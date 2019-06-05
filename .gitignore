@@ -6,3 +6,6 @@
 OS/**/*.o
 OS/**/*.hex
 OS/**/*.elf
+
+# ignores intermediate files in OS folder
+OS/docs/**/.*

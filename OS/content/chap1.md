@@ -9,43 +9,109 @@ disableComments: true
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
-## Bit manipulations
+ {{.TableOfContents}} 
+
+## Bare metal programming on the Arduino UNO
 
 Programming the Arduino UNO can be easily done with **Arduino IDE**. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all, the Arduino UNO board uses an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus).
 
+### Bit manipulation
+When bare metal programming a microcontroller it is often required to start poking specific bit. A quick refresh on how to achieve this is given here. In contrast with the software world, hardware engineers start counting from the right (instead of the left) and from 0 (instead of 1).
 
-### Wat is C++ dan?
+<center><img src="/img/0x_01.jpg" height=320/></center>
 
-Zoals we zullen zien, bevat C weinig mogelijkheden om declaratief te zijn. C++ is de objectenlaag bovenop C die de taal uitbreidt met 'moderne' mogelijkheden tot structureren: inheritance, templating, eenvoudigere libraries (STL), ... De C++ compiler gebruikt gewoon C met laagjes C++ "sugar", zoals de [ANSI C++ Standard](https://isocpp.org/std/the-standard) aangeeft.
+Assume a variable that consists of 8 bits (eg. unsigned char x), which experts sometimes refer to as a **byte**. Setting he rightmost bit ( the least significant bit (**LSB**)) to '1' can be done easily.
 
-De C taal is compact, de C++ taal is dat helaas niet. Kijk zelf maar:
+```C
+  unsigned char x;
+  x = 1;
+```
 
-<img src="/img/teaching/cppbooks.jpg" class="bordered" />
+Setting the fifth bit (starting from the right), might be a bit cumbersome. FYI: the number 2 to the power 5 (for fifth position) equals to 32.
 
-Ik neem aan dat ze met '++' het aantal pagina's in handboeken bedoelden. Vergeet niet dat bovenstaande handleiding nog maar een "primer" is.
+```C
+  unsigned char x;
+  x = 32;
+```
 
-### Vergelijkingen met Java
+More experienced C programmers might be inclined to use [shift operators](https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Shift_operators).
 
-```java
-import java.io.IOException;
-import java.nio.*;
+```C
+  unsigned char x;
+  x = (1 << 5);
+```
 
-class FileReader {
+Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators) are also heavily used for setting and/or clearing certain bits. The logical functions AND (&), OR(|) and NOT(~) can be used as efficient tools for bit fiddling.
 
-    @Override
-    public String read(String file) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(file)));
-    }
+:heavy_exclamation_mark: :exclamation: :dragon: Beware of the dragons :dragon: :exclamation: :heavy_exclamation_mark:
+
+```C
+  unsigned char x, y;
+  ...
+  x = (1 << 5);
+  y = y | (1 << 5);
+  ...
+  x = (1 << 5);
+  y = (1 << 4);
+  if(x && y) { printf("YES\n"); } else { printf("NO\n");
+  if(x & y)  { printf("YES\n"); } else { printf("NO\n");
+```
+
+### Hello hardware, this is software speaking
+
+
+### Two beating hearts
+As mentioned above, simply cross compiling for the targeted microcontroller allows for programming the Arduino UNO in C.
+
+When using the Arduino IDE, this is fairly simple. The code would look something like this:
+
+```C
+void setup()
+{
+  pinMode(13, OUTPUT);
 }
 
-class Main {
-    public static void main(String[] args) {
-        System.out.println("reading file: ");
-        System.out.println(new FileReader().read("sup.txt"));
-    }
+void loop()
+{
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
 }
 ```
 
-Hoe zouden we zoiets in C doen? Dat wordt moeilijk. C heeft geen `class` systeem! De low-level C implementatie is als volgt:
+This snippet of C code is wrapped by the **IDE** into a complete C program. Through the toolchain a lot of _magic_ happens that hides certain more complex aspects for the programmer. Writing the same program in C for the Arduino is a bit less aesthetic.
 
 ```C
+#include <avr/io.h>
+
+void setup()
+{
+  DDRB |= (1 << 5);
+  // or in a shorter form:  DDRD |= PORTD6;
+  // or even with helper.h: bit_set(DDRD, PORTD6);
+}
+
+void loop()
+{
+  int i, j;
+
+  PORTB = PORTB | (1 << 5);
+  for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
+
+  PORTB = PORTB & ~(1 << 5);
+  for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
+}
+
+int main(void) {
+  setup();
+  while(1) {
+    loop();
+  }
+}
+```
+
+
+<!--
+<center><img src="/img/placeholder.png" height=240/></center>
+-->

@@ -4,14 +4,14 @@ accent: "#008eb3"
 disableComments: true
 ---
 
+&laquo;&nbsp;[Back to Table of Content](/toc)<br/>
 <!--
-&laquo;&nbsp;[Terug naar Software ontwerp in C/C++](/teaching/cpp)<br/>
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
  {{.TableOfContents}} 
 
-## Bare metal programming on the Arduino UNO
+## 1.1 Bare metal programming on the Arduino UNO
 
 Programming the Arduino UNO can be easily done with **Arduino IDE**. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all, the Arduino UNO board uses an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus).
 
@@ -58,6 +58,9 @@ Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bi
 ```
 
 ### Hello hardware, this is software speaking
+A heavily used way of communication between hardware and software is through memory-mapped registers. Such a register can be read or written by software at a certain address. This register serves as driver (in the hardware sense) for inputs of a certain hardware component.
+
+When a register is written by software and read (or driving) hardware, such a register is sometimes called a **command register** (CR). When a register is written (or driven) by hardware and read by the software, such a register is sometimes refered to with a **status register** (SR).
 
 
 ### Two beating hearts

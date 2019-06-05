@@ -1,3 +1,8 @@
 
 # ignore Jo's sublime-project files
 *.sublime-*
+
+# ignores intermediate files in OS folder
+OS/**/*.o
+OS/**/*.hex
+OS/**/*.elf

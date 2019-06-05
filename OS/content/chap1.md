@@ -9,7 +9,7 @@ disableComments: true
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 
 ## Bit manipulations
-
+ hello world
 Programming the Arduino UNO can be easily done with **Arduino IDE**. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all the Arduino UNO board uses an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus).
 
 

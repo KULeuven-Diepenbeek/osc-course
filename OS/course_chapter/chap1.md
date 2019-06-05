@@ -8,15 +8,10 @@ disableComments: true
 &laquo;&nbsp;[Terug naar Software ontwerp in C/C++](/teaching/cpp)<br/>
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 
-## De C programmeertaal
+## Bit manipulations
 
-De [C taal](https://en.wikipedia.org/wiki/C_(programming_language)) is een  programmeertaal in de jaren '70 ontwikkeld om makkelijk hardware te kunnen aanspreken. C was/is in essentie niet veel meer dan een kleine abstractielaag bovenop assembly.
+Programming the Arduino UNO can be easily done with **Arduino IDE**. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all the Arduino UNO board uses an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus).
 
-C is een **imperatieve** programmeertaal. Dat zal je bij het oefenen wel merken: we schrijven instructies als _statements_. Deze regels of statements zijn gestructureerd in functies en `struct` types. Het jammere hier aan is dat er weinig **declarativiteit** aan de pas komt. Omdat C zo weinig om het lijf heeft (low-level), drukken statements bijna altijd uit _hoe_ iets moet werken, in plaats van _wat_ het moet doen.
-
-Toch is **clean code** voor mij van levensbelang en gaan we ook in C ons focussen op _leesbaarheid_. In plaats van getallen in de code gebruiken we `#define`, in plaats van lange statements splitsen we logische blokken op in duidelijke `function` blokken.
-
-C wordt voornamelijk gebruikt in embedded system development, net omdat het zo kort bij de hardware staat. De UNIX, Windows en OSX kernels zijn volledig geschreven in C bijvoorbeeld. Het besturingssysteem van je GSM, smartwatch of (handheld) gaming systeem bouwt verder op C. Enorm veel talen zoals Java (JVM), Python, Ruby en PHP zijn geschreven in C.
 
 ### Wat is C++ dan?
 

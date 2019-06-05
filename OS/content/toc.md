@@ -1,3 +1,9 @@
+---
+title: 'Table of Contents'
+accent: "#008eb3"
+disableComments: true
+---
+
 # Table of content: Operating System
 
 ## [Chapter 1: Interrupts](/chap1)

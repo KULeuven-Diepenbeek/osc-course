@@ -1,5 +1,5 @@
-languageCode = "en-us"
-title = "Brain Baking"
+languageCode = "en-uk"
+title = "Operating Systems and C"
 baseurl = "https://brainbaking.com/"
 theme = "minimal"
 pygmentsUseClasses = true
@@ -15,19 +15,20 @@ enableGitInfo = true
     tag = "tags"
 
 [params]
-    description = "Freshly baked thought"
+    #description = "Freshly baked thought"
     # see single.html, DisqusShortname also needed
     disableComments = true
     accent = "purple"
     showBorder = true
-    twitter = "woutergroenev"
+    #twitter = "woutergroenev"
     backgroundColor = "white"
     highlight = true
     highlightStyle = "paraiso-dark"
     highlightLanguages = ["cs", "cpp", "scheme", "python", "java", "scala", "javascript", "llvm"]
     font = "Source Serif Pro"
-    copyright = "No <i class='fa fa-copyright'></i> reserved - sharing is caring. <i class='fa fa-github'></i> <a href='https://github.com/wgroeneveld/brainbaking/'>Hack away</a>! <i class='fa fa-lightbulb-o'></i> <a href='/'>Brain Baking</a>"
+
+    copyright = "No <i class='fa fa-copyright'></i> reserved - sharing is caring."
 
 [Author]
-  name = "Wouter Groeneveld"
-  email = "wouter.groeneveld@gmail.com"
+  name = "Wouter Groeneveld & Jo Vliegen"
+  email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"

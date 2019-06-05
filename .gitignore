@@ -9,3 +9,4 @@ OS/**/*.elf
 
 # ignores intermediate files in OS folder
 OS/docs/**/.*
+OS/themes/*.zip

@@ -11,9 +11,6 @@ disableComments: true
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
-# Chapter 1: Interrupts
-
- {{.TableOfContents}} 
 
 ## 1.1 Arduino UNO
 

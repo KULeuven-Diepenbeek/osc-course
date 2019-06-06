@@ -1,0 +1,11 @@
+div.exercise {
+  padding: 10px 20px;
+  background-color: #DDDDDD;
+  border: 1px solid #777777;
+}
+
+div.exercise h1 {
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 150%;
+}

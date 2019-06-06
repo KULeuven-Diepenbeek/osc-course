@@ -1,4 +1,4 @@
-#include <avr/io.h>
+/*#include <avr/io.h>*/
 
 volatile unsigned int *ADDRESS_DDR_B = (volatile unsigned int*) 0x0000024;
 volatile unsigned int *ADDRESS_PORT_B = (volatile unsigned int*) 0x0000025;

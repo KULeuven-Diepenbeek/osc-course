@@ -127,8 +127,6 @@ This snippet of C code is wrapped by the **IDE** into a complete C program. Thro
 Writing the same program in C for the Arduino is a bit less aesthetic.
 
 ```C
-#include <avr/io.h>
-
 volatile unsigned int *ADDRESS_DDR_B = (volatile unsigned int*) 0x0000024;
 volatile unsigned int *ADDRESS_PORT_B = (volatile unsigned int*) 0x0000025;
 
@@ -165,7 +163,7 @@ A number of things can be said about both examples.
 Of course the C program can be written more dense. But, in the end, there is not too much difference between both pieces of code.
 
 ## 8-bit Timer
-One component that is in almost every microcontroller is a Timer. This timer can be used for many things: stopwatch, wave generation, timing, ... The block diagram of an 8-bit counter in the Arduino is shown here. There are 2 such counters (1 and 2) available.
+One component that is in almost every microcontroller is a Timer. This timer can be used for many things: stopwatch, wave generation, timing, ... The block diagram of an 8-bit counter in the Arduino is shown here. There are 2 such counters (0 and 1) available.
 
 <center><img src="/img/0x_12.png" alt="Block Diagram of an 8-bit counter in the Arduino microcontroller"/></center>
 
@@ -179,7 +177,7 @@ However, before getting into the details of configuring and using the Timer, the
 
 To introduce a concept of time, a [crystal oscillator](https://en.wikipedia.org/wiki/Crystal_oscillator) is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often refered to as the _clock speed_.
 
-Both 8-bit timers (1 and 2) have a hardware prescaler. Such a prescaler divides the frequency of the clock with a certain power of 2 and allows the developer to choose a more suitable frequency. With this clock, the timer can be configured to 
+Both 8-bit timers (0 and 1) have a hardware prescaler. Such a prescaler divides the frequency of the clock with a certain power of 2 and allows the developer to choose a more suitable frequency. With this clock, the timer can be configured to 
 
 When the Timer/counter is running, it can count bi-directionaly. This counter is a hardware component that you also are (or soon: will be) able to described in an HDL. There are multiple modes of operation in which the Timer/Counter can operate. With each mode of operation a certain waveform is generated.
 

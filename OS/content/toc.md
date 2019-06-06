@@ -4,7 +4,7 @@ accent: "#008eb3"
 disableComments: true
 ---
 
-# Table of content: Operating System
+# Table of contents: Operating System
 
 ## [Chapter 1: Interrupts](/chap1)
   * 1.1: Arduino UNO

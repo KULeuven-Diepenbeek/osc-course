@@ -16,7 +16,7 @@ disableComments: true
 
 The Arduino UNO is an open-source microcontroller board. It is powered by an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus). The datasheet for this family of microcontrollers can be found [here](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf).
 
-<center><img src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg" height=320/></center>
+<center><img src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg" height=320 alt="An Arduino UNO"/></center>
 
 The datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other components as well.
 
@@ -77,8 +77,17 @@ Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bi
   if(x & y)  { printf("YES\n"); } else { printf("NO\n");
 ```
 
+<div class="exercise">
+  <h1>Exercise</h1>
+  Write a line of C-code that:
+  <ul>
+    <li>sets the 3rd byte to '1' and all others to '0'</li>
+    <li>sets the 4th and 5th byte to '1' and all others to '0'</li>
+  </ul>
+</div>
+
 ### Hello hardware, this is software speaking
-A heavily used way of communication between hardware and software is through memory-mapped registers. Such a register can be read or written by software at a certain address. This register serves as driver (in the hardware sense) for inputs of a certain hardware component.
+A frequently used way of communication between hardware and software is through memory-mapped registers. Such a register can be read or written by software at a certain address. This register serves as driver (in the hardware sense) for inputs of a certain hardware component.
 
 When a register is written by software and read (or driving) hardware, such a register is sometimes called a **command register** (CR). When a register is written (or driven) by hardware and read by the software, such a register is sometimes refered to with a **status register** (SR).
 
@@ -88,16 +97,15 @@ Going through the datasheet of the microcontroller on the Arduino many CRs can b
 
 The register above can be accessed from software on address register 0x7A. When the software writes to this register **ALL** 8 bits are written. This is important to remember to avoid one of the <span style="color: green; font-weight: bold;">dragons</span> described above. This register serves as a CR and SR for the control of the Analog-to-Digital Converter. 
 
-As can be learned from the datasheet, the MSB of this register is used to enable or disable the ADC.
-
-
-
+As can be learned from the datasheet, the MSB of this register is used to enable or disable the hardware ADC through software instructions.
 
 
 ### Two beating hearts
-As mentioned above, simply cross compiling for the targeted microcontroller allows for programming the Arduino UNO in C.
+As mentioned above, simply cross compiling for the targeted microcontroller allows for programming the Arduino UNO in C, outside of the Arduino IDE.
 
-When using the Arduino IDE, this is fairly simple. The code would look something like this:
+Here two examples are shown to make a blinking light. The first example uses the Arduino IDE, the second example uses plain C.
+
+The code in the Arduino IDE would look something like this:
 
 ```C
 void setup()
@@ -114,26 +122,28 @@ void loop()
 }
 ```
 
-This snippet of C code is wrapped by the **IDE** into a complete C program. Through the toolchain a lot of _magic_ happens that hides certain more complex aspects for the programmer. Writing the same program in C for the Arduino is a bit less aesthetic.
+This snippet of C code is wrapped by the **IDE** into a complete C program. Through the toolchain that is applied a lot of _magic_ happens that hides certain more complex aspects from the programmer. 
+
+Writing the same program in C for the Arduino is a bit less aesthetic.
 
 ```C
 #include <avr/io.h>
 
+volatile unsigned int *ADDRESS_PORT_B = (volatile unsigned int*) 0x0000025;
+
 void setup()
 {
   DDRB |= (1 << 5);
-  // or in a shorter form:  DDRD |= PORTD6;
-  // or even with helper.h: bit_set(DDRD, PORTD6);
 }
 
 void loop()
 {
   int i, j;
 
-  PORTB = PORTB | (1 << 5);
+  *ADDRESS_PORT_B = *ADDRESS_PORT_B | (1 << 5);
   for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
 
-  PORTB = PORTB & ~(1 << 5);
+  *ADDRESS_PORT_B = *ADDRESS_PORT_B & ~(1 << 5);
   for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
 }
 
@@ -145,11 +155,52 @@ int main(void) {
 }
 ```
 
+A number of things can be said about both examples.
+
+1. Addresses and bit positions have to be looked up in the datasheet;
+2. The "Setup and Loop"-function approach can be mimiced.
+3. The **delay(x)** function is missing
+
+Of course the C program can be written more dense. But, in the end, there is not too much difference between both pieces of code.
+
+## 8-bit Timer
+One component that is in almost every microcontroller is a Timer. This timer can be used for many things: stopwatch, wave generation, timing, ... The block diagram of an 8-bit counter in the Arduino is shown here. There are 2 such countair (0 and 1) available.
+
+<center><img src="/img/0x_12.png" alt="Block Diagram of an 8-bit counter in the Arduino microcontroller"/></center>
+
+As can be seen from the block diagram 5 (3+2) registers are available for interaction with the software:
+
+* **TCCRnA:** Timer/Counter Control Register for counter n OCR A (also available for B)
+* **OCRnA:** Output Compare Register A for counter n (also available for B)
+* **TCNTn:** Timer Count for counter n
+
+However, before getting into the details of configuring and using the Timer, the clock has be considered.
+
+To introduce a concept of time, a [crystal oscillator](https://en.wikipedia.org/wiki/Crystal_oscillator) is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often refered to as the _clock speed_.
+
+Both 8-bit timers (0 and 1) have a hardware prescaler. Such a prescaler divides the frequency of the clock with a certain power of 2 and allows the developper to choose a more suitable frequency. With this clock, the timer can be configured to 
+
+
+
+Now let's configure the timer so it can be used to 
+
+
+## Take aways:
+After studying this chapter you should:
+
+* be able to target specific bits in a register at a specific address through C
+* understand how CR's and SR's work
+* understand how timers work
+* understand what Interrupts are
+
+## "Things" to "think" on:
+* 
+
+
+## Useful links:
+* [megaAVR Data Sheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+* [Arduino UNO schematic](https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf)
 
 <!--
 <center><img src="/img/placeholder.png" height=240/></center>
 -->
-
-## 8-bit Timer
-
-<center><img src="/img/0x_12.png"/></center>

@@ -18,9 +18,8 @@ enableGitInfo = true
     #description = "Freshly baked thought"
     # see single.html, DisqusShortname also needed
     disableComments = true
-    accent = "purple"
+    accent = "blue"
     showBorder = true
-    #twitter = "woutergroenev"
     backgroundColor = "white"
     highlight = true
     highlightStyle = "paraiso-dark"
@@ -30,5 +29,5 @@ enableGitInfo = true
     copyright = "No <i class='fa fa-copyright'></i> reserved - sharing is caring."
 
 [Author]
-  name = "Wouter Groeneveld & Jo Vliegen"
+  name = "Jo Vliegen"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"

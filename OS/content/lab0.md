@@ -17,17 +17,29 @@ However, students that are interested in installing a linux system on their mach
 
 A **Virtual Machine** emulates a computer system. It tries to reproduce the functionality and computing environment of the target machine. 
 
-Software that allows the management of virtual machines is refered to as **Hypervisors**. Examples of hypervisors are: VMware, Xen, Hyper-V, and Virtual Box.
+Software that allows the management of virtual machines is generally refered to as **Hypervisors**. Examples of hypervisors are: VMware, QEMU, Hyper-V, and Virtual Box.
 
-Studying VMs and hypervisors is a course on its own and is not within scope for this course.
+Studying virtual machines and hypervisors is a course on its own and is not within scope for this course.
 
 The labs are given on a Virtual Box machine which have an installation of Bodhi Linux.
 
 
 ## Linux Installation log
 
-* Downloaded Bodhi image. Why Bodhi ?
+### OS
+
+* Downloaded Lubuntu image. Why Lubuntu ?
   * Ubuntu LTS based
-* live boot
-* Preferences > Install
-* user: osc/oscillator 
+  * lightweight variant
+  * why not ?
+* Boot > install
+* user credentials: osc/oscillator
+
+### Tools
+* sudo apt-get install gcc-avr
+* sudo apt-get install avrdude
+
+
+## Further Reading
+
+* [Convert VB image to VMware](https://www.howtogeek.com/125640/how-to-convert-virtual-machines-between-virtualbox-and-vmware/)

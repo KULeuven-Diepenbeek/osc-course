@@ -21,7 +21,7 @@ Software that allows the management of virtual machines is generally refered to 
 
 Studying virtual machines and hypervisors is a course on its own and is not within scope for this course.
 
-The labs are given on a Virtual Box machine which have an installation of Bodhi Linux.
+The labs are given on a Virtual Box machine which have an installation of Lubuntu Linux.
 
 
 ## Linux Installation log
@@ -36,8 +36,13 @@ The labs are given on a Virtual Box machine which have an installation of Bodhi 
 * user credentials: osc/oscillator
 
 ### Tools
+* sudo apt-get install build-essential
 * sudo apt-get install gcc-avr
+* sudo apt-get install gdb-avr
 * sudo apt-get install avrdude
+* sudo apt-get install arduino-core
+* install Sublime text
+
 
 
 ## Further Reading

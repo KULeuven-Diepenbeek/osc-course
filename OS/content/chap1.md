@@ -194,7 +194,7 @@ Now let's configure the timer so it can be used to overcome the need for the **d
 
 int main(void) {
 
-  unsigned char y=0, x=0;
+  unsigned char x;
 
   DDRB = (1<<5);            // set PORTB_5 as output
   TCCR1A = 0x0;             // set part of "mode of operation"
@@ -223,14 +223,45 @@ Another example is given by a cartoon.
 {{< youtube id="18AzodTPG5U" >}}
 &nbsp;
 
-Would it not be nice that the CPU could just continue working on something else until a certain event occurs. In the second example (that of the cartoon), the _woman_ interrupts what the _processor_ was doing.
+Would it not be nice that the CPU could just continue working on something else until a certain event occurs. In the second example (that with the cartoon), the _woman_ interrupts what the _processor_ was doing.
 
-An **interrupt** is a signal that goes to the processor to signal a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a hardware interrupt. An example for a software interrupt could be an attempt of a division by zero.
+An **interrupt** is a signal that goes to the processor signaling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a hardware interrupt. An example for a software interrupt could be an attempt of a division by zero.
+
+The datasheet of the microcontroller shows the hardware interrupts that are available.
 
 <center><img src="/img/0x_14.png" alt="The interrupts in the Arduino's microcontroller."/></center>
 
+```C
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
-TODO: nested interrupts are possible, though it requires user software to re-enable interrupts
+int main(void) {
+
+  cli();                      // disable all interrupts
+
+  DDRB = (1<<5);              // set bit as output
+  TCCR1A = 0x0;               // set part of "mode of operation"
+  TCCR1B = 0x4;               // set part of "mode of operation" & clock prescaler
+  TIMSK1 = 0x1;               // enable the "Overflow Interrupt"
+
+  sei();                      // enable all interrupts
+
+  while(1) {
+  }
+}
+
+ISR(TIMER1_OVF_vect) {
+  PORTB ^= (1<<5);
+}
+```
+
+<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: Decide whether we want to go into details here about interrupt vectors and ISR's </div>
+
+
+
+
+<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: nested interrupts are possible, though it requires user software to re-enable interrupts</div>
+
 
 
 ## Take aways:

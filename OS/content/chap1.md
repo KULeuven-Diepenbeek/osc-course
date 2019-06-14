@@ -39,6 +39,7 @@ Future engineers, however, should be able to understand what is going on behind 
 When bare metal programming a microcontroller it is often required to start poking specific bit. A quick refresh on how to achieve this is given here. In contrast with the software world, hardware engineers start counting from the right (instead of the left) and from 0 (instead of 1).
 
 <center><img src="/img/0x_01.jpg" height=320/></center>
+<center><img src="/img/endianness.png" height=320/></center>
 
 Assume a variable that consists of 8 bits (eg. unsigned char x), which experts sometimes refer to as a **byte**. Setting he rightmost bit ( the least significant bit (**LSB**)) to '1' can be done easily.
 
@@ -61,7 +62,7 @@ More experienced C programmers might be inclined to use [shift operators](https:
   x = (1 << 5);
 ```
 
-Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators) are also heavily used for setting and/or clearing certain bits. The logical functions AND (&), OR(|) and NOT(~) can be used as efficient tools for bit fiddling.
+Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators) are also heavily used for setting and/or clearing certain bits. The logical functions AND (&), OR(|) and NOT(\~) can be used as efficient tools for bit fiddling.
 
 :heavy_exclamation_mark: :exclamation: :dragon: Beware of the <span style="color: green; font-weight: bold;">dragons</span> :dragon: :exclamation: :heavy_exclamation_mark:.
 

@@ -1,7 +1,8 @@
 languageCode = "en-uk"
 title = "Operating Systems and C"
 baseurl = "https://brainbaking.com/"
-theme = "minimal"
+
+theme = "kuleuvencourse"
 pygmentsUseClasses = true
 pygmentCodeFences = true
 googleAnalytics = "UA-45748221-1"

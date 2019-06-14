@@ -3,7 +3,38 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
 .container {
     display: flex;
+    flex-direction: column;
     margin: 0px;
+}
+
+.navigation {
+    background-color: yellow;
+    height: 125px;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+    margin: 0px 200px;
+    background-color: #f9f9f9;
+    padding: 0px 40px;
+
+    font-size: 18pt;
+}
+
+.sidebar{
+    background-color: blue;
+    color: white;
+    width: 300px;
+}
+
+.footer {
+    background-color: black;
+    color: white;
 }

@@ -1,14 +1,20 @@
 {{ partial "header" . }}
 
-<main>
+<div class="main">
+    <div class="content">
 
-    <!--{{ partial "list-item" . }}-->
+        <!--{{ partial "list-item" . }}-->
 
-    <br> <div class="text-justify">{{ .Content }}</div>
+        {{ .Content }}
 
-    <!-- related posts with the same tags -->
-    {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+        <!-- related posts with the same tags - ->
+        {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}-->
 
-</main>
+    </div>
+
+    <div class="sidebar">
+        <p>hello world</p>
+    </div>
+</div>
 
 {{ partial "footer.html" . }}

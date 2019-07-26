@@ -6,6 +6,6 @@ ECTS description can be found here.
 
 * Hugo is configured through config.toml
 * a certain foldertree is expected
-* running hugo, generates static web content in "docs"
-* running hugo server runs a local server (http://localhost:1313) so changes in the Markdown files are automatically updated
+* running hugo (cmd 'hugo'), generates static web content in "docs"
+* running hugo server (cmd 'hugo server') runs a local server (http://localhost:1313) so changes in the Markdown files are automatically updated
 * no a f*ck was given about CSS/style/fancy lights/...

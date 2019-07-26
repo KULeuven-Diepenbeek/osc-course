@@ -4,7 +4,7 @@ accent: "#008eb3"
 disableComments: true
 ---
 
-&laquo;&nbsp;[Back to Table of Content](/)<br/>
+&laquo;&nbsp;[Back to Table of Contents](/)<br/>
 
 <hr/>
 <!--

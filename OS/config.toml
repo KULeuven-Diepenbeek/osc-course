@@ -1,6 +1,6 @@
 languageCode = "en-uk"
 title = "Operating Systems and C"
-baseurl = "https://brainbaking.com/"
+#baseurl = "https://brainbaking.com/"
 
 theme = "kuleuvencourse"
 pygmentsUseClasses = true
@@ -16,7 +16,6 @@ enableGitInfo = true
     tag = "tags"
 
 [params]
-    #description = "Freshly baked thought"
     # see single.html, DisqusShortname also needed
     disableComments = true
     accent = "blue"
@@ -30,5 +29,5 @@ enableGitInfo = true
     copyright = "No <i class='fa fa-copyright'></i> reserved - sharing is caring."
 
 [Author]
-  name = "Jo Vliegen"
+  name = "Jo Vliegen, Wouter Groeneveld"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"

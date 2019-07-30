@@ -33,3 +33,15 @@ home = [ "HTML", "RSS", "JSON"]
 [Author]
   name = "Jo Vliegen, Wouter Groeneveld"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
+
+[[menu.shortcuts]] 
+name = "<i class='fa fa-university'></i> Toledo"
+identifier = "tol"
+url = "TODO"
+weight = 10
+
+[[menu.shortcuts]] 
+name = "<i class='fa fa-university'></i> ECTS Sheet"
+identifier = "stud"
+url = "TODO"
+weight = 1

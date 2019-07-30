@@ -7,7 +7,8 @@
     filter: invert(100%);    
 }
 
-#header-wrapper {
+#sidebar #shortcuts h3 {
+    color: grey !important;
 }
 
 /* ---------------- custom style from theme below */

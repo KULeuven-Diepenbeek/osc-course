@@ -1,7 +1,7 @@
 function altToCaption() {
     var display_str = 1;
 
-    $("img").each(function() {
+    $("img:content").each(function() {
         var imageCaption = $(this).attr("alt");
         if (imageCaption != '') {
             var imgWidth = $(this).width();

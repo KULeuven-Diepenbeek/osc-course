@@ -3,10 +3,10 @@
 *.sublime-*
 
 # ignores intermediate files in OS folder
-OS/**/*.o
-OS/**/*.hex
-OS/**/*.elf
+**/*.o
+**/*.hex
+**/*.elf
 
 # ignores intermediate files in OS folder
-OS/docs/**/.*
-OS/themes/*.zip
+docs/**/.*
+themes/*.zip

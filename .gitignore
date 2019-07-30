@@ -10,3 +10,5 @@
 # ignores intermediate files in OS folder
 docs/**/.*
 themes/*.zip
+
+.DS_Store

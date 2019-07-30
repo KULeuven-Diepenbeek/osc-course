@@ -3,14 +3,10 @@ title = "Operating Systems and C"
 #baseurl = "https://brainbaking.com/"
 
 theme = "hugo-theme-learn"
-pygmentsUseClasses = true
-pygmentCodeFences = true
-googleAnalytics = "UA-45748221-1"
 publishDir = "docs"
 enableEmoji = true
 enableRobotsTXT = true
-# for .Lastmod to work with .GitInfo: --enableGitInfo https://gohugo.io/variables/git/
-enableGitInfo = true
+pygmentsCodefences = true
 
 [taxonomies]
     tag = "tags"
@@ -18,13 +14,6 @@ enableGitInfo = true
 [params]
     disableComments = true
     themeVariant = "kul"
-    showBorder = true
-    highlight = true
-    highlightStyle = "paraiso-dark"
-    highlightLanguages = ["cs", "cpp", "scheme", "python", "java", "scala", "javascript", "llvm"]
-    font = "Source Serif Pro"
-
-    copyright = "No <i class='fa fa-copyright'></i> reserved - sharing is caring."
 
 # see https://learn.netlify.com/en/basics/configuration/
 [outputs]

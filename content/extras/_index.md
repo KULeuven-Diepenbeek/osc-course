@@ -1,5 +1,5 @@
 ---
-title: 'Part III: Appendix'
+title: 'C. Appendix'
 pre: "<i class='fab fa-github'></i> "
 chapter: true
 ---

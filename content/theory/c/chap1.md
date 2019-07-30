@@ -2,7 +2,7 @@
 title: '1: Introduction of the C ecosystem'
 ---
 
-&laquo;&nbsp;[Back to Table of Contents](/)<br/>
+Handles Intro to C, building, ecosystems, compiling & cross-compiling, building header/source files, Makefiles, ...
 
 ## The C programming language
 

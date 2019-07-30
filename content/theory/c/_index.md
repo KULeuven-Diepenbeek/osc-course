@@ -1,5 +1,5 @@
 ---
-title: 'Part II: C'
+title: 'Part II: Programming in C'
 pre: "<i class='fa fa-keyboard'></i> "
 chapter: true
 ---

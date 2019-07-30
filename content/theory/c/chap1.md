@@ -462,17 +462,13 @@ CLion is not free, but it is highly recommended for students (and they get a fre
 
 <pre>
 cmake_minimum_required(VERSION 3.10)
-project(testje)
+project(my_little_pony)
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(testje main.cpp biblio.cpp biblio.h dieren.cpp dieren.h)    
+add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
 </pre>
 
 A simple CMake file is much easier to read and write than a Makefile. See [CMake tutorial](https://cmake.org/cmake-tutorial/) for more information. CLion manages the `add_executable` arguments for you: adding new files to your project will also automatically add them to the list.
-
-## <a name="oef"></a>Lab exercises
-
-TODO overnemen of niet?
 
 ## Ponder on this
 

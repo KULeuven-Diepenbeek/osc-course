@@ -7,6 +7,40 @@
     filter: invert(100%);    
 }
 
+div.ex {
+    margin: 2rem 0;
+    position: relative;
+}
+
+div.ex p {
+    padding: 15px;
+    display: block;
+    font-size: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: #666;
+    border-top: 30px solid #F0B37E;
+    background: #FFF2DB;
+}
+
+div.ex p:first-child:before {
+    position: absolute;
+    top: 2px;
+    color: #fff;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f085";
+    left: 10px;
+}
+
+div.ex p:first-child:after {
+    position: absolute;
+    top: 2px;
+    color: #fff;
+    left: 2rem;
+    content: 'Practice Time!';
+}
+
 #sidebar #shortcuts h3 {
     color: grey !important;
 }

@@ -6,6 +6,7 @@
 **/*.o
 **/*.hex
 **/*.elf
+**/a.out
 
 # ignores intermediate files in OS folder
 docs/**/.*

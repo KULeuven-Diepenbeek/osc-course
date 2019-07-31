@@ -2,7 +2,10 @@
 title: '1: Introduction of the C ecosystem'
 ---
 
-Handles Intro to C, building, ecosystems, compiling & cross-compiling, building header/source files, Makefiles, ...
+&laquo;&nbsp;[Back to Part II: Programming C, Overview](/theory/c)<br/>
+&raquo;&nbsp;[To the C Labs](/practice/lab1)
+
+Chapter 1 handles the following subjects: Intro to C, building, ecosystems, compiling & cross-compiling, building header/source files, Makefiles, ...
 
 ## The C programming language
 
@@ -56,7 +59,11 @@ int main() {
 }
 ```
 
-Compile with `gcc -o fileio fileio.c`.
+{{% ex %}}
+Compile the above with `gcc -o fileio fileio.c`. <br/>
+Save some text in a file called "sup.txt", and execute the program with `./fileio`. <br/>
+Congratulations on your first compiled C program!
+{{% /ex %}}
 
 There are a lot of problems with this implementation: the buffer length is hardcoded and the memory has not been released. A `FileReader` Java class that does everything for you simply cannot be created. As you can see it's a lot more **low-level** work than Java's one-liners like `Files.readAllBytes`! C does not even have the keyword `new`. Ouch.
 
@@ -89,6 +96,12 @@ The `main()` function returns a number that determines whether or not your progr
 
 The "f" of printf stands for "formatting" as you can see in the example. See [Formatted output](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html).
 
+{{% ex %}}
+Write a program that outputs the following: <br/>
+"pi is&nbsp;&nbsp;&nbsp;&nbsp;3.1415"<br/>
+Based on the floating-point variable pi with a value of `3.1415`. The output should end with a new line and contain a tab.
+{{% /ex %}}
+
 ### Structuring your code
 
 Done with `function`. Blocks such as if, for, while, do are familiar and work just like in other languages:
@@ -112,7 +125,33 @@ int main() {
 }
 ```
 
-You **cannot overload** functions in C, unlike in C++ and Java. That means each function name is unique.
+You **cannot overload** functions in C, unlike in C++ and Java. That means each function name is unique:
+
+```C
+int yay() {
+    return 1;
+}
+
+int yay() {
+    return 0;
+}
+
+int main() {
+    return yay();   // ??
+}
+```
+
+Does, depending on the compiler, not compile:
+
+<pre>
+test.c:5:5: error: redefinition of 'yay'
+int yay() {
+    ^
+test.c:1:5: note: previous definition is here
+int yay() {
+    ^
+1 error generated.
+</pre>
 
 ### Strings? What do you mean?
 
@@ -143,6 +182,11 @@ int main() {
 C reserves the right amount of memory with string literals you know from Java. The `string[]` char array does contain **9 characters** and not 8! That is because the end of the array is determined by a magical **NULL terminator**, `\0`. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using `%s`.
 
 Handy string utility functions reside in the header file `<string.h>` (copying, concatenating, asking for the length, ...) See [GNU C: String utils](https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html).
+
+{{% ex %}}
+What is the result of `strcmp("hello, Hello")`? <br/>
+And of `strncmp("hello, world", "hello, amazing world!!", 5)`?
+{{% /ex %}}
 
 ### Structs
 
@@ -183,13 +227,18 @@ int is_old(struct Person this) {
 int main() {
     struct Person jaak;
     jaak.age = 40;
-    jaak.is_oud = &is_oud;
+    jaak.is_old = &is_old;
 
     printf("is jaak old? %d\n", jaak.is_old(jaak));  
 }
 ```
 
 It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. 
+
+{{% ex %}}
+Compile and execute the above code. what happens when you comment out `jaak.is_old = &is_old;`?<br/>
+Implement another function with signature `int f(struct Person p)` that calls people old when they are called "Jaak". Look at the previous example on how to expand the struct to add a name property.
+{{% /ex %}}
 
 ### Extra definitions
 
@@ -440,6 +489,10 @@ Typically, the compiler used is set as a shell variable (CC = gcc). You can see 
 Executing the above steps can be done using the ``make`` command and a default goal (all), or ``make compile`` for a specific goal (executes the 'compile' steps only).
 
 For more information on the correct Makefile syntax, see the [GNU make](ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html) documentation.
+
+{{% ex %}}
+Create a Makefile that contains two targets: `compile` and `run`. The default target should execute both in sequence. As for what to compile, write a simple program that outputs "hello, (name)". The name is something you ask from the user using the stdio function `gets()`.
+{{% /ex %}}
 
 ### Repeatedly compiling: (3) IDEs
 

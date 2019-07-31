@@ -8,6 +8,9 @@ enableEmoji = true
 enableRobotsTXT = true
 pygmentsCodefences = true
 
+# for .Lastmod to work with .GitInfo: --enableGitInfo https://gohugo.io/variables/git/
+enableGitInfo = true
+
 [taxonomies]
     tag = "tags"
 

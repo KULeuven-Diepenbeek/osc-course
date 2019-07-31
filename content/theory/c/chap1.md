@@ -447,7 +447,7 @@ We use the UNIX GNU `gcc` compiler to compile C soure files and convert them int
 
 > `gcc *.c`
 
-Due to the lack of a target file name, the compiler creates an "a.out" file that you can execute. You can specify this with the "-o" flag. If you have something more to link, put everything in a row one after the other.
+Due to the lack of a target file name, the compiler creates an "a.out" file that you can execute (`chmod +x` has already been done for you). You can specify this with the "-o" flag. If you have something more to link, put everything in a row one after the other.
 
 However, there are still a lot of compiler options that are [explained at gcc.gnu.org](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html) that you can play with.
 

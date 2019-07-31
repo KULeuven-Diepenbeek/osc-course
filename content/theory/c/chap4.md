@@ -8,7 +8,8 @@ todo
 
 * data segment stuff van wikipedia
 * objdump -D voorbeeld
-* malloc/free
+* malloc/free, why it is needed: https://godbolt.org/z/Upuztq
 * segmentation fault = alleen indien buiten segment; 'oufofbounds' vb uit chapter 2 werkt wel nog. 
 * compiler optimization heavy, unpredictable, ...
+
 

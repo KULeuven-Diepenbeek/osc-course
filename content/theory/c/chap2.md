@@ -233,19 +233,43 @@ void print_text(char *txt) {
 }
 ```
 
-Notice `txt++`. We simply point to the next possible value in the memory space, which hopefully is still a character. If it is not, and it came from a string, it will be ended with `\0`. Adding some value _beyond the limit_ will result in calling upon unintended memory values, resulting in possible glitches. But C will not crash, it is very robust. You should pay extra attention while fiddling about with pointers! 
+Notice `txt++`. We simply point to the next possible value in the memory space, which hopefully is still a character. If it is not, and it came from a string, it will be ended with `\0`. Adding some value _beyond the limit_ will result in calling upon unintended memory values, resulting in possible glitches. But C will not crash, it is very robust. You should pay extra attention while fiddling about with pointers! For instance:
 
 {{% notice note %}}
 In C, `a[i]` exactly the same as `*(a + i)`!
 {{% /notice %}}
 
-## Herhaling: let op met syntax!
+```C
+#include <stdio.h>
+int main() {
+    char txt[4] = "hey";
+    char* ptr = txt;
+    char otherstuff[10] = "other";
 
-Zie pagina 53 - symbolen zoals `*` en `&` in C en C++ hebben verschillende betekenissen.  
+    for(int i = 0; i < 5; i++) {
+        printf("%c", *ptr);
+        ptr++;
+    }
+}
+```
 
-- `int &r = i;` - & na een type: dit is een reference type
-- `int *p;` - * na een type: dit is een pointer type
-- `p = &i` - & gebruikt in een experessie als _address-of_ operatie
-- `*p = i` - * gebruikt in een expressie als _dereference_ operatie
+**Depending on your compiler**, the above code will print "hey ot", meaning your ptr pointer is pointing to the next variable on the local stack after the four characters "h", "e", "y", "\0", from the txt variable, are processed within the for loop. We will go more into detail on this in [chapter 4](/theory/c/chap4).
 
-Vergeet niet dat de eerste regel enkel geldig is in C++.
+{{% ex %}}
+What happens when I change `txt[4]` to `txt[3]`?
+{{% /ex %}}
+
+### Watch out for syntax!
+
+Remember that symbols such as `*` en `&` have different meanings.  
+
+- `int *p;` - * after a type: it's a pointer.
+- `p = &i` - & used in an expression: _address-of_ operation
+- `*p = i` - * used in an expression: _dereference_ operation
+
+## Ponder on this
+
+1. What is the difference between `char msg[] = "heykes"` and `char *msg = "heykes"`? Clarify your answer with a drawing.
+2. Wat is the difference between `int a[10][20]` and `int *b[10]`? Can you also say something about memory usage?
+3. In which case would you definitely use pointers in C, and in which case would you not? Explain your choice.
+

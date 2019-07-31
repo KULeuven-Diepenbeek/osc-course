@@ -233,7 +233,7 @@ int main() {
 }
 ```
 
-It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. 
+It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. The function pointer, or callback method, will be further explained in [chapter 2](/theory/c/chap2).
 
 {{% ex %}}
 Compile and execute the above code. what happens when you comment out `jaak.is_old = &is_old;`?<br/>

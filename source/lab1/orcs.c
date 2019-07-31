@@ -16,7 +16,7 @@ Orc vecht(Orc aanvaller, Orc verdediger) {
 }
 
 Orc* generate_orcs(int aantal) {
-	Orc leger[aantal];
+	Orc* leger = malloc(sizeof(Orc) * aantal);
 	for(int i = 0; i < aantal; i++) {
 		Orc beest;
 		beest.aanval = rand() % 21;
@@ -28,7 +28,7 @@ Orc* generate_orcs(int aantal) {
 }
 
 char* omnom(char* zin) {
-	char response[100];
+	char* response = malloc(sizeof(char) * 100);
 	strcpy(response, zin);
 
 	for(int i = 0; i < strlen(response); i++) {

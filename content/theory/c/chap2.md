@@ -67,96 +67,117 @@ int main() {
 ```
 
 {{% ex %}}
-What will be printed in the above example?
+What will be printed in the above example? The first line should be obvious, but the second one... 
 {{% /ex %}}
 
 {{<mermaid>}}
 graph LR;
     A{*age} -->|after first assignment| B[young<br/>10]
-    A --> |after second assignment| C[old<br/>80]
+    A -.-> |after second assignment| C[old<br/>80]
 {{< /mermaid >}}
 
 
-Merk op dat we hier toch nog `&` gebruiken! Dit is geen referentie type maar de _address-of_ operator om het adres van de variabele jong vast te krijgen. Een pointer verwijst naar een adres, niet naar een waarde.
+Notice the use of the `&` operator, it is the _address-of_ operator to fetch the address of a variable. A pointer points to an address, not to a value (of a variable). 
 
-Wat is de output van `printf("%d", leeftijd);`? 1389434244! Huh? We drukken het **adres** van de pointer af, niet waar de pointer naar verwijst. Om dat te doen heb je weer de `*` operator nodig: `printf("%d", *leetijd);`. Dit noemen we _dereferencen_.
+Look at it this way: I live in streetname, city. When I give you my card, you have a **reference** to my address. I can hand out cards to more people. The card does not represent my house, but points towards it. 
+If you wish to do so, you can write a different address on the card, eliminating my previous address. From that point on, your card points to a different address, while other cards I dealt out still point to my original address. 
 
-De compiler geeft dit ook aan als warning:
+{{<mermaid>}}
+graph LR;
+  C{my card} -->|contains directions to| A[my house]
+  B[your house]
+{{< /mermaid >}}
+
+If I want to get the address of your house, I'd have to use the address-of operator: `&your_house`. If I want to get the house itself (physically impossible...), I'd use the _dereference_ operator on the card: `*card`. This simply **follows the arrow** where card currently points to. 
+
+So, what was de output of `printf("%d\n", age);`? 1389434244! Huh? We are printing the **address** of the pointer, not the actual value (by following where it points to). Remember, to do that, you have to use the dereference `*` operator: `printf("%d", *age);`. The compiler hints at this with the following warning:
 
 > warning: format specifies type 'int' but the argument has type 'int *' [-Wformat]
 
-Pointers kunnen ook verwijzen naar... pointers naar... pointers naar ... Genoeg keer `*` toevoegen.
+Pointers can point to pointers which can point to pointers which can ... Add enough `*` symbols!
 
 ```C
-int jong = 10;
-int *ptr = &jong;
-int **ptr_to_ptr = ptr; // compiler error
+int val = 10;
+int *ptr = &val;
+int **ptr_to_ptr = ptr;
 int **ptr_to_ptr = &ptr;
 ```
+
+{{% ex %}}
+Why does `int **ptr_to_ptr = ptr;` generate a compiler error?
+{{% /ex %}}
 
 {{<mermaid>}}
 graph LR;
     A{"**ptr_to_ptr"} -->|ref| B{"*ptr"}
-    B --> |ref| C[jong<br/>10]
+    B --> |ref| C[val<br/>10]
 {{< /mermaid >}}
 
-Waar wijst een nieuwe pointer naar die nog niet geïnstantieerd is? Naar `0`:
+Where does a new pointer point to that is not yet instantiated? To `0`:
 
 ```C
 int *ptr;
 printf("%d", *ptr); // print 0
 ```
 
-`NULL` is een platform-afhankelijke macro die in C verwijst naar 0, meestal in de vorm van een void pointer. Een `void*` pointer kan naar eender welk type verwijzen en wordt meestal gebruikt om low-level memory aan te spreken, zoals we zullen zien bij de GBA.
+`NULL` is a **platform dependent** (!!) macro that in C refers to zero (`0`), usually in the form of a void pointer. A `void *` pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.
 
-De definitie van een pointer schrijft niet voor waar de `*` precies moet staan: `int* leeftijd` is hetzelfde als `int *leeftijd`. Pas om met dingen als `int* leeftijd, ouderdom`! De laatste veriabele is hier een gewone int, en géén pointer!
+The definition of a pointer does not prescribe the exact location of the `*`: `int* age` is the same as` int *age` (notice the placement of the stars). Be careful with things like 'int *age, old_age'! The last variable here is an ordinary int, and not a pointer!
 
-Referenties en pointers kan je mixen: `int *&ref_to_ptr = ptr`. Lees de tekenreeks van rechts naar links: "referentie van", "pointer".
+#### Function pointers
 
-#### Functie pointers
-
-Een pointer kan ook verwijzen naar een functie (p247), daarvoor heb je dezelfde signatuur definitie nodig:
+Now things are getting interesting. A pointer can also point **to a function**. (Remember the datastructure from [chapter one](/theory/c/chap1)?). You will need the same signature definition to do that:
 
 ```C
 #include <stdio.h>
 
-int verhoog(int getal) {
-    return getal + 1;
+int increase(int nr) {
+    return nr + 1;
 }
 
-int verdubbel(int getal) {
-    return getal * 2;
+int doublenr(int nr) {
+    return nr * 2;
 }
 
 int main() {
-    int (*op)(int) = &verhoog;
+    int (*op)(int) = &increase;
 
-    printf("verhoog 5: %d\n", op(5));
-    op = &verdubbel;
-    printf("verdubbel 5: %d\n", op(5));
+    printf("increase 5: %d\n", op(5));
+    op = &doublenr;
+    printf("double 5: %d\n", op(5));
     return 0;
 }
 ```
 
-De definitie van de op pointer ziet er wat vreemd uit, maar de signatuur voorspelt dat we een `int` retourneren (meest links), en dat er één parameter nodig is, ook in de vorm van een `int` (tussen haakjes).
+The definition of the op pointer looks a bit strange, but the signature predicts that we will return an `int` (far left), and that one parameter is needed, also in the form of an` int` (in brackets). If you fail to do so (for instance, by creating a `double doublenr(int nr)` function), weird things happen, but the program does not crash:
 
-Functie pointers kan je ook als parameter meegeven, bijvoorbeeld met `void exec(int (*op)(int)) {`. Een functie kan een functie (pointer) teruggeven, bijvoorbeeld met `int (*kies_op(int mod))(int) {`. De functie "kies_op" verwacht 1 int parameter en geeft een functie pointer terug die verwijst naar een functie met 1 int parameter en returnvalue int. Om dat warboeltje te vereenvoudigen wordt meestal `typedef` gebruikt:
+<pre>
+Wouters-Air:development jefklak$ gcc test.c && ./a.out
+test.c:15:8: warning: incompatible pointer types assigning to 'int (*)(int)' from 'double (*)(int)' [-Wincompatible-pointer-types]
+    op = &doublenr;
+       ^ ~~~~~~~~~
+1 warning generated.
+increase 5: 6
+double 5: 14
+</pre>
+
+Function pointers can also be given as a parameter, for example with `void exec (int (* op) (int)) {`. A function can return a function (pointer), for example with `int (* choose_op (int mod)) (int) {`. The function "choose_op" expects 1 int parameter and returns a function pointer that refers to a function with 1 int parameter and return value int. To simplify that mess, `typedef` is usually used:
 
 ```C
 #include <stdio.h>
 
 typedef int(*func_type)(int);
 
-int verhoog(int getal) {
-    return getal + 1;
+int increase(int nr) {
+    return nr + 1;
 }
 
-int verdubbel(int getal) {
-    return getal * 2;
+int doublenr(int nr) {
+    return nr * 2;
 }
 
-func_type kies_op(int mod) {
-    return mod == 0 ? &verhoog : &verdubbel;
+func_type choose_op(int mod) {
+    return mod == 0 ? &increase : &doublenr;
 }
 
 void exec(int (*op)(int)) {
@@ -164,60 +185,17 @@ void exec(int (*op)(int)) {
 }
 
 int main() {
-    exec(kies_op(0));       // print 6
-    exec(kies_op(1));       // print 10
+    exec(choose_op(0));       // print 6
+    exec(choose_op(1));       // print 10
     return 0;
 }
 ```
 
-Laten we de Persoon `struct` van [labo 1](/teaching/cpp/labo-1) eens herbekijken in het licht van pointers (en typedefs):
+Now you understand how we used the 'callback function' `is_old()` in the Person struct in [chapter 1](/theory/c/chap1).
 
-```C
-#include <stdio.h>
-#include <stdlib.h>
+### Practical use of pointers
 
-struct Persoon {
-    int leeftijd;
-    int (*is_oud)();
-};
-
-typedef struct Persoon Persoon;
-
-int is_oud(Persoon* this) {
-    printf("checking leeftijd van persoon: %d\n", this->leeftijd);
-    return this->leeftijd > 60;
-}
-
-Persoon* create_persoon(int leeftijd) {
-    Persoon* persoon = malloc(sizeof(Persoon));
-    persoon->leeftijd = leeftijd;
-    persoon->is_oud = &is_oud;
-
-    return persoon;
-}
-
-int main() {
-    Persoon* jaak = create_persoon(40);
-
-    printf("is jaak oud? %d\n", jaak->is_oud(jaak));
-    free(jaak); // niet echt nodig, programma stopt hier toch.
-    return 0;
-}
-```
-
-Vergeet niet dat we nog steeds in C aan het programmeren zijn.
-
-Wat is er veranderd?
-
-1. `Persoon` is een typedef geworden.
-2. Pointers zijn gebruikt om struts door te geven. `malloc()` komt kijken om geheugen te reserveren voor een nieuwe persoon. Vergeet niet dat we dit zelf moeten terug vrijgeven met `free()`!
-3. Het belangrijkste: een **factory method** `create_persoon` is nodig om een nieuwe persoon te assembleren en de is_oud methode aan de struct te plakken.
-
-Dat ziet er al iets gestroomlijnder uit maar vereist nog steeds te veel boilerplating. Zo'n constructies ga je zelden tegen komen in de praktijk. Ontwikkelaars die graag objecten maken zullen C links laten liggen.
-
-### Praktisch gebruik van pointers
-
-Omdat in C alles _by-value_ doorgegeven wordt, kunnen we met pointers de waarden van variabelen in een functie manipuleren die erbuiten gedeclareerd werd. In Java kan je de waarde van member variabelen in objecten ook wijzigen, maar niet **primitives**! Hoe wissel je twee getallen zonder iets terug te geven?
+Because in C everything passed _by-value_, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not **primitives**! How do you switch two numbers without giving anything back?
 
 ```C
 void swap(int *px, int *py) {
@@ -231,10 +209,9 @@ swap(&x, &y);
 printf("(%d, %d)\n", x, y); // print (20, 10)
 ```
 
-Zoiets is ondenkbaar in Java - daar hebben we truckjes voor nodig als een `int[]` dat toch een object is. Natuurlijk is deze implementatie ook **nadelig**: is het wel duidelijk voor de caller dat variabelen gewijzigd worden?
-Performante algoritme implementaties profiteren van deze mogelijkheden. Duidelijke domain-driven applicaties niet: daar dient een hogere taal voor.
+Something like that is unthinkable in Java - we need extra tricks for that, such as passing objects. Of course this implementation is also **disadvantageous**: is it clear to the caller that variables are being changed? No. High-performance algorithm implementations benefit from these possibilities. Clear domain-driven applications are not: a higher language is used for that.
 
-Pointers en arrays gaan hand-in-hand in C. Op pointers kan je ook operaties als `++` en `--` uitvoeren die de pointer in het geheugen één plaatsje naar links of rechts opschuiven. Met `char *tekst = "sup"` verwijst de pointer naar het eerste karakter:
+Pointers and arrays go hand-in-hand in C. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text =" sup "` the pointer refers to the first character:
 
 {{<mermaid>}}
 graph TD
@@ -245,18 +222,22 @@ graph TD
     A-.->F['\0']
 {{< /mermaid >}}
 
-Een eigen `printf("%s", tekst)` zou het overlopen van de pointer kunnen zijn, tot er niets meer is, en karakter per karakter afdrukken:
+Creating an own version of `printf("%s", tekst)` could be implemented by looping through the pointer until nothing is left to print, like this:
 
 ```C
-void print_tekst(char *tekst) {
-    while(*tekst != '\0') {
-        printf("%c", *tekst);
-        tekst++;
+void print_text(char *txt) {
+    while(*txt != '\0') {
+        printf("%c", *txt);
+        txt++;
     }
 }
 ```
 
-In C is `a[i]` exact hetzelfde als `*(a + i)`!
+Notice `txt++`. We simply point to the next possible value in the memory space, which hopefully is still a character. If it is not, and it came from a string, it will be ended with `\0`. Adding some value _beyond the limit_ will result in calling upon unintended memory values, resulting in possible glitches. But C will not crash, it is very robust. You should pay extra attention while fiddling about with pointers! 
+
+{{% notice note %}}
+In C, `a[i]` exactly the same as `*(a + i)`!
+{{% /notice %}}
 
 ## Herhaling: let op met syntax!
 

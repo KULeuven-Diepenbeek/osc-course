@@ -2,11 +2,13 @@
 title: 'Lab 1: Introduction to C'
 ---
 
-### 1. String manipulation 
+## We are at War!
 
 We're at **war**! The orcs are attacking and are looking very hungry! Look at them! ([img src](https://www.google.be/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjmyPWi2N7jAhUIxoUKHWLZCmgQjhx6BAgBEAM&url=https%3A%2F%2Fwww.artstation.com%2Fartwork%2Fe5ZDb&psig=AOvVaw2XqhvpDcX5bqiky-tRoQaN&ust=1564646412604432))
 
 ![Orcs attacking](/img/labs/orcs.png)
+
+### 1. String manipulation 
 
 However, instead of simply killing you, these not so friendly looking beasts target _vowels_ instead of _bowels_. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called `char* munch(char* sentence)` that obscures all vowels with an 'X', and then prints the results. You will also need a `int main()` function. 
 
@@ -31,7 +33,10 @@ Start from this blueprint:
 #include <stdio.h>
 
 char* munch(char* sentence) {
+    char* response = malloc(sizeof(char) * 100);
     // TODO eat those vowels!
+
+    return response;
 }
 
 int main() {
@@ -41,6 +46,8 @@ int main() {
     printf("OUTPUT: %s\n", munch(sentence));
 }
 ```
+
+The correct use of `malloc()` will be explained in the second lab.
 
 ### 2. Modelling the orcs
 

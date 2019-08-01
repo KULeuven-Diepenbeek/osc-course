@@ -209,6 +209,16 @@ jaak.age = 80;
 jaak.gender = 1;
 ```
 
+Another way of assigning values is defining the values inline using the `{}`brackets:
+
+```C
+struct Person jaak = {
+    "Jaak Trekhaak",    // need to be in order of property definition
+    80,
+    1
+};
+```
+
 The next question is, can we also define functions in a `struct`? Jes and no. A function pointer makes this possible, but it is not the same such as a member variable of a class in Java. C function pointers, however, can be very usefully used as _callback methods_:
 
 ```C

@@ -17,7 +17,7 @@ The back of the first row of books is barely readable, but you can distinguish t
 * _Ancient Aberrations and how to prevent them_, by _Elminster Aumar_
 * _Killing people with cows: the ins and outs of Wild Magic_, by _Neera_
 
-How should we proceed to model the concept of a book? Right, a `struct`! Keep track of the title and the author using `char[]` properties. <br/>
+How should we proceed to model the concept of a book? Right, a `struct`! Keep track of the title and the author using `char*` properties. <br/>
 Proceed with caution and whatever you do, do not directly look into the green light! Use the following blueprint:
 
 ```C
@@ -49,7 +49,7 @@ Tips:
 2. You can use `while(ptr) { ... }` instead of a `for` loop. The value within the `while()` statement always evaluates to `true`, unless a "nullpointer" (a value of `0` or `NULL`) is detected. That is exactly what we want. 
 3. Another method to ease use of the `malloc()` statements might come in handy, such as `Book* create_book(char* title, char* author)`.
 
-### 2. Cleaning up the library
+### 3. Cleaning up the library
 
 The place looks dusty, doesn't it? <br/>
 Also, the books seem to be placed in a random order. Why don't we take the time, now that we are here and enjoy the green glow, to order these books alphabetically **by author**? You can ignore the surnames, simply sort on the property `author`. That is, the expected output of your program should be:
@@ -88,3 +88,32 @@ Tips:
 1. Use the [strcmp()](https://www.tutorialspoint.com/c_standard_library/c_function_strcmp) function from `<string.h>` to compare two strings.
 2. Sorting a _linked list_ is not as difficult as you might think. You will need some sort of _swapping_ function. Take a look at the above drawing. If book 4 needs to be first, how do you swap it with book 1, **while keeping the links intact**? 
 3. Use _recursion_ to repeatedly call `sort_books()` within the same function. Which book should be placed in the beginning? What should you process next? Think in terms of _head_ and _tail_. 
+
+### 4. Wild Surge! ASC/DESC
+
+A sudden gust of wind enters the old library. You immediately halt what you were doing to carefully listen if imminent threats are upon you and your party. A cloaked figure swings open a side-door and starts casting a spell that sounds very unfamiliar to you. _Praeses, Alia, Fero..._ An alteration, but which one?! Quick, hide the books! But alas, it was too late... <br/>
+While the spell completes, you hear the figure cursing "_annoying wild surges!_". The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar... Suddenly, you know it. The book! The cow book! That was the author! Neera... 
+
+Neera managed to completely reverse our sorting strategy, sorting Z to A instead of A to Z. She used a function pointer to encapsulate `strcmp()`. The following is your main function:
+
+```C
+int main() {
+    Book* library = create_books();
+    neera_encounter();  // changes a function pointer from asc to desc
+
+    sort_books(library);
+    print_books(library);   // prints Z -> A
+    return 0;
+}
+```
+
+Create a function pointer that is initialized to the address of your ascending sorter. Neera her Wild Magic switches this to the address of a descending sorter. That pointer will be used inside `sort_books()` instead of `strcmp()`.
+
+Tips:
+
+1. Re-read [chapter 2](/theory/c/chap2)!
+2. You will need two extra functions, `asc()` and `desc()`, besides `neera_encounter()`.
+
+### 5. Do you rest until fully healed? 
+
+ptr to ptr, add new book at beginning & at end. 

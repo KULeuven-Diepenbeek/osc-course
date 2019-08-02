@@ -113,14 +113,20 @@ graph LR;
     B --> |ref| C[val<br/>10]
 {{< /mermaid >}}
 
-Where does a new pointer point to that is not yet instantiated? To `0`:
+Where does a new pointer point to that is not yet instantiated?:
 
 ```C
 int *ptr;
-printf("%d", *ptr); // print 0
+printf("%d", *ptr); // prints -12599900072
 ```
 
+Whoops. Always assign 'nothing' to a pointer, using `int *ptr = NULL`.
+
 `NULL` is a **platform dependent** (!!) macro that in C refers to zero (`0`), usually in the form of a void pointer. A `void *` pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.
+
+{{% ex %}}
+What gets printed in the above example if we assign `NULL` to `*ptr`?
+{{% /ex %}}
 
 The definition of a pointer does not prescribe the exact location of the `*`: `int* age` is the same as` int *age` (notice the placement of the stars). Be careful with things like 'int *age, old_age'! The last variable here is an ordinary int, and not a pointer!
 
@@ -195,23 +201,76 @@ Now you understand how we used the 'callback function' `is_old()` in the Person 
 
 ### Practical use of pointers
 
+#### Changing values around
+
 Because in C everything passed _by-value_, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not **primitives**! How do you switch two numbers without giving anything back?
 
 ```C
+#include <stdio.h>
 void swap(int *px, int *py) {
     int temp;
     temp = *px;
     *px = *py;
     *py = temp;
 }
-int x = 10, y = 20;
-swap(&x, &y);
-printf("(%d, %d)\n", x, y); // print (20, 10)
+
+int main() {
+    int x = 10, y = 20;
+    swap(&x, &y);
+    printf("(%d, %d)\n", x, y); // print (20, 10)
+}
 ```
 
-Something like that is unthinkable in Java - we need extra tricks for that, such as passing objects. Of course this implementation is also **disadvantageous**: is it clear to the caller that variables are being changed? No. High-performance algorithm implementations benefit from these possibilities. Clear domain-driven applications are not: a higher language is used for that.
+{{<mermaid>}}
+graph TD;
+    x[x<br/>10]
+    y[y<br/>20]
+    px{px}
+    py{py}
+    temp[temp]
 
-Pointers and arrays go hand-in-hand in C. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text =" sup "` the pointer refers to the first character:
+    px -->|&x, address-of stack-var x| x
+    py -->|&y, address-of stack-var y| y
+    temp -.->|*px, follow pointer for the value| px
+{{< /mermaid >}}
+
+Something like that is unthinkable in Java - we need extra tricks for that, such as passing objects. Of course this implementation is also **disadvantageous**: is it clear to the caller that variables are being changed? Not really. High-performance algorithm implementations benefit from these possibilities. Clear domain-driven applications are not: a higher language is used for that.
+
+#### Not chaning values around: const
+
+To prevent further confusion, it is possible to mark pointers with the `const` keyword, meaning **the value** should not be changed. The pointer can still point to another value! As such, this is by _no means_ a "constant", like in many other traditional programming languages. Take the above example, and change swap's signature to `void swap(const int *px, const int *py)`. While compiling the code, the following errors are generated:
+
+<pre>
+test.c:5:9: error: read-only variable is not assignable
+    *px = *py;
+    ~~~ ^
+test.c:6:9: error: read-only variable is not assignable
+    *py = temp;
+    ~~~ ^
+2 errors generated.
+</pre>
+
+With the `const` keyword, we prohibit programmers from using `*ptr = ...` - that is, assigning another value as a _dereferenced_ pointer. `ptr = &temp` is still possible, however. If you do not want pointers to change addresses, use `const int* const px`. That's right, two times `const` - this is not a mistake. This reads, from **right to left**, as:
+
+1. px is a 
+2. constant
+3. pointer to an int
+4. constant
+
+Introducing the second `const` gives the following error when attempting to change the pointer itself:
+
+<pre>
+test.c:5:8: error: read-only variable is not assignable
+    px = &temp;
+    ~~ ^
+1 error generated.
+</pre>
+
+In practice, try to use as many constant variables as possible, if you want to make sure the passed values stay the same. 
+
+#### Arithmetics with pointers
+
+Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and substracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text =" sup "` the pointer refers to the first character:
 
 {{<mermaid>}}
 graph TD
@@ -272,4 +331,5 @@ Remember that symbols such as `*` en `&` have different meanings.
 1. What is the difference between `char msg[] = "heykes"` and `char *msg = "heykes"`? Clarify your answer with a drawing.
 2. Wat is the difference between `int a[10][20]` and `int *b[10]`? Can you also say something about memory usage?
 3. In which case would you definitely use pointers in C, and in which case would you not? Explain your choice.
+4. What happens when I get the address of a stack variable, like `&x` in section 'changing values around', but the stack got cleared because the method call was finished? 
 

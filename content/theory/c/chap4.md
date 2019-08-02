@@ -6,10 +6,7 @@ Stack, heap, by-value VS by-reference
 
 todo 
 
-* data segment stuff van wikipedia
 * objdump -D voorbeeld
-* malloc/free, why it is needed: https://godbolt.org/z/Upuztq
-* segmentation fault = alleen indien buiten segment; 'oufofbounds' vb uit chapter 2 werkt wel nog. 
 * compiler optimization heavy, unpredictable, ...
 
 ## The Stack and the Heap
@@ -60,6 +57,62 @@ Contrary to initialized pointers, arrays within functions are also bound to the 
 
 Contrary to arrays, initialized pointers are bound to the heap, such as `char* line = malloc(sizeof(char) * 10)` - _except for_ pointer values that are being assigned directly with a string constant such as `char* line = "hello";`. Freeing the last line would result in the error _munmap\_chunk(): invalid pointer_. 
 
+The usage of `malloc()` and such is required if you want to reserve space on the heap. [memcpy()](https://www.tutorialspoint.com/c_standard_library/c_function_memcpy) from `<string.h>` makes it possible to copy values from the stack to the heap, without having to reassign every single property. Make sure to reserve space first!
+
+```C
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+typedef struct Data {
+    int one;
+    int two;
+} Data;
+
+Data* from_stack() {
+    Data data = { 1, 2 };
+    Data *heap_data = malloc(sizeof(Data));
+    memcpy(heap_data, &data, sizeof(Data));
+    return heap_data;
+}
+
+int main() {
+    Data* heap = from_stack();
+    printf("one: %d, two: %d\n", heap->one, heap->two);
+}
+```
+
+This is called creating a **deep copy**, while a **shallow copy** creates a copy of a pointer, still pointing to the same value in memory space.
+
+{{% ex %}}
+What happens when you omit `malloc()` and simply write `Data *heap_data = memcpy(heap_data, &data, sizeof(Data));`?
+{{% /ex %}}
+
+### Inspecting program memory in the OS
+
+Unix-like operating systems implement [procfs](https://en.wikipedia.org/wiki/Procfs), a special filesystem mapped to `/proc`, that makes it easy for us to inspect program running program state. You will need the process ID (PID) as it is the subdir name. Interesting files to inspect are:
+
+* `/proc/PID/maps`, a text file containing information about mapped files and blocks (like heap and stack).
+* `/proc/PID/mem`, a binary image representing the process's virtual memory, can only be accessed by a ptrace'ing process.
+
+We will take a closer look at these during the [labs](/practice/lab4).
+
+Mac OSX Does not have _procfs_. Instead, you will have to rely on commandline tools such as `sysctl` to query process information. 
+
+### Should I use the stack or the heap?
+
+Good question. The answer is obviously **both**. Use the stack when:
+
+* You do not want to de-allocate variables yourself.
+* You need speed (space is managed efficiently by the CPU). 
+
+Use the heap when:
+
+* You require a large amount of space (virtually no memory limit).
+* You don't mind a bit slower access (fragmentation problems can occur).
+* You want to pass on (global) objects between functions. 
+* You like managing things yourself.
+
 ## Memory management
 
 ### Freeing up space
@@ -90,6 +143,25 @@ As soon as the method `do_nasty_things()` ends, `ugly` is not accessible anymore
 2. Free the pointer space at the end of the function by calling `free(ugly)`.
 
 Since this is a small program that ends after `main()` statements are executed, it does not matter much. However, programs with a main loop that require a lot of work can also contain memory leaks. If that is the case, leak upon leak will cause the program to take op too much memory and simply freeze. 
+
+Do not make the mistake to free up stack memory, such as in this nice example, from the '[Top 20 C pointer mistakes](https://www.acodersjourney.com/top-20-c-pointer-mistakes/)':
+
+```C
+int main() {
+  int* p1;
+  int m = 100;  // stack var
+  p1 = &m;      // pointer to stack var
+
+  free(p1);     // BOOM headshot!
+  return 0;
+}
+```
+
+<pre>
+a.out(83471,0x7fff7e136000) malloc: *** error for object 0x7fff5a24046c: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
+Abort trap: 6    
+</pre>
 
 ### Dangling pointers
 

@@ -4,7 +4,7 @@ title: 'Lab 2: Pointers and Arrays'
 
 ## The Ancient Library
 
-Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. ([img src](https://dublin2019.com/3906-2/fantasy-library-art-736x459/))
+> Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. ([img src](https://dublin2019.com/3906-2/fantasy-library-art-736x459/))
 
 ![Library](/img/labs/library.png)
 
@@ -91,7 +91,7 @@ Tips:
 
 ### 4. Wild Surge! ASC/DESC
 
-A sudden gust of wind enters the old library. You immediately halt what you were doing to carefully listen if imminent threats are upon you and your party. A cloaked figure swings open a side-door and starts casting a spell that sounds very unfamiliar to you. _Praeses, Alia, Fero..._ An alteration, but which one?! Quick, hide the books! But alas, it was too late... <br/>
+> A sudden gust of wind enters the old library. You immediately halt what you were doing to carefully listen if imminent threats are upon you and your party. A cloaked figure swings open a side-door and starts casting a spell that sounds very unfamiliar to you. _Praeses, Alia, Fero..._ An alteration, but which one?! Quick, hide the books! But alas, it was too late... <br/>
 While the spell completes, you hear the figure cursing "_annoying wild surges!_". The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar... Suddenly, you know it. The book! The cow book! That was the author! Neera... 
 
 Neera managed to completely reverse our sorting strategy, sorting Z to A instead of A to Z. She used a function pointer to encapsulate `strcmp()`. The following is your main function:
@@ -116,4 +116,33 @@ Tips:
 
 ### 5. Do you rest until fully healed? 
 
-ptr to ptr, add new book at beginning & at end. 
+> The rumble of Neera's spell made your head rush and you fill dizzy. Maybe it would be better for you and your party to stay for the night and set up camp. During the night, you make the time to write up on the past events. It looks like it will be quite a thick book, something new to add to the old library. Now, should you add the book at the beginning of the row, or all the way at the end?
+
+Create a function called `void add_book(Book* library, Book* book)`, that adds a new book to **the end** of the library.
+
+{{<mermaid>}}
+graph LR;
+    new(<strong>new book</strong>)
+    A[book 1]
+    B[book 2]
+    N>NULL]    
+
+    B -.->|next| new
+    new -->|next| N
+    A -->|next| B
+{{< /mermaid >}}
+
+That was quite simple, wasn't it? What if we want it to add new books to **the beginning** of the library? You cannot change the `Book* library` pointer as it is copied over by-value. For this to work, we need to change the signature to a _pointer of a pointer_: `void add_book(Book** library, Book* book)`.
+
+Use the following main function to test your code:
+
+```C
+int main() {
+    Book* library = create_books();
+    Book* newbook = create_book("My adventures", "The Hero");
+    // add newbook to the library. But how? 
+    print_books(library);
+    return 0;
+}
+```
+

@@ -94,6 +94,8 @@ So, what was de output of `printf("%d\n", age);`? 1389434244! Huh? We are printi
 
 > warning: format specifies type 'int' but the argument has type 'int *' [-Wformat]
 
+#### C's By-Value VS Java's By-Ref - redux
+
 Pointers can point to pointers which can point to pointers which can ... Add enough `*` symbols!
 
 ```C
@@ -113,6 +115,29 @@ graph LR;
     B --> |ref| C[val<br/>10]
 {{< /mermaid >}}
 
+Practical use of the double `**` notation would be to relink a pointer to another location. As you know from [chapter one](/theory/c/chap1), variables in C are passed along **by value**: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaning the actual value is possible by following the address using the _dereference_ operator. But chaning _the address_ itself is only possible with double pointers:
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+void increase(int* nr) {
+    (*nr)++;
+}
+void reassign(int** nr, int* dest) {
+    *nr = dest;
+}
+int main() {
+    int* nr = malloc(sizeof(int)), *nr2 = malloc(sizeof(int));
+    *nr = 10, *nr2 = 5;
+    increase(nr);
+    printf("%d\n", *nr);    // prints 11
+    reassign(&nr, nr2);
+    printf("%d\n", *nr);    // prints 5
+}
+```
+
+#### Pointer instantiation
+
 Where does a new pointer point to that is not yet instantiated?:
 
 ```C
@@ -120,7 +145,7 @@ int *ptr;
 printf("%d", *ptr); // prints -12599900072
 ```
 
-Whoops. Always assign 'nothing' to a pointer, using `int *ptr = NULL`.
+Whoops. Always assign 'nothing' to a pointer, using `int *ptr = NULL`. Note that depending on the C implementation (such as VC++, clang, GNU C), an uninitialized pointer might contain the value `0`.
 
 `NULL` is a **platform dependent** (!!) macro that in C refers to zero (`0`), usually in the form of a void pointer. A `void *` pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.
 
@@ -270,7 +295,7 @@ In practice, try to use as many constant variables as possible, if you want to m
 
 #### Arithmetics with pointers
 
-Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and substracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text =" sup "` the pointer refers to the first character:
+Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and substracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text = "sup"` the pointer refers to the first character:
 
 {{<mermaid>}}
 graph TD
@@ -317,6 +342,36 @@ int main() {
 {{% ex %}}
 What happens when I change `txt[4]` to `txt[3]`?
 {{% /ex %}}
+
+Jumping to the next available address space also works with structures instead of a character array:
+
+```C
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef struct Doos { int one; int two; } Doos;
+
+int main() {
+    Doos doos1 = { 1, 2 };
+    Doos doos2 = { 3, 4 };
+    Doos* doosje = malloc(sizeof(Doos) * 2);
+    doosje[0] = doos1;
+    doosje[1] = doos2;
+
+    for(int i = 0; i < 2; i++) {
+        printf("doos: one %d two %d\n", doosje->one, doosje->two);
+        doosje++;
+    }
+
+    return 0;
+}
+```
+
+The only problem here is that we cannot loop "until the end" using `while(*doosje) { ... }`. For that to work, we need linked lists (see [lab 2](/practice/lab2)).
+
+{{% notice note %}}
+In C, the `new` keyword does _not_ exist. Creating instances is done using `malloc()` instead.
+{{% /notice %}}
 
 ### Watch out for syntax!
 

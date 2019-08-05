@@ -102,7 +102,7 @@ Write a program that outputs the following: <br/>
 Based on the floating-point variable pi with a value of `3.1415`. The output should end with a new line and contain a tab.
 {{% /ex %}}
 
-### Structuring your code
+### Use functions to structure code
 
 Done with `function`. Blocks such as if, for, while, do are familiar and work just like in other languages:
 
@@ -152,6 +152,24 @@ int yay() {
     ^
 1 error generated.
 </pre>
+
+### Primitives and combinational types
+
+The C language provides the four basic arithmetic type specifiers:
+
+1. `char` (1 byte)
+2. `int` (4 bytes)
+3. `float` (4 bytes)
+4. `double` (8 bytes)
+
+Together with the modifiers:
+
+1. `signed` (minus and plus signs supported)
+2. `unsigned` (only plus signs, greater range)
+3. `short` (/2 bytes)
+4. `long` (x2 bytes)
+
+Bytes are dependant on the target platform. [The table on Wikipedia](https://en.wikipedia.org/wiki/C_data_types) lists the permissible combinations to specify a large set of storage size-specific declarations. `char` is the smallest addressable unit, and `long double` is the biggest. For instance, `unsigned char` gives you a range of 0 to 255, while `signed char` works from -127 to 127. 
 
 ### Strings? What do you mean?
 
@@ -250,7 +268,7 @@ Compile and execute the above code. what happens when you comment out `jaak.is_o
 Implement another function with signature `int f(struct Person p)` that calls people old when they are called "Jaak". Look at the previous example on how to expand the struct to add a name property.
 {{% /ex %}}
 
-### Extra definitions
+#### Extra definitions
 
 Creating a person looks awkward: `struct Person jaak;` - why can't we simply use `Person jaak;`? That is possible if you **define** your own types using the keyword `typedef`. It's also useful to emulate your own `string` implementation:
 
@@ -272,6 +290,49 @@ bool male = TRUE;
 
 
 Typical C code that you may encounter due to lack of a bool: `if (result) {...}` where result is an `int`. This is in **no case** the same as [JavaScripts Truthy / Falsey](https://j11y.io/javascript/truthy-falsey/) construction! The number `0` is false. `EOF`,` NULL` or `\ 0` all evaluate to a number to use this.
+
+#### C's By-Value VS Java's By-Ref
+
+In C, everything you pass to functions is passed _by value_, meaning a **copy of the value** is created to pass to the called function. This is _very important_ to grap because mistakes are easily made. For instance, by passing the Person strcuture, we copy it. Any changes made to the struct in the function are done ON THAT COPY:
+
+```C
+void happy_birthday(Person person) {
+    person.age++;
+}
+int main() {
+    Person jaak;
+    jaak.age = 13;
+    happy_birthday(jaak);
+    printf("%d\n", jaak.age);   // HUH? Still 13?
+}
+```
+
+The copy of jaak gets to celebrate, but jaak himself stays 13.
+
+{{<mermaid>}}
+graph LR;
+    main{main}
+    happy{happy_birthday}
+    jaak[Person jaak]
+    copy[copy of jaak]
+
+    jaak -.->|create copy| copy
+    main -->|push to main stack| jaak
+    happy -->|push to local fn stack| copy
+{{< /mermaid >}}
+
+To fix this, we need the use of **pointers**, as explained in [chapter two](/theory/c/chap2). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
+
+```Java
+public static void increase(int i) {
+    i++;
+}
+public static void main(String[] args) {
+    int i = 5;
+    increase(i);
+    System.out.println("i is " + i);    // still 5
+}
+```
 
 ## Use of header Files
 

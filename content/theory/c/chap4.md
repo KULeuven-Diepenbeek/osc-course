@@ -223,3 +223,127 @@ That is **platform-dependent** and will hopefully crash instead of cause all for
 Write a program with an infinite loop that puts stuff on the stack. What is the program output?<br/>
 Do the same with infinite malloc()'s. What happens now?
 {{% /ex %}}
+
+## Optimizing C code
+
+#### Compiler flags
+
+Depending on your compiler and your target platform, the C compiler will try to optimize code by rearranging declarations and possibly even removing lines such as completely unused variables. The GNU and LLVM `gcc` compilers offer multiple levels of optimization that can be enabled by passing along `-O1`, `-O2`, and `-O3` flags (O = Optimize). Consider the following code:
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+void stuff() {
+    char dingdong[] = "hello? who's there?";
+    printf("doing things\n");
+}
+int main() {
+    stuff();
+}
+```
+
+`stuff` is not doging anything with the char array. Compile with `gcc -g -O3 test.c` to enable debug output and optimize. When disassembling using `lldb` (LLVM) or `gdb` (GNU), we see something like this:
+
+<pre>
+(lldb) disassemble --name stuff
+a.out`stuff at test.c:3:
+a.out[0x100000f30]:  pushq  %rbp
+a.out[0x100000f31]:  movq   %rsp, %rbp
+a.out[0x100000f34]:  leaq   0x4b(%rip), %rdi          ; "doing things"
+a.out[0x100000f3b]:  popq   %rbp
+a.out[0x100000f3c]:  jmp    0x100000f64               ; symbol stub for: puts
+
+a.out`main + 4 [inlined] stuff at test.c:12
+a.out`main + 4 at test.c:12:
+a.out[0x100000f54]:  leaq   0x2b(%rip), %rdi          ; "doing things"
+a.out[0x100000f5b]:  callq  0x100000f64               ; symbol stub for: puts
+a.out[0x100000f60]:  xorl   %eax, %eax
+</pre>
+
+Where is `dingdong`? The compiler saw it was not used and removed it. Without the `-O3` flag:
+
+<pre>
+(lldb) disassemble --name stuff
+a.out`stuff at test.c:3:
+a.out[0x100000e90]:  pushq  %rbp
+a.out[0x100000e91]:  movq   %rsp, %rbp
+a.out[0x100000e94]:  subq   $0x30, %rsp
+a.out[0x100000e98]:  movq   0x171(%rip), %rax         ; (void *)0x0000000000000000
+a.out[0x100000e9f]:  movq   (%rax), %rax
+a.out[0x100000ea2]:  movq   %rax, -0x8(%rbp)
+a.out[0x100000ea6]:  movq   0xc3(%rip), %rax          ; "hello? who's there?"
+a.out[0x100000ead]:  movq   %rax, -0x20(%rbp)
+a.out[0x100000eb1]:  movq   0xc0(%rip), %rax          ; "ho's there?"
+a.out[0x100000eb8]:  movq   %rax, -0x18(%rbp)
+a.out[0x100000ebc]:  movl   0xbe(%rip), %ecx          ; "re?"
+a.out[0x100000ec2]:  movl   %ecx, -0x10(%rbp)
+a.out[0x100000ec5]:  movl   $0x0, -0x24(%rbp)
+a.out[0x100000ecc]:  cmpl   $0xa, -0x24(%rbp)
+a.out[0x100000ed3]:  jge    0x100000ef2               ; stuff + 98 at test.c:5
+a.out[0x100000ed9]:  movslq -0x24(%rbp), %rax
+a.out[0x100000edd]:  movb   $0x63, -0x20(%rbp,%rax)
+a.out[0x100000ee2]:  movl   -0x24(%rbp), %eax
+a.out[0x100000ee5]:  addl   $0x1, %eax
+a.out[0x100000eea]:  movl   %eax, -0x24(%rbp)
+a.out[0x100000eed]:  jmp    0x100000ecc               ; stuff + 60 at test.c:5
+a.out[0x100000ef2]:  leaq   0x8b(%rip), %rdi          ; "doing things\n"
+a.out[0x100000ef9]:  movb   $0x0, %al
+a.out[0x100000efb]:  callq  0x100000f46               ; symbol stub for: printf
+a.out[0x100000f00]:  movq   0x109(%rip), %rdi         ; (void *)0x0000000000000000
+a.out[0x100000f07]:  movq   (%rdi), %rdi
+a.out[0x100000f0a]:  cmpq   -0x8(%rbp), %rdi
+a.out[0x100000f0e]:  movl   %eax, -0x28(%rbp)
+a.out[0x100000f11]:  jne    0x100000f1d               ; stuff + 141 at test.c:9
+a.out[0x100000f17]:  addq   $0x30, %rsp
+a.out[0x100000f1b]:  popq   %rbp
+a.out[0x100000f1c]:  retq
+a.out[0x100000f1d]:  callq  0x100000f40               ; symbol stub for: __stack_chk_fail
+</pre>
+
+You can fiddle with options and such yourself in [godbolt.org](https://godbolt.org/).
+
+#### volatile
+
+When heavily optimizing, sometimes you do not want the compiler to leave things out. This is especially important on embedded devices with raw pointer access to certain memory mapped spaces. In that case, use the `volatile` keyword on a variable to tell the compiler to "leave this variable alone" - do not move it's declaration and do not leave it out. [For instance](https://godbolt.org/z/Dm5YHx):
+
+```C
+int array[1024];
+int main (void) {
+    int  x;
+
+    for (int i = 0; i < 1024; i++) {
+        x = array[i];
+    }
+}
+```
+
+Does pretty much nothing. Compiling with `-O3` results in 2 assembly instructions: 
+
+<pre>
+main:
+  xor eax, eax
+  ret
+</pre>
+
+However, if you want `x` to be left alone, use `volatile int x;` and recompile:
+
+<pre>
+main:
+  mov eax, OFFSET FLAT:array
+.L2:
+  mov edx, DWORD PTR [rax]
+  add rax, 4
+  mov DWORD PTR [rsp-4], edx
+  cmp rax, OFFSET FLAT:array+4096
+  jne .L2
+  xor eax, eax
+  ret
+</pre>
+
+That's a big difference. 
+
+#### Function call order
+
+Another part of optimizing code is the determination of function call order. For instance, consider the following statement: `x = f() + g() * h()`. Which function gets called first? 
+
+The answer is **we do not know**. Do _not_ rely on function order to calculate something! Each function should be completely independant. There should not be a global variable manipulated in `f()` which will then be needed in `g()` or `h()`. You can inspect disassembled code for different compilers on [https://godbolt.org/](https://godbolt.org/). It will differ from platform to platform, and from compiler to compiler (and even from option flag to flag). 

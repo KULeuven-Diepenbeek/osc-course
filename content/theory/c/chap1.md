@@ -169,7 +169,9 @@ Together with the modifiers:
 3. `short` (/2 bytes)
 4. `long` (x2 bytes)
 
-Bytes are dependant on the target platform. [The table on Wikipedia](https://en.wikipedia.org/wiki/C_data_types) lists the permissible combinations to specify a large set of storage size-specific declarations. `char` is the smallest addressable unit, and `long double` is the biggest. For instance, `unsigned char` gives you a range of 0 to 255, while `signed char` works from -127 to 127. 
+[The table on Wikipedia](https://en.wikipedia.org/wiki/C_data_types) lists the permissible combinations to specify a large set of storage size-specific declarations. `char` is the smallest addressable unit, and `long double` is the biggest. For instance, `unsigned char` gives you a range of 0 to 255, while `signed char` works from -127 to 127. 
+
+Actual byte sizes are dependant on the target platform. This can be retrieved using `sizeof(char)`. 
 
 ### Strings? What do you mean?
 
@@ -288,6 +290,7 @@ typedef unsigned short int bool;
 bool male = TRUE;
 ```
 
+These `#define` statements are **preprocessor flags**. These can be as simple as this example or as complex as switching on different CPU architectures and executing another set of rules depending on the outcome. Macros are expanded just before expanding, see the "compiling" section below. Intricate examples are visible at [Wikipedia](https://en.wikipedia.org/wiki/C_preprocessor).
 
 Typical C code that you may encounter due to lack of a bool: `if (result) {...}` where result is an `int`. This is in **no case** the same as [JavaScripts Truthy / Falsey](https://j11y.io/javascript/truthy-falsey/) construction! The number `0` is false. `EOF`,` NULL` or `\ 0` all evaluate to a number to use this.
 
@@ -522,7 +525,17 @@ Due to the lack of a target file name, the compiler creates an "a.out" file that
 
 However, there are still a lot of compiler options that are [explained at gcc.gnu.org](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html) that you can play with.
 
-### Repeatedly compiling: (1) using a script
+#### Step 1: compiling
+
+As seen in the above schematic, executing your source code requires the activation of two steps: compiling (1), and linking (2). [C Preprocessor flags](https://en.wikipedia.org/wiki/C_preprocessor) get parsed just before compiling. Simply calling the `gcc` compiler executes all steps at once. Only compiling is done using the `-c` statement (source input) and providing the source files as arguments, producing **object files**, which can be then linked into a binary.
+
+#### Step 2: linking
+
+After obtaining object files it is simply a matter of concatenating them ('linking'), to create the native executable binary file, using the `-o` flag and providing the object files as arguments. After linking, inspecting the disassembly (see [chapter 4](/theory/c/chap4) on how to do so in detail) shows the concatenated results. 
+
+### Repeatedly compiling
+
+#### (1) using a script
 
 It is annoying to have to type the same command all the time, so a simple alternative is to put your gcc command in a shell script:
 
@@ -531,7 +544,7 @@ It is annoying to have to type the same command all the time, so a simple altern
 clear && gcc -o mystuff source.c && ./mystuff
 ```
 
-### Repeatedly compiling: (2) Makefiles
+#### (2) Makefiles
 
 In the C world there is such a thing as a "Makefile" that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.
 
@@ -565,9 +578,9 @@ For more information on the correct Makefile syntax, see the [GNU make](ftp://ft
 Create a Makefile that contains two targets: `compile` and `run`. The default target should execute both in sequence. As for what to compile, write a simple program that outputs "hello, (name)". The name is something you ask from the user using the stdio function `gets()`.
 {{% /ex %}}
 
-### Repeatedly compiling: (3) IDEs
+#### (3) IDEs
 
-#### Lightweights
+##### Lightweights
 
 A source file consists of simply plain text. Any text editor is sufficient to write your C program. However, it may be useful to use Sublime Text or Visual Studio Code. These modern powerful editors have built-in auto-completion and build tools.
 
@@ -576,7 +589,7 @@ A source file consists of simply plain text. Any text editor is sufficient to wr
 
 We will not stop old-school fans from using Emacs or Vi(m). 
 
-#### Heavyweights
+##### Heavyweights
 
 [CLion](https://www.jetbrains.com/clion/) is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it's built on the same platform (IDEA) - even most shortcuts are the same.
 

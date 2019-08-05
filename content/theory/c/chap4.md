@@ -302,6 +302,10 @@ a.out[0x100000f1d]:  callq  0x100000f40               ; symbol stub for: __stack
 
 You can fiddle with options and such yourself in [godbolt.org](https://godbolt.org/).
 
+{{% notice note %}}
+Instead of bootstrapping the debugger to inspect disassembly, you can also simply dump the object contents using `objdump -D` (GNU) or `otool -tV` (OSX).
+{{% /notice %}}
+
 #### volatile
 
 When heavily optimizing, sometimes you do not want the compiler to leave things out. This is especially important on embedded devices with raw pointer access to certain memory mapped spaces. In that case, use the `volatile` keyword on a variable to tell the compiler to "leave this variable alone" - do not move it's declaration and do not leave it out. [For instance](https://godbolt.org/z/Dm5YHx):

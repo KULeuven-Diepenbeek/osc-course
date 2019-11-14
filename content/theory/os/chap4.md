@@ -1,5 +1,5 @@
 ---
-title: '4: Gathering your Party'
+title: 'Chapter 4: Inter-process communication'
 ---
 
 &laquo;&nbsp;[Back to Table of Contents](/)<br/>

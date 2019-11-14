@@ -1,5 +1,5 @@
 ---
-title: '1: Interrupts'
+title: 'Chapter 1: Interrupts'
 ---
 
 <!--

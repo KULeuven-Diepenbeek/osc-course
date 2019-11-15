@@ -17,9 +17,10 @@ title: 'Operating Systems and C'
 
 #### [Chapter 1: Interrupts](/theory/os/chap1)
 #### [Chapter 2: Introduction to Operating Systems, using Linux](/theory/os/chap2)
-#### Chapter 3: Scheduling]
-#### Chapter 4: Memory]
-#### Chapter 5: Device management and file systems]
+#### [Chapter 3: Task management](/theory/os/chap3)
+#### [Chapter 4: Inter-process communication]
+#### [Chapter 5: Memory management]
+#### [Chapter 6: Capita Selecta]
 
 ### <i class='fab fa-github'></i>&nbsp;Part III: Appendix
 ## Labs

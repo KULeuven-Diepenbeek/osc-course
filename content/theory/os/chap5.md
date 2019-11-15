@@ -1,10 +1,10 @@
 ---
-title: 'Chapter 5: Address space management'
+title: 'Chapter 5: Memory management'
 ---
-
-&laquo;&nbsp;[Back to Table of Content](/)<br/>
+<!--
+&laquo;&nbsp;[Back to Table of Contents](/)<br/>
 
 <hr/>
-<!--
+< !--
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->

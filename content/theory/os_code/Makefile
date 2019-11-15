@@ -1,20 +1,33 @@
-CC = /usr/bin/gcc
-LIBS  = 
-CFLAGS = -Wall
+# Makefile
+#
 
-SRC=$(wildcard *.c)
-OBJ=$(SRC:.c=.o)
-BIN=$(SRC:.c=)
+CC=/usr/bin/gcc
+CFLAGS=-Wall
 
-all: $(BIN)
+INCS=
+LIBS=
 
-$(OBJ): $(SRC)
-	$(CC) -c $^ $(CFLAGS)
+SRCS=$(wildcard *.c)
+OBJS=$(patsubst %.c,%.o,$(SRCS))
+BINS=$(patsubst %.c,%.bin,$(SRCS))
 
-$(BIN): $(OBJ)
+# .SECONDARY with no prerequisites causes all targets 
+# to be treated as secondary (i.e., no target is removed 
+# because it is considered intermediate).
+.SECONDARY:
+
+all: $(BINS)
+
+
+#  $@ evaluates to all
+#  $< evaluates to the first prerequisite
+#  $^ evaluates to all prerequisites
+%.o : %.c
+	$(CC) $(INCS) -c $< $(CFLAGS) -o $@
+
+%.bin : %.o
 	$(CC) -o $@ $^ $(LIBS)
 
-.PHONY: clean
-
+.PHONY: all clean
 clean: 
-	rm -Rf *.o $(BIN)
+	rm -Rf *.o $(BINS)

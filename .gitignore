@@ -4,6 +4,7 @@
 
 # ignores intermediate files in OS folder
 **/*.o
+**/*.bin
 **/*.hex
 **/*.elf
 **/a.out
@@ -11,5 +12,6 @@
 # ignores intermediate files in OS folder
 docs/**/.*
 themes/*.zip
+
 
 .DS_Store

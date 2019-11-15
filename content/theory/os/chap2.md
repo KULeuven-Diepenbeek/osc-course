@@ -80,3 +80,21 @@ In the definition the Microkernel it states that it runs the **bare minimum** of
 
 These three mechanism form the core task of an OS an will be elaborated on in the remainder of this course.
 
+## Linux
+
+Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions like Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn **Linus Torvalds**. 
+
+The Linux kernel almost never comes on its own but is packaged in a distribution (a.k.a. a distro). Such a distro is the collection of various pieces software of software and the linux kernel. There is a large number of Linux distributions available. Which one to pick was (and probably is) the start of multiple cultural wars. My personal 2-cent opinion is to take into consideration what you want to use it for.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg">
+<div class="footnote">source: https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg</div>
+
+If the figure above doesn't contain a distribution to your liking you can always DIY it: [Linux from scratch](http://www.linuxfromscratch.org/). Happy compiling !!
+
+One of the aspects in which these distro's differ is the packaging system with which it's distributed. These packaging management systems allow you to install/uninstall/... your software. The people that are making distro's take source code from main software packets and compile them using the distro's dependencies. This is then packaged and made available for package managers to install from. Typical examples of package mangers are:
+
+| Name | Extension | Typical distro's |
+|---|---|---|
+| dpkg | .deb | Debian and Ubuntu a.o.|
+| RPM | .rpm | Red Hat, Fedora, and CentOS a.o. |
+| packman | .pkg.tar.xz | Arch Linux, FeLi Linux a.o. |

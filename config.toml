@@ -1,6 +1,6 @@
 languageCode = "en-uk"
 title = "Operating Systems and C"
-#baseurl = "https://brainbaking.com/"
+#baseurl = "http://192.168.1.184/osc"
 
 theme = "hugo-theme-learn"
 publishDir = "docs"
@@ -24,7 +24,7 @@ enableGitInfo = true
 home = [ "HTML", "RSS", "JSON"]
 
 [Author]
-  name = "Jo Vliegen, Wouter Groeneveld"
+  name = "Wouter Groeneveld and Jo Vliegen"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
 
 [[menu.shortcuts]] 

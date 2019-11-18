@@ -172,7 +172,7 @@ As can be seen from the block diagram 6 (4+2) registers are available for intera
 * **TCNTn:** Timer/counter value for counter n
 * **ICRn:** Input capture something something
 
-<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: ICRn</div>
+{{< todo message="ICRn" >}}
 
 However, before getting into the details of configuring and using the Timer, the clock has be considered.
 
@@ -253,12 +253,10 @@ ISR(TIMER1_OVF_vect) {
 }
 ```
 
-<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: Decide whether we want to go into details here about interrupt vectors and ISR's </div>
 
+{{< todo message="Decide whether we want to go into details here about interrupt vectors and ISR's" >}}
 
-
-
-<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: nested interrupts are possible, though it requires user software to re-enable interrupts</div>
+{{< todo message="nested interrupts are possible, though it requires user software to re-enable interrupts" >}}
 
 
 

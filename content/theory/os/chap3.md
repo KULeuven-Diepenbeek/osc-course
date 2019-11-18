@@ -14,7 +14,9 @@ One of the three core tasks of an OS is the management of tasks. These different
 
 
 ## 3.1.1 Got task ?
-<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: Uniformly style definitions ?</div>
+
+{{< todo message="Uniformly style definitions ?" >}}
+
 By definition, a process is an instance of a program. As was dicussed in the "C-portion" of this course a basic program can be divided in multiple segments:
 
 * **text/code**: is the machine code in assembly. This section is compiled for one (type of) processor(s).
@@ -90,8 +92,6 @@ The Process Control Block (PCB)  is a representation of the process in the OS. I
 
 The PCBs of all the processes are contained in a doubly-linked list which is headed by the **mother of all processes**. This process is called **init** and has **PID 0**. The doubly-linked list is commonly known as the **process table**.
 
-
-
 Let's verify all of the above. We'll adapt the C program so it takes more time to run.
 
 ```C
@@ -153,22 +153,19 @@ jvliegen@localhost:~/$
 ```
 
 Don't forget it's there because it might come in handy someday !!
-
-
 Every process has a PCB that contains metadata about the process.
 
 ### Creating processes
 
-In Linux there are two typical ways for users to create processes: using **fork** or using **exec**. For the records it is mentioned there is another option using system() function but because it's less secure and is inefficient.
+In Linux there are two typical ways for users to create processes: using **fork** or using **exec**. For the records it is mentioned there is another option using system() function but because it is less secure and is less efficient then the other two.
 
 Both fork and exec create a new process. The fork function copies the PCB of process to a new PCB. The process that calls the fork() is referred to with the parent process while the new process is the child process. The child process will continue operations on the same line as the parent process.
 The exec() function call also starts from copying its own PCB. In contrast with fork() it hen replaces the 'program' (read the *text*, *data*, and *bss*) with a new program.and starts executing from (relative) 0.
 
-It is mentioned earlier that the first process that is started is the **init** process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on.
+It is mentioned earlier that the first process that is started is the **init** process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on. Using the **pstree** command we can see the processes in a tree, and have a visual representation of which child-parent relations there are between processes.
 
 <!--<img src="/img/0x_30.png"/>-->
 
-<img src="/img/0x_31.png">
-
+{{< figure src="/img/0x_31.png" title="An example of the pstree command. The left image shows the result of Linux on an embedded system. The right image shows the result of Linux running on a laptop" >}}
 
 blabla

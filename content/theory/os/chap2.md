@@ -50,7 +50,8 @@ Different OSes exist for different computing platforms.
         <td><h4>Embedded systems</h4>Embedded systems come in many flavours, colours and sizes. Typically, these devices are smaller and have fewer features than the laptops and co do. It goes without saying that the OSes that run on embedded systems are different to, or at least ported from, the other OSes. A number of OSes for embedded systems are: Android, FreeRTOS, Symbian, mbedOS, and brickOS.</td></tr>
 </table>
 
-<div style="background-color: #F00; color: yellow; font-weight: bold; text-align: center">TODO: Uniformly style the polls ?</div>
+{{< todo message="Uniformly style the polls ?" >}}
+
 {{% ex %}}
 Which operating system is the best ?
 {{% /ex %}}
@@ -80,9 +81,9 @@ In the definition the Microkernel it states that it runs the **bare minimum** of
 
 These three mechanism form the core task of an OS an will be elaborated on in the remainder of this course.
 
-## Linux
+## 2.3 Linux
 
-Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions like Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn **Linus Torvalds**. 
+Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions such as Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn: **Linus Torvalds**. 
 
 The Linux kernel almost never comes on its own but is packaged in a distribution (a.k.a. a distro). Such a distro is the collection of various pieces software of software and the linux kernel. There is a large number of Linux distributions available. Which one to pick was (and probably is) the start of multiple cultural wars. My personal 2-cent opinion is to take into consideration what you want to use it for.
 
@@ -98,3 +99,4 @@ One of the aspects in which these distro's differ is the packaging system with w
 | dpkg | .deb | Debian and Ubuntu a.o.|
 | RPM | .rpm | Red Hat, Fedora, and CentOS a.o. |
 | packman | .pkg.tar.xz | Arch Linux, FeLi Linux a.o. |
+

@@ -45,6 +45,18 @@ div.ex p:first-child:after {
     color: grey !important;
 }
 
+
+/* begin VlJo */
+div.todo {
+    background-color: red;
+    color: yellow;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* end VlJo */
+
+
 /* ---------------- custom style from theme below */
  
 :root{

@@ -67,9 +67,10 @@ The image above showed that the OS places itself between general software and ha
 * Hybrid kernel
 
 A **Monotlithic kernel** is a kernel that runs the __complete__ operating system in kernel space.
-<!--Linux is a example of an OS that uses a Monolithic kernel.-->
+Linux is a example of an OS that uses a Monolithic kernel.
 
 A **Microkernel** is a kernel that runs the __bare minimum__ of software in kernel space.
+FreeRTOS is a example of an OS that uses a Monolithic kernel.
 
 A **Hybrid kernel** is a type of kernel that is a combination of the two types above. No surprise there, right ?
 

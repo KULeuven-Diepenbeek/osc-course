@@ -159,13 +159,35 @@ Every process has a PCB that contains metadata about the process.
 
 In Linux there are two typical ways for users to create processes: using **fork** or using **exec**. For the records it is mentioned there is another option using system() function but because it is less secure and is less efficient then the other two.
 
-Both fork and exec create a new process. The fork function copies the PCB of process to a new PCB. The process that calls the fork() is referred to with the parent process while the new process is the child process. The child process will continue operations on the same line as the parent process.
-The exec() function call also starts from copying its own PCB. In contrast with fork() it hen replaces the 'program' (read the *text*, *data*, and *bss*) with a new program.and starts executing from (relative) 0.
+Both fork and exec create a new process. The fork function copies the PCB of its process to a new PCB. The process that calls the fork() is referred to with the **parent** process while the new process is the **child** process. The child process will continue operations on the same line as the parent process. Because of the copying of the PCB, the program counter is also copied !!
+
+The exec() function call also starts from copying its own PCB. In contrast with fork(), it then replaces the 'program' (read the *text*, *data*, and *bss*) with a new program and starts executing from (relative) 0.
 
 It is mentioned earlier that the first process that is started is the **init** process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on. Using the **pstree** command we can see the processes in a tree, and have a visual representation of which child-parent relations there are between processes.
 
-<!--<img src="/img/0x_30.png"/>-->
-
 {{< figure src="/img/0x_31.png" title="An example of the pstree command. The left image shows the result of Linux on an embedded system. The right image shows the result of Linux running on a laptop" >}}
 
-blabla
+## Out of fuel ? Take a Shell
+
+When a user logs in on a Linux computer, typically one of the following through approaches is used:
+
+* a login through a Graphical User Interface (GUI)
+* a login through a Command Line Interface (CLI)
+
+For a desktop/laptop that is running Linux the GUI approach is typically used.  On those systems there are **terminal emulators** which emulate CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, ...
+
+{{<figure src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator">}}
+
+For embedded systems the CLI is more appropriate. The GUI approach is not discussed here. 
+{{<todo message="point to where we talk about Xorg">}}
+When a CLI is used, a **shell** is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As always, there are many flavours of shells: sh, bash, ksh, zsh, ... 
+
+Once the shell is running and the user asks to create new processes, all of these newly create processes will have the shell as a parent process. 
+
+{{<todo message="Elaborate on ... ?">}}
+
+* daemons
+* services
+* foreground / background
+  Would be good, because CTRL-Z is a SIGTSTP signal wich **suspends** the process. Maybe just give the teaser towards the next chapter ?
+* ssh

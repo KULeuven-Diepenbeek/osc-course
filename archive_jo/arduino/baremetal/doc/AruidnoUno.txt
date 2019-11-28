@@ -1,0 +1,65 @@
+
+## Timer 
+
+TCCR0B
+
+* a counter runs at a certain frequency (TCNT0)
+* output compare register (OCR0)
+* a comparator compares TCNT0 with OCR0
+
+If the comparator matches => OCR0-flag
+If the counter overflows => TOF0-flag
+
+Frequency:
+16 MHz clock
+prescaler: 
+  TCCR0[2:0]: CS002, CS001, CSO00
+  0x0: no clock input (timer stopped)
+  0x1: system clock (16MHz)
+  0x2: system clock / 8 (2MHz)
+  0x3: system clock / 64(4MHz)
+  0x4: system clock / 256 (2MHz)
+  0x5: system clock / 1024(16KHz)
+  0x6: T0 falling edge
+  0x7: T1 rising edge
+
+## PINOUT
+
+21 PB7 (PCINT7/OC0A/OC1C)
+20 PB6 (PCINT6)
+19 PB5 (PCINT5)
+18 PB4 (T1/PCINT4)
+17 PB3 (PD0/MISO/PCINT3)
+16 PB2 (PDI/MOSI/PCINT2)
+15 PB1 (SCLK/PCINT1)
+14 PB0 (SS/PCINT0)
+
+22 PC7 (INT4/ICP1/CLK0)
+23 PC6 (OC1A/PCINT8)
+25 PC5 (PCINT9/OC1B)
+26 PC4 (PCINT10)
+ 5 PC2 (AIN2/PCINT11)
+
+13 PD7 (CTS/HWB/AIN6/TO/INT7)
+12 PD6 (RTS/AIN5/INT6)
+11 PD5 (XCK/AIN4/PCINT12)
+10 PD4 (INT5/AIN3)
+ 9 PD3 (TXD1/INT3)
+ 8 PD2 (RXD1/AIN1/INT2)
+ 7 PD1 (AIN0/INT1)
+ 6 PD0 (OC0B/INT0)
+
+INT0, INT1, INT2, INT3, INT4, INT5, INT6, INT7
+TXD1, RXD1, XCK
+SS, SCLK, MISO, MOSI
+PCINT0, PCINT1, PCINT2, PCINT3, PCINT4, PCINT5, PCINT6, PCINT7, PCINT8, PCINT9, PCINT10, PCINT11, PCINT12
+AIN0, AIN2, AIN2, AIN3, AIN4, AIN5, AIN6
+OC0B, OC1B, OC1A, OC0A, OC1C
+
+
+18 PB4 (T1)
+17 PB3 (PD0)
+16 PB2 (PDI)
+22 PC7 (ICP1/CLK0)
+13 PD7 (CTS/HWB/TO)
+12 PD6 (RTS)

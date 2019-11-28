@@ -1,0 +1,69 @@
+#include "FreeRTOS.h"
+#include "task.h"
+
+#define bit_get(p,m) ((p) & (m))
+#define bit_set(p,m) ((p) |= (m))
+#define bit_clear(p,m) ((p) &= ~(m))
+#define bit_flip(p,m) ((p) ^= (m))
+#define bit_write(c,p,m) (c ? bit_set(p,m) : bit_clear(p,m))
+#define BIT(x) (0x01 << (x))
+//#define LONGBIT(x) ((unsigned long)0x00000001 << (x))
+
+void vHeartBeat(void *pvParameters);
+void vLedToggle(void *pvParameters);
+
+int main(void) {
+  int x;
+  /**
+   * Data Direction Register n
+   *    Sets bits to:
+   *      0: input
+   *      1: output
+   */
+  DDRB = 0xFF;         // default port as output
+  DDRD = 0xFF;         // default port as output
+
+  bit_clear(DDRB, BIT(1));    // define B1 as input
+  bit_clear(PORTB, BIT(1));   // no pull-up resistor
+
+  /* Insert nop for synchronization*/
+  x = 0;
+
+  /**
+   * Start Tasks
+   */
+
+  xTaskCreate( vLedToggle, "Airbag", 256, NULL, 1, NULL);
+  xTaskCreate( vHeartBeat, "Heartbt", 256, NULL, 1, NULL);
+
+  /**
+   * Start the scheduler so the tasks start executing
+   */
+  vTaskStartScheduler();
+
+  /**
+   Execution will only reach here if there was insufficient heap to start the scheduler. 
+   */
+  for/*ever*/ (;;);
+
+  return 0;
+}
+
+void vHeartBeat(void *pvParameters ) {
+  for/*ever*/ (;;) {
+    bit_set(PORTD, BIT(2));
+    vTaskDelay( pdMS_TO_TICKS(500) );
+
+    bit_clear(PORTD, BIT(2));
+    vTaskDelay( pdMS_TO_TICKS(500) );
+  }
+}
+
+void vLedToggle(void *pvParameters) {
+  for/*ever*/ (;;) {
+    if( (PINB & 0x02) ) 
+      bit_set(PORTB, BIT(4));
+    else
+      bit_clear(PORTB, BIT(4));
+  }
+}

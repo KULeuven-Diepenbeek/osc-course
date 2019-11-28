@@ -1,0 +1,99 @@
+#include "mbed.h"
+
+AnalogOut sine_output(PA_4);
+AnalogOut saw_output(PA_5);
+
+DigitalIn mypin(USER_BUTTON);
+
+Thread thread_sine(osPriorityRealtime);
+Thread thread_saw(osPriorityRealtime);
+/* osPriorityNormal osPriorityAboveNormal  osPriorityRealtime */
+
+#define PI        (3.141592653589793238462)
+#define AMPLITUDE (1.0)    // x * 3.3V
+#define PHASE     (PI * 1) // 2*pi is one period
+#define RANGE     (0x7FFF)
+#define OFFSET    (0x7FFF)
+#define BUFFER_SIZE (360)
+
+float scalingfactor=1;
+uint16_t buffer_sine[BUFFER_SIZE];
+uint16_t buffer_saw[BUFFER_SIZE];
+uint16_t offset = 0x7FFF;
+
+void calculate_sinewave(void);
+void calculate_sawwave(void);
+void run_sinewave(void);
+void run_sawwave(void);
+
+int main() {
+  int count=1, a=0, b=0;
+
+  if(mypin.is_connected()) {
+    printf("mypin is connected and initialized\r\n");
+  }
+
+  calculate_sinewave();
+  calculate_sawwave();
+
+  printf("Sinewave example\r\n");
+  printf("Sawwave example\r\n");
+
+  thread_sine.start(run_sinewave);
+  thread_saw.start(run_sawwave);
+
+  while(1) {      
+    b = a;
+    a = 1-mypin.read();
+    if (a==1 && b==0) {
+    //if (a==1) {
+      count++;
+      if(count == 4) {
+        count = 1;
+      }
+      printf("I'm going to increase the count variable to %d\r\n", count);
+      scalingfactor = count/3.0;
+      printf("%f\r\n",scalingfactor);
+    }
+  }
+}
+
+void calculate_sinewave(void){
+  double rads = 0;
+  int i;
+  for (i = 0; i < BUFFER_SIZE; i++) {
+    rads = (PI * i)/180.0; // Convert degree in radian
+    buffer_sine[i] = (uint16_t)(AMPLITUDE * (RANGE * (cos(rads + PHASE))) + OFFSET);
+  }
+}
+
+void calculate_sawwave(void){
+  int i;
+  for (i = 0; i < BUFFER_SIZE; i++) {
+    buffer_saw[i] = (uint16_t)(AMPLITUDE * (RANGE * (i%180)/180) + OFFSET);
+  }
+}
+
+void run_sinewave(void) {
+  int i;
+
+  while(1){
+    for (i = 0; i < BUFFER_SIZE; i++) {
+      sine_output.write_u16(buffer_sine[i]*scalingfactor);
+      //wait_us(64);
+      Thread::wait(1);
+    }  
+  }
+}
+
+void run_sawwave(void) {
+  int i;
+
+  while(1){
+    for (i = 0; i < BUFFER_SIZE; i++) {
+      saw_output.write_u16((uint16_t)(buffer_saw[i]*scalingfactor));
+      //wait_us(64);
+      Thread::wait(1);
+    }  
+  }
+}

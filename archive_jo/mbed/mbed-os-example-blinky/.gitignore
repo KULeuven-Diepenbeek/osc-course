@@ -1,0 +1,5 @@
+.mbed
+BUILD*/*
+mbed-os*
+*.py*
+img*/*

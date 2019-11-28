@@ -1,0 +1,26 @@
+taak0 1 3
+taak1 2 2
+taak2 3 1
+taak3 1 3
+taak4 1 2
+taak5 2 1
+taak6 2 2
+taak7 3 1
+taak8 3 3
+taak9 1 1
+taakA 2 1
+taakB 2 1
+taakC 3 2
+taakD 3 2
+taakE 3 3
+#
+# formaat:
+#   * commentaar begint met '#'
+#   * de volgende 5 karakters zijn de naam van de "taak"
+#   * het tweede veld is een getal dat de prioriteit aangeeft:
+#       - 1: hoogste prioriteit
+#       - 2: normale prioriteit
+#       - 3: laagste prioriteit
+#   * het derde (en laatste) veld is de "value"
+#   * velden zijn gescheiden met een spatie
+#

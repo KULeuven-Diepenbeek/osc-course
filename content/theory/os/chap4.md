@@ -79,7 +79,7 @@ int main(void) {
 }
 ```
 
-This program will emulate an egg timer. Every second it displays how time is left. Once the process starts running, it takes 10 minutes to complete. This process can be **killed** by just pressing CTRL+C.
+This program will emulate an egg timer. Every second it displays how much time is left. Once the process starts running, it takes 10 minutes to complete. This process can be **killed** by just pressing CTRL+C.
 
 ```bash
 jvliegen@localhost:~/$ ./eg4_timer.bin 

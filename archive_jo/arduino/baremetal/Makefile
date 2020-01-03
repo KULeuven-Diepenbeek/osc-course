@@ -41,12 +41,13 @@ show:
 
 
 
-.PHONY: flash clean
+.PHONY: flash terminal clean
 
 flash: main.hex
 	$(AVRDUDE) -p$(avrType) -C$(avrConfFile) -c$(programmerType) -P$(programmerDev) -b$(baud) -v -U flash:w:$<
-	gtkterm -p /dev/ttyACM1 -s 9600 -b 8 -t 2
 
+terminal:
+	gtkterm -p /dev/ttyACM1 -s 9600 -b 8 -t 2
 
 clean:
 	$(RM) main.hex main.elf $(objects) $(FOREIGN_TARGETS)

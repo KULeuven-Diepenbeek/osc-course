@@ -54,6 +54,25 @@ div.todo {
     text-align: center;
     text-transform: uppercase;
 }
+
+div.task {
+    background-color: #01407a;
+    color: #FFFFFF;
+    padding: 10px 30px;
+    margin: 0px 100px;
+}
+
+div.task div.task_heading {
+    font-size: 200%;
+    font-weight: bolder;
+}
+div.task div.task_body {
+    padding: 0px 60px;
+}
+
+div.task div.task_body ul{
+    margin: 10px 0px;
+}
 /* end VlJo */
 
 

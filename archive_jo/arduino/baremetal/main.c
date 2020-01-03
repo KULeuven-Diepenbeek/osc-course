@@ -1,9 +1,8 @@
 #include "helper.h"
 
-// '1' is output
-#define HEARTBEAT_LED_DIR DDRD
+#define HEARTBEAT_LED_DIR DDRD      // '1' is output
 #define HEARTBEAT_LED_PORT PORTD
-#define HEARTBEAT_LED_BIT PORTD2
+#define HEARTBEAT_LED_BIT PORTD7
 
 
 /* PORT B7: OCR0A
@@ -74,31 +73,32 @@ int main(void) {
    * loop()
    */
   for/*ever*/ (;;)
-  {/*
+  {
     // LED on
     bit_set(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
     _delay_ms(500);
 
     // LED off
     bit_clear(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
-    
+    _delay_ms(500);
+   
 
 
     // 
-    a = (a+1)%4;
-    _delay_ms(500);*/
-    if ((TCNT0 & 0x80)>7) {
-      bit_set(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
-      SWprescaler = (SWprescaler + 1)%1024;
-    } else  {
-      bit_clear(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
-    }
+    // a = (a+1)%4;
+    // _delay_ms(500);*/
+    // if (TCNT0 & 0x80) {
+    //   bit_set(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
+    //   SWprescaler = (SWprescaler + 1)%4096;
+    // } else  {
+    //   bit_clear(HEARTBEAT_LED_PORT, BIT(HEARTBEAT_LED_BIT));
+    // }
 
-    if( SWprescaler == 1023 ) {
-      USART_Transmit('x');
-      USART_Transmit(CLKPR);
-      USART_Transmit(' ');
-    }
+    // if( SWprescaler == 4096-1 ) {
+    //   USART_Transmit('x');
+    //   USART_Transmit(CLKPR);
+    //   USART_Transmit(' ');
+    // }
 
   }
 }

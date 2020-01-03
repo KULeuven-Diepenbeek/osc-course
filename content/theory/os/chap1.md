@@ -23,15 +23,13 @@ The datasheet contains a block diagram of the AVR architecture. Nonetheless, mos
 The image should be familiar to students that took up the _Elektronische systemen_ course at KU Leuven. :smile: The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, a number of independent topics are explained first. Through these topics the concept of interrupts is introduced by using the 8-bit timer that is present on the Arduino UNO.
 
 
-
-
 ## 1.2 Bare metal programming on the Arduino UNO
 
 Programming the Arduino UNO can be easily done with **Arduino IDE**. This user friendly environment is a very nice entry point for new users of microcontrollers. 
 
-<center><img src="/img/0x_02.png"/></center>
+{{<figure src="/img/0x_02.png" title="The Arduino IDE">}}
 
-Future engineers, however, should be able to understand what is going on behind the curtain. 
+Future engineers, however, should be able to understand what is going on behind the curtain. After all, magic doesn't exist.
 
 ### Bit manipulation
 When bare metal programming a microcontroller it is often required to start poking specific bit. A quick refresh on how to achieve this is given here. In contrast with the software world, hardware engineers start counting from the right (instead of the left) and from 0 (instead of 1).
@@ -221,7 +219,7 @@ Another example is given by a cartoon.
 {{< youtube id="18AzodTPG5U" >}}
 &nbsp;
 
-Would it not be nice that the CPU could just continue working on something else until a certain event occurs. In the second example (that with the cartoon), the _woman_ interrupts what the _processor_ was doing.
+Would it not be nice that the CPU could just continue working on something else until a certain event occurs. In the second example (the one with the cartoon), the _co-pilot interrupts what the _processor_ was doing.
 
 An **interrupt** is a signal that goes to the processor signaling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a hardware interrupt. An example for a software interrupt could be an attempt of a division by zero.
 
@@ -274,8 +272,4 @@ After studying this chapter you should:
 
 ## Useful links:
 * [megaAVR Data Sheet](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
-* [Arduino UNO schematic](https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf)
-
-<!--
-<center><img src="/img/placeholder.png" height=240/></center>
--->
+* [Arduino UNO schematic](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)

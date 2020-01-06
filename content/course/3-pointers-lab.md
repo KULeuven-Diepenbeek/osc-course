@@ -1,5 +1,7 @@
 ---
-title: 'Lab 2: Pointers and Arrays'
+title: '3.1: Pointers and Arrays'
+pre: "<i class='fas fa-vial'></i> "
+weight: 4
 ---
 
 ## The Ancient Library

@@ -1,5 +1,7 @@
 ---
-title: 'Chapter 3: Task management'
+title: '6: Task management'
+pre: "<i class='fab fa-linux'></i> "
+weight: 6
 ---
 <!--
 &laquo;&nbsp;[Back to Table of Contents](/)<br/>

@@ -1,5 +1,7 @@
 ---
-title: '4: The Stack & the Heap'
+title: '8: The Stack & the Heap'
+pre: "<i class='far fa-keyboard'></i> "
+weight: 8
 ---
 
 Stack, heap, by-value VS by-reference

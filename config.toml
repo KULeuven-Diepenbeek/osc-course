@@ -18,6 +18,7 @@ enableGitInfo = true
     disableComments = true
     themeVariant = "kul"
     disableInlineCopyToClipBoard = true
+    ordersectionsby = "weight"
 
 # see https://learn.netlify.com/en/basics/configuration/
 [outputs]

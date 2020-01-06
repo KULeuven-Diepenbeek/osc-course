@@ -1,5 +1,7 @@
 ---
-title: '2: Pointers and arrays'
+title: '3: Pointers and arrays'
+pre: "<i class='far fa-keyboard'></i> "
+weight: 3
 ---
 
 In the schematic examples below, the following concepts can be explicitly distinguished:

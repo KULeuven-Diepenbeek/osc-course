@@ -1,5 +1,7 @@
 ---
-title: 'Chapter 2: Introduction to Operating Systems, using Linux'
+title: '5: Intro to OS using Linux'
+pre: "<i class='fab fa-linux'></i> "
+weight: 5
 ---
 
 <!--

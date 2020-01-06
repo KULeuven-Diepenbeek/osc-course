@@ -1,5 +1,7 @@
 ---
-title: 'Chapter 4: Inter-task communication'
+title: '7: Inter-task communication'
+pre: "<i class='fab fa-linux'></i> "
+weight: 7
 ---
 <!--
 &laquo;&nbsp;[Back to Table of Contents](/)<br/>

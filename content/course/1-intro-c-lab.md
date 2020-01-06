@@ -1,5 +1,7 @@
 ---
-title: 'Lab 1: Introduction to C'
+title: '1.1: Introduction to C'
+pre: "<i class='fas fa-vial'></i> "
+weight: 2
 ---
 
 ## We are at War!

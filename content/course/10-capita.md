@@ -1,5 +1,7 @@
 ---
-title: 'Chapter 6: Capita Selecta'
+title: '10: Capita Selecta'
+pre: "<i class='fab fa-linux'></i> "
+weight: 10
 ---
 <!--
 &laquo;&nbsp;[Back to Table of Contents](/)<br/>

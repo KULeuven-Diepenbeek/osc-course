@@ -1,5 +1,7 @@
 ---
-title: 'Chapter 1: Interrupts'
+title: '2: Interrupts'
+pre: "<i class='fab fa-linux'></i> "
+weight: 2
 ---
 
 <!--

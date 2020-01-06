@@ -1,5 +1,7 @@
 ---
-title: 'Lab x: Baremetal Arduino'
+title: '2.2: Baremetal Arduino'
+pre: "<i class='fas fa-vial'></i> "
+weight: 3
 ---
 
 ## Let's strip to bare-metal

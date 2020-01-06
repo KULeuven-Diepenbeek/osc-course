@@ -1,7 +1,7 @@
 ---
-title: '2: Interrupts'
-pre: "<i class='fab fa-linux'></i> "
-weight: 2
+title: '2.1: Arduino UNO'
+pre: "<i class='fas fa-book'></i> "
+weight: 1
 ---
 
 <!--

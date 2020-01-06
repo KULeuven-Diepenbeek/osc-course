@@ -1,6 +1,6 @@
 ---
-title: '5: Intro to OS using Linux'
-pre: "<i class='fab fa-linux'></i> "
+title: '5.1: Intro to OS using Linux'
+pre: "<i class='fas fa-book'></i> "
 weight: 5
 ---
 

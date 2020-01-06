@@ -1,7 +1,7 @@
 ---
-title: '6.1: Task management labs'
+title: '6.2: Task management labs'
 pre: "<i class='fas fa-vial'></i> "
-weight: 7
+weight: 2
 ---
 # 3.1 Task management
 

@@ -1,7 +1,7 @@
 ---
-title: '8.1: The Stack & the Heap: labs'
+title: '7.2: The Stack & the Heap: labs'
 pre: "<i class='fas fa-vial'></i> "
-weight: 9
+weight: 2
 ---
 
 TODO is dit lab 4?

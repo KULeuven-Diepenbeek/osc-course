@@ -1,7 +1,7 @@
 ---
-title: '8: The Stack & the Heap'
-pre: "<i class='far fa-keyboard'></i> "
-weight: 8
+title: '7.1: The Stack & the Heap'
+pre: "<i class='fas fa-book'></i> "
+weight: 1
 ---
 
 Stack, heap, by-value VS by-reference

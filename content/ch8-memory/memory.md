@@ -1,6 +1,6 @@
 ---
-title: '9: Memory management'
-pre: "<i class='fab fa-linux'></i> "
+title: '8.1: Memory management'
+pre: "<i class='fas fa-book'></i> "
 weight: 9
 ---
 <!--

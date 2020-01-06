@@ -1,7 +1,7 @@
 ---
-title: '4: Debugging'
+title: '4.1: Debugging'
 pre: "<i class='far fa-keyboard'></i> "
-weight: 4
+weight: 1
 ---
 
 how to debug shizzle

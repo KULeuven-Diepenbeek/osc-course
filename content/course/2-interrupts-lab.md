@@ -4,7 +4,7 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 3
 ---
 
-## Let's strip to bare-metal
+# 2.2 Let's strip to bare-metal
 
 When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
 

@@ -11,18 +11,19 @@ weight: 2
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
-
-## 1.1 Arduino UNO
+# 2.1 Arduino UNO
 
 The Arduino UNO is an open-source microcontroller board. It is powered by an _off-the-shelf_ ATMega microcontroller from [Microchip](https://www.microchip.com/design-centers/8-bit/avr-mcus). The datasheet for this family of microcontrollers can be found [here](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf).
 
 {{<figure src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg" title="An Arduino UNO">}}
 
-The datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other components as well.
+This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well. The image should be familiar to students that took up the _Elektronische systemen_ course at KU Leuven. :smile: 
 
-{{<figure src="http://exploreembedded.com/wiki/images/thumb/f/fc/AVR_Architecture.GIF/409px-AVR_Architecture.GIF" title="Block diagram of the AVR Architecture">}}
+The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, a number of related topics are explained first. Through these topics the concept of interrupts is introduced by using the 16-bit timer that is present on the Arduino UNO.
 
-The image should be familiar to students that took up the _Elektronische systemen_ course at KU Leuven. :smile: The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, a number of independent topics are explained first. Through these topics the concept of interrupts is introduced by using the 8-bit timer that is present on the Arduino UNO.
+{{<figure src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif" title="Block diagram of the AVR Architecture">}}
+
+
 
 
 ## 1.2 Bare metal programming on the Arduino UNO

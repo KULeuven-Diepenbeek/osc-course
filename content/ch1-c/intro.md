@@ -4,9 +4,6 @@ pre: "<i class='far fa-keyboard'></i> "
 weight: 1
 ---
 
-&laquo;&nbsp;[Back to Part II: Programming C, Overview](/theory/c)<br/>
-&raquo;&nbsp;[To the C Labs](/practice/lab1)
-
 Chapter 1 handles the following subjects: Intro to C, building, ecosystems, compiling & cross-compiling, building header/source files, Makefiles, ...
 
 ## The C programming language

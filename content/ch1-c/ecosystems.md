@@ -194,9 +194,9 @@ Executing the above steps can be done using the ``make`` command and a default g
 
 For more information on the correct Makefile syntax, see the [GNU make](ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html) documentation.
 
-{{% ex %}}
+{{% task %}}
 Create a Makefile that contains two targets: `compile` and `run`. The default target should execute both in sequence. As for what to compile, write a simple program that outputs "hello, (name)". The name is something you ask from the user using the stdio function `gets()`.
-{{% /ex %}}
+{{% /task %}}
 
 #### (3) IDEs
 

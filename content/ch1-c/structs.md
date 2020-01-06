@@ -61,10 +61,10 @@ int main() {
 
 It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. The function pointer, or callback method, will be further explained in [chapter 2](/theory/c/chap2).
 
-{{% ex %}}
+{{<task>}}
 Compile and execute the above code. what happens when you comment out `jaak.is_old = &is_old;`?<br/>
 Implement another function with signature `int f(struct Person p)` that calls people old when they are called "Jaak". Look at the previous example on how to expand the struct to add a name property.
-{{% /ex %}}
+{{</task>}}
 
 #### Extra definitions
 

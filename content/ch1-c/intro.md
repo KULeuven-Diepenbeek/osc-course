@@ -1,10 +1,8 @@
 ---
-title: '1.1: Intro of the C ecosystem'
+title: '1.1: The C programming language'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
-
-## The C programming language
 
 The [C language](https://en.wikipedia.org/wiki/C_(programming_language)) is a programming language developed in the '70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself. 
 
@@ -56,11 +54,11 @@ int main() {
 }
 ```
 
-{{% ex %}}
+{{<task>}}
 Compile the above with `gcc -o fileio fileio.c`. <br/>
 Save some text in a file called "sup.txt", and execute the program with `./fileio`. <br/>
 Congratulations on your first compiled C program!
-{{% /ex %}}
+{{</task>}}
 
 There are a lot of problems with this implementation: the buffer length is hardcoded and the memory has not been released. A `FileReader` Java class that does everything for you simply cannot be created. As you can see it's a lot more **low-level** work than Java's one-liners like `Files.readAllBytes`! C does not even have the keyword `new`. Ouch.
 
@@ -93,11 +91,11 @@ The `main()` function returns a number that determines whether or not your progr
 
 The "f" of printf stands for "formatting" as you can see in the example. See [Formatted output](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html).
 
-{{% ex %}}
+{{<task>}}
 Write a program that outputs the following: <br/>
 "pi is&nbsp;&nbsp;&nbsp;&nbsp;3.1415"<br/>
 Based on the floating-point variable pi with a value of `3.1415`. The output should end with a new line and contain a tab.
-{{% /ex %}}
+{{</task>}}
 
 ### Use functions to structure code
 
@@ -168,7 +166,9 @@ Together with the modifiers:
 
 [The table on Wikipedia](https://en.wikipedia.org/wiki/C_data_types) lists the permissible combinations to specify a large set of storage size-specific declarations. `char` is the smallest addressable unit, and `long double` is the biggest. For instance, `unsigned char` gives you a range of 0 to 255, while `signed char` works from -127 to 127. 
 
-Actual byte sizes are dependant on the target platform. This can be retrieved using `sizeof(char)`. 
+{{% notice note %}}
+Actual byte sizes are dependant on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using `sizeof(type)`. 
+{{% /notice %}}
 
 ### Strings? What do you mean?
 
@@ -200,8 +200,7 @@ C reserves the right amount of memory with string literals you know from Java. T
 
 Handy string utility functions reside in the header file `<string.h>` (copying, concatenating, asking for the length, ...) See [GNU C: String utils](https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html).
 
-{{% ex %}}
+{{% task %}}
 What is the result of `strcmp("hello, Hello")`? <br/>
 And of `strncmp("hello, world", "hello, amazing world!!", 5)`?
-{{% /ex %}}
-
+{{% /task %}}

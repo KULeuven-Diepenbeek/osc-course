@@ -68,9 +68,9 @@ int main() {
 }
 ```
 
-{{% ex %}}
+{{% task %}}
 What will be printed in the above example? The first line should be obvious, but the second one... 
-{{% /ex %}}
+{{% /task %}}
 
 {{<mermaid>}}
 graph LR;
@@ -107,9 +107,9 @@ int **ptr_to_ptr = ptr;
 int **ptr_to_ptr = &ptr;
 ```
 
-{{% ex %}}
+{{% task %}}
 Why does `int **ptr_to_ptr = ptr;` generate a compiler error?
-{{% /ex %}}
+{{% /task %}}
 
 {{<mermaid>}}
 graph LR;
@@ -151,9 +151,9 @@ Whoops. Always assign 'nothing' to a pointer, using `int *ptr = NULL`. Note that
 
 `NULL` is a **platform dependent** (!!) macro that in C refers to zero (`0`), usually in the form of a void pointer. A `void *` pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.
 
-{{% ex %}}
+{{% task %}}
 What gets printed in the above example if we assign `NULL` to `*ptr`?
-{{% /ex %}}
+{{% /task %}}
 
 The definition of a pointer does not prescribe the exact location of the `*`: `int* age` is the same as` int *age` (notice the placement of the stars). Be careful with things like 'int *age, old_age'! The last variable here is an ordinary int, and not a pointer!
 
@@ -341,9 +341,9 @@ int main() {
 
 **Depending on your compiler**, the above code will print "hey ot", meaning your ptr pointer is pointing to the next variable on the local stack after the four characters "h", "e", "y", "\0", from the txt variable, are processed within the for loop. We will go more into detail on this in [chapter 4](/theory/c/chap4).
 
-{{% ex %}}
+{{% task %}}
 What happens when I change `txt[4]` to `txt[3]`?
-{{% /ex %}}
+{{% /task %}}
 
 Jumping to the next available address space also works with structures instead of a character array:
 

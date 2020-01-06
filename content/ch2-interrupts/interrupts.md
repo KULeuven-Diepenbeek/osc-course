@@ -76,14 +76,12 @@ Next to the shift operator, [bitwise operators](https://en.wikipedia.org/wiki/Bi
   if(x & y)  { printf("YES\n"); } else { printf("NO\n");
 ```
 
-<div class="exercise">
-  <h1>Exercise</h1>
-  Write a line of C-code that:
-  <ul>
-    <li>sets the 3rd byte to '1' and all others to '0'</li>
-    <li>sets the 4th and 5th byte to '1' and all others to '0'</li>
-  </ul>
-</div>
+{{% task %}}
+Write a line of C-code that:
+
+- sets the 3rd byte to '1' and all others to '0', and 
+- sets the 4th and 5th byte to '1' and all others to '0'.
+{{% /task %}}
 
 ### Hello hardware, this is software speaking
 A frequently used way of communication between hardware and software is through memory-mapped registers. Such a register can be read or written by software at a certain address. This register serves as driver (in the hardware sense) for inputs of a certain hardware component.

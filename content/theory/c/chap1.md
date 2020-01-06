@@ -1,5 +1,6 @@
 ---
 title: '1: Introduction of the C ecosystem'
+pre: "<i class='fab fa-leanpub'></i> "
 ---
 
 &laquo;&nbsp;[Back to Part II: Programming C, Overview](/theory/c)<br/>

@@ -15,10 +15,10 @@ publish:
 	git push	
 
 
-localserver: 
+server: 
 	killall hugo || true
 	$(HUGO) $(SERVER_OPTIONS) server &
-	$(BROWSER) http://localhost:1313 &
+	#$(BROWSER) http://localhost:1313 &
 
 clean:
 	killall hugo

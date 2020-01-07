@@ -54,9 +54,9 @@ Different OSes exist for different computing platforms.
 
 {{< todo message="Uniformly style the polls ?" >}}
 
-{{% ex %}}
+{{% task %}}
 Which operating system is the best ?
-{{% /ex %}}
+{{% /task %}}
 
 ## 2.2 Types of operating systems
 

@@ -13,6 +13,10 @@ div.ex {
 }
 
 div.ex p {
+    margin: 0;
+}
+
+div.ex .inner {
     padding: 15px;
     display: block;
     font-size: 1rem;
@@ -23,7 +27,7 @@ div.ex p {
     background: #FFF2DB;
 }
 
-div.ex p:first-child:before {
+div.ex .inner:first-child:before {
     position: absolute;
     top: 2px;
     color: #fff;
@@ -33,12 +37,12 @@ div.ex p:first-child:before {
     left: 10px;
 }
 
-div.ex p:first-child:after {
+div.ex .inner:first-child:after {
     position: absolute;
     top: 2px;
     color: #fff;
     left: 2rem;
-    content: 'Practice Time!';
+    content: 'Exercise!';
 }
 
 #sidebar #shortcuts h3 {
@@ -55,24 +59,6 @@ div.todo {
     text-transform: uppercase;
 }
 
-div.task {
-    background-color: #01407a;
-    color: #FFFFFF;
-    padding: 10px 30px;
-    margin: 0px 100px;
-}
-
-div.task div.task_heading {
-    font-size: 200%;
-    font-weight: bolder;
-}
-div.task div.task_body {
-    padding: 0px 60px;
-}
-
-div.task div.task_body ul{
-    margin: 10px 0px;
-}
 /* end VlJo */
 
 

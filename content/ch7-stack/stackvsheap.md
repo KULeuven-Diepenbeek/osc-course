@@ -86,9 +86,9 @@ int main() {
 
 This is called creating a **deep copy**, while a **shallow copy** creates a copy of a pointer, still pointing to the same value in memory space.
 
-{{% ex %}}
+{{% task %}}
 What happens when you omit `malloc()` and simply write `Data *heap_data = memcpy(heap_data, &data, sizeof(Data));`?
-{{% /ex %}}
+{{% /task %}}
 
 ### Inspecting program memory in the OS
 
@@ -199,7 +199,7 @@ int main() {
 
 The above mistakes are easily made if you are used to Java:
 
-```Java
+```java
 void foo() {
     Animal cow = new Animal();
     cow.eat();
@@ -221,10 +221,10 @@ That is **platform-dependent** and will hopefully crash instead of cause all for
 1. Stack --> heap. The C compiler will silently overwrite the heap datastructure! On modern OS systems, there are **guard pages** that prevent the stack from growing, resulting in a _segmentation fault_. Also, modern compilers throw exceptions such as **stack overflow** if you attempt to go outside the reserved space (= segfault). 
 2. Heap --> Stack. The `malloc()` implementation will notice this and return `NULL`. It is up to you to do something with that result. 
 
-{{% ex %}}
+{{% task %}}
 Write a program with an infinite loop that puts stuff on the stack. What is the program output?<br/>
 Do the same with infinite malloc()'s. What happens now?
-{{% /ex %}}
+{{% /task %}}
 
 ## Optimizing C code
 

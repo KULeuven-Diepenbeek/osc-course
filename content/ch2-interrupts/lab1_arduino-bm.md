@@ -44,33 +44,34 @@ int main(void) {
 
 The approach in the C code is not too different from the Arduino IDE approach. The direction bit of the LED is set to *output*: `bit_set(HEARTBEAT_LED_DIR, BIT(HEARTBEAT_LED_BIT));` In the *Loop* function, 4 statements are repeated forever: 1) toggle the LED ON, 2) wait for half the period, 3) toggle the LED OFF, and 4) wait half the period again. These **pseudo** functions are actually macros. These are defined in the file *helper.h* which is included on the first line. {{< todo message="are these the correct words ? Wouter ?<br/>Should we make separate directory for these helper files ?" >}} 
 
-{{<task>}}
+{{% task %}}
 Try to understand the <b>BIT MANIPULATION FUNCTIONS</b> in the helper.h file:
-<ul>
-  <li>bit_get(p,m)</li>
-  <li>bit_set(p,m)</li>
-  <li>bit_clear(p,m)</li>
-  <li>bit_flip(p,m)</li>
-  <li>bit_write(c,p,m)</li>
-  <li>BIT(x)</li>
-  <li>LONGBIT(x)</li>
-</ul>
-{{< /task >}}
+
+- `bit_get(p,m)`
+- `bit_set(p,m)`
+- `bit_clear(p,m)`
+- `bit_flip(p,m)`
+- `bit_write(c,p,m)`
+- `BIT(x)`
+- `LONGBIT(x)`
+{{% /task %}}
 
 The **helper.h** file itself includes **avr/io.h**. When taking a closer look on this file, lines 271 and 272 read:
- ```
+
+```
 #elif defined (__AVR_ATmega328P__)
 #  include <avr/iom328p.h>
 ```
+
 So the actual include is from: **avr/iom328p.h**. This file contains **all** the defines to ease the address-to-name mapping.
 eg. #define DDRD \_SFR_IO8(0x0A)
 
-{{<task>}}
-1. Try to find out <b>HOW</b> the selection in io.h is done.<br/>
+{{% task %}}
+1. Try to find out **HOW** the selection in io.h is done.<br/>
 2. Make a new program that moves the blinking light to a different port.
-<br/><b>TIP:</b> don't move the LED, just add another one. We'll need 2 LEDS for the next exercise.
-{{< /task >}}
 
+**TIP**: don't move the LED, just add another one. We'll need 2 LEDS for the next exercise.
+{{% /task %}}
 
 
 #### Translation micro controller Arduino

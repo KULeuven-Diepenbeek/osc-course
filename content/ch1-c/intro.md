@@ -87,7 +87,7 @@ int main() {
 ```
 
 
-The `main()` function returns a number that determines whether or not your program was executed successfully (0), else some kind of error code will be returned. `printf` is a function in the default IO header die we we need to include, just like Java's `import`.
+The `main()` function returns a number that determines whether or not your program was executed successfully (0), else some kind of error code will be returned. `printf` is a function in the default IO header that we need to include, just like Java's `import`.
 
 The "f" of printf stands for "formatting" as you can see in the example. See [Formatted output](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html).
 

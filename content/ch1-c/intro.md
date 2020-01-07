@@ -201,6 +201,8 @@ C reserves the right amount of memory with string literals you know from Java. T
 Handy string utility functions reside in the header file `<string.h>` (copying, concatenating, asking for the length, ...) See [GNU C: String utils](https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html).
 
 {{% task %}}
-What is the result of `strcmp("hello, Hello")`? <br/>
+What is the result of `strcmp("hello", "Hello")`? <br/>
 And of `strncmp("hello, world", "hello, amazing world!!", 5)`?
 {{% /task %}}
+
+Hint: `man strcmp`!

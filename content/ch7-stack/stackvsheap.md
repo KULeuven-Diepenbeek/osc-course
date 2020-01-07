@@ -97,7 +97,7 @@ Unix-like operating systems implement [procfs](https://en.wikipedia.org/wiki/Pro
 * `/proc/PID/maps`, a text file containing information about mapped files and blocks (like heap and stack).
 * `/proc/PID/mem`, a binary image representing the process's virtual memory, can only be accessed by a ptrace'ing process.
 
-We will take a closer look at these during the [labs](/practice/lab4).
+We will take a closer look at these during the labs.
 
 Mac OSX Does not have _procfs_. Instead, you will have to rely on commandline tools such as `sysctl` to query process information. 
 

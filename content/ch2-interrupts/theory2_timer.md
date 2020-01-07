@@ -4,13 +4,33 @@ pre: "<i class='fab fa-linux'></i> "
 weight: 3
 ---
 
+With our sleeves rolled up and dirt all the way up to our elbows, it's time to grab a coffee and do so reading/studying again. In this section **interrupts** will be introduced through the use of a timer.
+
+A lot of applications that are built using an Arduino need some sense of **time**. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.
 
 
 
 ## 16-bit Timer
 One component that is in almost every microcontroller is a Timer/counter. This timer/counter can be used for many things: stopwatch, wave generation, timing, ... The block diagram of the 16-bit timer/counter in the Arduino is shown here. Next to this 16-bit timer/counter there are 2 8-bit timer/counters available.
 
-<center><img src="/img/0x_12.png" alt="Block Diagram of an 8-bit counter in the Arduino microcontroller"/></center>
+{{<figure src="/img/0x_12.png" title="Block Diagram of the 16-bit counter in the Arduino microcontroller">}}
+
+During **normal operation** the counter simply *counts*. The left-side image below shows what happens to the 16-bit value **TCNT2**. This value starts at 0x0000 and counts to 0xFFFF. The counter can also be used in a different mode: **Clear-timer-on-compare (CTC)**. In this mode the timer starts again at 0x0000, but only counts a certain value. When this value is reached, the counter resets and starts over. The right-side image below shows the CTC mode with the cap at **0x7FFF** and at <span style="color:red">**0x3FFF**</span>.
+
+<div style="display: flex; flex-direction: row; align-items: center;">
+  <div style="width: 50%">
+    {{<figure src="/img/jo/timer_normal.jpg" title="Value of TCNT during normal operation of the 16-bit counter." width="200%">}}
+  </div>
+  <div style="width: 50%">
+    {{<figure src="/img/jo/timer_ctc.jpg" title="Value of TCNT during clear-timer-on-compare (CTC) operation of the 16-bit counter." width="200%">}}
+  </div>
+</div>
+
+The value to which Timer counts in CTC mode can be set through the register **OCR1A**: the **O**utput **C**ompare **R**egister of timer **1** named **A**.
+
+
+
+
 
 As can be seen from the block diagram 6 (4+2) registers are available for interaction with the software:
 

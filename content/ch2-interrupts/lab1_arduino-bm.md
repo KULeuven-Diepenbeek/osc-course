@@ -1,5 +1,5 @@
 ---
-title: '2.2: Baremetal Arduino'
+title: '2.2: Bare metal Arduino'
 pre: "<i class='fas fa-dumbbell'></i> "
 weight: 2
 ---

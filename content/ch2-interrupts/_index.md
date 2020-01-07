@@ -19,5 +19,4 @@ This chapter handles the following subjects: Bare metal, arduino, timers, ...
   * Hello hardware, this is software speaking
   * Two beating hearts
 
-2.2 (lab): Bare metal 
-Arduino
+2.2 (lab): Bare metal Arduino

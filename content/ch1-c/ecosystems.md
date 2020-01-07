@@ -145,6 +145,15 @@ Due to the lack of a target file name, the compiler creates an "a.out" file that
 
 However, there are still a lot of compiler options that are [explained at gcc.gnu.org](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html) that you can play with.
 
+{{% notice note %}}
+When targetting another platform, you will need a **cross-compiler** that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, ...)<br/>
+Instead of using the default GCC compiler: `gcc bla.c`, you will download and install a custom cross-compiler and evoke it the same way: `arm-eabi-none-gcc bla.c`. The GBA or RaspberryPi for instance have an ARM chipset and require this cross-compiler. This differs from most x86 chipsets that leverages `gcc`.
+{{% /notice %}}
+
+{{% task %}}
+Are you still cross-compiling if you are compiling on an ARM machine yourself, using `gcc`, compiled for that chipset? What if you compile code on the Raspberry for your laptop?
+{{% /task %}}
+
 #### Step 1: compiling
 
 As seen in the above schematic, executing your source code requires the activation of two steps: compiling (1), and linking (2). [C Preprocessor flags](https://en.wikipedia.org/wiki/C_preprocessor) get parsed just before compiling. Simply calling the `gcc` compiler executes all steps at once. Only compiling is done using the `-c` statement (source input) and providing the source files as arguments, producing **object files**, which can be then linked into a binary.
@@ -226,3 +235,15 @@ add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h
 </pre>
 
 A simple CMake file is much easier to read and write than a Makefile. See [CMake tutorial](https://cmake.org/cmake-tutorial/) for more information. CLion manages the `add_executable` arguments for you: adding new files to your project will also automatically add them to the list.
+
+Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling `gcc file.c` yourself every single time. 
+
+{{<mermaid>}}
+graph TD
+    cmake[CMake]
+    make[Makefiles]
+    cmd[gcc & cmdline]
+    cmake --> make
+    make --> cmd
+{{< /mermaid >}}
+

@@ -11,6 +11,12 @@ pygmentsCodefences = true
 # for .Lastmod to work with .GitInfo: --enableGitInfo https://gohugo.io/variables/git/
 enableGitInfo = true
 
+# for new Hugo 0.6x, markup changed to CommonMark.
+[markup]
+	defaultMarkdownHandler = "blackfriday"
+	[markup.blackFriday]
+		skipHTML = false
+
 [taxonomies]
     tag = "tags"
 

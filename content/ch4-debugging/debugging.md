@@ -1,5 +1,5 @@
 ---
-title: '4.1: Debugging'
+title: '4.1: GDB'
 pre: "<i class='far fa-keyboard'></i> "
 weight: 1
 ---

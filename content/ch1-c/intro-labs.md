@@ -20,7 +20,7 @@ Tips:
 
 1. Re-read [chapter 1](/ch1-c/).
 2. How do you start writing a program in C? Create one file, create a main function, print something and compile/run to test if it works. Then expand. 
-3. Will you be using `scanf` or `gets` for user input? What is the difference? 
+3. Will you be using `scanf()` or `fgets()` for user input? What is the difference? Look up how to use either functions. 
 4. You can safely ignore the `*`. A char array gets converted to a pointer if returned or given as an argument. Remember, in Java, the function signature would simply be `char[] munch(char[] sentence)`
 5. Go through the [GNU Coding standards](https://www.gnu.org/prep/standards/html_node/Writing-C.html). Methods in C are _snake-cased_: `my_nice_method` instead of Java's _camelcasing_ `myNiceMethod`.
 
@@ -33,6 +33,7 @@ Start from this blueprint:
 
 ```C
 #include <stdio.h>
+#include <stdlib.h>
 
 char* munch(char* sentence) {
     char* response = malloc(sizeof(char) * 100);
@@ -49,6 +50,4 @@ int main() {
 }
 ```
 
-The correct use of `malloc()` will be explained in the second lab.
-
-
+The correct use of `malloc()` will be explained in the coming labs.

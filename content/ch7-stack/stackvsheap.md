@@ -4,13 +4,6 @@ pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
 
-Stack, heap, by-value VS by-reference
-
-todo 
-
-* objdump -D voorbeeld
-* compiler optimization heavy, unpredictable, ...
-
 ## The Stack and the Heap
 
 ### Program Memory

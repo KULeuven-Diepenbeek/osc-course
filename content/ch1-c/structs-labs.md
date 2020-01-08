@@ -56,34 +56,3 @@ Tips:
 1. You will need to loop through all orcs and take two elements out of the array to pit them against each other. Reassign `Orc winner = army[0]` with the result of the `fight()` function, within the loop.
 2. If both orcs survive, the first one wins.
 
-### 4. Building with Makefiles
-
-It is time to split up our code into different parts:
-
-{{<mermaid>}}
-graph TD
-    E{Executable}
-    A[main.c]
-    AA>main.o]
-    B[orcs.c]
-    BB>orcs.o]
-    D[orcs.h]
-    
-    E --> AA
-    E --> BB
-
-    AA --> A
-    AA --> D
-
-    BB --> B
-    BB --> D
-{{< /mermaid >}}
-
-Create four different files:
-
-1. orcs.h - this is where your struct definition resides.
-2. orcs.c - this is where your methods related to orcs reside. Include the orc header file.
-3. main.c - this is where your main method resides. Include the orc header file.
-4. Makefile - builds everything. Create a `compile`, `link`, and `clean` target.
-
-Compile both C files with separate `gcc -c` commands, merging them together with a third command, as seen in the theory. 

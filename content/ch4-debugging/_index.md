@@ -18,5 +18,7 @@ Important concepts to grasp:
 
 ## Recommended Reading
 
+- [The GNU Project Debugger Documentation](https://www.gnu.org/software/gdb/documentation/)
 - [Hackme: exploiting heap bugs](https://tc.gtisc.gatech.edu/cs6265/2016/l/lab10-heap/README-tut.txt
 )
+- [Google Test Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)

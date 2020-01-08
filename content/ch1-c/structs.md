@@ -8,7 +8,7 @@ weight: 2
 
 The only way to structure data in C is using the `struct` keyword:
 
-```C
+```c
 struct Person {
     int age;
     int gender;     // no bool, remember?
@@ -18,7 +18,7 @@ struct Person {
 
 We can use this structure to assign values like this:
 
-```C
+```c
 struct Person jaak;    // do not forget "struct"
 // jaak.name = "Jaak Trekhaak"; - this is too easy - won't work
 strcpy(jaak.name, "Jaak Trekhaak"); // include <string.h> for this
@@ -28,7 +28,7 @@ jaak.gender = 1;
 
 Another way of assigning values is defining the values inline using the `{}`brackets:
 
-```C
+```c
 struct Person jaak = {
     "Jaak Trekhaak",    // need to be in order of property definition
     80,
@@ -38,7 +38,7 @@ struct Person jaak = {
 
 The next question is, can we also define functions in a `struct`? Yes and no. A function pointer makes this possible, but it is not the same such as a member variable of a class in Java. C function pointers, however, can be very usefully used as _callback methods_:
 
-```C
+```c
 #include <stdio.h>
 
 struct Person {
@@ -71,14 +71,14 @@ Implement another function with signature `int f(struct Person p)` that calls pe
 
 Creating a person looks awkward: `struct Person jaak;` - why can't we simply use `Person jaak;`? That is possible if you **define** your own types using the keyword `typedef`. It's also useful to emulate your own `string` implementation:
 
-```C
+```c
 typedef struct Person Person;
 typedef char* string;
 ```
 
 Magic numbers are usually defined on top, in header files, using `#define`. With some tricks we can emulate booleans in C:
 
-```C
+```c
 #define TRUE 1
 #define FALSE 0
 
@@ -93,9 +93,9 @@ Typical C code that you may encounter due to lack of a bool: `if (result) {...}`
 
 #### C's By-Value VS Java's By-Ref
 
-In C, everything you pass to functions is passed _by value_, meaning a **copy of the value** is created to pass to the called function. This is _very important_ to grap because mistakes are easily made. For instance, by passing the Person strcuture, we copy it. Any changes made to the struct in the function are done ON THAT COPY:
+In C, everything you pass to functions is passed _by value_, meaning a **copy of the value** is created to pass to the called function. This is _very important_ to grap because mistakes are easily made. For instance, by passing the Person struct, we copy it. Any changes made to the struct in the function are done ON THAT COPY:
 
-```C
+```c
 void happy_birthday(Person person) {
     person.age++;
 }
@@ -123,7 +123,7 @@ graph LR;
 
 To fix this, we need the use of **pointers**, as explained in [chapter two](/theory/c/chap2). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
 
-```Java
+```java
 public static void increase(int i) {
     i++;
 }
@@ -138,7 +138,7 @@ public static void main(String[] args) {
 
 The `#include` statements ensure the correct inclusion of functions in your program. Large programs consist of multiple C (source) and H (header) files that are glued together with compiling and linking. A header file contains function **definitions**, the **declarations** are in the source files:
 
-```
+```c
 // person.h
 
 struct Person {
@@ -149,7 +149,7 @@ int is_old(struct Person p);
 
 With the following source file:
 
-```
+```c
 // person.c
 
 #include <stdio.h>
@@ -174,9 +174,11 @@ The reason for splitting this up is that other source files also provide access 
 {{<mermaid>}}
 graph LR;
     A{person.h} -->|source| B[person.c]
-    B --> E[definitie is_old]
+    B --> E[definition is_old]
     A{person.h} -->|source| C[facebook.c]
     C --> F[use struct]
     A{person.h} -->|source| D[twitter.c]
     D --> G[use struct]
 {{< /mermaid >}}
+
+If you create a separate header file and include them into the source files, there is no need to compile or link it separately. That is, `gcc code.c` still suffices. Only when you split up source code into separate **source files**, multiple output files will need to be compiled - and linked together (with one `main()` function present somewhere).

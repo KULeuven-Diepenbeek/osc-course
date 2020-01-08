@@ -134,7 +134,20 @@ eax            0x55756260   1433756256
 
 As you can see, `0x55756260` is an invalid memory address, but based on the disassembly info, we can deduce it is actually `0x0000555555756260` we need to look at. 
 
-## Recommended Reading
+## The (still) hard way: DDD, a UI on top of GDB
 
-- [Hackme: exploiting heap bugs](https://tc.gtisc.gatech.edu/cs6265/2016/l/lab10-heap/README-tut.txt
-)
+Instead of invoking `gdb`, one can also employ `ddd`. This is a crude UI on top of the gdb debugger, with multiple windows where the same commands can be entered as you have learned so far. However, ddd also allows you to visualize heap/stack variables while strepping through the application. The Figure below shows a screenshot of a debug session of our hackme app using ddd. 
+
+<img src="/img/ddd.png" />
+
+Things to try out:
+
+- View -> Show source
+- Rightclick on a line in source (compile with `-g` again!) -> Add breakpoint
+- Start/step using the buttons or the commands in the cmdline window.
+- Rightclick in the main window -> Add variables by name to watch (for instance `buf` and `password`, as shown)
+
+{{% task %}}
+Take a moment to fiddle with `ddd`. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.
+{{% /task %}}
+

@@ -54,6 +54,7 @@ OUTPUT:
 Tips:
 
 1. You will need to loop through all orcs and take two elements out of the array to pit them against each other. Reassign `Orc winner = army[0]` with the result of the `fight()` function, within the loop.
+2. If both orcs survive, the first one wins.
 
 ### 4. Building with Makefiles
 

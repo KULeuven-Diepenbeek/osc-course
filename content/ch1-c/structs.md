@@ -11,8 +11,8 @@ The only way to structure data in C is using the `struct` keyword:
 ```C
 struct Person {
     int age;
-    int gender;   // geen bool, remember?
-    char name[];
+    int gender;     // no bool, remember?
+    char name[100]; // do not forget to add a size
 }
 ```
 
@@ -20,7 +20,8 @@ We can use this structure to assign values like this:
 
 ```C
 struct Person jaak;    // do not forget "struct"
-jaak.name = "Jaak Trekhaak";
+// jaak.name = "Jaak Trekhaak"; - this is too easy - won't work
+strcpy(jaak.name, "Jaak Trekhaak"); // include <string.h> for this
 jaak.age = 80;
 jaak.gender = 1;
 ```
@@ -35,7 +36,7 @@ struct Person jaak = {
 };
 ```
 
-The next question is, can we also define functions in a `struct`? Jes and no. A function pointer makes this possible, but it is not the same such as a member variable of a class in Java. C function pointers, however, can be very usefully used as _callback methods_:
+The next question is, can we also define functions in a `struct`? Yes and no. A function pointer makes this possible, but it is not the same such as a member variable of a class in Java. C function pointers, however, can be very usefully used as _callback methods_:
 
 ```C
 #include <stdio.h>

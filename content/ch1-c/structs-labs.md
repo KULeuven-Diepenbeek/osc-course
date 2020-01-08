@@ -26,6 +26,18 @@ Tips:
 1. Do not forget to generate a new seed for the random value, see the `rand()` docs.
 2. Creating a separate function `generate_orcs()` will keep your `main()` function short and clean. The function will return a list of orcs, the "army", so to speak. Remember that returning an array is of type `Orc*`.
 
+The generate method will look like this:
+
+```c
+Orc* generate_orcs(int amount) {
+  Orc* army = malloc(sizeof(Orc) * amount);
+  // add stuff to army
+  return army; 
+}
+```
+
+Details on how the `malloc()` function works will be explained later.
+
 ### 3. Orcs eating each other??
 
 Vowels did not seem to fully satisfy them, now they are turning on each other!? All the better for us. Expand the program such that the first orc fights the next one. (life minus attack). Create a function `Orc fight(Orc attacker, Orc defender)`. Is the defender still alive after the attack? Then he is victorious (and will be returned). Print the last man stending. Input stays the same. 

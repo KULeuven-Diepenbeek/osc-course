@@ -1,5 +1,5 @@
 ---
-title: '4.2: Debugging using GDB'
+title: '4.2: The Hard Way: GDB'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
@@ -7,6 +7,8 @@ weight: 2
 ## 2. The hard way: Command-line debugging using GDB
 
 In order to fluently debug binary programs, they have to be compiled with the **debug flag**, `gcc -g`. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the "Debug" button on them, but since this is a command-line application, we need to do everything ourselves. 
+
+### 2.1 With debug flags
 
 Let's start with a heap-based application we would like to inspect:
 
@@ -98,8 +100,39 @@ Address `0x7fffffffdc6c` first contains 21845 - a coincidence that might have an
 Bootstrap gdb, disassemble the `main` function, and set breakpoints after each `malloc()` call using `b *[address]`. You can check the return value, stored at the register eax, with `i r eax`.
 {{% /task %}}
 
-Looking at the memory block returned by `malloc()`, 
+### 2.2 Without debug flags
 
+Now try to 'hack' the password using gdb without the `-g` compiler flag. Imagine someone has put up a binary file on the internet and you managed to download it. No source code available, and no debug information compiled in. The gdb tool still works, disassembling still works, but method information is withheld. That means calling `start` and `next` will **not** reveal much-needed information about each statement, and we will have to figure it out ourselves by looking at the disassembly information. 
+
+{{% task %}}
+Try to disassemble again and look at the heap value of our secret. Notice that you will not be able to use something like `x [varname]` because of the lack of debug information! We will have to rely on breakpoints of address values from the disassembly. 
+{{% /task %}}
+
+Remember to always run the program first before disassembling - otherwise address values will be way too low, and thus incorrect. 
+
+When inspecting the return value of `eax`, gdb returns a **relative address** for our current program (8 BITS), while we need an **absolute** one (16 BITS) when using the x command to inspect the heap. Look at the disassembly info to prepend the right bits:
+
+<pre>
+---Type <return> to continue, or q <return> to quit---
+   0x0000555555554844 <+122>:   mov    -0x8(%rbp),%rdx
+   0x0000555555554848 <+126>:   mov    -0x10(%rbp),%rax
+   0x000055555555484c <+130>:   mov    %rdx,%rsi
+...
+(gdb) b *0x00005555555547ea
+Breakpoint 1 at 0x5555555547ea
+(gdb) r
+Starting program: /home/wouter/Development/osc-labs/solutions/debugging/a.out 
+
+Breakpoint 1, 0x00005555555547ea in main ()
+(gdb) i r eax
+eax            0x55756260   1433756256
+(gdb) x 0x55756260
+0x55756260: Cannot access memory at address 0x55756260
+(gdb) x 0x0000555555756260
+0x555555756260: 0x00000000
+</pre>
+
+As you can see, `0x55756260` is an invalid memory address, but based on the disassembly info, we can deduce it is actually `0x0000555555756260` we need to look at. 
 
 ## Recommended Reading
 

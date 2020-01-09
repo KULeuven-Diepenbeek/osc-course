@@ -19,7 +19,6 @@ Compile the code below and flash it on the Arduino, both of which can be done th
 
 ```C
 #include <avr/io.h>
-#include <util/delay.h>
 
 /* BIT MANIPULATION MACROS */
 #define BIT(x) (0x01 << (x%8))
@@ -35,15 +34,16 @@ Compile the code below and flash it on the Arduino, both of which can be done th
 #define HEARTBEAT_LED 7
 
 int main(void) {
-
+  int i,j;
+  
   // set data directions
   bit_set(DDRD, HEARTBEAT_LED);
 
   /*loop*/ for/*ever*/ (;;) {
     bit_set(PORTD, HEARTBEAT_LED); // LED off
-    _delay_ms(1000); // wait half the period
+    for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
     bit_clear(PORTD, HEARTBEAT_LED);  // LED off
-    _delay_ms(1000); // wait half the period
+    for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
   }
 
   return 0;
@@ -88,7 +88,7 @@ So the actual included defines come from: **avr/iom328p.h**. This file contains 
 
 {{% task %}}
 1. Try to find out **HOW** the selection of the correct file in io.h is done.<br/>
-2. Make a new program that adds a blinking to a different port.
+2. Make a new program that adds a blinking LED to a different port.
 3. Modify the new program so there is a phase shift of 90° between both blinking lights.
 {{% /task %}}
 

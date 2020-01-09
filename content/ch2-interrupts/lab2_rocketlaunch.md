@@ -9,20 +9,25 @@ weight: 4
 
 ## Multiple tasks
 
-Let's assume that one task is the original blinking LED which oscillates at 0.5 Hz. Now we want a second application which oscillates 3 times every second.
+Let's assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.
 
 {{<task>}}
-Make two different LEDs oscillate at different frequencies
+Make two LEDs oscillate at different frequencies
 <ul>
-  <li>one LED oscillates at 0.5 Hz</li>
+  <li>one LED oscillates at 1 Hz</li>
   <li>one LED oscillates at 3 Hz</li>
 </ul>
 {{< /task >}}
 
 
+{{% mathjax %}}
+f_{counter} = { f_{IO} \over 2 \cdot prescaler} = { 16e6 \over 2 \cdot 2^{10}} = 
+{{% /mathjax %}}
+
+
 ## Start the countdown in ... 3 ... 2 ... 1 ...
 
-The bare-metal rocket on the top of this page needs to be launched. Because of the huge amount of exhaust it should be triggered after a countdown. This gives the poor operator sufficient time to get to a safe distance.
+The bare-metal \\(rocket\\) on the top of this page needs to be launched. Because of the huge amount of exhaust it should be triggered after a countdown. This gives the poor operator sufficient time to get to a safe distance.
 
 {{<task>}}
 After the launch button is pressed, a countdown is started. The countdown starts at 10 and goes to 0. Once the countdown is ongoing, the 0.5 Hz LED should flash. In the final 3 seconds, the second 3 Hz LED should join the show. When the countdown reaches 0, both LEDs should stay on.

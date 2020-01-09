@@ -6,8 +6,7 @@ weight: 3
 
 With our sleeves rolled up and dirt all the way up to our elbows, it's time to grab a coffee and do so reading/studying again. In this section **interrupts** will be introduced through the use of a timer.
 
-A lot of applications that are built using an Arduino need some sense of **time**. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.
-
+A lot of applications that are built using an Arduino need some sense of **time**. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer. Through these timers the concept of time can be implemented.
 
 
 ## 16-bit Timer
@@ -15,7 +14,7 @@ One component that is in almost every microcontroller is a Timer/counter. This t
 
 {{<figure src="/img/0x_12.png" title="Block Diagram of the 16-bit counter in the Arduino microcontroller">}}
 
-During **normal operation** the counter simply *counts*. The left-side image below shows what happens to the 16-bit value **TCNT2**. This value starts at 0x0000 and counts to 0xFFFF. The counter can also be used in a different mode: **Clear-timer-on-compare (CTC)**. In this mode the timer starts again at 0x0000, but only counts a certain value. When this value is reached, the counter resets and starts over. The right-side image below shows the CTC mode with the cap at **0x7FFF** and at <span style="color:red">**0x3FFF**</span>.
+During **normal operation** the counter simply *counts* from 0x0 to its maximum value.. The left-side image below shows what happens to the 16-bit value **TCNT1**. The counter can also be used in a different mode: **Clear-timer-on-compare (CTC)**. In this mode the timer starts again at 0x0000, but only counts to a certain value. When this value is reached, the counter resets and starts over. The right-side image below shows the CTC mode with the cap at **0x7FFF** and at <span style="color:red">**0x3FFF**</span>.
 
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
@@ -29,27 +28,60 @@ During **normal operation** the counter simply *counts*. The left-side image bel
 The value to which the timer counts in CTC mode can be set through the register **OCR1A**: the **O**utput **C**ompare **R**egister of timer **1** named **A**. As can be seen in the block diagram, there is a comparator in the *Timer* block that compares TCNT1 and OCR1A. The result of this comparator can be evaluated in the control logic. By configuring the timer this control logic can be altered.
 
 {{% task %}}
-What is the frequency on which the counter reaches is maximum value in **normal** mode ?
+What is the frequency at which the counter reaches its maximum value in **normal** mode ?
 {{% /task %}}
 
 
 ## Timer frequency
 
-To determine the frequency at which the counter operates a quick visit to the datasheet holds the answer. The **clk<sub>T1</sub>** can be generated from an external or internal clock source. This should be selected by the Clock Select bits (CS12, CS11, and CS10).
+To determine the frequency at which the counter operates a quick visit to the datasheet holds the answer. The **clk<sub>T1</sub>** can be generated from an external or internal clock source: **clk<sub>I/O</sub>**. This incoming clock goes through a prescaler which can be set  by the Clock Select bits (CS12, CS11, and CS10).
 
-{{<figure src="/img/timer_cs1x.png" title="Clock Select bit description (source: Datasheet)">}}
+<div style="display: flex; flex-direction: row; align-items: center;">
+  <div style="width: 50%">
+    {{<figure src="/img/clock_distribution.png" title="Clock Distribution (source: Datasheet)">}}
+  </div>
+  <div style="width: 50%">
+    {{<figure src="/img/timer_cs1x.png" title="Clock Select bits for prescaler cconfiguration (source: Datasheet)">}}
+  </div>
+</div>
 
-This clock selection helps to determine the frequency of the counting. However, the frequency of **clk<sub>IO</sub>** is yet not known. To determine this the clock distribution section of the datasheet should be consulted. For the sake of simplicity it can be assumed that this clock is **freq<sub>clk<sub>T1</sub></sub> = 16 MHz**.
-
-{{<figure src="/img/clock_distribution.png" title="Clock Distribution (source: Datasheet)">}}
-
-{{% notice note%}}
-It wouldn't hurt to verify for yourself that this is indeed correct :)
-{{% /notice %}}
+To introduce a clock, a {{< link name="crystal oscillator" url="https://en.wikipedia.org/wiki/Crystal_oscillator" >}} is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often referred to as the _clock speed_. Given that frequency, and the value of the pre-scaler, clock frequency at which the counter operates can be calculated.
 
 
+{{< todo message="die inline mathjax sucks" >}}
+
+{{% mathjax %}}
+f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15'625 Hz
+{{% /mathjax %}}
+
+
+
+Because the counter needs 2<sup>16</sup> clock ticks to reach its maximum, this maximum will be reached every \\( 2^{16} \over 15625 \\) = 4.19 s. If a LED were to be toggled every time the counter reaches its maximum, the frequency of the toggling LED would be (**2** * 4.19 s)<sup>-1</sup> = 0.119 Hz.
+
+{{<figure src="/img/jo/timer_time.jpg" title="Value of TCNT during clear-timer-on-compare (CTC) operation of the 16-bit counter." width="50%">}}
+
+
+
+## Polling vs Interrupt
+
+Before you put down your coffee to get back to work let's discuss polling first. A nice illustration of polling is shown below.
+
+{{< youtube id="O_sO39FXL68" >}}
+&nbsp;
+
+Our toddler is **polling** her father. Another example of polling is shown below. This clip however, ends with an **interrupt**.
+
+{{< youtube id="18AzodTPG5U" >}}
+&nbsp;
+
+Would it not be nice that the CPU could just continue working on something else until a certain event occurs eg. the timer reaching its maximum value ? In the second example (the one with the cartoon), the _co-pilot interrupts what the _processor_ was doing.
+
+An **interrupt** is a signal that goes to the processor signalling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a h**ardware interrupt**. An example for a **software interrupt** could be an attempt of a division by zero.
+
+## Configuring the timer.
 
 As can be seen from the block diagram 6 (4+2) registers are available for interaction with the software:
+
 
 * **TCCRnA:** Timer/Counter Control Register for counter n OCR A (also available for B)
 * **OCRnA:** Output Compare Register A for counter n (also available for B)
@@ -60,7 +92,7 @@ As can be seen from the block diagram 6 (4+2) registers are available for intera
 
 However, before getting into the details of configuring and using the Timer, the clock has be considered.
 
-To introduce a concept of time, a {{< link name="crystal oscillator" url="https://en.wikipedia.org/wiki/Crystal_oscillator" >}} is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often referred to as the _clock speed_.
+
 
 The timer has a hardware prescaler. Such a prescaler divides the frequency of the clock with a certain power of 2 and allows the developer to choose a more suitable frequency. With this clock, the timer can be configured to divide the incoming frequency by 1024 (= 2<sup>10</sup>). This sets the incoming clock frequency to 16__x__10<sup>6</sup> / 2<sup>10</sup> = 15'325 Hz.
 
@@ -95,19 +127,8 @@ Note that the CR's can be accessed with their names. TCCR1A is the Timer/Counter
 
 
 ## Interrupts
-In the example above it is up to the programmer to check if the timer has finished. Also for the Arduino example this can be said. The execution of the **delay()** function is also waiting until the delay is over. This waiting for an event is called: **polling**. A nice illustration for this is shown below.
+In the example above it is up to the programmer to check if the timer has finished. Also for the Arduino example this can be said. The execution of the **delay()** function is also waiting until the delay is over. This waiting for an event is called: **polling**. 
 
-{{< youtube id="O_sO39FXL68" >}}
-&nbsp;
-
-Another example is given by a cartoon.
-
-{{< youtube id="18AzodTPG5U" >}}
-&nbsp;
-
-Would it not be nice that the CPU could just continue working on something else until a certain event occurs. In the second example (the one with the cartoon), the _co-pilot interrupts what the _processor_ was doing.
-
-An **interrupt** is a signal that goes to the processor signaling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a hardware interrupt. An example for a software interrupt could be an attempt of a division by zero.
 
 The datasheet of the microcontroller shows the hardware interrupts that are available.
 

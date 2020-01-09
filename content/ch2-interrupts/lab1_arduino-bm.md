@@ -18,31 +18,32 @@ Compile the code below and flash it on the Arduino, both of which can be done th
 {{<figure src="/img/tinkercad/tinkercad_example1.png">}}
 
 ```C
-#include "helper.h"
+#include <avr/io.h>
+#include <util/delay.h>
 
-#define HEARTBEAT_LED_DIR DDRD      // '1' is output
-#define HEARTBEAT_LED_PORT PORTD
-#define HEARTBEAT_LED_BIT PORTD7
+/* BIT MANIPULATION MACROS */
+#define BIT(x) (0x01 << (x%8))
+#define LONGBIT(x) ((unsigned long)0x00000001 << (x))
 
+#define bit_get(p,m) ((p) & (m))
+#define bit_set(p,m) ((p) |= (BIT(m)))
+#define bit_clear(p,m) ((p) &= ~(BIT(m)))
+#define bit_toggle(p,m) ((p) ^= (BIT(m)))
+#define bit_write(c,p,m) (c ? bit_set(p,m) : bit_clear(p,m))
+
+/* PHYSICAL CONNECTIONS */
+#define HEARTBEAT_LED 7
 
 int main(void) {
 
   // set data directions
-  bit_set(HEARTBEAT_LED_DIR, HEARTBEAT_LED_BIT);
-
+  bit_set(DDRD, HEARTBEAT_LED);
 
   /*loop*/ for/*ever*/ (;;) {
-    // LED on
-    bit_set(HEARTBEAT_LED_PORT, HEARTBEAT_LED_BIT);
-
-    // wait half the period
-    _delay_ms(1000);
-
-    // LED off
-    bit_clear(HEARTBEAT_LED_PORT, HEARTBEAT_LED_BIT);
-
-    // wait half the period
-    _delay_ms(1000);
+    bit_set(PORTD, HEARTBEAT_LED); // LED off
+    _delay_ms(1000); // wait half the period
+    bit_clear(PORTD, HEARTBEAT_LED);  // LED off
+    _delay_ms(1000); // wait half the period
   }
 
   return 0;
@@ -54,7 +55,7 @@ int main(void) {
 
 #### What is happening in this code ? 
 
-The approach in the C code is not too different from the Arduino IDE approach. The direction bit of the LED is set to *output*: `bit_set(HEARTBEAT_LED_DIR, HEARTBEAT_LED_BIT);` In the *Loop* function, 4 statements are repeated forever:
+The approach in the C code is not too different from the Arduino IDE approach. The direction bit of the LED is set to *output*: `bit_set(PORTD, HEARTBEAT_LED_BIT);` In the *Loop* function, 4 statements are repeated forever:
 
 1. toggle the LED ON, 
 2. wait for half the period, 
@@ -64,7 +65,7 @@ The approach in the C code is not too different from the Arduino IDE approach. T
 These pseudo functions are actually **macros**. These are defined in the file *helper.h* which is included on the first line of the C-file.
 
 {{% task %}}
-Try to understand the <b>BIT MANIPULATION FUNCTIONS</b> in the helper.h file:
+Try to understand the <b>BIT MANIPULATION FUNCTIONS</b> macros:
 
 * BIT(x)
 * LONGBIT(x)
@@ -76,7 +77,7 @@ Try to understand the <b>BIT MANIPULATION FUNCTIONS</b> in the helper.h file:
 
 {{% /task %}}
 
-The **helper.h** file itself includes **avr/io.h**. This file makes searching for address in the memory space superfluous. When taking a closer look in this file, lines 271 and 272 read:
+The **avr/io.h** file makes searching for specific addresses in the memory space superfluous. When taking a closer look in this file, lines 271 and 272 read:
 
 ```
 #elif defined (__AVR_ATmega328P__)

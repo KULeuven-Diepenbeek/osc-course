@@ -11,7 +11,7 @@ A lot of applications that are built using an Arduino need some sense of **time*
 
 
 ## 16-bit Timer
-One component that is in almost every microcontroller is a Timer/counter. This timer/counter can be used for many things: stopwatch, wave generation, timing, ... The block diagram of the 16-bit timer/counter in the Arduino is shown here. Next to this 16-bit timer/counter there are 2 8-bit timer/counters available.
+One component that is in almost every microcontroller is a Timer/counter. This timer/counter can be used for many things: stopwatch, wave generation, timing, ... The block diagram of the 16-bit timer/counter in the Arduino is shown here. Next to this 16-bit timer/counter there are 2 8-bit timer/counters available. The documentation reports registers like TCNTn and OCnB. The letter n is a placeholder for the number of the timer. In the case of the micro controller on the Arduino, the 16-bit counter results in **n = 1**.
 
 {{<figure src="/img/0x_12.png" title="Block Diagram of the 16-bit counter in the Arduino microcontroller">}}
 
@@ -26,9 +26,26 @@ During **normal operation** the counter simply *counts*. The left-side image bel
   </div>
 </div>
 
-The value to which Timer counts in CTC mode can be set through the register **OCR1A**: the **O**utput **C**ompare **R**egister of timer **1** named **A**.
+The value to which the timer counts in CTC mode can be set through the register **OCR1A**: the **O**utput **C**ompare **R**egister of timer **1** named **A**. As can be seen in the block diagram, there is a comparator in the *Timer* block that compares TCNT1 and OCR1A. The result of this comparator can be evaluated in the control logic. By configuring the timer this control logic can be altered.
+
+{{% task %}}
+What is the frequency on which the counter reaches is maximum value in **normal** mode ?
+{{% /task %}}
 
 
+## Timer frequency
+
+To determine the frequency at which the counter operates a quick visit to the datasheet holds the answer. The **clk<sub>T1</sub>** can be generated from an external or internal clock source. This should be selected by the Clock Select bits (CS12, CS11, and CS10).
+
+{{<figure src="/img/timer_cs1x.png" title="Clock Select bit description (source: Datasheet)">}}
+
+This clock selection helps to determine the frequency of the counting. However, the frequency of **clk<sub>IO</sub>** is yet not known. To determine this the clock distribution section of the datasheet should be consulted. For the sake of simplicity it can be assumed that this clock is **freq<sub>clk<sub>T1</sub></sub> = 16 MHz**.
+
+{{<figure src="/img/clock_distribution.png" title="Clock Distribution (source: Datasheet)">}}
+
+{{% notice note%}}
+It wouldn't hurt to verify for yourself that this is indeed correct :)
+{{% /notice %}}
 
 
 

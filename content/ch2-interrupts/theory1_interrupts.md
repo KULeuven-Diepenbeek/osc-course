@@ -99,7 +99,7 @@ Next to the shift operator, {{< link name="bitwise operators" url="https://en.wi
 ```
 
 
-{{<task>}}
+{{% task %}}
 1. What will be the printed in the output of the C-code above ?
 <br/><br/>
 2. Write a line of C-code that:
@@ -107,7 +107,7 @@ Next to the shift operator, {{< link name="bitwise operators" url="https://en.wi
     <li>sets the 3rd byte to '1' and all others to '0'</li>
     <li>sets the 4th and 5th byte to '1' and all others to '0'</li>
   </ul>
-{{< /task >}}
+{{% /task %}}
 
 
 ### Hello hardware, this is software speaking
@@ -149,21 +149,24 @@ This snippet of C code is wrapped by the **IDE** into a complete C program. Thro
 ```C
 #include <avr/io.h>
 
+#define HEARTBEAT_LED 7
+
 int main(void) {
   int i, j;
 
   /* setup */
-  DDRD |= (1 << 7);
+  DDRD |= (1 << HEARTBEAT_LED);
 
   /*loop*/ for/*ever*/ (;;) {
-    PORTD |= (1 << 7);
+    PORTD |= (1 << HEARTBEAT_LED);
     for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
-    PORTD &= ~(1 << 7);
+    PORTD &= ~(1 << HEARTBEAT_LED);
     for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
   }
  
   return 0;
 }
+
 ```
 
 {{% notice note %}}

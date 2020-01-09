@@ -167,7 +167,7 @@ Together with the modifiers:
 [The table on Wikipedia](https://en.wikipedia.org/wiki/C_data_types) lists the permissible combinations to specify a large set of storage size-specific declarations. `char` is the smallest addressable unit, and `long double` is the biggest. For instance, `unsigned char` gives you a range of 0 to 255, while `signed char` works from -127 to 127. 
 
 {{% notice note %}}
-Actual byte sizes are dependant on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using `sizeof(type)`. 
+Actual byte sizes are dependent on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using `sizeof(type)`. 
 {{% /notice %}}
 
 ### Strings? What do you mean?

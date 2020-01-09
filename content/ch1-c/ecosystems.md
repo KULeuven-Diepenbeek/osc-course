@@ -137,7 +137,7 @@ Functions that have been declared in other source files must therefore be redefi
 
 ## Compiling everything
 
-We use the UNIX GNU `gcc` compiler to compile C soure files and convert them into binaries. The simplest possible way to do so is:
+We use the UNIX GNU `gcc` compiler to compile C source files and convert them into binaries. The simplest possible way to do so is:
 
 > `gcc *.c`
 
@@ -146,12 +146,12 @@ Due to the lack of a target file name, the compiler creates an "a.out" file that
 However, there are still a lot of compiler options that are [explained at gcc.gnu.org](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html) that you can play with.
 
 {{% notice note %}}
-When targetting another platform, you will need a **cross-compiler** that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, ...)<br/>
-Instead of using the default GCC compiler: `gcc bla.c`, you will download and install a custom cross-compiler and evoke it the same way: `arm-eabi-none-gcc bla.c`. The GBA or RaspberryPi for instance have an ARM chipset and require this cross-compiler. This differs from most x86 chipsets that leverages `gcc`.
+When targeting another platform, you will need a **cross-compiler** that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, ...)<br/>
+Instead of using the default GCC compiler: `gcc bla.c`, you will download and install a custom cross-compiler and evoke it the same way: `arm-eabi-none-gcc bla.c`. The GBA or RaspberryPi for instance have an ARM chip-set and require this cross-compiler. This differs from most x86 chip-sets that leverages `gcc`.
 {{% /notice %}}
 
 {{% task %}}
-Are you still cross-compiling if you are compiling on an ARM machine yourself, using `gcc`, compiled for that chipset? What if you compile code on the Raspberry for your laptop?
+Are you still cross-compiling if you are compiling on an ARM machine yourself, using `gcc`, compiled for that chip-set? What if you compile code on the Raspberry for your laptop?
 {{% /task %}}
 
 #### Step 1: compiling
@@ -166,7 +166,7 @@ After obtaining object files it is simply a matter of concatenating them ('linki
 
 #### (1) using a script
 
-It is annoying to have to type the same command all the time, so a simple alternative is to put your gcc command in a shell script:
+It is annoying to have to type the same command all the time, so a simple alternative is to put your `gcc` command in a shell script:
 
 ```sh
 #!/bin/sh

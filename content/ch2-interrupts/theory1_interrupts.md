@@ -67,7 +67,7 @@ Let's explore the bit manipulations. First we assign the value 1 to an 8-bit typ
 ```
 With this line, **x** holds the number "00000001". This means the bytes are represented in Little Endian.
 
-Setting the fifth bit, might be a bit cumbersome. First the result of 2<sup>5</sup> has to be calculated. After googling the result, the programmer can write:
+Setting the sixth bit, might be a bit cumbersome. First the result of 2<sup>5</sup> has to be calculated. After googling the result, the programmer can write:
 
 ```C
   unsigned char x;
@@ -100,12 +100,12 @@ Next to the shift operator, {{< link name="bitwise operators" url="https://en.wi
 
 
 {{% task %}}
-1. What will be the printed in the output of the C-code above ?
+1. What will be the printed output of the C-code above ?
 <br/><br/>
 2. Write a line of C-code that:
   <ul>
-    <li>sets the 3rd byte to '1' and all others to '0'</li>
-    <li>sets the 4th and 5th byte to '1' and all others to '0'</li>
+    <li>sets the 3rd bit to '1' and all others to '0' (resulting in "00000100")</li>
+    <li>sets the 4th and 5th byte to '1' and all others to '0(resulting in "00011000")'</li>
   </ul>
 {{% /task %}}
 

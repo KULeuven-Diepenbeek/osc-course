@@ -36,7 +36,7 @@ Using the library is a matter of doing two things:
 
 #### 1. Adding include folders
 
-You will need a `main()` function to boostrap the framework:
+You will need a `main()` function to bootstrap the framework:
 
 ```c
 // main.cpp

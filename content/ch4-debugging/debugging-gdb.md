@@ -136,7 +136,7 @@ As you can see, `0x55756260` is an invalid memory address, but based on the disa
 
 ## The (still) hard way: DDD, a UI on top of GDB
 
-Instead of invoking `gdb`, one can also employ `ddd`. This is a crude UI on top of the gdb debugger, with multiple windows where the same commands can be entered as you have learned so far. However, ddd also allows you to visualize heap/stack variables while strepping through the application. The Figure below shows a screenshot of a debug session of our hackme app using ddd. 
+Instead of invoking `gdb`, one can also employ `ddd`. This is a crude UI on top of the gdb debugger, with multiple windows where the same commands can be entered as you have learned so far. However, ddd also allows you to visualize heap/stack variables while stepping through the application. The Figure below shows a screen-shot of a debug session of our hackme app using ddd. 
 
 <img src="/img/ddd.png" />
 

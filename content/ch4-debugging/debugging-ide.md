@@ -25,6 +25,6 @@ A quick glance at the screenshot reveals the following buttons:
 A short live demo of CLion's debugging capabilities is in order here.
 {{% /notice %}}
 
-CLion is not free but a 30-day trail is, and as a student you can apply for a one-year licence for free using your student e-mail address. Bigger development environments like this are typically used when developing large applications with a lot of source and header files. In this course, we will not be needing that. That is why the usage of a tool like this is not needed for now. 
+CLion is not free but a 30-day trail is, and as a student you can apply for a one-year license for free using your student e-mail address. Bigger development environments like this are typically used when developing large applications with a lot of source and header files. In this course, we will not be needing that. That is why the usage of a tool like this is not needed for now. 
 
 Instead of relying on visual debug tools like CLion, another 'hard-core' commandline alternative exists for Linux: `gdb` (The GNU debug tool). 

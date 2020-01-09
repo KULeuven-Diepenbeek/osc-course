@@ -22,14 +22,14 @@ graph TD;
     B{varname<br/>address}
 {{< /mermaid >}}
 
-This example visualises the instruction `int a = 5`:
+This example visualizes the instruction `int a = 5`:
 
 {{<mermaid>}}
 graph TD;
     A[a<br/>5]
 {{< /mermaid >}}
 
-Where the type, `int`, reserves a few bytes depending on the target platform (`sizeof(int)`), on a specific address. We can mainpulate the address itself - this is essential when working with arrays.
+Where the type, `int`, reserves a few bytes depending on the target platform (`sizeof(int)`), on a specific address. We can manipulate the address itself - this is essential when working with arrays.
 
 ### "Compound" types
 
@@ -92,7 +92,7 @@ graph LR;
 
 If I want to get the address of your house, I'd have to use the address-of operator: `&your_house`. If I want to get the house itself (physically impossible...), I'd use the _dereference_ operator on the card: `*card`. This simply **follows the arrow** where card currently points to. 
 
-So, what was de output of `printf("%d\n", age);`? 1389434244! Huh? We are printing the **address** of the pointer, not the actual value (by following where it points to). Remember, to do that, you have to use the dereference `*` operator: `printf("%d", *age);`. The compiler hints at this with the following warning:
+So, what was the output of `printf("%d\n", age);`? 1389434244! Huh? We are printing the **address** of the pointer, not the actual value (by following where it points to). Remember, to do that, you have to use the dereference `*` operator: `printf("%d", *age);`. The compiler hints at this with the following warning:
 
 > warning: format specifies type 'int' but the argument has type 'int *' [-Wformat]
 
@@ -117,7 +117,7 @@ graph LR;
     B --> |ref| C[val<br/>10]
 {{< /mermaid >}}
 
-Practical use of the double `**` notation would be to relink a pointer to another location. As you know from [chapter one](/theory/c/chap1), variables in C are passed along **by value**: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaning the actual value is possible by following the address using the _dereference_ operator. But chaning _the address_ itself is only possible with double pointers:
+Practical use of the double `**` notation would be to relink a pointer to another location. As you know from [chapter one](/theory/c/chap1), variables in C are passed along **by value**: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the _dereference_ operator. But chaining _the address_ itself is only possible with double pointers:
 
 ```C
 #include <stdio.h>
@@ -263,7 +263,7 @@ graph TD;
 
 Something like that is unthinkable in Java - we need extra tricks for that, such as passing objects. Of course this implementation is also **disadvantageous**: is it clear to the caller that variables are being changed? Not really. High-performance algorithm implementations benefit from these possibilities. Clear domain-driven applications are not: a higher language is used for that.
 
-#### Not chaning values around: const
+#### Not chaining values around: const
 
 To prevent further confusion, it is possible to mark pointers with the `const` keyword, meaning **the value** should not be changed. The pointer can still point to another value! As such, this is by _no means_ a "constant", like in many other traditional programming languages. Take the above example, and change swap's signature to `void swap(const int *px, const int *py)`. While compiling the code, the following errors are generated:
 
@@ -297,11 +297,11 @@ In practice, try to use as many constant variables as possible, if you want to m
 
 #### Arithmetics with pointers
 
-Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and substracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text = "sup"` the pointer refers to the first character:
+Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and subtracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text = "sup"` the pointer refers to the first character:
 
 {{<mermaid>}}
 graph TD
-    A{*tekst}
+    A{*text}
     A-->|begin van array|C['s']
     A-.->D['u']
     A-.->E['p']

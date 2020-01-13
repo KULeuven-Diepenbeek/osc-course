@@ -42,7 +42,7 @@ div.ex .inner:first-child:after {
     top: 2px;
     color: #fff;
     left: 2rem;
-    content: 'Exercise!';
+    content: 'Exercise !';
 }
 
 #sidebar #shortcuts h3 {

@@ -179,5 +179,4 @@ A number of things should be pointed out.
 2. The "Setup and Loop"-function approach can be mimicked, but this is not required.
 3. The **delay(x)** function is missing, but this will be addressed later.
 
-Of course the C program can be written more dense. But, in the end, there is not too much difference between both pieces of code.
 

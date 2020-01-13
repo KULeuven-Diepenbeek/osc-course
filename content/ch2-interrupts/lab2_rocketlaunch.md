@@ -1,11 +1,20 @@
 ---
 title: '2.4: Launch that rocket !!'
-pre: "<i class='fas fa-dumbbell'></i> "
+pre: "<i class='fas fa-vial'></i> "
 weight: 4
 ---
 
 {{<figure src="/img/spacex_spaceship.jpeg" title="image source: businessinsider.com">}}
 
+## First task
+The first task that the Arduino should for us is oscillate a LED at 1Hz. 
+
+{{<task>}}
+Make one LED oscillate using the Timer/Counter1 Overflow Interrupt
+<ul>
+  <li>one LED oscillates at 3 Hz</li>
+</ul>
+{{< /task >}}
 
 ## Multiple tasks
 
@@ -18,11 +27,6 @@ Make two LEDs oscillate at different frequencies
   <li>one LED oscillates at 3 Hz</li>
 </ul>
 {{< /task >}}
-
-
-{{% mathjax %}}
-f_{counter} = { f_{IO} \over 2 \cdot prescaler} = { 16e6 \over 2 \cdot 2^{10}} = 
-{{% /mathjax %}}
 
 
 ## Start the countdown in ... 3 ... 2 ... 1 ...

@@ -69,114 +69,81 @@ Before you put down your coffee to get back to work let's discuss polling first.
 {{< youtube id="O_sO39FXL68" >}}
 &nbsp;
 
-Our toddler is **polling** her father. Another example of polling is shown below. This clip however, ends with an **interrupt**.
+Our toddler is **polling** her father. Another example of polling is shown below. This clip, however, ends with an **interrupt**.
 
 {{< youtube id="18AzodTPG5U" >}}
 &nbsp;
 
-Would it not be nice that the CPU could just continue working on something else until a certain event occurs eg. the timer reaching its maximum value ? In the second example (the one with the cartoon), the _co-pilot interrupts what the _processor_ was doing.
+Would it not be nice that the CPU could just continue working on something else until a certain event occurs eg. the timer reaching its maximum value ? In the second example (the one with the cartoon), the _co-pilot_ **interrupts** what _the processor_ was doing.
 
-An **interrupt** is a signal that goes to the processor signalling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a h**ardware interrupt**. An example for a **software interrupt** could be an attempt of a division by zero.
+An **interrupt** is a signal that goes to the processor signalling a certain event. There are two sources for this interrupt: hardware and software. The timer that reaches his maximum count and signals this to the processor is an example of a **hardware interrupt**. An example for a **software interrupt** could be an attempt of a division by zero.
 
-## Configuring the timer.
+## Configuring the timer with interrupts
 
-As can be seen from the block diagram 6 (4+2) registers are available for interaction with the software:
+As can be seen from the block diagram on the top of this page, 4 registers are available for interaction with the software:
 
-
-* **TCCRnA:** Timer/Counter Control Register for counter n OCR A (also available for B)
-* **OCRnA:** Output Compare Register A for counter n (also available for B)
 * **TCNTn:** Timer/counter value for counter n
-* **ICRn:** Input capture something something
+* **OCRnA/OCRn:** Output Compare Register A for counter n (also available for B)
+* **ICRn:** Input Capture Register
+* **TCCRnA:** Timer/Counter Control Register for counter n
 
-{{< todo message="ICRn" >}}
+The first three registers (TCNT, OCRA/OCRB, and ICR) are all 16-bit registers. Their functionality is self-explanatory. The Control Register needs more explanation, though. Luckily for us, there is ... the datasheet.
 
-However, before getting into the details of configuring and using the Timer, the clock has be considered.
+{{%figure src="/img/TCCR1.png" title="Timer/Counter Configuration Register 1 (TCCR1)"%}}
 
+The following configuration are given. For other configuration the reader is invited to consult the datasheet for him/herself.
 
+* **CS12 | CS11 | CS10 :** Clock Select as explained above. Dividing the incoming clock with a 1024-bit prescaler gives configuration: **101**.
+* **WGM13 | WGM12 | WGM11 | WGM10 :** Waveform Generation Mode. This is the formal name for the *normal mode* or the *CTC mode* that were discussed above. Normal mode of operation is achieved by setting these bits to: **0000**
+* **IC.. :** Input Capture (Noise Cancellation and Edge Select) are irrelevant for this mode of operation and can be both set to: **0**
+* **COM1.. :** What should happen when OCRA or OCRB can be chosen from 4 different options (hence the 2 bits). Both these settings are irrelevant for this mode of operation and can be both set to: **00**
 
-The timer has a hardware prescaler. Such a prescaler divides the frequency of the clock with a certain power of 2 and allows the developer to choose a more suitable frequency. With this clock, the timer can be configured to divide the incoming frequency by 1024 (= 2<sup>10</sup>). This sets the incoming clock frequency to 16__x__10<sup>6</sup> / 2<sup>10</sup> = 15'325 Hz.
+In summary, TCCR1A should be set to **0b00000000** (or **0x00**) and TCCR1B should be set to **0b00000101** (or **0x05**).
 
-When the Timer/counter is running, it can count bi-directionally. This counter is a hardware component that you also are (or soon: will be) able to described in an HDL. There are multiple modes of operation in which the Timer/Counter can operate. With each mode of operation a certain waveform is generated.
+The settings above configure TIMER/COUNTER 1 to operate like requested, but the interrupts still have to be set. To set this, two different flags need to be enabled. In the final section of this chapter these two flags are elaborated on. For now, it suffices to know there is a **general Interrupt Enable** and a **'maskable' Interrupt Enable**. The former can be set by calling the function **sie()** the latter should be set through a register: Timer Interrupt Mask Register (TIMSK1).
 
-<center><img src="/img/0x_13.png" alt="The different modes of operation to which the Timer/Counter can be configured"/></center>
+{{%figure src="/img/TIMSK1.png" title="Timer Interrupt Mask Register (TIMSK1)" %}}
 
-Now let's configure the timer so it can be used to overcome the need for the **delay()** function. In the **Normal** mode of operation, the timer/counter counts to 0xFFFF. This means the MSB toggles at a frequency of approximately 2 Hz (15'325 Hz / 0xFFFF * 2 ). The C-code that is required to achieve this is shown below.
+As can be seen from the image above, there are other Interrupts that can be set. For this example only the final one (Timer Overflow Interrupt Enable) should be set to one. This results in setting TIMSK1 to **0b00000001** (or **0x01**).
 
+Finally, when the interrupt is triggered, something should happen. Otherwise this would be quite useless. When an interrupt occurs, the processor **halts** whatever it was doing and executes a *function*. In stead of "calling" the function ourselves, this function call is done automatically. To be able to distinguish between different interrupt sources, different prefixed function names are available. The next section of this chapter will elaborate on this as well. The function-name that is linked to the TIMER/COUNTER 1 overflowing is: **TIMER1_OVF_vect**. 
 
-```C
-#include <avr/io.h>
-
-int main(void) {
-
-  unsigned char x;
-
-  DDRB = (1<<5);            // set PORTB_5 as output
-  TCCR1A = 0x0;             // set part of "mode of operation"
-  TCCR1B = 0x4;             // set part of "mode of operation" & clock prescaler
-
-  while(1) {
-                            // read and shift MSB of 16-bit wide counter
-    x = (unsigned char)((TCNT1 & 0x8000)>>15);
-                            // shift and write the LED
-    PORTB = (PORTB & 0b11011111) | (x<<5);
-  }
-}
-```
-
-Note that the CR's can be accessed with their names. TCCR1A is the Timer/Counter Control Register (of timer/counter1) A. The translation from this name to the correct address is done by **#include <avr/io.h>** line. This include will subsequently load a header file which has all the mappings for the targeted microcontroller. This choice is made through the CLI-arguments that are given in the tool chain.
-
-
-## Interrupts
-In the example above it is up to the programmer to check if the timer has finished. Also for the Arduino example this can be said. The execution of the **delay()** function is also waiting until the delay is over. This waiting for an event is called: **polling**. 
-
-
-The datasheet of the microcontroller shows the hardware interrupts that are available.
-
-<center><img src="/img/0x_14.png" alt="The interrupts in the Arduino's microcontroller."/></center>
+The example code below puts **everything together**.
 
 ```C
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-int main(void) {
-
-  cli();                      // disable all interrupts
-
-  DDRB = (1<<5);              // set bit as output
-  TCCR1A = 0x0;               // set part of "mode of operation"
-  TCCR1B = 0x4;               // set part of "mode of operation" & clock prescaler
-  TIMSK1 = 0x1;               // enable the "Overflow Interrupt"
-
-  sei();                      // enable all interrupts
-
-  while(1) {
-  }
-}
+#define HEARTBEAT_LED 7
 
 ISR(TIMER1_OVF_vect) {
-  PORTB ^= (1<<5);
+  PORTD ^= (1 << HEARTBEAT_LED);
+}
+
+int main(void) {
+
+  /* setup */
+  DDRD |= (1 << HEARTBEAT_LED);
+
+  /* configure TIMER/COUNTER 1 */
+  TCCR1A = 0x00;
+  TCCR1B = 0x05;
+
+  /* enable the interrupts */
+  TIMSK1 = 0x01;
+  sei();
+
+  /*loop*/ for/*ever*/ (;;) {
+  }
+ 
+  return 0;
 }
 ```
 
+{{% notice note %}}
+The C-file above can be found in the Virtual Machine as **example2.c**
+{{% /notice %}}
 
-{{< todo message="Decide whether we want to go into details here about interrupt vectors and ISR's" >}}
-
-{{< todo message="nested interrupts are possible, though it requires user software to re-enable interrupts" >}}
-
-
-
-## Take aways:
-After studying this chapter you should:
-
-* be able to target specific bits in a register at a specific address through C
-* understand how CR's and SR's work
-* understand how timers work
-* understand what Interrupts are
-
-## "Things" to "think" on:
-* 
-
-
-## Useful links:
-* {{< link name="megaAVR Data Sheet" url="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" >}}
-* {{< link name="Arduino UNO schematic" url="https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf" >}}
+{{% task %}}
+Compile and run the code above. What is the frequency at which the LED toggles ?
+{{% /task %}}

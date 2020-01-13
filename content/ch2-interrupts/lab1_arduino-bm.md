@@ -98,6 +98,4 @@ So the actual included defines come from: **avr/iom328p.h**. This file contains 
 ## Translation micro controller Arduino
 Unfortunately for us, the mapping between the micro controller ports and the Arduino ports are not one-to-one. The image below summarises these mappings. If you want more insights, check the [Arduino UNO schematic](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf).
 
-
 {{<figure src="https://roboticsbackend.com/wp-content/uploads/2019/01/arduino_schematics_pins.jpg">}}
-

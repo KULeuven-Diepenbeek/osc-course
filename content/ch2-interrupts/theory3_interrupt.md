@@ -4,49 +4,45 @@ pre: "<i class='fab fa-linux'></i> "
 weight: 5
 ---
 
-Note that the CR's can be accessed with their names. TCCR1A is the Timer/Counter Control Register (of timer/counter1) A. The translation from this name to the correct address is done by **#include <avr/io.h>** line. This include will subsequently load a header file which has all the mappings for the targeted microcontroller. This choice is made through the CLI-arguments that are given in the tool chain.
+{{<figure src="/img/jo/disassembly.jpg">}}
 
+## The internals
 
-## Interrupts
-In the example above it is up to the programmer to check if the timer has finished. Also for the Arduino example this can be said. The execution of the **delay()** function is also waiting until the delay is over. This waiting for an event is called: **polling**. 
+Now that you have an understanding of how interrupts work, let's dive a bit deeper into the interal workings.
 
+The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding **wire** goes high. This makes one (or more) bits of this interrupt vector *high*. This triggers the internal **Interrupt unit**. The image below shows the available interrupts for the AT Mega.
 
-The datasheet of the microcontroller shows the hardware interrupts that are available.
+{{<figure src="/img/0x_14.png" title="The interrupt vector">}}
 
-<center><img src="/img/0x_14.png" alt="The interrupts in the Arduino's microcontroller."/></center>
+When an **Interrupt Request** is triggered and the interrupt is allowed, the processor will jump to another function in program. This function is called the **Interrupt Service Routine**. When this function is finished, the processor continues with the next instruction that would have been executed before the interrupt occured.
 
-```C
-#include <avr/io.h>
-#include <avr/interrupt.h>
+When looking at the image above, vector number 14 (or 13, if we start counting at 0x0) should look familiar: **TIMER1_OVF**. Below there are two screenshots of disassembled code. The example on left is showing an example on a binary that doesn't have interrupts. In that example it is clear that the complete interrupt vector is empty. The example on the right is showing an interrupt vector that has an entry on position 13. Whenever this signal goes *high*, the processor jumps to the function at address 0x90.
 
-int main(void) {
+<div style="display: flex; flex-direction: row; align-items: center;">
+  <div style="width: 50%" class="highlight">
+    {{<figure src="/img/inter_inter_without.png" title="The interrupt vector without an ISR" width="100%">}}
+  </div>
+  <div style="width: 50%">
+    {{<figure src="/img/inter_inter_with.png" title="The interrupt vector with an ISR">}}
+    {{<figure src="/img/inter_inter_with2.png" title="The interrupt service routine">}}
+  </div>
+</div>
 
-  cli();                      // disable all interrupts
+{{% task %}}
+What happens if we have an in(-terrupt)ception, read as: an interrupt while an interrupt is being handled ?
+{{% /task %}}
 
-  DDRB = (1<<5);              // set bit as output
-  TCCR1A = 0x0;               // set part of "mode of operation"
-  TCCR1B = 0x4;               // set part of "mode of operation" & clock prescaler
-  TIMSK1 = 0x1;               // enable the "Overflow Interrupt"
+As was stated ealier there is a general interrupt flag. ...
 
-  sei();                      // enable all interrupts
+**CONTINUE HERE!!!!!!!!!!!!!!!**
 
-  while(1) {
-  }
-}
-
-ISR(TIMER1_OVF_vect) {
-  PORTB ^= (1<<5);
-}
-```
-
-
-{{< todo message="Decide whether we want to go into details here about interrupt vectors and ISR's" >}}
+{{< todo message="order" >}}
 
 {{< todo message="nested interrupts are possible, though it requires user software to re-enable interrupts" >}}
 
+## Good coding practice
 
-
-## Take aways:
+## Take aways
 After studying this chapter you should:
 
 * be able to target specific bits in a register at a specific address through C
@@ -54,7 +50,7 @@ After studying this chapter you should:
 * understand how timers work
 * understand what Interrupts are
 
-## "Things" to "think" on:
+## "Things" to "think" on
 * 
 
 

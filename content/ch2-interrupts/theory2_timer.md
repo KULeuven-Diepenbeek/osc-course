@@ -133,8 +133,7 @@ int main(void) {
   TIMSK1 = 0x01;
   sei();
 
-  /*loop*/ for/*ever*/ (;;) {
-  }
+  /*loop*/ for/*ever*/ (;;);
  
   return 0;
 }

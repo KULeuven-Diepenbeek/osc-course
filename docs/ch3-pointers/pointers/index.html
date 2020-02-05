@@ -7,25 +7,25 @@
     <meta name="description" content="">
 
 
-    <link rel="icon" href="/osc-course/images/favicon.png" type="image/png">
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
 
     <title>3.1: Pointers and arrays :: Operating Systems and C</title>
 
     
-    <link href="/osc-course/css/nucleus.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/fontawesome-all.min.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/hybrid.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/featherlight.min.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/perfect-scrollbar.min.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/auto-complete.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/atom-one-dark-reasonable.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/theme.css?1580915510" rel="stylesheet">
-    <link href="/osc-course/css/hugo-theme.css?1580915510" rel="stylesheet">
+    <link href="../../css/nucleus.css?1580925027" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1580925027" rel="stylesheet">
+    <link href="../../css/hybrid.css?1580925027" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1580925027" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1580925027" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1580925027" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1580925027" rel="stylesheet">
+    <link href="../../css/theme.css?1580925027" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1580925027" rel="stylesheet">
     
-      <link href="/osc-course/css/theme-kul.css?1580915510" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1580925027" rel="stylesheet">
     
 
-    <script src="/osc-course/js/jquery-3.3.1.min.js?1580915510"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1580925027"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,7 +58,7 @@ window.MathJax = {
 };
 </script>
   </head>
-  <body class="" data-url="/osc-course/ch3-pointers/pointers/">
+  <body class="" data-url="/ch3-pointers/pointers/">
     <nav id="sidebar" class="">
 
 
@@ -66,10 +66,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="/img/style/kul.png" alt="KU Leuven" /><br/>
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="/img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/osc-course/js/lunr.min.js?1580915510"></script>
-<script type="text/javascript" src="/osc-course/js/auto-complete.js?1580915510"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1580925027"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1580925027"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="/osc-course/js/search.js?1580915510"></script>
+<script type="text/javascript" src="../../js/search.js?1580925027"></script>
 
     
   </div>
@@ -102,12 +102,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch1-c/" title="1: Introduction in C" class="dd-item 
+    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch1-c/">
+      <a href="../../ch1-c/">
           <i class='far fa-keyboard'></i> 1: Introduction in C
           
       </a>
@@ -127,8 +127,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
-        <a href="/osc-course/ch1-c/intro/">
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
+        <a href="../../ch1-c/intro/">
         <i class='fas fa-book'></i> 1.1: The C programming language
         
         </a>
@@ -146,8 +146,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
-        <a href="/osc-course/ch1-c/intro-labs/">
+      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
+        <a href="../../ch1-c/intro-labs/">
         <i class='fas fa-vial'></i> 1.2: String Manipulation
         
         </a>
@@ -165,8 +165,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
-        <a href="/osc-course/ch1-c/structs/">
+      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch1-c/structs/">
         <i class='fas fa-book'></i> 1.3: Creating order: Structures
         
         </a>
@@ -184,8 +184,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
-        <a href="/osc-course/ch1-c/structs-labs/">
+      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
+        <a href="../../ch1-c/structs-labs/">
         <i class='fas fa-vial'></i> 1.4: Structs
         
         </a>
@@ -203,8 +203,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
-        <a href="/osc-course/ch1-c/ecosystems/">
+      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch1-c/ecosystems/">
         <i class='fas fa-book'></i> 1.5: C Ecosystems
         
         </a>
@@ -222,8 +222,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
-        <a href="/osc-course/ch1-c/ecosystems-labs/">
+      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch1-c/ecosystems-labs/">
         <i class='fas fa-vial'></i> 1.6: Splitting up Code
         
         </a>
@@ -248,12 +248,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch2-interrupts/" title="2: Interrupts" class="dd-item 
+    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch2-interrupts/">
+      <a href="../../ch2-interrupts/">
           <i class='fab fa-linux'></i> 2: Interrupts
           
       </a>
@@ -273,8 +273,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
-        <a href="/osc-course/ch2-interrupts/theory1_arduino/">
+      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch2-interrupts/theory1_arduino/">
         <i class='fab fa-linux'></i> 2.1 Arduino UNO
         
         </a>
@@ -292,8 +292,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
-        <a href="/osc-course/ch2-interrupts/lab1_arduino-bm/">
+      <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
+        <a href="../../ch2-interrupts/lab1_arduino-bm/">
         <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
         
         </a>
@@ -311,8 +311,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
-        <a href="/osc-course/ch2-interrupts/theory2_timer/">
+      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
+        <a href="../../ch2-interrupts/theory2_timer/">
         <i class='fab fa-linux'></i> 2.3 The timer
         
         </a>
@@ -330,8 +330,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
-        <a href="/osc-course/ch2-interrupts/lab2_rocketlaunch/">
+      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
         <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
         
         </a>
@@ -349,8 +349,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
-        <a href="/osc-course/ch2-interrupts/theory3_interrupt/">
+      <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
+        <a href="../../ch2-interrupts/theory3_interrupt/">
         <i class='fab fa-linux'></i> 2.5 The internals of interrupts
         
         </a>
@@ -375,12 +375,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
+    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
         parent
         
         
         ">
-      <a href="/osc-course/ch3-pointers/">
+      <a href="../../ch3-pointers/">
           <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
           
       </a>
@@ -400,8 +400,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item active">
-        <a href="/osc-course/ch3-pointers/pointers/">
+      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item active">
+        <a href="../../ch3-pointers/pointers/">
         <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
         
         </a>
@@ -419,8 +419,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch3-pointers/lab/" title="3.2: The Ancient Library" class="dd-item ">
-        <a href="/osc-course/ch3-pointers/lab/">
+      <li data-nav-id="/ch3-pointers/lab/" title="3.2: The Ancient Library" class="dd-item ">
+        <a href="../../ch3-pointers/lab/">
         <i class='fas fa-vial'></i> 3.2: The Ancient Library
         
         </a>
@@ -445,12 +445,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch4-debugging/" title="4: Debugging" class="dd-item 
+    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch4-debugging/">
+      <a href="../../ch4-debugging/">
           <i class='far fa-keyboard'></i> 4: Debugging
           
       </a>
@@ -470,8 +470,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
-        <a href="/osc-course/ch4-debugging/debugging-ide/">
+      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-ide/">
         <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
         
         </a>
@@ -489,8 +489,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
-        <a href="/osc-course/ch4-debugging/debugging-gdb/">
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-gdb/">
         <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
         
         </a>
@@ -508,8 +508,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
-        <a href="/osc-course/ch4-debugging/testing/">
+      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch4-debugging/testing/">
         <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
         
         </a>
@@ -534,12 +534,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch5-introos/" title="5: Intro in OS" class="dd-item 
+    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch5-introos/">
+      <a href="../../ch5-introos/">
           <i class='fab fa-linux'></i> 5: Intro in OS
           
       </a>
@@ -559,8 +559,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
-        <a href="/osc-course/ch5-introos/intro-os/">
+      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch5-introos/intro-os/">
         <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
         
         </a>
@@ -585,12 +585,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch6-tasks/" title="6: Tasks" class="dd-item 
+    <li data-nav-id="/ch6-tasks/" title="6: Tasks" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch6-tasks/">
+      <a href="../../ch6-tasks/">
           <i class='fab fa-linux'></i> 6: Tasks
           
       </a>
@@ -610,8 +610,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch6-tasks/tasks/" title="6.1: Task management" class="dd-item ">
-        <a href="/osc-course/ch6-tasks/tasks/">
+      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Task management" class="dd-item ">
+        <a href="../../ch6-tasks/tasks/">
         <i class='fas fa-book'></i> 6.1: Task management
         
         </a>
@@ -629,8 +629,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch6-tasks/tasks-lab/" title="6.2: Task management labs" class="dd-item ">
-        <a href="/osc-course/ch6-tasks/tasks-lab/">
+      <li data-nav-id="/ch6-tasks/tasks-lab/" title="6.2: Task management labs" class="dd-item ">
+        <a href="../../ch6-tasks/tasks-lab/">
         <i class='fas fa-vial'></i> 6.2: Task management labs
         
         </a>
@@ -648,8 +648,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch6-tasks/intertasks/" title="6.3: Inter-task communication" class="dd-item ">
-        <a href="/osc-course/ch6-tasks/intertasks/">
+      <li data-nav-id="/ch6-tasks/intertasks/" title="6.3: Inter-task communication" class="dd-item ">
+        <a href="../../ch6-tasks/intertasks/">
         <i class='fas fa-book'></i> 6.3: Inter-task communication
         
         </a>
@@ -667,8 +667,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch6-tasks/intertasks-lab/" title="6.4: Inter-task labs" class="dd-item ">
-        <a href="/osc-course/ch6-tasks/intertasks-lab/">
+      <li data-nav-id="/ch6-tasks/intertasks-lab/" title="6.4: Inter-task labs" class="dd-item ">
+        <a href="../../ch6-tasks/intertasks-lab/">
         <i class='fas fa-vial'></i> 6.4: Inter-task labs
         
         </a>
@@ -693,12 +693,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch7-stack/" title="7: The Stack &amp; The Heap" class="dd-item 
+    <li data-nav-id="/ch7-stack/" title="7: The Stack &amp; The Heap" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch7-stack/">
+      <a href="../../ch7-stack/">
           <i class='far fa-keyboard'></i> 7: The Stack &amp; The Heap
           
       </a>
@@ -718,8 +718,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch7-stack/stackvsheap/" title="7.1: The Stack &amp; the Heap" class="dd-item ">
-        <a href="/osc-course/ch7-stack/stackvsheap/">
+      <li data-nav-id="/ch7-stack/stackvsheap/" title="7.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="../../ch7-stack/stackvsheap/">
         <i class='fas fa-book'></i> 7.1: The Stack &amp; the Heap
         
         </a>
@@ -737,8 +737,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch7-stack/inspection-labs/" title="7.2: Inspecting memory regions" class="dd-item ">
-        <a href="/osc-course/ch7-stack/inspection-labs/">
+      <li data-nav-id="/ch7-stack/inspection-labs/" title="7.2: Inspecting memory regions" class="dd-item ">
+        <a href="../../ch7-stack/inspection-labs/">
         <i class='fas fa-vial'></i> 7.2: Inspecting memory regions
         
         </a>
@@ -763,12 +763,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch8-memory/" title="8: Memory Management" class="dd-item 
+    <li data-nav-id="/ch8-memory/" title="8: Memory Management" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch8-memory/">
+      <a href="../../ch8-memory/">
           <i class='fab fa-linux'></i> 8: Memory Management
           
       </a>
@@ -788,8 +788,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch8-memory/memory/" title="8.1: Memory management" class="dd-item ">
-        <a href="/osc-course/ch8-memory/memory/">
+      <li data-nav-id="/ch8-memory/memory/" title="8.1: Memory management" class="dd-item ">
+        <a href="../../ch8-memory/memory/">
         <i class='fas fa-book'></i> 8.1: Memory management
         
         </a>
@@ -814,12 +814,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/ch9-capitaselecta/" title="9: Capita Selecta" class="dd-item 
+    <li data-nav-id="/ch9-capitaselecta/" title="9: Capita Selecta" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/ch9-capitaselecta/">
+      <a href="../../ch9-capitaselecta/">
           <i class='fab fa-linux'></i> 9: Capita Selecta
           
       </a>
@@ -839,8 +839,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/ch9-capitaselecta/capita-selecta/" title="9.1: Capita Selecta" class="dd-item ">
-        <a href="/osc-course/ch9-capitaselecta/capita-selecta/">
+      <li data-nav-id="/ch9-capitaselecta/capita-selecta/" title="9.1: Capita Selecta" class="dd-item ">
+        <a href="../../ch9-capitaselecta/capita-selecta/">
         <i class='fas fa-book'></i> 9.1: Capita Selecta
         
         </a>
@@ -865,12 +865,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/exercises/" title="A. Exercises" class="dd-item 
+    <li data-nav-id="/exercises/" title="A. Exercises" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/exercises/">
+      <a href="../../exercises/">
           <i class='fas fa-pencil-alt'></i> A. Exercises
           
       </a>
@@ -890,8 +890,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/exercises/tba/" title="To Be Announced!" class="dd-item ">
-        <a href="/osc-course/exercises/tba/">
+      <li data-nav-id="/exercises/tba/" title="To Be Announced!" class="dd-item ">
+        <a href="../../exercises/tba/">
         <i class='fas fa-pen-square'></i> To Be Announced!
         
         </a>
@@ -916,12 +916,12 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/osc-course/appendix/" title="B. Appendix" class="dd-item 
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
         
         
         
         ">
-      <a href="/osc-course/appendix/">
+      <a href="../../appendix/">
           <i class='fab fa-github'></i> B. Appendix
           
       </a>
@@ -941,8 +941,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/appendix/reading/" title="1. Recommended reading" class="dd-item ">
-        <a href="/osc-course/appendix/reading/">
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="../../appendix/reading/">
         1. Recommended reading
         
         </a>
@@ -960,8 +960,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
-        <a href="/osc-course/appendix/installing/">
+      <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
+        <a href="../../appendix/installing/">
         2. Installation Instructions
         
         </a>
@@ -979,8 +979,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/osc-course/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
-        <a href="/osc-course/appendix/cheat_sheet/">
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="../../appendix/cheat_sheet/">
         Cheat sheet
         
         </a>
@@ -1063,7 +1063,7 @@ window.MathJax = {
             
           
           
-            <a href='/osc-course/'>Operating Systems and C</a> > <a href='/osc-course/ch3-pointers/'>3: Pointers & Arrays</a> > 3.1: Pointers and arrays
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-pointers/'>3: Pointers & Arrays</a> > 3.1: Pointers and arrays
           
          
           
@@ -1142,7 +1142,7 @@ window.MathJax = {
 
 <p>The <strong>type</strong> of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value. Each variable has a unique address. Variables can therefore refer to each other.</p>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1160,7 +1160,7 @@ graph TD;
 
 <p>This example visualizes the instruction <code>int a = 5</code>:</p>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1181,7 +1181,7 @@ graph TD;
 
 <p>C uses a <em>pass-by-value</em> system to pass variables to functions. This means that the value is copied, and that function cannot make changes to the original value. That is something positive: <strong>separation of concerns</strong>.</p>
 
-<p>When we think of our person example of <a href="/theory/c/chap1">chapter 1</a>, that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a &ldquo;pointer&rdquo;: a reference to the current data. Objects are <em>passed by-reference</em> by default in Java - so in C we have to do something extra for this.</p>
+<p>When we think of our person example of <a href="../../theory/c/chap1">chapter 1</a>, that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a &ldquo;pointer&rdquo;: a reference to the current data. Objects are <em>passed by-reference</em> by default in Java - so in C we have to do something extra for this.</p>
 
 <p>Instead of <code>is_old(struct Person person)</code> the signature becomes <code>is_old(struct Person * person)</code> (note the added asterik *). We have two options for reading a value here:</p>
 
@@ -1221,7 +1221,7 @@ graph TD;
 	</div>
 </div>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1242,7 +1242,7 @@ graph LR;
 <p>Look at it this way: I live in streetname, city. When I give you my card, you have a <strong>reference</strong> to my address. I can hand out cards to more people. The card does not represent my house, but points towards it.
 If you wish to do so, you can write a different address on the card, eliminating my previous address. From that point on, your card points to a different address, while other cards I dealt out still point to my original address.</p>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1281,7 +1281,7 @@ graph LR;
 	</div>
 </div>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1297,7 +1297,7 @@ graph LR;
 
 </div>
 
-<p>Practical use of the double <code>**</code> notation would be to relink a pointer to another location. As you know from <a href="/theory/c/chap1">chapter one</a>, variables in C are passed along <strong>by value</strong>: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the <em>dereference</em> operator. But chaining <em>the address</em> itself is only possible with double pointers:</p>
+<p>Practical use of the double <code>**</code> notation would be to relink a pointer to another location. As you know from <a href="../../theory/c/chap1">chapter one</a>, variables in C are passed along <strong>by value</strong>: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the <em>dereference</em> operator. But chaining <em>the address</em> itself is only possible with double pointers:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">increase</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> nr) {
@@ -1335,7 +1335,7 @@ printf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f926
 
 <h4 id="function-pointers">Function pointers</h4>
 
-<p>Now things are getting interesting. A pointer can also point <strong>to a function</strong>. (Remember the datastructure from <a href="/theory/c/chap1">chapter one</a>?). You will need the same signature definition to do that:</p>
+<p>Now things are getting interesting. A pointer can also point <strong>to a function</strong>. (Remember the datastructure from <a href="../../theory/c/chap1">chapter one</a>?). You will need the same signature definition to do that:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">increase</span>(<span style="color:#66d9ef">int</span> nr) {
@@ -1392,7 +1392,7 @@ func_type <span style="color:#a6e22e">choose_op</span>(<span style="color:#66d9e
 </span><span style="color:#75715e"></span>    exec(choose_op(<span style="color:#ae81ff">1</span>));       <span style="color:#75715e">// print 10
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p>Now you understand how we used the &lsquo;callback function&rsquo; <code>is_old()</code> in the Person struct in <a href="/theory/c/chap1">chapter 1</a>.</p>
+<p>Now you understand how we used the &lsquo;callback function&rsquo; <code>is_old()</code> in the Person struct in <a href="../../theory/c/chap1">chapter 1</a>.</p>
 
 <h3 id="practical-use-of-pointers">Practical use of pointers</h3>
 
@@ -1412,7 +1412,7 @@ func_type <span style="color:#a6e22e">choose_op</span>(<span style="color:#66d9e
     swap(<span style="color:#f92672">&amp;</span>x, <span style="color:#f92672">&amp;</span>y);
     printf(<span style="color:#e6db74">&#34;(%d, %d)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x, y); <span style="color:#75715e">// print (20, 10)
 </span><span style="color:#75715e"></span>}</code></pre></div>
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1475,7 +1475,7 @@ test.c:5:8: error: read-only variable is not assignable
 
 <p>Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and subtracting. On pointers you can also perform operations such as <code>++</code> and <code>--</code> that move the pointer in the memory one place to the left or right. With <code>char * text = &quot;sup&quot;</code> the pointer refers to the first character:</p>
 
-<script defer src="/osc-course/mermaid/mermaid.min.js">
+<script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1518,7 +1518,7 @@ graph TD
         ptr<span style="color:#f92672">++</span>;
     }
 }</code></pre></div>
-<p><strong>Depending on your compiler</strong>, the above code will print &ldquo;hey ot&rdquo;, meaning your ptr pointer is pointing to the next variable on the local stack after the four characters &ldquo;h&rdquo;, &ldquo;e&rdquo;, &ldquo;y&rdquo;, &ldquo;\0&rdquo;, from the txt variable, are processed within the for loop. We will go more into detail on this in <a href="/theory/c/chap4">chapter 4</a>.</p>
+<p><strong>Depending on your compiler</strong>, the above code will print &ldquo;hey ot&rdquo;, meaning your ptr pointer is pointing to the next variable on the local stack after the four characters &ldquo;h&rdquo;, &ldquo;e&rdquo;, &ldquo;y&rdquo;, &ldquo;\0&rdquo;, from the txt variable, are processed within the for loop. We will go more into detail on this in <a href="../../theory/c/chap4">chapter 4</a>.</p>
 
 
 <div class="ex">
@@ -1548,7 +1548,7 @@ graph TD
 
     <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p>The only problem here is that we cannot loop &ldquo;until the end&rdquo; using <code>while(*doosje) { ... }</code>. For that to work, we need linked lists (see <a href="/practice/lab2">lab 2</a>).</p>
+<p>The only problem here is that we cannot loop &ldquo;until the end&rdquo; using <code>while(*doosje) { ... }</code>. For that to work, we need linked lists (see <a href="../../practice/lab2">lab 2</a>).</p>
 
 
 <div class="notices note" ><p>In C, the <code>new</code> keyword does <em>not</em> exist. Creating instances is done using <code>malloc()</code> instead.</p>
@@ -2263,10 +2263,10 @@ graph TD
 	 
 	 
 		
-			<a class="nav nav-prev" href="/osc-course/ch3-pointers/" title="3: Pointers &amp; Arrays"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch3-pointers/" title="3: Pointers &amp; Arrays"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/osc-course/ch3-pointers/lab/" title="3.2: The Ancient Library" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch3-pointers/lab/" title="3.2: The Ancient Library" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2276,19 +2276,19 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/osc-course/js/clipboard.min.js?1580915510"></script>
-    <script src="/osc-course/js/perfect-scrollbar.min.js?1580915510"></script>
-    <script src="/osc-course/js/perfect-scrollbar.jquery.min.js?1580915510"></script>
-    <script src="/osc-course/js/jquery.sticky.js?1580915510"></script>
-    <script src="/osc-course/js/featherlight.min.js?1580915510"></script>
-    <script src="/osc-course/js/highlight.pack.js?1580915510"></script>
+    <script src="../../js/clipboard.min.js?1580925027"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1580925027"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1580925027"></script>
+    <script src="../../js/jquery.sticky.js?1580925027"></script>
+    <script src="../../js/featherlight.min.js?1580925027"></script>
+    <script src="../../js/highlight.pack.js?1580925027"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/osc-course/js/modernizr.custom-3.6.0.js?1580915510"></script>
-    <script src="/osc-course/js/learn.js?1580915510"></script>
-    <script src="/osc-course/js/hugo-learn.js?1580915510"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1580925027"></script>
+    <script src="../../js/learn.js?1580925027"></script>
+    <script src="../../js/hugo-learn.js?1580925027"></script>
 
-    <link href="/osc-course/mermaid/mermaid.css?1580915510" rel="stylesheet" />
-    <script src="/osc-course/mermaid/mermaid.js?1580915510"></script>
+    <link href="../../mermaid/mermaid.css?1580925027" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1580925027"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

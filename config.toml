@@ -1,6 +1,10 @@
 languageCode = "en-uk"
 title = "Operating Systems and C"
+
 baseurl = "https://kuleuven-diepenbeek.github.io/osc-course/"
+# fix for subdir baseurl, see https://discourse.gohugo.io/t/issue-when-baseurl-have-subdirectory/4088/7
+RelativeURLs=true
+CanonifyURLs=true
 
 theme = "hugo-theme-learn"
 publishDir = "docs"

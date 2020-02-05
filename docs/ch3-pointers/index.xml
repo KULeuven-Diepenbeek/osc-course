@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3: Pointers &amp; Arrays on Operating Systems and C</title>
+    <link>/ch3-pointers/</link>
+    <description>Recent content in 3: Pointers &amp; Arrays on Operating Systems and C</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
+    
+	<atom:link href="/ch3-pointers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>3.1: Pointers and arrays</title>
+      <link>/ch3-pointers/pointers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch3-pointers/pointers/</guid>
+      <description>In the schematic examples below, the following concepts can be explicitly distinguished:
+ The name of a variable The value of a variable  And the following implicitly:
+ The type of a variable The adres of a variable  The type of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value.</description>
+    </item>
+    
+    <item>
+      <title>3.2: The Ancient Library</title>
+      <link>/ch3-pointers/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch3-pointers/lab/</guid>
+      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
+ 1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+    </item>
+    
+  </channel>
+</rss>

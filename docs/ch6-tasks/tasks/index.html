@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>6.1: Task management :: Operating Systems and C</title>
+
+    
+    <link href="/css/nucleus.css?1580915216" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580915216" rel="stylesheet">
+    <link href="/css/hybrid.css?1580915216" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580915216" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580915216" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580915216" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580915216" rel="stylesheet">
+    <link href="/css/theme.css?1580915216" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580915216" rel="stylesheet">
+    
+      <link href="/css/theme-kul.css?1580915216" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1580915216"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+  </head>
+  <body class="" data-url="/ch6-tasks/tasks/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="/img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="/img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1580915216"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580915216"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1580915216"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch1-c/">
+          <i class='far fa-keyboard'></i> 1: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
+        <a href="/ch1-c/intro/">
+        <i class='fas fa-book'></i> 1.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
+        <a href="/ch1-c/intro-labs/">
+        <i class='fas fa-vial'></i> 1.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
+        <a href="/ch1-c/structs/">
+        <i class='fas fa-book'></i> 1.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
+        <a href="/ch1-c/structs-labs/">
+        <i class='fas fa-vial'></i> 1.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
+        <a href="/ch1-c/ecosystems/">
+        <i class='fas fa-book'></i> 1.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
+        <a href="/ch1-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch2-interrupts/">
+          <i class='fab fa-linux'></i> 2: Interrupts
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
+        <a href="/ch2-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
+        <a href="/ch2-interrupts/lab1_arduino-bm/">
+        <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
+        <a href="/ch2-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 2.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
+        <a href="/ch2-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
+        <a href="/ch2-interrupts/theory3_interrupt/">
+        <i class='fab fa-linux'></i> 2.5 The internals of interrupts
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch3-pointers/">
+          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
+        <a href="/ch3-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/lab/" title="3.2: The Ancient Library" class="dd-item ">
+        <a href="/ch3-pointers/lab/">
+        <i class='fas fa-vial'></i> 3.2: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch4-debugging/">
+          <i class='far fa-keyboard'></i> 4: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="/ch4-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
+        <a href="/ch4-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
+        <a href="/ch4-debugging/testing/">
+        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch5-introos/">
+          <i class='fab fa-linux'></i> 5: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
+        <a href="/ch5-introos/intro-os/">
+        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Tasks" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Tasks
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Task management" class="dd-item active">
+        <a href="/ch6-tasks/tasks/">
+        <i class='fas fa-book'></i> 6.1: Task management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/tasks-lab/" title="6.2: Task management labs" class="dd-item ">
+        <a href="/ch6-tasks/tasks-lab/">
+        <i class='fas fa-vial'></i> 6.2: Task management labs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks/" title="6.3: Inter-task communication" class="dd-item ">
+        <a href="/ch6-tasks/intertasks/">
+        <i class='fas fa-book'></i> 6.3: Inter-task communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks-lab/" title="6.4: Inter-task labs" class="dd-item ">
+        <a href="/ch6-tasks/intertasks-lab/">
+        <i class='fas fa-vial'></i> 6.4: Inter-task labs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-stack/" title="7: The Stack &amp; The Heap" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch7-stack/">
+          <i class='far fa-keyboard'></i> 7: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-stack/stackvsheap/" title="7.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="/ch7-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 7.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-stack/inspection-labs/" title="7.2: Inspecting memory regions" class="dd-item ">
+        <a href="/ch7-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 7.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-memory/" title="8: Memory Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch8-memory/">
+          <i class='fab fa-linux'></i> 8: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-memory/memory/" title="8.1: Memory management" class="dd-item ">
+        <a href="/ch8-memory/memory/">
+        <i class='fas fa-book'></i> 8.1: Memory management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-capitaselecta/" title="9: Capita Selecta" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch9-capitaselecta/">
+          <i class='fab fa-linux'></i> 9: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-capitaselecta/capita-selecta/" title="9.1: Capita Selecta" class="dd-item ">
+        <a href="/ch9-capitaselecta/capita-selecta/">
+        <i class='fas fa-book'></i> 9.1: Capita Selecta
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tba/" title="To Be Announced!" class="dd-item ">
+        <a href="/exercises/tba/">
+        <i class='fas fa-pen-square'></i> To Be Announced!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="/appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
+        <a href="/appendix/installing/">
+        2. Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="/appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Operating Systems and C</a> > <a href='/ch6-tasks/'>6: Tasks</a> > 6.1: Task management
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#3-1-task-management">3.1 Task management</a>
+<ul>
+<li><a href="#3-1-1-got-task">3.1.1 Got task ?</a></li>
+<li><a href="#3-1-2-run-task">3.1.2 Run task !</a>
+<ul>
+<li><a href="#process-control-block">Process Control Block</a></li>
+<li><a href="#creating-processes">Creating processes</a></li>
+</ul></li>
+<li><a href="#out-of-fuel-take-a-shell">Out of fuel ? Take a Shell</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              6.1: Task management
+            </h1>
+          
+
+        
+
+
+
+
+
+<!--
+&laquo;&nbsp;[Back to Table of Contents](/)<br/>
+
+<hr/>
+< !--
+&raquo;&nbsp;[Naar de labo opgave](#oef)
+-->
+
+<h1 id="3-1-task-management">3.1 Task management</h1>
+
+<p>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.</p>
+
+<h2 id="3-1-1-got-task">3.1.1 Got task ?</h2>
+
+<div class="todo">
+  <p>TODO: Uniformly style definitions ?</p>
+</div>
+
+<p>By definition, a process is an instance of a program. As was dicussed in the &ldquo;C-portion&rdquo; of this course a basic program can be divided in multiple segments:</p>
+
+<ul>
+<li><strong>text/code</strong>: is the machine code in assembly. This section is compiled for one (type of) processor(s).</li>
+<li><strong>data</strong>: is the segment that contains initialised variables. These variables could be global, static, or external. A further distinction can be made between normal initialised variables and constants. This distinction is often referred to with read-only (ro-data) and read-write (rw-data), with the former the part where the constants reside and the latter that of the normal variables.</li>
+<li><strong>bss</strong>: this segment contains the global and static variables that are not initialised.</li>
+</ul>
+
+<p>When source code is compiled into a binary, these segments are <em>fixed</em>.</p>
+
+<p>Let&rsquo;s put these definitions to the test. A very simple program could be written as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+
+  printf(<span style="color:#e6db74">&#34;hello world !</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+<p>This program can be compiled with the command below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ gcc -o eg3_1 eg3_1.c
+
+jvliegen@localhost:~/$ </code></pre></div>
+<p>On the command line there is a command <strong>size</strong> that can be used to examine these segments. The arguments that are available on Linux commands can typically be explored with <strong>command &ndash;help</strong> or <strong>man command</strong> (offcourse, command needs to be replaced with the actual command-name).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ size -B eg3_1
+   text    data     bss     dec     hex filename
+   <span style="color:#ae81ff">1516</span>     <span style="color:#ae81ff">600</span>       <span style="color:#ae81ff">8</span>    <span style="color:#ae81ff">2124</span>     84c eg3_1
+
+jvliegen@localhost:~/$ </code></pre></div>
+<p>This command shows the sizes of the sections that are discussed above. The text, data and bss sections are 1516, 600, and 8 bytes. In total this sums up to 2124 bytes, which can be written hexadecimally as 0x84C.</p>
+
+<p>OK, this makes sense :)</p>
+
+<h2 id="3-1-2-run-task">3.1.2 Run task !</h2>
+
+<p>By the time you&rsquo;re reading this part of the course, running the binary that was compiled above should be a walk in the park.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./eg3_1
+hello world !
+
+jvliegen@localhost:~/$ </code></pre></div>
+<p>When a program is started, an <strong>instance</strong> of the program is created. This results (among many other things) in an allocation of the instance in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in <a href="/theory/os/chap5">chapter 5</a>.</p>
+
+<p>Next to mapping an instance of the program in memory space, upon start up a <strong>Process Control Block (PCB)</strong> is created.</p>
+
+<h3 id="process-control-block">Process Control Block</h3>
+
+<p>The Process Control Block (PCB)  is a representation of the process in the OS. It is created as a <em>task_struct</em> object. Such a PCB is made for every process and the definition of its struct is in the kernel source (well DUHU).</p>
+
+<p><strong>HOLD ON</strong> Linux is an open source OS, so does that mean we should be able to find this struct in the source code ?</p>
+
+<p><strong>WELL YES</strong> Inspecting the <a href="https://github.com/torvalds/linux/blob/master/include/linux/sched.h">sched.h</a> file verifies: 1) that we read the code, 2) that the task_struct is indeed there, and 3) that the PCB has <strong>a lot</strong> of parameters.The definition of the struct starts at line 624 and ends at line 1284 (at the moment of writing this course, Nov 15th 2019). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:</p>
+
+<ul>
+<li>the process state</li>
+<li>the process identifier (PID)</li>
+<li>the process priority</li>
+<li>CPU scheduling info</li>
+<li>list of open files</li>
+<li>memory limits</li>
+<li>CPU registers</li>
+<li>program counter</li>
+</ul>
+
+<p>The PCBs of all the processes are contained in a doubly-linked list which is headed by the <strong>mother of all processes</strong>. This process is called <strong>init</strong> and has <strong>PID 0</strong>. The doubly-linked list is commonly known as the <strong>process table</strong>.</p>
+
+<p>Let&rsquo;s verify all of the above. We&rsquo;ll adapt the C program so it takes more time to run.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#define DURATION_IN_MINUTES 2
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">int</span> i;
+
+  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>(DURATION_IN_MINUTES<span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>);i<span style="color:#f92672">++</span>) {
+    printf(<span style="color:#e6db74">&#34;hello world !</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+    sleep(<span style="color:#ae81ff">1</span>);
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+<p>After starting the program, the PID of the process can be looked for.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./eg3_2
+hello world !
+hello world !
+...</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ps -u
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+jvliegen <span style="color:#ae81ff">14339</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">30408</span>  <span style="color:#ae81ff">5500</span> pts/3    Ss   <span style="color:#ae81ff">09</span>:57   <span style="color:#ae81ff">0</span>:00 bash
+jvliegen <span style="color:#ae81ff">20162</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0   <span style="color:#ae81ff">4504</span>   <span style="color:#ae81ff">804</span> pts/1    S+   <span style="color:#ae81ff">11</span>:49   <span style="color:#ae81ff">0</span>:00 ./eg3_2.bin
+jvliegen <span style="color:#ae81ff">20244</span>  <span style="color:#ae81ff">3</span>.0  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">47232</span>  <span style="color:#ae81ff">3616</span> pts/3    R+   <span style="color:#ae81ff">11</span>:51   <span style="color:#ae81ff">0</span>:00 ps -u
+jvliegen <span style="color:#ae81ff">27675</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">30544</span>  <span style="color:#ae81ff">5556</span> pts/0    Ss+  <span style="color:#ae81ff">08</span>:55   <span style="color:#ae81ff">0</span>:00 bash
+jvliegen <span style="color:#ae81ff">27700</span>  <span style="color:#ae81ff">0</span>.2  <span style="color:#ae81ff">0</span>.5 <span style="color:#ae81ff">207400</span> <span style="color:#ae81ff">96300</span> pts/0    Sl   <span style="color:#ae81ff">08</span>:55   <span style="color:#ae81ff">0</span>:30 /usr/local/bin/
+jvliegen <span style="color:#ae81ff">29414</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">30412</span>  <span style="color:#ae81ff">5504</span> pts/1    Ss   <span style="color:#ae81ff">09</span>:13   <span style="color:#ae81ff">0</span>:00 bash
+
+...</code></pre></div>
+<p>Through the ps command the PID of the process <strong>./eg3_2.bin</strong> can be found. In the example above it&rsquo;s 20162. While this process is running, there is a folder in the <strong>/proc</strong> map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. Also certain fields in the struct_task are reflected in this folder.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ls /proc/20162 
+attr             exe        mounts         projid_map    status
+autogroup        fd         mountstats     root          syscall
+auxv             fdinfo     net            sched         task
+cgroup           gid_map    ns             schedstat     timers
+clear_refs       io         numa_maps      sessionid     timerslack_ns
+cmdline          limits     oom_adj        setgroups     uid_map
+comm             loginuid   oom_score      smaps         wchan
+coredump_filter  map_files  oom_score_adj  smaps_rollup
+cpuset           maps       pagemap        stack
+cwd              mem        patch_state    stat
+environ          mountinfo  personality    statm
+jvliegen@localhost:~/$</code></pre></div>
+<p>Don&rsquo;t forget it&rsquo;s there because it might come in handy someday !!
+Every process has a PCB that contains metadata about the process.</p>
+
+<h3 id="creating-processes">Creating processes</h3>
+
+<p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or using <strong>exec</strong>. For the records it is mentioned there is another option using system() function but because it is less secure and is less efficient then the other two.</p>
+
+<p>Both fork and exec create a new process. The fork function copies the PCB of its process to a new PCB. The process that calls the fork() is referred to with the <strong>parent</strong> process while the new process is the <strong>child</strong> process. The child process will continue operations on the same line as the parent process. Because of the copying of the PCB, the program counter is also copied !!</p>
+
+<p>The exec() function call also starts from copying its own PCB. In contrast with fork(), it then replaces the &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with a new program and starts executing from (relative) 0.</p>
+
+<p>It is mentioned earlier that the first process that is started is the <strong>init</strong> process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on. Using the <strong>pstree</strong> command we can see the processes in a tree, and have a visual representation of which child-parent relations there are between processes.</p>
+
+<figure>
+    <img src="/img/0x_31.png"/> <figcaption>
+            <h4>An example of the pstree command. The left image shows the result of Linux on an embedded system. The right image shows the result of Linux running on a laptop</h4>
+        </figcaption>
+</figure>
+
+
+<h2 id="out-of-fuel-take-a-shell">Out of fuel ? Take a Shell</h2>
+
+<p>When a user logs in on a Linux computer, typically one of the following through approaches is used:</p>
+
+<ul>
+<li>a login through a Graphical User Interface (GUI)</li>
+<li>a login through a Command Line Interface (CLI)</li>
+</ul>
+
+<p>For a desktop/laptop that is running Linux the GUI approach is typically used.  On those systems there are <strong>terminal emulators</strong> which emulate CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, &hellip;</p>
+
+<figure>
+    <img src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png"/> <figcaption>
+            <h4>Example of a Terminal emulator</h4>
+        </figcaption>
+</figure>
+
+
+<p>For embedded systems the CLI is more appropriate. The GUI approach is not discussed here.
+<div class="todo">
+  <p>TODO: point to where we talk about Xorg</p>
+</div>
+When a CLI is used, a <strong>shell</strong> is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As always, there are many flavours of shells: sh, bash, ksh, zsh, &hellip;</p>
+
+<p>Once the shell is running and the user asks to create new processes, all of these newly create processes will have the shell as a parent process.</p>
+
+<div class="todo">
+  <p>TODO: Elaborate on ... ?</p>
+</div>
+
+<ul>
+<li>daemons</li>
+<li>services</li>
+<li>foreground / background
+Would be good, because CTRL-Z is a SIGTSTP signal wich <strong>suspends</strong> the process. Maybe just give the teaser towards the next chapter ?</li>
+<li>ssh</li>
+</ul>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/ch6-tasks/" title="6: Tasks"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/ch6-tasks/tasks-lab/" title="6.2: Task management labs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1580915216"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580915216"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580915216"></script>
+    <script src="/js/jquery.sticky.js?1580915216"></script>
+    <script src="/js/featherlight.min.js?1580915216"></script>
+    <script src="/js/highlight.pack.js?1580915216"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580915216"></script>
+    <script src="/js/learn.js?1580915216"></script>
+    <script src="/js/hugo-learn.js?1580915216"></script>
+
+    <link href="/mermaid/mermaid.css?1580915216" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580915216"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

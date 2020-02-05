@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/ch1-c/intro/</loc>
+    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/theory1_arduino/</loc>
+    <lastmod>2020-01-13T14:07:40+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch4-debugging/debugging-ide/</loc>
+    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch6-tasks/tasks/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch7-stack/stackvsheap/</loc>
+    <lastmod>2020-01-07T15:16:52+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch9-capitaselecta/capita-selecta/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/exercises/tba/</loc>
+    <lastmod>2020-02-05T11:45:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/intro-labs/</loc>
+    <lastmod>2020-01-07T15:16:52+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/structs/</loc>
+    <lastmod>2020-01-08T10:17:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/lab1_arduino-bm/</loc>
+    <lastmod>2020-01-13T14:18:54+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/</loc>
+    <lastmod>2020-01-07T14:11:53+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch4-debugging/debugging-gdb/</loc>
+    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch6-tasks/tasks-lab/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch7-stack/inspection-labs/</loc>
+    <lastmod>2020-01-07T14:44:13+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/theory2_timer/</loc>
+    <lastmod>2020-01-13T16:28:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch3-pointers/pointers/</loc>
+    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch3-pointers/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch4-debugging/testing/</loc>
+    <lastmod>2020-02-05T11:45:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch6-tasks/intertasks/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/structs-labs/</loc>
+    <lastmod>2020-01-08T16:07:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/lab2_rocketlaunch/</loc>
+    <lastmod>2020-01-13T16:28:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch3-pointers/lab/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch4-debugging/</loc>
+    <lastmod>2020-01-08T16:07:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch6-tasks/intertasks-lab/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/ecosystems/</loc>
+    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch2-interrupts/theory3_interrupt/</loc>
+    <lastmod>2020-01-13T16:28:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch5-introos/intro-os/</loc>
+    <lastmod>2020-01-06T17:11:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch5-introos/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch1-c/ecosystems-labs/</loc>
+    <lastmod>2020-01-08T16:07:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch6-tasks/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch7-stack/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch8-memory/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch8-memory/memory/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/ch9-capitaselecta/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/exercises/</loc>
+    <lastmod>2020-02-05T11:45:06+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/appendix/</loc>
+    <lastmod>2020-02-05T10:29:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/color_palette/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/appendix/reading/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/appendix/installing/</loc>
+    <lastmod>2020-02-05T15:02:21+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/appendix/cheat_sheet/</loc>
+    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-06T17:11:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2: Interrupts on Operating Systems and C</title>
+    <link>/ch2-interrupts/</link>
+    <description>Recent content in 2: Interrupts on Operating Systems and C</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
+    
+	<atom:link href="/ch2-interrupts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2.1 Arduino UNO</title>
+      <link>/ch2-interrupts/theory1_arduino/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch2-interrupts/theory1_arduino/</guid>
+      <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
+  An Arduino UNO   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+    </item>
+    
+    <item>
+      <title>2.2: Bare metal Arduino</title>
+      <link>/ch2-interrupts/lab1_arduino-bm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch2-interrupts/lab1_arduino-bm/</guid>
+      <description>When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
+  image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under ex1.c. The required setup on the breadboard should look something like this:</description>
+    </item>
+    
+    <item>
+      <title>2.3 The timer</title>
+      <link>/ch2-interrupts/theory2_timer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch2-interrupts/theory2_timer/</guid>
+      <description>With our sleeves rolled up and dirt all the way up to our elbows, it&amp;rsquo;s time to grab a coffee and do so reading/studying again. In this section interrupts will be introduced through the use of a timer.
+A lot of applications that are built using an Arduino need some sense of time. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.</description>
+    </item>
+    
+    <item>
+      <title>2.4: Launch that rocket !!</title>
+      <link>/ch2-interrupts/lab2_rocketlaunch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch2-interrupts/lab2_rocketlaunch/</guid>
+      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:  
+Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
+    </item>
+    
+    <item>
+      <title>2.5 The internals of interrupts</title>
+      <link>/ch2-interrupts/theory3_interrupt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch2-interrupts/theory3_interrupt/</guid>
+      <description>The internals Now that you have an understanding of how interrupts work, let&amp;rsquo;s dive a bit deeper into the interal workings.
+The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding wire goes high. This makes one (or more) bits of this interrupt vector high. This triggers the internal Interrupt unit. The image below shows the available interrupts for the AT Mega.</description>
+    </item>
+    
+  </channel>
+</rss>

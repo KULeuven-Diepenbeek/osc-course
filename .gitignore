@@ -10,7 +10,6 @@
 **/a.out
 
 # ignores intermediate files in OS folder
-docs/**/.*
 themes/*.zip
 
 

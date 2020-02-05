@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>6: Tasks on Operating Systems and C</title>
+    <link>/ch6-tasks/</link>
+    <description>Recent content in 6: Tasks on Operating Systems and C</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
+    
+	<atom:link href="/ch6-tasks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>6.1: Task management</title>
+      <link>/ch6-tasks/tasks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch6-tasks/tasks/</guid>
+      <description>3.1 Task management One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
+3.1.1 Got task ? TODO: Uniformly style definitions ?
+ By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course a basic program can be divided in multiple segments:</description>
+    </item>
+    
+    <item>
+      <title>6.2: Task management labs</title>
+      <link>/ch6-tasks/tasks-lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch6-tasks/tasks-lab/</guid>
+      <description> 3.1 Task management  3.1 Write a C-program that prints its own PID on the screen. 3.2 Write a C-program that spawns another process. Both parent and child processes announce their existence (through a printf) and their PIDs. 3.x Write a C-program that creates 4 child processes  every of the childeren checks which numbes (&amp;lt;10k) are prime every child reports only numbers that are prime, together with its PID   </description>
+    </item>
+    
+    <item>
+      <title>6.3: Inter-task communication</title>
+      <link>/ch6-tasks/intertasks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch6-tasks/intertasks/</guid>
+      <description>What&amp;rsquo;s in a task ? Up until this point a process and a task were used interchangibly. However, a better distinction is to be made. A task is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a thread.</description>
+    </item>
+    
+    <item>
+      <title>6.4: Inter-task labs</title>
+      <link>/ch6-tasks/intertasks-lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>/ch6-tasks/intertasks-lab/</guid>
+      <description> Inter-task communication  4.1 Write a C-program that spawns another thread. Both parent and child threads announce their existence (through a printf) and their PIDs.  </description>
+    </item>
+    
+  </channel>
+</rss>

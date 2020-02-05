@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>2.1 Arduino UNO :: Operating Systems and C</title>
+
+    
+    <link href="/css/nucleus.css?1580915216" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1580915216" rel="stylesheet">
+    <link href="/css/hybrid.css?1580915216" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1580915216" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1580915216" rel="stylesheet">
+    <link href="/css/auto-complete.css?1580915216" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1580915216" rel="stylesheet">
+    <link href="/css/theme.css?1580915216" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1580915216" rel="stylesheet">
+    
+      <link href="/css/theme-kul.css?1580915216" rel="stylesheet">
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1580915216"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+  </head>
+  <body class="" data-url="/ch2-interrupts/theory1_arduino/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="/img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="/img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1580915216"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1580915216"></script>
+<script type="text/javascript">
+    
+        var baseurl = "";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1580915216"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch1-c/">
+          <i class='far fa-keyboard'></i> 1: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
+        <a href="/ch1-c/intro/">
+        <i class='fas fa-book'></i> 1.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
+        <a href="/ch1-c/intro-labs/">
+        <i class='fas fa-vial'></i> 1.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
+        <a href="/ch1-c/structs/">
+        <i class='fas fa-book'></i> 1.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
+        <a href="/ch1-c/structs-labs/">
+        <i class='fas fa-vial'></i> 1.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
+        <a href="/ch1-c/ecosystems/">
+        <i class='fas fa-book'></i> 1.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
+        <a href="/ch1-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/ch2-interrupts/">
+          <i class='fab fa-linux'></i> 2: Interrupts
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item active">
+        <a href="/ch2-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
+        <a href="/ch2-interrupts/lab1_arduino-bm/">
+        <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
+        <a href="/ch2-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 2.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
+        <a href="/ch2-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
+        <a href="/ch2-interrupts/theory3_interrupt/">
+        <i class='fab fa-linux'></i> 2.5 The internals of interrupts
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch3-pointers/">
+          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
+        <a href="/ch3-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/lab/" title="3.2: The Ancient Library" class="dd-item ">
+        <a href="/ch3-pointers/lab/">
+        <i class='fas fa-vial'></i> 3.2: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch4-debugging/">
+          <i class='far fa-keyboard'></i> 4: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="/ch4-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
+        <a href="/ch4-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
+        <a href="/ch4-debugging/testing/">
+        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch5-introos/">
+          <i class='fab fa-linux'></i> 5: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
+        <a href="/ch5-introos/intro-os/">
+        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Tasks" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Tasks
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Task management" class="dd-item ">
+        <a href="/ch6-tasks/tasks/">
+        <i class='fas fa-book'></i> 6.1: Task management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/tasks-lab/" title="6.2: Task management labs" class="dd-item ">
+        <a href="/ch6-tasks/tasks-lab/">
+        <i class='fas fa-vial'></i> 6.2: Task management labs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks/" title="6.3: Inter-task communication" class="dd-item ">
+        <a href="/ch6-tasks/intertasks/">
+        <i class='fas fa-book'></i> 6.3: Inter-task communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks-lab/" title="6.4: Inter-task labs" class="dd-item ">
+        <a href="/ch6-tasks/intertasks-lab/">
+        <i class='fas fa-vial'></i> 6.4: Inter-task labs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-stack/" title="7: The Stack &amp; The Heap" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch7-stack/">
+          <i class='far fa-keyboard'></i> 7: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-stack/stackvsheap/" title="7.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="/ch7-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 7.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-stack/inspection-labs/" title="7.2: Inspecting memory regions" class="dd-item ">
+        <a href="/ch7-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 7.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-memory/" title="8: Memory Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch8-memory/">
+          <i class='fab fa-linux'></i> 8: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-memory/memory/" title="8.1: Memory management" class="dd-item ">
+        <a href="/ch8-memory/memory/">
+        <i class='fas fa-book'></i> 8.1: Memory management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-capitaselecta/" title="9: Capita Selecta" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/ch9-capitaselecta/">
+          <i class='fab fa-linux'></i> 9: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-capitaselecta/capita-selecta/" title="9.1: Capita Selecta" class="dd-item ">
+        <a href="/ch9-capitaselecta/capita-selecta/">
+        <i class='fas fa-book'></i> 9.1: Capita Selecta
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tba/" title="To Be Announced!" class="dd-item ">
+        <a href="/exercises/tba/">
+        <i class='fas fa-pen-square'></i> To Be Announced!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="/appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
+        <a href="/appendix/installing/">
+        2. Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="/appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Operating Systems and C</a> > <a href='/ch2-interrupts/'>2: Interrupts</a> > 2.1 Arduino UNO
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#low-level-programming">Low Level programming</a></li>
+<li><a href="#bit-manipulations">Bit manipulations</a></li>
+<li><a href="#hello-hardware-this-is-software-speaking">Hello hardware, this is software speaking</a></li>
+<li><a href="#two-beating-hearts">Two beating hearts</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              2.1 Arduino UNO
+            </h1>
+          
+
+        
+
+
+
+
+
+<!--
+&laquo;&nbsp;[Back to Table of Content](/)<br/>
+
+<hr/>
+&raquo;&nbsp;[Naar de labo opgave](#oef)
+-->
+
+<p>The Arduino UNO is an open-source microcontroller board. It is powered by an <em>off-the-shelf</em> ATMega microcontroller from <a href="https://www.microchip.com/design-centers/8-bit/avr-mcus" target="_blank">
+Microchip
+</a>
+. The datasheet for this family of microcontrollers can be found <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" target="_blank">
+here
+</a>
+.</p>
+
+<figure>
+    <img src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg"/> <figcaption>
+            <h4>An Arduino UNO</h4>
+        </figcaption>
+</figure>
+
+
+<p>This datasheet contains a <strong>block diagram</strong> of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well. The image should be familiar to students that took up the <em>Elektronische systemen</em> course at KU Leuven. 😄</p>
+
+<div style="display: flex; flex-direction: row; align-items: center;">
+  <div style="width: 50%">
+    <figure>
+    <img src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif"/> <figcaption>
+            <h4>Block diagram of the AVR Architecture</h4>
+        </figcaption>
+</figure>
+
+  </div>
+  <div style="width: 50%">
+    The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, another topic is explained first: Timer<br/><br/>
+    The ATMega microcontroller on the Arduino has, amonst other components, a dedicated Timer. This timer block consists out of 3 timers: two 8-bit timers and a single 16-bit timer. Through the use of the 16-bot timer, the concept of interrupts is illustrated.
+  </div>
+</div>
+
+<h3 id="low-level-programming">Low Level programming</h3>
+
+<p>Programming the Arduino UNO can be easily done with the <strong>Arduino IDE</strong>. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all, <strong>magic</strong> doesn&rsquo;t exist.</p>
+
+<figure>
+    <img src="/img/0x_02.png"/> <figcaption>
+            <h4>The Arduino IDE</h4>
+        </figcaption>
+</figure>
+
+
+<h3 id="bit-manipulations">Bit manipulations</h3>
+
+<p>When bare metal programming a microcontroller it is often required to start poking specific bits in a register. A quick background refresh is given first.</p>
+
+<div style="display: flex; flex-direction: row; align-items: center;">
+  <div style="width: 50%">
+    <figure>
+    <img src="/img/endianness.png"/> <figcaption>
+            <h4>Endianness and approaches in hardware and software</h4>
+        </figcaption>
+</figure>
+
+  </div>
+  <div style="width: 50%">
+    <h4>Binary</h4>
+    Everybody agrees that the hexadecimal number <b>0x41</b> is binary written as <b>01000001</b>. This is interpreted as 1 x 2<sup>6</sup> + 1 x 2<sup>0</sup> = 64 + 1 = 65. The least-significant bit is in the term: 1 x 2<sup>0</sup>.
+    <h4>Endianness</h4>
+    When this byte is serialised (eg. in an array or in communcation) the question of "Which bit do we write first ?" arises. This is defined as the <b>endianness</b>. Big Endian writes the MSB on the right, while Little Endian writes the LSB on the right.
+    <h4>Hardware vs. Software</h4>
+    In contrast with the software world, hardware engineers typically start counting from the right (instead of the left). The C code for the assignement above would be:<br/>
+    int myvalue[] = {1, 0, 0, 0, 0, 0, 1, 0};
+    where in VHDL this assignment would be:<br/>
+    myvalue <= "01000001";
+    <br/>
+    Now both 'worlds' see myvalue[0] as '1'.
+  </div>
+</div>
+
+<p>Let&rsquo;s explore the bit manipulations. First we assign the value 1 to an 8-bit type variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> x;
+  x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;</code></pre></div>
+<p>With this line, <strong>x</strong> holds the number &ldquo;00000001&rdquo;. This means the bytes are represented in Little Endian.</p>
+
+<p>Setting the sixth bit, might be a bit cumbersome. First the result of 2<sup>5</sup> has to be calculated. After googling the result, the programmer can write:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> x;
+  x <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span>;</code></pre></div>
+<p>More seasoned C programmers might be inclined to use the <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators" target="_blank">
+shift operator
+</a>
+: &lt;&lt;. This litteraly takes te value 1 (remember: this is represented as 00000001) and shifts this value 5 positions to the left, while inserting 0&rsquo;s on the right ( 00000001 + 00000 =&gt; 00000 + 00100000 =&gt;  00100000).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> x;
+  x <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>);</code></pre></div>
+<p>Next to the shift operator, <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators" target="_blank">
+bitwise operators
+</a>
+ are also heavily used for setting and/or clearing certain bits. The logical functions AND (&amp;), OR(|) and NOT(~) can be used as efficient tools for bit fiddling.</p>
+
+<p>❗️ ❗ 🐉 Beware of the <span style="color: green; font-weight: bold;">dragons</span> 🐉 ❗ ❗️.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+  ...
+  x <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>);
+  y <span style="color:#f92672">=</span> y <span style="color:#f92672">|</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>);
+  ...
+  x <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span>);
+  y <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span>);
+  <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&amp;&amp;</span> y) { printf(<span style="color:#e6db74">&#34;YES</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); } <span style="color:#66d9ef">else</span> { printf(<span style="color:#e6db74">&#34;NO</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); }
+  <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&amp;</span> y)  { printf(<span style="color:#e6db74">&#34;YES</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); } <span style="color:#66d9ef">else</span> { printf(<span style="color:#e6db74">&#34;NO</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); }
+  <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">|</span> y)  { printf(<span style="color:#e6db74">&#34;YES</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); } <span style="color:#66d9ef">else</span> { printf(<span style="color:#e6db74">&#34;NO</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); }</code></pre></div>
+
+<div class="ex">
+	<div class="inner">
+    	<ol>
+<li>What will be the printed output of the C-code above ?
+<br/><br/></li>
+<li>Write a line of C-code that:
+<ul>
+<li>sets the 3rd bit to &lsquo;1&rsquo; and all others to &lsquo;0&rsquo; (resulting in &ldquo;00000100&rdquo;)</li>
+<li>sets the 4th and 5th byte to &lsquo;1&rsquo; and all others to &lsquo;0(resulting in &ldquo;00011000&rdquo;)&rsquo;</li>
+</ul></li>
+</ol>
+
+	</div>
+</div>
+
+<h3 id="hello-hardware-this-is-software-speaking">Hello hardware, this is software speaking</h3>
+
+<p>A frequently used way of communication between hardware and software is through memory-mapped registers. Such a register can be <strong>read or written</strong> by software at a certain <strong>address</strong>. This register serves as driver (in the hardware sense) for inputs of a specific hardware component.</p>
+
+<p>When a register is written by software and read by (or driving) hardware, such a register is sometimes called a <strong>command register (CR)</strong>. When a register is written (or driven) by hardware and read by the software, such a register is sometimes referred to with a <strong>status register (SR)</strong>.</p>
+
+<p>Going through the <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" target="_blank">
+datasheet
+</a>
+ of the microcontroller on the Arduino many CRs can be found. Section 36 summarises these registers on more than 3 pages. An example of a register that serves both as a CR and as a SR for controlling of the Analog-to-Digital Converter is shown below. As can be learned from the datasheet, the MSB of this register is used to enable or disable the hardware ADC through software instructions.</p>
+
+<figure>
+    <img src="/img/0x_03.png"/> <figcaption>
+            <h4>Example of a CR in the ATMega microcontroller.</h4>
+        </figcaption>
+</figure>
+
+
+
+<div class="notices warning" ><p>The register above can be accessed from software on address register 0x7A. When the software writes to this register <strong>ALL</strong> 8 bits are written. This is important to remember to avoid one of the <span style="color: green; font-weight: bold;">dragons</span> described above.</p>
+</div>
+
+
+<h3 id="two-beating-hearts">Two beating hearts</h3>
+
+<p>As mentioned above, simply cross compiling for the targeted microcontroller allows for programming the Arduino UNO in C, outside of the Arduino IDE. Here two examples are shown to make a blinking light. The first example is for use through the Arduino IDE, the second example uses plain C in bare metal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>()
+{
+  pinMode(<span style="color:#ae81ff">7</span>, OUTPUT);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>()
+{
+  digitalWrite(<span style="color:#ae81ff">7</span>, HIGH);
+  delay(<span style="color:#ae81ff">500</span>);
+  digitalWrite(<span style="color:#ae81ff">7</span>, LOW);
+  delay(<span style="color:#ae81ff">500</span>);
+}</code></pre></div>
+<p>This snippet of C code is wrapped by the <strong>IDE</strong> into a complete C program. Through the tool chain that is applied a lot of <strong>magic</strong> happens that hides certain more complex aspects from the programmer. Writing the same program in bare metal C for the Arduino is a bit less aesthetic.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;avr/io.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#define HEARTBEAT_LED 7
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">int</span> i, j;
+
+  <span style="color:#75715e">/* setup */</span>
+  DDRD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED);
+
+  <span style="color:#75715e">/*loop*/</span> <span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span> (;;) {
+    PORTD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED);
+    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
+    PORTD <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED);
+    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
+  }
+ 
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+
+<div class="notices note" ><p>The C-file above can be found in the Virtual Machine as <strong>example1.c</strong></p>
+</div>
+
+
+<p>A number of things should be pointed out.</p>
+
+<ol>
+<li>Addresses and bit positions have to be known up front. these are defined in the <strong>io.h</strong> header file. If this file would not exist the addresses can be found in the datasheet.</li>
+<li>The &ldquo;Setup and Loop&rdquo;-function approach can be mimicked, but this is not required.</li>
+<li>The <strong>delay(x)</strong> function is missing, but this will be addressed later.</li>
+</ol>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/ch2-interrupts/" title="2: Interrupts"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1580915216"></script>
+    <script src="/js/perfect-scrollbar.min.js?1580915216"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1580915216"></script>
+    <script src="/js/jquery.sticky.js?1580915216"></script>
+    <script src="/js/featherlight.min.js?1580915216"></script>
+    <script src="/js/highlight.pack.js?1580915216"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1580915216"></script>
+    <script src="/js/learn.js?1580915216"></script>
+    <script src="/js/hugo-learn.js?1580915216"></script>
+
+    <link href="/mermaid/mermaid.css?1580915216" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1580915216"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

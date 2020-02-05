@@ -35,6 +35,6 @@ The most crucial resource is disk space. The virtual machine image is **2.4 GB**
 
 1. [WINDOWS] The screen looks very interlaced ()
   * Settings > Display
-    * Graphics Controller VBoxVGA-> VMSVGA
+    * Graphics Controller VBoxVGA -> VMSVGA
 
 

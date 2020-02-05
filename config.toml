@@ -1,6 +1,6 @@
 languageCode = "en-uk"
 title = "Operating Systems and C"
-#baseurl = "http://192.168.1.184/osc"
+baseurl = "https://kuleuven-diepenbeek.github.io/osc-course/"
 
 theme = "hugo-theme-learn"
 publishDir = "docs"

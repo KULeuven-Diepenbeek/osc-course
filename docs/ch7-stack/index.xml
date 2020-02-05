@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>7: The Stack &amp; The Heap on Operating Systems and C</title>
-    <link>/ch7-stack/</link>
+    <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/</link>
     <description>Recent content in 7: The Stack &amp; The Heap on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
     
-	<atom:link href="/ch7-stack/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>7.1: The Stack &amp; the Heap</title>
-      <link>/ch7-stack/stackvsheap/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/stackvsheap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch7-stack/stackvsheap/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/stackvsheap/</guid>
       <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:   text Read-only, fixed size. Contains executable instructions.   data Can be modified. Contains global or static variables that are initialized, such as static int i = 5;.</description>
     </item>
     
     <item>
       <title>7.2: Inspecting memory regions</title>
-      <link>/ch7-stack/inspection-labs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/inspection-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch7-stack/inspection-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/inspection-labs/</guid>
       <description>1. No malloc, no heap Let&amp;rsquo;s look at memory regions of a process that does not call malloc(). This means we will not use the heap just yet. Compile the following code:
 #include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;stdio.h&amp;gt; int main() { getchar(); // breaks process until char input  return 0; } To explore the above example, we will introduce getchar() before ending the main() loop, so the program pauses and gives us a change to look under the hood.</description>
     </item>

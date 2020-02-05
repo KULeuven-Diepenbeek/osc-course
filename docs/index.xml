@@ -2,51 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Operating Systems and C</title>
-    <link>/</link>
+    <link>https://kuleuven-diepenbeek.github.io/osc-course/</link>
     <description>Recent content on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>1.1: The C programming language</title>
-      <link>/ch1-c/intro/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/intro/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</guid>
       <description>The C language is a programming language developed in the &amp;lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
 C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types. There is little declarative to it, compared to other higher level languages.</description>
     </item>
     
     <item>
       <title>2.1 Arduino UNO</title>
-      <link>/ch2-interrupts/theory1_arduino/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch2-interrupts/theory1_arduino/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
   An Arduino UNO   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
       <title>4.1: The Easy Way: IDEs</title>
-      <link>/ch4-debugging/debugging-ide/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-ide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch4-debugging/debugging-ide/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-ide/</guid>
       <description>1. The easy way: Debugging using an IDE Arguably one of the better integrated C/C++ IDEs out there is CLion, a toolkit from Jetbrains based on the IDEA platform you all know from IntelliJ. It has exactly the same tools and capabilities but is fully geared towards C and C++. Cross-compiling and toolchain setup is also very easy using CLion. The Figure below is a screen capture of CLion showcasing it&amp;rsquo;s integrated unit testing capabilities which we will expand upon in the coming sections.</description>
     </item>
     
     <item>
       <title>6.1: Task management</title>
-      <link>/ch6-tasks/tasks/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch6-tasks/tasks/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks/</guid>
       <description>3.1 Task management One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
 3.1.1 Got task ? TODO: Uniformly style definitions ?
  By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course a basic program can be divided in multiple segments:</description>
@@ -54,47 +54,47 @@ C is an imperative programming language. You will notice this when writing some 
     
     <item>
       <title>7.1: The Stack &amp; the Heap</title>
-      <link>/ch7-stack/stackvsheap/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/stackvsheap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch7-stack/stackvsheap/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/stackvsheap/</guid>
       <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:   text Read-only, fixed size. Contains executable instructions.   data Can be modified. Contains global or static variables that are initialized, such as static int i = 5;.</description>
     </item>
     
     <item>
       <title>9.1: Capita Selecta</title>
-      <link>/ch9-capitaselecta/capita-selecta/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-capitaselecta/capita-selecta/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch9-capitaselecta/capita-selecta/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-capitaselecta/capita-selecta/</guid>
       <description> </description>
     </item>
     
     <item>
       <title>To Be Announced!</title>
-      <link>/exercises/tba/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tba/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/exercises/tba/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tba/</guid>
       <description>Exercises will be made available in this directory, as will be announced in the labs.</description>
     </item>
     
     <item>
       <title>1.2: String Manipulation</title>
-      <link>/ch1-c/intro-labs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/intro-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</guid>
       <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them! (img src)
 1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
     </item>
     
     <item>
       <title>1.3: Creating order: Structures</title>
-      <link>/ch1-c/structs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/structs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs/</guid>
       <description>Structs The only way to structure data in C is using the struct keyword:
 struct Person { int age; int gender; // no bool, remember?  char name[100]; // do not forget to add a size } We can use this structure to assign values like this:
 struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &amp;#34;Jaak Trekhaak&amp;#34;; - this is too easy - won&amp;#39;t work strcpy(jaak.name, &amp;#34;Jaak Trekhaak&amp;#34;); // include &amp;lt;string.</description>
@@ -102,58 +102,58 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
     
     <item>
       <title>2.2: Bare metal Arduino</title>
-      <link>/ch2-interrupts/lab1_arduino-bm/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch2-interrupts/lab1_arduino-bm/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</guid>
       <description>When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
   image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under ex1.c. The required setup on the breadboard should look something like this:</description>
     </item>
     
     <item>
       <title>4.2: The Hard Way: GDB</title>
-      <link>/ch4-debugging/debugging-gdb/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch4-debugging/debugging-gdb/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</guid>
       <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.</description>
     </item>
     
     <item>
       <title>6.2: Task management labs</title>
-      <link>/ch6-tasks/tasks-lab/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks-lab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch6-tasks/tasks-lab/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks-lab/</guid>
       <description> 3.1 Task management  3.1 Write a C-program that prints its own PID on the screen. 3.2 Write a C-program that spawns another process. Both parent and child processes announce their existence (through a printf) and their PIDs. 3.x Write a C-program that creates 4 child processes  every of the childeren checks which numbes (&amp;lt;10k) are prime every child reports only numbers that are prime, together with its PID   </description>
     </item>
     
     <item>
       <title>7.2: Inspecting memory regions</title>
-      <link>/ch7-stack/inspection-labs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/inspection-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch7-stack/inspection-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/inspection-labs/</guid>
       <description>1. No malloc, no heap Let&amp;rsquo;s look at memory regions of a process that does not call malloc(). This means we will not use the heap just yet. Compile the following code:
 #include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;stdio.h&amp;gt; int main() { getchar(); // breaks process until char input  return 0; } To explore the above example, we will introduce getchar() before ending the main() loop, so the program pauses and gives us a change to look under the hood.</description>
     </item>
     
     <item>
       <title>2.3 The timer</title>
-      <link>/ch2-interrupts/theory2_timer/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch2-interrupts/theory2_timer/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</guid>
       <description>With our sleeves rolled up and dirt all the way up to our elbows, it&amp;rsquo;s time to grab a coffee and do so reading/studying again. In this section interrupts will be introduced through the use of a timer.
 A lot of applications that are built using an Arduino need some sense of time. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.</description>
     </item>
     
     <item>
       <title>3.1: Pointers and arrays</title>
-      <link>/ch3-pointers/pointers/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch3-pointers/pointers/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</guid>
       <description>In the schematic examples below, the following concepts can be explicitly distinguished:
  The name of a variable The value of a variable  And the following implicitly:
  The type of a variable The adres of a variable  The type of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value.</description>
@@ -161,98 +161,98 @@ A lot of applications that are built using an Arduino need some sense of time. A
     
     <item>
       <title>4.3: The Middle Way: TDD</title>
-      <link>/ch4-debugging/testing/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch4-debugging/testing/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</guid>
       <description>Test-Driven Development: Google Test A concept you learned to love in the Software Engineering Skills course.
 It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.</description>
     </item>
     
     <item>
       <title>6.3: Inter-task communication</title>
-      <link>/ch6-tasks/intertasks/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch6-tasks/intertasks/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</guid>
       <description>What&amp;rsquo;s in a task ? Up until this point a process and a task were used interchangibly. However, a better distinction is to be made. A task is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a thread.</description>
     </item>
     
     <item>
       <title>1.4: Structs</title>
-      <link>/ch1-c/structs-labs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/structs-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them! (img src)
 2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen. An orc has the following properties (both simple numbers, between 1 and 10, use rand() from stdlib):</description>
     </item>
     
     <item>
       <title>2.4: Launch that rocket !!</title>
-      <link>/ch2-interrupts/lab2_rocketlaunch/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch2-interrupts/lab2_rocketlaunch/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</guid>
       <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:  
 Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
     <item>
       <title>3.2: The Ancient Library</title>
-      <link>/ch3-pointers/lab/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch3-pointers/lab/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
  1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>
       <title>6.4: Inter-task labs</title>
-      <link>/ch6-tasks/intertasks-lab/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks-lab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch6-tasks/intertasks-lab/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks-lab/</guid>
       <description> Inter-task communication  4.1 Write a C-program that spawns another thread. Both parent and child threads announce their existence (through a printf) and their PIDs.  </description>
     </item>
     
     <item>
       <title>1.5: C Ecosystems</title>
-      <link>/ch1-c/ecosystems/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/ecosystems/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</guid>
       <description>Separation of concerns: functions in different C files To make the division clearer, we prepare the following C code, split into different files:
 // hello.c char* hello() { return &amp;#34;heykes&amp;#34;; } // main.c #include &amp;lt;printf.h&amp;gt;int main() { printf(&amp;#34;%s&amp;#34;, hello()); return 0; } The main function has no knowledge of hello() because it lives in a different source file. This will be fine if we link the machine code together after compiling.</description>
     </item>
     
     <item>
       <title>2.5 The internals of interrupts</title>
-      <link>/ch2-interrupts/theory3_interrupt/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch2-interrupts/theory3_interrupt/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</guid>
       <description>The internals Now that you have an understanding of how interrupts work, let&amp;rsquo;s dive a bit deeper into the interal workings.
 The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding wire goes high. This makes one (or more) bits of this interrupt vector high. This triggers the internal Interrupt unit. The image below shows the available interrupts for the AT Mega.</description>
     </item>
     
     <item>
       <title>5.1: Intro to OS using Linux</title>
-      <link>/ch5-introos/intro-os/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch5-introos/intro-os/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</guid>
       <description>2.1 What is an OS and Why should we use one ? In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ?
 If more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !</description>
     </item>
     
     <item>
       <title>1.6: Splitting up Code</title>
-      <link>/ch1-c/ecosystems-labs/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch1-c/ecosystems-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</guid>
       <description>Building with Makefiles It is time to split up our Orc exercise code into different parts:
 mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  graph TD E{Executable} A[main.c] AAmain.o] B[orcs.c] BBorcs.o] D[orcs.h] E -- AA E -- BB AA -- A AA -- D BB -- B BB -- D  Create four different files:
  orcs.h - this is where your struct definition resides. orcs.c - this is where your methods related to orcs reside.</description>
@@ -260,28 +260,28 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
     
     <item>
       <title>8.1: Memory management</title>
-      <link>/ch8-memory/memory/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-memory/memory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/ch8-memory/memory/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-memory/memory/</guid>
       <description> </description>
     </item>
     
     <item>
       <title></title>
-      <link>/color_palette/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/color_palette/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/color_palette/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/color_palette/</guid>
       <description>Color palette by Paletton.com /* Palette color codes */ /* Feel free to copy&amp;paste color codes to your application */ .primary-1 { background-color: #89C9FE } .primary-2 { background-color: #5CB5FF } .primary-0 { background-color: #33A2FF } .primary-3 { background-color: #0E92FF } .primary-4 { background-color: #0186F5 } .secondary-1-1 { background-color: #9593FE } .secondary-1-2 { background-color: #6D6AFF } .secondary-1-0 { background-color: #4844FF } .secondary-1-3 { background-color: #231FFF } .secondary-1-4 { background-color: #0602F6 } .</description>
     </item>
     
     <item>
       <title>1. Recommended reading</title>
-      <link>/appendix/reading/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/appendix/reading/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</guid>
       <description>Operating Systems Operating System Concepts  Another defining moment in the evolution of operating systems Small footprint operating systems, such as those driving the handheld devices that the baby dinosaurs are using on the cover, are just one of the cutting-edge applications you&amp;rsquo;ll find in Silberschatz, Galvin, and Gagne&amp;rsquo;s Operating System Concepts, Seventh Edition.
  Website: os-book.com
 Programming in C The (Ansi) C Programming Language  This book is meant to help the reader learn how to program in C.</description>
@@ -289,20 +289,20 @@ Programming in C The (Ansi) C Programming Language  This book is meant to help t
     
     <item>
       <title>2. Installation Instructions</title>
-      <link>/appendix/installing/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/appendix/installing/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</guid>
       <description>The exercises for this course are to be done on a Linux machine. Because it is not expected that you reinstall your machines (or prepare them for dual boot) there is a virtual machine prepared for you 😃. This virtual machine runs Bodhi which is a lightweight linux distribution that is based on Ubuntu 18.04 LTS.
 System Requirements The most crucial resource is disk space. The virtual machine image is 2.</description>
     </item>
     
     <item>
       <title>Cheat sheet</title>
-      <link>/appendix/cheat_sheet/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>/appendix/cheat_sheet/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</guid>
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
 Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;command -h&amp;rdquo;, &amp;ldquo;man command&amp;rdquo;, or even google the manpage on Google.
 Navigation    command goal     cd change directory   ls list (show content of current folder)    CLI tools    command goal     rm remove a file   touch create a file   grep search for content in a file   vi powerful editor with a steep learning curve (FYI: exiting is through: &amp;ldquo;:q!</description>

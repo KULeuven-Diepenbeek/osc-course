@@ -9,13 +9,10 @@ weight: 98
 
 # Exercises
 
-This part contains exercises for students to complete and return to the teaching staff. These will be graded and make up for a portion of the total grading of this course. Each week, new exercises will be made available, so be sure to check out this section now and then. 
+This part contains exercises for students to complete and return to the teaching staff. These will be graded and make up for a portion of the total grading of this course. Every few weeks, new exercises will be made available, so be sure to check out this section now and then. 
 
 #### Submitting your exercises
 
-Instructions on how to submit
+Exercises can be submitted via [Toledo](https://toledo.kuleuven.be/portal/), when _assignments_ are available on the platform. 
 
-#### Deadlines and rules
-
-More on how this works. Toledo?
-
+**Deadlines** are also visible on the assignment page via Toledo. Usually, when instructors announce the exercise that has to be submitted, the deadline will be in _that same week_, on friday, at 12H PM midnight. 

@@ -7,6 +7,10 @@
     filter: invert(100%);    
 }
 
+#chapter p {
+    text-align: justify;
+}
+
 div.ex {
     margin: 2rem 0;
     position: relative;

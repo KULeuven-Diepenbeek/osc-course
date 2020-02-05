@@ -116,8 +116,6 @@ Bringing everything together:
 <pre>
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-main.cpp
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-tests.cpp
-Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-
-gtest-main.cpp   gtest-main.o     gtest-tests.cpp  gtest-tests.o
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/libgtest.a $GTEST_DIR/build/libgtest_main.a
 Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
 [==========] Running 2 tests from 1 test case.

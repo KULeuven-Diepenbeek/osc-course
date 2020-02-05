@@ -5,7 +5,7 @@
 /* define the struct */
 typedef struct node {
   char value;
-  struct node * next;
+  struct node* next;
 } T_node;
 
 /* prototypes */

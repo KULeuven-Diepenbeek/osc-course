@@ -1,3 +1,7 @@
+---
+title: 'Virtual Machine notes'
+draft: true
+---
 
 ## Installing arduino tools on host
 * virtual box

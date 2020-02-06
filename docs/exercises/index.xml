@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>A. Exercises on Operating Systems and C</title>
+    <title>A. Exercises Assignments on Operating Systems and C</title>
     <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/</link>
-    <description>Recent content in A. Exercises on Operating Systems and C</description>
+    <description>Recent content in A. Exercises Assignments on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>

@@ -54,11 +54,11 @@ int main() {
 }
 ```
 
-{{<task>}}
+{{% task %}}
 Compile the above with `gcc -o fileio fileio.c`. <br/>
 Save some text in a file called "sup.txt", and execute the program with `./fileio`. <br/>
 Congratulations on your first compiled C program!
-{{</task>}}
+{{% /task %}}
 
 There are a lot of problems with this implementation: the buffer length is hardcoded and the memory has not been released. A `FileReader` Java class that does everything for you simply cannot be created. As you can see it's a lot more **low-level** work than Java's one-liners like `Files.readAllBytes`! C does not even have the keyword `new`. Ouch.
 
@@ -91,11 +91,11 @@ The `main()` function returns a number that determines whether or not your progr
 
 The "f" of printf stands for "formatting" as you can see in the example. See [Formatted output](https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html).
 
-{{<task>}}
+{{% task %}}
 Write a program that outputs the following: <br/>
 "pi is&nbsp;&nbsp;&nbsp;&nbsp;3.1415"<br/>
 Based on the floating-point variable pi with a value of `3.1415`. The output should end with a new line and contain a tab.
-{{</task>}}
+{{% /task %}}
 
 ### Use functions to structure code
 

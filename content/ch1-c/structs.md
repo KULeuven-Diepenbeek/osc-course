@@ -64,7 +64,7 @@ It looks a bit weird because there is no such thing as a magical variable named 
 
 {{<task>}}
 Compile and execute the above code. what happens when you comment out `jaak.is_old = &is_old;`?<br/>
-Implement another function with signature `int f(struct Person p)` that calls people old when they are called "Jaak". Look at the previous example on how to expand the struct to add a name property.
+Implement another function with signature `int scoff_at(struct Person p)` that calls people old when they are called "Jaak". Look at the previous example on how to expand the struct to add a name property.
 {{</task>}}
 
 #### Extra definitions
@@ -123,7 +123,7 @@ graph LR;
 
 To fix this, we need the use of **pointers**, as explained in [chapter two](/theory/c/chap2). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
 
-```java
+```c
 public static void increase(int i) {
     i++;
 }

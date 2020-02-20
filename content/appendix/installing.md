@@ -2,7 +2,7 @@
 title: '2. Installation Instructions'
 ---
 
-The exercises for this course are to be done on a **Linux** machine. Because it is not expected that you reinstall your machines (or prepare them for dual boot) there is a virtual machine prepared for you :smiley:. This virtual machine runs [Bodhi](https://www.bodhilinux.
+The exercises for this course are to be done on a **Linux** machine. Because it is not expected that you reinstall your machines (or prepare them for dual boot), there is a virtual machine prepared for you :smiley:. This virtual machine runs [Bodhi](https://www.bodhilinux.
 com/) which is a lightweight linux distribution that is based on Ubuntu 18.04 LTS.
 
 ## System Requirements
@@ -33,8 +33,14 @@ The most crucial resource is disk space. The virtual machine image is **2.4 GB**
 
 ## FAQ
 
-1. [WINDOWS] The screen looks very interlaced ()
+1. [WINDOWS] The screen looks very interlaced
   * Settings > Display
     * Graphics Controller VBoxVGA -> VMSVGA
-
-
+2. I want to change the keyboard layout!
+  * (https://www.bodhilinux.com/w/configuring-your-new-bodhi-system/ Go to Menu > Applications > System Tools > System Settings > Keyboard Layout to open the Keyboard Layout dialog box.  Click your language from the list and hit Apply Selected.)
+3. I want to be able to copy-and-paste text between my Host (my own computer) and the Guest (Bohdi Linux ISO)!
+  * This is not possible without the installation of an additional package: https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745
+4. I want to install something else such as my own favorite editor!
+  * `sudo apt-get install [package]` (root password is XXXXXX)
+5. I want to change the resolution of the VirtualBox display
+  * View -> fit to screen, or View -> change resolution to -> pick one. 

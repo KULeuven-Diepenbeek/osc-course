@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>2: Interrupts on Operating Systems and C</title>
@@ -29,7 +29,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</guid>
       <description>When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
-  image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under ex1.c. The required setup on the breadboard should look something like this:</description>
+  image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under /home/osc/osc-exercises/ch2_interrupts/example1.c. The required setup on the breadboard should look something like this:</description>
     </item>
     
     <item>

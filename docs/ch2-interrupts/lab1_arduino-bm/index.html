@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>2.2: Bare metal Arduino :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582200408" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582200408" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582200408" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582200408" rel="stylesheet">
-    <link href="../../css/theme.css?1582200408" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582200408" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582538359" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582538359" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582538359" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582538359" rel="stylesheet">
+    <link href="../../css/theme.css?1582538359" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582538359" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582200408" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582538359" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582200408"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582538359"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582200408"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582200408"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582538359"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582538359"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582200408"></script>
+<script type="text/javascript" src="../../js/search.js?1582538359"></script>
 
     
   </div>
@@ -1127,23 +1127,13 @@ window.MathJax = {
 
 <h2 id="first-things-first-a-beating-heart">First things first &hellip; a beating heart</h2>
 
-<p>Compile the code below and flash it on the Arduino, both of which can be done through the <strong>Makefile</strong>. This code can be found under <strong>ex1.c</strong>. The required setup on the breadboard should look something like this:</p>
+<p>Compile the code below and flash it on the Arduino, both of which can be done through the <strong>Makefile</strong>. This code can be found under <strong>/home/osc/osc-exercises/ch2_interrupts/example1.c</strong>. The required setup on the breadboard should look something like this:</p>
 
 <figure>
     <img src="../../img/tinkercad/tinkercad_example1.png"/> 
 </figure>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;avr/io.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">/* BIT MANIPULATION MACROS */</span>
-<span style="color:#75715e">#define BIT(x) (0x01 &lt;&lt; (x%8))
-</span><span style="color:#75715e">#define LONGBIT(x) ((unsigned long)0x00000001 &lt;&lt; (x))
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#define bit_get(p,m) ((p) &amp; (m))
-</span><span style="color:#75715e">#define bit_set(p,m) ((p) |= (BIT(m)))
-</span><span style="color:#75715e">#define bit_clear(p,m) ((p) &amp;= ~(BIT(m)))
-</span><span style="color:#75715e">#define bit_toggle(p,m) ((p) ^= (BIT(m)))
-</span><span style="color:#75715e">#define bit_write(c,p,m) (c ? bit_set(p,m) : bit_clear(p,m))
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">/* PHYSICAL CONNECTIONS */</span>
 <span style="color:#75715e">#define HEARTBEAT_LED 7
@@ -1152,20 +1142,18 @@ window.MathJax = {
   <span style="color:#66d9ef">int</span> i,j;
   
   <span style="color:#75715e">// set data directions
-</span><span style="color:#75715e"></span>  bit_set(DDRD, HEARTBEAT_LED);
+</span><span style="color:#75715e"></span>  DDRD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED)
 
   <span style="color:#75715e">/*loop*/</span> <span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span> (;;) {
-    bit_set(PORTD, HEARTBEAT_LED); <span style="color:#75715e">// LED off
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
-    bit_clear(PORTD, HEARTBEAT_LED);  <span style="color:#75715e">// LED off
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
+    PORTD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED);
+    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
+    PORTD <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> HEARTBEAT_LED);
+    <span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;j<span style="color:#f92672">++</span>) <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1600</span>;i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">asm</span>(<span style="color:#e6db74">&#34;nop&#34;</span>);
   }
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p><div class="todo">
-  <p>TODO: complete the correct path inside the VM</p>
-</div>.</p>
+<p>To compile these example files, simply use <code>make</code>. The Makefile can also be used to flash the binary to the arduino: <code>make flash t=filename</code>. The <em>filename</em> should be replaced with the actual filename of the binary.</p>
 
 <h4 id="what-is-happening-in-this-code">What is happening in this code ?</h4>
 
@@ -1932,19 +1920,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582200408"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582200408"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582200408"></script>
-    <script src="../../js/jquery.sticky.js?1582200408"></script>
-    <script src="../../js/featherlight.min.js?1582200408"></script>
-    <script src="../../js/highlight.pack.js?1582200408"></script>
+    <script src="../../js/clipboard.min.js?1582538359"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582538359"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582538359"></script>
+    <script src="../../js/jquery.sticky.js?1582538359"></script>
+    <script src="../../js/featherlight.min.js?1582538359"></script>
+    <script src="../../js/highlight.pack.js?1582538359"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582200408"></script>
-    <script src="../../js/learn.js?1582200408"></script>
-    <script src="../../js/hugo-learn.js?1582200408"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582538359"></script>
+    <script src="../../js/learn.js?1582538359"></script>
+    <script src="../../js/hugo-learn.js?1582538359"></script>
 
-    <link href="../../mermaid/mermaid.css?1582200408" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582200408"></script>
+    <link href="../../mermaid/mermaid.css?1582538359" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582538359"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

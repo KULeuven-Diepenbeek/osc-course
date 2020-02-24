@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>7.1: The Stack &amp; the Heap :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582200408" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582200408" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582200408" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582200408" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582200408" rel="stylesheet">
-    <link href="../../css/theme.css?1582200408" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582200408" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582538359" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582538359" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582538359" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582538359" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582538359" rel="stylesheet">
+    <link href="../../css/theme.css?1582538359" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582538359" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582200408" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582538359" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582200408"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582538359"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582200408"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582200408"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582538359"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582538359"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582200408"></script>
+<script type="text/javascript" src="../../js/search.js?1582538359"></script>
 
     
   </div>
@@ -1311,12 +1311,12 @@ r <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</spa
 <h3 id="garbage-collection-not-happening-in-c">Garbage Collection - not happening in C&hellip;</h3>
 
 <p>The above mistakes are easily made if you are used to Java:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#960050;background-color:#1e0010">void foo</span>() {
-    <span style="color:#960050;background-color:#1e0010">Animal cow </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() {
+    Animal <span style="color:#a6e22e">cow</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal();
     cow.<span style="color:#a6e22e">eat</span>();
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>}
-<span style="color:#960050;background-color:#1e0010">public static void main</span>(<span style="color:#960050;background-color:#1e0010">String[] args</span>) {
+<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] <span style="color:#a6e22e">args</span>) {
     foo();
     <span style="color:#75715e">// cow instances are cleaned up for you...
 </span><span style="color:#75715e"></span>}</code></pre></div>
@@ -2164,19 +2164,19 @@ main:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582200408"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582200408"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582200408"></script>
-    <script src="../../js/jquery.sticky.js?1582200408"></script>
-    <script src="../../js/featherlight.min.js?1582200408"></script>
-    <script src="../../js/highlight.pack.js?1582200408"></script>
+    <script src="../../js/clipboard.min.js?1582538360"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582538360"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582538360"></script>
+    <script src="../../js/jquery.sticky.js?1582538360"></script>
+    <script src="../../js/featherlight.min.js?1582538360"></script>
+    <script src="../../js/highlight.pack.js?1582538360"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582200408"></script>
-    <script src="../../js/learn.js?1582200408"></script>
-    <script src="../../js/hugo-learn.js?1582200408"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582538360"></script>
+    <script src="../../js/learn.js?1582538360"></script>
+    <script src="../../js/hugo-learn.js?1582538360"></script>
 
-    <link href="../../mermaid/mermaid.css?1582200408" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582200408"></script>
+    <link href="../../mermaid/mermaid.css?1582538360" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582538360"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

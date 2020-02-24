@@ -4,7 +4,7 @@ BROWSER=/usr/bin/google-chrome-stable %u
 HUGO=/usr/local/bin/hugo
 SERVER_OPTIONS=-D -F
 
-all: localserver
+all: server
 
 publish:
 	rm -Rf docs

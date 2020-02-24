@@ -48,8 +48,6 @@ To determine the frequency at which the counter operates a quick visit to the da
 To introduce a clock, a {{< link name="crystal oscillator" url="https://en.wikipedia.org/wiki/Crystal_oscillator" >}} is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often referred to as the _clock speed_. Given that frequency, and the value of the pre-scaler, clock frequency at which the counter operates can be calculated.
 
 
-{{< todo message="die inline mathjax sucks" >}}
-
 {{% mathjax %}}
 f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15'625 Hz
 {{% /mathjax %}}
@@ -140,7 +138,7 @@ int main(void) {
 ```
 
 {{% notice note %}}
-The C-file above can be found in the Virtual Machine as **example2.c**
+The C-file above can be found in the Virtual Machine as **/home/osc/osc-exercises/ch2_interrupts/example2.c**
 {{% /notice %}}
 
 {{% task %}}

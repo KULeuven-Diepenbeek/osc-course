@@ -32,15 +32,14 @@ When looking at the image above, vector number 14 (or 13, if we start counting a
 What happens if we have an in(-terrupt)ception, read as: an interrupt while an interrupt is being handled ?
 {{% /task %}}
 
-As was stated ealier there is a general interrupt flag. ...
+<!--As was stated ealier there is a general interrupt flag. ...
 
 **CONTINUE HERE!!!!!!!!!!!!!!!**
 
 {{< todo message="order" >}}
 
 {{< todo message="nested interrupts are possible, though it requires user software to re-enable interrupts" >}}
-
-## Good coding practice
+-->
 
 ## Take aways
 After studying this chapter you should:
@@ -50,8 +49,7 @@ After studying this chapter you should:
 * understand how timers work
 * understand what Interrupts are
 
-## "Things" to "think" on
-* 
+
 
 
 ## Useful links:

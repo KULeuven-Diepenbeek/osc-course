@@ -37,7 +37,6 @@ int main(void) {
 
   return 0;
 }
-
 ```
 
 To compile these example files, simply use `make`. The Makefile can also be used to flash the binary to the arduino: `make flash t=filename`. The *filename* should be replaced with the actual filename of the binary.

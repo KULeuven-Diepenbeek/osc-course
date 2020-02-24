@@ -39,6 +39,7 @@ After the launch button is pressed, a countdown is started. The countdown starts
 {{< /task >}}
 
 
+
+{{% notice note %}}
 Pull-up resistor: https://www.youtube.com/watch?v=wxjerCHCEMg
-
-
+{{% /notice %}}

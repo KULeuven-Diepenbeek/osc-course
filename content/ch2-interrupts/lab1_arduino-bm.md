@@ -10,25 +10,14 @@ When the going gets tough, the tough get going. Sometimes you need to drop the m
 
 
 
-
 ## First things first ... a beating heart
 
-Compile the code below and flash it on the Arduino, both of which can be done through the **Makefile**. This code can be found under **ex1.c**. The required setup on the breadboard should look something like this:
+Compile the code below and flash it on the Arduino, both of which can be done through the **Makefile**. This code can be found under **/home/osc/osc-exercises/ch2_interrupts/example1.c**. The required setup on the breadboard should look something like this:
 
 {{<figure src="/img/tinkercad/tinkercad_example1.png">}}
 
 ```C
 #include <avr/io.h>
-
-/* BIT MANIPULATION MACROS */
-#define BIT(x) (0x01 << (x%8))
-#define LONGBIT(x) ((unsigned long)0x00000001 << (x))
-
-#define bit_get(p,m) ((p) & (m))
-#define bit_set(p,m) ((p) |= (BIT(m)))
-#define bit_clear(p,m) ((p) &= ~(BIT(m)))
-#define bit_toggle(p,m) ((p) ^= (BIT(m)))
-#define bit_write(c,p,m) (c ? bit_set(p,m) : bit_clear(p,m))
 
 /* PHYSICAL CONNECTIONS */
 #define HEARTBEAT_LED 7
@@ -37,12 +26,12 @@ int main(void) {
   int i,j;
   
   // set data directions
-  bit_set(DDRD, HEARTBEAT_LED);
+  DDRD |= (1 << HEARTBEAT_LED)
 
   /*loop*/ for/*ever*/ (;;) {
-    bit_set(PORTD, HEARTBEAT_LED); // LED off
+    PORTD |= (1 << HEARTBEAT_LED);
     for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
-    bit_clear(PORTD, HEARTBEAT_LED);  // LED off
+    PORTD &= ~(1 << HEARTBEAT_LED);
     for(j=0;j<1600;j++) for(i=0;i<1600;i++) asm("nop");
   }
 
@@ -51,7 +40,8 @@ int main(void) {
 
 ```
 
-{{< todo message="complete the correct path inside the VM" >}}. 
+To compile these example files, simply use `make`. The Makefile can also be used to flash the binary to the arduino: `make flash t=filename`. The *filename* should be replaced with the actual filename of the binary.
+
 
 #### What is happening in this code ? 
 

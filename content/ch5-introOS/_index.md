@@ -7,5 +7,9 @@ weight: 5
 
 ### Chapter 5
 
-# Introduction to Operating Systems
+5.1: Intro to OS using Linux
 
+  * Types of operating systems
+  * Linux
+  * Got Root ?
+  * On files and such

@@ -1,7 +1,7 @@
 ---
 title: '5.1: Intro to OS using Linux'
 pre: "<i class='fas fa-book'></i> "
-weight: 5
+weight: 1
 ---
 
 <!--
@@ -12,7 +12,7 @@ weight: 5
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
-## 2.1 What is an OS and Why should we use one ?
+## 5.1 What is an OS and Why should we use one ?
 
 In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ? 
 
@@ -52,13 +52,12 @@ Different OSes exist for different computing platforms.
         <td><h4>Embedded systems</h4>Embedded systems come in many flavours, colours and sizes. Typically, these devices are smaller and have fewer features than the laptops and co do. It goes without saying that the OSes that run on embedded systems are different to, or at least ported from, the other OSes. A number of OSes for embedded systems are: Android, FreeRTOS, Symbian, mbedOS, and brickOS.</td></tr>
 </table>
 
-{{< todo message="Uniformly style the polls ?" >}}
 
 {{% task %}}
 Which operating system is the best ?
 {{% /task %}}
 
-## 2.2 Types of operating systems
+### Types of operating systems
 
 The image above showed that the OS places itself between general software and hardware. In the most inner core of an OS resides the kernel. This is the heart of the OS. Depending on the type of the kernel, a typical classification of OSes can be made
 
@@ -82,9 +81,9 @@ In the definition the Microkernel it states that it runs the **bare minimum** of
 * **inter-process communication**: handles what is says: the communication between different processes. More on processes in the next chapter.
 * **address space management**: the is only one (memory-) world. How this world is shared between tasks is dictated by this mechanism.
 
-These three mechanism form the core task of an OS an will be elaborated on in the remainder of this course.
+These three mechanism form the core task of an OS and will be elaborated on in the remainder of this course.
 
-## 2.3 Linux
+## Linux
 
 Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions such as Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn: **Linus Torvalds**. 
 
@@ -95,7 +94,8 @@ The Linux kernel almost never comes on its own but is packaged in a distribution
 
 If the figure above doesn't contain a distribution to your liking you can always DIY it: [Linux from scratch](http://www.linuxfromscratch.org/). Happy compiling !!
 
-One of the aspects in which these distro's differ is the packaging system with which it's distributed. These packaging management systems allow you to install/uninstall/... your software. The people that are making distro's take source code from main software packets and compile them using the distro's dependencies. This is then packaged and made available for package managers to install from. Typical examples of package mangers are:
+
+One of the aspects in which these distro's differ is the packaging system with which it's distributed. These packaging systems allow you to install/uninstall/... your software. The people that are making distro's take source code from main software packets and compile them using the distro's dependencies. This is then packaged and made available for package managers to install from. Typical examples of package mangers are:
 
 | Name | Extension | Typical distro's |
 |---|---|---|
@@ -103,3 +103,33 @@ One of the aspects in which these distro's differ is the packaging system with w
 | RPM | .rpm | Red Hat, Fedora, and CentOS a.o. |
 | packman | .pkg.tar.xz | Arch Linux, FeLi Linux a.o. |
 
+{{% notice note %}}
+If you search for Bodhi in the image above, you'll learn that Bodhi is based on Ubuntu, which is based on Debian. Therefore APT (Advanced Package Tool) is used.
+{{% /notice %}}
+
+{{% task %}}
+1. Use apt to see a list of the installed packages in the VM
+2. Update the list of packages in the VM
+3. Upgrade all packages to the most recently available version
+4. Install **frozen-bubble** in the VM
+{{% /task %}}
+
+
+## Got Root ?
+Most operating system allow for multiple users to share one system. Like in most OS-es linux also has an **administrative** user, or super-user: **root**. This privileged user is not to be used when doing day-to-day work. However, you are able to login as a root user and do everything you like as this user. Again: **this is strongly discouraged !!** 
+
+A better way of approaching your day-to-day work on a Linux system is to use a standard user. Whenever you need a higher privilege-level, you can use **sudo**. This is a simple tool that allows regular user to execute certain commands as the root-user. The VM with this course is organised in this way.
+
+{{% figure src="https://imgs.xkcd.com/comics/sandwich.png" title="source: xkcd.com"%}}
+
+Every user that has a login on a Linux system automatically belongs to a **group**. Depending on the distribution, this group can have multiple names. On **Bodhi** a new group is created for every user that bares the same name.
+
+## On files and such
+On Linux, almost everything is a file. A file ... is a file. A directory ... is a file. A harddrive ... is a file. A UART port ... is a file. Every file is owned by one user. All other users' privileges are based on the **access permissions**.
+
+{{% figure src="/img/os/accesspermissions.png" title="Access permissions in an example folder"%}}
+
+The image above shows the content of a folder **example** this folder contains: 2 files, 2 directories, a *hidden* directory, and a *hidden* file. With *hidden* is meant that these files are not seen with a normal *ls*. To see these files the **-a** options has to be present.
+
+With the **-l** the *long listing* format is shown (as is seen in the image above). With this, the access permissions are shown in the first 10 characters of each line:
+{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: somewhere on the Internet, found through Google"%}}

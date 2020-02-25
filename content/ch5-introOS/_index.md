@@ -13,3 +13,5 @@ weight: 5
   * Linux
   * Got Root ?
   * On files and such
+
+5.2: (lab) Getting your CLI-feet wet

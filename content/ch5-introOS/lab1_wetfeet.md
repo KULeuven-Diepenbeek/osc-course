@@ -38,7 +38,7 @@ This 'lab' consists out of a list to small tasks that introduce you to the comma
   * one file contains the word "bamboozle"
   * find out which file contains this word
   * find out the line number on which the word occurs
-2. **search** the man page for the meaning of "-x"
+2. **search** the man page for the meaning of "-x" in the command *ls*
 3. display the current date and time
 4. execute three commands, using the **enter** only once
   1. display the current date and time

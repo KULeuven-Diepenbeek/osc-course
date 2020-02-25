@@ -12,8 +12,6 @@ weight: 1
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
 
-## 5.1 What is an OS and Why should we use one ?
-
 In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ? 
 
 If more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: **Operating systems !!!**

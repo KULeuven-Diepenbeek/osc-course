@@ -1,7 +1,8 @@
 ---
 title: '6.4: Inter-task labs'
 pre: "<i class='fas fa-vial'></i> "
-weight: 4
+weight: 40
+draft: true
 ---
 
 ## Inter-task communication

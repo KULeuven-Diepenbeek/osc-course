@@ -1,5 +1,5 @@
 ---
-title: '6.2: Task management'
+title: '6.2: Processes'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---

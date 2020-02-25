@@ -15,3 +15,5 @@ weight: 6
     * Process state
     * Open files list
   * Creating processes
+
+6.2: (lab) Processes

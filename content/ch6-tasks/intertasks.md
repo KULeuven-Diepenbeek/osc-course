@@ -1,7 +1,8 @@
 ---
 title: '6.3: Inter-task communication'
 pre: "<i class='fas fa-book'></i> "
-weight: 3
+weight: 30
+draft: true
 ---
 <!--
 &laquo;&nbsp;[Back to Table of Contents](/)<br/>

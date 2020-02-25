@@ -7,10 +7,11 @@ weight: 6
 
 ### Chapter 6
 
-6.1: Task management
+6.1: Process management
 
-  * What's in a task ?
-  * Run task !
-  * Creating processes
+  * What's in a process ?
+  * Run process !
     * Process Control Block
     * Process state
+    * Open files list
+  * Creating processes

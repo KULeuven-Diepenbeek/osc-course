@@ -1,5 +1,5 @@
 ---
-title: '6.1: Task management'
+title: '6.1: Process management'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
@@ -7,7 +7,7 @@ weight: 1
 One of the three core tasks of an OS is the **management of tasks**. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
 
 
-## What's in a task ?
+## What's in a process ?
 
 By definition, a process is an instance of a program. As was dicussed in the "C-portion" of this course a basic program can be divided in multiple **segments**. When source code is compiled into a binary, these segments are *fixed*. 
 
@@ -52,7 +52,7 @@ This command shows the sizes of the sections that are discussed above. The text,
 
 OK, this makes sense :)
 
-## Run task !
+## Run process !
 
 By the time you're reading this part of the course, running the binary that was compiled above should be a walk in the park.
 

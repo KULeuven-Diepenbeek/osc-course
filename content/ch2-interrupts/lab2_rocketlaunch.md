@@ -8,7 +8,7 @@ weight: 4
 
 ## First task
 The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
-{{% figure src="/img/jo/drawio/timer_ovf.jpg" width="60%"%}}
+{{% figure src="/img/jo/timer_ovf.jpg" width="60%"%}}
 
 {{<task>}}
 Make one LED oscillate using the "Timer/Counter1 Overflow Interrupt"

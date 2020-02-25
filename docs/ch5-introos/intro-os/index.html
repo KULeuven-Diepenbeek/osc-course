@@ -12,20 +12,20 @@
     <title>5.1: Intro to OS using Linux :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582538360" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582538360" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582538360" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582538360" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582538360" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582538360" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582538360" rel="stylesheet">
-    <link href="../../css/theme.css?1582538360" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582538360" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582625397" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582625397" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582625397" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582625397" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582625397" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582625397" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582625397" rel="stylesheet">
+    <link href="../../css/theme.css?1582625397" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582625397" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582538360" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582625397" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582538360"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582625397"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582538360"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582538360"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582625397"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582625397"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582538360"></script>
+<script type="text/javascript" src="../../js/search.js?1582625397"></script>
 
     
   </div>
@@ -571,6 +571,25 @@ window.MathJax = {
 
             
           
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch5-introos/lab1_wetfeet/">
+        <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
         
         </ul>
               
@@ -610,9 +629,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Task management" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Process management" class="dd-item ">
         <a href="../../ch6-tasks/tasks/">
-        <i class='fas fa-book'></i> 6.1: Task management
+        <i class='fas fa-book'></i> 6.1: Process management
         
         </a>
     </li>
@@ -629,47 +648,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/tasks-lab/" title="6.2: Task management labs" class="dd-item ">
-        <a href="../../ch6-tasks/tasks-lab/">
-        <i class='fas fa-vial'></i> 6.2: Task management labs
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-      <li data-nav-id="/ch6-tasks/intertasks/" title="6.3: Inter-task communication" class="dd-item ">
-        <a href="../../ch6-tasks/intertasks/">
-        <i class='fas fa-book'></i> 6.3: Inter-task communication
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-      <li data-nav-id="/ch6-tasks/intertasks-lab/" title="6.4: Inter-task labs" class="dd-item ">
-        <a href="../../ch6-tasks/intertasks-lab/">
-        <i class='fas fa-vial'></i> 6.4: Inter-task labs
+      <li data-nav-id="/ch6-tasks/lab1_taskmgmt/" title="6.2: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_taskmgmt/">
+        <i class='fas fa-vial'></i> 6.2: Processes
         
         </a>
     </li>
@@ -1080,9 +1061,13 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#2-1-what-is-an-os-and-why-should-we-use-one">2.1 What is an OS and Why should we use one ?</a></li>
-<li><a href="#2-2-types-of-operating-systems">2.2 Types of operating systems</a></li>
-<li><a href="#2-3-linux">2.3 Linux</a></li>
+<li>
+<ul>
+<li><a href="#types-of-operating-systems">Types of operating systems</a></li>
+</ul></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#got-root">Got Root ?</a></li>
+<li><a href="#on-files-and-such">On files and such</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1118,8 +1103,6 @@ window.MathJax = {
 < !--
 &raquo;&nbsp;[Naar de labo opgave](#oef)
 -->
-
-<h2 id="2-1-what-is-an-os-and-why-should-we-use-one">2.1 What is an OS and Why should we use one ?</h2>
 
 <p>In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ?</p>
 
@@ -1177,10 +1160,6 @@ graph TD
         <td><h4>Embedded systems</h4>Embedded systems come in many flavours, colours and sizes. Typically, these devices are smaller and have fewer features than the laptops and co do. It goes without saying that the OSes that run on embedded systems are different to, or at least ported from, the other OSes. A number of OSes for embedded systems are: Android, FreeRTOS, Symbian, mbedOS, and brickOS.</td></tr>
 </table></p>
 
-<div class="todo">
-  <p>TODO: Uniformly style the polls ?</p>
-</div>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1189,7 +1168,7 @@ graph TD
 	</div>
 </div>
 
-<h2 id="2-2-types-of-operating-systems">2.2 Types of operating systems</h2>
+<h3 id="types-of-operating-systems">Types of operating systems</h3>
 
 <p>The image above showed that the OS places itself between general software and hardware. In the most inner core of an OS resides the kernel. This is the heart of the OS. Depending on the type of the kernel, a typical classification of OSes can be made</p>
 
@@ -1222,9 +1201,9 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
 <li><strong>address space management</strong>: the is only one (memory-) world. How this world is shared between tasks is dictated by this mechanism.</li>
 </ul>
 
-<p>These three mechanism form the core task of an OS an will be elaborated on in the remainder of this course.</p>
+<p>These three mechanism form the core task of an OS and will be elaborated on in the remainder of this course.</p>
 
-<h2 id="2-3-linux">2.3 Linux</h2>
+<h2 id="linux">Linux</h2>
 
 <p>Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions such as Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn: <strong>Linus Torvalds</strong>.</p>
 
@@ -1239,7 +1218,7 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
 
 <p>If the figure above doesn&rsquo;t contain a distribution to your liking you can always DIY it: <a href="http://www.linuxfromscratch.org/">Linux from scratch</a>. Happy compiling !!</p>
 
-<p>One of the aspects in which these distro&rsquo;s differ is the packaging system with which it&rsquo;s distributed. These packaging management systems allow you to install/uninstall/&hellip; your software. The people that are making distro&rsquo;s take source code from main software packets and compile them using the distro&rsquo;s dependencies. This is then packaged and made available for package managers to install from. Typical examples of package mangers are:</p>
+<p>One of the aspects in which these distro&rsquo;s differ is the packaging system with which it&rsquo;s distributed. These packaging systems allow you to install/uninstall/&hellip; your software. The people that are making distro&rsquo;s take source code from main software packets and compile them using the distro&rsquo;s dependencies. This is then packaged and made available for package managers to install from. Typical examples of package mangers are:</p>
 
 <table>
 <thead>
@@ -1270,6 +1249,57 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
 </tr>
 </tbody>
 </table>
+
+
+<div class="notices note" ><p>If you search for Bodhi in the image above, you&rsquo;ll learn that Bodhi is based on Ubuntu, which is based on Debian. Therefore APT (Advanced Package Tool) is used.</p>
+</div>
+
+
+
+<div class="ex">
+	<div class="inner">
+    	<ol>
+<li>Use apt to see a list of the installed packages in the VM</li>
+<li>Update the list of packages in the VM</li>
+<li>Upgrade all packages to the most recently available version</li>
+<li>Install <strong>frozen-bubble</strong> in the VM</li>
+</ol>
+
+	</div>
+</div>
+
+<h2 id="got-root">Got Root ?</h2>
+
+<p>Most operating system allow for multiple users to share one system. Like in most OS-es linux also has an <strong>administrative</strong> user, or super-user: <strong>root</strong>. This privileged user is not to be used when doing day-to-day work. However, you are able to login as a root user and do everything you like as this user. Again: <strong>this is strongly discouraged !!</strong></p>
+
+<p>A better way of approaching your day-to-day work on a Linux system is to use a standard user. Whenever you need a higher privilege-level, you can use <strong>sudo</strong>. This is a simple tool that allows regular user to execute certain commands as the root-user. The VM with this course is organised in this way.</p>
+
+<figure>
+    <img src="https://imgs.xkcd.com/comics/sandwich.png"/> <figcaption>
+            <h4>source: xkcd.com</h4>
+        </figcaption>
+</figure>
+
+<p>Every user that has a login on a Linux system automatically belongs to a <strong>group</strong>. Depending on the distribution, this group can have multiple names. On <strong>Bodhi</strong> a new group is created for every user that bares the same name.</p>
+
+<h2 id="on-files-and-such">On files and such</h2>
+
+<p>On Linux, almost everything is a file. A file &hellip; is a file. A directory &hellip; is a file. A harddrive &hellip; is a file. A UART port &hellip; is a file. Every file is owned by one user. All other users&rsquo; privileges are based on the <strong>access permissions</strong>.</p>
+
+<figure>
+    <img src="../../img/os/accesspermissions.png"/> <figcaption>
+            <h4>Access permissions in an example folder</h4>
+        </figcaption>
+</figure>
+
+<p>The image above shows the content of a folder <strong>example</strong> this folder contains: 2 files, 2 directories, a <em>hidden</em> directory, and a <em>hidden</em> file. With <em>hidden</em> is meant that these files are not seen with a normal <em>ls</em>. To see these files the <strong>-a</strong> options has to be present.</p>
+
+<p>With the <strong>-l</strong> the <em>long listing</em> format is shown (as is seen in the image above). With this, the access permissions are shown in the first 10 characters of each line:
+<figure>
+    <img src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg"/> <figcaption>
+            <h4>source: somewhere on the Internet, found through Google</h4>
+        </figcaption>
+</figure></p>
 
 
 <footer class=" footline" >
@@ -1657,37 +1687,24 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -1704,9 +1721,6 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -1963,7 +1977,7 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
 			<a class="nav nav-prev" href="../../ch5-introos/" title="5: Intro in OS"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch6-tasks/" title="6: Tasks" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1973,19 +1987,19 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582538360"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582538360"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582538360"></script>
-    <script src="../../js/jquery.sticky.js?1582538360"></script>
-    <script src="../../js/featherlight.min.js?1582538360"></script>
-    <script src="../../js/highlight.pack.js?1582538360"></script>
+    <script src="../../js/clipboard.min.js?1582625397"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582625397"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582625397"></script>
+    <script src="../../js/jquery.sticky.js?1582625397"></script>
+    <script src="../../js/featherlight.min.js?1582625397"></script>
+    <script src="../../js/highlight.pack.js?1582625397"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582538360"></script>
-    <script src="../../js/learn.js?1582538360"></script>
-    <script src="../../js/hugo-learn.js?1582538360"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582625397"></script>
+    <script src="../../js/learn.js?1582625397"></script>
+    <script src="../../js/hugo-learn.js?1582625397"></script>
 
-    <link href="../../mermaid/mermaid.css?1582538360" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582538360"></script>
+    <link href="../../mermaid/mermaid.css?1582625397" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582625397"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

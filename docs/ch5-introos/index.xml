@@ -18,8 +18,19 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</guid>
-      <description>2.1 What is an OS and Why should we use one ? In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ?
-If more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !</description>
+      <description>In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ?
+If more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !!!
+The image below shows the classic picture when introducing OSes.</description>
+    </item>
+    
+    <item>
+      <title>5.2: Getting your CLI-feet wet</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
+      <description>Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
+Navigation  figure out in which folder you are at the moment navigate to the root folder navigate to your home folder, using only 1 command make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create an empty file: empty.</description>
     </item>
     
   </channel>

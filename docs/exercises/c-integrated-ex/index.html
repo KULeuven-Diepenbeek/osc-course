@@ -12,20 +12,20 @@
     <title>1. Integrated C exercise :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582728502" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582728502" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582728502" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582728502" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582728502" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582728502" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582728502" rel="stylesheet">
-    <link href="../../css/theme.css?1582728502" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582728502" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582745756" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582745756" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582745756" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582745756" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582745756" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582745756" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582745756" rel="stylesheet">
+    <link href="../../css/theme.css?1582745756" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582745756" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582728502" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582745756" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582728502"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582745756"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582728502"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582728502"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582745756"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582745756"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582728502"></script>
+<script type="text/javascript" src="../../js/search.js?1582745756"></script>
 
     
   </div>
@@ -1145,10 +1145,10 @@ window.MathJax = {
 <h3 id="3-refer-to-previous-objects">3. Refer to previous objects</h3>
 
 <p>Extend the structure in such a way that not only a pointer to the next value is available, but also to the previous one. Currently, the structure looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> node {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">struct</span> node {
   <span style="color:#66d9ef">char</span> value;
   <span style="color:#66d9ef">struct</span> node<span style="color:#f92672">*</span> next;
-} T_node;</code></pre></div>
+};</code></pre></div>
 <p>A third variable should be added called <code>previous</code>. Think about which of the above functions you need to modify in order to set the correct values. This is essentially creating a <strong>double-linked list</strong> instead of a single-linked one.</p>
 
 <p>Change the <code>main()</code> and <code>showList()</code> functions such that they keep track of and print the <strong>TAIL</strong> of the list instead of the <strong>HEAD</strong>, using your newly created variable.</p>
@@ -1855,19 +1855,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582728502"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582728502"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582728502"></script>
-    <script src="../../js/jquery.sticky.js?1582728502"></script>
-    <script src="../../js/featherlight.min.js?1582728502"></script>
-    <script src="../../js/highlight.pack.js?1582728502"></script>
+    <script src="../../js/clipboard.min.js?1582745756"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582745756"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582745756"></script>
+    <script src="../../js/jquery.sticky.js?1582745756"></script>
+    <script src="../../js/featherlight.min.js?1582745756"></script>
+    <script src="../../js/highlight.pack.js?1582745756"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582728502"></script>
-    <script src="../../js/learn.js?1582728502"></script>
-    <script src="../../js/hugo-learn.js?1582728502"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582745756"></script>
+    <script src="../../js/learn.js?1582745756"></script>
+    <script src="../../js/hugo-learn.js?1582745756"></script>
 
-    <link href="../../mermaid/mermaid.css?1582728502" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582728502"></script>
+    <link href="../../mermaid/mermaid.css?1582745756" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582745756"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

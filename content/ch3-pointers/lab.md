@@ -113,7 +113,7 @@ Create a function pointer that is initialized to the address of your ascending s
 
 Tips:
 
-1. Re-read [chapter 2](/theory/c/chap2)!
+1. Re-read [chapter 3 (pointers)](/ch3-pointers)!
 2. You will need two extra functions, `asc()` and `desc()`, besides `neera_encounter()`.
 
 ### 5. Do you rest until fully healed? 

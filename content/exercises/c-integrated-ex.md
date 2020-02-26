@@ -34,10 +34,10 @@ This program makes a list of 10 _objects_, instances of the `node` struct, in a 
 Extend the structure in such a way that not only a pointer to the next value is available, but also to the previous one. Currently, the structure looks like this:
 
 ```C
-typedef struct node {
+struct node {
   char value;
   struct node* next;
-} T_node;
+};
 ```
 
 A third variable should be added called `previous`. Think about which of the above functions you need to modify in order to set the correct values. This is essentially creating a **double-linked list** instead of a single-linked one. 

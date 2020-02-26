@@ -17,3 +17,11 @@ weight: 6
   * Creating processes
 
 6.2: (lab) Processes
+
+6.3: Thread management
+
+  * What's in a thread ?
+  * Why would we want multiple threads ?
+    * Amdahl's law
+  * Creating threads
+    * Pthreads

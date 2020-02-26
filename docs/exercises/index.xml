@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>A. Exercises Assignments on Operating Systems and C</title>
@@ -19,6 +19,17 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tba/</guid>
       <description>Exercises will be made available in this directory, as will be announced in the labs.</description>
+    </item>
+    
+    <item>
+      <title>1. Integrated C exercise</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</guid>
+      <description>Download the start project here: c-integrated-start.c.
+The following functions are given:
+ showList() prints the values of a list (no need to modify this) clearList() clears objects and frees memory (no need to modify this) createRandomNode() creates a new object with a random value createListOfItems() creates a list of x random objects main() bootstraps everything.  1. Commandline compiling Create a simplified Makefile which does the following when executing the command make:</description>
     </item>
     
   </channel>

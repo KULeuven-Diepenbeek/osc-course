@@ -12,20 +12,20 @@
     <title>5.1: Intro to OS using Linux :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582728478" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582728478" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582728478" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582728478" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582728478" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582728478" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582728478" rel="stylesheet">
-    <link href="../../css/theme.css?1582728478" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582728478" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582728502" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582728502" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582728502" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582728502" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582728502" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582728502" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582728502" rel="stylesheet">
+    <link href="../../css/theme.css?1582728502" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582728502" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582728478" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582728502" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582728478"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582728502"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582728478"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582728478"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582728502"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582728502"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582728478"></script>
+<script type="text/javascript" src="../../js/search.js?1582728502"></script>
 
     
   </div>
@@ -629,8 +629,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/tasks/" title="6.1: Process management" class="dd-item ">
-        <a href="../../ch6-tasks/tasks/">
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Process management" class="dd-item ">
+        <a href="../../ch6-tasks/processes/">
         <i class='fas fa-book'></i> 6.1: Process management
         
         </a>
@@ -648,9 +648,28 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab1_taskmgmt/" title="6.2: Processes" class="dd-item ">
-        <a href="../../ch6-tasks/lab1_taskmgmt/">
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
         <i class='fas fa-vial'></i> 6.2: Processes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads" class="dd-item ">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
+        <i class='fas fa-vial'></i> 6.4: Threads
         
         </a>
     </li>
@@ -1064,6 +1083,7 @@ window.MathJax = {
 <li>
 <ul>
 <li><a href="#types-of-operating-systems">Types of operating systems</a></li>
+<li><a href="#system-calls">System calls</a></li>
 </ul></li>
 <li><a href="#linux">Linux</a></li>
 <li><a href="#got-root">Got Root ?</a></li>
@@ -1202,6 +1222,12 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
 </ul>
 
 <p>These three mechanism form the core task of an OS and will be elaborated on in the remainder of this course.</p>
+
+<h3 id="system-calls">System calls</h3>
+
+<p>The area marked in <span style="background-color: yellow">&nbsp;yellow&nbsp;</span> in the figure above is called the <strong>user mode</strong>. The area marked in <span style="background-color: red; color: white">&nbsp; red &nbsp;</span> in the figure above is called the <strong>kernel mode</strong> or the <strong>privileged mode</strong>. A program in user mode has no direct access to the hardware or to the entire memory space. It is also ran with lower priority on the hardware that programs in kernel mode.</p>
+
+<p>It is stated above that the user only communicates with <em>software</em>. When the user, or the software on the user&rsquo;s behalf, needs something from the more privileged world the border between the user mode and kernel mode needs to be crossed. There are special functions that facilitate this: <strong>System Calls</strong>. A list of all the system calls in a Linux operating system can be found <a href="http://asm.sourceforge.net/syscall.html#p31">here</a>.</p>
 
 <h2 id="linux">Linux</h2>
 
@@ -1754,6 +1780,22 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1987,19 +2029,19 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582728478"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582728478"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582728478"></script>
-    <script src="../../js/jquery.sticky.js?1582728478"></script>
-    <script src="../../js/featherlight.min.js?1582728478"></script>
-    <script src="../../js/highlight.pack.js?1582728478"></script>
+    <script src="../../js/clipboard.min.js?1582728502"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582728502"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582728502"></script>
+    <script src="../../js/jquery.sticky.js?1582728502"></script>
+    <script src="../../js/featherlight.min.js?1582728502"></script>
+    <script src="../../js/highlight.pack.js?1582728502"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582728478"></script>
-    <script src="../../js/learn.js?1582728478"></script>
-    <script src="../../js/hugo-learn.js?1582728478"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582728502"></script>
+    <script src="../../js/learn.js?1582728502"></script>
+    <script src="../../js/hugo-learn.js?1582728502"></script>
 
-    <link href="../../mermaid/mermaid.css?1582728478" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582728478"></script>
+    <link href="../../mermaid/mermaid.css?1582728502" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582728502"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

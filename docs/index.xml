@@ -54,10 +54,10 @@ The image below shows the classic picture when introducing OSes.</description>
     
     <item>
       <title>6.1: Process management</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/tasks/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</guid>
       <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
 What&amp;rsquo;s in a process ? By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course a basic program can be divided in multiple segments. When source code is compiled into a binary, these segments are fixed.</description>
     </item>
@@ -143,10 +143,10 @@ Navigation  figure out in which folder you are at the moment navigate to the roo
     
     <item>
       <title>6.2: Processes</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_taskmgmt/</link>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_taskmgmt/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting processes  Write a C-program that prints its own PID on the screen.    An example output    Write a C-program that spawns another process. Both parent and child processes announce their existence (through a printf) and their PIDs.</description>
     </item>
@@ -220,6 +220,18 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
  1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+    </item>
+    
+    <item>
+      <title>6.4: Threads</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
+      <description>    p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
+Creating and inspecting threads  Write a C-program that has 3 threads. Each threads announces its existence (through a printf) and their PIDs.
+ Write a C-program that creates 4 threads
+ every of the threads checks which numbes (&amp;lt;10k) are prime every child reports only numbers that are prime, together with its own PID   </description>
     </item>
     
     <item>

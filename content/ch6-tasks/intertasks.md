@@ -1,20 +1,22 @@
 ---
-title: '6.3: Inter-task communication'
+title: '6.5: Inter-task communication'
 pre: "<i class='fas fa-book'></i> "
-weight: 30
+weight: 5
 draft: true
 ---
-<!--
-&laquo;&nbsp;[Back to Table of Contents](/)<br/>
-
-<hr/>
-< !--
-&raquo;&nbsp;[Naar de labo opgave](#oef)
--->
 
 ## What's in a task ?
 
-Up until this point a process and a task were used interchangibly. However, a better distinction is to be made. A **task** is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a **thread**. 
+Up until this point a process and a thread were discussed
+
+
+
+{{% notice error %}}
+**!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! continue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
+{{% /notice %}}
+
+
+. However, a better distinction is to be made. A **task** is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a **thread**. 
 
 A process can run one single thread, or multiple threads. In all cases a process is a **standalone** unit. A thread, however, always belongs to process and is therefor not standalone.
 

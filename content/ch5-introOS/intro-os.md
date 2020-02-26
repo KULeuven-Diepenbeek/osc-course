@@ -81,6 +81,12 @@ In the definition the Microkernel it states that it runs the **bare minimum** of
 
 These three mechanism form the core task of an OS and will be elaborated on in the remainder of this course.
 
+### System calls
+
+The area marked in <span style="background-color: yellow">&nbsp;yellow&nbsp;</span> in the figure above is called the **user mode**. The area marked in <span style="background-color: red; color: white">&nbsp; red &nbsp;</span> in the figure above is called the **kernel mode** or the **privileged mode**. A program in user mode has no direct access to the hardware or to the entire memory space. It is also ran with lower priority on the hardware that programs in kernel mode. 
+
+It is stated above that the user only communicates with *software*. When the user, or the software on the user's behalf, needs something from the more privileged world the border between the user mode and kernel mode needs to be crossed. There are special functions that facilitate this: **System Calls**. A list of all the system calls in a Linux operating system can be found [here](http://asm.sourceforge.net/syscall.html#p31).
+
 ## Linux
 
 Linux is a an open source Unix-like OS. Although whole books can be (and probably are) written about definitions such as Unix-like and open source, this is of minor importance in this course. What might be worth pointing out is that Linux is based on the Linux kernel. This kernel was first released in 1991 by the Finn: **Linus Torvalds**. 

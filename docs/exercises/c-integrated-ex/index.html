@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>4.2: The Hard Way: GDB :: Operating Systems and C</title>
+    <title>1. Integrated C exercise :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1582720253" rel="stylesheet">
@@ -58,7 +58,7 @@ window.MathJax = {
 };
 </script>
   </head>
-  <body class="" data-url="/ch4-debugging/debugging-gdb/">
+  <body class="" data-url="/exercises/c-integrated-ex/">
     <nav id="sidebar" class="">
 
 
@@ -446,7 +446,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
-        parent
+        
         
         
         ">
@@ -489,7 +489,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item active">
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
         <a href="../../ch4-debugging/debugging-gdb/">
         <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
         
@@ -847,7 +847,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item 
-        
+        parent
         
         
         ">
@@ -890,7 +890,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
+      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item active">
         <a href="../../exercises/c-integrated-ex/">
         <i class='fas fa-pen-square'></i> 1. Integrated C exercise
         
@@ -1063,7 +1063,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch4-debugging/'>4: Debugging</a> > 4.2: The Hard Way: GDB
+            <a href='../../'>Operating Systems and C</a> > <a href='../../exercises/'>A. Exercises Assignments</a> > 1. Integrated C exercise
           
          
           
@@ -1080,12 +1080,12 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#2-the-hard-way-command-line-debugging-using-gdb">2. The hard way: Command-line debugging using GDB</a>
+<li>
 <ul>
-<li><a href="#2-1-with-debug-flags">2.1 With debug flags</a></li>
-<li><a href="#2-2-without-debug-flags">2.2 Without debug flags</a></li>
+<li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
+<li><a href="#2-create-two-lists">2. Create two lists</a></li>
+<li><a href="#3-refer-to-previous-objects">3. Refer to previous objects</a></li>
 </ul></li>
-<li><a href="#the-still-hard-way-ddd-a-ui-on-top-of-gdb">The (still) hard way: DDD, a UI on top of GDB</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1104,7 +1104,7 @@ window.MathJax = {
           
             <h1>
               
-              4.2: The Hard Way: GDB
+              1. Integrated C exercise
             </h1>
           
 
@@ -1114,168 +1114,44 @@ window.MathJax = {
 
 
 
-<h2 id="2-the-hard-way-command-line-debugging-using-gdb">2. The hard way: Command-line debugging using GDB</h2>
+<p><strong>Download the start project here</strong>: <a href="../../exercises/c-integrated-start.c">c-integrated-start.c</a>.</p>
 
-<p>In order to fluently debug binary programs, they have to be compiled with the <strong>debug flag</strong>, <code>gcc -g</code>. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &ldquo;Debug&rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.</p>
-
-<h3 id="2-1-with-debug-flags">2.1 With debug flags</h3>
-
-<p>Let&rsquo;s start with a heap-based application we would like to inspect:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">char</span> password[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;250382&#34;</span>;
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
-{
-  <span style="color:#66d9ef">int</span> stackvar <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>buf <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)malloc(<span style="color:#ae81ff">100</span>);
-  <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>secret <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)malloc(<span style="color:#ae81ff">100</span>);
-
-  strcpy(secret, password);
-
-  printf(<span style="color:#e6db74">&#34;Crackme! </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  printf(<span style="color:#e6db74">&#34;Password? &#34;</span>);
-
-  scanf(<span style="color:#e6db74">&#34;%s&#34;</span>, buf);
-
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>strcmp(buf, secret)) {
-    printf(<span style="color:#e6db74">&#34;Password OK :)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-  } <span style="color:#66d9ef">else</span> {
-    printf(<span style="color:#e6db74">&#34;Invalid Password! %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, buf);
-  }
-
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>If the source code would not have been supplied, making an estimated guess against the password would take a (very) long time. (We naively assume here that the program has been compiled with debug information enabled).</p>
-
-<p>Compile using <code>gcc -g hackme.c</code>. Take a look at the filesize - without flag:</p>
-
-<pre>
-wouter@wouter-Latitude-7490:~/Development$ gcc hackme.c -o hackme.bin && ls -la | grep hackme.bin
--rwxr-xr-x  1 wouter wouter 8568 Jan  7 19:59 hackme.bin
-</pre>
-
-<p>With flag:</p>
-
-<pre>
-wouter@wouter-Latitude-7490:~/Development$ gcc hackme.c -g -o hackme.bin && ls -la | grep hackme.bin
--rwxr-xr-x  1 wouter wouter 11352 Jan  7 19:59 hackme.bin
-</pre>
-
-<p>Star the <code>gdb</code> debugger using <code>gdb [binary]</code>. It will enter the interactive gdb shell, where you can set breakpoints, step through code, and have a chance at inspecting the heap, where we might attempt to figure out what&rsquo;s hidden in there.</p>
-
-<p>Things you need to know from the GDB debugger:</p>
+<p>The following functions are given:</p>
 
 <ol>
-<li><code>r</code>: running the program (main() method execution)</li>
-<li><code>c</code>: continue after a breakpoint</li>
-<li><code>i</code>: inspect (<code>i r [regname]</code>: inspect register name)</li>
-<li><code>start</code> and <code>next</code>: start stepping through the application.</li>
-<li><code>b *[addr]</code>: set breakpoint at certain address</li>
-<li><code>delete</code>: deletes all breakpoints</li>
-<li><code>disassemble [fn]</code>: disassembles functionname (after running)</li>
-<li><code>x/[length][format] [address expr]</code>: inspect dynamic memory block (see <a href="http://visualgdb.com/gdbreference/commands/x">manual</a>)</li>
+<li><code>showList()</code> prints the values of a list (no need to modify this)</li>
+<li><code>clearList()</code> clears objects and frees memory (no need to modify this)</li>
+<li><code>createRandomNode()</code> creates a new object with a random value</li>
+<li><code>createListOfItems()</code> creates a list of x random objects</li>
+<li><code>main()</code> bootstraps everything.</li>
 </ol>
 
+<h3 id="1-commandline-compiling">1. Commandline compiling</h3>
 
-<div class="ex">
-	<div class="inner">
-    	<p>Bootstrap gdb and step through the whole application. As soon as the stackvar has been evaluated, try to inspect the memory value using <code>x/d</code>. The address expression could be hexadecimal, or <code>&amp;stackvar</code>. <br/>
-How could you evaluate a heap variable using the x command? If you have the address, how do you pry out the value on the heap?</p>
+<p>Create a simplified <code>Makefile</code> which does the following when executing the command <code>make</code>:</p>
 
-	</div>
-</div>
+<ol>
+<li>Clean up any left object files</li>
+<li>Compile the exercise</li>
+<li>Run the exercise</li>
+</ol>
 
-<p>Do not forget that the expression that is printed out is the one to be evaluated after you enter the &lsquo;next&rsquo; command. You can already inspect the stack variable address but it will contain junk:</p>
+<p>This file should also be submitted.</p>
 
-<pre>
-(gdb) start
-Temporary breakpoint 1 at 0x7d9: file hackme.c, line 11.
-Starting program: /home/wouter/Development/hackme.bin 
+<h3 id="2-create-two-lists">2. Create two lists</h3>
 
-Temporary breakpoint 1, main (argc=1, argv=0x7fffffffdd68) at hackme.c:11
-11    int stack = 5;
-(gdb) x/d &stack
-0x7fffffffdc6c: 21845
-(gdb) next
-12    char *buf = (char *)malloc(100);
-(gdb) x/d &stack
-0x7fffffffdc6c: 5
-</pre>
+<p>This program makes a list of 10 <em>objects</em>, instances of the <code>node</code> struct, in a linked list. Each object has a random number as it&rsquo;s <em>value</em>. In this exercise, you have to extend the program such that the list will be <em>split up</em> into two lists: one with objects that have an <em>even</em> value, one with objects that have an <em>uneven</em> value. The objects have to continue to exist, but have to be relinked. It is of paramount importance <strong>not to</strong> make copies of objects! (Remember pointers?)</p>
 
-<p>Address <code>0x7fffffffdc6c</code> first contains 21845 - a coincidence that might have another value on your machine.</p>
+<h3 id="3-refer-to-previous-objects">3. Refer to previous objects</h3>
 
+<p>Extend the structure in such a way that not only a pointer to the next value is available, but also to the previous one. Currently, the structure looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> node {
+  <span style="color:#66d9ef">char</span> value;
+  <span style="color:#66d9ef">struct</span> node<span style="color:#f92672">*</span> next;
+} T_node;</code></pre></div>
+<p>A third variable should be added called <code>previous</code>. Think about which of the above functions you need to modify in order to set the correct values. This is essentially creating a <strong>double-linked list</strong> instead of a single-linked one.</p>
 
-<div class="ex">
-	<div class="inner">
-    	<p>Bootstrap gdb, disassemble the <code>main</code> function, and set breakpoints after each <code>malloc()</code> call using <code>b *[address]</code>. You can check the return value, stored at the register eax, with <code>i r eax</code>.</p>
-
-	</div>
-</div>
-
-<h3 id="2-2-without-debug-flags">2.2 Without debug flags</h3>
-
-<p>Now try to &lsquo;hack&rsquo; the password using gdb without the <code>-g</code> compiler flag. Imagine someone has put up a binary file on the internet and you managed to download it. No source code available, and no debug information compiled in. The gdb tool still works, disassembling still works, but method information is withheld. That means calling <code>start</code> and <code>next</code> will <strong>not</strong> reveal much-needed information about each statement, and we will have to figure it out ourselves by looking at the disassembly information.</p>
-
-
-<div class="ex">
-	<div class="inner">
-    	<p>Try to disassemble again and look at the heap value of our secret. Notice that you will not be able to use something like <code>x [varname]</code> because of the lack of debug information! We will have to rely on breakpoints of address values from the disassembly.</p>
-
-	</div>
-</div>
-
-<p>Remember to always run the program first before disassembling - otherwise address values will be way too low, and thus incorrect.</p>
-
-<p>When inspecting the return value of <code>eax</code>, gdb returns a <strong>relative address</strong> for our current program (8 BITS), while we need an <strong>absolute</strong> one (16 BITS) when using the x command to inspect the heap. Look at the disassembly info to prepend the right bits:</p>
-
-<pre>
----Type <return> to continue, or q <return> to quit---
-   0x0000555555554844 <+122>:   mov    -0x8(%rbp),%rdx
-   0x0000555555554848 <+126>:   mov    -0x10(%rbp),%rax
-   0x000055555555484c <+130>:   mov    %rdx,%rsi
-...
-(gdb) b *0x00005555555547ea
-Breakpoint 1 at 0x5555555547ea
-(gdb) r
-Starting program: /home/wouter/Development/osc-labs/solutions/debugging/a.out 
-
-Breakpoint 1, 0x00005555555547ea in main ()
-(gdb) i r eax
-eax            0x55756260   1433756256
-(gdb) x 0x55756260
-0x55756260: Cannot access memory at address 0x55756260
-(gdb) x 0x0000555555756260
-0x555555756260: 0x00000000
-</pre>
-
-<p>As you can see, <code>0x55756260</code> is an invalid memory address, but based on the disassembly info, we can deduce it is actually <code>0x0000555555756260</code> we need to look at.</p>
-
-<h2 id="the-still-hard-way-ddd-a-ui-on-top-of-gdb">The (still) hard way: DDD, a UI on top of GDB</h2>
-
-<p>Instead of invoking <code>gdb</code>, one can also employ <code>ddd</code>. This is a crude UI on top of the gdb debugger, with multiple windows where the same commands can be entered as you have learned so far. However, ddd also allows you to visualize heap/stack variables while stepping through the application. The Figure below shows a screen-shot of a debug session of our hackme app using ddd.</p>
-
-<p><img src="../../img/ddd.png" /></p>
-
-<p>Things to try out:</p>
-
-<ul>
-<li>View -&gt; Show source</li>
-<li>Rightclick on a line in source (compile with <code>-g</code> again!) -&gt; Add breakpoint</li>
-<li>Start/step using the buttons or the commands in the cmdline window.</li>
-<li>Rightclick in the main window -&gt; Add variables by name to watch (for instance <code>buf</code> and <code>password</code>, as shown)</li>
-</ul>
-
-
-<div class="ex">
-	<div class="inner">
-    	<p>Take a moment to fiddle with <code>ddd</code>. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.</p>
-
-	</div>
-</div>
+<p>Change the <code>main()</code> and <code>showList()</code> functions such that they keep track of and print the <strong>TAIL</strong> of the list instead of the <strong>HEAD</strong>, using your newly created variable.</p>
 
 
 <footer class=" footline" >
@@ -1573,7 +1449,6 @@ eax            0x55756260   1433756256
             
                 
                     
-                    
                 
                 
 
@@ -1586,26 +1461,6 @@ eax            0x55756260   1433756256
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -1623,8 +1478,21 @@ eax            0x55756260   1433756256
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -1853,6 +1721,7 @@ eax            0x55756260   1433756256
             
                 
                     
+                    
                 
                 
 
@@ -1865,6 +1734,9 @@ eax            0x55756260   1433756256
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1882,6 +1754,7 @@ eax            0x55756260   1433756256
             
                 
                     
+                    
                 
                 
 
@@ -1900,6 +1773,9 @@ eax            0x55756260   1433756256
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1969,10 +1845,10 @@ eax            0x55756260   1433756256
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../exercises/tba/" title="To Be Announced!"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch4-debugging/testing/" title="4.3: The Middle Way: TDD" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../appendix/" title="B. Appendix" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

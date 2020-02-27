@@ -41,6 +41,7 @@ Below is a brief list of Linux commands. Remember that you can get more info on 
 
 | command | goal |
 |---|---|
+| lsusb | list USB devices |
 | ps | report a snaptshot of the current processes |
 | pstree | display a tree of processes |
 | kill | send a signal to a process |

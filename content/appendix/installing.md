@@ -44,3 +44,12 @@ The most crucial resource is disk space. The virtual machine image is **2.4 GB**
   * `sudo apt-get install [package]` (root password is XXXXXX)
 5. I want to change the resolution of the VirtualBox display
   * View -> fit to screen, or View -> change resolution to -> pick one. 
+6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
+{{% figure src="/img/installVM/arduino_01.png" %}}
+  * This can be verified with the command **lsusb**. If the Arduino is not found, it should not be present in the result of this command:
+{{% figure src="/img/installVM/arduino_02.png" %}}
+  * In the bottom right of your VirtualBox machine, you can give permission to your Arduino on the VM:
+{{% figure src="/img/installVM/arduino_03.png" %}}
+  * The VM should now be able to see the Arduino. Again ... verify with **lsusb**
+{{% figure src="/img/installVM/arduino_04.png" %}}
+

@@ -9,4 +9,12 @@ weight: 1
 
 # Introduction to C
 
-Chapter 1 handles the following subjects: Intro to C, building, ecosystems, compiling & cross-compiling, building header/source files, Makefiles, ...
+Chapter 1 handles the following subjects: 
+
+- Intro to C: primitives, differences between C/Java
+- Structures, `char*` as strings, arrays
+- Building C source files
+- C Ecosystems
+- Compiling & cross-compiling
+- Building header/source files
+- Makefiles

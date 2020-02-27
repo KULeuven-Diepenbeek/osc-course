@@ -1,7 +1,7 @@
 ---
-title: '3.2: The Ancient Library'
+title: '3.3: The Ancient Library'
 pre: "<i class='fas fa-vial'></i> "
-weight: 4
+weight: 5
 ---
 
 ## The Ancient Library

@@ -213,13 +213,13 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
     </item>
     
     <item>
-      <title>3.2: The Ancient Library</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</link>
+      <title>3.2: Practical Use of Pointers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
-      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
- 1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</guid>
+      <description>1. Changing values around Because in C everything passed by-value, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not primitives! How do you switch two numbers without giving anything back?
+#include &amp;lt;stdio.h&amp;gt;void swap(int *px, int *py) { int temp; temp = *px; *px = *py; *py = temp; } int main() { int x = 10, y = 20; swap(&amp;amp;x, &amp;amp;y); printf(&amp;#34;(%d, %d)\n&amp;#34;, x, y); // print (20, 10) } mermaid.</description>
     </item>
     
     <item>
@@ -252,6 +252,16 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</guid>
       <description>The internals Now that you have an understanding of how interrupts work, let&amp;rsquo;s dive a bit deeper into the interal workings.
 The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding wire goes high. This makes one (or more) bits of this interrupt vector high. This triggers the internal Interrupt unit. The image below shows the available interrupts for the AT Mega.</description>
+    </item>
+    
+    <item>
+      <title>3.3: The Ancient Library</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
+      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
+ 1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>

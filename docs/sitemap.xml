@@ -9,7 +9,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
   </url>
   
   <url>
@@ -44,7 +44,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</loc>
-    <lastmod>2020-02-26T13:31:14+01:00</lastmod>
+    <lastmod>2020-02-26T20:36:09+01:00</lastmod>
   </url>
   
   <url>
@@ -94,12 +94,12 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</loc>
-    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
+    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
   </url>
   
   <url>
@@ -118,8 +118,8 @@
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</loc>
+    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
   </url>
   
   <url>
@@ -140,6 +140,11 @@
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</loc>
     <lastmod>2020-02-24T10:57:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</loc>
+    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
   </url>
   
   <url>

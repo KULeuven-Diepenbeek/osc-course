@@ -9,8 +9,6 @@ weight: 2
 
 # Interrupts, the next step towards multitasking
 
-This chapter handles the following subjects: Bare metal, arduino, timers, ...
-
 2.1: Arduino Uno
 
   * Intro

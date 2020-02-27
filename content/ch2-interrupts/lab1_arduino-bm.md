@@ -54,15 +54,12 @@ The approach in the C code is not too different from the Arduino IDE approach. T
 These pseudo functions are actually **macros**. These are defined in the file *helper.h* which is included on the first line of the C-file.
 
 {{% task %}}
-Try to understand the <b>BIT MANIPULATION FUNCTIONS</b> macros:
+Try to write the <b>BIT MANIPULATION FUNCTIONS</b> macros:
 
-* BIT(x)
-* LONGBIT(x)
 * bit_get(p,m)
 * bit_set(p,m)
 * bit_clear(p,m)
 * bit_toggle(p,m)
-* bit_write(c,p,m)
 
 {{% /task %}}
 

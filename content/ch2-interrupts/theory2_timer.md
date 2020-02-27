@@ -45,7 +45,7 @@ To determine the frequency at which the counter operates a quick visit to the da
   </div>
 </div>
 
-To introduce a clock, a {{< link name="crystal oscillator" url="https://en.wikipedia.org/wiki/Crystal_oscillator" >}} is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is frequency at which the CPU is working, often referred to as the _clock speed_. Given that frequency, and the value of the pre-scaler, clock frequency at which the counter operates can be calculated.
+To introduce a clock, a {{< link name="crystal oscillator" url="https://en.wikipedia.org/wiki/Crystal_oscillator" >}} is used. The one on the Arduino UNO board runs at a frequency of 16'000'000 Hz or 16 MHz. This is the frequency at which the CPU is working, often referred to as the _clock speed_. Given that frequency, and the value of the pre-scaler, the clock frequency at which the counter operates can be calculated.
 
 
 {{% mathjax %}}

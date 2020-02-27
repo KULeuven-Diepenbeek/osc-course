@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>2. Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582793577" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582793577" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582793577" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582793577" rel="stylesheet">
-    <link href="../../css/theme.css?1582793577" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582793577" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582820555" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582820555" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582820555" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582820555" rel="stylesheet">
+    <link href="../../css/theme.css?1582820555" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582820555" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582793577" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582820555" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582793577"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582820555"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582793577"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582793577"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582820555"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582820555"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582793577"></script>
+<script type="text/javascript" src="../../js/search.js?1582820555"></script>
 
     
   </div>
@@ -1214,6 +1214,28 @@ com/">Bodhi</a> which is a lightweight linux distribution that is based on Ubunt
 <ul>
 <li>View -&gt; fit to screen, or View -&gt; change resolution to -&gt; pick one.</li>
 </ul></li>
+
+<li><p>I get the following error <strong>can&rsquo;t open device &ldquo;/dev/ttyACM0&rdquo;: No such file or directory</strong>. This means that the Arduino is not present in the Virtual Machine. Make sure you&rsquo;ve added the device in the <strong>OSC - Settings</strong> !!
+<figure>
+<img src="../../img/installVM/arduino_01.png"/>
+</figure></p>
+
+<ul>
+<li><p>This can be verified with the command <strong>lsusb</strong>. If the Arduino is not found, it should not be present in the result of this command:
+<figure>
+<img src="../../img/installVM/arduino_02.png"/>
+</figure></p></li>
+
+<li><p>In the bottom right of your VirtualBox machine, you can give permission to your Arduino on the VM:
+<figure>
+<img src="../../img/installVM/arduino_03.png"/>
+</figure></p></li>
+
+<li><p>The VM should now be able to see the Arduino. Again &hellip; verify with <strong>lsusb</strong>
+<figure>
+<img src="../../img/installVM/arduino_04.png"/>
+</figure></p></li>
+</ul></li>
 </ol>
 
 
@@ -1937,19 +1959,19 @@ com/">Bodhi</a> which is a lightweight linux distribution that is based on Ubunt
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582793577"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582793577"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582793577"></script>
-    <script src="../../js/jquery.sticky.js?1582793577"></script>
-    <script src="../../js/featherlight.min.js?1582793577"></script>
-    <script src="../../js/highlight.pack.js?1582793577"></script>
+    <script src="../../js/clipboard.min.js?1582820555"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582820555"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582820555"></script>
+    <script src="../../js/jquery.sticky.js?1582820555"></script>
+    <script src="../../js/featherlight.min.js?1582820555"></script>
+    <script src="../../js/highlight.pack.js?1582820555"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582793577"></script>
-    <script src="../../js/learn.js?1582793577"></script>
-    <script src="../../js/hugo-learn.js?1582793577"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582820555"></script>
+    <script src="../../js/learn.js?1582820555"></script>
+    <script src="../../js/hugo-learn.js?1582820555"></script>
 
-    <link href="../../mermaid/mermaid.css?1582793577" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582793577"></script>
+    <link href="../../mermaid/mermaid.css?1582820555" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582820555"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

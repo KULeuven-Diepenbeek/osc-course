@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -59,12 +59,12 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</loc>
-    <lastmod>2020-02-24T10:57:35+01:00</lastmod>
+    <lastmod>2020-02-27T17:22:12+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/</loc>
-    <lastmod>2020-02-24T10:57:35+01:00</lastmod>
+    <lastmod>2020-02-27T17:22:12+01:00</lastmod>
   </url>
   
   <url>
@@ -89,7 +89,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</loc>
-    <lastmod>2020-02-24T10:57:35+01:00</lastmod>
+    <lastmod>2020-02-27T17:22:12+01:00</lastmod>
   </url>
   
   <url>
@@ -139,7 +139,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</loc>
-    <lastmod>2020-02-24T10:57:35+01:00</lastmod>
+    <lastmod>2020-02-27T17:22:12+01:00</lastmod>
   </url>
   
   <url>
@@ -204,12 +204,12 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</loc>
-    <lastmod>2020-02-20T13:07:01+01:00</lastmod>
+    <lastmod>2020-02-27T17:21:02+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</loc>
-    <lastmod>2020-02-20T13:07:01+01:00</lastmod>
+    <lastmod>2020-02-27T17:21:02+01:00</lastmod>
   </url>
   
   <url>

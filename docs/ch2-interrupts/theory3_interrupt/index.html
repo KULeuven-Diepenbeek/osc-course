@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.58.3" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>2.5 The internals of interrupts :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1582793577" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/hybrid.css?1582793577" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1582793577" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1582793577" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1582793577" rel="stylesheet">
-    <link href="../../css/theme.css?1582793577" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1582793577" rel="stylesheet">
+    <link href="../../css/nucleus.css?1582820555" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/hybrid.css?1582820555" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1582820555" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1582820555" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1582820555" rel="stylesheet">
+    <link href="../../css/theme.css?1582820555" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1582820555" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1582793577" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1582820555" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1582793577"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1582820555"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1582793577"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1582793577"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1582820555"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1582820555"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1582793577"></script>
+<script type="text/javascript" src="../../js/search.js?1582820555"></script>
 
     
   </div>
@@ -1139,7 +1139,7 @@ window.MathJax = {
 
 <p>Now that you have an understanding of how interrupts work, let&rsquo;s dive a bit deeper into the interal workings.</p>
 
-<p>The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding <strong>wire</strong> goes high. This makes one (or more) bits of this interrupt vector <em>high</em>. This triggers the internal <strong>Interrupt unit</strong>. The image below shows the available interrupts for the AT Mega.</p>
+<p>The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding <strong>wire</strong> goes high. This makes one (or more) bits of this <strong>interrupt vector</strong> <em>high</em>. This triggers the internal <strong>Interrupt unit</strong>. The image below shows the available interrupts for the AT Mega.</p>
 
 <figure>
     <img src="../../img/0x_14.png"/> <figcaption>
@@ -1150,7 +1150,7 @@ window.MathJax = {
 
 <p>When an <strong>Interrupt Request</strong> is triggered and the interrupt is allowed, the processor will jump to another function in program. This function is called the <strong>Interrupt Service Routine</strong>. When this function is finished, the processor continues with the next instruction that would have been executed before the interrupt occured.</p>
 
-<p>When looking at the image above, vector number 14 (or 13, if we start counting at 0x0) should look familiar: <strong>TIMER1_OVF</strong>. Below there are two screenshots of disassembled code. The example on left is showing an example on a binary that doesn&rsquo;t have interrupts. In that example it is clear that the complete interrupt vector is empty. The example on the right is showing an interrupt vector that has an entry on position 13. Whenever this signal goes <em>high</em>, the processor jumps to the function at address 0x90.</p>
+<p>When looking at the image above, vector number 14 (or 13, if we start counting at 0x0) should look familiar: <strong>TIMER1_OVF</strong>. Below there are two screenshots of disassembled code. The example on the left is showing an example on a binary that doesn&rsquo;t have interrupts. In that example it is clear that the complete interrupt vector is empty. The example on the right is showing an interrupt vector that has an entry on position 13. Whenever this signal goes <em>high</em>, the processor jumps to the function at address 0x90.</p>
 
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%" class="highlight">
@@ -1177,6 +1177,8 @@ window.MathJax = {
   </div>
 </div>
 
+<p>To <strong>de-compile</strong> a binary the Makefile can also be used. This is not so by default, but if you add this to the Makefile, you can 😃. <code>make od t=filename</code> The <em>filename</em> should be replaced with the actual filename of the binary.</p>
+
 
 <div class="ex">
 	<div class="inner">
@@ -1185,28 +1187,27 @@ window.MathJax = {
 	</div>
 </div>
 
-<!--As was stated ealier there is a general interrupt flag. ...
+<!-- todo message="nested interrupts are possible, though it requires user software to re-enable interrupts" -->
 
-**CONTINUE HERE!!!!!!!!!!!!!!!**
+<p>Finally, it is pointed out that there is a <strong>global interrupt mask</strong>. This mask can be (de-)activated to disable/enable <strong>all</strong> interrupts. In the AVR world this can be done through two simple functions:</p>
 
-<div class="todo">
-  <p>TODO: order</p>
-</div>
+<ul>
+<li><strong>sei()</strong> enables the global interrupt mask</li>
+<li><strong>cli()</strong> disables the global interrupt mask</li>
+</ul>
 
-<div class="todo">
-  <p>TODO: nested interrupts are possible, though it requires user software to re-enable interrupts</p>
-</div>
--->
+<p>For the sake of completeness, it is pointed out that Interrupts can also be used in the Arduino IDE.</p>
 
 <h2 id="take-aways">Take aways</h2>
 
 <p>After studying this chapter you should:</p>
 
 <ul>
-<li>be able to target specific bits in a register at a specific address through C</li>
+<li>be able to target specific bits in a register</li>
 <li>understand how CR&rsquo;s and SR&rsquo;s work</li>
 <li>understand how timers work</li>
 <li>understand what Interrupts are</li>
+<li>be able to use Interrupts</li>
 </ul>
 
 <h2 id="useful-links">Useful links:</h2>
@@ -1943,19 +1944,19 @@ Arduino UNO schematic
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1582793577"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1582793577"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1582793577"></script>
-    <script src="../../js/jquery.sticky.js?1582793577"></script>
-    <script src="../../js/featherlight.min.js?1582793577"></script>
-    <script src="../../js/highlight.pack.js?1582793577"></script>
+    <script src="../../js/clipboard.min.js?1582820555"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1582820555"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1582820555"></script>
+    <script src="../../js/jquery.sticky.js?1582820555"></script>
+    <script src="../../js/featherlight.min.js?1582820555"></script>
+    <script src="../../js/highlight.pack.js?1582820555"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1582793577"></script>
-    <script src="../../js/learn.js?1582793577"></script>
-    <script src="../../js/hugo-learn.js?1582793577"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1582820555"></script>
+    <script src="../../js/learn.js?1582820555"></script>
+    <script src="../../js/hugo-learn.js?1582820555"></script>
 
-    <link href="../../mermaid/mermaid.css?1582793577" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1582793577"></script>
+    <link href="../../mermaid/mermaid.css?1582820555" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1582820555"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

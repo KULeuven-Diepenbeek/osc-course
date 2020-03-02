@@ -120,7 +120,7 @@ An example for creating a new thread is given below.
 
 int counter;
 
-void* doSomeThing(void *arg) {
+void* doSomeThing() {
     unsigned long i = 0;
     counter += 1;
 
@@ -247,3 +247,7 @@ The **pthreads** library also provides an API to program with semaphores. It con
 * sem_trywait()
 * sem_post()
 * sem_getValue()
+
+**TODO** **TODO** **TODO** **TODO** **TODO** 
+https://techdifferences.com/difference-between-semaphore-and-mutex.html
+**TODO** **TODO** **TODO** **TODO** **TODO** 

@@ -7,16 +7,16 @@ OBJ=main.o main2.o
 
 LIBS="-lpthread"
 
-all: philosophers philosophers2
+all: philosophers.bin philosophers2.bin
 
 %.o: %.c
 	gcc -c $^
 
-philosophers2: main2.o
+philosophers2.bin: main2.o
 	gcc -o $@ $^ $(LIBS) # Libraries should "follow" sources and objects
 
-philosophers: main.o
+philosophers.bin: main.o
 	gcc -o $@ $^ $(LIBS) # Libraries should "follow" sources and objects
 
 clean:
-	rm -f *.o philosophers philosophers2
+	rm -f *.o philosophers.bin philosophers2.bin

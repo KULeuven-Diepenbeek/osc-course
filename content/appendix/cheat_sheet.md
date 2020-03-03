@@ -29,6 +29,7 @@ Below is a brief list of Linux commands. Remember that you can get more info on 
 | grep | search for content in a file |
 | vi | powerful editor with a steep learning curve (FYI: exiting is through: ":q!") |
 | chmod | change modifiers of a file (r/w/x/d) - params: `+/-[modifier]`
+| time | time a simple command or give resource usage |
 
 ### Compiling
 

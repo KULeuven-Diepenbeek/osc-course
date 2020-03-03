@@ -9,23 +9,23 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>6.4: Threads :: Operating Systems and C</title>
+    <title>6.4: Threads (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583229447" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583229447" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583229447" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583229447" rel="stylesheet">
-    <link href="../../css/theme.css?1583229447" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583229447" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583250005" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583250005" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583250005" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583250005" rel="stylesheet">
+    <link href="../../css/theme.css?1583250005" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583250005" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583229447" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583250005" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583229447"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583250005"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583229447"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583229447"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583250005"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583250005"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583229447"></script>
+<script type="text/javascript" src="../../js/search.js?1583250005"></script>
 
     
   </div>
@@ -623,13 +623,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch6-tasks/" title="6: Tasks" class="dd-item 
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item 
         parent
         
         
         ">
       <a href="../../ch6-tasks/">
-          <i class='fab fa-linux'></i> 6: Tasks
+          <i class='fab fa-linux'></i> 6: Task management
           
       </a>
       
@@ -648,9 +648,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Process management" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
         <a href="../../ch6-tasks/processes/">
-        <i class='fas fa-book'></i> 6.1: Process management
+        <i class='fas fa-book'></i> 6.1: Processes
         
         </a>
     </li>
@@ -667,9 +667,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
         <a href="../../ch6-tasks/lab1_processmgmt/">
-        <i class='fas fa-vial'></i> 6.2: Processes
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
         
         </a>
     </li>
@@ -686,9 +686,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads" class="dd-item active">
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item active">
         <a href="../../ch6-tasks/lab2_threadsmgmt/">
-        <i class='fas fa-vial'></i> 6.4: Threads
+        <i class='fas fa-vial'></i> 6.4: Threads (lab)
         
         </a>
     </li>
@@ -1082,7 +1082,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Tasks</a> > 6.4: Threads
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Task management</a> > 6.4: Threads (lab)
           
          
           
@@ -1118,7 +1118,7 @@ window.MathJax = {
           
             <h1>
               
-              6.4: Threads
+              6.4: Threads (lab)
             </h1>
           
 
@@ -1185,11 +1185,10 @@ window.MathJax = {
 <li><strong>TIP</strong> the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
 </ul></li>
 <li>interpret the chart</li>
-<li>there is a chance that multiple consumers handle the same number. Prevent this from happening !! Describe your solution in the report.</li>
 </ol></li>
 </ul>
 
-<p><center><strong>hand in the report AND the modified C file</strong></center></p>
+<p><center><strong>hand in the report</strong></center></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -1999,7 +1998,7 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch6-tasks/lab1_processmgmt/" title="6.2: Processes"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="../../ch7-stack/" title="7: The Stack &amp; The Heap" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -2012,19 +2011,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583229447"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583229447"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583229447"></script>
-    <script src="../../js/jquery.sticky.js?1583229447"></script>
-    <script src="../../js/featherlight.min.js?1583229447"></script>
-    <script src="../../js/highlight.pack.js?1583229447"></script>
+    <script src="../../js/clipboard.min.js?1583250005"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583250005"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583250005"></script>
+    <script src="../../js/jquery.sticky.js?1583250005"></script>
+    <script src="../../js/featherlight.min.js?1583250005"></script>
+    <script src="../../js/highlight.pack.js?1583250005"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583229447"></script>
-    <script src="../../js/learn.js?1583229447"></script>
-    <script src="../../js/hugo-learn.js?1583229447"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583250005"></script>
+    <script src="../../js/learn.js?1583250005"></script>
+    <script src="../../js/hugo-learn.js?1583250005"></script>
 
-    <link href="../../mermaid/mermaid.css?1583229447" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583229447"></script>
+    <link href="../../mermaid/mermaid.css?1583250005" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583250005"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>6: Tasks on Operating Systems and C</title>
+    <title>6: Task management on Operating Systems and C</title>
     <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/</link>
-    <description>Recent content in 6: Tasks on Operating Systems and C</description>
+    <description>Recent content in 6: Task management on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>6.1: Process management</title>
+      <title>6.1: Processes</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
@@ -23,7 +23,7 @@ What&amp;rsquo;s in a process ? By definition, a process is an instance of a pro
     </item>
     
     <item>
-      <title>6.2: Processes</title>
+      <title>6.2: Processes (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
@@ -33,7 +33,7 @@ Creating and inspecting processes  Write a C-program that prints its own PID on 
     </item>
     
     <item>
-      <title>6.4: Threads</title>
+      <title>6.4: Threads (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>

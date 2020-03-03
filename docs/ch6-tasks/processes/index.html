@@ -9,23 +9,23 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>6.1: Process management :: Operating Systems and C</title>
+    <title>6.1: Processes :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583229447" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583229447" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583229447" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583229447" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583229447" rel="stylesheet">
-    <link href="../../css/theme.css?1583229447" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583229447" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583250005" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583250005" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583250005" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583250005" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583250005" rel="stylesheet">
+    <link href="../../css/theme.css?1583250005" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583250005" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583229447" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583250005" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583229447"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583250005"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583229447"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583229447"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583250005"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583250005"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583229447"></script>
+<script type="text/javascript" src="../../js/search.js?1583250005"></script>
 
     
   </div>
@@ -623,13 +623,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch6-tasks/" title="6: Tasks" class="dd-item 
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item 
         parent
         
         
         ">
       <a href="../../ch6-tasks/">
-          <i class='fab fa-linux'></i> 6: Tasks
+          <i class='fab fa-linux'></i> 6: Task management
           
       </a>
       
@@ -648,9 +648,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Process management" class="dd-item active">
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item active">
         <a href="../../ch6-tasks/processes/">
-        <i class='fas fa-book'></i> 6.1: Process management
+        <i class='fas fa-book'></i> 6.1: Processes
         
         </a>
     </li>
@@ -667,9 +667,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
         <a href="../../ch6-tasks/lab1_processmgmt/">
-        <i class='fas fa-vial'></i> 6.2: Processes
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
         
         </a>
     </li>
@@ -686,9 +686,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
         <a href="../../ch6-tasks/lab2_threadsmgmt/">
-        <i class='fas fa-vial'></i> 6.4: Threads
+        <i class='fas fa-vial'></i> 6.4: Threads (lab)
         
         </a>
     </li>
@@ -1082,7 +1082,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Tasks</a> > 6.1: Process management
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Task management</a> > 6.1: Processes
           
          
           
@@ -1125,7 +1125,7 @@ window.MathJax = {
           
             <h1>
               
-              6.1: Process management
+              6.1: Processes
             </h1>
           
 
@@ -1297,18 +1297,7 @@ Every process has a PCB that contains metadata about the process.</p>
 <li>standard error (stderr)</li>
 </ol>
 
-<p>By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done like this:</p>
-
-<ul>
-<li>process &lt; STDIN 1&gt;STDOUT 2&gt;STDERR</li>
-<li>process &lt; STDIN 1&gt;STDOUT 2&gt;&amp;1</li>
-</ul>
-
-<figure>
-    <img src="../../img/os/sc_redirect_stdout.png"/> <figcaption>
-            <h4>Redirection of the standard output </h4>
-        </figcaption>
-</figure>
+<p>By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done and will be briefly touched in <a href="../../ch6-tasks/intertasks/">section 6.5</a>.</p>
 
 <h2 id="creating-processes">Creating processes</h2>
 
@@ -2032,10 +2021,10 @@ Every process has a PCB that contains metadata about the process.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch6-tasks/" title="6: Tasks"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch6-tasks/" title="6: Task management"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch6-tasks/lab1_processmgmt/" title="6.2: Processes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2045,19 +2034,19 @@ Every process has a PCB that contains metadata about the process.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583229447"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583229447"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583229447"></script>
-    <script src="../../js/jquery.sticky.js?1583229447"></script>
-    <script src="../../js/featherlight.min.js?1583229447"></script>
-    <script src="../../js/highlight.pack.js?1583229447"></script>
+    <script src="../../js/clipboard.min.js?1583250005"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583250005"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583250005"></script>
+    <script src="../../js/jquery.sticky.js?1583250005"></script>
+    <script src="../../js/featherlight.min.js?1583250005"></script>
+    <script src="../../js/highlight.pack.js?1583250005"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583229447"></script>
-    <script src="../../js/learn.js?1583229447"></script>
-    <script src="../../js/hugo-learn.js?1583229447"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583250005"></script>
+    <script src="../../js/learn.js?1583250005"></script>
+    <script src="../../js/hugo-learn.js?1583250005"></script>
 
-    <link href="../../mermaid/mermaid.css?1583229447" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583229447"></script>
+    <link href="../../mermaid/mermaid.css?1583250005" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583250005"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

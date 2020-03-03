@@ -9,23 +9,23 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>1.1: The C programming language :: Operating Systems and C</title>
+    <title>6.6: Inter task communication (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583250005" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583250005" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583250005" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583250005" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583250005" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583250005" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583250005" rel="stylesheet">
-    <link href="../../css/theme.css?1583250005" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583250005" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583249872" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583249872" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583249872" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583249872" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583249872" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583249872" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583249872" rel="stylesheet">
+    <link href="../../css/theme.css?1583249872" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583249872" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583250005" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583249872" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583250005"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583249872"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,7 +58,7 @@ window.MathJax = {
 };
 </script>
   </head>
-  <body class="" data-url="/ch1-c/intro/">
+  <body class="" data-url="/ch6-tasks/lab3_intertaskcomm/">
     <nav id="sidebar" class="">
 
 
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583250005"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583250005"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583249872"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583249872"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583250005"></script>
+<script type="text/javascript" src="../../js/search.js?1583249872"></script>
 
     
   </div>
@@ -103,7 +103,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
-        parent
+        
         
         
         ">
@@ -127,7 +127,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item active">
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
         <a href="../../ch1-c/intro/">
         <i class='fas fa-book'></i> 1.1: The C programming language
         
@@ -624,7 +624,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item 
-        
+        parent
         
         
         ">
@@ -689,6 +689,25 @@ window.MathJax = {
       <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
         <a href="../../ch6-tasks/lab2_threadsmgmt/">
         <i class='fas fa-vial'></i> 6.4: Threads (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab3_intertaskcomm/" title="6.6: Inter task communication (lab)" class="dd-item active">
+        <a href="../../ch6-tasks/lab3_intertaskcomm/">
+        <i class='fas fa-vial'></i> 6.6: Inter task communication (lab)
         
         </a>
     </li>
@@ -1082,7 +1101,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch1-c/'>1: Introduction in C</a> > 1.1: The C programming language
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Task management</a> > 6.6: Inter task communication (lab)
           
          
           
@@ -1099,17 +1118,7 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li>
-<ul>
-<li><a href="#comparison-with-java">Comparison with Java</a></li>
-</ul></li>
-<li><a href="#basic-c">Basic C</a>
-<ul>
-<li><a href="#hello-world">Hello World</a></li>
-<li><a href="#use-functions-to-structure-code">Use functions to structure code</a></li>
-<li><a href="#primitives-and-combinational-types">Primitives and combinational types</a></li>
-<li><a href="#strings-what-do-you-mean">Strings? What do you mean?</a></li>
-</ul></li>
+<li><a href="#inter-process-communication">Inter process communication</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1128,7 +1137,7 @@ window.MathJax = {
           
             <h1>
               
-              1.1: The C programming language
+              6.6: Inter task communication (lab)
             </h1>
           
 
@@ -1138,201 +1147,30 @@ window.MathJax = {
 
 
 
-<p>The <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C language</a> is a programming language developed in the &lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.</p>
+<figure>
+    <img src="../../img/os/header_communication.jpg"/> 
+</figure>
 
-<p>C is an <strong>imperative</strong> programming language. You will notice this when writing some code yourself: we write instructions as <em>statements</em>. These rules or statements are structured in <code>function</code> and <code>struct</code> types. There is little <strong>declarative</strong> to it, compared to other higher level languages. C&rsquo;s footprint is quite small, the syntax is concise and easy to learn. Statements always express <em>how</em> to do things, instead of <em>what</em> it is doing. Increasing readability is of course important. We could for instance use <code>#define</code> to give meaning to a few symbols, or write clear <code>function</code> blocks.</p>
 
-<p>C is primarily being used in embedded system development because it is so closely related to the hardware itself. The UNIX, Windows and OSX kernels are fully written in C. The operating system of your cellphone, smartwatch or handheld all build on top of C. A huge amount of languages such as Java (JVM), Python, Ruby and PHP are first and foremost implemented in C.</p>
+<h2 id="inter-process-communication">Inter process communication</h2>
 
-<h3 id="comparison-with-java">Comparison with Java</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">IOException</span>;
-<span style="color:#f92672">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">nio</span>.<span style="color:#f92672">*</span>;
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileReader</span> {
-
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">String</span> read(String <span style="color:#a6e22e">file</span>) <span style="color:#66d9ef">throws</span> <span style="color:#a6e22e">IOException</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(file)));
-    }
-}
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] <span style="color:#a6e22e">args</span>) {
-        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;reading file: &#34;</span>);
-        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#66d9ef">new</span> FileReader().<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;sup.txt&#34;</span>));
-    }
-}</code></pre></div>
-<p>How would one go around doing something like that in C? That will become difficult as C does not have a <code>class</code> system! A lower level implementation could look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">read</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> file) {
-    FILE <span style="color:#f92672">*</span>filePointer <span style="color:#f92672">=</span> fopen(file, <span style="color:#e6db74">&#34;r&#34;</span>);
-    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>buffer <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">255</span>);
-
-    fgets(buffer, <span style="color:#ae81ff">255</span>, (FILE<span style="color:#f92672">*</span>) filePointer);
-    fclose(filePointer);
-    <span style="color:#66d9ef">return</span> buffer;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    printf(<span style="color:#e6db74">&#34;reading file: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    printf(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, read(<span style="color:#e6db74">&#34;sup.txt&#34;</span>));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-
-<div class="ex">
-	<div class="inner">
-    	<p>Compile the above with <code>gcc -o fileio fileio.c</code>. <br/>
-Save some text in a file called &ldquo;sup.txt&rdquo;, and execute the program with <code>./fileio</code>. <br/>
-Congratulations on your first compiled C program!</p>
-
-	</div>
+<div class="notices note" ><p>These exercises are to be done in a terminal, using the command line interface.</p>
 </div>
 
-<p>There are a lot of problems with this implementation: the buffer length is hardcoded and the memory has not been released. A <code>FileReader</code> Java class that does everything for you simply cannot be created. As you can see it&rsquo;s a lot more <strong>low-level</strong> work than Java&rsquo;s one-liners like <code>Files.readAllBytes</code>! C does not even have the keyword <code>new</code>. Ouch.</p>
 
-<p>Key differences between C and a higher level language such as C#:</p>
+<ul>
+<li><p>Open two terminals. On one terminal you start a process that takes some minutes to finish. From the other terminal:</p>
 
 <ol>
-<li>C&rsquo;s syntax footprint is small: no private/protected/class/interface/inheritance/bool/string&hellip; No &ldquo;standard&rdquo; libraries.</li>
-<li>C does NOT have exceptions! It works with <em>interrupts</em> and error codes (<code>return 0</code>).</li>
-<li>C does NOT have garbage collection: you manage the memory yourself.</li>
-<li>C does NOT have a virtual machine (JVM, CLR) but gets compiled to native machine code.</li>
-<li>C code usually is full of pointer variables to manipulate memory directly.</li>
-<li>C allows for combination-integer-types (<code>unsigned short int</code>)</li>
-<li>C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for <a href="https://www.devdungeon.com/content/how-mix-c-and-assembly">mixing with assembly</a>.</li>
-</ol>
+<li>figure out the <strong>process ID</strong> of the first process</li>
+<li>send a <strong>kill</strong> signal to that first process.</li>
+</ol></li>
 
-<h2 id="basic-c">Basic C</h2>
+<li><p>something with &lt; and &gt;</p></li>
 
-<h3 id="hello-world">Hello World</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> nr <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
-    printf(<span style="color:#e6db74">&#34;sup? %d&#34;</span>, nr);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>The <code>main()</code> function returns a number that determines whether or not your program was executed successfully (0), else some kind of error code will be returned. <code>printf</code> is a function in the default IO header that we need to include, just like Java&rsquo;s <code>import</code>.</p>
-
-<p>The &ldquo;f&rdquo; of printf stands for &ldquo;formatting&rdquo; as you can see in the example. See <a href="https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html">Formatted output</a>.</p>
-
-
-<div class="ex">
-	<div class="inner">
-    	<p>Write a program that outputs the following: <br/>
-&ldquo;pi is&nbsp;&nbsp;&nbsp;&nbsp;3.1415&rdquo;<br/>
-Based on the floating-point variable pi with a value of <code>3.1415</code>. The output should end with a new line and contain a tab.</p>
-
-	</div>
-</div>
-
-<h3 id="use-functions-to-structure-code">Use functions to structure code</h3>
-
-<p>Done with <code>function</code>. Blocks such as if, for, while, do are familiar and work just like in other languages:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">say_something_if_positive</span>(<span style="color:#66d9ef">int</span> number) {
-    <span style="color:#66d9ef">if</span>(number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>) {
-        printf(<span style="color:#e6db74">&#34;wow, positive or what? </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> number; i<span style="color:#f92672">++</span>) {
-            printf(<span style="color:#e6db74">&#34;%d &#34;</span>, i);
-        }
-        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    }
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    say_something_if_positive(<span style="color:#ae81ff">5</span>);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>You <strong>cannot overload</strong> functions in C, unlike in C++ and Java. That means each function name is unique:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">yay</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">yay</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">return</span> yay();   <span style="color:#75715e">// ??
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>Does, depending on the compiler, not compile:</p>
-
-<pre>
-test.c:5:5: error: redefinition of 'yay'
-int yay() {
-    ^
-test.c:1:5: note: previous definition is here
-int yay() {
-    ^
-1 error generated.
-</pre>
-
-<h3 id="primitives-and-combinational-types">Primitives and combinational types</h3>
-
-<p>The C language provides the four basic arithmetic type specifiers:</p>
-
-<ol>
-<li><code>char</code> (1 byte)</li>
-<li><code>int</code> (4 bytes)</li>
-<li><code>float</code> (4 bytes)</li>
-<li><code>double</code> (8 bytes)</li>
-</ol>
-
-<p>Together with the modifiers:</p>
-
-<ol>
-<li><code>signed</code> (minus and plus signs supported)</li>
-<li><code>unsigned</code> (only plus signs, greater range)</li>
-<li><code>short</code> (/2 bytes)</li>
-<li><code>long</code> (x2 bytes)</li>
-</ol>
-
-<p><a href="https://en.wikipedia.org/wiki/C_data_types">The table on Wikipedia</a> lists the permissible combinations to specify a large set of storage size-specific declarations. <code>char</code> is the smallest addressable unit, and <code>long double</code> is the biggest. For instance, <code>unsigned char</code> gives you a range of 0 to 255, while <code>signed char</code> works from -127 to 127.</p>
-
-
-<div class="notices note" ><p>Actual byte sizes are dependent on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using <code>sizeof(type)</code>.</p>
-</div>
-
-
-<h3 id="strings-what-do-you-mean">Strings? What do you mean?</h3>
-
-<p>Forget it: <code>char[]</code> or a <code>char*</code> pointer is the only possibility. And no, it is not as easy as in Java to handle arrays due to the way they are defined.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#define SIZE 10
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> arr[SIZE];
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> SIZE; i<span style="color:#f92672">++</span>) {
-        arr[i] <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;
-    }
-
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> SIZE; j<span style="color:#f92672">++</span>) {
-        printf(<span style="color:#e6db74">&#34;array index %d has value %d </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, j, arr[j]);
-    }
-
-    <span style="color:#66d9ef">char</span> string[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi there&#34;</span>;
-    printf(<span style="color:#e6db74">&#34;%s&#34;</span>, string);
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>C reserves the right amount of memory with string literals you know from Java. The <code>string[]</code> char array does contain <strong>9 characters</strong> and not 8! That is because the end of the array is determined by a magical <strong>NULL terminator</strong>, <code>\0</code>. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using <code>%s</code>.</p>
-
-<p>Handy string utility functions reside in the header file <code>&lt;string.h&gt;</code> (copying, concatenating, asking for the length, &hellip;) See <a href="https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html">GNU C: String utils</a>.</p>
-
-
-<div class="ex">
-	<div class="inner">
-    	<p>What is the result of <code>strcmp(&quot;hello&quot;, &quot;Hello&quot;)</code>? <br/>
-And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot;, 5)</code>?</p>
-
-	</div>
-</div>
-
-<p>Hint: <code>man strcmp</code>!</p>
+<li></li>
+</ul>
 
 
 <footer class=" footline" >
@@ -1371,37 +1209,6 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -1412,9 +1219,6 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -1431,70 +1235,6 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
                         
             
@@ -1591,6 +1331,38 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -1752,54 +1524,6 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -1823,6 +1547,142 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -2036,10 +1896,10 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch1-c/" title="1: Introduction in C"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch1-c/intro-labs/" title="1.2: String Manipulation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch7-stack/" title="7: The Stack &amp; The Heap" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2049,19 +1909,19 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583250005"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583250005"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583250005"></script>
-    <script src="../../js/jquery.sticky.js?1583250005"></script>
-    <script src="../../js/featherlight.min.js?1583250005"></script>
-    <script src="../../js/highlight.pack.js?1583250005"></script>
+    <script src="../../js/clipboard.min.js?1583249872"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583249872"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583249872"></script>
+    <script src="../../js/jquery.sticky.js?1583249872"></script>
+    <script src="../../js/featherlight.min.js?1583249872"></script>
+    <script src="../../js/highlight.pack.js?1583249872"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583250005"></script>
-    <script src="../../js/learn.js?1583250005"></script>
-    <script src="../../js/hugo-learn.js?1583250005"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583249872"></script>
+    <script src="../../js/learn.js?1583249872"></script>
+    <script src="../../js/hugo-learn.js?1583249872"></script>
 
-    <link href="../../mermaid/mermaid.css?1583250005" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583250005"></script>
+    <link href="../../mermaid/mermaid.css?1583249872" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583249872"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

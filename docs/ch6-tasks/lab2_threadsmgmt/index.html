@@ -12,20 +12,20 @@
     <title>6.4: Threads :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583162046" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583162046" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583162046" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583162046" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583162046" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583162046" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583162046" rel="stylesheet">
-    <link href="../../css/theme.css?1583162046" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583162046" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583229447" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583229447" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583229447" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583229447" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583229447" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583229447" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583229447" rel="stylesheet">
+    <link href="../../css/theme.css?1583229447" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583229447" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583162046" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583229447" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583162046"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583229447"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583162046"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583162046"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583229447"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583229447"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583162046"></script>
+<script type="text/javascript" src="../../js/search.js?1583229447"></script>
 
     
   </div>
@@ -1148,26 +1148,48 @@ window.MathJax = {
 <h2 id="creating-and-inspecting-threads">Creating and inspecting threads</h2>
 
 <ul>
-<li><p>Write a C-program that has 3 threads. Each threads announces its existence (through a printf) together with their PIDs.</p></li>
+<li>Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID.</li>
+</ul>
 
-<li><p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The king thread sleeps for a random amount of time and signals the servants when it has awoken. All servant threads politly say <strong>Good morning, sire</strong>. When <strong>all</strong> of them have greeted the king tread. The king thread goes to sleep again.</p></li>
+<figure>
+    <img src="../../img/os/sc_641.png"/> <figcaption>
+            <h4>An example output</h4>
+        </figcaption>
+</figure>
 
-<li><p>Analyse the exercise 6_4_3.c file and write a report (&lt; 3 pages):</p>
+<ul>
+<li><p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of threads should be configurable through a define. The king thread sleeps for a random amount of time and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
+
+<ul>
+<li>the order of the servants <strong>can</strong> vary</li>
+<li>every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
+</ul></li>
+</ul>
+
+<figure>
+    <img src="../../img/os/sc_642.png"/> <figcaption>
+            <h4>An example output</h4>
+        </figcaption>
+</figure>
+
+<ul>
+<li>Analyse exercise 6_4_3.c (shown below) and write a report (<strong>&lt;</strong> 3 pages):
 
 <ol>
 <li>describe what the program does</li>
-<li>make a chart that plots the amount of seconds the program takes in function of the number of threads that are contributing
+<li>make a chart that plots &lsquo;the elapsed real time&rsquo; the program consumes in function of the number of &lsquo;the number of threads that are contributing&rsquo;
 
 <ul>
 <li>the scale on the X-axis goes from 2 to 300</li>
 <li>at least 8 data points should be present in the chart</li>
+<li><strong>TIP</strong> the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
 </ul></li>
 <li>interpret the chart</li>
-<li>there is a chance that multiple consumers handle the same number. Prevent this from happening ! Describe your solution in the report</li>
+<li>there is a chance that multiple consumers handle the same number. Prevent this from happening !! Describe your solution in the report.</li>
 </ol></li>
 </ul>
 
-<p><strong>hand in the report AND the modified C file</strong></p>
+<p><center><strong>hand in the report AND the modified C file</strong></center></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -1990,19 +2012,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583162046"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583162046"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583162046"></script>
-    <script src="../../js/jquery.sticky.js?1583162046"></script>
-    <script src="../../js/featherlight.min.js?1583162046"></script>
-    <script src="../../js/highlight.pack.js?1583162046"></script>
+    <script src="../../js/clipboard.min.js?1583229447"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583229447"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583229447"></script>
+    <script src="../../js/jquery.sticky.js?1583229447"></script>
+    <script src="../../js/featherlight.min.js?1583229447"></script>
+    <script src="../../js/highlight.pack.js?1583229447"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583162046"></script>
-    <script src="../../js/learn.js?1583162046"></script>
-    <script src="../../js/hugo-learn.js?1583162046"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583229447"></script>
+    <script src="../../js/learn.js?1583229447"></script>
+    <script src="../../js/hugo-learn.js?1583229447"></script>
 
-    <link href="../../mermaid/mermaid.css?1583162046" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583162046"></script>
+    <link href="../../mermaid/mermaid.css?1583229447" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583229447"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

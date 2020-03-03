@@ -1,5 +1,5 @@
 ---
-title: '6.2: Processes'
+title: '6.2: Processes (lab)'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
@@ -20,5 +20,7 @@ weight: 2
 * Write a C-program that creates 4 child processes
   * every of the childeren checks which numbes (<10k) are [prime](https://en.wikipedia.org/wiki/Prime_number)
   * every child reports only numbers that are prime, together with its own PID
+  * before exiting, a child must announce how many prime numbers it has found
+  * **TIP:** don't worry too much about the efficienty of calculating whether a number is prime or not. The calculation is meant to be time-consuming.
 
 {{% figure src="/img/os/sc_623.png" title="An example output" %}}

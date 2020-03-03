@@ -1,5 +1,5 @@
 ---
-title: '6.1: Process management'
+title: '6.1: Processes'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
@@ -171,12 +171,7 @@ Every process that is created has a list of open files. Even programs that do no
 0. standard output (stdout)
 0. standard error (stderr)
 
-By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done like this:
-
-* process < STDIN 1>STDOUT 2>STDERR
-* process < STDIN 1>STDOUT 2>&1
-
-{{% figure src="/img/os/sc_redirect_stdout.png" title="Redirection of the standard output " %}}
+By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done and will be briefly touched in [section 6.5](/ch6-tasks/intertasks/).
 
 
 

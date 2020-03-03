@@ -1,37 +1,19 @@
 ---
-title: '6.5: Inter-task communication'
+title: '6.5: Inter task communication'
 pre: "<i class='fas fa-book'></i> "
 weight: 5
 draft: true
 ---
 
-## What's in a task ?
+## Communication between tasks
 
-Up until this point a process and a thread were discussed
+Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, **good job !!**
 
+It would make sense, though, if different tasks were able to communicate with eachother. A distinction should be made between multi-processes and multi-threading. Although both techniques are made for running multiple jobs, the communication between the jobs is much different in both.
 
+## Communication between processes
 
-{{% notice error %}}
-**!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! continue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
-{{% /notice %}}
-
-
-. However, a better distinction is to be made. A **task** is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a **thread**. 
-
-A process can run one single thread, or multiple threads. In all cases a process is a **standalone** unit. A thread, however, always belongs to process and is therefor not standalone.
-
-When a process is divided into multiple threads, all threads share the same text, data, and bss segments with the process. The heap is also shared, but the stack is copied.
-
-{{<figure src="/img/os4_proc_thread.png" title="Sections in a single threaded (left) and multithreaded (right) process.">}}
-
-Note that, when running multile instances of a program, multiple processes are created. In contrast, when a program starts multiple threads, **no** additional processes are created.
-
-
-## Hey task, it's me: task !
-
-Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !! It would make sense though if different tasks were able to communicate with eachother. A distinction was made between multi-processes and multi-threading. Although both concepts are made for running multiple jobs, the communication between the jobs is much different in multi-processes and multi-threading.
-
-### Multiple processes
+There are three main techniques to facilitate communication between multiple processes:
 
 1. signals
 2. pipes
@@ -172,3 +154,121 @@ The example above chains the following:
 
 
 ## Don't lock me out
+
+
+Open files list
+
+* process < STDIN 1>STDOUT 2>STDERR
+* process < STDIN 1>STDOUT 2>&1
+
+{{% figure src="/img/os/sc_redirect_stdout.png" title="Redirection of the standard output " %}}
+
+
+
+## Communication between threads
+
+
+## Inter-thread communication
+One *raison d'être* for multi-threaded applications is **resource sharing**. In the example that is shown above this is done through a **global variable** 'counter'. Because no measures were taken this is exactly what goes wrong in that example. The output of the example looks like shown below.
+
+{{% figure src="/img/os/sc_631.png" %}}
+
+This might come as a surprise :smiley: <br/>
+It should be clear that what we wanted to see was *Job 1 started* followed by *Job 1 finished* and that this would be repeated again for job number 2.
+
+The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2 in contrast with the expected value of 1.
+
+### Mutex
+The simplest form of solving inter-thread communication issues is the use of a mutex. This is a portmanteau of **Mut**ual **Ex**clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you **lock** the door. Others that want to occupy the toilet have to wait until you're finished and you **unlock** the door (and get out).
+
+The concept of a mutex is implemented in the pthreads library as a new variable type: **pthread_mutex_t**. Locking and unlocking can be done through functions **pthread_mutex_lock()** and **pthread_mutex_unlock()**.
+
+The example above can be rewritten using a mutex:
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int counter;
+pthread_mutex_t lock_counter;                   /* THIS LINE HAS BEEN ADDED */
+
+void* doSomeThing(void *arg) {
+    unsigned long i = 0;
+
+    int id;                                     /* THIS LINE HAS BEEN ADDED */
+    pthread_mutex_lock(&lock_counter);          /* THIS LINE HAS BEEN ADDED */
+    counter += 1;
+    id = counter;                               /* THIS LINE HAS BEEN ADDED */
+    pthread_mutex_unlock(&lock_counter);        /* THIS LINE HAS BEEN ADDED */
+
+
+    printf("  Job %d started\n", id);           /* THIS LINE HAS BEEN CHANGED */
+    for(i=0; i<(0xFFFFFFFF);i++);
+    printf("  Job %d finished\n", id);          /* THIS LINE HAS BEEN CHANGED */
+
+    return NULL;
+}
+
+int main(void) {
+  int i = 0, err;
+  pthread_t tid[2];
+
+  while(i < 2) {
+    err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
+    if (err != 0) {
+      printf("\ncan't create thread :[%s]", strerror(err));
+    }
+    i++;
+  }
+
+  pthread_join(tid[0], NULL);
+  pthread_join(tid[1], NULL);
+
+  return 0;
+}
+```
+
+This solves the issue that was encountered above.
+{{% figure src="/img/os/sc_mutex.png" %}}
+
+### Semaphore
+
+A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys. 
+
+{{% figure src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" title="This photo of Cafe Boulevard is courtesy of Tripadvisor"  width="50%" %}}
+
+Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, he/she needs to take a bracelet and put it on. When there are not more bracelets, the child has to wait until another child leaves the room and places the bracelet back in the bowl.
+
+This technique is used in producer-consumer problems, amongst other. It is pointed out that if there is only a single token in the semaphore, this behaves exactly the same as a mutex. Such a semaphore is referred to as a **binary semaphore**.
+
+The **pthreads** library also provides an API to program with semaphores. It contains functions like:
+
+* sem_init()
+* sem_wait()
+* sem_trywait()
+* sem_post()
+* sem_getValue()
+
+**TODO** **TODO** **TODO** **TODO** **TODO** 
+https://techdifferences.com/difference-between-semaphore-and-mutex.html
+**TODO** **TODO** **TODO** **TODO** **TODO** 
+
+
+{{% notice error %}}
+**!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! continue here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!**
+{{% /notice %}}
+
+
+. However, a better distinction is to be made. A **task** is a name that can cover both processes and threads. A process is, as was discussed in the previous chapter, an instance of a program that is running. Within a program multiple sequence streams could be written. Such a sequence stream within a process, is referred to with a **thread**. 
+
+A process can run one single thread, or multiple threads. In all cases a process is a **standalone** unit. A thread, however, always belongs to process and is therefor not standalone.
+
+When a process is divided into multiple threads, all threads share the same text, data, and bss segments with the process. The heap is also shared, but the stack is copied.
+
+{{<figure src="/img/os4_proc_thread.png" title="Sections in a single threaded (left) and multithreaded (right) process.">}}
+
+Note that, when running multile instances of a program, multiple processes are created. In contrast, when a program starts multiple threads, **no** additional processes are created.
+

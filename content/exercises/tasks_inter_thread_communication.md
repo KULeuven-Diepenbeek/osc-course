@@ -13,9 +13,8 @@ draft: true
       * at least 8 data points should be present in the chart
       * **TIP** the command [*time*](https://linux.die.net/man/1/time)
   3. interpret the chart
-  4. there is a chance that multiple consumers handle the same number. Prevent this from happening !! Describe your solution in the report.
 
-<center>**hand in the report AND the modified C file**</center>
+<center>**hand in the report**</center>
 
 ```C
 #include <stdio.h>

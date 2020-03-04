@@ -31,6 +31,10 @@ weight: 6
 6.4: Threads (lab)
 
 6.5 Inter Task communication
-  * 
+
+  * Communication between processes
+    1. Shared memory
+    2. Message passing
+  * Communication between threads
 
 6.5 Inter Task communication (lab)

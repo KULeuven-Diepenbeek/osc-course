@@ -6,7 +6,7 @@ draft: true
 ---
 
 
-
+c
 ## Out of fuel ? Take a Shell
 
 When a user logs in on a Linux computer, typically one of the following approaches is used:

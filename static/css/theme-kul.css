@@ -63,6 +63,15 @@ div.todo {
     text-transform: uppercase;
 }
 
+div.multicolumn {
+    display: flex;
+    justify-content: space-around;
+}
+
+div.multicolumn div.column{
+    width: 48%;
+}
+
 /* end VlJo */
 
 

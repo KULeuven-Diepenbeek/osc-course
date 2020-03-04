@@ -46,6 +46,7 @@ As can be learned from even looking at the name **multi-threaded** process, such
       <li>the code segment</li>
       <li>the data segment</li>
       <li>the list of open files</li>
+      <li>the heap</li>
     </ul>
   </div>
   <div class="column">

@@ -5,26 +5,136 @@ weight: 5
 draft: true
 ---
 
-## Communication between tasks
-
 Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, **good job !!**
 
 It would make sense, though, if different tasks were able to communicate with eachother. A distinction should be made between multi-processes and multi-threading. Although both techniques are made for running multiple jobs, the communication between the jobs is much different in both.
 
+
 ## Communication between processes
 
-There are three main techniques to facilitate communication between multiple processes:
+There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
 
-1. signals
-2. pipes
-3. System V IPC
-  * message queues
-  * semaphores
-  * shared memory
+1. Shared memory
+2. Message passing
 
+{{% figure src="/img/os/db_ipc.png" title="The two main techniques for inter process communication" %}}
+{{% dinobook %}}
+
+### 1. Shared memory
+
+When two processes communicate through shared memory, they have to be aware that the memory is **not** protected by the OS. One of the reasons why there are multiple processes is to certain tasks from other tasks. This protection is normally provided by the OS. An example is given below.
+
+
+{{% figure src="/img/os/sc_stacksmashing.png" title="An example of memory protection that given by the OS" %}}
+
+
+```C
+#include <stdio.h>
+
+int main(void) {
+  int i, my_array[8];
+
+  for(i=0;i<=8;i++) {
+    my_array[i] = i+1;
+  }
+
+  for(i=0;i<8;i++) {
+    printf("%d\n", my_array[i]);
+  }
+
+  return 0;
+}
+```
+
+A programming API for using shared memory is provided by POSIX. The example below shows a **producer** on the left and a **consumer** on the right.
+
+<div class="multicolumn">
+  <div class="column">
+  {{< highlight c >}}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/shm.h>
+#include <sys/mman.h>
+
+int main() {
+  const int SIZE = 4096; /* buffersize (bytes) */
+  const char *name = "OS"; /* shared memory object name */
+  const char *message_0 = "Hello"; /* message 1 */
+  const char *message_1 = "World!"; /* message 2*/
+  int shm_fd; /* file descriptor */
+  void *ptr;
+
+  /* create the shared memory object */
+  shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
+
+  /* configure the size of the shared memory object */
+  ftruncate(shm_fd, SIZE);
+
+  /* memory map the shared memory object */
+  ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+
+  /* write to the shared memory object */
+  sprintf(ptr,"%s",message_0);
+  ptr += strlen(message_0);
+  sprintf(ptr,"%s",message_1);
+  ptr += strlen(message_1);
+
+
+
+
+  return 0;
+}
+  {{< /highlight >}}
+  </div>
+  <div class="column">
+  {{< highlight c >}}
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/shm.h>
+#include <sys/mman.h>
+
+
+int main() {
+  const int SIZE = 4096; /* buffersize (bytes) */
+  const char *name = "OS"; /* shared memory object name */
+
+
+  int shm_fd; /* file descriptor */
+  void *ptr;
+
+  /* open the shared memory object */
+  shm_fd = shm_open(name, O_RDONLY, 0666);
+
+
+
+
+  /* memory map the shared memory object */
+  ptr = mmap(0, SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
+
+
+  /* read from the shared memory object */
+  printf("%s",(char *)ptr);
+
+
+
+  /* remove the shared memory object */
+  shm_unlink(name);
+
+  return 0;
+}
+  {{< /highlight >}}
+  </div>
+</div>
+{{% dinobook %}}
+
+
+### 2. Message passing
 
 #### Signals
-The first mechanism for interprocess communication (IPC) comes in the form of **signals**. This is the cheapest form of IPC. It litteraly allows one process to send a signal to another process, through the use of the function **kill()**. Although the name might be a bit misleading, it can be used to send all different signals. This function is to be used in programs, but it also has CLI-compatible command **kill**.
+One mechanism for interprocess communication (IPC) comes in the form of **signals**. This is the cheapest form of IPC. It litteraly allows one process to send a signal to another process, through the use of the function **kill()**. Although the name might be a bit misleading, it can be used to send all different signals. This function is to be used in programs, but it also has CLI-compatible command **kill**.
 
 ```bash
 jvliegen@localhost:~/$ kill -L
@@ -141,7 +251,8 @@ The example above chains the following:
 
 **Named pipes** are the other type of pipes that can be created. The main difference is the lifetime of this mechanism. The **anonymous** pipes above only lived as long as the processes live. Named pipes have to be closed explictly (or at shutdown).
 
-{{<todo message="Give example on > and <">}}
+Anonymous pipes are use heavily on a **CLI**. Do you remember the Process Control Block ? This has one field called **list of open files** ... 
+
 
 #### System V IPC
 {{<todo message="Out-of-scope ?">}}

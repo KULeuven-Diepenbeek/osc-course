@@ -18,5 +18,7 @@ draft: true
     * announcement of first exercise
   * 3h: **ch2** Interrupts (halfway exercise 2.4)
 * W4: 
-  * 1.5h: remainder of ch2 Interrupts
+  * 1.5h: remainder of ch2 Interrupts (15' early)
   * 3h: **ch4** Debugging
+* W5: 
+  * 1.5h: **ch5** Intro to OS

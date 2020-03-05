@@ -4,9 +4,12 @@ draft: true
 ---
 
 # TODO
-* add stuff for bitwise operations 
+* ch2: add stuff for bitwise operations 
   * in C ?
   * in Interrupts ?
+* ch2: add "Good design practice" for working with interrupts
+  * keep ISR short
+  * nested Interrupts
 
 # TIMING AY2019-2020
 * W1: 1.5h + 3h
@@ -22,3 +25,4 @@ draft: true
   * 3h: **ch4** Debugging
 * W5: 
   * 1.5h: **ch5** Intro to OS
+  * 3h: 

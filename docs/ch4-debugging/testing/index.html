@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.1" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>4.3: The Middle Way: TDD :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583309635" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583309635" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583309635" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583309635" rel="stylesheet">
-    <link href="../../css/theme.css?1583309635" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583309635" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583403592" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583403592" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583403592" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583403592" rel="stylesheet">
+    <link href="../../css/theme.css?1583403592" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583403592" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583309635" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583403592" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583309635"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583403592"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583309635"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583309635"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583403592"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583403592"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583309635"></script>
+<script type="text/javascript" src="../../js/search.js?1583403592"></script>
 
     
   </div>
@@ -1145,7 +1145,8 @@ window.MathJax = {
 
 
 <div class="notices warning" ><p>Google Test is a <code>C++</code> (11) framework, not a <code>C</code> framework! We will be using <code>g++</code> instead of <code>gcc</code> to compile everything. C++ files are suffixed with <code>.cpp</code> instead of <code>.c</code>.<br/>
-Major differences between both languages exist but will not be needed to know all about in order to write a few simple tests.</p>
+Major differences between both languages exist but will not be needed to know all about in order to write a few simple tests.<br/><br/>
+Since <code>g++</code> is not installed on the image by default, use <code>apt install g++</code> to download and install the toolchain.</p>
 </div>
 
 
@@ -1154,7 +1155,7 @@ Major differences between both languages exist but will not be needed to know al
 <p>Most open source libraries require you to download the source code and compile it yourself. For Google Test, we will do exactly that, since we are learning how to work with compiling and making things anyway. We want to only compile <em>googletest</em>, and not <em>googlemock</em> - both are part of the same repository.</p>
 
 <ul>
-<li>Clone the github repository: <a href="https://github.com/google/googletest/tree/v1.10.x">https://github.com/google/googletest/tree/v1.10.x</a>.</li>
+<li>Clone the github repository: <a href="https://github.com/google/googletest/">https://github.com/google/googletest/</a>. We want to build branch <code>v1.10.x</code> - the <code>master</code> branch is too unstable. Remember how to switch to that branch? Use <code>git branch -a</code> to see all branches, and <code>git checkout -b [name] remotes/origin/[name]</code> to check it out locally. Verify with <code>git branch</code>.</li>
 <li><code>cd googletest</code></li>
 <li>Create a builddir and navigate into it: <code>mkdir build</code>, <code>cd build</code></li>
 <li>Build Makefiles using cmake: <code>cmake ./../</code></li>
@@ -1167,6 +1168,8 @@ Major differences between both languages exist but will not be needed to know al
 <li><code>libgtest.a</code></li>
 <li><code>ligbtest_main.a</code></li>
 </ol>
+
+<p>In the subfolder <code>googletest/googletest/build/lib</code>.</p>
 
 <h3 id="b-usage">B. Usage</h3>
 
@@ -1247,26 +1250,36 @@ To be equal to: 5
 <pre>
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-main.cpp
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-tests.cpp
-Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/libgtest.a $GTEST_DIR/build/libgtest_main.a
-Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
+Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/lib/libgtest.a $GTEST_DIR/build/lib/libgtest_main.a
+Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out -lpthread
 [==========] Running 2 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 2 tests from AddTest
 [ RUN      ] AddTest.ShouldAddOneAndTo    
 </pre>
 
-<p>As you can see, it can be handy to create a shell variable <code>$GTEST_DIR</code> that points to your own Google Test directory.</p>
+<p>As you can see, it can be handy to create a shell variable <code>$GTEST_DIR</code> that points to your own Google Test directory. To do that, edit the <code>.bashrc</code> file in your <code>~</code> (home) folder. Remember that files starting with a dot are hidden by default, so use the <code>-a</code> flag of the <code>ls</code> command. Add the line:</p>
+
+<p><code>GTEST_DIR=/hone/[user]/googletest/googletest</code></p>
+
+<p>And reopen all terminals. Verify the above using <code>echo $GTEST_DIR</code>, it should print out the path.</p>
+
+
+<div class="notices note" ><p>The <code>-lpthread</code> linking flag tells the compiler to link the standard threading libraries along with anything else, that are needed by GTest internally. We will get back on these in <a href="../../ch6-tasks">chapter 6</a>. <br/>
+Without this flag, you will get the following errors: &ldquo;ld returned 1 exit status, undefined reference to pthread_[fn]&rdquo;</p>
+</div>
+
 
 <h3 id="c-debugging-with-gtest">C. &lsquo;Debugging&rsquo; with GTest</h3>
 
 <p>Going back to the crackme implementation, a simplified method that verifies input is the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">verify</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> pwd) {
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>strcmp(pwd, <span style="color:#e6db74">&#34;250382&#34;</span>);  <span style="color:#75715e">// include string.H
+    <span style="color:#75715e">// return 1 if verified against a pre-determined password, 0 otherwise.
 </span><span style="color:#75715e"></span>}</code></pre></div>
 
 <div class="ex">
 	<div class="inner">
-    	<p>Write a set of tests for the above method. Simply copy it into the test file, or include it from somewhere else.<br/> You should at least have the following cases:</p>
+    	<p>Write a set of tests for the above method - <strong>BEFORE</strong> implementing it yourself! Time to hone your TDD skills acquired from the course &lsquo;Software Engineering Skills&rsquo;. Simply copy it into the test file, or include it from somewhere else.<br/> You should at least have the following edge cases:</p>
 
 <ul>
 <li>right password entered</li>
@@ -1274,7 +1287,9 @@ Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
 <li>empty password (what about <code>NULL</code> or <code>&quot;&quot;</code>?)</li>
 </ul>
 
-<p>Use the GTest macro <code>EXPECT_TRUE</code> and <code>EXPECT_FALSE</code>. See <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Google Test Primer</a>.</p>
+<p>Use the GTest macro <code>EXPECT_TRUE</code> and <code>EXPECT_FALSE</code>. These correspond to JUnit&rsquo;s <code>AssertTrue()</code> and <code>AssertFalse()</code>.</p>
+
+<p>Again, watch out with the order in which parameters should be passed (expected/actual)! See <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">Google Test Primer</a>.</p>
 
 	</div>
 </div>
@@ -2000,19 +2015,19 @@ Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583309635"></script>
-    <script src="../../js/jquery.sticky.js?1583309635"></script>
-    <script src="../../js/featherlight.min.js?1583309635"></script>
-    <script src="../../js/highlight.pack.js?1583309635"></script>
+    <script src="../../js/clipboard.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583403592"></script>
+    <script src="../../js/jquery.sticky.js?1583403592"></script>
+    <script src="../../js/featherlight.min.js?1583403592"></script>
+    <script src="../../js/highlight.pack.js?1583403592"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583309635"></script>
-    <script src="../../js/learn.js?1583309635"></script>
-    <script src="../../js/hugo-learn.js?1583309635"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583403592"></script>
+    <script src="../../js/learn.js?1583403592"></script>
+    <script src="../../js/hugo-learn.js?1583403592"></script>
 
-    <link href="../../mermaid/mermaid.css?1583309635" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583309635"></script>
+    <link href="../../mermaid/mermaid.css?1583403592" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583403592"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

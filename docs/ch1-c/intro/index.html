@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.1" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>1.1: The C programming language :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583309635" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583309635" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583309635" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583309635" rel="stylesheet">
-    <link href="../../css/theme.css?1583309635" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583309635" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583403592" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583403592" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583403592" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583403592" rel="stylesheet">
+    <link href="../../css/theme.css?1583403592" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583403592" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583309635" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583403592" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583309635"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583403592"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583309635"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583309635"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583403592"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583403592"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583309635"></script>
+<script type="text/javascript" src="../../js/search.js?1583403592"></script>
 
     
   </div>
@@ -1145,19 +1145,19 @@ window.MathJax = {
 <p>C is primarily being used in embedded system development because it is so closely related to the hardware itself. The UNIX, Windows and OSX kernels are fully written in C. The operating system of your cellphone, smartwatch or handheld all build on top of C. A huge amount of languages such as Java (JVM), Python, Ruby and PHP are first and foremost implemented in C.</p>
 
 <h3 id="comparison-with-java">Comparison with Java</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">IOException</span>;
-<span style="color:#f92672">import</span> <span style="color:#a6e22e">java</span>.<span style="color:#a6e22e">nio</span>.<span style="color:#f92672">*</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#960050;background-color:#1e0010">import java</span>.<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">IOException</span>;
+<span style="color:#960050;background-color:#1e0010">import java</span>.<span style="color:#a6e22e">nio</span>.<span style="color:#f92672">*</span>;
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileReader</span> {
+<span style="color:#960050;background-color:#1e0010">class FileReader </span>{
 
     <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">String</span> read(String <span style="color:#a6e22e">file</span>) <span style="color:#66d9ef">throws</span> <span style="color:#a6e22e">IOException</span> {
+    <span style="color:#960050;background-color:#1e0010">public String </span>read(<span style="color:#960050;background-color:#1e0010">String file</span>) <span style="color:#960050;background-color:#1e0010">throws IOException </span>{
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String(Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(file)));
     }
 }
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> {
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] <span style="color:#a6e22e">args</span>) {
+<span style="color:#960050;background-color:#1e0010">class Main </span>{
+    <span style="color:#960050;background-color:#1e0010">public static void main</span>(<span style="color:#960050;background-color:#1e0010">String[] args</span>) {
         System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;reading file: &#34;</span>);
         System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#66d9ef">new</span> FileReader().<span style="color:#a6e22e">read</span>(<span style="color:#e6db74">&#34;sup.txt&#34;</span>));
     }
@@ -2049,19 +2049,19 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583309635"></script>
-    <script src="../../js/jquery.sticky.js?1583309635"></script>
-    <script src="../../js/featherlight.min.js?1583309635"></script>
-    <script src="../../js/highlight.pack.js?1583309635"></script>
+    <script src="../../js/clipboard.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583403592"></script>
+    <script src="../../js/jquery.sticky.js?1583403592"></script>
+    <script src="../../js/featherlight.min.js?1583403592"></script>
+    <script src="../../js/highlight.pack.js?1583403592"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583309635"></script>
-    <script src="../../js/learn.js?1583309635"></script>
-    <script src="../../js/hugo-learn.js?1583309635"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583403592"></script>
+    <script src="../../js/learn.js?1583403592"></script>
+    <script src="../../js/hugo-learn.js?1583403592"></script>
 
-    <link href="../../mermaid/mermaid.css?1583309635" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583309635"></script>
+    <link href="../../mermaid/mermaid.css?1583403592" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583403592"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

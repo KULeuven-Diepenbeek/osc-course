@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.1" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>6.4: Threads (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583309635" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583309635" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583309635" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583309635" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583309635" rel="stylesheet">
-    <link href="../../css/theme.css?1583309635" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583309635" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583403592" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583403592" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583403592" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583403592" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583403592" rel="stylesheet">
+    <link href="../../css/theme.css?1583403592" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583403592" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583309635" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583403592" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583309635"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583403592"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583309635"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583309635"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583403592"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583403592"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583309635"></script>
+<script type="text/javascript" src="../../js/search.js?1583403592"></script>
 
     
   </div>
@@ -1163,6 +1163,7 @@ window.MathJax = {
 <ul>
 <li>the order of the servants <strong>can</strong> vary</li>
 <li>every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
+<li>the king <strong>doesn&rsquo;t</strong> wait for the greetings before he goes back to sleep</li>
 </ul></li>
 </ul>
 
@@ -1173,123 +1174,9 @@ window.MathJax = {
 </figure>
 
 <ul>
-<li>Analyse exercise 6_4_3.c (shown below) and write a report (<strong>&lt;</strong> 3 pages):
-
-<ol>
-<li>describe what the program does</li>
-<li>make a chart that plots &lsquo;the elapsed real time&rsquo; the program consumes in function of the number of &lsquo;the number of threads that are contributing&rsquo;
-
-<ul>
-<li>the scale on the X-axis goes from 2 to 300</li>
-<li>at least 8 data points should be present in the chart</li>
-<li><strong>TIP</strong> the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
-</ul></li>
-<li>interpret the chart</li>
-</ol></li>
+<li>Add to the previous exercise the feature that the king <strong>does</strong> have to wait for the greetings of every servant before he goes back to sleep</li>
 </ul>
 
-<p><center><strong>hand in the report</strong></center></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;semaphore.h&gt; </span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;signal.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#define NUMBER_OF_THREADS 5
-</span><span style="color:#75715e">#define MAX_COUNT 500000
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">static</span> sem_t obj_produced;
-<span style="color:#66d9ef">static</span> sem_t obj_consumed;
-
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> shelf;
-
-
-<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">producer</span>() {
-  <span style="color:#66d9ef">int</span> i;
-  
-  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>; i<span style="color:#f92672">&lt;</span> MAX_COUNT; i<span style="color:#f92672">++</span>) {
-    shelf <span style="color:#f92672">=</span> i;
-    sem_post(<span style="color:#f92672">&amp;</span>obj_produced);
-    sem_wait(<span style="color:#f92672">&amp;</span>obj_consumed);
-  }
-
-  <span style="color:#66d9ef">return</span> NULL;
-}
-
-
-<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">consumer</span>() {
-  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> isPrime;
-  <span style="color:#66d9ef">int</span> i;
-  <span style="color:#66d9ef">int</span> VUT;
-
-  <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>) {
-    sem_wait(<span style="color:#f92672">&amp;</span>obj_produced);
-    VUT <span style="color:#f92672">=</span> shelf;
-    sem_post(<span style="color:#f92672">&amp;</span>obj_consumed);
-    printf(<span style="color:#e6db74">&#34;[CONSUMER] %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, VUT);
-
-    isPrime <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">&lt;</span>VUT; i<span style="color:#f92672">++</span>) {
-      <span style="color:#66d9ef">if</span> (VUT <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) {
-        isPrime <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-      }
-    }
-    <span style="color:#66d9ef">if</span>(isPrime<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>) {
-      printf(<span style="color:#e6db74">&#34;    thread #x announces that %d is prime.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
-    }
-  }
-}
-
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-  <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, err;
-  pthread_t tid[NUMBER_OF_THREADS];
-
-  <span style="color:#75715e">// create semaphores
-</span><span style="color:#75715e"></span>  err <span style="color:#f92672">=</span> sem_init(<span style="color:#f92672">&amp;</span>obj_produced, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
-  <span style="color:#66d9ef">if</span>(err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create semaphore: obj_produced [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  }
-  err <span style="color:#f92672">=</span> sem_init(<span style="color:#f92672">&amp;</span>obj_consumed, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
-  <span style="color:#66d9ef">if</span>(err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create semaphore: obj_produced [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  }
-
-  <span style="color:#75715e">// create producer thread
-</span><span style="color:#75715e"></span>  err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>producer, NULL);
-  <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create producer thread: [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  } 
-  printf(<span style="color:#e6db74">&#34;Producer thread created</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-
-  <span style="color:#75715e">// create consumer threads
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>NUMBER_OF_THREADS;i<span style="color:#f92672">++</span>) {
-    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>consumer, NULL);
-    <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create consumer thread %d: [%s]&#34;</span>, i, strerror(err));
-    }
-    printf(<span style="color:#e6db74">&#34;Consumer thread %d created</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
-  }
-
-  <span style="color:#75715e">// wait for producer thread
-</span><span style="color:#75715e"></span>  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
-
-  <span style="color:#75715e">// kill consumer threads 
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>NUMBER_OF_THREADS;i<span style="color:#f92672">++</span>) {
-    pthread_kill(tid[i], <span style="color:#ae81ff">9</span>);
-  }
-
-  <span style="color:#75715e">// delete the semaphores
-</span><span style="color:#75715e"></span>  sem_destroy(<span style="color:#f92672">&amp;</span>obj_produced);
-  sem_destroy(<span style="color:#f92672">&amp;</span>obj_consumed);
-
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
 
 <footer class=" footline" >
 	
@@ -2011,19 +1898,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583309635"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583309635"></script>
-    <script src="../../js/jquery.sticky.js?1583309635"></script>
-    <script src="../../js/featherlight.min.js?1583309635"></script>
-    <script src="../../js/highlight.pack.js?1583309635"></script>
+    <script src="../../js/clipboard.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583403592"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583403592"></script>
+    <script src="../../js/jquery.sticky.js?1583403592"></script>
+    <script src="../../js/featherlight.min.js?1583403592"></script>
+    <script src="../../js/highlight.pack.js?1583403592"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583309635"></script>
-    <script src="../../js/learn.js?1583309635"></script>
-    <script src="../../js/hugo-learn.js?1583309635"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583403592"></script>
+    <script src="../../js/learn.js?1583403592"></script>
+    <script src="../../js/hugo-learn.js?1583403592"></script>
 
-    <link href="../../mermaid/mermaid.css?1583309635" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583309635"></script>
+    <link href="../../mermaid/mermaid.css?1583403592" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583403592"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -7,25 +7,25 @@
     <meta name="description" content="">
 
 
-    <link rel="icon" href="../images/favicon.png" type="image/png">
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>2: Interrupts :: Operating Systems and C</title>
+    <title>3.3: The Ancient Library (RTOS) :: Operating Systems and C</title>
 
     
-    <link href="../css/nucleus.css?1583753091" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1583753091" rel="stylesheet">
-    <link href="../css/hybrid.css?1583753091" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1583753091" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1583753091" rel="stylesheet">
-    <link href="../css/auto-complete.css?1583753091" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1583753091" rel="stylesheet">
-    <link href="../css/theme.css?1583753091" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1583753091" rel="stylesheet">
+    <link href="../../css/nucleus.css?1583753091" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1583753091" rel="stylesheet">
+    <link href="../../css/hybrid.css?1583753091" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1583753091" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1583753091" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1583753091" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1583753091" rel="stylesheet">
+    <link href="../../css/theme.css?1583753091" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1583753091" rel="stylesheet">
     
-      <link href="../css/theme-kul.css?1583753091" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1583753091" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1583753091"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1583753091"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,7 +58,7 @@ window.MathJax = {
 };
 </script>
   </head>
-  <body class="" data-url="/ch2-interrupts/">
+  <body class="" data-url="/appendix/lab_ll_rtos/">
     <nav id="sidebar" class="">
 
 
@@ -66,10 +66,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="../img/style/kul.png" alt="KU Leuven" /><br/>
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1583753091"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1583753091"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1583753091"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1583753091"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1583753091"></script>
+<script type="text/javascript" src="../../js/search.js?1583753091"></script>
 
     
   </div>
@@ -107,7 +107,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch1-c/">
+      <a href="../../ch1-c/">
           <i class='far fa-keyboard'></i> 1: Introduction in C
           
       </a>
@@ -128,7 +128,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
-        <a href="../ch1-c/intro/">
+        <a href="../../ch1-c/intro/">
         <i class='fas fa-book'></i> 1.1: The C programming language
         
         </a>
@@ -147,7 +147,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
-        <a href="../ch1-c/intro-labs/">
+        <a href="../../ch1-c/intro-labs/">
         <i class='fas fa-vial'></i> 1.2: String Manipulation
         
         </a>
@@ -166,7 +166,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
-        <a href="../ch1-c/structs/">
+        <a href="../../ch1-c/structs/">
         <i class='fas fa-book'></i> 1.3: Creating order: Structures
         
         </a>
@@ -185,7 +185,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
-        <a href="../ch1-c/structs-labs/">
+        <a href="../../ch1-c/structs-labs/">
         <i class='fas fa-vial'></i> 1.4: Structs
         
         </a>
@@ -204,7 +204,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
-        <a href="../ch1-c/ecosystems/">
+        <a href="../../ch1-c/ecosystems/">
         <i class='fas fa-book'></i> 1.5: C Ecosystems
         
         </a>
@@ -223,7 +223,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
-        <a href="../ch1-c/ecosystems-labs/">
+        <a href="../../ch1-c/ecosystems-labs/">
         <i class='fas fa-vial'></i> 1.6: Splitting up Code
         
         </a>
@@ -249,11 +249,11 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
-      <a href="../ch2-interrupts/">
+      <a href="../../ch2-interrupts/">
           <i class='fab fa-linux'></i> 2: Interrupts
           
       </a>
@@ -274,7 +274,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
-        <a href="../ch2-interrupts/theory1_arduino/">
+        <a href="../../ch2-interrupts/theory1_arduino/">
         <i class='fab fa-linux'></i> 2.1 Arduino UNO
         
         </a>
@@ -293,7 +293,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
-        <a href="../ch2-interrupts/lab1_arduino-bm/">
+        <a href="../../ch2-interrupts/lab1_arduino-bm/">
         <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
         
         </a>
@@ -312,7 +312,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
-        <a href="../ch2-interrupts/theory2_timer/">
+        <a href="../../ch2-interrupts/theory2_timer/">
         <i class='fab fa-linux'></i> 2.3 The timer
         
         </a>
@@ -331,7 +331,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
-        <a href="../ch2-interrupts/lab2_rocketlaunch/">
+        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
         <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
         
         </a>
@@ -350,7 +350,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
-        <a href="../ch2-interrupts/theory3_interrupt/">
+        <a href="../../ch2-interrupts/theory3_interrupt/">
         <i class='fab fa-linux'></i> 2.5 The internals of interrupts
         
         </a>
@@ -380,7 +380,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch3-pointers/">
+      <a href="../../ch3-pointers/">
           <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
           
       </a>
@@ -401,7 +401,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
-        <a href="../ch3-pointers/pointers/">
+        <a href="../../ch3-pointers/pointers/">
         <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
         
         </a>
@@ -420,7 +420,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
-        <a href="../ch3-pointers/practical-use/">
+        <a href="../../ch3-pointers/practical-use/">
         <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
         
         </a>
@@ -439,7 +439,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
-        <a href="../ch3-pointers/lab/">
+        <a href="../../ch3-pointers/lab/">
         <i class='fas fa-vial'></i> 3.3: The Ancient Library
         
         </a>
@@ -469,7 +469,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch4-debugging/">
+      <a href="../../ch4-debugging/">
           <i class='far fa-keyboard'></i> 4: Debugging
           
       </a>
@@ -490,7 +490,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
-        <a href="../ch4-debugging/debugging-ide/">
+        <a href="../../ch4-debugging/debugging-ide/">
         <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
         
         </a>
@@ -509,7 +509,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
-        <a href="../ch4-debugging/debugging-gdb/">
+        <a href="../../ch4-debugging/debugging-gdb/">
         <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
         
         </a>
@@ -528,7 +528,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
-        <a href="../ch4-debugging/testing/">
+        <a href="../../ch4-debugging/testing/">
         <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
         
         </a>
@@ -558,7 +558,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch5-introos/">
+      <a href="../../ch5-introos/">
           <i class='fab fa-linux'></i> 5: Intro in OS
           
       </a>
@@ -579,7 +579,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
-        <a href="../ch5-introos/intro-os/">
+        <a href="../../ch5-introos/intro-os/">
         <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
         
         </a>
@@ -598,7 +598,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
-        <a href="../ch5-introos/lab1_wetfeet/">
+        <a href="../../ch5-introos/lab1_wetfeet/">
         <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
         
         </a>
@@ -628,7 +628,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch6-tasks/">
+      <a href="../../ch6-tasks/">
           <i class='fab fa-linux'></i> 6: Task management
           
       </a>
@@ -649,7 +649,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
-        <a href="../ch6-tasks/processes/">
+        <a href="../../ch6-tasks/processes/">
         <i class='fas fa-book'></i> 6.1: Processes
         
         </a>
@@ -668,7 +668,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
-        <a href="../ch6-tasks/lab1_processmgmt/">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
         <i class='fas fa-vial'></i> 6.2: Processes (lab)
         
         </a>
@@ -687,7 +687,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
-        <a href="../ch6-tasks/lab2_threadsmgmt/">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
         <i class='fas fa-vial'></i> 6.4: Threads (lab)
         
         </a>
@@ -717,7 +717,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch7-stack/">
+      <a href="../../ch7-stack/">
           <i class='far fa-keyboard'></i> 7: The Stack &amp; The Heap
           
       </a>
@@ -738,7 +738,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-stack/stackvsheap/" title="7.1: The Stack &amp; the Heap" class="dd-item ">
-        <a href="../ch7-stack/stackvsheap/">
+        <a href="../../ch7-stack/stackvsheap/">
         <i class='fas fa-book'></i> 7.1: The Stack &amp; the Heap
         
         </a>
@@ -757,7 +757,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-stack/inspection-labs/" title="7.2: Inspecting memory regions" class="dd-item ">
-        <a href="../ch7-stack/inspection-labs/">
+        <a href="../../ch7-stack/inspection-labs/">
         <i class='fas fa-vial'></i> 7.2: Inspecting memory regions
         
         </a>
@@ -787,7 +787,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch8-memory/">
+      <a href="../../ch8-memory/">
           <i class='fab fa-linux'></i> 8: Memory Management
           
       </a>
@@ -808,7 +808,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch8-memory/memory/" title="8.1: Memory management" class="dd-item ">
-        <a href="../ch8-memory/memory/">
+        <a href="../../ch8-memory/memory/">
         <i class='fas fa-book'></i> 8.1: Memory management
         
         </a>
@@ -838,7 +838,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch9-capitaselecta/">
+      <a href="../../ch9-capitaselecta/">
           <i class='fab fa-linux'></i> 9: Capita Selecta
           
       </a>
@@ -859,7 +859,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch9-capitaselecta/capita-selecta/" title="9.1: Capita Selecta" class="dd-item ">
-        <a href="../ch9-capitaselecta/capita-selecta/">
+        <a href="../../ch9-capitaselecta/capita-selecta/">
         <i class='fas fa-book'></i> 9.1: Capita Selecta
         
         </a>
@@ -889,7 +889,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../exercises/">
+      <a href="../../exercises/">
           <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
           
       </a>
@@ -910,7 +910,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
-        <a href="../exercises/c-integrated-ex/">
+        <a href="../../exercises/c-integrated-ex/">
         <i class='fas fa-pen-square'></i> 1. Integrated C exercise
         
         </a>
@@ -929,7 +929,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
-        <a href="../exercises/c-debugging-testing/">
+        <a href="../../exercises/c-debugging-testing/">
         <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
         
         </a>
@@ -955,11 +955,11 @@ window.MathJax = {
   
     
     <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
-        
+        parent
         
         
         ">
-      <a href="../appendix/">
+      <a href="../../appendix/">
           <i class='fab fa-github'></i> B. Appendix
           
       </a>
@@ -979,8 +979,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
-        <a href="../appendix/lab_ll_rtos/">
+      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item active">
+        <a href="../../appendix/lab_ll_rtos/">
         <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
         
         </a>
@@ -999,7 +999,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
-        <a href="../appendix/reading/">
+        <a href="../../appendix/reading/">
         1. Recommended reading
         
         </a>
@@ -1018,7 +1018,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
-        <a href="../appendix/installing/">
+        <a href="../../appendix/installing/">
         2. Installation Instructions
         
         </a>
@@ -1037,7 +1037,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
-        <a href="../appendix/cheat_sheet/">
+        <a href="../../appendix/cheat_sheet/">
         Cheat sheet
         
         </a>
@@ -1104,6 +1104,8 @@ window.MathJax = {
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -1114,7 +1116,13 @@ window.MathJax = {
             
           
           
-            <a href='../'>Operating Systems and C</a> > 2: Interrupts
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../appendix/'>B. Appendix</a> > 3.3: The Ancient Library (RTOS)
+          
+         
           
          
           
@@ -1123,6 +1131,25 @@ window.MathJax = {
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#the-ancient-library">The Ancient Library</a>
+<ul>
+<li><a href="#1-modeling-the-books">1. Modeling the books</a></li>
+<li><a href="#2-cleaning-up-the-library">2. Cleaning up the library</a></li>
+<li><a href="#optional-3-wild-surge-asc-desc">[OPTIONAL] 3. Wild Surge! ASC/DESC</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -1130,9 +1157,12 @@ window.MathJax = {
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              3.3: The Ancient Library (RTOS)
+            </h1>
           
 
         
@@ -1140,51 +1170,151 @@ window.MathJax = {
 
 
 
-	
 
-<h3 id="chapter-2">Chapter 2</h3>
+<h2 id="the-ancient-library">The Ancient Library</h2>
 
-<h1 id="interrupts-the-next-step-towards-multitasking">Interrupts, the next step towards multitasking</h1>
+<blockquote>
+<p>Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (<a href="https://dublin2019.com/3906-2/fantasy-library-art-736x459/">img src</a>)</p>
+</blockquote>
 
-<p>2.1: Arduino Uno</p>
+<p><img src="../../img/labs/library.png" alt="Library" /></p>
 
-<ul>
-<li>Intro</li>
-<li>Low level programming</li>
-<li>Bit manipulations</li>
-<li>Hello hardware, this is software speaking</li>
-<li>Two beating hearts</li>
-</ul>
+<h3 id="1-modeling-the-books">1. Modeling the books</h3>
 
-<p>2.2 (lab): Bare metal Arduino</p>
-
-<p>2.3: The timer</p>
+<p>The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</p>
 
 <ul>
-<li>16-bit Timer</li>
-<li>Timer frequency</li>
-<li>Polling vs Interrupt</li>
-<li>Configuring the timer with interrupts</li>
+<li><em>Cleaning the streets Beyond the Gate</em>, by <em>Ulder Ravengard</em></li>
+<li><em>Beyond the depths of the Underdark</em>, by <em>Drizzt Do&rsquo;Urden</em></li>
+<li><em>Ancient Aberrations and how to prevent them</em>, by <em>Elminster Aumar</em></li>
+<li><em>Killing people with cows: the ins and outs of Wild Magic</em>, by <em>Neera</em></li>
 </ul>
 
-<p>2.4: (lab) Launch that rocket !!</p>
+<p>How should we proceed to model the concept of a book? Right, a <code>struct</code>! Keep track of the title and the author using <code>char*</code> properties. <br/>
+Proceed with caution and whatever you do, do not directly look into the green light! Use the following blueprint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// typedef of &#34;book&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// forward declarations
+</span><span style="color:#75715e"></span>book<span style="color:#f92672">*</span> <span style="color:#a6e22e">create_books</span>(<span style="color:#66d9ef">void</span>);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print_books</span>(book<span style="color:#f92672">*</span> library);
 
-<p>2.5: The internals of interrupts</p>
+<span style="color:#75715e">// main functions
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
+    print_books(library);
 
-<ul>
-<li>The internals</li>
-</ul>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#75715e">// other functions
+</span><span style="color:#75715e"></span>book<span style="color:#f92672">*</span> <span style="color:#a6e22e">create_books</span>(<span style="color:#66d9ef">void</span>) {
+    <span style="color:#75715e">// ??
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print_books</span>(book<span style="color:#f92672">*</span> library) {
+    <span style="color:#75715e">// ??
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>The structure you provided can be expanded with a third property: <code>book* next</code>, pointing to the next element in the row. That way, when looping through all books, we simply need to follow the &lsquo;next&rsquo; pointer, until a <code>NULL</code> is reached, indicating the end of the library. This technique makes it possible to loop through things <strong>without knowing it&rsquo;s size</strong>!</p>
+
+<p><strong>Tips:</strong> You may <strong>hardcode</strong> the four books mentioned above in the <code>create_books()</code> function. Pay attention that you keep the order of the entries !!</p>
 
 
+<div class="ex">
+	<div class="inner">
+    	<p>Write the required struct and complete the function bodies of <code>create_books()</code> and <code>print_books()</code>.</p>
 
+	</div>
+</div>
+
+<h3 id="2-cleaning-up-the-library">2. Cleaning up the library</h3>
+
+<p>The place looks dusty, doesn&rsquo;t it? <br/>
+Also, the books seem to be placed in a random order. Why don&rsquo;t we take the time, now that we are here and enjoy the green glow, to order these books alphabetically <strong>by author</strong>? You can ignore the surnames, simply sort on the property <code>author</code>. That is, the expected output of your program should be:</p>
+
+<pre>
+Beyond the depths of the Underdark, by Drizzt Do'Urden
+Ancient Aberrations and how to prevent them, by Elminster Aumar
+Killing people with cows: the ins and outs of Wild Magic, by Neera
+Cleaning the streets Beyond the Gate, by Ulder Ravengard
+</pre>
+
+<p>Tips:</p>
+
+<ol>
+<li>Use the <a href="https://www.tutorialspoint.com/c_standard_library/c_function_strcmp">strcmp()</a> function from <code>&lt;string.h&gt;</code> to compare two strings.</li>
+<li>The sorting algorithm that you use is <strong>not</strong> important. You can simply use <a href="https://en.wikipedia.org/wiki/Bubble_sort">bubble sort</a>. However, if you want to use a fancy approach, feel welcome to do so.</li>
+<li>Sorting <strong>should</strong> be done by moving the <strong>objects</strong>, <strong>not the content</strong> of the objects.</li>
+<li>For the sake of simplicity, you may assume that the length of the library is fixed to 4.</li>
+</ol>
+
+<p>&nbsp;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+
+    book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
+    print_books(library);
+
+    library <span style="color:#f92672">=</span> sort_books(library);
+    print_books(library);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+
+<div class="ex">
+	<div class="inner">
+    	<p>Create the function <code>book* sort_books(book* library)</code>. Display the original library and then print it again, after applying the <code>sort_books()</code> function.</p>
+
+	</div>
+</div>
+
+<h3 id="optional-3-wild-surge-asc-desc">[OPTIONAL] 3. Wild Surge! ASC/DESC</h3>
+
+<blockquote>
+<p>A sudden gust of wind enters the old library. You immediately halt what you were doing to carefully listen if imminent threats are upon you and your party. A cloaked figure swings open a side-door and starts casting a spell that sounds very unfamiliar to you. <em>Praeses, Alia, Fero&hellip;</em> An alteration, but which one?! Quick, hide the books! But alas, it was too late&hellip; <br/>
+While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild surges!</em>&rdquo;. The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar&hellip; Suddenly, you know it. The book! The cow book! That was the author! Neera&hellip;</p>
+</blockquote>
+
+<p>Neera managed to completely mess up our sorting strategy, sorting on the <strong>title</strong> of the book instead of on the <strong>author</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+
+    book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
+    print_books(library);
+
+    library <span style="color:#f92672">=</span> sort_books(library);
+    print_books(library);
+
+    <span style="color:#75715e">// NEERA ENCOUNTER:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//   changes a function pointer of sort_books() from sort_books_by_author() to sort_books_by_title()
+</span><span style="color:#75715e"></span>
+    library <span style="color:#f92672">=</span> sort_books(library);
+    print_books(library);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+<p>Tips:</p>
+
+<ol>
+<li>Re-read <a href="../../ch3-pointers">chapter 3 (pointers)</a>!</li>
+<li>You will need two extra functions, <code>sort_books_by_author()</code> and <code>sort_books_by_title()</code>.</li>
+</ol>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Changes the function pointer of sort_books() from <code>sort_books_by_author()</code> to <code>sort_books_by_title()</code></p>
+
+	</div>
+</div>
 
 
 <footer class=" footline" >
 	
 </footer>
 
-        
-            </div> 
+
         
         </div> 
         
@@ -1331,7 +1461,6 @@ window.MathJax = {
             
                 
                     
-                    
                 
                 
 
@@ -1344,9 +1473,6 @@ window.MathJax = {
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1831,6 +1957,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -1843,6 +1970,7 @@ window.MathJax = {
             
             
                 
+                    
                     
                 
                 
@@ -1859,6 +1987,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1915,10 +2046,10 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../ch1-c/ecosystems-labs/" title="1.6: Splitting up Code"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../appendix/" title="B. Appendix"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../appendix/reading/" title="1. Recommended reading" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1928,19 +2059,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1583753091"></script>
-    <script src="../js/perfect-scrollbar.min.js?1583753091"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1583753091"></script>
-    <script src="../js/jquery.sticky.js?1583753091"></script>
-    <script src="../js/featherlight.min.js?1583753091"></script>
-    <script src="../js/highlight.pack.js?1583753091"></script>
+    <script src="../../js/clipboard.min.js?1583753091"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1583753091"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1583753091"></script>
+    <script src="../../js/jquery.sticky.js?1583753091"></script>
+    <script src="../../js/featherlight.min.js?1583753091"></script>
+    <script src="../../js/highlight.pack.js?1583753091"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1583753091"></script>
-    <script src="../js/learn.js?1583753091"></script>
-    <script src="../js/hugo-learn.js?1583753091"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1583753091"></script>
+    <script src="../../js/learn.js?1583753091"></script>
+    <script src="../../js/hugo-learn.js?1583753091"></script>
 
-    <link href="../mermaid/mermaid.css?1583753091" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1583753091"></script>
+    <link href="../../mermaid/mermaid.css?1583753091" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1583753091"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
@@ -1948,3 +2079,4 @@ window.MathJax = {
 
   </body>
 </html>
+

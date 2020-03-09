@@ -10,6 +10,7 @@ draft: true
 * ch2: add "Good design practice" for working with interrupts
   * keep ISR short
   * nested Interrupts
+* ch3.1: print pointers using printf("%p") ?
 
 # TIMING AY2019-2020
 * W1: 1.5h + 3h

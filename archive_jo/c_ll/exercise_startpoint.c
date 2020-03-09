@@ -14,9 +14,8 @@ void clearList(T_node *printer);
 
 int main(void) {
   int i;
-  int flagx=0, flagy = 0;
 
-  T_node *head, *tail, *newelement, *x, *y, *z, *odd, *even;
+  T_node *head, *tail, *newelement;
   head = NULL;
 
   /* seed the random number generator */
@@ -93,6 +92,7 @@ void clearList(T_node *printer) {
       x = y;
       y = y->next;
     }
+    
     // remove final item
     x->next=NULL;
     free(y);

@@ -2,7 +2,6 @@
 title: '6.3: Threads'
 pre: "<i class='fas fa-book'></i> "
 weight: 3
-draft: true
 ---
 
 One of the three core tasks of an OS is the **management of tasks**. These different tasks are all running on the same processor. To make this magic happen some form of management is required.

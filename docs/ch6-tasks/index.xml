@@ -33,6 +33,17 @@ Creating and inspecting processes  Write a C-program that prints its own PID on 
     </item>
     
     <item>
+      <title>6.3: Threads</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
+      <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
+What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up until now all the processes that were discussed contained one thread.
+  The single threaded process    p.</description>
+    </item>
+    
+    <item>
       <title>6.4: Threads (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

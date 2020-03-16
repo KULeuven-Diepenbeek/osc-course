@@ -30,10 +30,10 @@ draft: true
   * 1.5h: **ch5** Intro to OS
   * 3h: **ch6** Processes + lab + Threads (rap rap due to corona :)
   * indienen taak 2 (C++ testing)
+* W6: 
 
 **we are here**
 
-* W6: 
   * 1.5h: Procsses lab (2/2) + Threads lab
   * 3h: inter task communication + labs
 * W7: 

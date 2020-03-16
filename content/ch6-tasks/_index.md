@@ -33,8 +33,10 @@ weight: 6
 6.5 Inter Task communication
 
   * Communication between processes
-    1. Shared memory
-    2. Message passing
+    * Shared memory
+    * Message passing
   * Communication between threads
+    * Mutex
+    * Semaphore
 
 6.5 Inter Task communication (lab)

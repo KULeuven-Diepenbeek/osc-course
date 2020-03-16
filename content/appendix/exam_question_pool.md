@@ -3,6 +3,8 @@ title: 'A. Exam Question Pool'
 draft: true
 ---
 
+**Mandatory, as promised:** examenvraag: Wat is de naam van het eerste proces op een Android systeem ?
+
 ## ch1
 ## ch2: Interrupts
 

@@ -33,13 +33,13 @@
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/stackvsheap/</loc>
-    <lastmod>2020-01-07T15:16:52+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/concepts/</loc>
+    <lastmod>2020-03-17T06:41:29+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-capitaselecta/capita-selecta/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>
@@ -88,8 +88,8 @@
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/inspection-labs/</loc>
-    <lastmod>2020-01-07T14:44:13+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>
@@ -168,8 +168,18 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</loc>
+    <lastmod>2020-03-17T06:41:29+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</loc>
     <lastmod>2020-01-08T16:07:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</loc>
+    <lastmod>2020-03-17T06:41:29+01:00</lastmod>
   </url>
   
   <url>
@@ -178,23 +188,33 @@
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-stack/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-memory/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-memory/memory/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-capitaselecta/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/capita-selecta/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   
   <url>

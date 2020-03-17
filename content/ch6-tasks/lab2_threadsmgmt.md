@@ -20,5 +20,3 @@ weight: 4
     * the king **doesn't** wait for the greetings before he goes back to sleep
 
 {{% figure src="/img/os/sc_642.png" title="An example output" %}}
-
-* Add to the previous exercise the feature that the king **does** have to wait for the greetings of every servant before he goes back to sleep

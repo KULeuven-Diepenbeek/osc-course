@@ -137,3 +137,21 @@ The image above shows the content of a folder **example** this folder contains: 
 
 With the **-l** the *long listing* format is shown (as is seen in the image above). With this, the access permissions are shown in the first 10 characters of each line:
 {{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: somewhere on the Internet, found through Google"%}}
+
+## Out of fuel ? Take a Shell
+
+When a user logs in on a Linux computer, typically one of the following approaches is used:
+
+* a login through a Graphical User Interface (GUI)
+* a login through a Command Line Interface (CLI)
+
+For a desktop/laptop that is running Linux the GUI approach is typically used. An example is the Bodhi Virtual Machine you use for the labs. On those systems there are **terminal emulators** which emulate the CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, ...
+
+{{<figure src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator">}}
+
+For embedded systems the CLI is more appropriate. Running the Graphical User Interface requires CPU time and storage. Both are scarece on an embedded system. Since everything can be done through the command line, removing the GUI is a win-win.
+
+
+When a CLI is used (or an emultor), a **shell** is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As with anything, there are many flavours of shells: sh, bash, ksh, zsh, ... 
+
+Once the shell is running and the user asks to create new processes, all of these newly create processes will have the shell as a parent process. 

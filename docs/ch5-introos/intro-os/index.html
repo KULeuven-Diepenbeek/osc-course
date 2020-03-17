@@ -12,20 +12,20 @@
     <title>5.1: Intro to OS using Linux :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1583914507" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1583914507" rel="stylesheet">
-    <link href="../../css/hybrid.css?1583914507" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1583914507" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1583914507" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1583914507" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1583914507" rel="stylesheet">
-    <link href="../../css/theme.css?1583914507" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1583914507" rel="stylesheet">
+    <link href="../../css/nucleus.css?1584422397" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1584422397" rel="stylesheet">
+    <link href="../../css/hybrid.css?1584422397" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1584422397" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1584422397" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1584422397" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1584422397" rel="stylesheet">
+    <link href="../../css/theme.css?1584422397" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1584422397" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1583914507" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1584422397" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1583914507"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1584422397"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -79,14 +79,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1583914507"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1583914507"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1584422397"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1584422397"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1583914507"></script>
+<script type="text/javascript" src="../../js/search.js?1584422397"></script>
 
     
   </div>
@@ -1164,6 +1164,7 @@ window.MathJax = {
 <li><a href="#linux">Linux</a></li>
 <li><a href="#got-root">Got Root ?</a></li>
 <li><a href="#on-files-and-such">On files and such</a></li>
+<li><a href="#out-of-fuel-take-a-shell">Out of fuel ? Take a Shell</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1402,6 +1403,30 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
             <h4>source: somewhere on the Internet, found through Google</h4>
         </figcaption>
 </figure></p>
+
+<h2 id="out-of-fuel-take-a-shell">Out of fuel ? Take a Shell</h2>
+
+<p>When a user logs in on a Linux computer, typically one of the following approaches is used:</p>
+
+<ul>
+<li>a login through a Graphical User Interface (GUI)</li>
+<li>a login through a Command Line Interface (CLI)</li>
+</ul>
+
+<p>For a desktop/laptop that is running Linux the GUI approach is typically used. An example is the Bodhi Virtual Machine you use for the labs. On those systems there are <strong>terminal emulators</strong> which emulate the CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, &hellip;</p>
+
+<figure>
+    <img src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png"/> <figcaption>
+            <h4>Example of a Terminal emulator</h4>
+        </figcaption>
+</figure>
+
+
+<p>For embedded systems the CLI is more appropriate. Running the Graphical User Interface requires CPU time and storage. Both are scarece on an embedded system. Since everything can be done through the command line, removing the GUI is a win-win.</p>
+
+<p>When a CLI is used (or an emultor), a <strong>shell</strong> is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As with anything, there are many flavours of shells: sh, bash, ksh, zsh, &hellip;</p>
+
+<p>Once the shell is running and the user asks to create new processes, all of these newly create processes will have the shell as a parent process.</p>
 
 
 <footer class=" footline" >
@@ -2169,19 +2194,19 @@ FreeRTOS is a example of an OS that uses a Monolithic kernel.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1583914507"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1583914507"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1583914507"></script>
-    <script src="../../js/jquery.sticky.js?1583914507"></script>
-    <script src="../../js/featherlight.min.js?1583914507"></script>
-    <script src="../../js/highlight.pack.js?1583914507"></script>
+    <script src="../../js/clipboard.min.js?1584422397"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1584422397"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1584422397"></script>
+    <script src="../../js/jquery.sticky.js?1584422397"></script>
+    <script src="../../js/featherlight.min.js?1584422397"></script>
+    <script src="../../js/highlight.pack.js?1584422397"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1583914507"></script>
-    <script src="../../js/learn.js?1583914507"></script>
-    <script src="../../js/hugo-learn.js?1583914507"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1584422397"></script>
+    <script src="../../js/learn.js?1584422397"></script>
+    <script src="../../js/hugo-learn.js?1584422397"></script>
 
-    <link href="../../mermaid/mermaid.css?1583914507" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1583914507"></script>
+    <link href="../../mermaid/mermaid.css?1584422397" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1584422397"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

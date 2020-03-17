@@ -1,10 +1,10 @@
 ---
-title: '8: Memory Management'
+title: '9: Memory Management'
 pre: "<i class='fab fa-linux'></i> "
 chapter: true
-weight: 8
+weight: 9
 ---
 
-### Chapter 8
+### Chapter 9
 
 # Memory Management

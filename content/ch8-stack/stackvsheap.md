@@ -1,5 +1,5 @@
 ---
-title: '7.1: The Stack & the Heap'
+title: '8.1: The Stack & the Heap'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: '7.2: Inspecting memory regions'
+title: '8.2: Inspecting memory regions'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---

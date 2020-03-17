@@ -2,7 +2,6 @@
 title: '3. Inter-thread communication'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 3
-draft: true
 ---
 
 

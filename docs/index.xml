@@ -183,6 +183,15 @@ A lot of applications that are built using an Arduino need some sense of time. A
     </item>
     
     <item>
+      <title>3. Inter-thread communication</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
+      <description>Analyse exercise 6_4_3.c (shown below) and write a report (&amp;lt; 3 pages):  describe what the program does make a chart that plots &amp;lsquo;the elapsed real time&amp;rsquo; the program consumes in function of the number of &amp;lsquo;the number of threads that are contributing&amp;rsquo;  the scale on the X-axis goes from 2 to 300 at least 8 data points should be present in the chart TIP the command time  interpret the chart   hand in the report</description>
+    </item>
+    
+    <item>
       <title>3.1: Pointers and arrays</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

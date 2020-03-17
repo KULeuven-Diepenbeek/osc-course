@@ -2,7 +2,6 @@
 title: '6.5: Inter task communication'
 pre: "<i class='fas fa-book'></i> "
 weight: 5
-draft: true
 ---
 
 Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, **good job !!**

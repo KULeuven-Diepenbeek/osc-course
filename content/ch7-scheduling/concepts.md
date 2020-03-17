@@ -83,9 +83,70 @@ If the scheduler applies the SJF algorithm on the same example, the occupation o
 {{% figure src="/img/sched/ss_coop_sjf.png" title="SJF with cooperative scheduling." %}}
 
 {{% task %}}
-Calculate **the three metrics** for the this result: Throughput, AJWT, and AJCT.
+Calculate **the three metrics** for the result of the SJF example, above: Throughput, AJWT, and AJCT.
 
 The answer is written below this "Exercise !" However the font is white-on-white. Select the text, or open the page-source to verify your answer.
+
+<input value="Show solution" type="button" style="margin: 0 auto;" onclick="showAnswer('q711')"/>
+{{% /task %}}
+
+<div id="q711" style="display:none">
+  <b>Answer:</b><br/>
+  Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
+  AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
+  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+</div>
+
+
+{{% notice note %}}
+Both algorithms above (FCFS and SJF) are explained using with non-preemptive/cooperative scheduling.
+{{% /notice %}}
+
+## Preemptive scheduling
+
+With preemptive scheduling the scheduler can **halt** a task running on the processor. Let's illustrate this with another example. When a new job comes in, the scheduler stops the currently running job and takes the most recently added job.
+
+{{% figure src="/img/sched/ss_preemt_lcfs.png" title="Preemptive scheduling." %}}
+
+In the example above the following actions are taken:
+
+* @ 0s, there is only one job: T2 => schedule T2
+* @ 2s, there are two new jobs (T1 and T3) and one old (T2) => schedule T1 (or T3)
+* @ 3s, T1 (or T3) is done; there is one old job (T3 (or T1)) and one even older (T2) => schedule T3 (or T1)
+* @ 4s, T3 (or T1) has finished; there is one older (T2) => schedule T2
+* @ 12s, T2 has finished; there are no more jobs
+
+In the example above, we sort-of used a Last-Come-First-Served approach.
+
+{{% task %}}
+Calculate **the three metrics** for the result of the preemption example, above: Throughput, AJWT, and AJCT.
+
+The answer is written below this "Exercise !" However the font is white-on-white. Select the text, or open the page-source to verify your answer.
+{{% /task %}}
+
+<div style="border: 1px solid black">
+  <div><b>Answer:</b></div>
+  <div style="color: white; border: 3px solid '#01407a'; padding-left: 20px; ">
+  Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
+  AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s <br/>
+  AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s 
+  </div>
+</div>
+
+### Priority-based scheduling
+At this point we could try a **SJF** approach with preemption. Although this a perfectly fine exercise **(wink)**, it is pointed out that *estimating* the duration of a job is not an easy task. The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork.
+
+Another algorithm is priority-based scheduling. If you take a closer look at the example above, more specifically at time 2s, the scheduler has two options: 1) schedule T1, or 2) schedule T3. Priority-base scheduling *could* provide a deterministic answer.
+
+
+{{% task %}}
+Let's asssume the priorities as mentioned in the image below. Try to complete the graph with the correct scheduler decision.
+<figure>
+  <a href="/img/sched/ss_preemt_priority.png" data-featherlight="image"><img src="../../img/sched/ss_preemt_priority.png" id="q713"></a>
+  <figcaption><h4>Preemptive scheduling.</h4></figcaption>
+</figure>
+
+<input value="Show solution" type="button" style="margin: 0 auto;" onclick="showAnswer('q713')"/>
 {{% /task %}}
 
 
@@ -98,21 +159,7 @@ The answer is written below this "Exercise !" However the font is white-on-white
 
 
 
-
-
-
-
-
-
-<div style="border: 1px solid black">
-  <div><b>Answer:</b></div>
-  <div style="color: white; border: 3px solid '#01407a'; padding-left: 20px; ">
-  Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
-  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
-  </div>
-</div>
-
+## TO ADD
 
 The dispatcher should be as fast as possible, since it is invoked during every
 process switch. The time it takes for the dispatcher to stop one process and

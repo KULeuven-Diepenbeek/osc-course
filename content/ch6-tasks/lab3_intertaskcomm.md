@@ -2,7 +2,6 @@
 title: '6.6: Inter task communication (lab)'
 pre: "<i class='fas fa-vial'></i> "
 weight: 6
-draft: true
 ---
 
 {{<figure src="/img/os/header_communication.jpg">}}

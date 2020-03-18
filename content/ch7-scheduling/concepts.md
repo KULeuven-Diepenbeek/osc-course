@@ -84,18 +84,19 @@ If the scheduler applies the SJF algorithm on the same example, the occupation o
 
 {{% task %}}
 Calculate **the three metrics** for the result of the SJF example, above: Throughput, AJWT, and AJCT.
-
-The answer is written below this "Exercise !" However the font is white-on-white. Select the text, or open the page-source to verify your answer.
-
-<input value="Show solution" type="button" style="margin: 0 auto;" onclick="showAnswer('q711')"/>
-{{% /task %}}
-
-<div id="q711" style="display:none">
+<br/>
+<br/>
+<div class="solution" id="q711" style="visibility: hidden">
   <b>Answer:</b><br/>
-  Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
-  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+  <p>
+    Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
+    AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
+    AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+  </p>
 </div>
+
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q711')"/>
+{{% /task %}}
 
 
 {{% notice note %}}
@@ -120,18 +121,19 @@ In the example above, we sort-of used a Last-Come-First-Served approach.
 
 {{% task %}}
 Calculate **the three metrics** for the result of the preemption example, above: Throughput, AJWT, and AJCT.
-
-The answer is written below this "Exercise !" However the font is white-on-white. Select the text, or open the page-source to verify your answer.
-{{% /task %}}
-
-<div style="border: 1px solid black">
-  <div><b>Answer:</b></div>
-  <div style="color: white; border: 3px solid '#01407a'; padding-left: 20px; ">
+<br/>
+<br/>
+<div class="solution" id="q712" style="visibility: hidden">
+  <b>Answer:</b>
+  <p>
   Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
   AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s <br/>
   AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s 
-  </div>
+  </p>
 </div>
+
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q712')"/>
+{{% /task %}}
 
 ### Priority-based scheduling
 At this point we could try a **SJF** approach with preemption. Although this a perfectly fine exercise **(wink)**, it is pointed out that *estimating* the duration of a job is not an easy task. The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork.
@@ -140,23 +142,50 @@ Another algorithm is priority-based scheduling. If you take a closer look at the
 
 
 {{% task %}}
-Let's asssume the priorities as mentioned in the image below. Try to complete the graph with the correct scheduler decision.
+Let's assume the priorities as mentioned in the image below. Try to complete the graph with the correct scheduler decision.
 <figure>
   <a href="/img/sched/ss_preemt_priority.png" data-featherlight="image"><img src="../../img/sched/ss_preemt_priority.png" id="q713"></a>
   <figcaption><h4>Preemptive scheduling.</h4></figcaption>
 </figure>
 
-<input value="Show solution" type="button" style="margin: 0 auto;" onclick="showAnswer('q713')"/>
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q713')"/>
+{{% /task %}}
+
+As can be seen from the example above, this approach might hold a potential risk: **starvation**. Some jobs with lower priority might not get any processor time. They *starve*. A solution for starvation is **priority aging**. This mechanism allows the priority of a job to increase over time in case of starvation. The actual priority is a function of the original priority and the age of the task.
+
+
+### Round-Robin scheduling
+Round-Robin scheduling is a popular algorithm that allows multiple tasks to **time-share** the processor. Jobs are dispatched to and interrupted from the processor on regular moments. 
+
+The smallest amount of time that a job can stay on the processor is called a **time quantum** or **time slice**. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. With the mantra "One image says more than a 1000 words" in mind ... here is an example (with an unrealistic time slice of 1s).
+
+{{% figure src="/img/sched/ss_preemt_rr.png" title="Round Robin scheduling." %}}
+
+{{% task %}}
+Calculate **the three metrics** for the result of the preemption example, above: Throughput, AJWT, and AJCT.
+<br/>
+<br/>
+<div class="solution" id="q714" style="visibility: hidden">
+  <b>Answer:</b>
+  <p>
+  Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
+  AJCT = ( 10 s + 11 s + 12 s ) / 3 = 11 s <br/>
+  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+  </p>
+</div>
+
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q714')"/>
 {{% /task %}}
 
 
 
-
-
-
-
-
-
+{{% notice warning %}}
+The scheduler does not wait until **a task yields** the CPU, but interrupts its execution after a single time slice. 
+This does **NOT** mean that a task **cannot** yield the CPU !!! 
+<br/>
+<br/>
+Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or when the job itself yields the processor.
+{{% /notice %}}
 
 
 ## TO ADD

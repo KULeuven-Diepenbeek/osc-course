@@ -72,6 +72,13 @@ div.multicolumn div.column{
     width: 48%;
 }
 
+div.solution b {
+    padding-left: 5%;
+}
+div.solution p {
+    padding-left: 10%;
+}
+
 /* end VlJo */
 
 

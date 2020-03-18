@@ -8,3 +8,11 @@ weight: 7
 ### Chapter 7
 
 # CPU scheduling
+
+* (Don't) Interrupt me !!
+* Scheduler algorithms
+  * FCFS
+  * SJF
+* Preemptive scheduling 
+  * Priority-based scheduling
+  * Round-Robin scheduling

@@ -35,4 +35,34 @@ function toggleAnswer(target) {
       x.style.visibility = "hidden";
     }
   }
+
+  if(target ==='q721') {
+    x = document.getElementById('div_q721')
+    if (x.style.visibility === "hidden") {
+      x.style.visibility = "visible";
+    } else {
+      x.style.visibility = "hidden";
+    }
+    x = document.getElementById('img_q721')
+    if (x.src.includes('img/sched/ss_ts.png')) {
+      x.src = '../../img/sched/ss_ts10ms.png'
+    } else {
+      x.src = '../../img/sched/ss_ts.png'
+    }
+  }
+
+  if(target ==='q722') {
+    x = document.getElementById('div_q722')
+    if (x.style.visibility === "hidden") {
+      x.style.visibility = "visible";
+    } else {
+      x.style.visibility = "hidden";
+    }
+    x = document.getElementById('img_q722')
+    if (x.src.includes('img/sched/ss_ts_l.png')) {
+      x.src = '../../img/sched/ss_ts100ms.png'
+    } else {
+      x.src = '../../img/sched/ss_ts_l.png'
+    }
+  }
 }  

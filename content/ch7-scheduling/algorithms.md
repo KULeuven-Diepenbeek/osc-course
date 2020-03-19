@@ -1,5 +1,5 @@
 ---
-title: '7.1: Concepts'
+title: '7.1: Scheduling algorithms'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 draft: true
@@ -9,8 +9,8 @@ In the previous chapter on Tasks, we've discussed one of the main responsibiliti
 
 The scheduler has two main jobs:
 
-1. Dispatching: switching tasks that are running on the processor
-2. Choose the order in which tasks are allowed on the processor
+0. Choose the next task task that is allowed on the processor
+0. Dispatching: switching tasks that are running on the processor
 
 Remember the image below ? The first job is the (interrupting and) dispatching of jobs.
 {{% figure src="/img/os/db_processstate.png" title="The different process states and their transitions" %}}
@@ -37,6 +37,8 @@ If the scheduler needs to preempt jobs after a certain amount of time (or ticks)
 
 
 ## Scheduler algorithms
+
+There exist many algorithms the scheduler may use to determine **which** job is to be scheduled next. A (very select) number of algorithms are given here. 
 
 ### FCFS
 A simple algorithm that a scheduler can follow is: **First Come, First served** (FCFS). The order in which the jobs arrive is the same as the order on which the jobs are allowed on the processor.
@@ -186,10 +188,3 @@ This does **NOT** mean that a task **cannot** yield the CPU !!!
 <br/>
 Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or when the job itself yields the processor.
 {{% /notice %}}
-
-
-## TO ADD
-
-The dispatcher should be as fast as possible, since it is invoked during every
-process switch. The time it takes for the dispatcher to stop one process and
-start another running is known as the dispatch latency.

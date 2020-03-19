@@ -31,11 +31,11 @@ draft: true
   * 3h: **ch6** Processes + lab + Threads (rap rap due to corona :)
   * indienen taak 2 (C++ testing)
 * W6: 
+  * 1.5h: Procsses lab (2/2) + Threads lab
+  * 3h: inter task communication + labs
 
 **we are here**
 
-  * 1.5h: Procsses lab (2/2) + Threads lab
-  * 3h: inter task communication + labs
 * W7: 
   * 1.5h: inter task communication + labs
   * 3h: Stack & Heap + labs

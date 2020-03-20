@@ -163,71 +163,25 @@ The O(n) (read as: [Big-Oh-En]) scheduler got his name from the fact that choosi
 #### O(1) scheduler
 This scheduler has been used in the Linux kernel up to version 2.6.23. This scheduler picks the next task in O(1), constant time. Obviously, this scales better. While this scheduler fixed the scalability problem of its predecessor, it did not perform well with an increasing number of **interactive processes**.
 
-#### CFS scheduler (currently used)
+#### CFS (currently used)
+The currently used scheduler has been around since Linux kernel version 2.6.23. As it is more fair towards interactive processes, or more in general, more fair towards all processes, it is named: Completely Fair Scheduler (CFS).
 
+There are 140 different priority levels in the CFS. Processes are divided in 2 types: Real-time processes and time sharing processes. The **real-time** processes are those with a priority from 0 to 99. The **time sharing** processes have a priority from 100 to 139. The real-time processes are processes that run in kernel mode, the time sharing processes run in user mode.
 
-There are 140 different priority levels in the O(1) scheduler. Processes are divided in 2 types: Real-time processes and timesharing processes. The **real-time** processes are those with a priority from 0 to 99. The **timesharing** processes have priority from 100 to 139.
+As was seen in the example above, it helps when processes don't have a fixed priority. Additionally, the concept of priority ageing was discussed as means to counteract starvation. A priority should be able to **change throughout the process's lifetime**. This is implemented with the **nice value**. This value is added to the original priority and ranges between -20 and 19. Smaller nice values give higher priorities. Larger nice values (*nicer processes*) give lower priorities.
 
-When a 
-The Linux scheduler is a preemptive, priority-based algorithm with two
-separate priority ranges: a real-time range from 0 to 99 and a nice value
-ranging from −20 to 19. Smaller nice values indicate higher priorities. Thus,
-by increasing the nice value, you are decreasing your priority and being “nice”
-to the rest of the system.
+{{% task %}}
+What should be the default priority that is given to a user process ?
+{{% /task %}}
 
-CFS is a significant departure from the traditional UNIX process scheduler.
-In the latter, the core variables in the scheduling algorithm are priority and
-time slice.  Traditional UNIX systems give processes a fixed
-time slice, perhaps with a boost or penalty for high- or low-priority processes,
-respectively. A process may run for the length of its time slice, and higherpriority processes run before lower-priority processes. It is a simple algorithm
-that many non-UNIX systems employ. Such simplicity worked well for early
-time-sharing systems but has proved incapable of delivering good interactive
-performance and fairness on today’s modern desktops and mobile devices.
-CFS introduced a new scheduling algorithm called fair scheduling that
-eliminates time slices in the traditional sense. 
+{{% notice note %}}
+When a process is **nicer** to other processes, it has a higher nice value. Therefore the overall priority of nicer processes is lower, which is reflected by a **higher** overall priority.  
+{{% /notice %}}
 
-Instead of time slices, all processes
-are allotted a proportion of the processor’s time. CFS calculates how long a
-process should run as a function of the total number of runnable processes.
+The clip below tries to illustrate the effect of the overall priority.
+{{< youtube Bt-Z_Y5Zl44 >}}
 
-To start, CFS says that if there are N runnable processes, then each should be afforded 1/N of the processor’s time. CFS then adjusts this allotment by weighting each process’s allotment by its nice value. Processes with the default nice value have a weight of 1—their priority is unchanged. Processes with a smaller nice value (higher priority) receive a higher weight, while processes
-with a larger nice value (lower priority) receive a lower weight. CFS then runs
-each process for a “time slice” proportional to the process’s weight divided by
-the total weight of all runnable processes.
-To calculate the actual length of time a process runs, CFS relies on a
-configurable variable called target latency, which is the interval of time during
-which every runnable task should run at least once. For example, assume
-that the target latency is 10 milliseconds. Further assume that we have two
-runnable processes of the same priority. Each of these processes has the same
-weight and therefore receives the same proportion of the processor’s time. In
-this case, with a target latency of 10 milliseconds, the first process runs for
-5 milliseconds, then the other process runs for 5 milliseconds, then the first
-process runs for 5 milliseconds again, and so forth. If we have 10 runnable
-processes, then CFS will run each for a millisecond before repeating.
-But what if we had, say, 1, 000 processes? Each process would run for 1
-microsecond if we followed the procedure just described. Due to switching
-costs, scheduling processes for such short lengths of time is inefficient.
-CFS consequently relies on a second configurable variable, the minimum
-granularity, which is a minimum length of time any process is allotted the
-processor. All processes, regardless of the target latency, will run for at least the
-minimum granularity. In this manner, CFS ensures that switching costs do not
-grow unacceptably large when the number of runnable processes grows too
-large. In doing so, it violates its attempts at fairness. In the usual case, however,
-the number of runnable processes remains reasonable, and both fairness and
-switching costs are maximized.
-With the switch to fair scheduling, CFS behaves differently from traditional
-UNIX process schedulers in several ways. Most notably, as we have seen, CFS
-eliminates the concept of a static time slice. Instead, each process receives
-a proportion of the processor’s time. How long that allotment is depends on
-how many other processes are runnable. This approach solves several problems
-in mapping priorities to time slices inherent in preemptive, priority-based
-scheduling algorithms. It is possible, of course, to solve these problems in other
-ways without abandoning the classic UNIX scheduler. CFS, however, solves the
-problems with a simple algorithm that performs well on interactive workloads
-such as mobile devices without compromising throughput performance on the
-largest of servers.
-
-
+Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers.
 
 
 ### Other schedulers

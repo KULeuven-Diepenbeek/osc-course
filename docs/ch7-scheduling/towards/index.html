@@ -1,0 +1,2533 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
+
+    
+    <link href="../../css/nucleus.css?1584691513" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1584691513" rel="stylesheet">
+    <link href="../../css/hybrid.css?1584691513" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1584691513" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1584691513" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1584691513" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1584691513" rel="stylesheet">
+    <link href="../../css/theme.css?1584691513" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1584691513" rel="stylesheet">
+    
+      <link href="../../css/theme-kul.css?1584691513" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1584691513"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="/ch7-scheduling/towards/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1584691513"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1584691513"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1584691513"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch1-c/">
+          <i class='far fa-keyboard'></i> 1: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
+        <a href="../../ch1-c/intro/">
+        <i class='fas fa-book'></i> 1.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
+        <a href="../../ch1-c/intro-labs/">
+        <i class='fas fa-vial'></i> 1.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch1-c/structs/">
+        <i class='fas fa-book'></i> 1.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
+        <a href="../../ch1-c/structs-labs/">
+        <i class='fas fa-vial'></i> 1.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch1-c/ecosystems/">
+        <i class='fas fa-book'></i> 1.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch1-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch2-interrupts/">
+          <i class='fab fa-linux'></i> 2: Interrupts
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch2-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
+        <a href="../../ch2-interrupts/lab1_arduino-bm/">
+        <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
+        <a href="../../ch2-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 2.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
+        <a href="../../ch2-interrupts/theory3_interrupt/">
+        <i class='fab fa-linux'></i> 2.5 The internals of interrupts
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch3-pointers/">
+          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
+        <a href="../../ch3-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch3-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch3-pointers/lab/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch4-debugging/">
+          <i class='far fa-keyboard'></i> 4: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch4-debugging/testing/">
+        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch5-introos/">
+          <i class='fab fa-linux'></i> 5: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch5-introos/intro-os/">
+        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch5-introos/lab1_wetfeet/">
+        <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Task management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/processes/">
+        <i class='fas fa-book'></i> 6.1: Processes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/threads/" title="6.3: Threads" class="dd-item ">
+        <a href="../../ch6-tasks/threads/">
+        <i class='fas fa-book'></i> 6.3: Threads
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
+        <i class='fas fa-vial'></i> 6.4: Threads (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks/" title="6.5: Inter task communication" class="dd-item ">
+        <a href="../../ch6-tasks/intertasks/">
+        <i class='fas fa-book'></i> 6.5: Inter task communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab3_intertaskcomm/" title="6.6: Inter task communication (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab3_intertaskcomm/">
+        <i class='fas fa-vial'></i> 6.6: Inter task communication (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-scheduling/" title="7: CPU scheduling" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../ch7-scheduling/">
+          <i class='fab fa-linux'></i> 7: CPU scheduling
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/algorithms/" title="7.1: Scheduling algorithms" class="dd-item ">
+        <a href="../../ch7-scheduling/algorithms/">
+        <i class='fas fa-book'></i> 7.1: Scheduling algorithms
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab1_algorithms/">
+        <i class='fas fa-vial'></i> 7.2: Scheduling algorithms (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/towards/" title="7.3: Towards real-world schedulers" class="dd-item active">
+        <a href="../../ch7-scheduling/towards/">
+        <i class='fas fa-book'></i> 7.3: Towards real-world schedulers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab2_niceguy/">
+        <i class='fas fa-vial'></i> 7.4: Mr. nice guy(lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-stack/" title="8: The Stack &amp; The Heap" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch8-stack/">
+          <i class='far fa-keyboard'></i> 8: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="../../ch8-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 8.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/inspection-labs/" title="8.2: Inspecting memory regions" class="dd-item ">
+        <a href="../../ch8-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 8.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch10-capitaselecta/" title="9: Capita Selecta" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch10-capitaselecta/">
+          <i class='fab fa-linux'></i> 9: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch10-capitaselecta/capita-selecta/" title="10.1: Capita Selecta" class="dd-item ">
+        <a href="../../ch10-capitaselecta/capita-selecta/">
+        <i class='fas fa-book'></i> 10.1: Capita Selecta
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch9-memory/">
+          <i class='fab fa-linux'></i> 9: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item ">
+        <a href="../../ch9-memory/memory/">
+        <i class='fas fa-book'></i> 9.1: Memory management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
+        <a href="../../exercises/c-integrated-ex/">
+        <i class='fas fa-pen-square'></i> 1. Integrated C exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
+        <a href="../../exercises/c-debugging-testing/">
+        <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
+        <a href="../../exercises/tasks_inter_thread_communication/">
+        <i class='fas fa-pen-square'></i> 3. Inter-thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
+        <a href="../../appendix/lab_ll_rtos/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="../../appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
+        <a href="../../appendix/installing/">
+        2. Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="../../appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://kuleuven-diepenbeek.github.io/osc-course/TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch7-scheduling/'>7: CPU scheduling</a> > 7.3: Towards real-world schedulers
+          
+         
+          
+         
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#dispatching">Dispatching</a></li>
+<li><a href="#time-slice-size">Time slice size</a>
+<ul>
+<li><a href="#the-time-slice-is-10-ms">The time slice is 10 ms</a></li>
+<li><a href="#the-time-slice-is-100-ms">The time slice is 100 ms</a></li>
+<li><a href="#what-does-it-all-mean">What does it all mean ?</a></li>
+</ul></li>
+<li><a href="#real-world-schedulers">Real-world schedulers</a>
+<ul>
+<li><a href="#run-queue-hey-you-there-get-in-line">Run queue - Hey, you there, get in line !!!</a>
+<ul>
+<li><a href="#a-simple-run-queue">A simple run queue</a></li>
+<li><a href="#multiple-fifos">Multiple FIFOs</a></li>
+<li><a href="#tree">Tree</a></li>
+</ul></li>
+<li><a href="#multi-level-feedback-queue">Multi-level feedback queue</a></li>
+<li><a href="#linux-scheduler">Linux Scheduler</a>
+<ul>
+<li><a href="#o-n-scheduler">O(n) scheduler</a></li>
+<li><a href="#o-1-scheduler">O(1) scheduler</a></li>
+<li><a href="#cfs-currently-used">CFS (currently used)</a></li>
+</ul></li>
+<li><a href="#other-schedulers">Other schedulers</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              7.3: Towards real-world schedulers
+            </h1>
+          
+
+        
+
+
+
+
+
+<p>The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.</p>
+
+<p>How could be mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the <em>time slice</em>. Let&rsquo;s try to figure out how that plays out &hellip; but first &hellip;</p>
+
+<figure>
+    <img src="../../img/sched/ss_dottedline.png"/> 
+</figure>
+
+<p>Images like the one above, we&rsquo;ve seen a number of times up until now. A question that arises is: <strong><span style="border-bottom: 2px dotted black">what happens on the dotted line ?<span></strong></p>
+
+<p>As was mentioned before the scheduler has two main jobs:</p>
+
+<ol>
+<li>Choose the next task task that is allowed on the processor</li>
+<li>Dispatching: switching tasks that are running on the processor</li>
+</ol>
+
+<p>The algorithms provide the scheduler with an approach to <strong>choose the next task</strong>. The second function a scheduler has is the <strong>dispatching</strong> of the newly chosen task. Let&rsquo;s break it down.</p>
+
+<h2 id="dispatching">Dispatching</h2>
+
+<p>There are 2 user jobs: X and Y. X is running on the processor while Y is in the ready state, waiting for CPU-time. The scheduler decides that X&rsquo;s time is over an it&rsquo;s Y&rsquo;s turn on the processor.</p>
+
+<p><strong>Step 1</strong></p>
+
+<p>X has be stopped in such a state that it can continue the next time it is scheduled. Therefore, a <em>snapshot</em> has to be made. What is value of the program counter, what are values in the registers, which address is the stack pointer pointing to, &hellip; ? All these values need to be stored. As was discussed <a href="http://localhost:1313/osc-course/ch6-tasks/processes/#process-control-block">earlier</a> the OS keeps a PCB for every process. This PCB is an object that has fields to store all the required parameters. <strong>The PCB of X needs to be updated</strong></p>
+
+<p><strong>Step 2</strong>
+X is removed from the processor. The scheduler switches to kernel mode and has to some work to determine which process is next: Y. Y is placed on the processor.</p>
+
+<p><strong>Step 3</strong>
+Everything that happened to the PCB of X, needs to be done in the opposite direction with the PCB of Y: <strong>the PCB of Y needs to be restored</strong></p>
+
+<p><strong>Step 4</strong>
+The scheduler switches back to user mode.</p>
+
+<p>The dispatching should be as fast as possible, since it is invoked during every process switch. The time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>. This is considered 100% overhead.</p>
+
+<p>The updating (an restoring) of PCB&rsquo;s is referred to as <strong>a context switch</strong>.</p>
+
+<h2 id="time-slice-size">Time slice size</h2>
+
+<p>With the knowledge of the dispatch latency, the size of the time slice can re-visited. We assume the following setting:</p>
+
+<ul>
+<li>there are 10 IO intensive tasks (T1 - T10), these
+
+<ol>
+<li>do calculations for 1 ms</li>
+<li>request IO operation from disk</li>
+<li>wait 10 ms before the result is fetched</li>
+</ol></li>
+<li>there is 1 calculation intensive task (T11)</li>
+<li>context switching takes 1 ms</li>
+<li>all tasks are long-running</li>
+</ul>
+
+<h3 id="the-time-slice-is-10-ms">The time slice is 10 ms</h3>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Try to understand the load that is put on the CPU. There is a periodic pattern.</p>
+
+<ol>
+<li>Try to <strong>draw</strong> the repeating pattern in this timing diagram</li>
+<li>How many <strong>context switches</strong> are there ?</li>
+<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (&#0951;<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
+</ol>
+
+<figure>
+  <a href="../../img/sched/ss_ts.png" data-featherlight="image"><img src="../../img/sched/ss_ts.png" id="img_q721"></a>
+  <figcaption><h4>Time slice = 10 ms</h4></figcaption>
+</figure>
+
+<div class="solution" id="div_q721" style="visibility: hidden">
+  <b>Answer:</b><br/>
+  <p>
+    2. There are 11 context switches.<br/>
+    3. &#0951;<sub>CPU</sub> = t<sub>useful</sub> / t<sub>total</sub> = 110 ms / 121 ms = 0.90909 <br/>
+      <span style="padding-left: 20px">&nbsp;</span>t<sub>useful</sub> = 10 x t<sub>IO</sub> + 1 x t<sub>CPU</sub> = 10 x 10ms + 1 x 10ms = 110ms<br/>
+      <span style="padding-left: 20px">&nbsp;</span>t<sub>total</sub>= t<sub>useful</sub> + t<sub>overhead> = 110 ms + 11 x 1 ms = 121 ms<br/>
+  </p>
+</div>
+
+<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721')"/></p>
+
+	</div>
+</div>
+
+<h3 id="the-time-slice-is-100-ms">The time slice is 100 ms</h3>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Try to understand the load that is put on the CPU. There is a periodic pattern.</p>
+
+<ol>
+<li>Try to <strong>draw</strong> the repeating pattern in this timing diagram</li>
+<li>How many <strong>context switches</strong> are there ?</li>
+<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (&#0951;<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
+</ol>
+
+<figure>
+  <a href="../../img/sched/ss_ts.png" data-featherlight="image"><img src="../../img/sched/ss_ts_l.png" id="img_q722"></a>
+  <figcaption><h4>Time slice = 100 ms</h4></figcaption>
+</figure>
+
+<div class="solution" id="div_q722" style="visibility: hidden">
+  <b>Answer:</b><br/>
+  <p>
+    2. There are 11 context switches.<br/>
+    3. &#0951;<sub>CPU</sub> = t<sub>useful</sub> / t<sub>total</sub> = 200 ms / 211 ms = 0.94787 <br/>
+      <span style="padding-left: 20px">&nbsp;</span>t<sub>useful</sub> = 10 x t<sub>IO</sub> + 1 x t<sub>CPU</sub> = 10 x 10ms + 1 x 100ms = 200ms<br/>
+      <span style="padding-left: 20px">&nbsp;</span>t<sub>total</sub>= t<sub>useful</sub> + t<sub>overhead> = 200 ms + 11 x 1 ms = 211 ms<br/>
+  </p>
+</div>
+
+<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q722')"/></p>
+
+	</div>
+</div>
+
+<h3 id="what-does-it-all-mean">What does it all mean ?</h3>
+
+<p>With the examples above, it should be clear that the size of the time quantum has an impact on the CPU efficiency. Be careful, however, that you formulate the correct conclusion. Stating that a larger time slice would <strong>&ldquo;always&rdquo;</strong> increases the CPU efficiency is <u>not correct</u>.</p>
+
+<p>Concluding that a system with a lot of IO-intensive tasks is better of with a smaller time slice, and a system with a lot of CPU-intensive tasks is better of with a larger time slice, would be more correct.</p>
+
+<p>For the sake of correctness it is pointed out that the time for context switches is not realistic. With larger time quanta the time for context switching also increases. As a rule of thumb it can be assumed that the time for a context switch is (a little) less than 10% of the time slice.</p>
+
+<h2 id="real-world-schedulers">Real-world schedulers</h2>
+
+<h3 id="run-queue-hey-you-there-get-in-line">Run queue - Hey, you there, get in line !!!</h3>
+
+<p>Processes that are ready to be scheduled are in the <strong>ready</strong> state. Processes that are waiting for IO are in state. All these <strong>queues</strong> need to be maintained and managed. In the chapter on <em>Pointers</em>, <em>linked lists</em> were discussed. This technique is heavily used for managing these types of queues.</p>
+
+<p>Depending on the strategy that a scheduler follows different queue systems might be more suited. Remember, the scheduler chooses the next task, a preferably as-fast-as-possible.</p>
+
+<h4 id="a-simple-run-queue">A simple run queue</h4>
+
+<p>The simplest type of a run queue would be a FIFO (first-in-first-out). It should be clear that a scheduler that uses a first-come-first-serve algorithm finds a perfect match with this type of run queue.</p>
+
+<p><strong>When a process is created</strong>, it is simply added to the back of the queue.</p>
+
+<figure>
+    <img src="../../img/sched/ss_runqueue_fifo.png"/> 
+</figure>
+
+<h4 id="multiple-fifos">Multiple FIFOs</h4>
+
+<p>A priority based system might use the exact same scheduling algorithm, with the exception of priorities. A solution could be to use multiple FIFOs: one FIFO for each priority level.</p>
+
+<p><strong>When a process is created</strong>, it is simply added to the back of the queue that matches the process&rsquo;s priority level.</p>
+
+<figure>
+    <img src="../../img/sched/ss_runqueue_multfifo.png"/> 
+</figure>
+
+<h4 id="tree">Tree</h4>
+
+<p>When a more complex algorithms are used in the scheduler, a tree might suit the needs better. Depending on the strategy a tree might be ordered in a certain way. For example, in a <strong>shortest-job-first</strong> algorithm, jobs may be ordered (from <strong>short</strong> to <strong>long</strong>) in the tree from <strong>left</strong> to <strong>right</strong>.</p>
+
+<p><strong>When a process is created</strong>, calculations have to be done to determine the position in the three of the new process.</p>
+
+<figure>
+    <img src="../../img/sched/ss_runqueue_tree.png"/> 
+</figure>
+
+<h3 id="multi-level-feedback-queue">Multi-level feedback queue</h3>
+
+<p>The multi-level feedback queue scheduler was originally develop by Fernando J. Corbató et al. in 1962. It consists of 3 queues. Every queue has a different time slice assigned to it: 8 ms, 16 ms and &#8734; ms.</p>
+
+<figure>
+    <img src="../../img/sched/ss_mlfq.png"/> 
+</figure>
+
+<p>When a newly created process is added to the scheduler, it arrives in the <strong>shortest queue</strong>. After a number of times being scheduled on the processor, the process might <strong>go down</strong> a level to a queue with a larger time slice. The criterion that is used is whether the job <strong>yielded</strong> from the processor, or whether it was interrupted by the scheduler.</p>
+
+<p>Jobs that always use up the complete time slice are considered to be more CPU intensive. As we have seen earlier, this type of process is more efficient when given a larger time slice. The scheduler moves the process to lower level. The <strong>reverse</strong> holds for moving up in between queues.</p>
+
+<p>With this scheduler, jobs might migrate between queues over time depending on what time slice is best suited for that moment. In general it can be stated that CPU intensive processes are to be found on the bottom, while IO intensive processes are on the top.</p>
+
+<h3 id="linux-scheduler">Linux Scheduler</h3>
+
+<p>The Linux kernel has used different schedulers up until now. Between Linux kernels 2.4 - 2.6 were using the O(n) scheduler, 2.6 - 2.6.11 the used scheduler was O(n), and from 2.6.12 onward the Completely Fair Scheduler (CFS) was used. These schedulers are briefly touched upon here. All of these are preemptive schedulers that are priority-based.</p>
+
+<h4 id="o-n-scheduler">O(n) scheduler</h4>
+
+<p>The O(n) (read as: [Big-Oh-En]) scheduler got his name from the fact that choosing a new task had <strong>linear</strong> complexity. This means that the amount it takes for choosing a new task is proportional the number of tasks that are available. As you can easily see on every OS, there are a huge amount of tasks running nowadays. With this scheduler it would also take a (relatively) huge amount of time for choosing the next task. <strong>This doesn&rsquo;t scale !</strong> Because the scheduler&rsquo;s work is seen as overhead, it should be clear why this scheduler got replaced.</p>
+
+<h4 id="o-1-scheduler">O(1) scheduler</h4>
+
+<p>This scheduler has been used in the Linux kernel up to version 2.6.23. This scheduler picks the next task in O(1), constant time. Obviously, this scales better. While this scheduler fixed the scalability problem of its predecessor, it did not perform well with an increasing number of <strong>interactive processes</strong>.</p>
+
+<h4 id="cfs-currently-used">CFS (currently used)</h4>
+
+<p>The currently used scheduler has been around since Linux kernel version 2.6.23. As it is more fair towards interactive processes, or more in general, more fair towards all processes, it is named: Completely Fair Scheduler (CFS).</p>
+
+<p>There are 140 different priority levels in the CFS. Processes are divided in 2 types: Real-time processes and time sharing processes. The <strong>real-time</strong> processes are those with a priority from 0 to 99. The <strong>time sharing</strong> processes have a priority from 100 to 139. The real-time processes are processes that run in kernel mode, the time sharing processes run in user mode.</p>
+
+<p>As was seen in the example above, it helps when processes don&rsquo;t have a fixed priority. Additionally, the concept of priority ageing was discussed as means to counteract starvation. A priority should be able to <strong>change throughout the process&rsquo;s lifetime</strong>. This is implemented with the <strong>nice value</strong>. This value is added to the original priority and ranges between -20 and 19. Smaller nice values give higher priorities. Larger nice values (<em>nicer processes</em>) give lower priorities.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>What should be the default priority that is given to a user process ?</p>
+
+	</div>
+</div>
+
+
+<div class="notices note" ><p>When a process is <strong>nicer</strong> to other processes, it has a higher nice value. Therefore the overall priority of nicer processes is lower, which is reflected by a <strong>higher</strong> overall priority.</p>
+</div>
+
+
+<p>The clip below tries to illustrate the effect of the overall priority.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Bt-Z_Y5Zl44" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+
+<p>Although there are <strong>more differences</strong> with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers.</p>
+
+<h3 id="other-schedulers">Other schedulers</h3>
+
+<p>As might be expected, these are not the only schedulers that exist. There a many scheduler available and, certainly, there will be many more to come. Just a small grasp of existing schedulers:</p>
+
+<ul>
+<li>Completely Fair Scheduler (Linux)</li>
+<li>Brain F*ck Scheduler (Linux)</li>
+<li>Noop Scheduler (Linux)</li>
+<li>Task Scheduler 1.0 (Windows)</li>
+<li>Task Scheduler 2.0 (Windows)</li>
+<li>JobScheduler (iOS)</li>
+</ul>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1584691513"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1584691513"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1584691513"></script>
+    <script src="../../js/jquery.sticky.js?1584691513"></script>
+    <script src="../../js/featherlight.min.js?1584691513"></script>
+    <script src="../../js/highlight.pack.js?1584691513"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1584691513"></script>
+    <script src="../../js/learn.js?1584691513"></script>
+    <script src="../../js/hugo-learn.js?1584691513"></script>
+
+    <link href="../../mermaid/mermaid.css?1584691513" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1584691513"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

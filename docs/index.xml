@@ -63,12 +63,13 @@ What&amp;rsquo;s in a process ? By definition, a process is an instance of a pro
     </item>
     
     <item>
-      <title>7.1: Concepts</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/concepts/</link>
+      <title>7.1: Scheduling algorithms</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/concepts/</guid>
-      <description></description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</guid>
+      <description>In the previous chapter on Tasks, we&amp;rsquo;ve discussed one of the main responsibilities of an operating system: task management. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on the processor is discussed in this chapter: the scheduler. For the record, tasks or jobs refer to either processes and/or threads.
+The scheduler has two main jobs:</description>
     </item>
     
     <item>
@@ -163,6 +164,16 @@ Creating and inspecting processes  Write a C-program that prints its own PID on 
     </item>
     
     <item>
+      <title>7.2: Scheduling algorithms (lab)</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</guid>
+      <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do it&amp;rsquo;s job. Let&amp;rsquo;s compare them. We assume the following tasks:
+ T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority medium T4: arrives @ 7s, takes 1s, and has priority high  Compare Threshold, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
+    </item>
+    
+    <item>
       <title>8.2: Inspecting memory regions</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -224,6 +235,16 @@ What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up u
     </item>
     
     <item>
+      <title>7.3: Towards real-world schedulers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
+      <description>The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
+How could be mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the time slice.</description>
+    </item>
+    
+    <item>
       <title>1.4: Structs</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -261,6 +282,15 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID.    An example output    Write a C-program that has 1 king thread and n servant threads.</description>
+    </item>
+    
+    <item>
+      <title>7.4: Mr. nice guy(lab)</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
+      <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.    An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times. Compile and run that program. While that program is running, and is reporting back every 5 seconds:  change the nice value (on another terminal) verify in the reporting that it works change the nice value so the overall priority is at its lowest change the nice value so the overall priority is at its highest     An example output    Adjust the program above (after copying it, off course) so it goes through the exact same changes in priority.</description>
     </item>
     
     <item>

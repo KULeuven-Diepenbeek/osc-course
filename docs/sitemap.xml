@@ -33,8 +33,8 @@
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/concepts/</loc>
-    <lastmod>2020-03-17T06:41:29+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</loc>
+    <lastmod>2020-03-20T09:04:58+01:00</lastmod>
   </url>
   
   <url>
@@ -88,6 +88,11 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</loc>
+    <lastmod>2020-03-19T09:08:33+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</loc>
     <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
@@ -123,6 +128,11 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</loc>
+    <lastmod>2020-03-20T09:04:58+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</loc>
     <lastmod>2020-01-08T16:07:27+01:00</lastmod>
   </url>
@@ -145,6 +155,11 @@
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</loc>
     <lastmod>2020-03-17T06:19:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</loc>
+    <lastmod>2020-03-20T09:04:23+01:00</lastmod>
   </url>
   
   <url>
@@ -194,7 +209,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+    <lastmod>2020-03-20T09:04:23+01:00</lastmod>
   </url>
   
   <url>

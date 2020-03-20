@@ -2,7 +2,6 @@
 title: '7.1: Scheduling algorithms'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
-draft: true
 ---
 
 In the previous chapter on Tasks, we've discussed one of the main responsibilities of an operating system: **task management**. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on the processor is discussed in this chapter: the **scheduler**. For the record, tasks or jobs refer to either processes and/or threads.

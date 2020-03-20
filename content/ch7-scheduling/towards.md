@@ -2,7 +2,6 @@
 title: '7.3: Towards real-world schedulers'
 pre: "<i class='fas fa-book'></i> "
 weight: 3
-draft: true
 ---
 
 The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.

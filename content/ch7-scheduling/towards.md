@@ -115,7 +115,7 @@ Concluding that a system with a lot of IO-intensive tasks is better of with a sm
 
 For the sake of correctness it is pointed out that the time for context switches is not realistic. With larger time quanta the time for context switching also increases. As a rule of thumb it can be assumed that the time for a context switch is (a little) less than 10% of the time slice.
 
-## Real-life schedulers
+## Real-world schedulers
 
 ### Run queue - Hey, you there, get in line !!!
 Processes that are ready to be scheduled are in the **ready** state. Processes that are waiting for IO are in state. All these **queues** need to be maintained and managed. In the chapter on *Pointers*, *linked lists* were discussed. This technique is heavily used for managing these types of queues.

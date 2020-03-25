@@ -83,6 +83,8 @@ This is called creating a **deep copy**, while a **shallow copy** creates a copy
 What happens when you omit `malloc()` and simply write `Data *heap_data = memcpy(heap_data, &data, sizeof(Data));`?
 {{% /task %}}
 
+As another side node, it is possible to resize variables on the heap, using `realloc()`. This is simply not possible on the stack: they cannot be resized. Also, using [calloc](https://www.tutorialspoint.com/c_standard_library/c_function_calloc.htm) instead of malloc initializes the allocated memory to zero instead of "nothing". So now you know how to use `malloc`, `calloc`, `realloc`, and `free`.
+
 ### Inspecting program memory in the OS
 
 Unix-like operating systems implement [procfs](https://en.wikipedia.org/wiki/Procfs), a special filesystem mapped to `/proc`, that makes it easy for us to inspect program running program state. You will need the process ID (PID) as it is the subdir name. Interesting files to inspect are:
@@ -100,6 +102,7 @@ Good question. The answer is obviously **both**. Use the stack when:
 
 * You do not want to de-allocate variables yourself.
 * You need speed (space is managed efficiently by the CPU). 
+* Variable size is static.
 
 Use the heap when:
 
@@ -107,6 +110,9 @@ Use the heap when:
 * You don't mind a bit slower access (fragmentation problems can occur).
 * You want to pass on (global) objects between functions. 
 * You like managing things yourself.
+* Variable size could be dynamic.
+
+What piece of code could be _dynamic_ in size? Data structures, such as linked lists from [chapter 3: pointers and arrays](/ch3-pointers), are a good candidate for this: arrays, sets, maps, and any other form of collection can grow and shrink in size, therefore need dynamic memory mapped. Using `[]` will, in most cases, not suffice in the C programming language, unless you are doing something very simple. 
 
 ## Memory management
 
@@ -218,6 +224,45 @@ That is **platform-dependent** and will hopefully crash instead of cause all for
 Write a program with an infinite loop that puts stuff on the stack. What is the program output?<br/>
 Do the same with infinite malloc()'s. What happens now?
 {{% /task %}}
+
+### What's a stack overflow?
+
+The stack is a limited, but fast piece of program memory, made available for your program by the OS. The keyword here is **limited**. Unlike the heap, it will not dynamically grow, and it is typically hard-wired in the OS. Simply keeping on adding stuff to the stack, such as calling methods within methods without a stop condition (infinite recursion), will cause a stack overflow exception, signaling that the OS prevented your program from taking over everything:
+
+```c
+// forward definition
+void flow();
+
+void flow() {  // on the stack
+    int x = 5; // on the stack
+    flow();    // keep on going
+}
+
+int main() {
+    flow();
+}
+```
+
+This causes a _segmentation fault_ on my OSX machine, signaling that it was killed by the OS. Add `printf()` statements to your liking. 
+
+How do I know how big the stack can be on my OS? Use `ulimit -a` to find out:
+
+<pre>
+outers-MacBook-Air:ch8-stack wgroeneveld$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+file size               (blocks, -f) unlimited
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 4864
+pipe size            (512 bytes, -p) 1
+stack size              (kbytes, -s) 8192           **BINGO**
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 709
+virtual memory          (kbytes, -v) unlimited
+</pre>
+
+So it's **8.19 MB**. 
 
 ## Optimizing C code
 

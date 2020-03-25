@@ -2,7 +2,6 @@
 title: '4. Pseudo scheduler'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 4
-draft: true
 ---
 
 {{<figure src="/img/ass4_sched/poepjee.jpg" title="image source: youtube.com">}}
@@ -129,6 +128,11 @@ T_PCB * sort_tasks_on_arrival(T_PCB * head);
 /* MODIFY ABOVE HERE --------------------------------------------------------*/
 {{< /highlight >}}
 
+
+
+{{% notice note %}}
+The complete boilerplate code added to the **osc-exercises** repository.
+{{% /notice %}}
 
 ### Assignment
 This assignment requires you to:

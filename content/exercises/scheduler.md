@@ -12,9 +12,29 @@ In this assignment you're going to build a (pseudo) scheduler. A number of tasks
 
 0. The scheduler is preemtive and uses a round-robin approach without priorities.
 0. The (virtual) time slice is 1 second.
-0. If a new job is announcing itself, it gets a time slice right away.
+0. If a new job is announcing itself, it gets a time slice right away (last come, first served)
+
 
 ### Circular Linked List
+As should be clear from the theory, the (pseudo) scheduler will need to store the incoming. To be consistent with this course and Linux, the run queue is to be implemented using a **linked list**.
+
+The **struct** that is to hold the tasks is predefined:
+
+{{< highlight c >}}
+// typedefs
+typedef struct ST_PCB {
+  int arrival_time;
+  char name[9];
+  int duration;
+  struct ST_PCB * next;
+} T_PCB;
+{{< /highlight >}}
+
+However in stead of making a linear linked list, as we did earlier; This time you should aim for a circular linked list. This is nothing more than a *normal* linked list where the final element's **next** field points back to the **head** of the list.
+
+{{<figure src="/img/ass4_sched/linear_vs_circular_ll.gif">}}
+
+With this run queue all the tasks are on a merry-go-round (see image above) :smiley:
 
 
 ### Input/output
@@ -87,77 +107,33 @@ T0000001
 
 ### Some boiler plating
 
-* The **struct** that is to hold the tasks is predefined:
+A starting file is provided here. This file provides:
 
+* the definition of the struct
+* two functions to show linked lists
 {{< highlight c >}}
-// typedefs
-typedef struct ST_PCB {
-  int arrival_time;
-  char name[9];
-  int duration;
-  struct ST_PCB * next;
-} T_PCB;
+void show_tasks_lin(T_PCB * head);
+void show_tasks_circ(T_PCB * head);
 {{< /highlight >}}
 
-* two functions are provided to show linked lists:
-
-<div class="multicolumn">
-  <div class="column">
-    <h4>One for linear lists</h4>
+* two function that should be completed
 {{< highlight c >}}
-void show_tasks_lin(T_PCB * head) {
-  T_PCB * ptr;
-  int ID = 0;
-
-  if(head == NULL ){
-    printf("Linear list is empty\n");
-  } else {
-    ptr = head;
-    printf("Printing linear list\n");
-    printf("  ID |    TASK  |  duration | arrival time\n");
-    printf("  ---+----------+-----------+-----------\n");
-
-    while(ptr != NULL) {
-      printf("  %2d | %s | %8d  | %5d\n", ID, ptr->name, ptr->duration, ptr->arrival_time);
-      ptr = ptr->next;
-      ID++;
-    }
-    printf("\n");
-  }
-}
+T_PCB * read_tasks(void);
+T_PCB * sort_tasks_on_arrival(T_PCB * head);
 {{< /highlight >}}
-  </div>
-  <div class="column">
-    <h4>One for circular lists</h4>
+
+* a main functions that can only be modified between these lines
 {{< highlight c >}}
-void show_tasks_circ(T_PCB * head) {
-  T_PCB * ptr;
-  int ID = 0;
+/* MODIFY BELOW HERE --------------------------------------------------------*/
 
-  if(head == NULL ){
-    printf("Cirulcar list is empty\n");
-  } else {
-
-    ptr = head->next;
-    while(ptr->next != head){
-      ptr = ptr->next;
-    }
-
-    printf("Printing circular list\n");
-    printf("  ID |    TASK  |  duration | arrival time\n");
-    printf("  ---+----------+-----------+-----------\n");
-
-    while(head != ptr) {
-      printf("  %2d | %s | %8d  | %5d\n", ID, \
-          head->name, head->duration, head->arrival_time);
-      head = head->next;
-      ID++;
-    }
-    printf("  %2d | %s | %8d  | %5d\n", ID, \
-        head->name, head->duration, head->arrival_time);
-    printf("\n");
-  }
-}
+/* MODIFY ABOVE HERE --------------------------------------------------------*/
 {{< /highlight >}}
-  </div>
-</div>
+
+
+### Assignment
+This assignment requires you to:
+
+* complete the bodies of the two missing functions
+* modify the main function **BETWEEN THE INDICATED LINES** so the correct output is produced given a certain input
+
+The resulting C-file is to be uploaded to Toledo.

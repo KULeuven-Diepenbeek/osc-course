@@ -179,7 +179,8 @@ Creating and inspecting processes  Write a C-program that prints its own PID on 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</guid>
-      <description>1. No malloc, no heap Let&amp;rsquo;s look at memory regions of a process that does not call malloc(). This means we will not use the heap just yet. Compile the following code:
+      <description>Accompanying Screencast:
+  1. No malloc, no heap Let&amp;rsquo;s look at memory regions of a process that does not call malloc(). This means we will not use the heap just yet. Compile the following code:
 #include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;stdio.h&amp;gt; int main() { getchar(); // breaks process until char input  return 0; } To explore the above example, we will introduce getchar() before ending the main() loop, so the program pauses and gives us a change to look under the hood.</description>
     </item>
     

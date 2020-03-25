@@ -1,4 +1,8 @@
-function toggleAnswer(target) {
+function toggleAnswer(target, combo) {
+  var text = combo%2;
+  combo = Math.floor( combo / 2 ); 
+  var image = combo%2
+
   if(target ==='q711') {
     x = document.getElementById('q711')
     if (x.style.visibility === "hidden") {
@@ -65,4 +69,23 @@ function toggleAnswer(target) {
       x.src = '../../img/sched/ss_ts_l.png'
     }
   }
+
+    if(text === 1) {
+      x = document.getElementById('div_'+target)
+      if (x.style.visibility === "hidden") {
+        x.style.visibility = "visible";
+      } else {
+        x.style.visibility = "hidden";
+      }
+    }
+    if(image === 1) {
+      x = document.getElementById('img_q811')
+      if (x.src.includes('img/sched/ss_ts_l.png')) {
+        x.src = '../../img/sched/ss_ts100ms.png'
+      } else {
+        x.src = '../../img/sched/ss_ts_l.png'
+      }
+    }
+
+
 }  

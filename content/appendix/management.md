@@ -37,8 +37,8 @@ draft: true
 **we are here**
 
 * W7: 
-  * 1.5h: inter task communication + labs
-  * 3h: Stack & Heap + labs
+  * 1.5h: **ch7** CPU Scheduling
+  * 3h: labs + **ch8** Stack & Heap + labs
   indienen taak 3 (threads)
 * W8: 
   * 1.5h: Memory Management

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Operating Systems and C</title>
@@ -242,6 +242,16 @@ What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up u
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
       <description>The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
 How could be mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the time slice.</description>
+    </item>
+    
+    <item>
+      <title>8.3: Different Scopes in C</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/scope/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/scope/</guid>
+      <description>Scoping issues Now that you have some basic knowledge on the stack and the heap, it is time to take a better look at the different scopes present in the C programming language. These concepts are very important because they in part determine whether variables live (or not) - and whether anything is pushed to the local stack (or not). Let&amp;rsquo;s start with a basic example:
+#include &amp;lt;stdio.h&amp;gt; void* whats_my_age() { int age = 30; // I&amp;#39;m being generous here!</description>
     </item>
     
     <item>

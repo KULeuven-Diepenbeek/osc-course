@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.1" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>8.1: The Stack &amp; the Heap :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1585128042" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/hybrid.css?1585128042" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1585128042" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1585128042" rel="stylesheet">
-    <link href="../../css/theme.css?1585128042" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1585128042" rel="stylesheet">
+    <link href="../../css/nucleus.css?1585143175" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/hybrid.css?1585143175" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1585143175" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1585143175" rel="stylesheet">
+    <link href="../../css/theme.css?1585143175" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1585143175" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1585128042" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1585143175" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1585128042"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1585143175"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -81,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1585128042"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1585128042"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1585143175"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1585143175"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1585128042"></script>
+<script type="text/javascript" src="../../js/search.js?1585143175"></script>
 
     
   </div>
@@ -935,6 +935,25 @@ window.MathJax = {
 
             
           
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/scope/" title="8.3: Different Scopes in C" class="dd-item ">
+        <a href="../../ch8-stack/scope/">
+        <i class='fas fa-book'></i> 8.3: Different Scopes in C
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
         
         </ul>
               
@@ -1327,6 +1346,7 @@ window.MathJax = {
 <li><a href="#dangling-pointers">Dangling pointers</a></li>
 <li><a href="#garbage-collection-not-happening-in-c">Garbage Collection - not happening in C&hellip;</a></li>
 <li><a href="#what-happens-when-the-stack-and-heap-collide">What happens when the stack and heap collide?</a></li>
+<li><a href="#what-s-a-stack-overflow">What&rsquo;s a stack overflow?</a></li>
 </ul></li>
 <li><a href="#optimizing-c-code">Optimizing C code</a>
 <ul>
@@ -1444,6 +1464,8 @@ Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack<
 	</div>
 </div>
 
+<p>As another side node, it is possible to resize variables on the heap, using <code>realloc()</code>. This is simply not possible on the stack: they cannot be resized. Also, using <a href="https://www.tutorialspoint.com/c_standard_library/c_function_calloc.htm">calloc</a> instead of malloc initializes the allocated memory to zero instead of &ldquo;nothing&rdquo;. So now you know how to use <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, and <code>free</code>.</p>
+
 <h3 id="inspecting-program-memory-in-the-os">Inspecting program memory in the OS</h3>
 
 <p>Unix-like operating systems implement <a href="https://en.wikipedia.org/wiki/Procfs">procfs</a>, a special filesystem mapped to <code>/proc</code>, that makes it easy for us to inspect program running program state. You will need the process ID (PID) as it is the subdir name. Interesting files to inspect are:</p>
@@ -1464,6 +1486,7 @@ Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack<
 <ul>
 <li>You do not want to de-allocate variables yourself.</li>
 <li>You need speed (space is managed efficiently by the CPU).</li>
+<li>Variable size is static.</li>
 </ul>
 
 <p>Use the heap when:</p>
@@ -1473,7 +1496,10 @@ Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack<
 <li>You don&rsquo;t mind a bit slower access (fragmentation problems can occur).</li>
 <li>You want to pass on (global) objects between functions.</li>
 <li>You like managing things yourself.</li>
+<li>Variable size could be dynamic.</li>
 </ul>
+
+<p>What piece of code could be <em>dynamic</em> in size? Data structures, such as linked lists from <a href="../../ch3-pointers">chapter 3: pointers and arrays</a>, are a good candidate for this: arrays, sets, maps, and any other form of collection can grow and shrink in size, therefore need dynamic memory mapped. Using <code>[]</code> will, in most cases, not suffice in the C programming language, unless you are doing something very simple.</p>
 
 <h2 id="memory-management">Memory management</h2>
 
@@ -1544,12 +1570,12 @@ r <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</spa
 <h3 id="garbage-collection-not-happening-in-c">Garbage Collection - not happening in C&hellip;</h3>
 
 <p>The above mistakes are easily made if you are used to Java:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() {
-    Animal <span style="color:#a6e22e">cow</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#960050;background-color:#1e0010">void foo</span>() {
+    <span style="color:#960050;background-color:#1e0010">Animal cow </span><span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal();
     cow.<span style="color:#a6e22e">eat</span>();
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String[] <span style="color:#a6e22e">args</span>) {
+<span style="color:#960050;background-color:#1e0010">public static void main</span>(<span style="color:#960050;background-color:#1e0010">String[] args</span>) {
     foo();
     <span style="color:#75715e">// cow instances are cleaned up for you...
 </span><span style="color:#75715e"></span>}</code></pre></div>
@@ -1573,6 +1599,41 @@ Do the same with infinite malloc()&rsquo;s. What happens now?</p>
 
 	</div>
 </div>
+
+<h3 id="what-s-a-stack-overflow">What&rsquo;s a stack overflow?</h3>
+
+<p>The stack is a limited, but fast piece of program memory, made available for your program by the OS. The keyword here is <strong>limited</strong>. Unlike the heap, it will not dynamically grow, and it is typically hard-wired in the OS. Simply keeping on adding stuff to the stack, such as calling methods within methods without a stop condition (infinite recursion), will cause a stack overflow exception, signaling that the OS prevented your program from taking over everything:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// forward definition
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flow</span>();
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flow</span>() {  <span style="color:#75715e">// on the stack
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// on the stack
+</span><span style="color:#75715e"></span>    flow();    <span style="color:#75715e">// keep on going
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    flow();
+}</code></pre></div>
+<p>This causes a <em>segmentation fault</em> on my OSX machine, signaling that it was killed by the OS. Add <code>printf()</code> statements to your liking.</p>
+
+<p>How do I know how big the stack can be on my OS? Use <code>ulimit -a</code> to find out:</p>
+
+<pre>
+outers-MacBook-Air:ch8-stack wgroeneveld$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+file size               (blocks, -f) unlimited
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 4864
+pipe size            (512 bytes, -p) 1
+stack size              (kbytes, -s) 8192           **BINGO**
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 709
+virtual memory          (kbytes, -v) unlimited
+</pre>
+
+<p>So it&rsquo;s <strong>8.19 MB</strong>.</p>
 
 <h2 id="optimizing-c-code">Optimizing C code</h2>
 
@@ -2356,6 +2417,22 @@ main:
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -2589,19 +2666,19 @@ main:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1585128042"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1585128042"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1585128042"></script>
-    <script src="../../js/jquery.sticky.js?1585128042"></script>
-    <script src="../../js/featherlight.min.js?1585128042"></script>
-    <script src="../../js/highlight.pack.js?1585128042"></script>
+    <script src="../../js/clipboard.min.js?1585143175"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1585143175"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1585143175"></script>
+    <script src="../../js/jquery.sticky.js?1585143175"></script>
+    <script src="../../js/featherlight.min.js?1585143175"></script>
+    <script src="../../js/highlight.pack.js?1585143175"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1585128042"></script>
-    <script src="../../js/learn.js?1585128042"></script>
-    <script src="../../js/hugo-learn.js?1585128042"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1585143175"></script>
+    <script src="../../js/learn.js?1585143175"></script>
+    <script src="../../js/hugo-learn.js?1585143175"></script>
 
-    <link href="../../mermaid/mermaid.css?1585128042" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1585128042"></script>
+    <link href="../../mermaid/mermaid.css?1585143175" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1585143175"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

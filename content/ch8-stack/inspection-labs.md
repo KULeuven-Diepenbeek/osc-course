@@ -93,7 +93,62 @@ Indeed, the Figure from [chapter 7.1](/ch7-stack/stackvsheap) and our findings c
 
 Until now the above examples have never taken into consideration the fact that one has to get rid unused space using `free()`. We will leave it up to you to inspect what happens in `/proc`. 
 
+## Extra: Using Valgrind to inspect the memory heap
+
+![](/img/valgrind.png)
+
+Valgrind is a useful commandline tool that makes it easy for C programmers to inspect how much dynamic (heap) memory a program actually consumed, and how much of it was freed. It is a lot easier to use than dabbling in different disassemble commands, but it does NOT come with the GNU toolchain. Use `apt-get install valgrind` to install it onto your virtual machine. 
+
+Let's assume a simple program that reserves some memory, fills in the blanks, and then frees up some space: (also available in the `osc-exercises` repository)
+
+```c
+#include <stdlib.h>
+
+int main() {
+    int* ptr;
+    ptr = malloc(sizeof(int) * 1000);
+    // we allocated 4000 bytes (since an int is usually 4 bytes)
+
+    free(ptr);
+    return 0;
+}
+```
+
+After compiling this, we can let the tool figure out how much space we took up, how many leaks there were, and much more:
+
+<pre>
+Wouters-MacBook-Air:ch8-stack wgroeneveld$ valgrind ./a.out
+==87742== Memcheck, a memory error detector
+==87742== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==87742== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==87742== Command: ./a.out
+==87742==
+--87742-- run: /usr/bin/dsymutil "./a.out"
+warning: no debug symbols in executable (-arch x86_64)
+==87742==
+==87742== HEAP SUMMARY:
+==87742==     in use at exit: 22,529 bytes in 188 blocks
+==87742==   total heap usage: 268 allocs, 80 frees, 32,649 bytes allocated
+==87742==
+==87742== LEAK SUMMARY:
+==87742==    definitely lost: 3,472 bytes in 55 blocks
+==87742==    indirectly lost: 2,832 bytes in 9 blocks
+==87742==      possibly lost: 0 bytes in 0 blocks
+==87742==    still reachable: 0 bytes in 0 blocks
+==87742==         suppressed: 16,225 bytes in 124 blocks
+==87742== Rerun with --leak-check=full to see details of leaked memory
+==87742==
+==87742== For lists of detected and suppressed errors, rerun with: -s
+==87742== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+</pre>
+
+{{% task %}}
+Try to let the above program produce a few memory leaks. Does valgrind notice you did not clean up your mess? The _definitely lost_ amount should skyrocket after a few uncleaned `malloc()` calls. Are amount of reported bytes correct? Recalculate this manually. 
+{{% /task %}}
+
+
 ## Further Reading
 
 - [Hack the Virtual Memory: malloc, the heap & the program break](https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/
 )
+- [Valgrind quickstart](http://valgrind.org/docs/manual/QuickStart.html)

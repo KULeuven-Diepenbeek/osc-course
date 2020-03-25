@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.1" />
     <meta name="description" content="">
 
 
@@ -12,20 +12,20 @@
     <title>8.2: Inspecting memory regions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1585128042" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/hybrid.css?1585128042" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1585128042" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1585128042" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1585128042" rel="stylesheet">
-    <link href="../../css/theme.css?1585128042" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1585128042" rel="stylesheet">
+    <link href="../../css/nucleus.css?1585143175" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/hybrid.css?1585143175" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1585143175" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1585143175" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1585143175" rel="stylesheet">
+    <link href="../../css/theme.css?1585143175" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1585143175" rel="stylesheet">
     
-      <link href="../../css/theme-kul.css?1585128042" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1585143175" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1585128042"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1585143175"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -81,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1585128042"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1585128042"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1585143175"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1585143175"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1585128042"></script>
+<script type="text/javascript" src="../../js/search.js?1585143175"></script>
 
     
   </div>
@@ -935,6 +935,25 @@ window.MathJax = {
 
             
           
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/scope/" title="8.3: Different Scopes in C" class="dd-item ">
+        <a href="../../ch8-stack/scope/">
+        <i class='fas fa-book'></i> 8.3: Different Scopes in C
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
         
         </ul>
               
@@ -1317,6 +1336,7 @@ window.MathJax = {
 <li><a href="#2-malloc-use-heap">2. malloc: use heap</a></li>
 <li><a href="#3-multiple-mallocs">3. multiple mallocs</a></li>
 <li><a href="#4-free">4. Free</a></li>
+<li><a href="#extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</a></li>
 <li><a href="#further-reading">Further Reading</a></li>
 </ul></li>
 </ul>
@@ -1453,10 +1473,64 @@ read(0,
 
 <p>Until now the above examples have never taken into consideration the fact that one has to get rid unused space using <code>free()</code>. We will leave it up to you to inspect what happens in <code>/proc</code>.</p>
 
+<h2 id="extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</h2>
+
+<p><img src="../../img/valgrind.png" alt="" /></p>
+
+<p>Valgrind is a useful commandline tool that makes it easy for C programmers to inspect how much dynamic (heap) memory a program actually consumed, and how much of it was freed. It is a lot easier to use than dabbling in different disassemble commands, but it does NOT come with the GNU toolchain. Use <code>apt-get install valgrind</code> to install it onto your virtual machine.</p>
+
+<p>Let&rsquo;s assume a simple program that reserves some memory, fills in the blanks, and then frees up some space: (also available in the <code>osc-exercises</code> repository)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr;
+    ptr <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+    <span style="color:#75715e">// we allocated 4000 bytes (since an int is usually 4 bytes)
+</span><span style="color:#75715e"></span>
+    free(ptr);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+<p>After compiling this, we can let the tool figure out how much space we took up, how many leaks there were, and much more:</p>
+
+<pre>
+Wouters-MacBook-Air:ch8-stack wgroeneveld$ valgrind ./a.out
+==87742== Memcheck, a memory error detector
+==87742== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==87742== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==87742== Command: ./a.out
+==87742==
+--87742-- run: /usr/bin/dsymutil "./a.out"
+warning: no debug symbols in executable (-arch x86_64)
+==87742==
+==87742== HEAP SUMMARY:
+==87742==     in use at exit: 22,529 bytes in 188 blocks
+==87742==   total heap usage: 268 allocs, 80 frees, 32,649 bytes allocated
+==87742==
+==87742== LEAK SUMMARY:
+==87742==    definitely lost: 3,472 bytes in 55 blocks
+==87742==    indirectly lost: 2,832 bytes in 9 blocks
+==87742==      possibly lost: 0 bytes in 0 blocks
+==87742==    still reachable: 0 bytes in 0 blocks
+==87742==         suppressed: 16,225 bytes in 124 blocks
+==87742== Rerun with --leak-check=full to see details of leaked memory
+==87742==
+==87742== For lists of detected and suppressed errors, rerun with: -s
+==87742== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+</pre>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Try to let the above program produce a few memory leaks. Does valgrind notice you did not clean up your mess? The <em>definitely lost</em> amount should skyrocket after a few uncleaned <code>malloc()</code> calls. Are amount of reported bytes correct? Recalculate this manually.</p>
+
+	</div>
+</div>
+
 <h2 id="further-reading">Further Reading</h2>
 
 <ul>
 <li><a href="https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/">Hack the Virtual Memory: malloc, the heap &amp; the program break</a></li>
+<li><a href="http://valgrind.org/docs/manual/QuickStart.html">Valgrind quickstart</a></li>
 </ul>
 
 
@@ -2120,9 +2194,6 @@ read(0,
             
         
                     
-            
-        
-                    
                         
             
             
@@ -2130,6 +2201,25 @@ read(0,
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -2346,7 +2436,7 @@ read(0,
 			<a class="nav nav-prev" href="../../ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch9-memory/" title="9: Memory Management" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch8-stack/scope/" title="8.3: Different Scopes in C" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2356,19 +2446,19 @@ read(0,
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1585128042"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1585128042"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1585128042"></script>
-    <script src="../../js/jquery.sticky.js?1585128042"></script>
-    <script src="../../js/featherlight.min.js?1585128042"></script>
-    <script src="../../js/highlight.pack.js?1585128042"></script>
+    <script src="../../js/clipboard.min.js?1585143175"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1585143175"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1585143175"></script>
+    <script src="../../js/jquery.sticky.js?1585143175"></script>
+    <script src="../../js/featherlight.min.js?1585143175"></script>
+    <script src="../../js/highlight.pack.js?1585143175"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1585128042"></script>
-    <script src="../../js/learn.js?1585128042"></script>
-    <script src="../../js/hugo-learn.js?1585128042"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1585143175"></script>
+    <script src="../../js/learn.js?1585143175"></script>
+    <script src="../../js/hugo-learn.js?1585143175"></script>
 
-    <link href="../../mermaid/mermaid.css?1585128042" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1585128042"></script>
+    <link href="../../mermaid/mermaid.css?1585143175" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1585143175"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

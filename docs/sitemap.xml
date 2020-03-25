@@ -148,6 +148,11 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</loc>
+    <lastmod>2020-03-25T10:07:01+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/</loc>
     <lastmod>2020-01-08T16:07:27+01:00</lastmod>
   </url>
@@ -219,12 +224,7 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+    <lastmod>2020-03-25T03:43:37+01:00</lastmod>
   </url>
   
   <url>
@@ -234,6 +234,11 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/capita-selecta/</loc>
+    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/</loc>
     <lastmod>2020-03-17T06:39:17+01:00</lastmod>
   </url>
   

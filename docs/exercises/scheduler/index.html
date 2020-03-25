@@ -7,25 +7,25 @@
     <meta name="description" content="">
 
 
-    <link rel="icon" href="../images/favicon.png" type="image/png">
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>3: Pointers &amp; Arrays :: Operating Systems and C</title>
+    <title>4. Pseudo scheduler :: Operating Systems and C</title>
 
     
-    <link href="../css/nucleus.css?1585127227" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1585127227" rel="stylesheet">
-    <link href="../css/hybrid.css?1585127227" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1585127227" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1585127227" rel="stylesheet">
-    <link href="../css/auto-complete.css?1585127227" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1585127227" rel="stylesheet">
-    <link href="../css/theme.css?1585127227" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1585127227" rel="stylesheet">
+    <link href="../../css/nucleus.css?1585127227" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1585127227" rel="stylesheet">
+    <link href="../../css/hybrid.css?1585127227" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1585127227" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1585127227" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1585127227" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1585127227" rel="stylesheet">
+    <link href="../../css/theme.css?1585127227" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1585127227" rel="stylesheet">
     
-      <link href="../css/theme-kul.css?1585127227" rel="stylesheet">
+      <link href="../../css/theme-kul.css?1585127227" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1585127227"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1585127227"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,9 +58,9 @@ window.MathJax = {
 };
 </script>
 
-<script src=../js/osc.js></script>
+<script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="/ch3-pointers/">
+  <body class="" data-url="/exercises/scheduler/">
     <nav id="sidebar" class="">
 
 
@@ -68,10 +68,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="../img/style/kul.png" alt="KU Leuven" /><br/>
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -81,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1585127227"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1585127227"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1585127227"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1585127227"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1585127227"></script>
+<script type="text/javascript" src="../../js/search.js?1585127227"></script>
 
     
   </div>
@@ -109,7 +109,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch1-c/">
+      <a href="../../ch1-c/">
           <i class='far fa-keyboard'></i> 1: Introduction in C
           
       </a>
@@ -130,7 +130,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
-        <a href="../ch1-c/intro/">
+        <a href="../../ch1-c/intro/">
         <i class='fas fa-book'></i> 1.1: The C programming language
         
         </a>
@@ -149,7 +149,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
-        <a href="../ch1-c/intro-labs/">
+        <a href="../../ch1-c/intro-labs/">
         <i class='fas fa-vial'></i> 1.2: String Manipulation
         
         </a>
@@ -168,7 +168,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
-        <a href="../ch1-c/structs/">
+        <a href="../../ch1-c/structs/">
         <i class='fas fa-book'></i> 1.3: Creating order: Structures
         
         </a>
@@ -187,7 +187,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
-        <a href="../ch1-c/structs-labs/">
+        <a href="../../ch1-c/structs-labs/">
         <i class='fas fa-vial'></i> 1.4: Structs
         
         </a>
@@ -206,7 +206,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
-        <a href="../ch1-c/ecosystems/">
+        <a href="../../ch1-c/ecosystems/">
         <i class='fas fa-book'></i> 1.5: C Ecosystems
         
         </a>
@@ -225,7 +225,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
-        <a href="../ch1-c/ecosystems-labs/">
+        <a href="../../ch1-c/ecosystems-labs/">
         <i class='fas fa-vial'></i> 1.6: Splitting up Code
         
         </a>
@@ -255,7 +255,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch2-interrupts/">
+      <a href="../../ch2-interrupts/">
           <i class='fab fa-linux'></i> 2: Interrupts
           
       </a>
@@ -276,7 +276,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
-        <a href="../ch2-interrupts/theory1_arduino/">
+        <a href="../../ch2-interrupts/theory1_arduino/">
         <i class='fab fa-linux'></i> 2.1 Arduino UNO
         
         </a>
@@ -295,7 +295,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
-        <a href="../ch2-interrupts/lab1_arduino-bm/">
+        <a href="../../ch2-interrupts/lab1_arduino-bm/">
         <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
         
         </a>
@@ -314,7 +314,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
-        <a href="../ch2-interrupts/theory2_timer/">
+        <a href="../../ch2-interrupts/theory2_timer/">
         <i class='fab fa-linux'></i> 2.3 The timer
         
         </a>
@@ -333,7 +333,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
-        <a href="../ch2-interrupts/lab2_rocketlaunch/">
+        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
         <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
         
         </a>
@@ -352,7 +352,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
-        <a href="../ch2-interrupts/theory3_interrupt/">
+        <a href="../../ch2-interrupts/theory3_interrupt/">
         <i class='fab fa-linux'></i> 2.5 The internals of interrupts
         
         </a>
@@ -378,11 +378,11 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
-      <a href="../ch3-pointers/">
+      <a href="../../ch3-pointers/">
           <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
           
       </a>
@@ -403,7 +403,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
-        <a href="../ch3-pointers/pointers/">
+        <a href="../../ch3-pointers/pointers/">
         <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
         
         </a>
@@ -422,7 +422,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
-        <a href="../ch3-pointers/practical-use/">
+        <a href="../../ch3-pointers/practical-use/">
         <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
         
         </a>
@@ -441,7 +441,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
-        <a href="../ch3-pointers/lab/">
+        <a href="../../ch3-pointers/lab/">
         <i class='fas fa-vial'></i> 3.3: The Ancient Library
         
         </a>
@@ -471,7 +471,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch4-debugging/">
+      <a href="../../ch4-debugging/">
           <i class='far fa-keyboard'></i> 4: Debugging
           
       </a>
@@ -492,7 +492,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
-        <a href="../ch4-debugging/debugging-ide/">
+        <a href="../../ch4-debugging/debugging-ide/">
         <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
         
         </a>
@@ -511,7 +511,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
-        <a href="../ch4-debugging/debugging-gdb/">
+        <a href="../../ch4-debugging/debugging-gdb/">
         <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
         
         </a>
@@ -530,7 +530,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
-        <a href="../ch4-debugging/testing/">
+        <a href="../../ch4-debugging/testing/">
         <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
         
         </a>
@@ -560,7 +560,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch5-introos/">
+      <a href="../../ch5-introos/">
           <i class='fab fa-linux'></i> 5: Intro in OS
           
       </a>
@@ -581,7 +581,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
-        <a href="../ch5-introos/intro-os/">
+        <a href="../../ch5-introos/intro-os/">
         <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
         
         </a>
@@ -600,7 +600,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
-        <a href="../ch5-introos/lab1_wetfeet/">
+        <a href="../../ch5-introos/lab1_wetfeet/">
         <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
         
         </a>
@@ -630,7 +630,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch6-tasks/">
+      <a href="../../ch6-tasks/">
           <i class='fab fa-linux'></i> 6: Task management
           
       </a>
@@ -651,7 +651,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
-        <a href="../ch6-tasks/processes/">
+        <a href="../../ch6-tasks/processes/">
         <i class='fas fa-book'></i> 6.1: Processes
         
         </a>
@@ -670,7 +670,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
-        <a href="../ch6-tasks/lab1_processmgmt/">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
         <i class='fas fa-vial'></i> 6.2: Processes (lab)
         
         </a>
@@ -689,7 +689,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/threads/" title="6.3: Threads" class="dd-item ">
-        <a href="../ch6-tasks/threads/">
+        <a href="../../ch6-tasks/threads/">
         <i class='fas fa-book'></i> 6.3: Threads
         
         </a>
@@ -708,7 +708,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
-        <a href="../ch6-tasks/lab2_threadsmgmt/">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
         <i class='fas fa-vial'></i> 6.4: Threads (lab)
         
         </a>
@@ -727,7 +727,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/intertasks/" title="6.5: Inter task communication" class="dd-item ">
-        <a href="../ch6-tasks/intertasks/">
+        <a href="../../ch6-tasks/intertasks/">
         <i class='fas fa-book'></i> 6.5: Inter task communication
         
         </a>
@@ -746,7 +746,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch6-tasks/lab3_intertaskcomm/" title="6.6: Inter task communication (lab)" class="dd-item ">
-        <a href="../ch6-tasks/lab3_intertaskcomm/">
+        <a href="../../ch6-tasks/lab3_intertaskcomm/">
         <i class='fas fa-vial'></i> 6.6: Inter task communication (lab)
         
         </a>
@@ -776,7 +776,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch7-scheduling/">
+      <a href="../../ch7-scheduling/">
           <i class='fab fa-linux'></i> 7: CPU scheduling
           
       </a>
@@ -797,7 +797,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-scheduling/algorithms/" title="7.1: Scheduling algorithms" class="dd-item ">
-        <a href="../ch7-scheduling/algorithms/">
+        <a href="../../ch7-scheduling/algorithms/">
         <i class='fas fa-book'></i> 7.1: Scheduling algorithms
         
         </a>
@@ -816,7 +816,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)" class="dd-item ">
-        <a href="../ch7-scheduling/lab1_algorithms/">
+        <a href="../../ch7-scheduling/lab1_algorithms/">
         <i class='fas fa-vial'></i> 7.2: Scheduling algorithms (lab)
         
         </a>
@@ -835,7 +835,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-scheduling/towards/" title="7.3: Towards real-world schedulers" class="dd-item ">
-        <a href="../ch7-scheduling/towards/">
+        <a href="../../ch7-scheduling/towards/">
         <i class='fas fa-book'></i> 7.3: Towards real-world schedulers
         
         </a>
@@ -854,7 +854,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" class="dd-item ">
-        <a href="../ch7-scheduling/lab2_niceguy/">
+        <a href="../../ch7-scheduling/lab2_niceguy/">
         <i class='fas fa-vial'></i> 7.4: Mr. nice guy(lab)
         
         </a>
@@ -884,7 +884,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch8-stack/">
+      <a href="../../ch8-stack/">
           <i class='far fa-keyboard'></i> 8: The Stack &amp; The Heap
           
       </a>
@@ -905,7 +905,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap" class="dd-item ">
-        <a href="../ch8-stack/stackvsheap/">
+        <a href="../../ch8-stack/stackvsheap/">
         <i class='fas fa-book'></i> 8.1: The Stack &amp; the Heap
         
         </a>
@@ -924,7 +924,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch8-stack/inspection-labs/" title="8.2: Inspecting memory regions" class="dd-item ">
-        <a href="../ch8-stack/inspection-labs/">
+        <a href="../../ch8-stack/inspection-labs/">
         <i class='fas fa-vial'></i> 8.2: Inspecting memory regions
         
         </a>
@@ -954,7 +954,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch9-memory/">
+      <a href="../../ch9-memory/">
           <i class='fab fa-linux'></i> 9: Memory Management
           
       </a>
@@ -975,7 +975,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item ">
-        <a href="../ch9-memory/memory/">
+        <a href="../../ch9-memory/memory/">
         <i class='fas fa-book'></i> 9.1: Memory management
         
         </a>
@@ -1005,7 +1005,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../ch10-capitaselecta/">
+      <a href="../../ch10-capitaselecta/">
           <i class='fab fa-linux'></i> 10: Capita Selecta
           
       </a>
@@ -1026,7 +1026,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/ch10-capitaselecta/capita-selecta/" title="10.1: Capita Selecta" class="dd-item ">
-        <a href="../ch10-capitaselecta/capita-selecta/">
+        <a href="../../ch10-capitaselecta/capita-selecta/">
         <i class='fas fa-book'></i> 10.1: Capita Selecta
         
         </a>
@@ -1052,11 +1052,11 @@ window.MathJax = {
   
     
     <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item 
-        
+        parent
         
         
         ">
-      <a href="../exercises/">
+      <a href="../../exercises/">
           <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
           
       </a>
@@ -1077,7 +1077,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
-        <a href="../exercises/c-integrated-ex/">
+        <a href="../../exercises/c-integrated-ex/">
         <i class='fas fa-pen-square'></i> 1. Integrated C exercise
         
         </a>
@@ -1096,7 +1096,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
-        <a href="../exercises/c-debugging-testing/">
+        <a href="../../exercises/c-debugging-testing/">
         <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
         
         </a>
@@ -1115,7 +1115,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
-        <a href="../exercises/tasks_inter_thread_communication/">
+        <a href="../../exercises/tasks_inter_thread_communication/">
         <i class='fas fa-pen-square'></i> 3. Inter-thread communication
         
         </a>
@@ -1133,8 +1133,8 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/exercises/scheduler/" title="4. Pseudo scheduler" class="dd-item ">
-        <a href="../exercises/scheduler/">
+      <li data-nav-id="/exercises/scheduler/" title="4. Pseudo scheduler" class="dd-item active">
+        <a href="../../exercises/scheduler/">
         <i class='fas fa-pen-square'></i> 4. Pseudo scheduler
         
         </a>
@@ -1164,7 +1164,7 @@ window.MathJax = {
         
         
         ">
-      <a href="../appendix/">
+      <a href="../../appendix/">
           <i class='fab fa-github'></i> B. Appendix
           
       </a>
@@ -1185,7 +1185,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
-        <a href="../appendix/lab_ll_rtos/">
+        <a href="../../appendix/lab_ll_rtos/">
         <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
         
         </a>
@@ -1204,7 +1204,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
-        <a href="../appendix/reading/">
+        <a href="../../appendix/reading/">
         1. Recommended reading
         
         </a>
@@ -1223,7 +1223,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
-        <a href="../appendix/installing/">
+        <a href="../../appendix/installing/">
         2. Installation Instructions
         
         </a>
@@ -1242,7 +1242,7 @@ window.MathJax = {
   
     
       <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
-        <a href="../appendix/cheat_sheet/">
+        <a href="../../appendix/cheat_sheet/">
         Cheat sheet
         
         </a>
@@ -1309,6 +1309,8 @@ window.MathJax = {
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -1319,7 +1321,13 @@ window.MathJax = {
             
           
           
-            <a href='../'>Operating Systems and C</a> > 3: Pointers & Arrays
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../exercises/'>A. Exercises Assignments</a> > 4. Pseudo scheduler
+          
+         
           
          
           
@@ -1328,6 +1336,27 @@ window.MathJax = {
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#scheduler">Scheduler</a></li>
+<li><a href="#circular-linked-list">Circular Linked List</a></li>
+<li><a href="#input-output">Input/output</a></li>
+<li><a href="#some-boiler-plating">Some boiler plating</a></li>
+<li><a href="#assignment">Assignment</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -1335,9 +1364,12 @@ window.MathJax = {
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              4. Pseudo scheduler
+            </h1>
           
 
         
@@ -1345,30 +1377,157 @@ window.MathJax = {
 
 
 
-	
 
-<h3 id="chapter-3">Chapter 3</h3>
+<figure>
+    <img src="../../img/ass4_sched/poepjee.jpg"/> <figcaption>
+            <h4>image source: youtube.com</h4>
+        </figcaption>
+</figure>
 
-<h1 id="pointers-and-arrays">Pointers and Arrays</h1>
 
-<p>Chapter 3 handles the following subjects:</p>
+<h3 id="scheduler">Scheduler</h3>
+
+<p>In this assignment you&rsquo;re going to build a (pseudo) scheduler. A number of tasks will be provided. The scheduler follows the next rules to schedule the presented tasks:</p>
+
+<ol>
+<li>The scheduler is preemtive and uses a round-robin approach without priorities.</li>
+<li>The (virtual) time slice is 1 second.</li>
+<li>If a new job is announcing itself, it gets a time slice right away (last come, first served)</li>
+</ol>
+
+<h3 id="circular-linked-list">Circular Linked List</h3>
+
+<p>As should be clear from the theory, the (pseudo) scheduler will need to store the incoming. To be consistent with this course and Linux, the run queue is to be implemented using a <strong>linked list</strong>.</p>
+
+<p>The <strong>struct</strong> that is to hold the tasks is predefined:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// typedefs
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> ST_PCB {
+  <span style="color:#66d9ef">int</span> arrival_time;
+  <span style="color:#66d9ef">char</span> name[<span style="color:#ae81ff">9</span>];
+  <span style="color:#66d9ef">int</span> duration;
+  <span style="color:#66d9ef">struct</span> ST_PCB <span style="color:#f92672">*</span> next;
+} T_PCB;</code></pre></div>
+
+<p>However in stead of making a linear linked list, as we did earlier; This time you should aim for a circular linked list. This is nothing more than a <em>normal</em> linked list where the final element&rsquo;s <strong>next</strong> field points back to the <strong>head</strong> of the list.</p>
+
+<figure>
+    <img src="../../img/ass4_sched/linear_vs_circular_ll.gif"/> 
+</figure>
+
+
+<p>With this run queue all the tasks are on a merry-go-round (see image above) 😃</p>
+
+<h3 id="input-output">Input/output</h3>
+
+<p>Both the input and the output are in the form of files.</p>
+
+<div class="multicolumn">
+  <div class="column">
+    <h4>INPUT</h4>
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">1</span>
+T0000003
+<span style="color:#ae81ff">6</span>
+<span style="color:#ae81ff">2</span>
+T0000002
+<span style="color:#ae81ff">3</span>
+<span style="color:#ae81ff">5</span>
+T0000001
+<span style="color:#ae81ff">4</span>
+    </code></pre></div>
+  </div>
+  <div class="column">
+    <h4>OUTPUT</h4>
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">00</span> - idle
+<span style="color:#ae81ff">01</span> - T0000003 <span style="color:#f92672">(</span>new<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">02</span> - T0000002 <span style="color:#f92672">(</span>new<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">03</span> - T0000003
+<span style="color:#ae81ff">04</span> - T0000002
+<span style="color:#ae81ff">05</span> - T0000001 <span style="color:#f92672">(</span>new<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">06</span> - T0000003
+<span style="color:#ae81ff">07</span> - T0000002
+<span style="color:#ae81ff">08</span> - T0000001
+<span style="color:#ae81ff">09</span> - T0000003
+<span style="color:#ae81ff">10</span> - T0000001
+<span style="color:#ae81ff">11</span> - T0000003
+<span style="color:#ae81ff">12</span> - T0000001
+<span style="color:#ae81ff">13</span> - T0000003
+<span style="color:#ae81ff">14</span> - idle
+<span style="color:#ae81ff">15</span> - idle
+...
+    </code></pre></div>
+  </div>
+</div>
+
+<div class="multicolumn">
+  <div class="column">
+    The <b>input</b> is formatted according to these rules:
+    <ol>
+      <li>The first line shows the number of tasks that are in the input file</li>
+      <li>For each task there are three consecutive lines:
+        <ol>
+          <li>The arrival time (in seconds)</li>
+          <li>Name of the task (<b>exactly 8 characters wide</b>)</li>
+          <li>The duration of the task (in seconds)</li>
+        </ol>
+      </li>
+    </ol>
+  </div>
+  <div class="column">
+    The <b>output</b> is formatted according to these rules:
+    <ol>
+      <li>There is a line for <b>every</b> time slice</li>
+      <li>If a task is scheduled it's <b>name</b> is mentioned</li>
+      <li>If a new task is scheduled it is indicated with the <b>(new)</b></li>
+      <li>If there is no task to scheduled <b>idle</b> is reported</li>
+    </ol>
+  </div>
+</div>
+
+<h3 id="some-boiler-plating">Some boiler plating</h3>
+
+<p>A starting file is provided here. This file provides:</p>
 
 <ul>
-<li>Arrays in C</li>
-<li>Pointers in C: arrays don&rsquo;t exist!</li>
-<li>By-reference, By-value</li>
-<li><code>malloc()</code>, <code>free()</code></li>
-<li>Function pointers</li>
-<li>Practical examples of pointers:
+<li>the definition of the struct</li>
 
-<ul>
-<li>Aritmetics</li>
-<li>Linked Lists</li>
-<li>Swapping Values</li>
-</ul></li>
+<li><p>two functions to show linked lists
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_tasks_lin</span>(T_PCB <span style="color:#f92672">*</span> head);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_tasks_circ</span>(T_PCB <span style="color:#f92672">*</span> head);</code></pre></div></p></li>
+
+<li><p>two function that should be completed
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">T_PCB <span style="color:#f92672">*</span> <span style="color:#a6e22e">read_tasks</span>(<span style="color:#66d9ef">void</span>);
+T_PCB <span style="color:#f92672">*</span> <span style="color:#a6e22e">sort_tasks_on_arrival</span>(T_PCB <span style="color:#f92672">*</span> head);</code></pre></div></p></li>
+
+<li><p>a main functions that can only be modified between these lines
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* MODIFY BELOW HERE --------------------------------------------------------*/</span>
+
+<span style="color:#75715e">/* MODIFY ABOVE HERE --------------------------------------------------------*/</span></code></pre></div></p></li>
 </ul>
 
 
+<div class="notices note" ><p>The complete boilerplate code added to the <strong>osc-exercises</strong> repository.</p>
+</div>
+
+
+<h3 id="assignment">Assignment</h3>
+
+<p>This assignment requires you to:</p>
+
+<ul>
+<li>complete the bodies of the two missing functions</li>
+<li>modify the main function <strong>BETWEEN THE INDICATED LINES</strong> so the correct output is produced given a certain input</li>
+</ul>
+
+<p>The resulting C-file is to be uploaded to Toledo.</p>
+
+
+<div class="notices warning" ><p>Just, for the record: </br>
+  <span style="margin-left: 5%"><strong>Don&rsquo;t create memory leaks !!</strong></span></br>
+  <span style="margin-left: 5%"><strong>Close files that are opened !!</strong></span></br></br>
+<strong>Your solution will be verified with multiple, different input files !!</strong></p>
+</div>
 
 
 
@@ -1376,8 +1535,7 @@ window.MathJax = {
 	
 </footer>
 
-        
-            </div> 
+
         
         </div> 
         
@@ -1620,7 +1778,6 @@ window.MathJax = {
             
                 
                     
-                    
                 
                 
 
@@ -1633,9 +1790,6 @@ window.MathJax = {
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2104,6 +2258,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -2116,6 +2271,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2165,6 +2323,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -2183,6 +2342,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2268,10 +2430,10 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../ch3-pointers/pointers/" title="3.1: Pointers and arrays" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../appendix/" title="B. Appendix" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2281,19 +2443,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1585127227"></script>
-    <script src="../js/perfect-scrollbar.min.js?1585127227"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1585127227"></script>
-    <script src="../js/jquery.sticky.js?1585127227"></script>
-    <script src="../js/featherlight.min.js?1585127227"></script>
-    <script src="../js/highlight.pack.js?1585127227"></script>
+    <script src="../../js/clipboard.min.js?1585127227"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1585127227"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1585127227"></script>
+    <script src="../../js/jquery.sticky.js?1585127227"></script>
+    <script src="../../js/featherlight.min.js?1585127227"></script>
+    <script src="../../js/highlight.pack.js?1585127227"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1585127227"></script>
-    <script src="../js/learn.js?1585127227"></script>
-    <script src="../js/hugo-learn.js?1585127227"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1585127227"></script>
+    <script src="../../js/learn.js?1585127227"></script>
+    <script src="../../js/hugo-learn.js?1585127227"></script>
 
-    <link href="../mermaid/mermaid.css?1585127227" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1585127227"></script>
+    <link href="../../mermaid/mermaid.css?1585127227" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1585127227"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
@@ -2301,3 +2463,4 @@ window.MathJax = {
 
   </body>
 </html>
+

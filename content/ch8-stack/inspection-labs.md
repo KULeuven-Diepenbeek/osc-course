@@ -4,6 +4,10 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
 
+Accompanying Screencast:
+
+{{< vimeo 400606180 >}}
+
 ## 1. No malloc, no heap
 
 Let's look at memory regions of a process that does not call `malloc()`. 

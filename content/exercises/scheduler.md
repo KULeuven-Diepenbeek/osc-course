@@ -136,4 +136,13 @@ This assignment requires you to:
 * complete the bodies of the two missing functions
 * modify the main function **BETWEEN THE INDICATED LINES** so the correct output is produced given a certain input
 
+
+
 The resulting C-file is to be uploaded to Toledo.
+
+{{% notice warning %}}
+Just, for the record: </br>
+  <span style="margin-left: 5%">**Don't create memory leaks !!**</span></br>
+  <span style="margin-left: 5%">**Close files that are opened !!**</span></br></br>
+**Your solution will be verified with multiple, different input files !!**
+{{% /notice %}}

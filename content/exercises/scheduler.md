@@ -131,7 +131,7 @@ T_PCB * sort_tasks_on_arrival(T_PCB * head);
 
 
 {{% notice note %}}
-The complete boilerplate code added to the **osc-exercises** repository.
+The complete boilerplate code is added to the **osc-exercises** repository.
 {{% /notice %}}
 
 ### Assignment

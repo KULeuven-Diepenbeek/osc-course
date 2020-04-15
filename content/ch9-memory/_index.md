@@ -7,4 +7,14 @@ weight: 9
 
 ### Chapter 9
 
-# Memory Management
+9.1: Memory management
+
+  * The flat earth of Arduino
+  * Let's share
+  * Address Binding
+  * The memory-management unit
+  * Segmentation
+
+
+
+9.2: Scheduling algorithms (lab)

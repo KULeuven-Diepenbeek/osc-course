@@ -4,41 +4,35 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
 
-{{<figure src="https://m.media-amazon.com/images/I/71rZ7W8knkL._AC_UX679_.jpg" title="source: amazon.com">}}
+{{<figure src="https://imgs.xkcd.com/comics/compiler_complaint.png" title="source: xkcd.com">}}
+
+
+## <s>X</s> A to the Z
 
 * Run the program below and verify that it runs without errors
 ```C
 #include <stdio.h>
 
+#define ACTUAL_SIZE 26
+#define READ_SIZE 27
+
 int main(void) {
-	unsigned char alphabet[26];
+	unsigned char alphabet[ACTUAL_SIZE];
 
-	for(int i=0;i<26;i++) {
+	for(int i=0;i<ACTUAL_SIZE;i++) {
 		alphabet[i] = 97 + i;
-	}
+}
 
-	for(int i=0;i<27;i++) {
-		printf("%2d -> %c\n", i, alphabet[i]);
+	for(int i=0;i<READ_SIZE;i++) {
+		printf("%2d -> %c (%02x)\n", i, alphabet[i], alphabet[i]);
 	}
 
 	return 0;
 }
 ```
 
+* Recompile the code above, but verify that you have the ```-0s``` option added. This compiler flags sets the optimisation towards size. What do you learn ?
 
-## Let's compare !
+* Increase the **READ_SIZE** to 100. Compile and run again. Any errors ?
 
-We have discussed a number of algorithms the scheduler can use to do it's job. Let's compare them. We assume the following tasks:
-
-* T1: arrives @ 0s, takes 10s, and has priority low
-* T2: arrives @ 1s, takes 2s, and has priority high
-* T3: arrives @ 4s, takes 5s, and has priority medium
-* T4: arrives @ 7s, takes 1s, and has priority high
-
-Compare Threshold, AJWT, and AJCT of the 4 algorithms we've seen up until: 
-
-0. cooperative (non preemptive) FCFS, 
-0. cooperative (non preemptive) SJF, 
-0. preemptive priority based, and 
-0. preemptive round robin, 
-
+*

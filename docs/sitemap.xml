@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -98,6 +98,16 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</loc>
+    <lastmod>2020-04-16T08:28:30+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</loc>
+    <lastmod>2020-04-15T08:02:31+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</loc>
     <lastmod>2020-02-27T17:22:12+01:00</lastmod>
   </url>
@@ -138,6 +148,11 @@
   </url>
   
   <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</loc>
+    <lastmod>2020-04-15T08:02:31+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</loc>
     <lastmod>2020-01-08T16:07:27+01:00</lastmod>
   </url>
@@ -170,6 +185,11 @@
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</loc>
     <lastmod>2020-03-20T09:04:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2/</loc>
+    <lastmod>2020-04-17T07:18:00+02:00</lastmod>
   </url>
   
   <url>
@@ -229,17 +249,12 @@
   
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
+    <lastmod>2020-04-15T07:58:09+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/capita-selecta/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/</loc>
-    <lastmod>2020-03-25T10:07:33+01:00</lastmod>
+    <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/</loc>
+    <lastmod>2020-04-15T07:58:27+02:00</lastmod>
   </url>
   
   <url>
@@ -250,11 +265,6 @@
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/</loc>
     <lastmod>2020-02-05T10:29:56+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kuleuven-diepenbeek.github.io/osc-course/color_palette/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

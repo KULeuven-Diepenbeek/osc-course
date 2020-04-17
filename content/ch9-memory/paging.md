@@ -13,20 +13,21 @@ With segmentation there might be the following issue: we need to allocate a segm
 
 With paging, this issue can be overcome. When paging is used, the **memory is divided into equally sized pieces** (see image above). As the tools are aware of this, the issue of having a too-large-a piece will not occur any more. Another benefit is that *finding* a new location for a piece becomes easier. The puzzling has become much easier.
 
+In contrast with segmentation, paging does not result in external fragmentation. Any frame can be assigned to any process that needs one. However, internal fragmentation is to be expected.
+
+
 This fragmentation in the memory space happens both in the logical address space and in the physical address space. Off course the size of the pieces is the same in both. These newly created pieces have different names, however. A piece in the logical address space is called a **page**, whereas a piece in the physical address space is called a **frame**.
 
 {{% figure src="/img/mem/ss_mem_paging.png" title="The fragmentation of the logical and physical address space with paging" %}}
 
-rewrite:
-This rather simple idea has great functionality and wide ramifications.
-For example, the logical address space is now totally separate from the physical
-address space, so a process can have a logical 64-bit address space even though
-the system has less than 264 bytes of physical memory.
-
-For paging to work, hardware assistance is required. Every address that is generated in the logical address space is again *secretly* split in two pieces. The first piece is the **page number** (p) and the second piece is the **page offset** (d). Similar to the segment table earlier, there exists a **page table** for every process. This page table stores the base address of each page in the physical memory. The page offset is than added to the page baseaddress to finally have a physical memory address. Let's define the size of the logical address space as 2<sup>m</sup>, and a page size as
-2<sup>n</sup> bytes. The m-n most left-most bits of the logical address define the page number, and the n remaining bytes form the page offset.
 
 
+For paging to work, hardware assistance is required. Every address that is generated in the logical address space is again *secretly* split in two pieces. The first piece is the **page number** (p) and the second piece is the **page offset** (d). Similar to the segment table earlier, there exists a **page table** for every process. This page table stores the base address of each page in the physical memory. The page offset is than added to the page base address to finally have a physical memory address. The size of the logical address space is defined as 2<sup>m</sup>, and a page size as
+2<sup>n</sup> bytes. The m-n left-most bits of the logical address define the page number, and the n remaining bits form the page offset.
+
+{{% notice warning %}}
+Answer this question before you continue. If you can't answer the question, find the answer in the text above!<br/><br/><b>How many page tables are there in a single system ?</b>
+{{% /notice %}}
 
 <div class="multicolumn">
   <div style="width: 30%">
@@ -38,64 +39,101 @@ For paging to work, hardware assistance is required. Every address that is gener
   </div>
 </div>
 
-Both the page size and the frame size are defined by the supporting **hardware**. As hardware is involved this (typically) dictates that the sizes are powers of 2. The page size varies between 512 bytes and 1 GB per page. 
+Both the page size and the frame size are defined by the supporting **hardware**. As hardware is involved this (typically) dictates that the sizes are powers of 2. The <u>page size</u> could theoretically vary between 512 bytes and 1 GB per page. On a 32-bit processor each <u>page-table entry</u> is typically 4 bytes long.
 
-## Let's do some math
 
-In a hypothetical 4-bit system the processor can address 2<sup>4</sup> different addresses. Each logical address has a length of 4 bits. The made-up environment has a page size of 4 bytes, and has 32 bytes of physical memory available. With the definitions as declared above,this comes down to:
+While the idea of paging is relatively simple, the effects however are not. With a strict decoupling between the logical an physical address spaces, one does not put any restrictions on the other. A 64-bit processor, capable of addressing 2<sup>64</sup> (= 1.8 x 10<sup>19</sup>) different memory locations, can run on a physical memory with less than 264 bytes. (We're not guaranteeing it'll run smoothly, though :smile:).
+
+
+## Let's do some numbers
+
+In a hypothetical 4-bit system the processor can address 2<sup>4</sup> different addresses. Each logical address has a length of 4 bits. The made-up environment has a page size of 4 bytes, and has 32 bytes of physical memory available. The page table for a certain program would be defined as: {5, 6, 1, 2}. With the definitions as declared above, this comes down to:
 
 * m = 4
 * n = 2
+* physical memory is 8 frames
+* page table: {5, 6, 1, 2}
+
+The logical address 0x0 (0b0000) can be seen as a concatenation of 0b00 and 0b00. This means that the logical address refers to the content on page 0 and offset 0.
+
+The page table tells us that page 0 is mapped to frame 5. Because frames and pages have an equal size, frame 5 also contains 4 bytes. Because the offset is 0, the physical address on which the logical address 0x0 is mapped is 0x14.
+
+This can be calculated as follows: a frame is 4 bytes, and we're looking for frame number 5, this gives us 5 x 4 = 20 = 0x14. Finally the offset has to be added. For logical address 0x0, this is 0. The final physical address hence is 0x14 + 0x0 = 0x14.
+
+Logical address 0x3 (0b0011) has the same page (page 0), but has an offset of 3. The physical address to which logical address 0x3 is mapped, hence is 0x17. 
 
 
-physical memory of 32 bytes (8 pages)
+{{% task %}}
+Given the hypothetical system as described above, what would be the corresponding physical address for the logical addresses 4, and 15?
+<br/>
+<br/>
+<div class="solution" id="div_q941" style="visibility: hidden">
+  <b>Answer:</b><br/>
+  <p>
+    Logical address 4 (page 1, offset 0) maps to physical address 23 [= (<b>6</b> × 4) + 0] = 0x18
+    <br/>    
+    Logical address 15 (page 3, offset 3) maps to physical address 11 [= (<b>2</b> × 4) + 3] = 0x0B
+  </p>
+</div>
 
-As a concrete (although minuscule) example, consider the memory in
-Figure 8.12. Here, in the logical address, n= 2 and m = 4. Using a page size
-of 4 bytes and a , we show how the
-programmer’s view of memory can be mapped into physical memory. Logical
-address 0 is page 0, offset 0. Indexing into the page table, we find that page 0
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q941', 1)" />
 
-is in frame 5. Thus, logical address 0 maps to physical address 20 [= (5 × 4) +
-0]. Logical address 3 (page 0, offset 3) maps to physical address 23 [= (5 × 4) +
-3]. Logical address 4 is page 1, offset 0; according to the page table, page 1 is
-mapped to frame 6. Thus, logical address 4 maps to physical address 24 [= (6
-× 4) + 0]. Logical address 13 maps to physical address 9.
-You may have noticed that paging itself is a form of dynamic relocation.
-Every logical address is bound by the paging hardware to some physical
-address. Using paging is similar to using a table of base (or relocation) registers,
-one for each frame of memory.
-When we use a paging scheme, we have no external fragmentation: any free
-frame can be allocated to a process that needs it. However, we may have some
-internal fragmentation. Notice that frames are allocated as units. If the memory
-requirements of a process do not happen to coincide with page boundaries,
-the last frame allocated may not be completely full. For example, if page size
-is 2,048 bytes, a process of 72,766 bytes will need 35 pages plus 1,086 bytes. It
-will be allocated 36 frames, resulting in internal fragmentation of 2,048 − 1,086
-= 962 bytes. In the worst case, a process would need n pages plus 1 byte. It
-would be allocated n + 1 frames, resulting in internal fragmentation of almost
-an entire frame.
-If process size is independent of page size, we expect internal fragmentation
-to average one-half page per process. This consideration suggests that small
-page sizes are desirable. However, overhead is involved in each page-table
-entry, and this overhead is reduced as the size of the pages increases. Also,
-disk I/O is more efficient when the amount data being transferred is larger
-(Chapter 10). Generally, page sizes have grown over time as processes, data
-sets, and main memory have become larger. Today, pages typically are between
-4 KB and 8 KB in size, and some systems support even larger page sizes. Some
-CPUs and kernels even support multiple page sizes. For instance, Solaris uses
-page sizes of 8 KB and 4 MB, depending on the data stored by the pages.
-Researchers are now developing support for variable on-the-fly page size.
-Frequently, on a 32-bit CPU, each page-table entry is 4 bytes long, but that
-size can vary as well. A 32-bit entry can point to one of 232 physical page frames.
-If frame size is 4 KB (212), then a system with 4-byte entries can address 244 bytes
-(or 16 TB) of physical memory. We should note here that the size of physical
-memory in a paged memory system is different from the maximum logical size
+{{% /task %}}
 
 
-So using pages:
+
+## Hierarchy
+
+Take an off-the-shelf 32-bit processor that can address 2<sup>32</sup> different locations with a page size of 4 kB (=2<sup>12</sup>). If we assume that an entry in the page table has 4 bytes we can calculate the size of the page table: 
+
+* the page table on this system has 2<sup>32</sup> / 2<sup>12</sup> = 2<sup>20</sup> entries
+* each entry is 4 = 2<sup>2</sup> bytes
+* the total size hence is 2<sup>20</sup> * 2<sup>2</sup> = 2<sup>22</sup> bytes
+* 2<sup>22</sup> bytes = 2<sup>12</sup> kB = 2<sup>2</sup> MB = 4 MB
+
+Having to store a 4 MB page table for **every process** is a bit much. Too much!! When the scheduler performs a task switch, it has to copy this, remember ?
+
+There exist multiple techniques to solve this issue. One solution will be discussed here, as discussing them all would take us too far. 
+
+
+<div class="multicolumn">
+  <div class="column">
+    {{% figure src="/img/mem/ss_mem_paging_2levelpaging.png" title="A two-level page-table scheme"%}}
+    {{% dinobook %}}
+  </div>
+  <div class="column">
+    <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses paging for page tables. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
+    {{% figure src="/img/mem/ss_mem_paging_2levelpaging_address.png" %}}
+    <p>With this setting, p<sub>1</sub> is the index into the outer page. Similarly, p<sub>2</sub> is the index into the inner page. When the physical address is to be searched from a logical address, first the outer tables needs to be examined using p<sub>1</sub>. With the inner table found, the base address could searched for using p<sub>2</sub>. Finally the page offset is added to the base address to end up with the mapped physical address.</p>
+    <p>The translation from logical to physical address happens from the outer page, inward. Therefore this scheme is known as <b>a forward-mapped page table</b>.</p>
+  </div>
+</div>
+
+## Throw in some more bits
+Paging gives us a nice page table. This could be considered as a table of contents, or the index at the back of a book. For our young(er than us) students, the following clarification:
+
+<div class="multicolumn">
+  <div>
+    {{% figure src="/img/mem/pile-of-books-159866.jpg" title="A book"%}}
+    <p style="text-align: center">A book is a collection of e-readers, held together with rope or glue.</p>
+  </div>
+  <div style="width: 30%">
+    {{% figure src="http://authormaps.com/wp-content/uploads/2011/07/page_138n.jpg" title="The index of a book" height="50%" %}}
+    <p style="text-align: center">A page table for finding content in a book.</p>
+  </div>
+</div>
+
+Additional information could be stored in the page table. One common bit of meta-data that is stored is a **protection bit**. Depending on whether the bit is set, the page can be read-only or read-write. Another bit that is added is the **valid bit**. From the name it should be clear that a valid bit shows whether the associated page is valid or not. A reason for setting resetting this bit is that the process is not using all the entries in the page table. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the **modified bit**. This bit indicates that its associated block of memory has been modified and has not been saved to storage yet. It is also often referred to as the **dirty bit**.
+
+{{% notice info %}}
+Have you ever wondered why you should **eject** a USB stick ? One of the reasons is the **Dirty bit**. It might happen that you have written data to the USB stick, by writing to its physical memory addresses, but the data has not reached its destination yet. Off course, cache memory also play a role. It has a similar dirty bit.
+{{% /notice %}}
+
+## In summary
+
+So, using pages:
 
 * provides separation between the logical and physical address spaces
+* requires specialised hardware
 * aids in memory protection
 * lessens the fragmentation and puzzling efforts
-* requires specialised hardware

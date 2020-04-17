@@ -11,6 +11,7 @@ draft: true
   * keep ISR short
   * nested Interrupts
 * ch3.1: print pointers using printf("%p") ?
+* ch 7 and or ch9: add swapping ?
 
 # TIMING AY2019-2020
 * W1: 1.5h + 3h

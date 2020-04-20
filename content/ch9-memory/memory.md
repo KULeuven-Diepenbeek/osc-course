@@ -2,7 +2,6 @@
 title: '9.1: Memory management'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
-draft: true
 ---
 
 At multiple times we referred to the registers in processor. These 16 (or at least in that order of magnitude) registers don't suffice to run the complex tasks that are running on our devices. More space is needed !!!

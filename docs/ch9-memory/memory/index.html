@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>1. Recommended reading :: Operating Systems and C</title>
+    <title>9.1: Memory management :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1587355921" rel="stylesheet">
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="/appendix/reading/">
+  <body class="" data-url="/ch9-memory/memory/">
     <nav id="sidebar" class="">
 
 
@@ -1052,7 +1052,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item 
-        
+        parent
         
         
         ">
@@ -1078,7 +1078,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item ">
+      <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item active">
         <a href="../../ch9-memory/memory/">
         <i class='fas fa-book'></i> 9.1: Memory management
         
@@ -1364,7 +1364,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
-        parent
+        
         
         
         ">
@@ -1411,7 +1411,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item active">
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
         <a href="../../appendix/reading/">
         1. Recommended reading
         
@@ -1536,7 +1536,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../appendix/'>B. Appendix</a> > 1. Recommended reading
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch9-memory/'>9: Memory Management</a> > 9.1: Memory management
           
         
           
@@ -1553,21 +1553,13 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#operating-systems">Operating Systems</a>
-<ul>
 <li>
 <ul>
-<li><a href="#operating-system-concepts-https-www-goodreads-com-book-show-83833-operating-system-concepts-ac-1-from-search-true"><a href="https://www.goodreads.com/book/show/83833.Operating_System_Concepts?ac=1&amp;from_search=true">Operating System Concepts</a></a></li>
-</ul></li>
-</ul></li>
-<li><a href="#programming-in-c">Programming in C</a>
-<ul>
-<li>
-<ul>
-<li><a href="#the-ansi-c-programming-language-https-www-goodreads-com-book-show-515601-the-c-programming-language-ac-1-from-search-true"><a href="https://www.goodreads.com/book/show/515601.The_C_Programming_Language?ac=1&amp;from_search=true">The (Ansi) C Programming Language</a></a></li>
-<li><a href="#expert-c-programming-http-www-electroons-com-8051-ebooks-expert-20c-20programming-pdf"><a href="http://www.electroons.com/8051/ebooks/expert%20C%20programming.pdf">Expert C Programming</a></a></li>
-<li><a href="#techniques-for-memory-safety-in-c-pdf-ipics-essay-winderickx-jori-pdf"><a href="../../pdf/IPICS_essay_Winderickx_Jori.pdf">Techniques for memory safety in C</a></a></li>
-</ul></li>
+<li><a href="#the-flat-earth-of-arduino">The flat earth of Arduino</a></li>
+<li><a href="#let-s-share">Let&rsquo;s share</a></li>
+<li><a href="#address-binding">Address Binding</a></li>
+<li><a href="#the-memory-management-unit">The memory-management unit</a></li>
+<li><a href="#segmentation">Segmentation</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1587,7 +1579,7 @@ window.MathJax = {
           
             <h1>
               
-              1. Recommended reading
+              9.1: Memory management
             </h1>
           
 
@@ -1596,42 +1588,221 @@ window.MathJax = {
 
 
 
-<h2 id="operating-systems">Operating Systems</h2>
+<p>At multiple times we referred to the registers in processor. These 16 (or at least in that order of magnitude) registers don&rsquo;t suffice to run the complex tasks that are running on our devices. More space is needed !!!</p>
 
-<h4 id="operating-system-concepts-https-www-goodreads-com-book-show-83833-operating-system-concepts-ac-1-from-search-true"><a href="https://www.goodreads.com/book/show/83833.Operating_System_Concepts?ac=1&amp;from_search=true">Operating System Concepts</a></h4>
+<p>What good is additional space is you can&rsquo;t access it ? As we do in real life we give every house an address. This provides an unambiguous way of <strong>addressing</strong> 😉 every single house.</p>
 
-<blockquote>
-<p>Another defining moment in the evolution of operating systems
-Small footprint operating systems, such as those driving the handheld devices that the baby dinosaurs are using on the cover, are just one of the cutting-edge applications you&rsquo;ll find in Silberschatz, Galvin, and Gagne&rsquo;s Operating System Concepts, Seventh Edition.</p>
-</blockquote>
+<p>In modern computers and embedded systems there is a large amount of memory available. All memory locations are uniquely addressed.</p>
 
-<p>Website: <a href="http://os-book.com">os-book.com</a></p>
 
-<h2 id="programming-in-c">Programming in C</h2>
+<div class="ex">
+	<div class="inner">
+    	<p>How many addresses are there on a modern computer/laptop ? How does this relate to a &ldquo;64-bit&rdquo; processor ?
+<br/>
+<br/>
+<div class="solution" id="div_q811" style="visibility: hidden">
+  <b>Answer:</b><br/>
+  <p>
+    The processor of a modern computer is often referred to as a <strong>64-bit</strong> processor. While this number reflects the internal bus size, typically it also implies that the address bus is 64 bits wide.<br/>
+    The number of available addresses hence is 2<sup>64</sup>. If we assume a binary order of magnitude, that comes down to 2<sup>24+10+10+10+10</sup> addresses, or 2<sup>24</sup> terabyte or <strong>16 exabyte</strong>.
+  </p>
+  <br/>
+  <p>
+    For the sake of correctness, this should be 16 exbibyte. Similarly, 1024 bits is officially a kibibyte, where we typically call this a kilobyte. More information on this can be found on <a href="https://en.wikipedia.org/wiki/Kibibyte">Wikipedia</a>.
+  </p>
+</div></p>
 
-<h4 id="the-ansi-c-programming-language-https-www-goodreads-com-book-show-515601-the-c-programming-language-ac-1-from-search-true"><a href="https://www.goodreads.com/book/show/515601.The_C_Programming_Language?ac=1&amp;from_search=true">The (Ansi) C Programming Language</a></h4>
+<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q811', 1)"/></p>
 
-<blockquote>
-<p>This book is meant to help the reader learn how to program in C. It is the definitive reference guide, now in a second edition. Although the first edition was written in 1978, it continues to be a worldwide best-seller. This second edition brings the classic original up to date to include the ANSI standard.</p>
-</blockquote>
+	</div>
+</div>
 
-<p><a href="https://www.dipmat.univpm.it/~demeio/public/the_c_programming_language_2.pdf">Ebook</a></p>
+<h3 id="the-flat-earth-of-arduino">The flat earth of Arduino</h3>
 
-<h4 id="expert-c-programming-http-www-electroons-com-8051-ebooks-expert-20c-20programming-pdf"><a href="http://www.electroons.com/8051/ebooks/expert%20C%20programming.pdf">Expert C Programming</a></h4>
+<p>On small systems-on-chip (SOCs) that do not run an operating system, the world of memory addresses looks flat.</p>
 
-<blockquote>
-<p>C programming is a craft that takes years to perfect. A reasonably sharp person can learn the basics of C quite quickly. But it takes much longer to master the nuances of the language and to write enough programs, and enough different programs, to become an expert. This book explains quirks, weird syntax, and more &ldquo;deep C secrets&rdquo;.</p>
-</blockquote>
+<div class="multicolumn">
+  <div class="column">
+    <figure>
+    <img src="../../img/mem/ss_mem_flat.png"/> <figcaption>
+            <h4>Flat earth view on memory.</h4>
+        </figcaption>
+</figure>
 
-<p><a href="http://www.electroons.com/8051/ebooks/expert%20C%20programming.pdf">Ebook</a></p>
+  </div>
+  <div class="column">
+    <figure>
+    <img src="https://cdn.mos.cms.futurecdn.net/8wRq3AgggbXphqRxapGWbZ-650-80.jpg"/> <figcaption>
+            <h4>Image source: Getty</h4>
+        </figcaption>
+</figure>
 
-<h4 id="techniques-for-memory-safety-in-c-pdf-ipics-essay-winderickx-jori-pdf"><a href="../../pdf/IPICS_essay_Winderickx_Jori.pdf">Techniques for memory safety in C</a></h4>
+  </div>
+</div>
 
-<blockquote>
-<p>In this essay, first temporal memory errors will be explained. After that the three main techniques to fully prevent these errors will be ex- plored by means of example. Furthermore for each technique the compatibility, with legacy code, and the performance will be discussed to provide a overview of the major advantages and disadvantages.</p>
-</blockquote>
+<p>If an 8-bit processor, like the ATMega 328p on the Arduino Uno, is assumed the complete memory space covers 2<sup>8</sup> = 256 addresses. On every address an 8-bit value is stored.</p>
 
-<p><a href="../../pdf/IPICS_essay_Winderickx_Jori.pdf">Ebook</a></p>
+<h3 id="let-s-share">Let&rsquo;s share</h3>
+
+<div class="multicolumn">
+  <div class="column">
+    The purpose of an OS is to run multiple, different tasks on a one piece of hardware. With the flat earth memory approach this becomes cumbersome. A simple solution would be to <b>share</b> the complete memory in multiple chunks. One chunk for each task. 
+    <br/>
+    <br/>
+    It is the responsibility of the OS to make sure that each process stays within it own share. Often this is referred to with <b>memory protection</b>.
+    <figure>
+    <img src="../../img/mem/ss_mem_meltdown_spectre.png"/> <figcaption>
+            <h4>Meltdown and Spectre - Two attacks that got access to other process&#39;s memory.</h4>
+        </figcaption>
+</figure>
+
+    <br/>
+    Some computer hackers try the most insane techniques to get access to another process's memory. Exactly this has recently been shown in the Meltdown and Spectre attacks. 
+  </div>
+  <div class="column">
+    <figure>
+    <img src="../../img/mem/ss_mem_logical.png"/> <figcaption>
+            <h4>The complete memory space, divided to one chunk per process.</h4>
+        </figcaption>
+</figure>
+
+  </div>
+</div>
+
+<p>To keep an eye on that everybody stays within its context the following approach is used. Each task gets a <strong>base address</strong>. This address gives the start of that process&rsquo;s context. The second parameter is the <strong>limit</strong> which gives the size of the context. When a process is scheduled the OS loads the base register and the limit register with the correct values. The <strong>check</strong> that the OS has to monitor is that the address of the accessed memory falls within the interval of the base address PLUS the limit. If this condition does not hold, there might (un-)intentional error. The OS will handle this error.</p>
+
+<figure>
+    <img src="../../img/mem/ss_mem_logical_BA_LMT.png"/> <figcaption>
+            <h4>Base address register and limit register in logical addressing.</h4>
+        </figcaption>
+</figure>
+
+<p>The two registers that store the base and limit addresses can only be written by the OS. Moreover, these registers can only be written by processes from the <strong>kernel-space</strong> because the operation is done through a special privileged instruction. The context that is assigned to a specific task is called a <strong>logical address space</strong>.</p>
+
+<h3 id="address-binding">Address Binding</h3>
+
+<div class="multicolumn">
+  <div class="column">
+    <p>When software is written, it is done from a certain point of abstraction with respect to the hardware. The <b>C</b> language has a relatively low level of abstraction (close to the hardware) whereas <b>Java</b> has a higher level of abstraction (further from the hardware). Luckily, in <b>C</b> we don't have to bother ourselves with physical addresses.</p>
+    <p>Variables are declared in C with statements like: <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#66d9ef">int</span> my_score;</code></pre></div> The compiler and the linker take care of the rest. Due to the underlying OS the required number of bytes can be <b>reserved</b>.</p>
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+      <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+        <span style="color:#66d9ef">short</span> i;
+        <span style="color:#66d9ef">short</span> my_array[<span style="color:#ae81ff">4</span>];
+        <span style="color:#66d9ef">long</span> a_long_value;
+        ...
+      }
+    </code></pre></div>
+    <p>Apart from registers that need to be mapped, there are also functions that require mapping. There typically are three moments in time when this mapping can be done: </p>
+    <ul>
+      <li>at compile time</li>
+      <li>at load time</il>
+      <li>at execution time</il>
+    </ul>
+  </div>
+  <div class="column">
+    <figure>
+    <img src="../../img/mem/ss_mem_binding.png"/> 
+</figure>
+
+
+  </div>
+</div>
+
+<p>When the mapping is done during <strong>compile</strong> time, it should be possible to know in which register a certain value is stored. Also the puzzle with functions has to be made. Therefore, all functions should be known which typically is not the case.</p>
+
+<p>When the mapping is done at <strong>load</strong> time, relocatable code is generated by the compiler. The addressing is done relatively. In the example above it could be stated that the first element of <em>my_array</em> is at the memory address of <em>i</em>, incremented with the size of a short (2 bytes). When such a program is run, the binding to memory address is done when the program loads. When the start address becomes known, all other address can be resolved.</p>
+
+<p>Finally, when (part of) the mapping is done while <strong>executing</strong> the program, the binding is done when it is required. This requires an additional hardware component: <strong>memory-management unit</strong>. Nevertheless, this option of binding at execution time is used by most general-purpose operating systems.</p>
+
+<h3 id="the-memory-management-unit">The memory-management unit</h3>
+
+<p>The address that is used by the CPU is the <strong>logical address</strong> or <strong>virtual address</strong>, the address that is actually used in hardware is the <strong>physical address</strong>. The mapping between logical and physical addresses is typically done with the memory-management unit (MMU).</p>
+
+<p>The first approach the MMU can use is the one similar to the base and limit registers, as seen above.</p>
+
+<figure>
+    <img src="../../img/mem/ss_mem_mmu.png"/> <figcaption>
+            <h4>The MMU</h4>
+        </figcaption>
+</figure>
+
+<p><style>
+  p.dinobook {
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-top: 0px;
+    margin-top: -20px;
+    text-align: center;
+  }
+</style>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
+
+<p>The CPU &lsquo;sends&rsquo; is logical address to the MMU. The MMU then adds a value to &ldquo;relocate&rdquo; the address. The address that comes out of the MMU is a physical address that can be used by the hardware to find the memory location. Because things not need to get more complicate, the register in the MMU is called the <strong>relocation register</strong>.</p>
+
+<p>There are more approaches the MMU can use. They will be discussed later.</p>
+
+<h3 id="segmentation">Segmentation</h3>
+
+<p>Most programmers, ourselves included, think of memory like this long-stretched, linear addressable chunk of highway that is solely here for us (if only it were so) 😄. We have seen that all the memory is split into multiple <strong>segments</strong> that might vary in size. Don&rsquo;t make the mistake of thinking that your program gets a single nicely demarcated <em>field</em> of memory. Our (simple) program also gets segmented.</p>
+
+<div class="multicolumn">
+  <div>
+    <figure>
+    <img src="../../img/mem/ss_mem_non_segmented.jpg" height="413px"/> <figcaption>
+            <h4>Continuous image</h4>
+        </figcaption>
+</figure>
+
+  </div>
+
+<p><div>
+    <figure>
+    <img src="../../img/mem/ss_mem_segmented.jpg" height="413px"/> <figcaption>
+            <h4>Segmented image</h4>
+        </figcaption>
+</figure></p>
+
+<p></div>
+</div></p>
+
+<p>The different segments are made, based on the <strong>sections</strong> that were discussed <a href="http://localhost:1313/osc-course/ch8-stack/stackvsheap/#program-memory">earlier</a>: text, data, bss, stack, &hellip; So instead of seeing a program as <strong>a single piece</strong> of the memory-puzzle, it actually breaks down into multiple pieces. All of those puzzle pieces should be mapped , but the will be spread out all over the memory space.</p>
+
+<p>As mentioned before, the puzzling is done by the development tools and the OS. For us, the programmer, it still feels like our very own private highway. With the segments that we are introducing, the job of the puzzler becomes even harder. Luckily there is dedicated hardware to assist. All the segments are collected in the <strong>segment table</strong>. Similarly as above, each segment has as base and a limit.</p>
+
+<figure>
+    <img src="../../img/mem/ss_mem_segmhw.png"/> <figcaption>
+            <h4>Segmentation hardware</h4>
+        </figcaption>
+</figure>
+
+<p><style>
+  p.dinobook {
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-top: 0px;
+    margin-top: -20px;
+    text-align: center;
+  }
+</style>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
+
+<p>The address that the programmer sees <em>secretly</em> consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an address in the segment table. Through this table the base address of the segment can be found. The offset number (d) will be used to define an offset within this segment and is simply added to the base address.</p>
+
+<p>If the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>What, <em>oh what</em>, could be the name of the error that the OS produces if the sum of the base address and the offset does <strong>not</strong> fall within the segment limit ?</p>
+
+	</div>
+</div>
 
 
 <footer class="footline">
@@ -2312,6 +2483,139 @@ Small footprint operating systems, such as those driving the handheld devices th
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -2432,146 +2736,10 @@ Small footprint operating systems, such as those driving the handheld devices th
             
         
                     
-            
-        
-                    
                         
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -2612,10 +2780,10 @@ Small footprint operating systems, such as those driving the handheld devices th
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch9-memory/" title="9: Memory Management"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../appendix/installing/" title="2. Installation Instructions" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

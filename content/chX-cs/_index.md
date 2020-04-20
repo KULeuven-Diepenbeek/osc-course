@@ -8,14 +8,32 @@ weight: 10
 ### Chapter X
 
 X.1: File systems
-  * General
-  * ext2
-  * ext4
-  * Networked filesystems
-  
-X.y: RTOS
 
-X.y: Device drivers
+  * Introduction in Unix filesystems
+    * Files in Unix
+    * File attributes
+  * File system (FS) flavors
+    * EXT (Extended File System)
+    * FAT (File Allocation Table)
+    * NTFS (New Tech. File System)
+    * NFS (Network File System)
+  * Common File System techniques
+    * Fragmentation
+    * Transactions
+    * Journaling
+    * Compressing
+  * More Resources
+
+
+X.2: RTOS
+
+  * Operating Systems
+  * Real-time Operating Systems
+    * FreeRTOS
+  * Outdated ?
+
+
+X.3: Device drivers
   * General
   * Character device drivers
   * Block device drivers

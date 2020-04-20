@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>9.3: Paging :: Operating Systems and C</title>
+
+    
+    <link href="../../css/nucleus.css?1587354979" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1587354979" rel="stylesheet">
+    <link href="../../css/hybrid.css?1587354979" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1587354979" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1587354979" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1587354979" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1587354979" rel="stylesheet">
+    <link href="../../css/theme.css?1587354979" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1587354979" rel="stylesheet">
+    
+    <link href="../../css/theme-kul.css?1587354979" rel="stylesheet">
+    
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1587354979"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="/ch9-memory/paging/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1587354979"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1587354979"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1587354979"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch1-c/">
+          <i class='far fa-keyboard'></i> 1: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
+        <a href="../../ch1-c/intro/">
+        <i class='fas fa-book'></i> 1.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
+        <a href="../../ch1-c/intro-labs/">
+        <i class='fas fa-vial'></i> 1.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch1-c/structs/">
+        <i class='fas fa-book'></i> 1.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
+        <a href="../../ch1-c/structs-labs/">
+        <i class='fas fa-vial'></i> 1.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch1-c/ecosystems/">
+        <i class='fas fa-book'></i> 1.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch1-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch2-interrupts/">
+          <i class='fab fa-linux'></i> 2: Interrupts
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch2-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab1_arduino-bm/" title="2.2: Bare metal Arduino" class="dd-item ">
+        <a href="../../ch2-interrupts/lab1_arduino-bm/">
+        <i class='fas fa-vial'></i> 2.2: Bare metal Arduino
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
+        <a href="../../ch2-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 2.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-interrupts/theory3_interrupt/" title="2.5 The internals of interrupts" class="dd-item ">
+        <a href="../../ch2-interrupts/theory3_interrupt/">
+        <i class='fab fa-linux'></i> 2.5 The internals of interrupts
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch3-pointers/">
+          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
+        <a href="../../ch3-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch3-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch3-pointers/lab/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch4-debugging/">
+          <i class='far fa-keyboard'></i> 4: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch4-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch4-debugging/testing/">
+        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch5-introos/">
+          <i class='fab fa-linux'></i> 5: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch5-introos/intro-os/">
+        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch5-introos/lab1_wetfeet/">
+        <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Task management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/processes/">
+        <i class='fas fa-book'></i> 6.1: Processes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/threads/" title="6.3: Threads" class="dd-item ">
+        <a href="../../ch6-tasks/threads/">
+        <i class='fas fa-book'></i> 6.3: Threads
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.4: Threads (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
+        <i class='fas fa-vial'></i> 6.4: Threads (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/intertasks/" title="6.5: Inter task communication" class="dd-item ">
+        <a href="../../ch6-tasks/intertasks/">
+        <i class='fas fa-book'></i> 6.5: Inter task communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab3_intertaskcomm/" title="6.6: Inter task communication (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab3_intertaskcomm/">
+        <i class='fas fa-vial'></i> 6.6: Inter task communication (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-scheduling/" title="7: CPU scheduling" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch7-scheduling/">
+          <i class='fab fa-linux'></i> 7: CPU scheduling
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/algorithms/" title="7.1: Scheduling algorithms" class="dd-item ">
+        <a href="../../ch7-scheduling/algorithms/">
+        <i class='fas fa-book'></i> 7.1: Scheduling algorithms
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab1_algorithms/">
+        <i class='fas fa-vial'></i> 7.2: Scheduling algorithms (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/towards/" title="7.3: Towards real-world schedulers" class="dd-item ">
+        <a href="../../ch7-scheduling/towards/">
+        <i class='fas fa-book'></i> 7.3: Towards real-world schedulers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab2_niceguy/">
+        <i class='fas fa-vial'></i> 7.4: Mr. nice guy(lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-stack/" title="8: The Stack &amp; The Heap" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../ch8-stack/">
+          <i class='far fa-keyboard'></i> 8: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="../../ch8-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 8.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/inspection-labs/" title="8.2: Inspecting memory regions" class="dd-item ">
+        <a href="../../ch8-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 8.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/scope/" title="8.3: Different Scopes in C" class="dd-item ">
+        <a href="../../ch8-stack/scope/">
+        <i class='fas fa-book'></i> 8.3: Different Scopes in C
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../ch9-memory/">
+          <i class='fab fa-linux'></i> 9: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item ">
+        <a href="../../ch9-memory/lab1_segfault/">
+        <i class='fas fa-vial'></i> 9.2: Deliberate Segfaulting
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/paging/" title="9.3: Paging" class="dd-item active">
+        <a href="../../ch9-memory/paging/">
+        <i class='fas fa-book'></i> 9.3: Paging
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab2_browsing/" title="9.4: Simply browsing through pages" class="dd-item ">
+        <a href="../../ch9-memory/lab2_browsing/">
+        <i class='fas fa-vial'></i> 9.4: Simply browsing through pages
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/chx-cs/" title="X: Capita Selecta" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../chx-cs/">
+          <i class='fab fa-linux'></i> X: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/filesystems/" title="X.1: File systems" class="dd-item ">
+        <a href="../../chx-cs/filesystems/">
+        <i class='fab fa-linux'></i> X.1: File systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
+        <a href="../../chx-cs/rtos/">
+        <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/devdrivers/" title="X.3: Device Drivers" class="dd-item ">
+        <a href="../../chx-cs/devdrivers/">
+        <i class='fab fa-linux'></i> X.3: Device Drivers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
+        <a href="../../exercises/c-integrated-ex/">
+        <i class='fas fa-pen-square'></i> 1. Integrated C exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
+        <a href="../../exercises/c-debugging-testing/">
+        <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
+        <a href="../../exercises/tasks_inter_thread_communication/">
+        <i class='fas fa-pen-square'></i> 3. Inter-thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/scheduler/" title="4. Pseudo scheduler" class="dd-item ">
+        <a href="../../exercises/scheduler/">
+        <i class='fas fa-pen-square'></i> 4. Pseudo scheduler
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
+        <a href="../../appendix/lab_ll_rtos/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="../../appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Installation Instructions" class="dd-item ">
+        <a href="../../appendix/installing/">
+        2. Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="../../appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://kuleuven-diepenbeek.github.io/osc-course/TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch9-memory/'>9: Memory Management</a> > 9.3: Paging
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#let-s-do-some-numbers">Let&rsquo;s do some numbers</a></li>
+<li><a href="#hierarchy">Hierarchy</a></li>
+<li><a href="#throw-in-some-more-bits">Throw in some more bits</a></li>
+<li><a href="#in-summary">In summary</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              9.3: Paging
+            </h1>
+          
+
+        
+
+
+
+
+<p>A memory management technique that is used both in Linux and all other main operating systems is <strong>paging</strong>. The core of the concept is similar to segmentation: The main memory is divided into pieces. These pieces are mapped to the hardware and give the programmer the illusion of having a continuous memory space. However, internally these pieces might be spread all over the hardware.</p>
+
+<p>With segmentation there might be the following issue: we need to allocate a segment of 1024 bytes. There are still 2000 open spaces, but none of them is larger than 1000 bytes. When this happens &hellip; <strong>we have a problem</strong>.</p>
+
+<figure>
+    <img src="../../img/mem/ss_mem_segmvspage.png"/> <figcaption>
+            <h4>The pieces of memory with segmentation (left) and paging (right)</h4>
+        </figcaption>
+</figure>
+
+<p>With paging, this issue can be overcome. When paging is used, the <strong>memory is divided into equally sized pieces</strong> (see image above). As the tools are aware of this, the issue of having a too-large-a piece will not occur any more. Another benefit is that <em>finding</em> a new location for a piece becomes easier. The puzzling has become much easier.</p>
+
+<p>In contrast with segmentation, paging does not result in external fragmentation. Any frame can be assigned to any process that needs one. However, internal fragmentation is to be expected.</p>
+
+<p>This fragmentation in the memory space happens both in the logical address space and in the physical address space. Off course the size of the pieces is the same in both. These newly created pieces have different names, however. A piece in the logical address space is called a <strong>page</strong>, whereas a piece in the physical address space is called a <strong>frame</strong>.</p>
+
+<figure>
+    <img src="../../img/mem/ss_mem_paging.png"/> <figcaption>
+            <h4>The fragmentation of the logical and physical address space with paging</h4>
+        </figcaption>
+</figure>
+
+<p>For paging to work, hardware assistance is required. Every address that is generated in the logical address space is again <em>secretly</em> split in two pieces. The first piece is the <strong>page number</strong> (p) and the second piece is the <strong>page offset</strong> (d). Similar to the segment table earlier, there exists a <strong>page table</strong> for every process. This page table stores the base address of each page in the physical memory. The page offset is than added to the page base address to finally have a physical memory address. The size of the logical address space is defined as 2<sup>m</sup>, and a page size as
+2<sup>n</sup> bytes. The m-n left-most bits of the logical address define the page number, and the n remaining bits form the page offset.</p>
+
+
+<div class="notices warning" ><p>Answer this question before you continue. If you can&rsquo;t answer the question, find the answer in the text above!<br/><br/><b>How many active <strong>page tables</strong> are there in a single system ?</b></p>
+</div>
+
+
+<div class="multicolumn">
+  <div style="width: 30%">
+    <figure>
+    <img src="../../img/mem/ss_mem_paging_logicaladdress.png"/> 
+</figure>
+
+  </div>
+  <div>
+    <figure>
+    <img src="../../img/mem/ss_mem_paginghw.png"/> <figcaption>
+            <h4>Paging hardware</h4>
+        </figcaption>
+</figure>
+
+    <style>
+  p.dinobook {
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-top: 0px;
+    margin-top: -20px;
+    text-align: center;
+  }
+</style>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
+  </div>
+</div>
+
+<p>Both the page size and the frame size are defined by the supporting <strong>hardware</strong>. As hardware is involved this (typically) dictates that the sizes are powers of 2. The <u>page size</u> could theoretically vary between 512 bytes and 1 GB per page. On a 32-bit processor each <u>page-table entry</u> is typically 4 bytes long.</p>
+
+<p>While the idea of paging is relatively simple, the effects however are not. With a strict decoupling between the logical an physical address spaces, one does not put any restrictions on the other. A 64-bit processor, capable of addressing 2<sup>64</sup> (= 1.8 x 10<sup>19</sup>) different memory locations, can run on a physical memory with less than 264 bytes. (We&rsquo;re not guaranteeing it&rsquo;ll run smoothly, though 😄).</p>
+
+<h2 id="let-s-do-some-numbers">Let&rsquo;s do some numbers</h2>
+
+<p>In a hypothetical 4-bit system the processor can address 2<sup>4</sup> different addresses. Each logical address has a length of 4 bits. The made-up environment has a page size of 4 bytes, and has 32 bytes of physical memory available. The page table for a certain program would be defined as: {5, 6, 1, 2}. With the definitions as declared above, this comes down to:</p>
+
+<ul>
+<li>m = 4</li>
+<li>n = 2</li>
+<li>physical memory is 8 frames</li>
+<li>page table: {5, 6, 1, 2}</li>
+</ul>
+
+<p>The logical address 0x0 (0b0000) can be seen as a concatenation of 0b00 and 0b00. This means that the logical address refers to the content on page 0 and offset 0.</p>
+
+<p>The page table tells us that page 0 is mapped to frame 5. Because frames and pages have an equal size, frame 5 also contains 4 bytes. Because the offset is 0, the physical address on which the logical address 0x0 is mapped is 0x14.</p>
+
+<p>This can be calculated as follows: a frame is 4 bytes, and we&rsquo;re looking for frame number 5, this gives us 5 x 4 = 20 = 0x14. Finally the offset has to be added. For logical address 0x0, this is 0. The final physical address hence is 0x14 + 0x0 = 0x14.</p>
+
+<p>Logical address 0x3 (0b0011) has the same page (page 0), but has an offset of 3. The physical address to which logical address 0x3 is mapped, hence is 0x17.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Given the hypothetical system as described above, what would be the corresponding physical address for the logical addresses 4, and 15?
+<br/>
+<br/>
+<div class="solution" id="div_q941" style="visibility: hidden">
+  <b>Answer:</b><br/>
+  <p>
+    Logical address 4 (page 1, offset 0) maps to physical address 23 [= (<b>6</b> × 4) + 0] = 0x18
+    <br/><br />
+    Logical address 15 (page 3, offset 3) maps to physical address 11 [= (<b>2</b> × 4) + 3] = 0x0B
+  </p>
+</div></p>
+
+<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q941', 1)" /></p>
+
+	</div>
+</div>
+
+<h2 id="hierarchy">Hierarchy</h2>
+
+<p>Take an off-the-shelf 32-bit processor that can address 2<sup>32</sup> different locations with a page size of 4 kB (=2<sup>12</sup>). If we assume that an entry in the page table has 4 bytes we can calculate the size of the page table:</p>
+
+<ul>
+<li>the page table on this system has 2<sup>32</sup> / 2<sup>12</sup> = 2<sup>20</sup> entries</li>
+<li>each entry is 4 = 2<sup>2</sup> bytes</li>
+<li>the total size hence is 2<sup>20</sup> * 2<sup>2</sup> = 2<sup>22</sup> bytes</li>
+<li>2<sup>22</sup> bytes = 2<sup>12</sup> kB = 2<sup>2</sup> MB = 4 MB</li>
+</ul>
+
+<p>Having to store a 4 MB page table for <strong>every process</strong> is a bit much. Too much!! When the scheduler performs a task switch, it has to copy this, remember ?</p>
+
+<p>There exist multiple techniques to solve this issue. One solution will be discussed here, as discussing them all would take us too far.</p>
+
+<div class="multicolumn">
+  <div class="column">
+    <figure>
+    <img src="../../img/mem/ss_mem_paging_2levelpaging.png"/> <figcaption>
+            <h4>A two-level page-table scheme</h4>
+        </figcaption>
+</figure>
+
+    <style>
+  p.dinobook {
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-top: 0px;
+    margin-top: -20px;
+    text-align: center;
+  }
+</style>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
+  </div>
+  <div class="column">
+    <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses paging for page tables. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
+    <figure>
+    <img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/> 
+</figure>
+
+    <p>With this setting, p<sub>1</sub> is the index into the outer page. Similarly, p<sub>2</sub> is the index into the inner page. When the physical address is to be searched from a logical address, first the outer tables needs to be examined using p<sub>1</sub>. With the inner table found, the base address could searched for using p<sub>2</sub>. Finally the page offset is added to the base address to end up with the mapped physical address.</p>
+    <p>The translation from logical to physical address happens from the outer page, inward. Therefore this scheme is known as <b>a forward-mapped page table</b>.</p>
+  </div>
+</div>
+
+<h2 id="throw-in-some-more-bits">Throw in some more bits</h2>
+
+<p>Paging gives us a nice page table. This could be considered as a table of contents, or the index at the back of a book. For our young(er than us) students, the following clarification:</p>
+
+<div class="multicolumn">
+  <div>
+    <figure>
+    <img src="../../img/mem/pile-of-books-159866.jpg"/> <figcaption>
+            <h4>A book</h4>
+        </figcaption>
+</figure>
+
+    <p style="text-align: center">A book is a collection of e-readers, held together with rope or glue.</p>
+  </div>
+  <div style="width: 30%">
+    <figure>
+    <img src="http://authormaps.com/wp-content/uploads/2011/07/page_138n.jpg" height="50%"/> <figcaption>
+            <h4>The index of a book</h4>
+        </figcaption>
+</figure>
+
+    <p style="text-align: center">A page table for finding content in a book.</p>
+  </div>
+</div>
+
+<p>Additional information could be stored in the page table. One common bit of meta-data that is stored is a <strong>protection bit</strong>. Depending on whether the bit is set, the page can be read-only or read-write. Another bit that is added is the <strong>valid bit</strong>. From the name it should be clear that a valid bit shows whether the associated page is valid or not. A reason for setting resetting this bit is that the process is not using all the entries in the page table. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the <strong>modified bit</strong>. This bit indicates that its associated block of memory has been modified and has not been saved to storage yet. It is also often referred to as the <strong>dirty bit</strong>.</p>
+
+
+<div class="notices info" ><p>Have you ever wondered why you should <strong>eject</strong> a USB stick ? One of the reasons is the <strong>Dirty bit</strong>. It might happen that you have written data to the USB stick, by writing to its physical memory addresses, but the data has not reached its destination yet. Off course, cache memory also play a role. It has a similar dirty bit.</p>
+</div>
+
+
+<h2 id="in-summary">In summary</h2>
+
+<p>So, using pages:</p>
+
+<ul>
+<li>provides separation between the logical and physical address spaces</li>
+<li>requires specialised hardware</li>
+<li>aids in memory protection</li>
+<li>lessens the fragmentation and puzzling efforts</li>
+</ul>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../ch9-memory/lab2_browsing/" title="9.4: Simply browsing through pages" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1587354979"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1587354979"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1587354979"></script>
+    <script src="../../js/jquery.sticky.js?1587354979"></script>
+    <script src="../../js/featherlight.min.js?1587354979"></script>
+    <script src="../../js/highlight.pack.js?1587354979"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1587354979"></script>
+    <script src="../../js/learn.js?1587354979"></script>
+    <script src="../../js/hugo-learn.js?1587354979"></script>
+
+    <link href="../../mermaid/mermaid.css?1587354979" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1587354979"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

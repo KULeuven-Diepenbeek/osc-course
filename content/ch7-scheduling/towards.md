@@ -117,7 +117,7 @@ For the sake of correctness it is pointed out that the time for context switches
 ## Real-world schedulers
 
 ### Run queue - Hey, you there, get in line !!!
-Processes that are ready to be scheduled are in the **ready** state. Processes that are waiting for IO are in state. All these **queues** need to be maintained and managed. In the chapter on *Pointers*, *linked lists* were discussed. This technique is heavily used for managing these types of queues.
+Processes that are ready to be scheduled are in the **ready** state. Processes that are waiting for IO are in **waiting** state. All these **queues** need to be maintained and managed. In the chapter on *Pointers*, *linked lists* were discussed. This technique is heavily used for managing these types of queues.
 
 Depending on the strategy that a scheduler follows different queue systems might be more suited. Remember, the scheduler chooses the next task, a preferably as-fast-as-possible.
 
@@ -154,7 +154,7 @@ Jobs that always use up the complete time slice are considered to be more CPU in
 With this scheduler, jobs might migrate between queues over time depending on what time slice is best suited for that moment. In general it can be stated that CPU intensive processes are to be found on the bottom, while IO intensive processes are on the top.
 
 ### Linux Scheduler
-The Linux kernel has used different schedulers up until now. Between Linux kernels 2.4 - 2.6 were using the O(n) scheduler, 2.6 - 2.6.11 the used scheduler was O(n), and from 2.6.12 onward the Completely Fair Scheduler (CFS) was used. These schedulers are briefly touched upon here. All of these are preemptive schedulers that are priority-based. 
+The Linux kernel has used different schedulers up until now. Between Linux kernels 2.4 - 2.6 were using the O(n) scheduler, 2.6 - 2.6.11 the used scheduler was O(1), and from 2.6.12 onward the Completely Fair Scheduler (CFS) was used. These schedulers are briefly touched upon here. All of these are preemptive schedulers that are priority-based. 
 
 #### O(n) scheduler
 The O(n) (read as: [Big-Oh-En]) scheduler got his name from the fact that choosing a new task had **linear** complexity. This means that the amount it takes for choosing a new task is proportional the number of tasks that are available. As you can easily see on every OS, there are a huge amount of tasks running nowadays. With this scheduler it would also take a (relatively) huge amount of time for choosing the next task. **This doesn't scale !** Because the scheduler's work is seen as overhead, it should be clear why this scheduler got replaced.
@@ -168,6 +168,8 @@ The currently used scheduler has been around since Linux kernel version 2.6.23. 
 There are 140 different priority levels in the CFS. Processes are divided in 2 types: Real-time processes and time sharing processes. The **real-time** processes are those with a priority from 0 to 99. The **time sharing** processes have a priority from 100 to 139. The real-time processes are processes that run in kernel mode, the time sharing processes run in user mode.
 
 As was seen in the example above, it helps when processes don't have a fixed priority. Additionally, the concept of priority ageing was discussed as means to counteract starvation. A priority should be able to **change throughout the process's lifetime**. This is implemented with the **nice value**. This value is added to the original priority and ranges between -20 and 19. Smaller nice values give higher priorities. Larger nice values (*nicer processes*) give lower priorities.
+
+For more information on CFS you can read the kernel documentation [here](https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html). For the daredevils ... you can even read (or modify, at your own risk) the kernel C code [here](https://github.com/torvalds/linux/blob/master/kernel/sched/fair.c).
 
 {{% task %}}
 What should be the default priority that is given to a user process ?

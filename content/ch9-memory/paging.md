@@ -2,7 +2,6 @@
 title: '9.3: Paging'
 pre: "<i class='fas fa-book'></i> "
 weight: 3
-draft: true
 ---
 
 A memory management technique that is used both in Linux and all other main operating systems is **paging**. The core of the concept is similar to segmentation: The main memory is divided into pieces. These pieces are mapped to the hardware and give the programmer the illusion of having a continuous memory space. However, internally these pieces might be spread all over the hardware.
@@ -26,7 +25,7 @@ For paging to work, hardware assistance is required. Every address that is gener
 2<sup>n</sup> bytes. The m-n left-most bits of the logical address define the page number, and the n remaining bits form the page offset.
 
 {{% notice warning %}}
-Answer this question before you continue. If you can't answer the question, find the answer in the text above!<br/><br/><b>How many page tables are there in a single system ?</b>
+Answer this question before you continue. If you can't answer the question, find the answer in the text above!<br/><br/><b>How many active **page tables** are there in a single system ?</b>
 {{% /notice %}}
 
 <div class="multicolumn">

@@ -49,12 +49,12 @@ draft: true
 * W9: 
   * 1.5h: CS - RTOS
   * 3h: CS - 
-* W9: 
+* W10: 
   * 1.5h: CS - 
   * 3h: CS - 
-* W9: 
+* W11: 
   * 1.5h: CS - Device drivers + exercise
   * 3h: CS - Device drivers + exercise
-* W9: 
+* W12: 
   * 1.5h: *vrij ?*
   * 3h: *vrij ?*

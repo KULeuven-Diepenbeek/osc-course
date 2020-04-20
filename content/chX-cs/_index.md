@@ -1,5 +1,5 @@
 ---
-title: 'X: Captita Selecta'
+title: 'X: Capita Selecta'
 pre: "<i class='fab fa-linux'></i> "
 chapter: true
 weight: 10

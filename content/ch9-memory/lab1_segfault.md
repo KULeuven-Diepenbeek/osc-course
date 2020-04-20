@@ -13,17 +13,18 @@ weight: 2
 ```C
 #include <stdio.h>
 
-#define ACTUAL_SIZE 26
+#define WRITE_SIZE 26
 #define READ_SIZE 27
 
 int main(void) {
-	unsigned char alphabet[ACTUAL_SIZE];
+	int i;
+	unsigned char alphabet[26];
 
-	for(int i=0;i<ACTUAL_SIZE;i++) {
-		alphabet[i] = 97 + i;
-}
+	for(i=0;i<WRITE_SIZE;i++) {
+		alphabet[i] = 65 + i;
+	}
 
-	for(int i=0;i<READ_SIZE;i++) {
+	for(i=0;i<READ_SIZE;i++) {
 		printf("%2d -> %c (%02x)\n", i, alphabet[i], alphabet[i]);
 	}
 
@@ -31,8 +32,6 @@ int main(void) {
 }
 ```
 
-* Recompile the code above, but verify that you have the ```-0s``` option added. This compiler flags sets the optimisation towards size. What do you learn ?
+* Recompile the code above, but verify that you have the ```-0s``` option added. This compiler flag sets the optimisation towards size. What do you learn ?
 
-* Increase the **READ_SIZE** to 100. Compile and run again. Any errors ?
-
-*
+* Increase the **WRITE_SIZE** to 27. Compile and run again. Any errors ? If so, what type of error could this be ?

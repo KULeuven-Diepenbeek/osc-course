@@ -82,6 +82,15 @@ The scheduler has two main jobs:</description>
     </item>
     
     <item>
+      <title>X.1: File systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>1. Integrated C exercise</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -185,6 +194,25 @@ Creating and inspecting processes  Write a C-program that prints its own PID on 
     </item>
     
     <item>
+      <title>9.2: Deliberate Segfaulting</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</guid>
+      <description>source: xkcd.com   X A to the Z  Run the program below and verify that it runs without errors
+#include &amp;lt;stdio.h&amp;gt; #define WRITE_SIZE 26 #define READ_SIZE 27  int main(void) { int i; unsigned char alphabet[26]; for(i=0;i&amp;lt;WRITE_SIZE;i++) { alphabet[i] = 65 + i; } for(i=0;i&amp;lt;READ_SIZE;i++) { printf(&amp;#34;%2d -&amp;gt; %c (%02x)\n&amp;#34;, i, alphabet[i], alphabet[i]); } return 0; } Recompile the code above, but verify that you have the -0s option added.</description>
+    </item>
+    
+    <item>
+      <title>X.2: Real-time Operating Systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>2.3 The timer</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -256,6 +284,25 @@ How could be mix both algorithms ? One takes priority into account while the oth
     </item>
     
     <item>
+      <title>9.3: Paging</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</guid>
+      <description>A memory management technique that is used both in Linux and all other main operating systems is paging. The core of the concept is similar to segmentation: The main memory is divided into pieces. These pieces are mapped to the hardware and give the programmer the illusion of having a continuous memory space. However, internally these pieces might be spread all over the hardware.
+With segmentation there might be the following issue: we need to allocate a segment of 1024 bytes.</description>
+    </item>
+    
+    <item>
+      <title>X.3: Device Drivers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
+      <description> General Character device drivers Block device drivers </description>
+    </item>
+    
+    <item>
       <title>1.4: Structs</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -312,6 +359,16 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
       <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.    An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times. Compile and run that program. While that program is running, and is reporting back every 5 seconds:  change the nice value (on another terminal) verify in the reporting that it works change the nice value so the overall priority is at its lowest change the nice value so the overall priority is at its highest     An example output    Adjust the program above (after copying it, off course) so it goes through the exact same changes in priority.</description>
+    </item>
+    
+    <item>
+      <title>9.4: Simply browsing through pages</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</guid>
+      <description>image source: wikipedia.com    Get page size on the Linux system in the Virtual Box through a C program   An example output  
+ Assume a system with a 32-bit logical addresses and a 4-kB page size. Write a C program that is passed a logical address (in decimal) through command line arguments. Print the page number and the offset for the given address.</description>
     </item>
     
     <item>
@@ -384,15 +441,6 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <description>Inter process communication These exercises are to be done in a terminal, using the command line interface.
   Open two terminals. On one terminal you start a process that takes some minutes to finish. From the other terminal:
  figure out the process ID of the first process send a kill signal to that first process.  Use unnamed pipes to display all the processes of which you are the owner.</description>
-    </item>
-    
-    <item>
-      <title>10.1: Capita Selecta</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/capita-selecta/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch10-capitaselecta/capita-selecta/</guid>
-      <description> </description>
     </item>
     
     <item>

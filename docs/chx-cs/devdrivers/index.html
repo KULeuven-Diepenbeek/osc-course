@@ -12,21 +12,21 @@
     <title>X.3: Device Drivers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1587355921" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1587355921" rel="stylesheet">
-    <link href="../../css/hybrid.css?1587355921" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1587355921" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1587355921" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1587355921" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1587355921" rel="stylesheet">
-    <link href="../../css/theme.css?1587355921" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1587355921" rel="stylesheet">
+    <link href="../../css/nucleus.css?1587963060" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1587963060" rel="stylesheet">
+    <link href="../../css/hybrid.css?1587963060" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1587963060" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1587963060" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1587963060" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1587963060" rel="stylesheet">
+    <link href="../../css/theme.css?1587963060" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1587963060" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1587355921" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1587963060" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1587355921"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1587963060"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1587355921"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1587355921"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1587963060"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1587963060"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1587355921"></script>
+<script type="text/javascript" src="../../js/search.js?1587963060"></script>
 
     
   </div>
@@ -1196,6 +1196,27 @@ window.MathJax = {
  
   
     
+      <li data-nav-id="/chx-cs/filesystems/" title="X.1: File systems" class="dd-item ">
+        <a href="../../chx-cs/filesystems/">
+        <i class='fab fa-linux'></i> X.1: File systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
       <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
         <a href="../../chx-cs/rtos/">
         <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
@@ -1553,9 +1574,17 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#general">General</a></li>
+<li><a href="#general">General</a>
+<ul>
+<li><a href="#where-do-they-live">Where do they live ?</a></li>
+</ul></li>
 <li><a href="#character-device-drivers">Character device drivers</a></li>
 <li><a href="#block-device-drivers">Block device drivers</a></li>
+<li><a href="#writing-your-own">Writing your own</a>
+<ul>
+<li><a href="#kernel-modules">Kernel modules</a></li>
+<li><a href="#driver">Driver</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1585,9 +1614,149 @@ window.MathJax = {
 
 <h2 id="general">General</h2>
 
+<p>The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware <strong>devices</strong> that are typically connected to a processor in a laptop, desktop, or server. The OS has to know <strong>how</strong> to talk to a certain device. Typically an Application Programming Interface (an <strong>API</strong>) is provided to the user space, so users can interact with the hardware.</p>
+
+<p>Let&rsquo;s take the timer from <a href="../../ch2-interrupts/theory2_timer/">chapter 2</a> as an example. Enabling the interrupt for when Timer1 overflows was done by writing a &lsquo;1&rsquo; to the LSB of address 0x6F. Although this is no rocket science, it is not realistic to assume that the user <em>simply knows this</em>. The manufacturer of the hardware, the timer in this example, is the one that knows and should make this knowledge available to the user. This is typically done through documentation, or through a driver.</p>
+
+<div class="multicolumn">
+  <div class="column">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      ...
+      <span style="color:#75715e">#define TIMSK1 _SFR_MEM8(0x6F)
+</span><span style="color:#75715e"></span>      ...
+      TIMSK1 <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0x1</span>;
+      ...
+    </code></pre></div>
+    <p>The user could find out what is to be done to enable the interrupt from the documentation. When that is figured out, the user has to program/use the functionality correctly.</p>
+    <ul> 
+      <li><i class="fas fa-plus-circle"></i> This needs no additional software</li>
+      <li><i class="fas fa-minus-circle"></i> This requires a "skilled" user</li>
+    </ul>
+  </div>
+  <div class="column">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      ...
+      <span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;timer.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>      ...
+      enable_interrupt_timer1_overflow();
+      ...
+    </code></pre></div>
+    <p>The user could find out what is to be done and execute the dedicated function.</p>
+    <ul> 
+      <li><i class="fas fa-plus-circle"></i> This requires a "normal" user</li>
+      <li><i class="fas fa-minus-circle"></i> This needs additional software</li>
+    </ul>
+  </div>
+</div>
+
+<p>The argument of needing additional software, e.g. the driver, is no longer a concern. The additional kilobyte of &ldquo;firmware&rdquo; can easily be stored. An <strong>additional</strong> benefit from using a driver is that it provides a more flexible solution. For example, version 2.0 from our timer has this bit moved to another position in the register. The &ldquo;skilled&rdquo; user that uses the timer, has to update his/her source code. With the solution of a driver, the vendor simply ships an updated driver with the hardware and no modifications needs to be made by the user. <strong>Scalability</strong> is improved!</p>
+
+<h3 id="where-do-they-live">Where do they live ?</h3>
+
+<p>The driver is a piece of software that allows an operating system to interact with a certain hardware component. In the first lecture on OSes, we talked about the user-space and kernel-space. So, where do device drivers live ? Take a guess &hellip; I&rsquo;m sure you&rsquo;ll be correct.</p>
+
+<p>The correct answer is: both 😄 The driver can live in user-space and in kernel-space. Depending on the space, there is a benefit and drawback. Drivers in user-space will not crash the entire system is an error occurs in the driver itself. This provides improved <strong>stability</strong>. Drivers in kernel-space will run with much higher priority than user-space processes ever can. This provides improved <strong>performance</strong>.</p>
+
 <h2 id="character-device-drivers">Character device drivers</h2>
 
+<p>Character devices are the simplest types of devices to communicate with, on a Linux systems. The textbook example for this is a <strong>serial port</strong>. The serial port is the predecessor of the Universal Serial Bus (USB). Students might have been in contact with the serial port when using the RS232 protocol. This is how the UART communicates. Today, it is hard to find the original connector on a modern laptop/desktop, as they are all replaced with a USB-alternative.</p>
+
+<div class="multicolumn">
+  <div class="column">
+    <figure>
+    <img src="https://www.partsdata.de/media/image/65/5b/58/null-modem-kabel--2x-dsub-9-weiblich-cross-over-belegung-3m_CNULL-101_1_1280x1280.png" width="55%"/> <figcaption>
+            <h4>The original serial port cable</h4>
+        </figcaption>
+</figure>
+
+  </div>
+  <div class="column">
+    <figure>
+    <img src="https://en.accessoires-asus.com/images/contenu/type-de-cable-usb.jpg"/> <figcaption>
+            <h4>Different types of USB connectors</h4>
+        </figcaption>
+</figure>
+
+  </div>
+</div>
+
+<p>As was stated before in the course, <strong>everything</strong> is a file on a Linux operating system. The serial port, which is driven by a <strong>character device driver</strong>, is represented by a file in <em>/dev</em></p>
+
+<figure>
+    <img src="../../img/chx/ttyusb0.png"/> <figcaption>
+            <h4>The representation of a serial port on Linux system</h4>
+        </figcaption>
+</figure>
+
+<p>The first character of <em>permission modes</em> is a <strong>c</strong>. We have seen that a <strong>d</strong> represents a directory. The <strong>c</strong> here shows that the device is a character device. A <strong>character device</strong> is a device that works with <strong>one character</strong> as a basic unit. The user can read one character at a time, or write one character at a time. As state above, the serial port is an excellent example for this.</p>
+
 <h2 id="block-device-drivers">Block device drivers</h2>
+
+<p>Devices that support <strong>filesystems</strong> are referred to as block devices. The drivers, not surprisingly: block device drivers. The typical examples for these are hard drives, solid-state drives, and USB flash memories.</p>
+
+<p>Similar to the letter <strong>c</strong> with the character devices in the permissions, the block devices show the letter <strong>b</strong>.</p>
+
+<figure>
+    <img src="../../img/chx/block_device.png"/> <figcaption>
+            <h4>The representation of a solid-state drive on Linux system</h4>
+        </figcaption>
+</figure>
+
+<h2 id="writing-your-own">Writing your own</h2>
+
+<p>When you develop new hardware, or got in a situation where no drivers are around for existing hardware, you might decide it is time to write your own device driver.</p>
+
+<p>This type of programming is very different from general application programming as you know it. If you make mistakes with general programming, you get a fault and that&rsquo;s that. Maybe you need to reset the terminal, but that&rsquo;s (roughly speaking) the worst that can happen.</p>
+
+<p>When you write bugs in your device drivers, it is a different story. Memory leaks in the kernel might crash your system periodically. Incorrectly handled exceptions lead to system failures and maybe even hardware failures.</p>
+
+<h3 id="kernel-modules">Kernel modules</h3>
+
+<p>Earlier we have seen that the kernel is not one impenetrable binary (monolithic). The kernel can be expanded with <strong>kernel modules</strong>. This is a <em>small</em> piece of code that can be added to the kernel, while the kernel is running. A number of kernel modules are present in the Virtual Machine image. You can <strong>list</strong> the kernel <strong>modules</strong> with the command: lsmod.</p>
+
+<figure>
+    <img src="../../img/chx/lsmod.png"/> <figcaption>
+            <h4>Result of lsmod in the Virtual Machine</h4>
+        </figcaption>
+</figure>
+
+<p>Modules can be loaded and unloaded with <strong>insmod</strong> and <strong>rmmod</strong>, respectively.</p>
+
+<h3 id="driver">Driver</h3>
+
+<p>While developing your custom driver, it is recommended you start of with a kernel module. After compiling, the kernel module can be inserted into the kernel (and hopefully, don&rsquo;t crash it).</p>
+
+<p>Because the driver is a <strong>kernel module</strong> it also has no <strong>main()</strong> function. &ldquo;It&rsquo;s just&rdquo; a collection of functions that are attached to <strong>hooks</strong> of the kernel.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">register_blkdev</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> major, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>name);</code></pre></div>
+<p>For example: the <em>hook</em> above is a standard function that kernel provides to allow a driver for a block device to register itself with the kernel.</p>
+
+<p>Displaying messages on the <strong>standard output device</strong> is also not possible. Beginning kernel hackers use the printk function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">    printk(KERN_DEBUG <span style="color:#e6db74">&#34;Debug message shown!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);</code></pre></div>
+<p>These printed message do not end up on the device&rsquo;s monitor, but in the kernel ring buffer. A <strong>ring buffer</strong> is a buffer with a fixed amount of size. When overflowing, the oldest messages get deleted.</p>
+
+<p>The ring buffer can be consulted using the <strong>dmesg</strong> command. This prints the current content of the ring buffer to the screen.</p>
+
+<div class="multicolumn">
+  <div class="column">
+    <figure>
+    <img src="../../img/chx/dmesg_1.png"/> <figcaption>
+            <h4>Example of dmesg output</h4>
+        </figcaption>
+</figure>
+
+  </div>
+  <div class="column">
+    <figure>
+    <img src="../../img/chx/dmesg_2.png"/> <figcaption>
+            <h4>Example of dmesg, after inserting a USB drive</h4>
+        </figcaption>
+</figure>
+
+  </div>
+</div>
+
+
+<div class="notices note" ><p>This is also a good place to visit when you are trying to solve system problems !!!!</p>
+</div>
+
 
 
 <footer class="footline">
@@ -2381,6 +2550,22 @@ window.MathJax = {
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -2581,19 +2766,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1587355921"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1587355921"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1587355921"></script>
-    <script src="../../js/jquery.sticky.js?1587355921"></script>
-    <script src="../../js/featherlight.min.js?1587355921"></script>
-    <script src="../../js/highlight.pack.js?1587355921"></script>
+    <script src="../../js/clipboard.min.js?1587963060"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1587963060"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1587963060"></script>
+    <script src="../../js/jquery.sticky.js?1587963060"></script>
+    <script src="../../js/featherlight.min.js?1587963060"></script>
+    <script src="../../js/highlight.pack.js?1587963060"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1587355921"></script>
-    <script src="../../js/learn.js?1587355921"></script>
-    <script src="../../js/hugo-learn.js?1587355921"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1587963060"></script>
+    <script src="../../js/learn.js?1587963060"></script>
+    <script src="../../js/hugo-learn.js?1587963060"></script>
 
-    <link href="../../mermaid/mermaid.css?1587355921" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1587355921"></script>
+    <link href="../../mermaid/mermaid.css?1587963060" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1587963060"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -37,3 +37,21 @@ If the desired frequency is 10 Hz, which corresponds to a period of 0.1 s, the L
 ## ch7
 ## ch8
 ## ch9
+## chx
+
+## other:
+
+* Tell me everything you can about this :
+```bash
+jvliegen@xps15-jo:~$ ls -al /dev/nvme0n1
+brw-rw---- 1 root disk 259, 0 Apr 27 04:10 /dev/nvme0n1
+jvliegen@xps15-jo:~$ 
+```
+
+  * login name
+  * machine name
+  * home folder
+  * block device
+  * last modified
+  * permissions
+  * owner

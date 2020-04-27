@@ -2,7 +2,6 @@
 title: 'X.1: File systems'
 pre: "<i class='fab fa-linux'></i> "
 weight: 1
-draft: true
 ---
 
 ## Introduction in Unix filesystems

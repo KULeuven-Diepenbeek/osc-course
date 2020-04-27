@@ -34,7 +34,9 @@ X.2: RTOS
 
 
 X.3: Device drivers
+
   * General
+    * Where do they live ?
   * Character device drivers
   * Block device drivers
 

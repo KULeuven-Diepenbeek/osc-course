@@ -12,5 +12,35 @@
 	<atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>X.1: File systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</guid>
+      <description>Introduction in Unix filesystems Files in Unix Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a file in Unix: we have used this to our advantage to inspect the inner workings of a process in the /proc directory.
+A file is the smallest possible unit of storage in a unix system.</description>
+    </item>
+    
+    <item>
+      <title>X.2: Real-time Operating Systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
+      <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
+  source: wikipedia.com   The image above shows:
+ Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+    </item>
+    
+    <item>
+      <title>X.3: Device Drivers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
+      <description>General The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware devices that are typically connected to a processor in a laptop, desktop, or server. The OS has to know how to talk to a certain device. Typically an Application Programming Interface (an API) is provided to the user space, so users can interact with the hardware.</description>
+    </item>
+    
   </channel>
 </rss>

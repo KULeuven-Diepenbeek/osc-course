@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.68.3" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>6.5: Inter task communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1587963060" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/hybrid.css?1587963060" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1587963060" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1587963060" rel="stylesheet">
-    <link href="../../css/theme.css?1587963060" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1587963060" rel="stylesheet">
+    <link href="../../css/nucleus.css?1589975729" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/hybrid.css?1589975729" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1589975729" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1589975729" rel="stylesheet">
+    <link href="../../css/theme.css?1589975729" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1589975729" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1587963060" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1589975729" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1587963060"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1589975729"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1587963060"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1587963060"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1589975729"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1589975729"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1587963060"></script>
+<script type="text/javascript" src="../../js/search.js?1589975729"></script>
 
     
   </div>
@@ -1796,19 +1796,19 @@ window.MathJax = {
 
 <p>One mechanism comes in the form of <strong>signals</strong>. This is the cheapest form of IPC. It literally allows one process to send a signal to another process, through the use of the function <strong>kill()</strong>. Although the name might be a bit misleading, it can be used to send different signals. The snippet below shows the different types of signals that can be sent.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ kill -L
- <span style="color:#ae81ff">1</span><span style="color:#f92672">)</span> SIGHUP   <span style="color:#ae81ff">2</span><span style="color:#f92672">)</span> SIGINT   <span style="color:#ae81ff">3</span><span style="color:#f92672">)</span> SIGQUIT  <span style="color:#ae81ff">4</span><span style="color:#f92672">)</span> SIGILL   <span style="color:#ae81ff">5</span><span style="color:#f92672">)</span> SIGTRAP
- <span style="color:#ae81ff">6</span><span style="color:#f92672">)</span> SIGABRT  <span style="color:#ae81ff">7</span><span style="color:#f92672">)</span> SIGBUS   <span style="color:#ae81ff">8</span><span style="color:#f92672">)</span> SIGFPE   <span style="color:#ae81ff">9</span><span style="color:#f92672">)</span> SIGKILL <span style="color:#ae81ff">10</span><span style="color:#f92672">)</span> SIGUSR1
-<span style="color:#ae81ff">11</span><span style="color:#f92672">)</span> SIGSEGV <span style="color:#ae81ff">12</span><span style="color:#f92672">)</span> SIGUSR2 <span style="color:#ae81ff">13</span><span style="color:#f92672">)</span> SIGPIPE <span style="color:#ae81ff">14</span><span style="color:#f92672">)</span> SIGALRM <span style="color:#ae81ff">15</span><span style="color:#f92672">)</span> SIGTERM
-<span style="color:#ae81ff">16</span><span style="color:#f92672">)</span> SIGSTKFLT <span style="color:#ae81ff">17</span><span style="color:#f92672">)</span> SIGCHLD <span style="color:#ae81ff">18</span><span style="color:#f92672">)</span> SIGCONT <span style="color:#ae81ff">19</span><span style="color:#f92672">)</span> SIGSTOP <span style="color:#ae81ff">20</span><span style="color:#f92672">)</span> SIGTSTP
-<span style="color:#ae81ff">21</span><span style="color:#f92672">)</span> SIGTTIN <span style="color:#ae81ff">22</span><span style="color:#f92672">)</span> SIGTTOU <span style="color:#ae81ff">23</span><span style="color:#f92672">)</span> SIGURG  <span style="color:#ae81ff">24</span><span style="color:#f92672">)</span> SIGXCPU <span style="color:#ae81ff">25</span><span style="color:#f92672">)</span> SIGXFSZ
-<span style="color:#ae81ff">26</span><span style="color:#f92672">)</span> SIGVTALRM <span style="color:#ae81ff">27</span><span style="color:#f92672">)</span> SIGPROF <span style="color:#ae81ff">28</span><span style="color:#f92672">)</span> SIGWINCH  <span style="color:#ae81ff">29</span><span style="color:#f92672">)</span> SIGIO <span style="color:#ae81ff">30</span><span style="color:#f92672">)</span> SIGPWR
-<span style="color:#ae81ff">31</span><span style="color:#f92672">)</span> SIGSYS  <span style="color:#ae81ff">34</span><span style="color:#f92672">)</span> SIGRTMIN  <span style="color:#ae81ff">35</span><span style="color:#f92672">)</span> SIGRTMIN+1  <span style="color:#ae81ff">36</span><span style="color:#f92672">)</span> SIGRTMIN+2  <span style="color:#ae81ff">37</span><span style="color:#f92672">)</span> SIGRTMIN+3
-<span style="color:#ae81ff">38</span><span style="color:#f92672">)</span> SIGRTMIN+4  <span style="color:#ae81ff">39</span><span style="color:#f92672">)</span> SIGRTMIN+5  <span style="color:#ae81ff">40</span><span style="color:#f92672">)</span> SIGRTMIN+6  <span style="color:#ae81ff">41</span><span style="color:#f92672">)</span> SIGRTMIN+7  <span style="color:#ae81ff">42</span><span style="color:#f92672">)</span> SIGRTMIN+8
-<span style="color:#ae81ff">43</span><span style="color:#f92672">)</span> SIGRTMIN+9  <span style="color:#ae81ff">44</span><span style="color:#f92672">)</span> SIGRTMIN+10 <span style="color:#ae81ff">45</span><span style="color:#f92672">)</span> SIGRTMIN+11 <span style="color:#ae81ff">46</span><span style="color:#f92672">)</span> SIGRTMIN+12 <span style="color:#ae81ff">47</span><span style="color:#f92672">)</span> SIGRTMIN+13
-<span style="color:#ae81ff">48</span><span style="color:#f92672">)</span> SIGRTMIN+14 <span style="color:#ae81ff">49</span><span style="color:#f92672">)</span> SIGRTMIN+15 <span style="color:#ae81ff">50</span><span style="color:#f92672">)</span> SIGRTMAX-14 <span style="color:#ae81ff">51</span><span style="color:#f92672">)</span> SIGRTMAX-13 <span style="color:#ae81ff">52</span><span style="color:#f92672">)</span> SIGRTMAX-12
-<span style="color:#ae81ff">53</span><span style="color:#f92672">)</span> SIGRTMAX-11 <span style="color:#ae81ff">54</span><span style="color:#f92672">)</span> SIGRTMAX-10 <span style="color:#ae81ff">55</span><span style="color:#f92672">)</span> SIGRTMAX-9  <span style="color:#ae81ff">56</span><span style="color:#f92672">)</span> SIGRTMAX-8  <span style="color:#ae81ff">57</span><span style="color:#f92672">)</span> SIGRTMAX-7
-<span style="color:#ae81ff">58</span><span style="color:#f92672">)</span> SIGRTMAX-6  <span style="color:#ae81ff">59</span><span style="color:#f92672">)</span> SIGRTMAX-5  <span style="color:#ae81ff">60</span><span style="color:#f92672">)</span> SIGRTMAX-4  <span style="color:#ae81ff">61</span><span style="color:#f92672">)</span> SIGRTMAX-3  <span style="color:#ae81ff">62</span><span style="color:#f92672">)</span> SIGRTMAX-2
-<span style="color:#ae81ff">63</span><span style="color:#f92672">)</span> SIGRTMAX-1  <span style="color:#ae81ff">64</span><span style="color:#f92672">)</span> SIGRTMAX  
+ 1<span style="color:#f92672">)</span> SIGHUP   2<span style="color:#f92672">)</span> SIGINT   3<span style="color:#f92672">)</span> SIGQUIT  4<span style="color:#f92672">)</span> SIGILL   5<span style="color:#f92672">)</span> SIGTRAP
+ 6<span style="color:#f92672">)</span> SIGABRT  7<span style="color:#f92672">)</span> SIGBUS   8<span style="color:#f92672">)</span> SIGFPE   9<span style="color:#f92672">)</span> SIGKILL 10<span style="color:#f92672">)</span> SIGUSR1
+11<span style="color:#f92672">)</span> SIGSEGV 12<span style="color:#f92672">)</span> SIGUSR2 13<span style="color:#f92672">)</span> SIGPIPE 14<span style="color:#f92672">)</span> SIGALRM 15<span style="color:#f92672">)</span> SIGTERM
+16<span style="color:#f92672">)</span> SIGSTKFLT 17<span style="color:#f92672">)</span> SIGCHLD 18<span style="color:#f92672">)</span> SIGCONT 19<span style="color:#f92672">)</span> SIGSTOP 20<span style="color:#f92672">)</span> SIGTSTP
+21<span style="color:#f92672">)</span> SIGTTIN 22<span style="color:#f92672">)</span> SIGTTOU 23<span style="color:#f92672">)</span> SIGURG  24<span style="color:#f92672">)</span> SIGXCPU 25<span style="color:#f92672">)</span> SIGXFSZ
+26<span style="color:#f92672">)</span> SIGVTALRM 27<span style="color:#f92672">)</span> SIGPROF 28<span style="color:#f92672">)</span> SIGWINCH  29<span style="color:#f92672">)</span> SIGIO 30<span style="color:#f92672">)</span> SIGPWR
+31<span style="color:#f92672">)</span> SIGSYS  34<span style="color:#f92672">)</span> SIGRTMIN  35<span style="color:#f92672">)</span> SIGRTMIN+1  36<span style="color:#f92672">)</span> SIGRTMIN+2  37<span style="color:#f92672">)</span> SIGRTMIN+3
+38<span style="color:#f92672">)</span> SIGRTMIN+4  39<span style="color:#f92672">)</span> SIGRTMIN+5  40<span style="color:#f92672">)</span> SIGRTMIN+6  41<span style="color:#f92672">)</span> SIGRTMIN+7  42<span style="color:#f92672">)</span> SIGRTMIN+8
+43<span style="color:#f92672">)</span> SIGRTMIN+9  44<span style="color:#f92672">)</span> SIGRTMIN+10 45<span style="color:#f92672">)</span> SIGRTMIN+11 46<span style="color:#f92672">)</span> SIGRTMIN+12 47<span style="color:#f92672">)</span> SIGRTMIN+13
+48<span style="color:#f92672">)</span> SIGRTMIN+14 49<span style="color:#f92672">)</span> SIGRTMIN+15 50<span style="color:#f92672">)</span> SIGRTMAX-14 51<span style="color:#f92672">)</span> SIGRTMAX-13 52<span style="color:#f92672">)</span> SIGRTMAX-12
+53<span style="color:#f92672">)</span> SIGRTMAX-11 54<span style="color:#f92672">)</span> SIGRTMAX-10 55<span style="color:#f92672">)</span> SIGRTMAX-9  56<span style="color:#f92672">)</span> SIGRTMAX-8  57<span style="color:#f92672">)</span> SIGRTMAX-7
+58<span style="color:#f92672">)</span> SIGRTMAX-6  59<span style="color:#f92672">)</span> SIGRTMAX-5  60<span style="color:#f92672">)</span> SIGRTMAX-4  61<span style="color:#f92672">)</span> SIGRTMAX-3  62<span style="color:#f92672">)</span> SIGRTMAX-2
+63<span style="color:#f92672">)</span> SIGRTMAX-1  64<span style="color:#f92672">)</span> SIGRTMAX  
 jvliegen@localhost:~/$  </code></pre></div>
 <p>The function of sending signals to other processes is to be used in programs. It also has CLI-compatible command <strong>kill</strong>. For more information on the kill command, add the <code>--help</code> argument, read the man-page (<code>man kill</code>), or ask the Internet.</p>
 
@@ -1832,23 +1832,23 @@ jvliegen@localhost:~/$  </code></pre></div>
 }</code></pre></div>
 <p>This program will emulate an egg timer. Every second it displays how much time is left. Once the process starts running, it takes 10 minutes to complete. This process can be <strong>killed</strong> by just pressing CTRL+C.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./eg4_timer.bin 
-TIMER: <span style="color:#ae81ff">00</span>:10:00
-TIMER: <span style="color:#ae81ff">00</span>:09:59
-TIMER: <span style="color:#ae81ff">00</span>:09:58
-TIMER: <span style="color:#ae81ff">00</span>:09:57
-TIMER: <span style="color:#ae81ff">00</span>:09:56
+TIMER: 00:10:00
+TIMER: 00:09:59
+TIMER: 00:09:58
+TIMER: 00:09:57
+TIMER: 00:09:56
 ^C
 jvliegen@localhost:~/$ </code></pre></div>
 <p>Another way to kill the process would be to explicitly send the signal through the kill command. To use this command, the <strong>PID</strong> is needed as an argument. Through a new CLI-window, this PID has to be search for first. Note that the type of signal is an argument in the command.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$  ps ux | grep timer
-jvliegen  <span style="color:#ae81ff">5041</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0   <span style="color:#ae81ff">4504</span>   <span style="color:#ae81ff">772</span> pts/1    S+   <span style="color:#ae81ff">06</span>:04   <span style="color:#ae81ff">0</span>:00 ./eg4_timer.bin
-jvliegen  <span style="color:#ae81ff">5066</span>  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">0</span>.0  <span style="color:#ae81ff">21996</span>  <span style="color:#ae81ff">1080</span> pts/2    S+   <span style="color:#ae81ff">06</span>:05   <span style="color:#ae81ff">0</span>:00 grep --color<span style="color:#f92672">=</span>auto timer
+jvliegen  <span style="color:#ae81ff">5041</span>  0.0  0.0   <span style="color:#ae81ff">4504</span>   <span style="color:#ae81ff">772</span> pts/1    S+   06:04   0:00 ./eg4_timer.bin
+jvliegen  <span style="color:#ae81ff">5066</span>  0.0  0.0  <span style="color:#ae81ff">21996</span>  <span style="color:#ae81ff">1080</span> pts/2    S+   06:05   0:00 grep --color<span style="color:#f92672">=</span>auto timer
 jvliegen@localhost:~/$  kill -KILL <span style="color:#ae81ff">5041</span>
 jvliegen@localhost:~/$ </code></pre></div>
 
 <div class="ex">
 	<div class="inner">
-    	<p>Try this for yourself. In the git repository for this course (in the VM), there is the <em>longhello</em> program (~/osc-exercises/ch6_tasks/longhello.c). Run this program and try to kill it using <strong>both</strong> approaches that were explained above. (Offcourse this means you shoud run it again, after you killed it the first time  )</p>
+    	<p>Try this for yourself. In the git repository for this course (in the VM), there is the <em>longhello</em> program (~/osc-exercises/ch6_tasks/longhello.c). Run this program and try to kill it using <strong>both</strong> approaches that were explained above. (Offcourse this means you shoud run it again, after you killed it the first time 😃 )</p>
 
 	</div>
 </div>
@@ -1866,9 +1866,9 @@ jvliegen@localhost:~/$ </code></pre></div>
 <p>Before you can send processes to the background, the process has to be halted first. This can be done through the CTRL+Z shortcut. With a halted process, the command <strong>bg</strong> sends the halted process to the background. If you do not send it to the background, the process will <em>freeze</em>. Once it is in the background it <em>unfreezes</em> and continues running. Additionally, this would give you back your shell.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ xeyes 
 ^Z
-<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>+  Stopped                 xeyes
+<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>+  Stopped                 xeyes
 jvliegen@localhost:~/$ bg
-<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>+ xeyes &amp;
+<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>+ xeyes &amp;
 jvliegen@localhost:~/$ </code></pre></div>
 <p>For the sake of completeness we enumerate a few more usefull aspects about this:</p>
 
@@ -3049,19 +3049,19 @@ pthread_mutex_t lock_counter;                   <span style="color:#75715e">/* T
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1587963060"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1587963060"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1587963060"></script>
-    <script src="../../js/jquery.sticky.js?1587963060"></script>
-    <script src="../../js/featherlight.min.js?1587963060"></script>
-    <script src="../../js/highlight.pack.js?1587963060"></script>
+    <script src="../../js/clipboard.min.js?1589975729"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1589975729"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1589975729"></script>
+    <script src="../../js/jquery.sticky.js?1589975729"></script>
+    <script src="../../js/featherlight.min.js?1589975729"></script>
+    <script src="../../js/highlight.pack.js?1589975729"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1587963060"></script>
-    <script src="../../js/learn.js?1587963060"></script>
-    <script src="../../js/hugo-learn.js?1587963060"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1589975729"></script>
+    <script src="../../js/learn.js?1589975729"></script>
+    <script src="../../js/hugo-learn.js?1589975729"></script>
 
-    <link href="../../mermaid/mermaid.css?1587963060" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1587963060"></script>
+    <link href="../../mermaid/mermaid.css?1589975729" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1589975729"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

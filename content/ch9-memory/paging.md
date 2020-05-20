@@ -69,7 +69,7 @@ Given the hypothetical system as described above, what would be the correspondin
 <div class="solution" id="div_q941" style="visibility: hidden">
   <b>Answer:</b><br/>
   <p>
-    Logical address 4 (page 1, offset 0) maps to physical address 23 [= (<b>6</b> × 4) + 0] = 0x18
+    Logical address 4 (page 1, offset 0) maps to physical address 24 [= (<b>6</b> × 4) + 0] = 0x18
     <br/>    
     Logical address 15 (page 3, offset 3) maps to physical address 11 [= (<b>2</b> × 4) + 3] = 0x0B
   </p>

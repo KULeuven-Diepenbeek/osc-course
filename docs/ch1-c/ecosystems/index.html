@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.68.3" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>1.5: C Ecosystems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1587963060" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/hybrid.css?1587963060" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1587963060" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1587963060" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1587963060" rel="stylesheet">
-    <link href="../../css/theme.css?1587963060" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1587963060" rel="stylesheet">
+    <link href="../../css/nucleus.css?1589975729" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/hybrid.css?1589975729" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1589975729" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1589975729" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1589975729" rel="stylesheet">
+    <link href="../../css/theme.css?1589975729" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1589975729" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1587963060" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1589975729" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1587963060"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1589975729"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1587963060"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1587963060"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1589975729"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1589975729"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1587963060"></script>
+<script type="text/javascript" src="../../js/search.js?1589975729"></script>
 
     
   </div>
@@ -1806,7 +1806,6 @@ Instead of using the default GCC compiler: <code>gcc bla.c</code>, you will down
 <p>In the C world there is such a thing as a &ldquo;Makefile&rdquo; that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.</p>
 
 <p>With Makefiles you can describe &ldquo;targets&rdquo; that perform certain actions for you. For example, cleaning up binaries, compiling and linking, all as a separate step. Stringing steps together is of course also possible.</p>
-
 <pre><code>.DEFAULT_GOAL := all
 
 CC=gcc
@@ -1821,9 +1820,7 @@ compile:
 link:
     $(CC) -o main.out main.o
 
-all: clean compile link
-</code></pre>
-
+all: clean compile link</code></pre>
 <p>Typically, the compiler used is set as a shell variable (CC = gcc). You can see here that compiling (gcc with the -c option does not link) and linking is split into separate make &lsquo;actions&rsquo;. This is not really necessary in our exercises, but shows the organizational strength of Make here.</p>
 
 <p>Executing the above steps can be done using the <code>make</code> command and a default goal (all), or <code>make compile</code> for a specific goal (executes the &lsquo;compile&rsquo; steps only).</p>
@@ -2895,19 +2892,19 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1587963060"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1587963060"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1587963060"></script>
-    <script src="../../js/jquery.sticky.js?1587963060"></script>
-    <script src="../../js/featherlight.min.js?1587963060"></script>
-    <script src="../../js/highlight.pack.js?1587963060"></script>
+    <script src="../../js/clipboard.min.js?1589975729"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1589975729"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1589975729"></script>
+    <script src="../../js/jquery.sticky.js?1589975729"></script>
+    <script src="../../js/featherlight.min.js?1589975729"></script>
+    <script src="../../js/highlight.pack.js?1589975729"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1587963060"></script>
-    <script src="../../js/learn.js?1587963060"></script>
-    <script src="../../js/hugo-learn.js?1587963060"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1589975729"></script>
+    <script src="../../js/learn.js?1589975729"></script>
+    <script src="../../js/hugo-learn.js?1589975729"></script>
 
-    <link href="../../mermaid/mermaid.css?1587963060" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1587963060"></script>
+    <link href="../../mermaid/mermaid.css?1589975729" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1589975729"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

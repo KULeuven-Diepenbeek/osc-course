@@ -28,11 +28,11 @@ weight: 1
             </li>
             <li>
                 <strong>heap</strong><br/>
-                Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. 
+                Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
             </li>
             <li>
                 <strong>stack</strong><br/>
-                Dynamically growing. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>.
+                Set size. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>. Can be modified manually using the command <code>ulimit</code> - but this cannot be modified once the process is running. 
             </li>
         </ol>
     </span>

@@ -37,7 +37,7 @@ weight: 1
         </ol>
     </span>
     <span style="float: right; width: 30%">
-        <img src="/img/Program_memory_layout.pdf.jpg" />
+        <img src="/img/Program_memory_layout.pdf.jpg" title="Source: Wikipedia" />
     </span>
 </div>
 <div style="clear: both;">&nbsp; </div>

@@ -81,7 +81,7 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
 
 In this formula **S** stands for the portion of the application that *has to be* run serially. **N** stands for the number of cores on which the parallel portion is spread.
 
-{{% figure src="/img/os/amdahl.png" %}}
+{{% figure src="/img/os/amdahl.png" title="Source: Wikipedia" %}}
 
 The graph above visualises Amdahl's law. For example, if a program has 80% of its code that can be run in parallel, it can be run maximally 2.5 times faster, using 4 cores. This point is marked with a red dot in the graph.
 

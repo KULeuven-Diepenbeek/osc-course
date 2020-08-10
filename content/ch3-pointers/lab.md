@@ -6,9 +6,10 @@ weight: 5
 
 ## The Ancient Library
 
-> Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. ([img src](https://dublin2019.com/3906-2/fantasy-library-art-736x459/))
+> Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. 
 
-![Library](/img/labs/library.png)
+{{% figure src="/img/labs/library.png" title="Source: dublin2019.com"%}}
+
 
 ### 1. Modeling the books
 

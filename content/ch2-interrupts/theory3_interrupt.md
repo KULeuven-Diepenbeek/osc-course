@@ -4,7 +4,7 @@ pre: "<i class='fab fa-linux'></i> "
 weight: 5
 ---
 
-{{<figure src="/img/jo/disassembly.jpg">}}
+{{% figure src="/img/jo/disassembly.jpg" title="Source: G.I."%}}
 
 ## The internals
 
@@ -12,7 +12,7 @@ Now that you have an understanding of how interrupts work, let's dive a bit deep
 
 The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding **wire** goes high. This makes one (or more) bits of this **interrupt vector** *high*. This triggers the internal **Interrupt unit**. The image below shows the available interrupts for the AT Mega.
 
-{{<figure src="/img/0x_14.png" title="The interrupt vector">}}
+{{<figure src="/img/0x_14.png" title="The interrupt vector. Source: Datasheet">}}
 
 When an **Interrupt Request** is triggered and the interrupt is allowed, the processor will jump to another function in program. This function is called the **Interrupt Service Routine**. When this function is finished, the processor continues with the next instruction that would have been executed before the interrupt occured.
 

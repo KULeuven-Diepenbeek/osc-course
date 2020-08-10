@@ -4,6 +4,6 @@ title: 'Operating Systems and C'
 
 # Operating systems and C
 
-![XKCD Comic](/img/xkcd.png)
+{{% figure src="/img/xkcd.png" title="source: xkcd"%}}
 
-![Compiling!](/img/compiling.png)
+{{% figure src="/img/compiling.png" title="source: xkcd"%}}

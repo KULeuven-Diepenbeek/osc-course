@@ -4,7 +4,8 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
 
-<center><video src="/img/os/b.mp4" autoplay loop style="width: 80%"></video></center>
+<center><video src="/img/os/b.mp4" autoplay loop style="width: 80%"></video>
+<br/>Source: Neo</center>
 
 ## Getting your feet wet
 

@@ -14,13 +14,13 @@ weight: 1
 The Arduino UNO is an open-source microcontroller board. It is powered by an _off-the-shelf_ ATMega microcontroller from {{< link name="Microchip" url="https://www.microchip.com/design-centers/8-bit/avr-mcus" >}}. The datasheet for this family of microcontrollers can be found {{< link name="here" url="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" >}}.
 
 
-{{<figure src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg" title="An Arduino UNO">}}
+{{<figure src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg" title="An Arduino UNO. Source. arduino.cc">}}
 
 This datasheet contains a **block diagram** of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well. The image should be familiar to students that took up the _Elektronische systemen_ course at KU Leuven. :smile: 
 
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    {{<figure src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif" title="Block diagram of the AVR Architecture">}}
+    {{<figure src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif" title="Block diagram of the AVR Architecture.  Source. podkalicki.com">}}
   </div>
   <div style="width: 50%">
     The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, another topic is explained first: Timer<br/><br/>
@@ -117,7 +117,7 @@ When a register is written by software and read by (or driving) hardware, such a
 
 Going through the {{< link name="datasheet" url="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" >}} of the microcontroller on the Arduino many CRs can be found. Section 36 summarises these registers on more than 3 pages. An example of a register that serves both as a CR and as a SR for controlling of the Analog-to-Digital Converter is shown below. As can be learned from the datasheet, the MSB of this register is used to enable or disable the hardware ADC through software instructions.
 
-{{< figure src="/img/0x_03.png" title="Example of a CR in the ATMega microcontroller." >}}
+{{< figure src="/img/0x_03.png" title="Example of a CR in the ATMega microcontroller. Source: arduino.cc" >}}
 
 
 

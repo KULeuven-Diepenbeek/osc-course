@@ -6,9 +6,9 @@ weight: 2
 
 ## We are at War!
 
-We're at **war**! The orcs are attacking and are looking very hungry! Look at them! ([img src](https://www.google.be/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjmyPWi2N7jAhUIxoUKHWLZCmgQjhx6BAgBEAM&url=https%3A%2F%2Fwww.artstation.com%2Fartwork%2Fe5ZDb&psig=AOvVaw2XqhvpDcX5bqiky-tRoQaN&ust=1564646412604432))
+We're at **war**! The orcs are attacking and are looking very hungry! Look at them! 
 
-![Orcs attacking](/img/labs/orcs.png)
+{{% figure src="/img/labs/orcs.png" title="Orcs attacking! source: G.I."%}}
 
 ### 1. String manipulation 
 

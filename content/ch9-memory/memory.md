@@ -124,7 +124,7 @@ Most programmers, ourselves included, think of memory like this long-stretched, 
 
 <div class="multicolumn">
   <div>
-    {{% figure src="/img/mem/ss_mem_non_segmented.jpg" height="413px" title="Continuous image" %}}
+    {{% figure src="/img/mem/ss_mem_non_segmented.jpg" height="413px" title="Continuous image. Source: G.I." %}}
   </div>
 
   <div>

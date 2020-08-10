@@ -4,7 +4,7 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 6
 ---
 
-{{<figure src="/img/os/header_communication.jpg">}}
+{{<figure src="/img/os/header_communication.jpg" title="Source: G.I." >}}
 
 ## Inter process communication
 

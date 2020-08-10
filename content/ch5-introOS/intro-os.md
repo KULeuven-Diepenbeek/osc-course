@@ -44,9 +44,9 @@ Different OSes exist for different computing platforms.
 <table style="border: 0px;">
     <tr>
         <td width="50%"><h4>Laptops, desktops, and servers</h4>On laptops, desktops, and servers, the most well known operating systems are used. These include: Microsoft's Windows, Linux, and MAC OS. It goes without saying that there are many more operating systems for these platforms, but some/many of them are fairly unknown. These might include: DOS, BeOS, BSD, Unix, Solaris, SunOS, ...</td>
-        <td>{{< figure src="https://3.imimg.com/data3/OP/NK/MY-2971758/laptop-desktop-and-server-trading-service-250x250.jpg" width="500px" >}}</td>
+        <td>{{< figure src="https://3.imimg.com/data3/OP/NK/MY-2971758/laptop-desktop-and-server-trading-service-250x250.jpg" width="500px" title="Source: imimg.com" >}}</td>
     </tr>
-    <tr><td>{{< figure src="https://images.fridaymagazine.ae/1_2244719/imagesList_0/159508486_main.jpg" width="500px" >}}</td>
+    <tr><td>{{< figure src="https://images.fridaymagazine.ae/1_2244719/imagesList_0/159508486_main.jpg" width="500px" title="fridaymagazine.ae" >}}</td>
         <td><h4>Embedded systems</h4>Embedded systems come in many flavours, colours and sizes. Typically, these devices are smaller and have fewer features than the laptops and co do. It goes without saying that the OSes that run on embedded systems are different to, or at least ported from, the other OSes. A number of OSes for embedded systems are: Android, FreeRTOS, Symbian, mbedOS, and brickOS.</td></tr>
 </table>
 
@@ -59,7 +59,7 @@ Which operating system is the best ?
 
 The image above showed that the OS places itself between general software and hardware. In the most inner core of an OS resides the kernel. This is the heart of the OS. Depending on the type of the kernel, a typical classification of OSes can be made
 
-{{< figure src="https://upload.wikimedia.org/wikipedia/commons/d/d0/OS-structure2.svg" title="source: https://en.wikipedia.org/wiki/Monolithic_kernel#/media/File:OS-structure2.svg" >}}
+{{< figure src="https://upload.wikimedia.org/wikipedia/commons/d/d0/OS-structure2.svg" title="source: Wikipedia" >}}
 
 * Monolithic kernel
 * Microkernel
@@ -93,7 +93,7 @@ Linux is a an open source Unix-like OS. Although whole books can be (and probabl
 
 The Linux kernel almost never comes on its own but is packaged in a distribution (a.k.a. a distro). Such a distro is the collection of various pieces software of software and the linux kernel. There is a large number of Linux distributions available. Which one to pick was (and probably is) the start of multiple cultural wars. My personal 2-cent opinion is to take into consideration what you want to use it for.
 
-{{< figure src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" title="source: https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" >}}
+{{< figure src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" title="source: Wikimedia" >}}
 
 
 If the figure above doesn't contain a distribution to your liking you can always DIY it: [Linux from scratch](http://www.linuxfromscratch.org/). Happy compiling !!
@@ -136,7 +136,8 @@ On Linux, almost everything is a file. A file ... is a file. A directory ... is 
 The image above shows the content of a folder **example** this folder contains: 2 files, 2 directories, a *hidden* directory, and a *hidden* file. With *hidden* is meant that these files are not seen with a normal *ls*. To see these files the **-a** options has to be present.
 
 With the **-l** the *long listing* format is shown (as is seen in the image above). With this, the access permissions are shown in the first 10 characters of each line:
-{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: somewhere on the Internet, found through Google"%}}
+
+{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: drawings.jvns.ca"%}}
 
 ## Out of fuel ? Take a Shell
 
@@ -147,7 +148,7 @@ When a user logs in on a Linux computer, typically one of the following approach
 
 For a desktop/laptop that is running Linux the GUI approach is typically used. An example is the Bodhi Virtual Machine you use for the labs. On those systems there are **terminal emulators** which emulate the CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, ...
 
-{{<figure src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator">}}
+{{<figure src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator. Source: linuxcommand.org">}}
 
 For embedded systems the CLI is more appropriate. Running the Graphical User Interface requires CPU time and storage. Both are scarece on an embedded system. Since everything can be done through the command line, removing the GUI is a win-win.
 

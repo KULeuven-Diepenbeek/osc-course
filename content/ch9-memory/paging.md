@@ -113,7 +113,7 @@ Paging gives us a nice page table. This could be considered as a table of conten
 
 <div class="multicolumn">
   <div>
-    {{% figure src="/img/mem/pile-of-books-159866.jpg" title="A book"%}}
+    {{% figure src="/img/mem/pile-of-books-159866.jpg" title="A book. Source: G.I."%}}
     <p style="text-align: center">A book is a collection of e-readers, held together with rope or glue.</p>
   </div>
   <div style="width: 30%">

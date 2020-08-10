@@ -12,7 +12,7 @@ A lot of applications that are built using an Arduino need some sense of **time*
 ## 16-bit Timer
 One component that is in almost every microcontroller is a Timer/counter. This timer/counter can be used for many things: stopwatch, wave generation, timing, ... The block diagram of the 16-bit timer/counter in the Arduino is shown here. Next to this 16-bit timer/counter there are 2 8-bit timer/counters available. The documentation reports registers like TCNTn and OCnB. The letter n is a placeholder for the number of the timer. In the case of the micro controller on the Arduino, the 16-bit counter results in **n = 1**.
 
-{{<figure src="/img/0x_12.png" title="Block Diagram of the 16-bit counter in the Arduino microcontroller">}}
+{{<figure src="/img/0x_12.png" title="Block Diagram of the 16-bit counter in the Arduino microcontroller. Source: arduino.cc">}}
 
 During **normal operation** the counter simply *counts* from 0x0 to its maximum value.. The left-side image below shows what happens to the 16-bit value **TCNT1**. The counter can also be used in a different mode: **Clear-timer-on-compare (CTC)**. In this mode the timer starts again at 0x0000, but only counts to a certain value. When this value is reached, the counter resets and starts over. The right-side image below shows the CTC mode with the cap at **0x7FFF** and at <span style="color:red">**0x3FFF**</span>.
 

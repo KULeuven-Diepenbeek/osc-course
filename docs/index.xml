@@ -29,7 +29,7 @@ C is an imperative programming language. You will notice this when writing some 
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
-  An Arduino UNO   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+  An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
@@ -118,8 +118,8 @@ The following functions are given:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</guid>
-      <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them! (img src)
-1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
+      <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
+  Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
     </item>
     
     <item>
@@ -145,13 +145,13 @@ The following code is given:
     </item>
     
     <item>
-      <title>2.2: Bare metal Arduino</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</link>
+      <title>2.2: Arduino multi frequencies</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</guid>
-      <description>When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
-  image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under /home/osc/osc-exercises/ch2_interrupts/example1.c. The required setup on the breadboard should look something like this:</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</guid>
+      <description>Time to make some harmonics.
+  image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
     </item>
     
     <item>
@@ -169,7 +169,8 @@ The following code is given:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
-      <description>Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
+      <description>Source: Neo
+Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
 Navigation  figure out in which folder you are at the moment navigate to the root folder navigate to your home folder, using only 1 command make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create an empty file: empty.</description>
     </item>
     
@@ -321,8 +322,8 @@ With segmentation there might be the following issue: we need to allocate a segm
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</guid>
-      <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them! (img src)
-2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen. An orc has the following properties (both simple numbers, between 1 and 10, use rand() from stdlib):</description>
+      <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
+  Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
     </item>
     
     <item>
@@ -395,23 +396,13 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
     </item>
     
     <item>
-      <title>2.5 The internals of interrupts</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</guid>
-      <description>The internals Now that you have an understanding of how interrupts work, let&amp;rsquo;s dive a bit deeper into the interal workings.
-The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding wire goes high. This makes one (or more) bits of this interrupt vector high. This triggers the internal Interrupt unit. The image below shows the available interrupts for the AT Mega.</description>
-    </item>
-    
-    <item>
       <title>3.3: The Ancient Library</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
-      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
- 1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
+   Source: dublin2019.com   1.</description>
     </item>
     
     <item>
@@ -451,7 +442,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</guid>
-      <description>Inter process communication These exercises are to be done in a terminal, using the command line interface.
+      <description>Source: G.I.   Inter process communication These exercises are to be done in a terminal, using the command line interface.
   Open two terminals. On one terminal you start a process that takes some minutes to finish. From the other terminal:
  figure out the process ID of the first process send a kill signal to that first process.  Use unnamed pipes to display all the processes of which you are the owner.</description>
     </item>

@@ -28,6 +28,8 @@ weight: 2
 
 2.4: (lab) Launch that rocket !!
 
+<!--
 2.5: The internals of interrupts
 
   * The internals
+-->

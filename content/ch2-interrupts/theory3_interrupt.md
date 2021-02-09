@@ -2,6 +2,7 @@
 title: '2.5 The internals of interrupts'
 pre: "<i class='fab fa-linux'></i> "
 weight: 5
+draft: true
 ---
 
 {{% figure src="/img/jo/disassembly.jpg" title="Source: G.I."%}}

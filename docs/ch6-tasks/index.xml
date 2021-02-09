@@ -69,7 +69,7 @@ It would make sense, though, if different tasks were able to communicate with ea
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</guid>
-      <description>Inter process communication These exercises are to be done in a terminal, using the command line interface.
+      <description>Source: G.I.   Inter process communication These exercises are to be done in a terminal, using the command line interface.
   Open two terminals. On one terminal you start a process that takes some minutes to finish. From the other terminal:
  figure out the process ID of the first process send a kill signal to that first process.  Use unnamed pipes to display all the processes of which you are the owner.</description>
     </item>

@@ -29,7 +29,8 @@ The image below shows the classic picture when introducing OSes.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
-      <description>Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
+      <description>Source: Neo
+Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
 Navigation  figure out in which folder you are at the moment navigate to the root folder navigate to your home folder, using only 1 command make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create an empty file: empty.</description>
     </item>
     

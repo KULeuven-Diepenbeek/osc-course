@@ -2,6 +2,7 @@
 title: '2.2: Bare metal Arduino'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
+draft: true
 ---
 
 When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.

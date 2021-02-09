@@ -19,17 +19,17 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
-  An Arduino UNO   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+  An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
-      <title>2.2: Bare metal Arduino</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</link>
+      <title>2.2: Arduino multi frequencies</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-bm/</guid>
-      <description>When the going gets tough, the tough get going. Sometimes you need to drop the mock-up and dive down to bare metal.
-  image source: stackexchange.com   First things first &amp;hellip; a beating heart Compile the code below and flash it on the Arduino, both of which can be done through the Makefile. This code can be found under /home/osc/osc-exercises/ch2_interrupts/example1.c. The required setup on the breadboard should look something like this:</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</guid>
+      <description>Time to make some harmonics.
+  image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
     </item>
     
     <item>
@@ -50,16 +50,6 @@ A lot of applications that are built using an Arduino need some sense of time. A
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</guid>
       <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:  
 Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
-    </item>
-    
-    <item>
-      <title>2.5 The internals of interrupts</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory3_interrupt/</guid>
-      <description>The internals Now that you have an understanding of how interrupts work, let&amp;rsquo;s dive a bit deeper into the interal workings.
-The processor has a hardware component that allows hardware interrupts. When a certain event occurs the corresponding wire goes high. This makes one (or more) bits of this interrupt vector high. This triggers the internal Interrupt unit. The image below shows the available interrupts for the AT Mega.</description>
     </item>
     
   </channel>

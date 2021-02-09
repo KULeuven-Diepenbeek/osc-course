@@ -125,7 +125,7 @@ Going through the {{< link name="datasheet" url="http://ww1.microchip.com/downlo
 The register above can be accessed from software on address register 0x7A. When the software writes to this register **ALL** 8 bits are written. This is important to remember to avoid one of the <span style="color: green; font-weight: bold;">dragons</span> described above.
 {{% /notice %}}
 
-
+<!-- Commented out because due to Corona, the VM-stuff is avoided
 ### Two beating hearts
 As mentioned above, simply cross compiling for the targeted microcontroller allows for programming the Arduino UNO in C, outside of the Arduino IDE. Here two examples are shown to make a blinking light. The first example is for use through the Arduino IDE, the second example uses plain C in bare metal.
 
@@ -179,4 +179,5 @@ A number of things should be pointed out.
 2. The "Setup and Loop"-function approach can be mimicked, but this is not required.
 3. The **delay(x)** function is missing, but this will be addressed later.
 
+-->
 

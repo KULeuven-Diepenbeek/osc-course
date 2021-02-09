@@ -35,7 +35,7 @@ Make two LEDs oscillate at different frequencies using the "Timer/Counter1 Overf
 The bare-metal \\(rocket\\) on the top of this page needs to be launched. Because of the huge amount of exhaust it should be triggered after a countdown. This gives the poor operator sufficient time to get to a safe distance.
 
 {{<task>}}
-After the launch button is pressed, a countdown is started. The countdown starts at 10 and goes to 0. Once the countdown is ongoing, the 1 Hz LED should flash. In the final 3 seconds, the second 3 Hz LED should join the show. When the countdown reaches 0, both LEDs should stay on.
+After the launch is initiated through a serial port command (eg. 'L'), a countdown is started. The countdown starts at 10 and goes to 0. Once the countdown is ongoing, the 1 Hz LED should flash. In the final 3 seconds, the second 3 Hz LED should join the show. When the countdown reaches 0, both LEDs should stay on.
 {{< /task >}}
 
 

@@ -109,37 +109,40 @@ Finally, when the interrupt is triggered, something should happen. Otherwise thi
 The example code below puts **everything together**.
 
 ```C
-#include <avr/io.h>
-#include <avr/interrupt.h>
+#define LED_1Hz 7
 
-#define HEARTBEAT_LED 7
+int led0_status = 0;
 
 ISR(TIMER1_OVF_vect) {
-  PORTD ^= (1 << HEARTBEAT_LED);
+  if(led0_status == 1) {
+    led0_status = 0;
+    digitalWrite(LED_1Hz, LOW);
+  } else {
+    led0_status = 1;
+    digitalWrite(LED_1Hz, HIGH);
+  }
 }
 
-int main(void) {
-
-  /* setup */
-  DDRD |= (1 << HEARTBEAT_LED);
-
+void setup()
+{
+  pinMode(LED_1Hz, OUTPUT);
+  
   /* configure TIMER/COUNTER 1 */
   TCCR1A = 0x00;
   TCCR1B = 0x05;
 
   /* enable the interrupts */
-  TIMSK1 = 0x01;
   sei();
+}
 
-  /*loop*/ for/*ever*/ (;;);
- 
-  return 0;
+void loop() {
+
 }
 ```
 
-{{% notice note %}}
+<!-- {{% notice note %}}
 The C-file above can be found in the Virtual Machine as **/home/osc/osc-exercises/ch2_interrupts/example2.c**
-{{% /notice %}}
+{{% /notice %}} -->
 
 {{% task %}}
 Compile and run the code above. What is the frequency at which the LED toggles ?

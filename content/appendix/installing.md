@@ -7,8 +7,10 @@ The exercises for this course are to be done on the **Linux** Operating System (
 We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle. So for this course we use a third option, called a "virtual machine". We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it's running on normal hardware.
 
 Notes:
-* if you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
-* if you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. 
+
+* If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
+* If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. 
+* If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on "apple" - "about": does "Chip" say "Apple M1"?), then you're out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/ - although beware and follow it at your own risk!
 
 ## Recipe for installing the OSC virtual machine
 
@@ -52,10 +54,10 @@ Notes:
 
 6. Get the course files
     * For some exercises, we provide some basic code to help you get started
-    * This code is hosted in a [GitHub repository](https://github.com/KULeuven-Diepenbeek/osc-course). If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon
+    * This code is hosted in a [GitHub repository](https://github.com/KULeuven-Diepenbeek/osc-exercises). If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon
     * For now, you just need to execute following commands in the terminal:
         * Install git: `sudo apt update && sudo apt install -y git`
-        * Download the course files: `git clone https://github.com/KULeuven-Diepenbeek/osc-course.git course-files`
+        * Download the course files: `git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files`
             * This will create a new directory named "course-files" containing the necessary items
 
 
@@ -74,6 +76,7 @@ You should now be ready to follow along with the classes!
   * `sudo apt install [package]`
 5. I want to change the resolution of the VirtualBox display
   * View -> fit to screen, or View -> change resolution to -> pick one.
+
 
 <!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
 {{% figure src="/img/installVM/arduino_01.png" %}}

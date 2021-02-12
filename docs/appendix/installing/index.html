@@ -12,21 +12,21 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613125408" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613125408" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613125408" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613125408" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613125408" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613125408" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613125408" rel="stylesheet">
-    <link href="../../css/theme.css?1613125408" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613125408" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613126365" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613126365" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613126365" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613126365" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613126365" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613126365" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613126365" rel="stylesheet">
+    <link href="../../css/theme.css?1613126365" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613126365" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613125408" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613126365" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613125408"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613126365"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613125408"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613125408"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613126365"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613126365"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613125408"></script>
+<script type="text/javascript" src="../../js/search.js?1613126365"></script>
 
     
   </div>
@@ -1595,9 +1595,13 @@ window.MathJax = {
 
 <p>We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle. So for this course we use a third option, called a &ldquo;virtual machine&rdquo;. We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it&rsquo;s running on normal hardware.</p>
 
-<p>Notes:
-* if you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
-* if you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible.</p>
+<p>Notes:</p>
+
+<ul>
+<li>If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!</li>
+<li>If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible.</li>
+<li>If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you&rsquo;re out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See <a href="https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/">https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/</a> - although beware and follow it at your own risk!</li>
+</ul>
 
 <h2 id="recipe-for-installing-the-osc-virtual-machine">Recipe for installing the OSC virtual machine</h2>
 
@@ -1680,12 +1684,12 @@ window.MathJax = {
 
 <ul>
 <li>For some exercises, we provide some basic code to help you get started</li>
-<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-course">GitHub repository</a>. If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
+<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
 <li>For now, you just need to execute following commands in the terminal:
 
 <ul>
 <li>Install git: <code>sudo apt update &amp;&amp; sudo apt install -y git</code></li>
-<li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-course.git course-files</code>
+<li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files</code>
 
 <ul>
 <li>This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items</li>
@@ -2740,19 +2744,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613125408"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613125408"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613125408"></script>
-    <script src="../../js/jquery.sticky.js?1613125408"></script>
-    <script src="../../js/featherlight.min.js?1613125408"></script>
-    <script src="../../js/highlight.pack.js?1613125408"></script>
+    <script src="../../js/clipboard.min.js?1613126365"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613126365"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613126365"></script>
+    <script src="../../js/jquery.sticky.js?1613126365"></script>
+    <script src="../../js/featherlight.min.js?1613126365"></script>
+    <script src="../../js/highlight.pack.js?1613126365"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613125408"></script>
-    <script src="../../js/learn.js?1613125408"></script>
-    <script src="../../js/hugo-learn.js?1613125408"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613126365"></script>
+    <script src="../../js/learn.js?1613126365"></script>
+    <script src="../../js/hugo-learn.js?1613126365"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613125408"></script>
+            <script src="../../mermaid/mermaid.js?1613126365"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

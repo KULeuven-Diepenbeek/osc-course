@@ -48,13 +48,13 @@ Notes:
     * We will do this from the "terminal" or "command line", a textual interface. This comes pre-installed in Linux. Look for an [icon like this one](https://kuleuven-diepenbeek.github.io/), which should open a screen that looks a bit like [this one](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png).
     * To check if GCC is installed (it should be), type the following command in the terminal and hit enter: `gcc -v`
         * the output should be a list of details of the GCC program, and should end with a line starting with "gcc version"
-        * if this is not the case and you get an error message saying GCC is not installed, please execute the following command `sudo apt update && sudo apt install build-essential` (it will ask you for your password) and try again
+        * if this is not the case and you get an error message saying GCC is not installed, please execute the following command `sudo apt update && sudo apt install -y gcc` (it will ask you for your password) and try again
 
 6. Get the course files
     * For some exercises, we provide some basic code to help you get started
     * This code is hosted in a [GitHub repository](https://github.com/KULeuven-Diepenbeek/osc-course). If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon
     * For now, you just need to execute following commands in the terminal:
-        * Install git: `sudo apt update && sudo apt install git`
+        * Install git: `sudo apt update && sudo apt install -y git`
         * Download the course files: `git clone https://github.com/KULeuven-Diepenbeek/osc-course.git course-files`
             * This will create a new directory named "course-files" containing the necessary items
 

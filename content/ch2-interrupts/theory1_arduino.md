@@ -24,7 +24,7 @@ This datasheet contains a **block diagram** of the AVR architecture. Nonetheless
   </div>
   <div style="width: 50%">
     The upper right component that is attached to the 8-bit data bus is the Interrupt Unit. This component is the topic of this chapter. Before diving into the details, another topic is explained first: Timer<br/><br/>
-    The ATMega microcontroller on the Arduino has, amonst other components, a dedicated Timer. This timer block consists out of 3 timers: two 8-bit timers and a single 16-bit timer. Through the use of the 16-bot timer, the concept of interrupts is illustrated.
+    The ATMega microcontroller on the Arduino has, amonst other components, a dedicated Timer. This timer block consists out of 3 timers: two 8-bit timers and a single 16-bit timer. Through the use of the 16-bit timer, the concept of interrupts is illustrated.
   </div>
 </div>
 
@@ -118,7 +118,6 @@ When a register is written by software and read by (or driving) hardware, such a
 Going through the {{< link name="datasheet" url="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf" >}} of the microcontroller on the Arduino many CRs can be found. Section 36 summarises these registers on more than 3 pages. An example of a register that serves both as a CR and as a SR for controlling of the Analog-to-Digital Converter is shown below. As can be learned from the datasheet, the MSB of this register is used to enable or disable the hardware ADC through software instructions.
 
 {{< figure src="/img/0x_03.png" title="Example of a CR in the ATMega microcontroller. Source: arduino.cc" >}}
-
 
 
 {{% notice warning %}}

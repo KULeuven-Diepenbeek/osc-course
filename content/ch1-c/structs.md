@@ -121,7 +121,7 @@ graph LR;
     happy -->|push to local fn stack| copy
 {{< /mermaid >}}
 
-To fix this, we need the use of **pointers**, as explained in [chapter two](/theory/c/chap2). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
+To fix this, we need the use of **pointers**, as explained in [chapter three](/ch3-pointers). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
 
 ```c
 public static void increase(int i) {

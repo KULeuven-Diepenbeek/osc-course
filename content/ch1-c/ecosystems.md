@@ -6,13 +6,20 @@ weight: 5
 
 ### Separation of concerns: functions in different C files
 
-To make the division clearer, we prepare the following C code, split into different files:
+To make the division clearer, we prepare the following C code, split into two different files:
+
+File `hello.c`:
 
 ```C
 // hello.c
 char* hello() {
     return "heykes";
 }
+```
+
+File `main.c`:
+
+```C
 // main.c
 #include <printf.h>
 int main() {
@@ -37,7 +44,7 @@ It is a **WARNING** - not an **ERROR** - so it still compiles! Wow! That is than
 <pre>
 Wouters-MacBook-Air:cmake-build-debug wgroenev$ gcc main.o
 Undefined symbols for architecture x86_64:
-  "_hallo", referenced from:
+  "_hello", referenced from:
       _main in main.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
@@ -101,21 +108,25 @@ cffa edfe 0700 0001 0300 0000 0100 0000
 Beautiful, but not very clear. `nm` does help some:
 
 <pre>
-heykesWouters-MacBook-Air:cmake-build-debug wgroenev$ nm hallo.o
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm main.o
+0000000000000060 s EH_frame0
+0000000000000037 s L_.str
+                 U _hello
+0000000000000000 T _main
+0000000000000078 S _main.eh
+                 U _printf
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm hello.o
 0000000000000038 s EH_frame0
 000000000000000d s L_.str
 0000000000000000 T _hello
 0000000000000050 S _hello.eh
-Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm main.o
-0000000000000060 s EH_frame0
-0000000000000037 s L_.str
-                 U _hallo
-0000000000000000 T _main
-0000000000000078 S _main.eh
-                 U _printf
 </pre>
 
 You can see that in main.o the function `_hello` is assigned an **unknown address** (hence the U). This means that the left hand should assume that it is yet to come - and luckily it is correctly defined in hello.o at address `0000000000000000` (there is only 1 function).
+
+{{% notice note %}}
+Note that both .o files have overlapping "address spaces": both `_hello` and `_main` are at address `0000000000000000`; this is normal. The linker will properly change/offset these addresses when creating the final program so they no longer overlap. 
+{{% /notice %}}
 
 This is the way the files will be coupled to each other:
 
@@ -130,7 +141,7 @@ graph TD
     E -->|"search main() via linker"|D
     C --> A
     D --> B
-    D -.->|"search hallo() via linker"|C
+    D -.->|"search hello() via linker"|C
 {{< /mermaid >}}
 
 Functions that have been declared in other source files must therefore be redefined (possibly with the `external` keyword) in your own source file where you wish to use the function. This way the compiler knows that there is a function with that signature, but "he will still come across it". This will be further elaborated in the next labs.
@@ -147,7 +158,7 @@ However, there are still a lot of compiler options that are [explained at gcc.gn
 
 {{% notice note %}}
 When targeting another platform, you will need a **cross-compiler** that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, ...)<br/>
-Instead of using the default GCC compiler: `gcc bla.c`, you will download and install a custom cross-compiler and evoke it the same way: `arm-eabi-none-gcc bla.c`. The GBA or RaspberryPi for instance have an ARM chip-set and require this cross-compiler. This differs from most x86 chip-sets that leverages `gcc`.
+Instead of using the default GCC compiler: `gcc bla.c`, you will download and install a custom cross-compiler and evoke it the same way: `arm-eabi-none-gcc bla.c`. The Game Boy Advance (GBA) or RaspberryPi for instance have an ARM chip-set and require this cross-compiler. This differs from most x86 chip-sets that leverages `gcc`.
 {{% /notice %}}
 
 {{% task %}}
@@ -178,6 +189,8 @@ clear && gcc -o mystuff source.c && ./mystuff
 In the C world there is such a thing as a "Makefile" that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.
 
 With Makefiles you can describe "targets" that perform certain actions for you. For example, cleaning up binaries, compiling and linking, all as a separate step. Stringing steps together is of course also possible.
+
+File `Makefile`:
 
 ```
 .DEFAULT_GOAL := all
@@ -222,7 +235,7 @@ We will not stop old-school fans from using Emacs or Vi(m).
 
 [CLion](https://www.jetbrains.com/clion/) is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it's built on the same platform (IDEA) - even most shortcuts are the same.
 
-<img src="https://brainbaking.com/img/teaching/clion.png" class="bordered" alt="A CLion project" />
+{{% figure src="/img/clion.png" %}}
 
 CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: `CMakeLists.txt` contains instructions to generate a` Makefile`:
 

@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster>
-    
-	<atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.1: The C programming language</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</link>
@@ -59,8 +55,10 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</guid>
-      <description>Separation of concerns: functions in different C files To make the division clearer, we prepare the following C code, split into different files:
-// hello.c char* hello() { return &amp;#34;heykes&amp;#34;; } // main.c #include &amp;lt;printf.h&amp;gt;int main() { printf(&amp;#34;%s&amp;#34;, hello()); return 0; } The main function has no knowledge of hello() because it lives in a different source file. This will be fine if we link the machine code together after compiling.</description>
+      <description>Separation of concerns: functions in different C files To make the division clearer, we prepare the following C code, split into two different files:
+File hello.c:
+// hello.c char* hello() { return &amp;#34;heykes&amp;#34;; } File main.c:
+// main.c #include &amp;lt;printf.h&amp;gt;int main() { printf(&amp;#34;%s&amp;#34;, hello()); return 0; } The main function has no knowledge of hello() because it lives in a different source file. This will be fine if we link the machine code together after compiling.</description>
     </item>
     
     <item>

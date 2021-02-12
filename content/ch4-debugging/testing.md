@@ -6,7 +6,7 @@ weight: 3
 
 ## Test-Driven Development: Google Test
 
-A concept you learned to love in the [Software Engineering Skills](https://brainbaking.com/teaching/ses/tdd/) course. 
+A concept you learned to love in the [Software Engineering Skills](https://kuleuven-diepenbeek.github.io/ses-course/tdd/) course. 
 
 It's concepts and definitions will **not** be repeated here, but we will introduce **Google Test**, a unit testing framework for C/C++ that enables us to write tests to track down bugs and **reduce the amount of time needed dabbling in `gdb`**. That is one of the major advantages of using automated test frameworks.
 

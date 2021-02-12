@@ -1,3 +1,6 @@
+
+
+
 ---
 title: '2. Linux Installation Instructions'
 ---
@@ -11,6 +14,7 @@ Notes:
 * If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
 * If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. 
 * If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on "apple" - "about": does "Chip" say "Apple M1"?), then you're out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/ - although beware and follow it at your own risk!
+
 
 ## Recipe for installing the OSC virtual machine
 
@@ -47,7 +51,7 @@ Notes:
 
 5. Prepare GCC
     * For many exercises in this course, we will use the "GNU Compiler Collection" (GCC) to run our C program code. 
-    * We will do this from the "terminal" or "command line", a textual interface. This comes pre-installed in Linux. Look for an [icon like this one](https://kuleuven-diepenbeek.github.io/), which should open a screen that looks a bit like [this one](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png).
+    * We will do this from the "terminal" or "command line", a textual interface. This comes pre-installed in Linux. Look for an [icon like this one](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/1200px-GNOME_Terminal_icon_2019.svg.png), which should open a screen that looks a bit like [this one](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png).
     * To check if GCC is installed (it should be), type the following command in the terminal and hit enter: `gcc -v`
         * the output should be a list of details of the GCC program, and should end with a line starting with "gcc version"
         * if this is not the case and you get an error message saying GCC is not installed, please execute the following command `sudo apt update && sudo apt install -y gcc` (it will ask you for your password) and try again
@@ -75,8 +79,12 @@ You should now be ready to follow along with the classes!
 4. I want to install something else such as my own favorite editor!
   * `sudo apt install [package]`
 5. I want to change the resolution of the VirtualBox display
-  * View -> fit to screen, or View -> change resolution to -> pick one.
-
+  * This is sadly non-trivial with VirtualBox, where by default you can either choose the small/windowed view (default), or a fullscreen view from the menu.
+  * To choose a dynamic resolution, you need to install the "VirtualBox Guest Additions"
+    * Boot the Virtual Machine and login
+    * In the VirtualBox menu on top, choose "Mount Guest Additions CD Image" (bottom option)
+    * This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
+        * Sometimes this step requires additional software to be installed first. This typically does the trick: `sudo apt install -y make perl`. After this, reboot the VM and re-Mount the CD image. 
 
 <!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
 {{% figure src="/img/installVM/arduino_01.png" %}}

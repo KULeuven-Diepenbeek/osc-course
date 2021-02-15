@@ -12,21 +12,21 @@
     <title>1.1: The C programming language :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613374870" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613374870" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613374870" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613374870" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613374870" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613374870" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613374870" rel="stylesheet">
-    <link href="../../css/theme.css?1613374870" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613374870" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613375963" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613375963" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613375963" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613375963" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613375963" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613375963" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613375963" rel="stylesheet">
+    <link href="../../css/theme.css?1613375963" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613375963" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613374870" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613375963" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613374870"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613375963"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613374870"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613374870"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613375963"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613375963"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613374870"></script>
+<script type="text/javascript" src="../../js/search.js?1613375963"></script>
 
     
   </div>
@@ -1562,9 +1562,10 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li>
+<li><a href="#a-quick-intro-to-c">A quick intro to C</a>
 <ul>
 <li><a href="#comparison-with-java">Comparison with Java</a></li>
+<li><a href="#why-should-you-learn-c">Why should you learn C?</a></li>
 </ul></li>
 <li><a href="#basic-c">Basic C</a>
 <ul>
@@ -1572,6 +1573,7 @@ window.MathJax = {
 <li><a href="#use-functions-to-structure-code">Use functions to structure code</a></li>
 <li><a href="#primitives-and-combinational-types">Primitives and combinational types</a></li>
 <li><a href="#strings-what-do-you-mean">Strings? What do you mean?</a></li>
+<li><a href="#the-c-language-a-quick-reference">The C Language - a quick reference</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1601,6 +1603,8 @@ window.MathJax = {
 
 
 <p>The <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C language</a> is a programming language developed in the &lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.</p>
+
+<h2 id="a-quick-intro-to-c">A quick intro to C</h2>
 
 <p>C is an <strong>imperative</strong> programming language. You will notice this when writing some code yourself: we write instructions as <em>statements</em>. These rules or statements are structured in <code>function</code> and <code>struct</code> types. There is little <strong>declarative</strong> to it, compared to other higher level languages. C&rsquo;s footprint is quite small, the syntax is concise and easy to learn. Statements always express <em>how</em> to do things, instead of <em>what</em> it is doing. Increasing readability is of course important. We could for instance use <code>#define</code> to give meaning to a few symbols, or write clear <code>function</code> blocks.</p>
 
@@ -1665,6 +1669,18 @@ Congratulations on your first compiled C program!</p>
 <li>C allows for combination-integer-types (<code>unsigned short int</code>)</li>
 <li>C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for <a href="https://www.devdungeon.com/content/how-mix-c-and-assembly">mixing with assembly</a>.</li>
 </ol>
+
+<h3 id="why-should-you-learn-c">Why should you learn C?</h3>
+
+<p>Good question. A few answers:</p>
+
+<ol>
+<li>Take a look at the <a href="https://www.tiobe.com/tiobe-index/">TIOBE index</a> and guess which programming language is the single most used throughout the world.</li>
+<li>Since this course is part of an <em>engineering</em> curriculum, it needs to stay close to its engineering roots: <strong>the hardware</strong> (<em>embedded systems</em>). Controlling hardware components on a PCB chip can only be done with low level machine instructions, that are coming from a low-level programming language such as C. Of course, writing in Assembly is even more precise, but hurts just a tad bit more.</li>
+<li>This is more of an operating systems course than it is a programming course. However, to learn concepts of an OS, you&rsquo;ll need a firm grasp of the basics in C.<br /></li>
+</ol>
+
+<p><img src="../../img/tiobe.jpg" alt="" title="The TIOBE Index" /></p>
 
 <h2 id="basic-c">Basic C</h2>
 
@@ -1795,6 +1811,18 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
 </div>
 
 <p>Hint: <code>man strcmp</code>!</p>
+
+<p><strong>Online C compilers</strong>:</p>
+
+<ul>
+<li><a href="https://rextester.com/">https://rextester.com/</a></li>
+<li><a href="https://godbolt.org/">https://godbolt.org/</a></li>
+<li><a href="https://repl.it/">https://repl.it/</a> (requires logging in)</li>
+</ul>
+
+<h3 id="the-c-language-a-quick-reference">The C Language - a quick reference</h3>
+
+<p>Actually, the ANSI C syntax fits in just <em>two index cards</em> - that&rsquo;s how small it really is. <a href="../../pdf/c-refcard.pdf">Download the quick reference cards here</a>. Compared to Java, C# or C++, C is very much falls in the category &ldquo;easy to learn, hard to master&rdquo;. See the <a href="https://kuleuven-diepenbeek.github.io/cpp-course/img/teaching/cpp/cppbooks.jpg">handbook comparison of C++ and C</a> and you&rsquo;ll know what we mean.</p>
 
 
 <footer class="footline">
@@ -2782,19 +2810,19 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613374870"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613374870"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613374870"></script>
-    <script src="../../js/jquery.sticky.js?1613374870"></script>
-    <script src="../../js/featherlight.min.js?1613374870"></script>
-    <script src="../../js/highlight.pack.js?1613374870"></script>
+    <script src="../../js/clipboard.min.js?1613375963"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613375963"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613375963"></script>
+    <script src="../../js/jquery.sticky.js?1613375963"></script>
+    <script src="../../js/featherlight.min.js?1613375963"></script>
+    <script src="../../js/highlight.pack.js?1613375963"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613374870"></script>
-    <script src="../../js/learn.js?1613374870"></script>
-    <script src="../../js/hugo-learn.js?1613374870"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613375963"></script>
+    <script src="../../js/learn.js?1613375963"></script>
+    <script src="../../js/hugo-learn.js?1613375963"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613374870"></script>
+            <script src="../../mermaid/mermaid.js?1613375963"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

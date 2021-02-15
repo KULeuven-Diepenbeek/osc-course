@@ -15,7 +15,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</guid>
       <description>The C language is a programming language developed in the &amp;lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
-C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types. There is little declarative to it, compared to other higher level languages.</description>
+A quick intro to C C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types.</description>
     </item>
     
     <item>

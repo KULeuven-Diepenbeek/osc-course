@@ -6,6 +6,8 @@ weight: 1
 
 The [C language](https://en.wikipedia.org/wiki/C_(programming_language)) is a programming language developed in the '70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself. 
 
+## A quick intro to C
+
 C is an **imperative** programming language. You will notice this when writing some code yourself: we write instructions as _statements_. These rules or statements are structured in `function` and `struct` types. There is little **declarative** to it, compared to other higher level languages. C's footprint is quite small, the syntax is concise and easy to learn. Statements always express _how_ to do things, instead of _what_ it is doing. Increasing readability is of course important. We could for instance use `#define` to give meaning to a few symbols, or write clear `function` blocks.
 
 C is primarily being used in embedded system development because it is so closely related to the hardware itself. The UNIX, Windows and OSX kernels are fully written in C. The operating system of your cellphone, smartwatch or handheld all build on top of C. A huge amount of languages such as Java (JVM), Python, Ruby and PHP are first and foremost implemented in C.
@@ -71,6 +73,16 @@ Key differences between C and a higher level language such as C#:
 5. C code usually is full of pointer variables to manipulate memory directly.
 6. C allows for combination-integer-types (`unsigned short int`)
 7. C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for [mixing with assembly](https://www.devdungeon.com/content/how-mix-c-and-assembly).
+
+### Why should you learn C? 
+
+Good question. A few answers:
+
+1. Take a look at the [TIOBE index](https://www.tiobe.com/tiobe-index/) and guess which programming language is the single most used throughout the world. 
+2. Since this course is part of an _engineering_ curriculum, it needs to stay close to its engineering roots: **the hardware** (_embedded systems_). Controlling hardware components on a PCB chip can only be done with low level machine instructions, that are coming from a low-level programming language such as C. Of course, writing in Assembly is even more precise, but hurts just a tad bit more. 
+3. This is more of an operating systems course than it is a programming course. However, to learn concepts of an OS, you'll need a firm grasp of the basics in C.  
+
+![](/img/tiobe.jpg "The TIOBE Index")
 
 ## Basic C
 
@@ -206,3 +218,15 @@ And of `strncmp("hello, world", "hello, amazing world!!", 5)`?
 {{% /task %}}
 
 Hint: `man strcmp`!
+
+**Online C compilers**:
+
+- https://rextester.com/
+- https://godbolt.org/
+- https://repl.it/ (requires logging in)
+
+
+### The C Language - a quick reference
+
+Actually, the ANSI C syntax fits in just _two index cards_ - that's how small it really is. [Download the quick reference cards here](/pdf/c-refcard.pdf). Compared to Java, C# or C++, C is very much falls in the category "easy to learn, hard to master". See the [handbook comparison of C++ and C](https://kuleuven-diepenbeek.github.io/cpp-course/img/teaching/cpp/cppbooks.jpg) and you'll know what we mean. 
+

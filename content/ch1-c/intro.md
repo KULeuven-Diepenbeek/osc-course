@@ -69,10 +69,16 @@ Key differences between C and a higher level language such as C#:
 1. C's syntax footprint is small: no private/protected/class/interface/inheritance/bool/string... No "standard" libraries.
 2. C does NOT have exceptions! It works with _interrupts_ and error codes (`return 0`).
 3. C does NOT have garbage collection: you manage the memory yourself.
-4. C does NOT have a virtual machine (JVM, CLR) but gets compiled to native machine code.
+4. C does NOT have a virtual machine (**JVM, CLR**) but gets compiled to native machine code.
 5. C code usually is full of pointer variables to manipulate memory directly.
 6. C allows for combination-integer-types (`unsigned short int`)
 7. C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for [mixing with assembly](https://www.devdungeon.com/content/how-mix-c-and-assembly).
+
+The following figure represents the Java Virtual Machine you have been using in the INF1 course ([source](https://www.quora.com/What-is-the-Java-virtual-machine-JVM)):
+
+![The JVM](/img/jvm.jpg)
+
+Note that there is **only one** source code and byte code block. Any `.class` file can be executed on any Linux/Windows/MacOS machine, provided you installed the correct JVM on top of the OS, as also pictured. When you compile `.c` C files, they do not translate into byte code but into **OS-specific binaries**! That means you cannot simply share your Windows binaries with a friend that runs Linux on his or her machine. 
 
 ### Why should you learn C? 
 
@@ -209,6 +215,23 @@ int main() {
 ```
 
 C reserves the right amount of memory with string literals you know from Java. The `string[]` char array does contain **9 characters** and not 8! That is because the end of the array is determined by a magical **NULL terminator**, `\0`. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using `%s`.
+
+In C, strings are just concatenations of `char`acters, terminated with `\0`. For instance, `string[] msg = "hey";` looks like this in memory[^dep]:
+
+[^dep]: The backslash (`\`) is depicted as a forward slash (`/`) in the Figure. 
+
+{{<mermaid>}}
+graph LR
+    H[h]
+    E[e]
+    Y[y]
+    T{/0}
+    
+    H --> E
+    E --> Y
+    Y --> T
+{{< /mermaid >}}
+
 
 Handy string utility functions reside in the header file `<string.h>` (copying, concatenating, asking for the length, ...) See [GNU C: String utils](https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html).
 

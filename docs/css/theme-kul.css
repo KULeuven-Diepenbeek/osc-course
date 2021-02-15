@@ -1,6 +1,11 @@
 
 /* ---------------- custom style below */
 
+#homelinks {
+    background-color: inherit;
+    border-bottom: none;
+}
+
 #uhlogo {
     width: 165px;
     -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */

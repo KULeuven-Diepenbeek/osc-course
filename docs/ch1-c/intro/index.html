@@ -12,21 +12,21 @@
     <title>1.1: The C programming language :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613375963" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613375963" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613375963" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613375963" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613375963" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613375963" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613375963" rel="stylesheet">
-    <link href="../../css/theme.css?1613375963" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613375963" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613395798" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613395798" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613395798" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613395798" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613395798" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613395798" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613395798" rel="stylesheet">
+    <link href="../../css/theme.css?1613395798" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613395798" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613375963" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613395798" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613375963"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613395798"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613375963"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613375963"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613395798"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613395798"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613375963"></script>
+<script type="text/javascript" src="../../js/search.js?1613395798"></script>
 
     
   </div>
@@ -1664,11 +1664,17 @@ Congratulations on your first compiled C program!</p>
 <li>C&rsquo;s syntax footprint is small: no private/protected/class/interface/inheritance/bool/string&hellip; No &ldquo;standard&rdquo; libraries.</li>
 <li>C does NOT have exceptions! It works with <em>interrupts</em> and error codes (<code>return 0</code>).</li>
 <li>C does NOT have garbage collection: you manage the memory yourself.</li>
-<li>C does NOT have a virtual machine (JVM, CLR) but gets compiled to native machine code.</li>
+<li>C does NOT have a virtual machine (<strong>JVM, CLR</strong>) but gets compiled to native machine code.</li>
 <li>C code usually is full of pointer variables to manipulate memory directly.</li>
 <li>C allows for combination-integer-types (<code>unsigned short int</code>)</li>
 <li>C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for <a href="https://www.devdungeon.com/content/how-mix-c-and-assembly">mixing with assembly</a>.</li>
 </ol>
+
+<p>The following figure represents the Java Virtual Machine you have been using in the INF1 course (<a href="https://www.quora.com/What-is-the-Java-virtual-machine-JVM">source</a>):</p>
+
+<p><img src="../../img/jvm.jpg" alt="The JVM" /></p>
+
+<p>Note that there is <strong>only one</strong> source code and byte code block. Any <code>.class</code> file can be executed on any Linux/Windows/MacOS machine, provided you installed the correct JVM on top of the OS, as also pictured. When you compile <code>.c</code> C files, they do not translate into byte code but into <strong>OS-specific binaries</strong>! That means you cannot simply share your Windows binaries with a friend that runs Linux on his or her machine.</p>
 
 <h3 id="why-should-you-learn-c">Why should you learn C?</h3>
 
@@ -1799,6 +1805,30 @@ int yay() {
 }</code></pre></div>
 <p>C reserves the right amount of memory with string literals you know from Java. The <code>string[]</code> char array does contain <strong>9 characters</strong> and not 8! That is because the end of the array is determined by a magical <strong>NULL terminator</strong>, <code>\0</code>. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using <code>%s</code>.</p>
 
+<p>In C, strings are just concatenations of <code>char</code>acters, terminated with <code>\0</code>. For instance, <code>string[] msg = &quot;hey&quot;;</code> looks like this in memory<sup class="footnote-ref" id="fnref:dep"><a href="#fn:dep">1</a></sup>:</p>
+
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR
+    H[h]
+    E[e]
+    Y[y]
+    T{/0}
+    
+    H --> E
+    E --> Y
+    Y --> T
+
+</div>
+
 <p>Handy string utility functions reside in the header file <code>&lt;string.h&gt;</code> (copying, concatenating, asking for the length, &hellip;) See <a href="https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html">GNU C: String utils</a>.</p>
 
 
@@ -1823,6 +1853,15 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
 <h3 id="the-c-language-a-quick-reference">The C Language - a quick reference</h3>
 
 <p>Actually, the ANSI C syntax fits in just <em>two index cards</em> - that&rsquo;s how small it really is. <a href="../../pdf/c-refcard.pdf">Download the quick reference cards here</a>. Compared to Java, C# or C++, C is very much falls in the category &ldquo;easy to learn, hard to master&rdquo;. See the <a href="https://kuleuven-diepenbeek.github.io/cpp-course/img/teaching/cpp/cppbooks.jpg">handbook comparison of C++ and C</a> and you&rsquo;ll know what we mean.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:dep">The backslash (<code>\</code>) is depicted as a forward slash (<code>/</code>) in the Figure.
+ <a class="footnote-return" href="#fnref:dep"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
 
 <footer class="footline">
@@ -2810,19 +2849,19 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613375963"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613375963"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613375963"></script>
-    <script src="../../js/jquery.sticky.js?1613375963"></script>
-    <script src="../../js/featherlight.min.js?1613375963"></script>
-    <script src="../../js/highlight.pack.js?1613375963"></script>
+    <script src="../../js/clipboard.min.js?1613395798"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613395798"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613395798"></script>
+    <script src="../../js/jquery.sticky.js?1613395798"></script>
+    <script src="../../js/featherlight.min.js?1613395798"></script>
+    <script src="../../js/highlight.pack.js?1613395798"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613375963"></script>
-    <script src="../../js/learn.js?1613375963"></script>
-    <script src="../../js/hugo-learn.js?1613375963"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613395798"></script>
+    <script src="../../js/learn.js?1613395798"></script>
+    <script src="../../js/hugo-learn.js?1613395798"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613375963"></script>
+            <script src="../../mermaid/mermaid.js?1613395798"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

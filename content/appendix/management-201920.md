@@ -1,23 +1,32 @@
 ---
-title: '0. Management'
+title: '0. Management (2019 - 2020)'
 draft: true
 ---
 
-# TIMING AY2020-2021
-* 15/02, 16/02 W1: 1.5h + 3h
+# TODO
+* ch2: add stuff for bitwise operations 
+  * in C ?
+  * in Interrupts ?
+* ch2: add "Good design practice" for working with interrupts
+  * keep ISR short
+  * nested Interrupts
+* ch3.1: print pointers using printf("%p") ?
+* ch 7 and or ch9: add swapping ?
+
+# TIMING AY2019-2020
+* W1: 1.5h + 3h
   * **ch1** Introduction in C
-* 22/02 W2: interrupts "gastencollege" Jo
-* 01/03, 02/03 W3: 
+* W2: 1.5h + 3h
+  * **ch3** Pointers & Arrays
+    * announcement of first exercise
+* W3: 
   * 1.5h: **ch3** Pointers & Arrays
-  * 3h: **ch2** pointers & arrays, announcement of first exercise
-* 08/03 W4: 
-  * 1.5h: intro in OS (Robin 1st, voormiddag)
-  * 3h: **ch4** Debugging (Wouter, namiddag)
+  * 3h: **ch2** Interrupts (halfway exercise 2.4)
+* W4: 
+  * 1.5h: remainder of ch2 Interrupts (15' early)
+  * 3h: **ch4** Debugging
   * announcement of second task
   * deadline task 1 (Linked Lists)
-
-Te bezien:
-
 * W5: 
   * 1.5h: **ch5** Intro to OS
   * 3h: **ch6** Processes + lab + Threads (rap rap due to corona :)
@@ -25,6 +34,9 @@ Te bezien:
 * W6: 
   * 1.5h: Procsses lab (2/2) + Threads lab
   * 3h: inter task communication + labs
+
+**we are here**
+
 * W7: 
   * 1.5h: **ch7** CPU Scheduling
   * 3h: labs + **ch8** Stack & Heap + labs

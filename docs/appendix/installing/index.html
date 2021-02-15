@@ -12,21 +12,21 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613126365" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613126365" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613126365" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613126365" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613126365" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613126365" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613126365" rel="stylesheet">
-    <link href="../../css/theme.css?1613126365" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613126365" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613374870" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613374870" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613374870" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613374870" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613374870" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613374870" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613374870" rel="stylesheet">
+    <link href="../../css/theme.css?1613374870" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613374870" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613126365" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613374870" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613126365"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613374870"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613126365"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613126365"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613374870"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613374870"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613126365"></script>
+<script type="text/javascript" src="../../js/search.js?1613374870"></script>
 
     
   </div>
@@ -1671,7 +1671,7 @@ window.MathJax = {
 
 <ul>
 <li>For many exercises in this course, we will use the &ldquo;GNU Compiler Collection&rdquo; (GCC) to run our C program code.</li>
-<li>We will do this from the &ldquo;terminal&rdquo; or &ldquo;command line&rdquo;, a textual interface. This comes pre-installed in Linux. Look for an <a href="https://kuleuven-diepenbeek.github.io/">icon like this one</a>, which should open a screen that looks a bit like <a href="https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png">this one</a>.</li>
+<li>We will do this from the &ldquo;terminal&rdquo; or &ldquo;command line&rdquo;, a textual interface. This comes pre-installed in Linux. Look for an <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/1200px-GNOME_Terminal_icon_2019.svg.png">icon like this one</a>, which should open a screen that looks a bit like <a href="https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png">this one</a>.</li>
 <li>To check if GCC is installed (it should be), type the following command in the terminal and hit enter: <code>gcc -v</code>
 
 <ul>
@@ -1727,7 +1727,15 @@ window.MathJax = {
 <li>I want to change the resolution of the VirtualBox display
 
 <ul>
-<li>View -&gt; fit to screen, or View -&gt; change resolution to -&gt; pick one.</li>
+<li>This is sadly non-trivial with VirtualBox, where by default you can either choose the small/windowed view (default), or a fullscreen view from the menu.</li>
+<li>To choose a dynamic resolution, you need to install the &ldquo;VirtualBox Guest Additions&rdquo;</li>
+<li>Boot the Virtual Machine and login</li>
+<li>In the VirtualBox menu on top, choose &ldquo;Mount Guest Additions CD Image&rdquo; (bottom option)</li>
+<li>This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
+
+<ul>
+<li>Sometimes this step requires additional software to be installed first. This typically does the trick: <code>sudo apt install -y make perl</code>. After this, reboot the VM and re-Mount the CD image.</li>
+</ul></li>
 </ul></li>
 </ol>
 
@@ -2744,19 +2752,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613126365"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613126365"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613126365"></script>
-    <script src="../../js/jquery.sticky.js?1613126365"></script>
-    <script src="../../js/featherlight.min.js?1613126365"></script>
-    <script src="../../js/highlight.pack.js?1613126365"></script>
+    <script src="../../js/clipboard.min.js?1613374870"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613374870"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613374870"></script>
+    <script src="../../js/jquery.sticky.js?1613374870"></script>
+    <script src="../../js/featherlight.min.js?1613374870"></script>
+    <script src="../../js/highlight.pack.js?1613374870"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613126365"></script>
-    <script src="../../js/learn.js?1613126365"></script>
-    <script src="../../js/hugo-learn.js?1613126365"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613374870"></script>
+    <script src="../../js/learn.js?1613374870"></script>
+    <script src="../../js/hugo-learn.js?1613374870"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613126365"></script>
+            <script src="../../mermaid/mermaid.js?1613374870"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

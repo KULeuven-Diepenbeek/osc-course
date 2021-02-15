@@ -186,6 +186,9 @@ Together with the modifiers:
 
 {{% notice note %}}
 Actual byte sizes are dependent on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using `sizeof(type)`. 
+<br/>
+<br/>
+Try this out for yourself! See the [combinational types demo C file](https://github.com/KULeuven-Diepenbeek/osc-exercises/blob/master/ch1_c/combinational.c) in `osc-exercises/ch1_c/combinational.c`
 {{% /notice %}}
 
 ### Strings? What do you mean?

@@ -12,21 +12,21 @@
     <title>2. Testing in C(&#43;&#43;) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613396773" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613396773" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613396773" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613396773" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613396773" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613396773" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613396773" rel="stylesheet">
-    <link href="../../css/theme.css?1613396773" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613396773" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613469453" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613469453" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613469453" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613469453" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613469453" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613469453" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613469453" rel="stylesheet">
+    <link href="../../css/theme.css?1613469453" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613469453" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613396773" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613469453" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613396773"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613469453"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613396773"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613396773"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613469453"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613469453"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613396773"></script>
+<script type="text/javascript" src="../../js/search.js?1613469453"></script>
 
     
   </div>
@@ -1567,7 +1567,7 @@ window.MathJax = {
 <li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
 <li><a href="#2-create-test-cases">2. Create Test cases</a></li>
 <li><a href="#3-implement-the-isinperiod-method">3. Implement the isInPeriod method</a></li>
-<li><a href="#4-is-a-period-overlapping">4. Is a period overlapping?</a></li>
+<li><a href="#4-add-new-functionality-merging-two-periods">4. Add new functionality: merging two periods</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1596,7 +1596,7 @@ window.MathJax = {
 
 
 
-<p><strong>Download the start project here</strong>: <a href="../../exercises/cpp-testing.cpp">cpp-testing.cpp</a>. Remember that in order to run this as a Google Test Suite, you need to compile it using <code>g++</code> and bootstrap GTest in a separate <code>.cpp</code> file where the <code>main()</code> function resides. Go back to the lab notes if you&rsquo;re not sure how to pull this off.</p>
+<p><strong>Download the start project files here</strong>: <a href="../../exercises/cpp-testing.cpp">cpp-testing.cpp</a>, <a href="../../exercises/cpp-testing-main.cpp">cpp-testing-main.cpp</a>. Remember that in order to run this as a Google Test Suite, you need to compile it using <code>g++</code> and bootstrap GTest in a separate <code>.cpp</code> file where the <code>main()</code> function resides. Go back to the lab notes if you&rsquo;re not sure how to pull this off.</p>
 
 <p>The following code is given:</p>
 
@@ -1656,13 +1656,15 @@ Add as many TEST cases as you can think of and complete isInPeriod()!
 
 <p>Rerun your tests and make sure everything is passing (not by changing values in your test cases!).</p>
 
-<h3 id="4-is-a-period-overlapping">4. Is a period overlapping?</h3>
+<h3 id="4-add-new-functionality-merging-two-periods">4. Add new functionality: merging two periods</h3>
 
 <p>Add a new method:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">isPeriodOverlapping</span>(period<span style="color:#f92672">*</span> one, period<span style="color:#f92672">*</span> two) {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">period<span style="color:#f92672">*</span> <span style="color:#a6e22e">mergePeriods</span>(period<span style="color:#f92672">*</span> one, period<span style="color:#f92672">*</span> two) {
+    period<span style="color:#f92672">*</span> result <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(period));
+
+    <span style="color:#66d9ef">return</span> result;
 }</code></pre></div>
-<p>Write test cases for this method. Some will fail because it simply returns zero, but let&rsquo;s assume we&rsquo;ve got working code here. You do <em>not need</em> to implement this method, only to think about Google Test cases for this one. Write as many <code>TEST()</code> cases as you can think of.</p>
+<p>Write <strong>all possible test cases</strong> for this method. Some will fail because it simply returns an empty period instance, but let&rsquo;s assume we&rsquo;ve got working code here. You do <strong>not need to implement</strong> this method, only to think about Google Test cases for this one. Write as many <code>TEST()</code> cases as you can think of. And yes, you can ignore the memory leaks.</p>
 
 
 <footer class="footline">
@@ -2656,19 +2658,19 @@ Add as many TEST cases as you can think of and complete isInPeriod()!
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613396773"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613396773"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613396773"></script>
-    <script src="../../js/jquery.sticky.js?1613396773"></script>
-    <script src="../../js/featherlight.min.js?1613396773"></script>
-    <script src="../../js/highlight.pack.js?1613396773"></script>
+    <script src="../../js/clipboard.min.js?1613469453"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613469453"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613469453"></script>
+    <script src="../../js/jquery.sticky.js?1613469453"></script>
+    <script src="../../js/featherlight.min.js?1613469453"></script>
+    <script src="../../js/highlight.pack.js?1613469453"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613396773"></script>
-    <script src="../../js/learn.js?1613396773"></script>
-    <script src="../../js/hugo-learn.js?1613396773"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613469453"></script>
+    <script src="../../js/learn.js?1613469453"></script>
+    <script src="../../js/hugo-learn.js?1613469453"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613396773"></script>
+            <script src="../../mermaid/mermaid.js?1613469453"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

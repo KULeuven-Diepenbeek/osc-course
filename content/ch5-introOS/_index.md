@@ -9,9 +9,4 @@ weight: 5
 
 5.1: Intro to OS using Linux
 
-  * Types of operating systems
-  * Linux
-  * Got Root ?
-  * On files and such
-
 5.2: (lab) Getting your CLI-feet wet

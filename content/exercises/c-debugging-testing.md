@@ -5,7 +5,7 @@ weight: 2
 draft: false
 ---
 
-**Download the start project here**: [cpp-testing.cpp](/exercises/cpp-testing.cpp). Remember that in order to run this as a Google Test Suite, you need to compile it using `g++` and bootstrap GTest in a separate `.cpp` file where the `main()` function resides. Go back to the lab notes if you're not sure how to pull this off.
+**Download the start project files here**: [cpp-testing.cpp](/exercises/cpp-testing.cpp), [cpp-testing-main.cpp](/exercises/cpp-testing-main.cpp). Remember that in order to run this as a Google Test Suite, you need to compile it using `g++` and bootstrap GTest in a separate `.cpp` file where the `main()` function resides. Go back to the lab notes if you're not sure how to pull this off.
 
 The following code is given:
 
@@ -59,14 +59,16 @@ Only _after creating test cases_, you can move on to the completion of this meth
 
 Rerun your tests and make sure everything is passing (not by changing values in your test cases!).
 
-### 4. Is a period overlapping?
+### 4. Add new functionality: merging two periods
 
 Add a new method:
 
 ```C
-int isPeriodOverlapping(period* one, period* two) {
-    return 0;
+period* mergePeriods(period* one, period* two) {
+    period* result = malloc(sizeof(period));
+
+    return result;
 }
 ```
 
-Write test cases for this method. Some will fail because it simply returns zero, but let's assume we've got working code here. You do _not need_ to implement this method, only to think about Google Test cases for this one. Write as many `TEST()` cases as you can think of. 
+Write **all possible test cases** for this method. Some will fail because it simply returns an empty period instance, but let's assume we've got working code here. You do **not need to implement** this method, only to think about Google Test cases for this one. Write as many `TEST()` cases as you can think of. And yes, you can ignore the memory leaks.

@@ -235,6 +235,7 @@ graph LR
     Y --> T
 {{< /mermaid >}}
 
+An elaborated example that illustrates how character sequences work, and how they are terminated with `\0`, can be found at [http://www.cplusplus.com/doc/oldtutorial/ntcs/](http://www.cplusplus.com/doc/oldtutorial/ntcs/).
 
 Handy string utility functions reside in the header file `<string.h>` (copying, concatenating, asking for the length, ...) See [GNU C: String utils](https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html).
 

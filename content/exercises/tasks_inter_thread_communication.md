@@ -5,15 +5,21 @@ weight: 3
 ---
 
 
-* Analyse exercise 6_4_3.c (shown below) and write a report (**<** 3 pages):
-  1. describe what the program does 
-  2. make a chart that plots 'the elapsed real time' the program consumes in function of the number of 'the number of threads that are contributing'
-      * the scale on the X-axis goes from 2 to 300
-      * at least 8 data points should be present in the chart
-      * **TIP** the command [*time*](https://linux.die.net/man/1/time)
-  3. interpret the chart
+* Analyse exercise 6_4_3.c (shown below) and write a report (2-3 pages):
+  1. describe what the program does (in general, not line-by-line)
+  2. make a line chart that plots 'the elapsed real time' the program consumes in function of 'the number of threads that are contributing'
+      * for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete
+      * Note:
+        * the scale on the X-axis goes from 2 to 300
+        * at least 8 data points should be present in the chart
+        * you can use any charting program for this (for example excel or google sheets)
+        * **TIP** use the command [*time*](https://linux.die.net/man/1/time)
+  3. interpret the chart and draw conclusions
+  4. explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads)
+  5. actually extend the program so it runs more than one producer thread
+  6. compare the actual outcome with your hypothesis from step 4 and explain why this happens
 
-<center>**hand in the report**</center>
+<center>**hand in the report via toledo**</center>
 
 ```C
 #include <stdio.h>

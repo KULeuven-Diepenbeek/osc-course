@@ -43,8 +43,8 @@ A quick intro to C C is an imperative programming language. You will notice this
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</guid>
-      <description>In the previous chapter the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts ?
-If more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !!!
+      <description>In Chapter 2 the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?
+When more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !!! (OSes)
 The image below shows the classic picture when introducing OSes.</description>
     </item>
     
@@ -167,8 +167,8 @@ The following code is given:
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
       <description>Source: Neo
-Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.
-Navigation  figure out in which folder you are at the moment navigate to the root folder navigate to your home folder, using only 1 command make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create an empty file: empty.</description>
+Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
+Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
     </item>
     
     <item>
@@ -239,7 +239,7 @@ A lot of applications that are built using an Arduino need some sense of time. A
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
-      <description>Analyse exercise 6_4_3.c (shown below) and write a report (&amp;lt; 3 pages):  describe what the program does make a chart that plots &amp;lsquo;the elapsed real time&amp;rsquo; the program consumes in function of the number of &amp;lsquo;the number of threads that are contributing&amp;rsquo;  the scale on the X-axis goes from 2 to 300 at least 8 data points should be present in the chart TIP the command time  interpret the chart   hand in the report</description>
+      <description>Analyse exercise 6_4_3.c (shown below) and write a report (2-3 pages):  describe what the program does (in general, not line-by-line) make a line chart that plots &amp;lsquo;the elapsed real time&amp;rsquo; the program consumes in function of &amp;lsquo;the number of threads that are contributing&amp;rsquo;  for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete Note: the scale on the X-axis goes from 2 to 300 at least 8 data points should be present in the chart you can use any charting program for this (for example excel or google sheets) TIP use the command time  interpret the chart and draw conclusions explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads) actually extend the program so it runs more than one producer thread compare the actual outcome with your hypothesis from step 4 and explain why this happens   hand in the report via toledo</description>
     </item>
     
     <item>

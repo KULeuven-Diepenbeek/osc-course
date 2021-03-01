@@ -12,21 +12,21 @@
     <title>5.2: Getting your CLI-feet wet :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1613469453" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613469453" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613469453" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613469453" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613469453" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613469453" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613469453" rel="stylesheet">
-    <link href="../../css/theme.css?1613469453" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613469453" rel="stylesheet">
+    <link href="../../css/nucleus.css?1614596873" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1614596873" rel="stylesheet">
+    <link href="../../css/hybrid.css?1614596873" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1614596873" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1614596873" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1614596873" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1614596873" rel="stylesheet">
+    <link href="../../css/theme.css?1614596873" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1614596873" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613469453" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1614596873" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613469453"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1614596873"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613469453"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613469453"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1614596873"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1614596873"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613469453"></script>
+<script type="text/javascript" src="../../js/search.js?1614596873"></script>
 
     
   </div>
@@ -1596,20 +1596,20 @@ window.MathJax = {
 
 
 
-<p><center><video src="../../img/os/b.mp4" autoplay loop style="width: 80%"></video>
+<p><center><video src="../../img/os/b.mp4" autoplay loop style="width: 60%"></video>
 <br/>Source: Neo</center></p>
 
 <h2 id="getting-your-feet-wet">Getting your feet wet</h2>
 
-<p>This &lsquo;lab&rsquo; consists out of a list to small tasks that introduce you to the command-line interface. None of these tasks require exhaustive manual labour. They should all be accomplished by using the commands.</p>
+<p>This &lsquo;lab&rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the <a href="../../appendix/cheat_sheet">cheat sheet</a>), and for others a short Google session should give you the answer.</p>
 
 <h3 id="navigation">Navigation</h3>
 
 <ol>
 <li>figure out in which folder you are at the moment</li>
-<li>navigate to the <em>root</em> folder</li>
-<li>navigate to your home folder, using only <strong>1</strong> command</li>
-<li>make an <strong>alias</strong> (man alias) that navigates to your home folder from everywhere within the system</li>
+<li>navigate to the <em>root</em> folder of the OS</li>
+<li>navigate to your home folder (/home/username), without actually typing that path</li>
+<li>make an <strong>alias</strong> (<code>man alias</code>) that navigates to your home folder from everywhere within the system</li>
 </ol>
 
 <h3 id="file-manipulation">File manipulation</h3>
@@ -1617,16 +1617,14 @@ window.MathJax = {
 <ol>
 <li>make a folder &ldquo;myVeryOwnFolder&rdquo;</li>
 <li>navigate into that folder</li>
-<li>create an empty file: <strong>empty.txt</strong></li>
-<li>create a file: <strong>another.txt</strong> that contains the text <strong>hello world</strong></li>
-<li>remove the file &ldquo;another.txt&rdquo;</li>
-<li>move up on folder and remove the entire directory myVeryOwnFolder</li>
+<li>create a file: <strong>hello.txt</strong> that contains the text <strong>hello world</strong>. Do this in a single step (hint: you can &ldquo;pipe&rdquo; commands together)</li>
+<li>move up on folder and remove the entire directory myVeryOwnFolder, including the .txt file</li>
 </ol>
 
 <h3 id="access-permissions">Access permissions</h3>
 
 <ol>
-<li>create a file with bogus content</li>
+<li>create a new file with any content</li>
 <li>make this file read-only for everyone</li>
 <li>remove the file</li>
 <li>make a folder <strong>ToBeDeleted</strong></li>
@@ -1637,7 +1635,7 @@ window.MathJax = {
 <h3 id="various">Various</h3>
 
 <ol>
-<li>Navigate to osc-exercises/ch5_os
+<li>navigate to osc-exercises/ch5_os (from your cloned git repository)
 
 <ul>
 <li>all these files contain random text</li>
@@ -1646,8 +1644,8 @@ window.MathJax = {
 <li>find out the line number on which the word occurs</li>
 </ul></li>
 <li><strong>search</strong> the man page for the meaning of &ldquo;-x&rdquo; in the command <em>ls</em></li>
-<li>display the current date and time</li>
-<li>execute three commands, using the <strong>enter</strong> only once
+<li>display the current date and time (is this correct? Why wouldn&rsquo;t it be?)</li>
+<li>execute three commands, using the <strong>enter</strong> key only once
 
 <ol>
 <li>display the current date and time</li>
@@ -2648,19 +2646,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613469453"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613469453"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613469453"></script>
-    <script src="../../js/jquery.sticky.js?1613469453"></script>
-    <script src="../../js/featherlight.min.js?1613469453"></script>
-    <script src="../../js/highlight.pack.js?1613469453"></script>
+    <script src="../../js/clipboard.min.js?1614596873"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1614596873"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1614596873"></script>
+    <script src="../../js/jquery.sticky.js?1614596873"></script>
+    <script src="../../js/featherlight.min.js?1614596873"></script>
+    <script src="../../js/highlight.pack.js?1614596873"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613469453"></script>
-    <script src="../../js/learn.js?1613469453"></script>
-    <script src="../../js/hugo-learn.js?1613469453"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1614596873"></script>
+    <script src="../../js/learn.js?1614596873"></script>
+    <script src="../../js/hugo-learn.js?1614596873"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613469453"></script>
+            <script src="../../mermaid/mermaid.js?1614596873"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

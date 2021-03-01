@@ -7,7 +7,7 @@ char loremipsum[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nu
 char ipsum[200][200];
 
 void splitIpsum() {
-  int n = 0, i, j = 0;
+  int n = 0, i = 0, j = 0;
   int found = 0;
 
   while(!found) {

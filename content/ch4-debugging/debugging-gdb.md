@@ -67,15 +67,22 @@ Things you need to know from the GDB debugger:
 2. `c`: continue after a breakpoint
 3. `i`: inspect (`i r [regname]`: inspect register name)
 4. `start` and `next`: start stepping through the application.
-5. `b *[addr]`: set breakpoint at certain address
+5. `b *[addr]`: set breakpoint at certain function/line/`*`address (see [manual](https://visualgdb.com/gdbreference/commands/break)). Conditionals are possible, for instance: `break func if arg == 3`.
 6. `delete`: deletes all breakpoints
 7. `disassemble [fn]`: disassembles functionname (after running)
 8. `x/[length][format] [address expr]`: inspect dynamic memory block (see [manual](http://visualgdb.com/gdbreference/commands/x))
+9. `print x`: print `var`, or `&var` address (Enalbe printing of addresses: `show print address`)
+10. `info` address/line (fn) or `source`
 
 {{% task %}}
 Bootstrap gdb and step through the whole application. As soon as the stackvar has been evaluated, try to inspect the memory value using `x/d`. The address expression could be hexadecimal, or `&stackvar`. <br/>
 How could you evaluate a heap variable using the x command? If you have the address, how do you pry out the value on the heap? 
 {{% /task %}}
+
+More useful commands:
+
+- Don't remember which breakpoints you've set? `info b`. (info breakpoints)
+- Don't remember where you're at now? Inspect the stack: `bt` (backtrace), optionally appended with `full` that includes local variables. 
 
 Do not forget that the expression that is printed out is the one to be evaluated after you enter the 'next' command. You can already inspect the stack variable address but it will contain junk:
 
@@ -100,6 +107,13 @@ Address `0x7fffffffdc6c` first contains 21845 - a coincidence that might have an
 Bootstrap gdb, disassemble the `main` function, and set breakpoints after each `malloc()` call using `b *[address]`. You can check the return value, stored at the register eax, with `i r eax`.
 {{% /task %}}
 
+How come something interesting is hidden in `eax` after calling `malloc()`? 
+
+1. Because `eax` is the _return value_ register, or the **accumulator**. You should be familiar with it due to other Hardware-oriented courses.
+2. Because [malloc returns a void pointer](https://www.man7.org/linux/man-pages/man3/malloc.3.html) - read the `man` pages carefully!
+ 
+Interested in more useful registers to fiddle with? Check out `info registers` in the gdb console (`i r` is [an abbreviation](https://sourceware.org/gdb/current/onlinedocs/gdb/Registers.html#Registers)).
+
 ### 2.2 Without debug flags
 
 Now try to 'hack' the password using gdb without the `-g` compiler flag. Imagine someone has put up a binary file on the internet and you managed to download it. No source code available, and no debug information compiled in. The gdb tool still works, disassembling still works, but method information is withheld. That means calling `start` and `next` will **not** reveal much-needed information about each statement, and we will have to figure it out ourselves by looking at the disassembly information. 
@@ -108,7 +122,7 @@ Now try to 'hack' the password using gdb without the `-g` compiler flag. Imagine
 Try to disassemble again and look at the heap value of our secret. Notice that you will not be able to use something like `x [varname]` because of the lack of debug information! We will have to rely on breakpoints of address values from the disassembly. 
 {{% /task %}}
 
-Remember to always run the program first before disassembling - otherwise address values will be way too low, and thus incorrect. 
+Remember to always run the program first before disassembling - otherwise address values will be way too low, and thus incorrect. `bt` does noet help us either here: _No symbol table info available_. 
 
 When inspecting the return value of `eax`, gdb returns a **relative address** for our current program (8 BITS), while we need an **absolute** one (16 BITS) when using the x command to inspect the heap. Look at the disassembly info to prepend the right bits:
 
@@ -142,10 +156,11 @@ Instead of invoking `gdb`, one can also employ `ddd`. This is a crude UI on top 
 
 Things to try out:
 
-- View -> Show source
-- Rightclick on a line in source (compile with `-g` again!) -> Add breakpoint
+- Display the Source Window via the View menu. This window lets you set breakpoints and interact with the source code.
+- Display the Machine Code Window via the View menu. This window is the equivalent of `bt` (`backtrace`) in `gdb`.
+- Right-click on a line in source (compile with `-g` again!) -> Add breakpoint
 - Start/step using the buttons or the commands in the cmdline window.
-- Rightclick in the main window -> Add variables by name to watch (for instance `buf` and `password`, as shown)
+- Right-click in the main window -> "New Display" to add variables by name to watch (for instance `buf` and `password`, as shown). You can also watch references to functions - any valid `gdb`-style expression will do.
 
 {{% task %}}
 Take a moment to fiddle with `ddd`. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.

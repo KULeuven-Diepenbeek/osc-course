@@ -129,7 +129,7 @@ Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out -lpthread
 
 As you can see, it can be handy to create a shell variable `$GTEST_DIR` that points to your own Google Test directory. To do that, edit the `.bashrc` file in your `~` (home) folder. Remember that files starting with a dot are hidden by default, so use the `-a` flag of the `ls` command. Add the line:
 
-`GTEST_DIR=/hone/[user]/googletest/googletest`
+`export GTEST_DIR=/home/[user]/googletest/googletest`
 
 And reopen all terminals. Verify the above using `echo $GTEST_DIR`, it should print out the path. 
 

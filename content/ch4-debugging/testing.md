@@ -119,8 +119,8 @@ Bringing everything together:
 <pre>
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-main.cpp
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-tests.cpp
-Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/lib/libgtest.a $GTEST_DIR/build/lib/libgtest_main.a
-Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out -lpthread
+Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/lib/libgtest.a $GTEST_DIR/build/lib/libgtest_main.a  -lpthread
+Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
 [==========] Running 2 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 2 tests from AddTest

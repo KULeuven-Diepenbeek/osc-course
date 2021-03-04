@@ -1,304 +1,184 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</loc>
-    <lastmod>2021-02-16T14:08:43+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/</loc>
-    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</loc>
-    <lastmod>2021-02-12T11:09:25+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-ide/</loc>
-    <lastmod>2020-01-09T13:48:50+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</loc>
-    <lastmod>2021-02-16T18:30:27+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</loc>
-    <lastmod>2020-03-03T16:39:35+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</loc>
-    <lastmod>2020-03-20T09:04:58+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</loc>
-    <lastmod>2020-04-27T06:51:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</loc>
-    <lastmod>2021-02-16T10:57:15+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs/</loc>
-    <lastmod>2021-02-12T11:09:25+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</loc>
-    <lastmod>2021-02-16T10:57:15+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</loc>
-    <lastmod>2021-02-09T14:01:28+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/</loc>
-    <lastmod>2021-02-09T14:01:28+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</loc>
-    <lastmod>2021-03-02T13:22:07+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</loc>
-    <lastmod>2021-02-16T18:30:27+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</loc>
-    <lastmod>2020-03-03T16:39:35+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</loc>
-    <lastmod>2020-03-19T09:08:33+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</loc>
-    <lastmod>2020-03-25T15:33:09+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</loc>
-    <lastmod>2020-04-20T05:56:49+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</loc>
-    <lastmod>2020-04-27T06:51:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</loc>
-    <lastmod>2021-02-10T06:46:55+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</loc>
-    <lastmod>2021-02-17T11:39:39+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</loc>
-    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/</loc>
-    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</loc>
-    <lastmod>2021-03-02T16:06:32+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</loc>
-    <lastmod>2020-04-20T05:56:49+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/scope/</loc>
-    <lastmod>2020-03-25T14:32:52+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</loc>
-    <lastmod>2020-04-27T06:51:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</loc>
-    <lastmod>2021-02-09T14:01:28+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</loc>
-    <lastmod>2020-02-27T09:52:54+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</loc>
-    <lastmod>2020-04-10T13:29:15+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/</loc>
-    <lastmod>2020-01-08T16:07:27+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</loc>
-    <lastmod>2020-03-17T06:19:45+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</loc>
-    <lastmod>2020-03-20T09:04:23+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</loc>
-    <lastmod>2020-04-20T05:56:49+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</loc>
-    <lastmod>2021-02-12T11:09:25+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</loc>
-    <lastmod>2020-03-09T12:23:58+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/</loc>
-    <lastmod>2021-02-16T18:30:27+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</loc>
-    <lastmod>2020-03-17T06:41:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</loc>
-    <lastmod>2020-01-08T16:07:27+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/</loc>
-    <lastmod>2020-03-16T17:06:56+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/</loc>
-    <lastmod>2020-03-20T09:04:23+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/</loc>
-    <lastmod>2020-03-17T06:39:17+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/</loc>
-    <lastmod>2020-04-15T07:58:09+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/</loc>
-    <lastmod>2020-04-27T06:51:17+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/exercises/</loc>
-    <lastmod>2020-02-26T13:31:14+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/</loc>
-    <lastmod>2020-02-05T10:29:56+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</loc>
-    <lastmod>2020-01-06T14:50:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</loc>
-    <lastmod>2021-02-12T12:25:36+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</loc>
-    <lastmod>2020-03-03T10:50:20+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/</loc>
-    <lastmod>2020-08-10T12:11:58+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:28:36+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/osc-course/tags/</loc>
   </url>
-  
 </urlset>

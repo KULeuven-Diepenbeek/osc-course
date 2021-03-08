@@ -64,7 +64,7 @@ Because the counter needs 2<sup>16</sup> clock ticks to reach its maximum, this 
 
 Before you put down your coffee to get back to work let's discuss polling first. A nice illustration of polling is shown below.
 
-{{< youtube id="O_sO39FXL68" >}}
+{{< youtube id="0P1lOG7e8wI" >}}
 &nbsp;
 
 Our toddler is **polling** her father. Another example of polling is shown below. This clip, however, ends with an **interrupt**.

@@ -105,7 +105,7 @@ Next to the shift operator, {{< link name="bitwise operators" url="https://en.wi
 2. Write a line of C-code that:
   <ul>
     <li>sets the 3rd bit to '1' and all others to '0' (resulting in "00000100")</li>
-    <li>sets the 4th and 5th byte to '1' and all others to '0(resulting in "00011000")'</li>
+    <li>sets the 4th and 5th bit to '1' and all others to '0(resulting in "00011000")'</li>
   </ul>
 {{% /task %}}
 

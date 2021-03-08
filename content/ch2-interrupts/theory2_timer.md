@@ -131,6 +131,9 @@ void setup()
   TCCR1A = 0x00;
   TCCR1B = 0x05;
 
+  /* enable interrupt mask */
+  TIMSK1 = 0x01;
+
   /* enable the interrupts */
   sei();
 }

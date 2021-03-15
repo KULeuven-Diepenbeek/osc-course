@@ -12,21 +12,21 @@
     <title>6.1: Processes :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1615215621" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1615215621" rel="stylesheet">
-    <link href="../../css/hybrid.css?1615215621" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1615215621" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1615215621" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1615215621" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1615215621" rel="stylesheet">
-    <link href="../../css/theme.css?1615215621" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1615215621" rel="stylesheet">
+    <link href="../../css/nucleus.css?1615831434" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1615831434" rel="stylesheet">
+    <link href="../../css/hybrid.css?1615831434" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1615831434" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1615831434" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1615831434" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1615831434" rel="stylesheet">
+    <link href="../../css/theme.css?1615831434" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1615831434" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1615215621" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1615831434" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1615215621"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1615831434"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1615215621"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1615215621"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1615831434"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1615831434"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1615215621"></script>
+<script type="text/javascript" src="../../js/search.js?1615831434"></script>
 
     
   </div>
@@ -1601,15 +1601,21 @@ window.MathJax = {
 
 <h2 id="what-s-in-a-process">What&rsquo;s in a process ?</h2>
 
-<p>By definition, a process is an instance of a program. As was dicussed in the &ldquo;C-portion&rdquo; of this course a basic program can be divided in multiple <strong>segments</strong>. When source code is compiled into a binary, these segments are <em>fixed</em>.</p>
+<p>By definition, a process is an instance of a program. As was dicussed in the &ldquo;C-portion&rdquo; of this course, a basic program can be divided in multiple <strong>segments</strong>. When source code is compiled into a binary, these segments are <em>fixed</em>.</p>
 
 <ul>
 <li><strong>text/code</strong>: is the machine code in assembly. This section is compiled for one (type of) processor(s).</li>
 <li><strong>data</strong>: is the segment that contains initialised variables. These variables could be global, static, or external. A further distinction can be made between normal initialised variables and constants. This distinction is often referred to with read-only (<strong>ro-data</strong>) and read-write (<strong>rw-data</strong>), with the former the part where the constants reside and the latter that of the normal variables.</li>
-<li><strong>bss</strong>: this segment contains the global and static variables that are not initialised.</li>
-<li><strong>stack</strong>: <em>see next chapter</em></li>
-<li><strong>heap</strong>: <em>see next chapter</em></li>
+<li><strong>bss</strong>: (Block Starting Symbol) this segment contains the global and static variables that are not initialised.</li>
+<li><strong>stack</strong>: dynamic part of memory used to store typically short-lived data. <em>see Chapter 8</em></li>
+<li><strong>heap</strong>: dynamic part of memory used to store typically longer-lived data. <em>see Chapter 8</em></li>
 </ul>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-225px-Program_memory_layout.pdf.jpg"/> <figcaption>
+            <h4>source: Wikipedia</h4>
+        </figcaption>
+</figure>
 
 <p>Let&rsquo;s put these definitions to the test. A very simple program could be written as follows:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
@@ -1620,11 +1626,11 @@ window.MathJax = {
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p>This program can be compiled with the command below:</p>
+<p>As you know by now, this program can be compiled with the command below:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ gcc -o hello hello.c
 
 jvliegen@localhost:~/$ </code></pre></div>
-<p>On the CLI there is a command <strong>size</strong> that can be used to examine these segments. The arguments that are available on Linux commands can typically be explored with <strong>command &ndash;help</strong> or <strong>man command</strong> (offcourse, command needs to be replaced with the actual command-name).</p>
+<p>On the CLI there is a command <strong>size</strong> that can be used to examine these segments.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ size -B hello
    text    data     bss     dec     hex filename
    <span style="color:#ae81ff">1516</span>     <span style="color:#ae81ff">600</span>       <span style="color:#ae81ff">8</span>    <span style="color:#ae81ff">2124</span>     84c hello
@@ -1640,9 +1646,9 @@ jvliegen@localhost:~/$ </code></pre></div>
 hello world !
 
 jvliegen@localhost:~/$ </code></pre></div>
-<p>When a program is started, an <strong>instance</strong> of the program is created. This results (among many other things) in an allocation of the instance of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in <a href="../../osc-course/ch8-memory">chapter 8</a>.</p>
+<p>When a program is started, an <strong>instance</strong> of the program is created, which we now call a <strong>process</strong>. Many of such processes can be active at the same time. Starting a process results (among many other things) in an allocation of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in <a href="../../osc-course/ch8-memory">chapter 8</a>.</p>
 
-<p>Next to mapping an instance of the program in memory space, upon start-up a <strong>Process Control Block (PCB)</strong> is created.</p>
+<p>So now the program was loaded into the memory. But to actually run it, we need to keep additional state for each instance. This additional space is kept in the <strong>Process Control Block (PCB)</strong>, which is created in the kernel upon mapping an instance of the program in memory space.</p>
 
 <h3 id="process-control-block">Process Control Block</h3>
 
@@ -1655,7 +1661,7 @@ jvliegen@localhost:~/$ </code></pre></div>
 <ol>
 <li>that we <strong>can</strong> read the source code</li>
 <li>that the <strong>task_struct</strong> is indeed there,</li>
-<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at line 624 and ends at line 1284 (at the moment of writing this course, Nov 15th 2019). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
+<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at line 649 and ends at line 1389 (at the moment of writing, March 15th 2021). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
 
 <ul>
 <li>the process state</li>
@@ -1664,14 +1670,17 @@ jvliegen@localhost:~/$ </code></pre></div>
 <li>CPU scheduling info</li>
 <li>list of open files</li>
 <li>memory limits</li>
-<li>CPU registers</li>
-<li>program counter</li>
+<li>the CPU registers</li>
+<li>the program counter (PC)</li>
 </ul></li>
 </ol>
 
+<p>Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pauze a process for a while: simply stop updating the PC.</p>
+
 <p>The PCBs of all the processes are contained in a doubly-linked list which is headed by the <strong>mother of all processes</strong>. This process is called <strong>init</strong> and has <strong>PID 0</strong>. The doubly-linked list is commonly known as the <strong>process table</strong>.</p>
 
-<p>Let&rsquo;s verify all of the above. We&rsquo;ll adapt the C program so it takes more time to run.</p>
+<p>Let&rsquo;s verify all of the above. To do that, we need to keep a process running for long enough to determine its PID.
+For this, we&rsquo;ll adapt the C program so it takes much more time to run.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -1687,11 +1696,8 @@ jvliegen@localhost:~/$ </code></pre></div>
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p>After starting the program, the PID of the process can be looked for.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./longhello
-hello world !
-hello world !
-...</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ps -u
+<p>After starting the program, the PID of the <strong>./longhello</strong> process can now be looked for using the <code>ps</code> command (&ldquo;Process Status&rdquo;).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ps -u
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 jvliegen <span style="color:#ae81ff">14339</span>  0.0  0.0  <span style="color:#ae81ff">30408</span>  <span style="color:#ae81ff">5500</span> pts/3    Ss   09:57   0:00 bash
 jvliegen <span style="color:#ae81ff">20162</span>  0.0  0.0   <span style="color:#ae81ff">4504</span>   <span style="color:#ae81ff">804</span> pts/1    S+   11:49   0:00 ./longhello
@@ -1701,7 +1707,8 @@ jvliegen <span style="color:#ae81ff">27700</span>  0.2  0.5 <span style="color:#
 jvliegen <span style="color:#ae81ff">29414</span>  0.0  0.0  <span style="color:#ae81ff">30412</span>  <span style="color:#ae81ff">5504</span> pts/1    Ss   09:13   0:00 bash
 
 ...</code></pre></div>
-<p>Through the ps command the PID of the process <strong>./longhello</strong> can be found. In the example above it&rsquo;s 20162. While this process is running, there is a folder in the <strong>/proc</strong> map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. Also, certain fields in the struct_task are reflected in this folder.</p>
+<p>In the example above the PID is 20162. Now we want to get some information on this process. Remember how we said that in Linux, almost everything is a file?
+Well, while this process is running, Linux magically creates a folder in the <strong>/proc</strong> map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. For example, certain fields in the struct_task are reflected in this folder.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ls /proc/20162 
 attr             exe        mounts         projid_map    status
 autogroup        fd         mountstats     root          syscall
@@ -1713,10 +1720,21 @@ comm             loginuid   oom_score      smaps         wchan
 coredump_filter  map_files  oom_score_adj  smaps_rollup
 cpuset           maps       pagemap        stack
 cwd              mem        patch_state    stat
-environ          mountinfo  personality    statm
-jvliegen@localhost:~/$</code></pre></div>
-<p>Don&rsquo;t forget it&rsquo;s there !! It might come in handy someday !!
-Every process has a PCB that contains metadata about the process.</p>
+environ          mountinfo  personality    statm</code></pre></div>
+
+<div class="ex">
+	<div class="inner">
+    	<p>Let&rsquo;s try to execute some commands here and see what they do:
+1. ls -al /proc/20162/cwd
+2. cat /proc/20162/sched
+3. cat /proc/20162/status
+4. cat /proc/20162/limits
+4. ls -al /proc/20162/net</p>
+
+<p>(tip: the <code>cat</code> command (short for concatenate) can be used to read a file and display its contents.)</p>
+
+	</div>
+</div>
 
 <h3 id="process-state">Process state</h3>
 
@@ -1751,7 +1769,7 @@ Every process has a PCB that contains metadata about the process.</p>
 
 <h3 id="open-files-list">Open files list</h3>
 
-<p>Every process that is created has a list of open files. Even programs that do not work with files have this list, and it <strong>not empty</strong>. Typically three files are open and these files are:</p>
+<p>Every process that is created has a list of open files. Even programs that do not actually work with files have this list, and it is <strong>never empty</strong>. Typically three files are open by default:</p>
 
 <ol>
 <li>standard input (stdin)</li>
@@ -1759,17 +1777,19 @@ Every process has a PCB that contains metadata about the process.</p>
 <li>standard error (stderr)</li>
 </ol>
 
-<p>By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done and will be briefly touched in <a href="../../ch6-tasks/intertasks/">section 6.5</a>.</p>
+<p>As you might have understood by now, these are not -actual- files on your hard disk. This is gain some Linux magic, where input/output logic is represented as files, to make them easy to read/write from.</p>
+
+<p>For example, by default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the command line. These mappings can be altered and redirected, however. For example, we might want to send errors (stderr) to a file instead. Redirecting can be done and will be briefly touched in <a href="../../ch6-tasks/intertasks/">section 6.5</a>.</p>
 
 <h2 id="creating-processes">Creating processes</h2>
 
-<p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or using <strong>exec</strong>. For the record, it is mentioned there is a third option using a system() function but because it is less secure and is less efficient then the other two, it is not discussed here.</p>
+<p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or using <strong>exec</strong>. There is a third option using a system() function, but because it is less secure and less efficient then the other two, it is not discussed here.</p>
 
-<p>Both fork and exec create a new process. The fork function copies the PCB of its process to a new PCB. The process that calls the fork() is referred to with the <strong>parent</strong> process while the new process is the <strong>child</strong> process. The child process will continue operations on the same line as the parent process. Because of the copying of the PCB, the program counter is also copied !!</p>
+<p>Both fork and exec create a new process, but in very different ways. The fork function copies the PCB of its current process to a new PCB. The process that calls the fork() is referred to as the <strong>parent</strong> process, while the new process is its <strong>child</strong>. The child process will continue operations on the same line as the parent process (because of the copying of the PCB, the program counter is also copied!). This method is useful if you want to for example process a lot of data on multiple processors: you first get everything ready, then fork() new child processes that each deal with a part of the data. This is easier than manually starting new processes from scratch.</p>
 
-<p>The exec() function call also starts from copying its own PCB. In contrast with fork(), it then replaces the &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with a new program and starts executing from (relative) 0.</p>
+<p>The exec() function call also starts from copying its own PCB. In contrast with fork() however, it then replaces its internal &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with a new, fresh copy of the program, clears all its memory and starts executing again from the first instruction. Unlike fork(), exec() thus doesn&rsquo;t spawn a new process, but effectively replaces the already running process with a new copy of itself and starts it from scratch. This is typically done right after fork(): you make a new clone of your process, then restart it from the beginning.</p>
 
-<p>It is mentioned earlier that the first process that is started is the <strong>init</strong> process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on. Using the <strong>pstree</strong> command we can see the processes in a tree, and have a visual representation of which child-parent relations there are between processes.</p>
+<p>It is mentioned earlier that the first process that is started is the <strong>init</strong> process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle connecting to the network, processes that do logging, and so on. Using the <strong>pstree</strong> command we can see the processes in a tree, and have a visual representation of which child-parent relations exist between processes.</p>
 
 <figure>
     <img src="../../img/0x_31.png"/> <figcaption>
@@ -2767,19 +2787,19 @@ Every process has a PCB that contains metadata about the process.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1615215621"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1615215621"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1615215621"></script>
-    <script src="../../js/jquery.sticky.js?1615215621"></script>
-    <script src="../../js/featherlight.min.js?1615215621"></script>
-    <script src="../../js/highlight.pack.js?1615215621"></script>
+    <script src="../../js/clipboard.min.js?1615831434"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1615831434"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1615831434"></script>
+    <script src="../../js/jquery.sticky.js?1615831434"></script>
+    <script src="../../js/featherlight.min.js?1615831434"></script>
+    <script src="../../js/highlight.pack.js?1615831434"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1615215621"></script>
-    <script src="../../js/learn.js?1615215621"></script>
-    <script src="../../js/hugo-learn.js?1615215621"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1615831434"></script>
+    <script src="../../js/learn.js?1615831434"></script>
+    <script src="../../js/hugo-learn.js?1615831434"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1615215621"></script>
+            <script src="../../mermaid/mermaid.js?1615831434"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

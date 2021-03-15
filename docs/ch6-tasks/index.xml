@@ -15,7 +15,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</guid>
       <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
-What&amp;rsquo;s in a process ? By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course a basic program can be divided in multiple segments. When source code is compiled into a binary, these segments are fixed.</description>
+What&amp;rsquo;s in a process ? By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course, a basic program can be divided in multiple segments. When source code is compiled into a binary, these segments are fixed.</description>
     </item>
     
     <item>

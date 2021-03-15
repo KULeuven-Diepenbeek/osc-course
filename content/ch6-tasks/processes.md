@@ -9,13 +9,15 @@ One of the three core tasks of an OS is the **management of tasks**. These diffe
 
 ## What's in a process ?
 
-By definition, a process is an instance of a program. As was dicussed in the "C-portion" of this course a basic program can be divided in multiple **segments**. When source code is compiled into a binary, these segments are *fixed*. 
+By definition, a process is an instance of a program. As was dicussed in the "C-portion" of this course, a basic program can be divided in multiple **segments**. When source code is compiled into a binary, these segments are *fixed*. 
 
 * **text/code**: is the machine code in assembly. This section is compiled for one (type of) processor(s).
 * **data**: is the segment that contains initialised variables. These variables could be global, static, or external. A further distinction can be made between normal initialised variables and constants. This distinction is often referred to with read-only (**ro-data**) and read-write (**rw-data**), with the former the part where the constants reside and the latter that of the normal variables.
-* **bss**: this segment contains the global and static variables that are not initialised.
-* **stack**: *see next chapter*
-* **heap**: *see next chapter*
+* **bss**: (Block Starting Symbol) this segment contains the global and static variables that are not initialised.
+* **stack**: dynamic part of memory used to store typically short-lived data. *see Chapter 8*
+* **heap**: dynamic part of memory used to store typically longer-lived data. *see Chapter 8*
+
+{{% figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-225px-Program_memory_layout.pdf.jpg" title="source: Wikipedia"%}}
 
 
 Let's put these definitions to the test. A very simple program could be written as follows:
@@ -31,7 +33,7 @@ int main(void) {
 
 ```
 
-This program can be compiled with the command below:
+As you know by now, this program can be compiled with the command below:
 
 ```bash
 jvliegen@localhost:~/$ gcc -o hello hello.c
@@ -39,7 +41,7 @@ jvliegen@localhost:~/$ gcc -o hello hello.c
 jvliegen@localhost:~/$ 
 ```
 
-On the CLI there is a command **size** that can be used to examine these segments. The arguments that are available on Linux commands can typically be explored with **command --help** or **man command** (offcourse, command needs to be replaced with the actual command-name).
+On the CLI there is a command **size** that can be used to examine these segments.
 
 ```bash
 jvliegen@localhost:~/$ size -B hello
@@ -63,9 +65,9 @@ hello world !
 jvliegen@localhost:~/$ 
 ```
 
-When a program is started, an **instance** of the program is created. This results (among many other things) in an allocation of the instance of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in [chapter 8](/osc-course/ch8-memory).
+When a program is started, an **instance** of the program is created, which we now call a **process**. Many of such processes can be active at the same time. Starting a process results (among many other things) in an allocation of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in [chapter 8](/osc-course/ch8-memory).
 
-Next to mapping an instance of the program in memory space, upon start-up a **Process Control Block (PCB)** is created. 
+So now the program was loaded into the memory. But to actually run it, we need to keep additional state for each instance. This additional space is kept in the **Process Control Block (PCB)**, which is created in the kernel upon mapping an instance of the program in memory space.
 
 ### Process Control Block
 The Process Control Block (PCB) is a representation of the process in the OS. It is created as a *task_struct* object. Such a PCB is made for every process and the definition of its struct is in the kernel source. 
@@ -76,19 +78,22 @@ The Process Control Block (PCB) is a representation of the process in the OS. It
 
 1. that we **can** read the source code
 2. that the **task_struct** is indeed there, 
-3. that the PCB has **a lot** of parameters. The definition of the struct starts at line 624 and ends at line 1284 (at the moment of writing this course, Nov 15th 2019). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
+3. that the PCB has **a lot** of parameters. The definition of the struct starts at line 649 and ends at line 1389 (at the moment of writing, March 15th 2021). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
   * the process state
   * the process identifier (PID)
   * the process priority
   * CPU scheduling info
   * list of open files
   * memory limits
-  * CPU registers
-  * program counter
+  * the CPU registers
+  * the program counter (PC)
+
+Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pauze a process for a while: simply stop updating the PC. 
 
 The PCBs of all the processes are contained in a doubly-linked list which is headed by the **mother of all processes**. This process is called **init** and has **PID 0**. The doubly-linked list is commonly known as the **process table**.
 
-Let's verify all of the above. We'll adapt the C program so it takes more time to run.
+Let's verify all of the above. To do that, we need to keep a process running for long enough to determine its PID. 
+For this, we'll adapt the C program so it takes much more time to run.
 
 ```C
 #include <stdio.h>
@@ -108,14 +113,7 @@ int main(void) {
 }
 ```
 
-After starting the program, the PID of the process can be looked for.
-
-```bash
-jvliegen@localhost:~/$ ./longhello
-hello world !
-hello world !
-...
-```
+After starting the program, the PID of the **./longhello** process can now be looked for using the `ps` command ("Process Status").
 
 ```bash
 jvliegen@localhost:~/$ ps -u
@@ -130,7 +128,8 @@ jvliegen 29414  0.0  0.0  30412  5504 pts/1    Ss   09:13   0:00 bash
 ...
 ```
 
-Through the ps command the PID of the process **./longhello** can be found. In the example above it's 20162. While this process is running, there is a folder in the **/proc** map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. Also, certain fields in the struct_task are reflected in this folder. 
+In the example above the PID is 20162. Now we want to get some information on this process. Remember how we said that in Linux, almost everything is a file?
+Well, while this process is running, Linux magically creates a folder in the **/proc** map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. For example, certain fields in the struct_task are reflected in this folder. 
 
 ```bash
 jvliegen@localhost:~/$ ls /proc/20162 
@@ -145,11 +144,18 @@ coredump_filter  map_files  oom_score_adj  smaps_rollup
 cpuset           maps       pagemap        stack
 cwd              mem        patch_state    stat
 environ          mountinfo  personality    statm
-jvliegen@localhost:~/$
 ```
 
-Don't forget it's there !! It might come in handy someday !!
-Every process has a PCB that contains metadata about the process.
+{{% task %}}
+Let's try to execute some commands here and see what they do:
+1. ls -al /proc/20162/cwd
+2. cat /proc/20162/sched
+3. cat /proc/20162/status
+4. cat /proc/20162/limits
+4. ls -al /proc/20162/net
+
+(tip: the `cat` command (short for concatenate) can be used to read a file and display its contents.)
+{{% /task %}}
 
 ### Process state
 One of the fields in the PCB is the **process state**. This value can be set to any of these values:
@@ -165,24 +171,25 @@ One of the fields in the PCB is the **process state**. This value can be set to 
 
 
 ### Open files list
-Every process that is created has a list of open files. Even programs that do not work with files have this list, and it **not empty**. Typically three files are open and these files are:
 
-0. standard input (stdin)
-0. standard output (stdout)
-0. standard error (stderr)
+Every process that is created has a list of open files. Even programs that do not actually work with files have this list, and it is **never empty**. Typically three files are open by default:
 
-By default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the monitor. These mappings can be altered, however. Redirecting can be done and will be briefly touched in [section 6.5](/ch6-tasks/intertasks/).
+1. standard input (stdin)
+2. standard output (stdout)
+3. standard error (stderr)
 
+As you might have understood by now, these are not -actual- files on your hard disk. This is gain some Linux magic, where input/output logic is represented as files, to make them easy to read/write from. 
 
+For example, by default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the command line. These mappings can be altered and redirected, however. For example, we might want to send errors (stderr) to a file instead. Redirecting can be done and will be briefly touched in [section 6.5](/ch6-tasks/intertasks/).
 
 ## Creating processes
 
-In Linux there are two typical ways for users to create processes: using **fork** or using **exec**. For the record, it is mentioned there is a third option using a system() function but because it is less secure and is less efficient then the other two, it is not discussed here.
+In Linux there are two typical ways for users to create processes: using **fork** or using **exec**. There is a third option using a system() function, but because it is less secure and less efficient then the other two, it is not discussed here.
 
-Both fork and exec create a new process. The fork function copies the PCB of its process to a new PCB. The process that calls the fork() is referred to with the **parent** process while the new process is the **child** process. The child process will continue operations on the same line as the parent process. Because of the copying of the PCB, the program counter is also copied !!
+Both fork and exec create a new process, but in very different ways. The fork function copies the PCB of its current process to a new PCB. The process that calls the fork() is referred to as the **parent** process, while the new process is its **child**. The child process will continue operations on the same line as the parent process (because of the copying of the PCB, the program counter is also copied!). This method is useful if you want to for example process a lot of data on multiple processors: you first get everything ready, then fork() new child processes that each deal with a part of the data. This is easier than manually starting new processes from scratch. 
 
-The exec() function call also starts from copying its own PCB. In contrast with fork(), it then replaces the 'program' (read the *text*, *data*, and *bss*) with a new program and starts executing from (relative) 0.
+The exec() function call also starts from copying its own PCB. In contrast with fork() however, it then replaces its internal 'program' (read the *text*, *data*, and *bss*) with a new, fresh copy of the program, clears all its memory and starts executing again from the first instruction. Unlike fork(), exec() thus doesn't spawn a new process, but effectively replaces the already running process with a new copy of itself and starts it from scratch. This is typically done right after fork(): you make a new clone of your process, then restart it from the beginning. 
 
-It is mentioned earlier that the first process that is started is the **init** process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle DHCP requests, processes that do logging, and so on. Using the **pstree** command we can see the processes in a tree, and have a visual representation of which child-parent relations there are between processes.
+It is mentioned earlier that the first process that is started is the **init** process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle connecting to the network, processes that do logging, and so on. Using the **pstree** command we can see the processes in a tree, and have a visual representation of which child-parent relations exist between processes.
 
 {{< figure src="/img/0x_31.png" title="An example of the pstree command. The left image shows the result of Linux on an embedded system. The right image shows the result of Linux running on a laptop" >}}

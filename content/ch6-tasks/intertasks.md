@@ -2,7 +2,11 @@
 title: '6.5: Inter task communication'
 pre: "<i class='fas fa-book'></i> "
 weight: 5
+draft: true
 ---
+
+!! DEPRECATED: SPLIT OUT INTO IPC and Inter-Thread separately !! 
+
 
 Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, **good job !!**
 
@@ -47,7 +51,7 @@ int main(void) {
 The code above exceeds the allowed stack space. Try to find out why this happens.
 {{% /task %}}
 
-The technique of using **shared memory** allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is **not** protected by the OS. A programming API for using shared memory is provided by POSIX. The example below shows a **producer** on the left and a **consumer** on the right.
+The technique of using **shared memory** allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is **not** protected by the OS. A programming API for using shared memory is provided by POSIX (Portable Operating System Interface). The example below shows a **producer** on the left (a process which puts data inside of the shared memory) and a **consumer** on the right (which uses the data it gets from the producer).
 
 <div class="multicolumn">
   <div class="column">
@@ -56,34 +60,32 @@ The technique of using **shared memory** allows other processes to gain access c
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <sys/shm.h>
 #include <sys/mman.h>
 
 int main() {
   const int SIZE = 4096; /* buffersize (bytes) */
   const char *name = "OS"; /* shared memory object name */
-  const char *message_0 = "Hello"; /* message 1 */
-  const char *message_1 = "World!"; /* message 2*/
-  int shm_fd; /* file descriptor */
+  const char *data_0 = "Hello";
+  const char *data_1 = "World!";
+  int shm_fd; /* shared memory file descriptor */
   void *ptr;
 
-  /* create the shared memory object */
+  /* create the shared memory file descriptor */
   shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
 
-  /* configure the size of the shared memory object */
+  /* configure the size of the shared memory file */
   ftruncate(shm_fd, SIZE);
 
-  /* memory map the shared memory object */
+  /* memory map the shared memory file */
   ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
-  /* write to the shared memory object */
-  sprintf(ptr,"%s",message_0);
-  ptr += strlen(message_0);
-  sprintf(ptr,"%s",message_1);
-  ptr += strlen(message_1);
-
-
-
+  /* write to the shared memory file */
+  sprintf(ptr,"%s",data_0);
+  ptr += strlen(data_0);
+  sprintf(ptr,"%s",data_1);
+  ptr += strlen(data_1);
 
   return 0;
 }
@@ -94,6 +96,7 @@ int main() {
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <sys/shm.h>
 #include <sys/mman.h>
 
@@ -106,22 +109,18 @@ int main() {
   int shm_fd; /* file descriptor */
   void *ptr;
 
-  /* open the shared memory object */
+  /* open the shared memory file */
   shm_fd = shm_open(name, O_RDONLY, 0666);
 
 
-
-
-  /* memory map the shared memory object */
+  /* memory map the shared memory file */
   ptr = mmap(0, SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
 
 
-  /* read from the shared memory object */
+  /* read from the shared memory file */
   printf("%s",(char *)ptr);
 
-
-
-  /* remove the shared memory object */
+  /* remove the shared memory file */
   shm_unlink(name);
 
   return 0;
@@ -131,22 +130,26 @@ int main() {
 </div>
 {{% dinobook %}}
 
+**Note:** to compile these, you need to pass the `-lrt` flag to gcc ("link with library rt") like so: `gcc -o producer producer.c -lrt`.
+
 {{% task %}}
 This very simple example uses shared memory. Try to find answers to the questions below:
 
-* Try to find out what these programs doe
+* Try to find out what these programs do
 * What is the size of the memory that is shared ?
 * Can a *producer* read from the shared memory ?
 * Can a *consumer* write to the shared memory ?
-* How do both process now which data is shared ? In other words, how does the consumer decide which memory it connects to ?
+* How do both processes know which data is shared ? In other words, how does the consumer decide which memory it connects to?
+* Do both processes have to be active at the same time for the memory sharing to work? Why (not)?
 {{% /task %}}
 
 ### Message passing
 
-The second technique for for interprocess communication (IPC) comes in the form of signals. Here we touch on 2 mechanisms for achieving this.
+The second technique for for InterProcess Communication (IPC) comes in the form of message passing. This method is a bit more restricted than using raw shared memory, but also easier to use ans safer because of that. Here we touch on 2 different mechanisms for achieving this: **signals** and **pipes**.
 
 #### Signals
-One mechanism comes in the form of **signals**. This is the cheapest form of IPC. It literally allows one process to send a signal to another process, through the use of the function **kill()**. Although the name might be a bit misleading, it can be used to send different signals. The snippet below shows the different types of signals that can be sent.
+
+Signals are the cheapest form of IPC. They literally allows one process to send a signal to another process, through the use of the function **kill()**. Although the name might be a bit misleading, it can be used to send different signals. These signals are conceptually a bit similar to the Interrupts we saw in Chapter 2: they allow a program to act on information coming in from the outside without itself having requested it. The snippet below shows the different types of signals that can be sent:
 
 ```bash
 jvliegen@localhost:~/$ kill -L
@@ -162,15 +165,14 @@ jvliegen@localhost:~/$ kill -L
 48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12
 53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7
 58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
-63) SIGRTMAX-1  64) SIGRTMAX  
-jvliegen@localhost:~/$  
+63) SIGRTMAX-1  64) SIGRTMAX   
 ```
 
-The function of sending signals to other processes is to be used in programs. It also has CLI-compatible command **kill**. For more information on the kill command, add the ```--help``` argument, read the man-page (```man kill```), or ask the Internet.
+There is also has CLI-compatible command **kill** that can send these signals to any running process (addressed by their PID). For more information on the kill command, add the ```--help``` argument, read the man-page (```man kill```), or ask the Internet.
 
 Two short-cuts are typically available in the CLI that allow for the sending of signals: CTRL+C and CTRL+Z. The former sends a **SIGINT** signal while the latter sends a **SIGTSTP** signal.
 
-Let's illustrate this with an example.
+Let's illustrate this with an example:
 
 ```C
 #include <stdio.h>
@@ -190,41 +192,38 @@ int main(void) {
 }
 ```
 
-This program will emulate an egg timer. Every second it displays how much time is left. Once the process starts running, it takes 10 minutes to complete. This process can be **killed** by just pressing CTRL+C.
+This program will emulate an egg timer. Every second it displays how much time is left. Once the process starts running, it takes 10 minutes to complete. This process can be **killed** by just pressing CTRL+C. Note that you don't have to manually do anything for this to work: your program automatically listens for this signal and exits the program when it is received.
 
 ```bash
-jvliegen@localhost:~/$ ./eg4_timer.bin 
+jvliegen@localhost:~/$ ./egg_timer.bin 
 TIMER: 00:10:00
 TIMER: 00:09:59
 TIMER: 00:09:58
 TIMER: 00:09:57
 TIMER: 00:09:56
 ^C
-jvliegen@localhost:~/$ 
-
 ```
 
-Another way to kill the process would be to explicitly send the signal through the kill command. To use this command, the **PID** is needed as an argument. Through a new CLI-window, this PID has to be search for first. Note that the type of signal is an argument in the command.
+Another way to kill the process would be to explicitly send the signal through the kill command. To use this command, the **PID** is needed as an argument. Through a new CLI-window, this PID has to be searched for first. Note that the type of signal is an argument in the command.
 
 ```bash
 jvliegen@localhost:~/$  ps ux | grep timer
-jvliegen  5041  0.0  0.0   4504   772 pts/1    S+   06:04   0:00 ./eg4_timer.bin
+jvliegen  5041  0.0  0.0   4504   772 pts/1    S+   06:04   0:00 ./egg_timer.bin
 jvliegen  5066  0.0  0.0  21996  1080 pts/2    S+   06:05   0:00 grep --color=auto timer
 jvliegen@localhost:~/$  kill -KILL 5041
-jvliegen@localhost:~/$ 
 ```
 
 {{% task %}}
-Try this for yourself. In the git repository for this course (in the VM), there is the *longhello* program (\~/osc-exercises/ch6_tasks/longhello.c). Run this program and try to kill it using **both** approaches that were explained above. (Offcourse this means you shoud run it again, after you killed it the first time :smiley: )
+Try this for yourself. You can use the *longhello* program (\~/osc-exercises/ch6_tasks/longhello.c) from Section 6.1. Run this program and try to kill it using **both** approaches that were explained above. (Ofcourse this means you shoud run it again, after you killed it the first time :smiley: )
 {{% /task %}}
 
 Although there are numerous uses for sending signals between signals, one more example is interesting to have a closer look at. Above there was already some hinting to **CTRL+Z**. 
 
-The CLI is running a shell, as you already know by now. This offers just a single interface. If you were to start a program, that CLI is occupied. Imagine you are working remotely on a server (e.g. through ssh), this would require you to open up a new connection to the server and have a second bash at your disposal. A more convenient solution would be to send the running program to the **background**.
+The CLI is running a shell, as you already know by now. This offers just a single interface. If you were to start a program, that CLI is occupied (you cannot type or execute any commands). Imagine you are working remotely on a server (e.g., through ssh): this would require you to open up a new connection to the server and have a second shell at your disposal every time you executed a longer running command (e.g., starting a web server). A more convenient solution would be to send the running program to the **background**.
 
 {{% figure src="/img/os/sc_xeyes.png" title="An example of a program that needs to be killed with CTRL-C" %}}
 
-Before you can send processes to the background, the process has to be halted first. This can be done through the CTRL+Z shortcut. With a halted process, the command **bg** sends the halted process to the background. If you do not send it to the background, the process will *freeze*. Once it is in the background it *unfreezes* and continues running. Additionally, this would give you back your shell.
+Before you can send processes to the background, the process has to be halted first. This can be done through the CTRL+Z shortcut. With a halted process, the command **bg** sends the halted process to the background. If you do not send it to the background, the process will *freeze*. Once it is in the background it *unfreezes* and continues running. Additionally, this gives you back your shell.
 
 ```bash
 jvliegen@localhost:~/$ xeyes 
@@ -237,35 +236,28 @@ jvliegen@localhost:~/$
 
 For the sake of completeness we enumerate a few more usefull aspects about this:
 
-* a process can be started in the background as well. This can be achieved by adding an **ampersand** after the command: eg. xeyes &
+* a process can be started in the background as well. This can be achieved by adding an **ampersand** after the command (e.g., xeyes &)
 * the command **jobs** gives you an overview of which jobs are running in the background
 * through the command **fg <#>** the job with index number <#> will pulled to foreground.
 
 {{% task %}}
-Try this for yourself. If the **xeyes** program is not installed, install it !!
-
-Reminder : 
-
-* sudo apt-cache search *string*
-* sudo apt-get install *package-name*
-
-
+Try this for yourself. If the **xeyes** program is not installed, install it first!
 {{% /task %}}
 
-
 #### Pipes
-Another option to achieve signal sending is through **pipes**. There are two different types of pipes available:
+
+Another option to achieve message sending is through **pipes**. There are two different types of pipes available:
 
 * anonymous pipes
 * named pipes
 
-**Anonymous pipes** are like tubes with two ends. Communication is half-duplex, to that means single direction only. A pipe could be attached to a process through a file descriptor. One process could **write** into the pipe, while the other could **read** from of the pipe. This type of pipe can only be create between two processes that have parent-child relation ship. 
+**Anonymous pipes** are like waterslides. You can put some data on it on one end (the top of the slide) and it comes out the other (the bottom), but it's not possible to go up the waterslide from the bottom. Put differently: communication is half-duplex (single direction). One process can **write** into the pipe, while the other can **read** from of the pipe. This type of pipe can only be create between two processes that have parent-child relation ship. What happens internally is that the **stdout** of the first process is mapped to the **stdin** of the second process. For this, we use the `|` (pipe) character.  
 
-When using the CLI, anonymous pipes are a very powerful tool for chaining different commands. The output of the first command will be the input for the next command. This can be chained multiple times
+When using the CLI, anonymous pipes are a very powerful tool for chaining different commands. The output of the first command will be the input for the next command. This can be chained multiple times.
 
 ```bash
 jvliegen@localhost:~/$ xeyes &
-jvliegen@localhost:~/$ ps u | grep xeyes | head -1 | cut -d " " -f 3
+jvliegen@localhost:~/$ ps -u | grep xeyes | head -1 | cut -d " " -f 3
 5526
 jvliegen@localhost:~/$ 
 ```
@@ -273,28 +265,32 @@ jvliegen@localhost:~/$
 The example above chains the following:
 
 1. give a list of all *my* processes
-2. only filter the lines that contain the word *xeyes*
-3. filter only the first line 
-4. split the input on a " " (a space) and report only the third field
+2. only filter the lines that contain the word *xeyes* (`grep` stands for Global Regular Expression Print)
+3. filter only the first line (`head`)
+4. split the input on a space (" ") and report only the third field
 
-Do you remember the Process Control Block ? This has one field called **list of open files**. We've already touched upon STDOUT and co. Using anonymous pipes will add an entry to this list.
+Do you remember the Process Control Block ? This has one field called **list of open files**. We've already touched upon stdin, stdout and stderr. Using anonymous pipes will add an entry to this list.
 
-As a quick reminder: Every process has at least 3 open files. These can be *relinked* as shown in the example below.
-
-* process < STDIN 1>STDOUT 2>STDERR
-* process < STDIN 1>STDOUT 2>&1
+We can also **relink** the 3 default open files to other targets. For example, instead of writing output and errors to the command line, we can redirect them to a file. Similarly, we can read input from a file instead of from the keyboard:
 
 {{% figure src="/img/os/sc_redirect_stdout.png" title="Redirection of the standard output " %}}
 
+The syntax for this is a bit weird though: 1> is meant to redirect data that normally goes to stdout, while 2> is used to relink stderr. You can also point directly to the existing stdout/stderr by using &1 or &2 respectively:
+
+* process 1>{STDOUT} 2>{STDERR}
+* process 1>{STDOUT} 2>&1
+* process < {STDIN} (read from a file at location {STDIN} rather than from the keyboard)
+
+Note that here we're using the `>` pipe here instead of `|` as above. The difference is subtle, but a simple explanation is that `>` deals with mapping a command to a *file* (or something that pretends to be a file, like stdout/stderr), while `|` maps a command to *another command*. 
 
 
-**Named pipes** are the other type of pipes that can be created. The main differences are the lifetime of this mechanism and their presence in the file system. 
+**Named pipes** are the other type of pipes that can be created. The main differences with anonymous pipes are the lifetime of this mechanism and their presence in the file system. 
 
-The anonymous pipes above only live as long as the processes live. Named pipes have to be closed explicitly (or are closes automatically at system-shutdown).
+The anonymous pipes above only live for as long as the processes live. Named pipes instead persist and have to be closed explicitly (or are closes automatically at system-shutdown).
 
-Named pipes have a presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the **mkfifo** command.
+Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the **mkfifo** command.
 
-As they are not frequently used we leave the interested reader to man page :smiley:.
+As they are not frequently used, we leave the interested reader to man page :smiley:.
 
 
 ## Communication between threads

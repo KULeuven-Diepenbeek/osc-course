@@ -1,7 +1,7 @@
 ---
-title: '6.4: Threads (lab)'
-pre: "<i class='fas fa-vial'></i> "
-weight: 4
+title: '6.5: Threads (lab)'
+pre: "<i class='fas fa-vial'></i>"
+weight: 5
 ---
 
 {{<figure src="/img/os/db_threads.png">}}

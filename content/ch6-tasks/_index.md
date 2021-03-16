@@ -20,7 +20,9 @@ weight: 6
 
 6.2: Processes (lab)
 
-6.3: Threads
+6.3: Inter-Process Communication (IPC)
+
+6.4: Threads
 
   * What's in a thread ?
   * Why would we want multiple threads ?
@@ -28,15 +30,13 @@ weight: 6
   * Creating threads
     * Pthreads
 
-6.4: Threads (lab)
+6.5: Threads (lab)
 
-6.5 Inter Task communication
-
-  * Communication between processes
-    * Shared memory
-    * Message passing
+6.6 Inter-Thread communication
+  * Critical Section
   * Communication between threads
+    * Locking
     * Mutex
     * Semaphore
 
-6.5 Inter Task communication (lab)
+6.7 Inter-Thread communication (lab)

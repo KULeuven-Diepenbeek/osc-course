@@ -2,7 +2,12 @@
 title: '6.6: Inter task communication (lab)'
 pre: "<i class='fas fa-vial'></i> "
 weight: 6
+draft: true
 ---
+
+
+!! DEPRECATED: SPLIT OUT INTO IPC and Inter-Thread separately !! 
+
 
 {{<figure src="/img/os/header_communication.jpg" title="Source: G.I." >}}
 

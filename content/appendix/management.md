@@ -4,45 +4,42 @@ draft: true
 ---
 
 # TIMING AY2020-2021
-* 15/02, 16/02 W1: 1.5h + 3h
-  * **ch1** Introduction in C
-* 22/02 W2: interrupts "gastencollege" Jo
-* 01/03, 02/03 W3: 
-  * 1.5h: **ch3** Pointers & Arrays
-  * 3h: **ch2** pointers & arrays, announcement of first exercise
-* 08/03 W4: 
-  * 1.5h: intro in OS (Robin 1st, voormiddag)
-  * 3h: **ch4** Debugging (Wouter, namiddag)
-  * announcement of second task
-  * deadline task 1 (Linked Lists)
+* Week 1: 15/02, 16/02: 1.5h + 3h
+  * **ch1** Introduction in C - Wouter
+* Week 2: 22/02 : 1.5h + 3h
+  * **ch3** Pointers and Arrays - Wouter
+* Week 3: 01/03, 02/03: 1.5h + 3h 
+  * 1.5h: **ch3** Pointers & Arrays - Wouter
+  * 3h: **ch4** Debugging - Wouter
+  * announcement of first exercise (deadline: 15/03 9AM)
+* Week 4: 08/03: 1.5h + 3h
+  * **ch2** Interrupts - Jo
+* Week 5: 15/03, 16/03: 1.5h + 3h
+  * 1.5h: **ch5** Intro to OS - Robin
+  * 3h: **ch6** Processes - Robin
+  * announcement of second exercise (deadline: TBD)
 
-Te bezien:
+* Week 6: 22/03: 1.5h + 3h
+  * **ch6** Threads - Robin
+* Week 7: 29/03, 30/03: 1.5h + 3h
+  * **ch7** CPU scheduling - Robin
+  * announcement of third exercise (deadline: TBD)
 
-* W5: 
-  * 1.5h: **ch5** Intro to OS
-  * 3h: **ch6** Processes + lab + Threads (rap rap due to corona :)
-  * indienen taak 2 (C++ testing)
-* W6: 
-  * 1.5h: Procsses lab (2/2) + Threads lab
-  * 3h: inter task communication + labs
-* W7: 
-  * 1.5h: **ch7** CPU Scheduling
-  * 3h: labs + **ch8** Stack & Heap + labs
-  indienen taak 3 (threads)
-* W8: 
-  * 1.5h: Memory Management
-  * 3h: 
-* paasvakantie
-* paasvakantie
-* W9: 
-  * 1.5h: CS - RTOS
-  * 3h: CS - 
-* W10: 
-  * 1.5h: CS - 
-  * 3h: CS - 
-* W11: 
-  * 1.5h: CS - Device drivers + exercise
-  * 3h: CS - Device drivers + exercise
-* W12: 
-  * 1.5h: *vrij ?*
-  * 3h: *vrij ?*
+* Week 8 : Easter holidays
+* Week 9 : Easter holidays
+
+* Week 10: 19/04: 1.5h + 3h
+  * **ch8** Stack and Heap - Wouter
+
+* Week 11: 26/04, 27/04: 1.5h + 3h
+  * **ch9** Memory Management - Robin
+  * announcement of the fourth exercise (deadline: TBD)
+
+* Week 12: 03/05: 1.5h + 3h 
+  * Capita Selecta
+
+* Week 13: 10/05, 11/05: 1.5h + 3h 
+  * Capita Selecta
+
+* Week 14: 17/05: 1.5h + 3h 
+  * Capita Selecta

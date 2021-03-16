@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>X.2: Real-time Operating Systems :: Operating Systems and C</title>
+    <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1615892616" rel="stylesheet">
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../chx-cs/rtos/">
+  <body class="" data-url="../../ch6-tasks/interthread/">
     <nav id="sidebar" class="">
 
 
@@ -665,7 +665,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item
-        
+        parent
         
         
         ">
@@ -796,7 +796,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/interthread/" title="6.6: Inter Thread communication" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/interthread/" title="6.6: Inter Thread communication" class="dd-item active">
         <a href="../../ch6-tasks/interthread/">
         <i class='fas fa-book'></i> 6.6: Inter Thread communication
         
@@ -1179,7 +1179,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/chx-cs/" title="X: Capita Selecta" class="dd-item
-        parent
+        
         
         
         ">
@@ -1226,7 +1226,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item active">
+      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
         <a href="../../chx-cs/rtos/">
         <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
         
@@ -1566,7 +1566,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../chx-cs/'>X: Capita Selecta</a> > X.2: Real-time Operating Systems
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Task management</a> > 6.6: Inter Thread communication
           
         
           
@@ -1583,12 +1583,11 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#operating-systems">Operating Systems</a></li>
-<li><a href="#real-time-operating-systems">Real-time Operating Systems</a>
+<li><a href="#communication-between-threads">Communication between threads</a>
 <ul>
-<li><a href="#freertos">FreeRTOS</a></li>
+<li><a href="#mutex">Mutex</a></li>
+<li><a href="#semaphore">Semaphore</a></li>
 </ul></li>
-<li><a href="#outdated">Outdated ?</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1607,7 +1606,7 @@ window.MathJax = {
           
             <h1>
               
-              X.2: Real-time Operating Systems
+              6.6: Inter Thread communication
             </h1>
           
 
@@ -1616,168 +1615,107 @@ window.MathJax = {
 
 
 
-<h2 id="operating-systems">Operating Systems</h2>
+<p><strong>TODO: add critical section (register updates) and deadlock empire stuff</strong></p>
 
-<p>In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.</p>
+<h2 id="communication-between-threads">Communication between threads</h2>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Simplified_Structure_of_the_Linux_Kernel.svg/1920px-Simplified_Structure_of_the_Linux_Kernel.svg.png" width="60%"/> <figcaption>
-            <h4>source: wikipedia.com</h4>
-        </figcaption>
-</figure>
-
-<p>The image above shows:</p>
-
-<ul>
-<li>Task management</li>
-<li>Memory management</li>
-<li>the IO subsystem</li>
-</ul>
-
-<div class="multicolumn">
-    <div class="column">
-        <figure>
-    <img src="../../img/chx/desired.svg"/> <figcaption>
-            <h4>The desired situation.</h4>
-        </figcaption>
-</figure>
-
-    </div>
-    <div class="column">
-        <figure>
-    <img src="../../img/chx/reality.svg"/> <figcaption>
-            <h4>The real situation.</h4>
-        </figcaption>
-</figure>
-
-    </div>
-</div>
-
-<p>The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware. On the left-hand side of the image above a visual representation is given of what we want to experience. Everything is running truly in parallel.    We have touched on a number of reasons why reality is more like is shown on the right-hand side of the image. The OS will do its best to achieve the desired situation as good as possible. However, sometimes doing your best is <strong>not good enough</strong>.</p>
-
-<p>Try to imagine these situations (and the possible explanations from the developers):</p>
-
-<ul>
-<li>A pacemaker <strong>missed</strong> an arrhythmia
-
-<ul>
-<li><em>Sorry, at that moment the tiny OS was switching tasks.</em></li>
-</ul></li>
-<li>A surveillance drone <strong>crashed</strong> against a construction crane
-
-<ul>
-<li><em>Sorry, at that moment the drone should have detected the crane, the flight computer was in the middle of a TCP time-out while sending telemetry.</em></li>
-</ul></li>
-<li>The motor of a high-end sports car <strong>burned</strong> out due to a faulty-timed gear shift
-
-<ul>
-<li><em>Sorry, at the moment the timer ended, the microcontroller was handling a switch in radio stations.</em></li>
-</ul></li>
-</ul>
-
-
-<div class="notices warning" ><p><strong>Sometimes doing your best is not good enough</strong></p>
-</div>
-
-
-<h2 id="real-time-operating-systems">Real-time Operating Systems</h2>
-
-<p>While a general OS tries its best to meet all constraints, a sporadic failure is not a vital problem. If there is a dip in network handling resulting in a short lag of a youtube-clip the computer will not crash-and-burn. Operating systems like this are called <strong>soft real-time operating systems</strong> and examples are: Linux, Windows, iOS, &hellip;</p>
-
-<p>Like illustrated above, some situations have tasks which <strong>have to meet their constraints</strong>. Failing to do so results in a system failure. For these applications Real-Time Operating Systems (RTOS) can be used. These operating systems are called <strong>hard real-time systems</strong>. They have very specific deterministic constraints and ALL of them should be MET, at ALL TIME. Examples of RTOSes are:</p>
-
-<ul>
-<li>FreeRTOS</li>
-<li>mbedOS</li>
-<li>Contiki</li>
-<li>Xenomai</li>
-<li><em>(there are many more)</em></li>
-</ul>
-
-<p>For the sake of completeness it is pointed out that tweaks are available to turn the Linux kernel into a real-time kernel.</p>
-
-<h3 id="freertos">FreeRTOS</h3>
+<p>One <em>raison d&rsquo;être</em> for multi-threaded applications is <strong>resource sharing</strong>. In the example that was given <a href="../../ch6-tasks/threads/#pthreads">earlier</a> a <strong>global variable</strong> &lsquo;counter&rsquo; was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.</p>
 
 <figure>
-    <img src="https://www.freertos.org/wp-content/uploads/2018/07/logo-1.jpg"/> <figcaption>
-            <h4>The FreeRTOS logo</h4>
-        </figcaption>
+    <img src="../../img/os/sc_631.png"/> 
 </figure>
 
-<p><a href="https://www.freertos.org/">FreeRTOS</a> is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in <a href="../../ch2-interrupts/">chapter 2</a>. Again &hellip; you can run <strong>this OS</strong> on the little microcontroller 😄</p>
+<p>This might come as a surprise 😃 <br/>
+It should be clear that what we wanted to see was <em>Job 1 started</em> followed by <em>Job 1 finished</em> and that this would be repeated again for job number 2.</p>
 
-<p>This OS essentially consists out 5 files:</p>
+<p>The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2 in contrast with the intended value of 1.</p>
 
-<ul>
-<li><strong>tasks.c</strong>: handles task management</li>
-<li><strong>queue.c</strong>: handles queues &amp; synchronisation</li>
-<li><strong>list.c</strong>: handles lists</li>
-<li><strong>port.c</strong>: details for porting to a specific processor</li>
-<li><strong>heap_x.c</strong>: handles the heap</li>
-</ul>
+<h3 id="mutex">Mutex</h3>
 
-<p>FreeRTOS is a trade-off between bare-metal programming and the luxury of an OS. With everything you&rsquo;ve seen in this course you should be able, after some studying perhaps, to understand how a <strong>task</strong> is described.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runClock</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> pvParameters) {
-	<span style="color:#66d9ef">short</span> i, j, k, l;
+<p>The simplest form of solving inter-thread communication issues is the use of a mutex. This is a portmanteau of <strong>Mut</strong>ual <strong>Ex</strong>clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you <strong>lock</strong> the door. Others that want to occupy the toilet have to wait until you&rsquo;re finished and you <strong>unlock</strong> the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, &hellip;</p>
 
-	<span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span>(;;) {
-		<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">24</span>;i<span style="color:#f92672">++</span>){
-			<span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span>;j<span style="color:#f92672">++</span>){
-				d[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span> j <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> (j<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">=</span> (i<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+<p>The concept of a mutex is implemented in the pthreads library as a new variable type: <strong>pthread_mutex_t</strong>. Locking and unlocking can be done through functions <strong>pthread_mutex_lock()</strong> and <strong>pthread_mutex_unlock()</strong>. As always, read the documentation for the exact usage of these functions.</p>
 
-				<span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>;k<span style="color:#f92672">++</span>) {
-					<span style="color:#66d9ef">for</span>(l<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;l<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>;l<span style="color:#f92672">++</span>) {
-						_delay_ms(<span style="color:#ae81ff">5</span>);
-					}			 
-				}
-		}}
-	} <span style="color:#75715e">/* end of for/*ever*/</span>
+<p>The example above can be rewritten using a mutex:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> counter;
+pthread_mutex_t lock_counter;                   <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
 
-	<span style="color:#75715e">// no return statement
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>The function above is the program/tasks that simulates time. The time is written in <strong>shared memory</strong> that is accessible by other programs/tasks.</p>
+<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">doSomeThing</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>arg) {
+    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-<p>The main function could like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+    <span style="color:#66d9ef">int</span> id;                                     <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    pthread_mutex_lock(<span style="color:#f92672">&amp;</span>lock_counter);          <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+    id <span style="color:#f92672">=</span> counter;                               <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    pthread_mutex_unlock(<span style="color:#f92672">&amp;</span>lock_counter);        <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
 
-  <span style="color:#75715e">/* Perform any hardware setup necessary. */</span>
 
-  <span style="color:#75715e">// define the outputs to be the 4 digit-selectors and the 7 segement-selectors
-</span><span style="color:#75715e"></span>  DDRB <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b00111111; 
-  DDRD <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b11111000; 
+    printf(<span style="color:#e6db74">&#34;  Job %d started</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);           <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
+    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>(<span style="color:#ae81ff">0xFFFFFFFF</span>);i<span style="color:#f92672">++</span>);
+    printf(<span style="color:#e6db74">&#34;  Job %d finished</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);          <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
 
-  <span style="color:#75715e">/* APPLICATION TASKS CAN BE CREATED HERE 
-</span><span style="color:#75715e">   * eg. xTaskCreate(TaskBlinkGreenLED, (const portCHAR*) &#34;GreenLED&#34;, 256, NULL, 3, NULL);
-</span><span style="color:#75715e">   * with 1st argument: name of the function
-</span><span style="color:#75715e">   *      2nd argument: human readable name (only for debugging purposes)
-</span><span style="color:#75715e">   *      3rd argument: stacksize (in &#34;words&#34; (words*stackwidth = memory))
-</span><span style="color:#75715e">   *      4th argument: function parameters
-</span><span style="color:#75715e">   *      5th argument: priority (0 ... (configMAX_PRIORITIES – 1))
-</span><span style="color:#75715e">   *      6th argument: pxCreatedTask can be used to pass out a handle to the task being created. This handle can then 
-</span><span style="color:#75715e">   *                    be used to reference the task in API calls that, for example, change the task priority or
-</span><span style="color:#75715e">   *                    delete the task.
-</span><span style="color:#75715e">   **/</span>
-  xTaskCreate(runClock, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;runclock&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
-  xTaskCreate(showOnDisplay, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;displayer&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
-  
-  <span style="color:#75715e">/* start the scheduler */</span>
-  vTaskStartScheduler();
+    <span style="color:#66d9ef">return</span> NULL;
+}
 
-  <span style="color:#75715e">/* Execution will only reach here if there was insufficient heap to start the scheduler. */</span>
-  <span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span> (;;);
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+  <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, err;
+  pthread_t tid[<span style="color:#ae81ff">2</span>];
+
+  <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
+    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>doSomeThing, NULL);
+    <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create thread :[%s]&#34;</span>, strerror(err));
+    }
+    i<span style="color:#f92672">++</span>;
+  }
+
+  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
+  pthread_join(tid[<span style="color:#ae81ff">1</span>], NULL);
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<h2 id="outdated">Outdated ?</h2>
+<p>This solves the issue that was encountered above. Before the counter is accessed the mutex is locked. This provides exclusive access. The counter is then incremented and copied in to variable <em>id</em>. Finally, the mutex is unlocked.</p>
 
-<p>One could state that RTOS-es are outdated. Processors and OS-es, anno 2020, are <strong>so powerful</strong> that no additional measures should be taken to guarantee specific constraints. While that might be true, there is also <strong>scalability</strong>.</p>
+<p>With this measure in place, the result is as was intended.
+<figure>
+    <img src="../../img/os/sc_mutex.png"/>
+</figure></p>
 
-<p>It might be feasible to write all the desired software (networking stacks, logging, sensor reading, &hellip;) in such a way all constraints are met, <strong>BUT</strong> it requires a state-of-the-art system. For example: a processor with 2 GB of RAM memory and 160 GB of solid state storage. Installing this in every gearbox of a car, for example, simply is <strong>too expensive</strong>. If the same constraints and performance requirements can be met for a fraction of the price, industry dictates the latter option should be chosen.</p>
+<p><strong>PROTIP:</strong> It is pointed out that the time (directionally proportional the number of instructions) between locking and unlocking a mutex should be kept to a minimum. Other threads might be waiting for the mutex to become available.</p>
 
-<p>That&rsquo;s good news for whoever is studying this course, as skill-full programmers and engineers are a necessity to make this work 😄</p>
+<h3 id="semaphore">Semaphore</h3>
+
+<p>A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys.</p>
+
+<figure>
+    <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" width="50%"/> <figcaption>
+            <h4>This photo of Cafe Boulevard is courtesy of Tripadvisor</h4>
+        </figcaption>
+</figure>
+
+<p>Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, he/she needs to take a bracelet and put it on. When there are not more bracelets, a child that also wants to play in the room has to wait until another child leaves the room and places his/her bracelet back in the bowl.</p>
+
+<p>This technique is used in e.g. producer-consumer problems, amongst many other types. In contrast with the mutex, a semaphore can have multiple states. It is <em>number</em> of tokens. It is pointed out that if there is only a single token in the semaphore, this behaves exactly the same as a mutex. Such a semaphore is referred to as a <strong>binary semaphore</strong>.</p>
+
+<p>The <strong>pthreads</strong> library also provides an API to program with semaphores. It contains, amongst others, functions like:</p>
+
+<ul>
+<li>sem_init(): initialises a semaphore</li>
+<li>sem_wait(): decrements the number inside of the semaphore.</li>
+<li>sem_post(): increments the number inside of the semaphore.</li>
+</ul>
+
+<p>Note that the <code>sem_wait()</code> function is blocking. If the value of the semaphore is set to zero, the thread waits until it can acquire a lock. There is a non-blocking alternative sem_trywait(). See the manual pages for more info and the correct usage.</p>
+
+<p>Next to fact that a mutex only has a single token, where a semaphore can have more, the signalling is also a main difference. When a thread wants to get access to a semaphore and there are no more tokens available, it goes into a sleep-like state. When another thread produces a semaphore, a signal is sent to all the threads that were &lsquo;sleeping&rsquo;.</p>
+
+<p>More info on the differences between a semaphore and a mutex are given <a href="https://techdifferences.com/difference-between-semaphore-and-mutex.html">here</a>.</p>
 
 
 <footer class="footline">
@@ -2186,6 +2124,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -2198,6 +2137,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2279,53 +2221,6 @@ window.MathJax = {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -2343,37 +2238,8 @@ window.MathJax = {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -2401,6 +2267,22 @@ window.MathJax = {
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -2514,6 +2396,70 @@ window.MathJax = {
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -2538,7 +2484,6 @@ window.MathJax = {
             
                 
                     
-                    
                 
                 
 
@@ -2551,26 +2496,6 @@ window.MathJax = {
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -2588,8 +2513,21 @@ window.MathJax = {
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -2774,10 +2712,10 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../chx-cs/filesystems/" title="X.1: File systems"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch6-tasks/lab2_threadsmgmt/" title="6.5: Threads (lab)"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../chx-cs/devdrivers/" title="X.3: Device Drivers" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch6-tasks/lab3_interthreadcomm/" title="6.7: Inter-Thread communication (lab)" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

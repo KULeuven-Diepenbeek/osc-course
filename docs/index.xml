@@ -265,14 +265,14 @@ It&amp;rsquo;s concepts and definitions will not be repeated here, but we will i
     </item>
     
     <item>
-      <title>6.3: Threads</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</link>
+      <title>6.3: Inter Process communication</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
-      <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
-What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up until now all the processes that were discussed contained one thread.
-  The single threaded process    p.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
+      <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
+It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
+There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.</description>
     </item>
     
     <item>
@@ -355,13 +355,14 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
     </item>
     
     <item>
-      <title>6.4: Threads (lab)</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
+      <title>6.4: Threads</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
-      <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
-Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID.    An example output    Write a C-program that has 1 king thread and n servant threads.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
+      <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
+What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up until now all the processes that were discussed contained one thread.
+  The single threaded process    p.</description>
     </item>
     
     <item>
@@ -416,13 +417,13 @@ File hello.c:
     </item>
     
     <item>
-      <title>6.5: Inter task communication</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</link>
+      <title>6.5: Threads (lab)</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/intertasks/</guid>
-      <description>Having multiple tasks running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
-It would make sense, though, if different tasks were able to communicate with each other. A distinction should be made between multi-processes and multi-threading. Although both techniques are made for running multiple jobs, the communication between the jobs is much different in both.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
+      <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
+Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID.    An example output    Write a C-program that has 1 king thread and n servant threads.</description>
     </item>
     
     <item>
@@ -437,14 +438,24 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
     </item>
     
     <item>
-      <title>6.6: Inter task communication (lab)</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</link>
+      <title>6.6: Inter Thread communication</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_intertaskcomm/</guid>
-      <description>Source: G.I.   Inter process communication These exercises are to be done in a terminal, using the command line interface.
-  Open two terminals. On one terminal you start a process that takes some minutes to finish. From the other terminal:
- figure out the process ID of the first process send a kill signal to that first process.  Use unnamed pipes to display all the processes of which you are the owner.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
+      <description>TODO: add critical section (register updates) and deadlock empire stuff
+Communication between threads One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.
+  This might come as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
+    </item>
+    
+    <item>
+      <title>6.7: Inter-Thread communication (lab)</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
+      <description>Source: G.I.    TODO: add proper exercises from Deadlock empire here!
+ REVISIT, WITH A TWEAK Write a C-program that has 1 king thread and n servant threads. The number of threads should be configurable through a define. The king thread sleeps for a random amount of time and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID.</description>
     </item>
     
     <item>

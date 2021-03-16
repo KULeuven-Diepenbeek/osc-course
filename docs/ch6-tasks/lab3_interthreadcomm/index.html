@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>X.2: Real-time Operating Systems :: Operating Systems and C</title>
+    <title>6.7: Inter-Thread communication (lab) :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1615892616" rel="stylesheet">
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../chx-cs/rtos/">
+  <body class="" data-url="../../ch6-tasks/lab3_interthreadcomm/">
     <nav id="sidebar" class="">
 
 
@@ -665,7 +665,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item
-        
+        parent
         
         
         ">
@@ -817,7 +817,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch6-tasks/lab3_interthreadcomm/" title="6.7: Inter-Thread communication (lab)" class="dd-item ">
+      <li data-nav-id="/ch6-tasks/lab3_interthreadcomm/" title="6.7: Inter-Thread communication (lab)" class="dd-item active">
         <a href="../../ch6-tasks/lab3_interthreadcomm/">
         <i class='fas fa-vial'></i> 6.7: Inter-Thread communication (lab)
         
@@ -1179,7 +1179,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/chx-cs/" title="X: Capita Selecta" class="dd-item
-        parent
+        
         
         
         ">
@@ -1226,7 +1226,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item active">
+      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
         <a href="../../chx-cs/rtos/">
         <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
         
@@ -1566,7 +1566,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../chx-cs/'>X: Capita Selecta</a> > X.2: Real-time Operating Systems
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch6-tasks/'>6: Task management</a> > 6.7: Inter-Thread communication (lab)
           
         
           
@@ -1579,19 +1579,7 @@ window.MathJax = {
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#operating-systems">Operating Systems</a></li>
-<li><a href="#real-time-operating-systems">Real-time Operating Systems</a>
-<ul>
-<li><a href="#freertos">FreeRTOS</a></li>
-</ul></li>
-<li><a href="#outdated">Outdated ?</a></li>
-</ul></li>
-</ul>
-</nav>
+
     </div>
 </div>
 
@@ -1607,177 +1595,37 @@ window.MathJax = {
           
             <h1>
               
-              X.2: Real-time Operating Systems
+              6.7: Inter-Thread communication (lab)
             </h1>
           
 
         
 
 
+<figure>
+    <img src="../../img/os/header_communication.jpg"/> <figcaption>
+            <h4>Source: G.I.</h4>
+        </figcaption>
+</figure>
 
 
-<h2 id="operating-systems">Operating Systems</h2>
+<ul>
+<li><p>TODO: add proper exercises from Deadlock empire here!</p></li>
 
-<p>In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.</p>
+<li><p><strong>REVISIT, WITH A TWEAK</strong> Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of threads should be configurable through a define. The king thread sleeps for a random amount of time and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
+
+<ul>
+<li>the order of the servants <strong>can</strong> vary</li>
+<li>every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
+<li>the king <strong>does</strong> wait for the greetings before he goes back to sleep &lt;&mdash;&mdash;&mdash;&mdash;&ndash; here&rsquo;s the tweak</li>
+</ul></li>
+</ul>
 
 <figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Simplified_Structure_of_the_Linux_Kernel.svg/1920px-Simplified_Structure_of_the_Linux_Kernel.svg.png" width="60%"/> <figcaption>
-            <h4>source: wikipedia.com</h4>
+    <img src="../../img/os/sc_642.png"/> <figcaption>
+            <h4>An example output</h4>
         </figcaption>
 </figure>
-
-<p>The image above shows:</p>
-
-<ul>
-<li>Task management</li>
-<li>Memory management</li>
-<li>the IO subsystem</li>
-</ul>
-
-<div class="multicolumn">
-    <div class="column">
-        <figure>
-    <img src="../../img/chx/desired.svg"/> <figcaption>
-            <h4>The desired situation.</h4>
-        </figcaption>
-</figure>
-
-    </div>
-    <div class="column">
-        <figure>
-    <img src="../../img/chx/reality.svg"/> <figcaption>
-            <h4>The real situation.</h4>
-        </figcaption>
-</figure>
-
-    </div>
-</div>
-
-<p>The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware. On the left-hand side of the image above a visual representation is given of what we want to experience. Everything is running truly in parallel.    We have touched on a number of reasons why reality is more like is shown on the right-hand side of the image. The OS will do its best to achieve the desired situation as good as possible. However, sometimes doing your best is <strong>not good enough</strong>.</p>
-
-<p>Try to imagine these situations (and the possible explanations from the developers):</p>
-
-<ul>
-<li>A pacemaker <strong>missed</strong> an arrhythmia
-
-<ul>
-<li><em>Sorry, at that moment the tiny OS was switching tasks.</em></li>
-</ul></li>
-<li>A surveillance drone <strong>crashed</strong> against a construction crane
-
-<ul>
-<li><em>Sorry, at that moment the drone should have detected the crane, the flight computer was in the middle of a TCP time-out while sending telemetry.</em></li>
-</ul></li>
-<li>The motor of a high-end sports car <strong>burned</strong> out due to a faulty-timed gear shift
-
-<ul>
-<li><em>Sorry, at the moment the timer ended, the microcontroller was handling a switch in radio stations.</em></li>
-</ul></li>
-</ul>
-
-
-<div class="notices warning" ><p><strong>Sometimes doing your best is not good enough</strong></p>
-</div>
-
-
-<h2 id="real-time-operating-systems">Real-time Operating Systems</h2>
-
-<p>While a general OS tries its best to meet all constraints, a sporadic failure is not a vital problem. If there is a dip in network handling resulting in a short lag of a youtube-clip the computer will not crash-and-burn. Operating systems like this are called <strong>soft real-time operating systems</strong> and examples are: Linux, Windows, iOS, &hellip;</p>
-
-<p>Like illustrated above, some situations have tasks which <strong>have to meet their constraints</strong>. Failing to do so results in a system failure. For these applications Real-Time Operating Systems (RTOS) can be used. These operating systems are called <strong>hard real-time systems</strong>. They have very specific deterministic constraints and ALL of them should be MET, at ALL TIME. Examples of RTOSes are:</p>
-
-<ul>
-<li>FreeRTOS</li>
-<li>mbedOS</li>
-<li>Contiki</li>
-<li>Xenomai</li>
-<li><em>(there are many more)</em></li>
-</ul>
-
-<p>For the sake of completeness it is pointed out that tweaks are available to turn the Linux kernel into a real-time kernel.</p>
-
-<h3 id="freertos">FreeRTOS</h3>
-
-<figure>
-    <img src="https://www.freertos.org/wp-content/uploads/2018/07/logo-1.jpg"/> <figcaption>
-            <h4>The FreeRTOS logo</h4>
-        </figcaption>
-</figure>
-
-<p><a href="https://www.freertos.org/">FreeRTOS</a> is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in <a href="../../ch2-interrupts/">chapter 2</a>. Again &hellip; you can run <strong>this OS</strong> on the little microcontroller 😄</p>
-
-<p>This OS essentially consists out 5 files:</p>
-
-<ul>
-<li><strong>tasks.c</strong>: handles task management</li>
-<li><strong>queue.c</strong>: handles queues &amp; synchronisation</li>
-<li><strong>list.c</strong>: handles lists</li>
-<li><strong>port.c</strong>: details for porting to a specific processor</li>
-<li><strong>heap_x.c</strong>: handles the heap</li>
-</ul>
-
-<p>FreeRTOS is a trade-off between bare-metal programming and the luxury of an OS. With everything you&rsquo;ve seen in this course you should be able, after some studying perhaps, to understand how a <strong>task</strong> is described.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runClock</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> pvParameters) {
-	<span style="color:#66d9ef">short</span> i, j, k, l;
-
-	<span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span>(;;) {
-		<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">24</span>;i<span style="color:#f92672">++</span>){
-			<span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span>;j<span style="color:#f92672">++</span>){
-				d[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span> j <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> (j<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">=</span> (i<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-
-				<span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>;k<span style="color:#f92672">++</span>) {
-					<span style="color:#66d9ef">for</span>(l<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;l<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>;l<span style="color:#f92672">++</span>) {
-						_delay_ms(<span style="color:#ae81ff">5</span>);
-					}			 
-				}
-		}}
-	} <span style="color:#75715e">/* end of for/*ever*/</span>
-
-	<span style="color:#75715e">// no return statement
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>The function above is the program/tasks that simulates time. The time is written in <strong>shared memory</strong> that is accessible by other programs/tasks.</p>
-
-<p>The main function could like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-
-  <span style="color:#75715e">/* Perform any hardware setup necessary. */</span>
-
-  <span style="color:#75715e">// define the outputs to be the 4 digit-selectors and the 7 segement-selectors
-</span><span style="color:#75715e"></span>  DDRB <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b00111111; 
-  DDRD <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b11111000; 
-
-  <span style="color:#75715e">/* APPLICATION TASKS CAN BE CREATED HERE 
-</span><span style="color:#75715e">   * eg. xTaskCreate(TaskBlinkGreenLED, (const portCHAR*) &#34;GreenLED&#34;, 256, NULL, 3, NULL);
-</span><span style="color:#75715e">   * with 1st argument: name of the function
-</span><span style="color:#75715e">   *      2nd argument: human readable name (only for debugging purposes)
-</span><span style="color:#75715e">   *      3rd argument: stacksize (in &#34;words&#34; (words*stackwidth = memory))
-</span><span style="color:#75715e">   *      4th argument: function parameters
-</span><span style="color:#75715e">   *      5th argument: priority (0 ... (configMAX_PRIORITIES – 1))
-</span><span style="color:#75715e">   *      6th argument: pxCreatedTask can be used to pass out a handle to the task being created. This handle can then 
-</span><span style="color:#75715e">   *                    be used to reference the task in API calls that, for example, change the task priority or
-</span><span style="color:#75715e">   *                    delete the task.
-</span><span style="color:#75715e">   **/</span>
-  xTaskCreate(runClock, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;runclock&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
-  xTaskCreate(showOnDisplay, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;displayer&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
-  
-  <span style="color:#75715e">/* start the scheduler */</span>
-  vTaskStartScheduler();
-
-  <span style="color:#75715e">/* Execution will only reach here if there was insufficient heap to start the scheduler. */</span>
-  <span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span> (;;);
-
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<h2 id="outdated">Outdated ?</h2>
-
-<p>One could state that RTOS-es are outdated. Processors and OS-es, anno 2020, are <strong>so powerful</strong> that no additional measures should be taken to guarantee specific constraints. While that might be true, there is also <strong>scalability</strong>.</p>
-
-<p>It might be feasible to write all the desired software (networking stacks, logging, sensor reading, &hellip;) in such a way all constraints are met, <strong>BUT</strong> it requires a state-of-the-art system. For example: a processor with 2 GB of RAM memory and 160 GB of solid state storage. Installing this in every gearbox of a car, for example, simply is <strong>too expensive</strong>. If the same constraints and performance requirements can be met for a fraction of the price, industry dictates the latter option should be chosen.</p>
-
-<p>That&rsquo;s good news for whoever is studying this course, as skill-full programmers and engineers are a necessity to make this work 😄</p>
 
 
 <footer class="footline">
@@ -2186,6 +2034,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -2198,6 +2047,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2295,85 +2147,6 @@ window.MathJax = {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -2394,6 +2167,9 @@ window.MathJax = {
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -2401,6 +2177,22 @@ window.MathJax = {
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -2514,6 +2306,70 @@ window.MathJax = {
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -2538,7 +2394,6 @@ window.MathJax = {
             
                 
                     
-                    
                 
                 
 
@@ -2551,26 +2406,6 @@ window.MathJax = {
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -2588,8 +2423,21 @@ window.MathJax = {
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -2774,10 +2622,10 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../chx-cs/filesystems/" title="X.1: File systems"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch6-tasks/interthread/" title="6.6: Inter Thread communication"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../chx-cs/devdrivers/" title="X.3: Device Drivers" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch7-scheduling/" title="7: CPU scheduling" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

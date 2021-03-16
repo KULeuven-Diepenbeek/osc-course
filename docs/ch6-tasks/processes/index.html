@@ -12,21 +12,21 @@
     <title>6.1: Processes :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1615831434" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1615831434" rel="stylesheet">
-    <link href="../../css/hybrid.css?1615831434" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1615831434" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1615831434" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1615831434" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1615831434" rel="stylesheet">
-    <link href="../../css/theme.css?1615831434" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1615831434" rel="stylesheet">
+    <link href="../../css/nucleus.css?1615885353" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1615885353" rel="stylesheet">
+    <link href="../../css/hybrid.css?1615885353" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1615885353" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1615885353" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1615885353" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1615885353" rel="stylesheet">
+    <link href="../../css/theme.css?1615885353" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1615885353" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1615831434" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1615885353" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1615831434"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1615885353"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1615831434"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1615831434"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1615885353"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1615885353"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1615831434"></script>
+<script type="text/javascript" src="../../js/search.js?1615885353"></script>
 
     
   </div>
@@ -1783,11 +1783,11 @@ environ          mountinfo  personality    statm</code></pre></div>
 
 <h2 id="creating-processes">Creating processes</h2>
 
-<p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or using <strong>exec</strong>. There is a third option using a system() function, but because it is less secure and less efficient then the other two, it is not discussed here.</p>
+<p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or <strong>exec</strong>. There is a third option using a system() function, but because it is less secure and less efficient then the other two, it is not discussed here.</p>
 
-<p>Both fork and exec create a new process, but in very different ways. The fork function copies the PCB of its current process to a new PCB. The process that calls the fork() is referred to as the <strong>parent</strong> process, while the new process is its <strong>child</strong>. The child process will continue operations on the same line as the parent process (because of the copying of the PCB, the program counter is also copied!). This method is useful if you want to for example process a lot of data on multiple processors: you first get everything ready, then fork() new child processes that each deal with a part of the data. This is easier than manually starting new processes from scratch.</p>
+<p>Both fork and exec create a new process, but in very different ways. The fork function copies the PCB and the entire memory space of its current process to a new PCB and memory location. The process that calls the fork() is referred to as the <strong>parent</strong> process, while the new process is its <strong>child</strong>. The child process will continue operations on the same line as the parent process (because of the copying of the PCB, the program counter is also copied!). This method is useful if you want to for example process a lot of data on multiple processors: you first get everything ready, then fork() new child processes that each deal with a part of the data. This is easier than manually starting new processes from scratch.</p>
 
-<p>The exec() function call also starts from copying its own PCB. In contrast with fork() however, it then replaces its internal &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with a new, fresh copy of the program, clears all its memory and starts executing again from the first instruction. Unlike fork(), exec() thus doesn&rsquo;t spawn a new process, but effectively replaces the already running process with a new copy of itself and starts it from scratch. This is typically done right after fork(): you make a new clone of your process, then restart it from the beginning.</p>
+<p>The exec function in contrast doesn&rsquo;t really spawn a new process, but instead replaces itself entirely with a new program. While it initially starts by copying its own PCB, it then replaces its internal &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with the new program to be executed. It then clears all its memory and starts executing the new program from the first instruction. Note that the new program can be a copy of the current one (essentially &ldquo;starting over&rdquo;), but more typically it&rsquo;s an entirely new program. The main way in which Linux starts new processes is to first fork() the current process, and then to call exec() directly inside of the new fork&rsquo;ed clone, replacing it with the intended new program.</p>
 
 <p>It is mentioned earlier that the first process that is started is the <strong>init</strong> process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle connecting to the network, processes that do logging, and so on. Using the <strong>pstree</strong> command we can see the processes in a tree, and have a visual representation of which child-parent relations exist between processes.</p>
 
@@ -2787,19 +2787,19 @@ environ          mountinfo  personality    statm</code></pre></div>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1615831434"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1615831434"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1615831434"></script>
-    <script src="../../js/jquery.sticky.js?1615831434"></script>
-    <script src="../../js/featherlight.min.js?1615831434"></script>
-    <script src="../../js/highlight.pack.js?1615831434"></script>
+    <script src="../../js/clipboard.min.js?1615885353"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1615885353"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1615885353"></script>
+    <script src="../../js/jquery.sticky.js?1615885353"></script>
+    <script src="../../js/featherlight.min.js?1615885353"></script>
+    <script src="../../js/highlight.pack.js?1615885353"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1615831434"></script>
-    <script src="../../js/learn.js?1615831434"></script>
-    <script src="../../js/hugo-learn.js?1615831434"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1615885353"></script>
+    <script src="../../js/learn.js?1615885353"></script>
+    <script src="../../js/hugo-learn.js?1615885353"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1615831434"></script>
+            <script src="../../mermaid/mermaid.js?1615885353"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -25,7 +25,8 @@ What&amp;rsquo;s in a process ? By definition, a process is an instance of a pro
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
-Creating and inspecting processes  Write a C-program that prints its own PID on the screen.    An example output    Write a C-program that spawns another process. Both parent and child processes announce their existence (through a printf) and their PIDs.</description>
+Creating and inspecting processes TIP: the unistd.h header has some useful functions. You may also want to check out the wait() function in sys/wait.h and exit() in stdlib.h.
+ Write a C-program that prints its own PID on the screen.</description>
     </item>
     
     <item>

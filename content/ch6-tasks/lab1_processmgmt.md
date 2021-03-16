@@ -9,6 +9,8 @@ weight: 2
 
 ## Creating and inspecting processes
 
+**TIP:** the unistd.h header has some useful functions. You may also want to check out the `wait()` function in sys/wait.h and `exit()` in stdlib.h.
+
 * Write a C-program that prints its own PID on the screen.
 
 {{% figure src="/img/os/sc_621.png" title="An example output" %}}

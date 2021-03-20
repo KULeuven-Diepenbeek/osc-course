@@ -11,7 +11,7 @@ In the previous three sections we have discussed that you can run multiple proce
 Luckily, there is another way to split up processes into smaller subtasks and make more efficient use of multicore hardware without incurring as much overhead. This is accomplished using **Threads**. 
 
  A thread is an independent unit of execution within a process. Put differently, it's a sequence of code instructions that can be executed independently from and, crucially, in parallel with other threads. As such, each thread can for example be assigned to a single CPU core for parallel processing. 
- 
+
 ## What's in a thread ?
 
 Up until now all the processes that were discussed contained just one thread (sometimes called the **main** thread). Such a process is referred to as a **single-threaded process**:
@@ -83,9 +83,7 @@ Although there are **many advantages** to multi-threaded programming, it require
 
 While threading seems like the ideal, lightweight solution to make your programs run faster, it might be surprising to hear that program performance typically **does not scale linearly** with the amount of threads and/or amount of CPU cores. This is because typically not all code in a process can be parallelized (and thus run in separate threads): there are typically parts of code that need to aggregate results from the parallel computations, which can only be done in a serial fashion. This can be seen in the following image:
 
-{{% figure src="/img/os/serial_vs_parallel.png" title="Parallel processing can lead to serial phases in a process" %}}
-{{% Source: J. Wolf et al. - Contribution to the Fluid-Structure Interaction Analysis of Ultra-Lightweight Structures using an Embedded Approach %}}
-
+{{% figure src="/img/os/serial_vs_parallel.png" title="Parallel processing can lead to serial phases in a process. Source: J. Wolf et al. - Contribution to the Fluid-Structure Interaction Analysis of Ultra-Lightweight Structures using an Embedded Approach" %}}
 
 A theoretical model for assessing the maximal gains from multithreading a program was developed by Gene Amdahl in 1967. His formula identifies potential performance gains from adding additional computing cores to an application that has both serial and parallel components:
 

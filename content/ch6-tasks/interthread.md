@@ -6,6 +6,13 @@ weight: 6
 
 **TODO: add critical section (register updates) and deadlock empire stuff**
 
+
+As you will see, the programm will never print "Job 1 finished" but you will see "Job 2 finished" twice. This is because the "counter" variable is shared by both threads. By the time thread 1 finished, thread 2 has already incremented the counter as well, causing thread 1 to read the value as "2" when it exits. This is somewhat counter-intuitive and the source of many thread-related bugs as we will see.
+
+It is worth noting that similar problems show up even in non-multithreaded situations, especially when working with callback functions (a common problem in for example JavaScript applications). Later you'll learn more about variable scopes and things named closures, but for now it's just good to get used to thinking about whether certain memory is shared or copied, which is an important skill.  
+
+
+
 ## Communication between threads
 
 One *raison d'être* for multi-threaded applications is **resource sharing**. In the example that was given [earlier](/ch6-tasks/threads/#pthreads) a **global variable** 'counter' was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.
@@ -18,6 +25,7 @@ It should be clear that what we wanted to see was *Job 1 started* followed by *J
 The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2 in contrast with the intended value of 1.
 
 ### Mutex
+
 The simplest form of solving inter-thread communication issues is the use of a mutex. This is a portmanteau of **Mut**ual **Ex**clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you **lock** the door. Others that want to occupy the toilet have to wait until you're finished and you **unlock** the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, ...
 
 The concept of a mutex is implemented in the pthreads library as a new variable type: **pthread_mutex_t**. Locking and unlocking can be done through functions **pthread_mutex_lock()** and **pthread_mutex_unlock()**. As always, read the documentation for the exact usage of these functions.

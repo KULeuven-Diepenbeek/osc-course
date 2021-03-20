@@ -17,19 +17,16 @@ Luckily, there is another way to split up processes into smaller subtasks and ma
 Up until now all the processes that were discussed contained just one thread (sometimes called the **main** thread). Such a process is referred to as a **single-threaded process**:
 
 {{% figure src="/img/os/db_singlethreaded_v2.png" title="The single threaded process" %}}
-{{% dinobook %}}
 
 Let's examine the image above. On the top of this image the following segments are mentioned: **code**, **heap**, and (open) **files**, alongside the **registers**, **program counter** and the **stack**.
 
 As we've seen, when multiple processes run at the same time, every individual process has separate and **isolated** instances of all these segments, like shown in the image below:
 
 {{% figure src="/img/os/db_singlethreaded_twice_v2.png" title="Two single threaded processes running in parallel" %}}
-{{% dinobook %}}
 
 However, the name "single-threaded" of course also implies the existence of **multi-threaded** processes, which have more than one thread. Each of these threads can execute in parallel and as such also need their own copies of some of the segments: the register contents, current program counter and the full stack are now **independent** for each thread. You could say that each thread has its own "Thread Control Block" (in analogy with the PCB), which tracks this metadata. However, the main difference between parallel threads and parallel processes is that threads do still **share many things**: the copy of the code, the (open) files and the heap memory. This is one reason why threads are more lightweight than processes, as they don't require copying these segments when new threads are created. 
 
 {{% figure src="/img/os/db_multithreaded_v2.png" title="A single-threaded vs multi-threaded process" %}}
-{{% dinobook %}}
 
 
 

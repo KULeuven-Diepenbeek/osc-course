@@ -4,88 +4,216 @@ pre: "<i class='fas fa-book'></i> "
 weight: 6
 ---
 
-**TODO: add critical section (register updates) and deadlock empire stuff**
-
-
-As you will see, the programm will never print "Job 1 finished" but you will see "Job 2 finished" twice. This is because the "counter" variable is shared by both threads. By the time thread 1 finished, thread 2 has already incremented the counter as well, causing thread 1 to read the value as "2" when it exits. This is somewhat counter-intuitive and the source of many thread-related bugs as we will see.
-
-It is worth noting that similar problems show up even in non-multithreaded situations, especially when working with callback functions (a common problem in for example JavaScript applications). Later you'll learn more about variable scopes and things named closures, but for now it's just good to get used to thinking about whether certain memory is shared or copied, which is an important skill.  
-
-
-
-## Communication between threads
-
-One *raison d'être* for multi-threaded applications is **resource sharing**. In the example that was given [earlier](/ch6-tasks/threads/#pthreads) a **global variable** 'counter' was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.
+One *raison d'être* for multi-threaded applications is **resource sharing**. In the example that was given [earlier](/ch6-tasks/threads/#pthreads) a **global variable** 'counter' was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
 
 {{% figure src="/img/os/sc_631.png" %}}
 
-This might come as a surprise :smiley: <br/>
+This probably came as a surprise :smiley: <br/>
 It should be clear that what we wanted to see was *Job 1 started* followed by *Job 1 finished* and that this would be repeated again for job number 2.
 
-The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2 in contrast with the intended value of 1.
+The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2, which is in contrast with the intended value of 1.
 
-### Mutex
+## Critical Section and Race Conditions
 
-The simplest form of solving inter-thread communication issues is the use of a mutex. This is a portmanteau of **Mut**ual **Ex**clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you **lock** the door. Others that want to occupy the toilet have to wait until you're finished and you **unlock** the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, ...
+At first glance, it might seem that this problem is easily solvable by copying the global counter to a local, per-thread variable for later use:
+
+```C
+void* doSomeThing(void *arg) {
+    unsigned long i = 0;
+
+    int local_id; // new, per-thread variable                                    
+    counter += 1;
+    local_id = counter; // make a local copy of counter for this thread                                
+
+    printf("  Job %d started\n", id);
+    for(i=0; i<(0xFFFFFFFF);i++);
+    printf("  Job %d finished\n", id);
+
+    return NULL;
+}
+```
+
+If you tried to implement this, it would probably work... most of the time at least. As explained in the first section on threads, threads are not necessarily run in parallel all the time, especially not if the number of threads is larger than the number of CPU cores. In fact, there are many situations where given 2 threads, the first one will get some time to execute, is then paused to give the second one some time to execute, unpaused to get some time etc. 
+
+As such, if two Threads executing doSomeThing() would be running on a single CPU, the following sequence of actions could occur:
+
+```C
+// Code that both threads will execute:
+counter += 1;
+local_id = counter;
+// -----------------------------------
+
+// Thread 1
+counter += 1; // after this, counter == 1
+    // Before Thread 1 can execute local_id = counter, it is paused by the CPU
+    // Thread 2
+    counter += 1; // after this, counter == 2
+    local_id = counter; // thus, in Thread 2, local_id is correctly 2
+// Here, the CPU switches back to Thread 1
+// Thread 1
+local_id = counter; // now, local_id is still 2, instead of 1... mission failed
+```
+
+We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called **race conditions**, referring to e.g., a car/horse race where it's not always the same contestant that wins, depending on the conditions of the racetrack. 
+
+In general, we can see that once multiple threads start accessing shared memory, things can go wrong. As such, these specific points in a multithreaded program are often referred to as the **critical section**: it's of the highest importance (critical) that this section is executed by itself, without outside interference. Otherwise, race conditions can occur and we can introduce bugs. 
+
+To make this all a bit more tangible, we will be using an outside interactive tool, called [Deadlock Empire](https://deadlockempire.github.io/). Instead of having you write correct code for a problem, this website challenges you to find bugs in existing code to show the many caveats of multithreaded programming. While the website uses the C# programming language and is a bit different from the C syntax we're using, the high-level concepts are 100% the same. 
+
+{{% task %}}
+Go to the Deadlock Empire website and do:
+- Tutorial: Tutorial 1: Interface
+- Unsynchronized Code: Boolean Flags Are Enough For Everyone
+- Unsynchronized Code: Simple Counter
+{{% /task %}}
+
+## Atomic operations
+
+Now that you have a feeling for race conditions and critical sections, it's time to make things worse. 
+
+The example above isn't only vulnerable through the "local_id = counter" code: the "counter += 1" code is also vulnerable to a race condition. This is because incrementing a variable (counter += 1) is not a so-called **atomic operation**. This means that internally, it is not implemented with a single CPU instruction, but rather composed out of a series of different operations/instructions.
+
+For example, for counter += 1, the series of executed steps might look like:
+
+1. Fetch value of counter from RAM and store it in the CPU cache memory
+2. Fetch value from CPU cache memory and store it in a CPU register for the calculation
+3. Add 1 to the register value
+4. Write the register value back to the CPU cache
+5. Write the cached value back to the RAM
+
+```C
+// In simple pseudocode, counter += 1 might look like this:
+int temp = counter + 1; // temp is for example the CPU register here, and "counter" is the value in memory
+counter = temp; // the register value is written back out to the memory
+```
+
+To the CPU, all of these steps are one or more instructions, each of which can also have a certain delay associated with them. As such, what can happen in practice is the following sequence of events:
+
+```C
+// Code that both threads will execute:
+int temp = counter + 1;
+counter = temp;
+// -----------------------------------
+
+// Thread 1
+int temp = counter + 1; // after this, the temp register contains the value 1. The "counter" address in RAM is still 0.
+    // Before Thread 1 can actually store this temporary register result in memory, the CPU gives control to Thread 2
+    // Thread 2
+    int temp = counter + 1; // "counter" was still 0 in RAM, so Thread 2's temp register now also contains the value 1
+    counter = temp; // The "counter" address in RAM now contains the value 1
+// Here, the CPU switches back to Thread 1
+// Thread 1
+counter = temp; // The "counter" address in RAM still contains the value 1
+```
+
+We can see that, even though two "counter += 1" lines of code were executed, the resulting value in memory is just 1 instead of 2. Again: you probably never saw this when testing the exercise in the lab, but theoretically it -could- happen, leading to randomly failing programmes.
+
+Note that this is a direct consequence of the fact that threads have separate program counters and register values, as discussed in the first Section on threads. Once individual threads are started, even if they are executing the same code, they do so in a partially separated context. 
+
+{{% task %}}
+Go to the Deadlock Empire website and do:
+- Tutorial: Tutorial 2: Non-Atomic Instructions
+- Unsynchronized Code: Confused Counter
+{{% /task %}}
+
+You might now think that this can only happen if two threads execute the _exact same code_. However, you would be wrong, as illustrated by the following example from Wikipedia:
+
+```C
+// Thread 1
+// ... other code
+b = x + 5;
+// ... other code
+
+    // Thread 2
+    // ... other code
+    x = 3 + z;
+    // ... other code
+```
+
+{{% task %}}
+Give a practical, numerical example of how, depending on CPU scheduling, b can end up with two very different values. 
+{{% /task %}}
+
+
+## Mutexes and Locking
+
+As we've seen in many examples, things can go wrong really quickly when dealing with shared memory. Making matters worse, simple solutions (such as making thread-local copies of shared memory) are also doomed to fail eventually. 
+
+As such, it should be clear that we need a way to secure the **critical sections** in a thread. We need a way to make sure the OS will not pause a thread during a critical section, to make sure that all instructions are done before another thread gets execution time. Put differently: we need a way to turn groups of non-atomic operations into a single big atomic block.
+
+The simplest way of doing this, is by means of a **mutex**. This term is a portmanteau of **Mut**ual **Ex**clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you **lock** the door. Others that want to occupy the toilet have to wait until you're finished and you **unlock** the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, locked or unlocked.
+
+Internally, a mutex lock is typically implemented by means of a single, atomic CPU instruction. Otherwise, simply locking or unlocking the mutex would of course potentially lead to the problems it is trying to solve!
 
 The concept of a mutex is implemented in the pthreads library as a new variable type: **pthread_mutex_t**. Locking and unlocking can be done through functions **pthread_mutex_lock()** and **pthread_mutex_unlock()**. As always, read the documentation for the exact usage of these functions.
 
-The example above can be rewritten using a mutex:
+The problematic example of the shared counter can be rewritten using a mutex:
 
 ```C
-#include <stdio.h>
-#include <string.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 int counter;
-pthread_mutex_t lock_counter;                   /* THIS LINE HAS BEEN ADDED */
+pthread_mutex_t counter_lock;                   /* THIS LINE HAS BEEN ADDED */
 
 void* doSomeThing(void *arg) {
     unsigned long i = 0;
 
-    int id;                                     /* THIS LINE HAS BEEN ADDED */
-    pthread_mutex_lock(&lock_counter);          /* THIS LINE HAS BEEN ADDED */
+    int local_id;                               /* THIS LINE HAS BEEN ADDED */
+    pthread_mutex_lock(&counter_lock);          /* THIS LINE HAS BEEN ADDED */
     counter += 1;
-    id = counter;                               /* THIS LINE HAS BEEN ADDED */
-    pthread_mutex_unlock(&lock_counter);        /* THIS LINE HAS BEEN ADDED */
+    local_id = counter;                         /* THIS LINE HAS BEEN ADDED */
+    pthread_mutex_unlock(&counter_lock);        /* THIS LINE HAS BEEN ADDED */
 
 
-    printf("  Job %d started\n", id);           /* THIS LINE HAS BEEN CHANGED */
+    printf("  Job %d started\n", local_id);     /* THIS LINE HAS BEEN CHANGED */
     for(i=0; i<(0xFFFFFFFF);i++);
-    printf("  Job %d finished\n", id);          /* THIS LINE HAS BEEN CHANGED */
+    printf("  Job %d finished\n", local_id);    /* THIS LINE HAS BEEN CHANGED */
 
     return NULL;
 }
-
-int main(void) {
-  int i = 0, err;
-  pthread_t tid[2];
-
-  while(i < 2) {
-    err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
-    if (err != 0) {
-      printf("\ncan't create thread :[%s]", strerror(err));
-    }
-    i++;
-  }
-
-  pthread_join(tid[0], NULL);
-  pthread_join(tid[1], NULL);
-
-  return 0;
-}
 ```
 
-This solves the issue that was encountered above. Before the counter is accessed the mutex is locked. This provides exclusive access. The counter is then incremented and copied in to variable *id*. Finally, the mutex is unlocked.
+This solves the issue that was encountered above. Before the counter is accessed, the mutex is locked. This provides exclusive access to the following 2-line critical section untill the mutex is unlocked again. The counter is then incremented and copied in to variable *local_id*. Finally, the mutex is unlocked.
 
-With this measure in place, the result is as was intended.
+With this measure in place, the result is as was originally intended.
+
 {{% figure src="/img/os/sc_mutex.png" %}}
 
-**PROTIP:** It is pointed out that the time (directionally proportional the number of instructions) between locking and unlocking a mutex should be kept to a minimum. Other threads might be waiting for the mutex to become available.
+**Note:** The amount of code/instructions between locking and unlocking a mutex should of course be kept to a minimum. If you put a mutex around your entire threading function, you undo the entire possible benefit of using threads: the fact that they can run in parallel! As such, inter-thread communication via shared memory should be kept to a minimum, and only that should be protected using Mutexes/locks.
 
-### Semaphore
+{{% task %}}
+Go to the Deadlock Empire website and do:
+- Locks: Insufficient lock
+- Locks: Deadlock
+- Locks: A more complex thread
+{{% /task %}}
+
+
+## Deadlocks
+
+While locks help with many **critical section** problems, the Deadlock Empire examples above show that they are also not always trivial to apply correctly. This is especially the case if there is more than one shared resource/variable/memory region in play. 
+
+For example, a typical problem that can arise is when two threads need to obtain access to two different shared resources, but do so in opposite orders. This can for example happen in complex programs that often interact with outside peripherals like the hard disk and the network:
+
+```C
+// Thread 1 wants to first read from the network, then write result to the hard disk
+// Thread 2 wants to first read the contents of a file, then send it on the network
+
+// Thread 1:
+network.lock()
+    // CPU pauses Thread 1 and activates Thread 2
+    harddisk.lock()
+// CPU pauses Thread 2 and activates Thread 1 again
+harddisk.lock() // this will not complete, because Thread 2 is holding this lock already. Thread 1 has to wait
+    // CPU pauses Thread 1 because it has to wait and activates Thread 2 again
+    network.lock() // this will not complete, because Thread 1 is holding this lock already. Thread 2 has to wait
+
+// Both threads are waiting endlessly AND also locking the network and the harddisk for any other threads that might arrive
+```
+
+Not entirely realistic: network and harddisk can generally be used by multiple threads and processes. This is because the OS has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (e.g., http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!
+
+TODO: finalize this last paragraph above. 
+
+## Semaphore
 
 A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys. 
 

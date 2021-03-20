@@ -66,8 +66,8 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
-      <description>TODO: add critical section (register updates) and deadlock empire stuff
-As you will see, the programm will never print &amp;ldquo;Job 1 finished&amp;rdquo; but you will see &amp;ldquo;Job 2 finished&amp;rdquo; twice. This is because the &amp;ldquo;counter&amp;rdquo; variable is shared by both threads. By the time thread 1 finished, thread 2 has already incremented the counter as well, causing thread 1 to read the value as &amp;ldquo;2&amp;rdquo; when it exits. This is somewhat counter-intuitive and the source of many thread-related bugs as we will see.</description>
+      <description>One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
+  This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
     </item>
     
     <item>

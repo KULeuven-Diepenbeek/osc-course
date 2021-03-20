@@ -360,9 +360,8 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
-      <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
-What&amp;rsquo;s in a thread ? A process can exist out of multiple threads. Up until now all the processes that were discussed contained one thread.
-  The single threaded process    p.</description>
+      <description>In the previous three sections we have discussed that you can run multiple processes at the same time and how this is managed by the OS. This can be useful in two ways: either a) to use multiple programs at the same time (e.g., your Web browser and music player), or b) to make efficient use of multiple hardware CPUs or processing cores.
+We have however also seen that this is not trivial: new processes need their own memory space and associated state (the PCB) and communication between processes is either flexible but complex (shared memory) or straightforward but limited (message passing).</description>
     </item>
     
     <item>
@@ -423,7 +422,7 @@ File hello.c:
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
-Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID.    An example output    Write a C-program that has 1 king thread and n servant threads.</description>
+Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID. Note that, unlike when spawning multiple processes, the PID is of course the same for all threads.</description>
     </item>
     
     <item>
@@ -444,8 +443,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
       <description>TODO: add critical section (register updates) and deadlock empire stuff
-Communication between threads One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.
-  This might come as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
+As you will see, the programm will never print &amp;ldquo;Job 1 finished&amp;rdquo; but you will see &amp;ldquo;Job 2 finished&amp;rdquo; twice. This is because the &amp;ldquo;counter&amp;rdquo; variable is shared by both threads. By the time thread 1 finished, thread 2 has already incremented the counter as well, causing thread 1 to read the value as &amp;ldquo;2&amp;rdquo; when it exits. This is somewhat counter-intuitive and the source of many thread-related bugs as we will see.</description>
     </item>
     
     <item>

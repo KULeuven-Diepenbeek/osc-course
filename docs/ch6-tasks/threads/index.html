@@ -12,21 +12,21 @@
     <title>6.4: Threads :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1615892616" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1615892616" rel="stylesheet">
-    <link href="../../css/hybrid.css?1615892616" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1615892616" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1615892616" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1615892616" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1615892616" rel="stylesheet">
-    <link href="../../css/theme.css?1615892616" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1615892616" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616256742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616256742" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616256742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616256742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616256742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616256742" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616256742" rel="stylesheet">
+    <link href="../../css/theme.css?1616256742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616256742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1615892616" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616256742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1615892616"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616256742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1615892616"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1615892616"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616256742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616256742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1615892616"></script>
+<script type="text/javascript" src="../../js/search.js?1616256742"></script>
 
     
   </div>
@@ -1587,6 +1587,7 @@ window.MathJax = {
 <li><a href="#why-would-we-want-multiple-threads">Why would we want multiple threads ?</a>
 <ul>
 <li><a href="#amdahl-s-law">Amdahl&rsquo;s law</a></li>
+<li><a href="#user-threads-vs-system-threads">User threads vs system threads</a></li>
 </ul></li>
 <li><a href="#creating-threads">Creating threads</a>
 <ul>
@@ -1619,14 +1620,20 @@ window.MathJax = {
 
 
 
-<p>One of the three core tasks of an OS is the <strong>management of tasks</strong>. These different tasks are all running on the same processor. To make this magic happen some form of management is required.</p>
+<p>In the previous three sections we have discussed that you can run multiple processes at the same time and how this is managed by the OS. This can be useful in two ways: either a) to use multiple programs at the same time (e.g., your Web browser and music player), or b) to make efficient use of multiple hardware CPUs or processing cores.</p>
+
+<p>We have however also seen that this is not trivial: new processes need their own memory space and associated state (the PCB) and communication between processes is either flexible but complex (shared memory) or straightforward but limited (message passing).</p>
+
+<p>Luckily, there is another way to split up processes into smaller subtasks and make more efficient use of multicore hardware without incurring as much overhead. This is accomplished using <strong>Threads</strong>.</p>
+
+<p>A thread is an independent unit of execution within a process. Put differently, it&rsquo;s a sequence of code instructions that can be executed independently from and, crucially, in parallel with other threads. As such, each thread can for example be assigned to a single CPU core for parallel processing.</p>
 
 <h2 id="what-s-in-a-thread">What&rsquo;s in a thread ?</h2>
 
-<p>A process can exist out of multiple <strong>threads</strong>. Up until now all the processes that were discussed contained one thread.</p>
+<p>Up until now all the processes that were discussed contained just one thread (sometimes called the <strong>main</strong> thread). Such a process is referred to as a <strong>single-threaded process</strong>:</p>
 
 <figure>
-    <img src="../../img/os/db_singlethreaded.png"/> <figcaption>
+    <img src="../../img/os/db_singlethreaded_v2.png"/> <figcaption>
             <h4>The single threaded process</h4>
         </figcaption>
 </figure>
@@ -1644,13 +1651,13 @@ window.MathJax = {
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 
-Let's examine the image above. On the top of this image the following segments are mentioned: **code**, **data**, and **files**. Additionally the registers and the stack  are mentioned. These registers are the values of the registers that belong to the processor for this process. Such a process is referred to as a **single-threaded process**.
+Let's examine the image above. On the top of this image the following segments are mentioned: **code**, **heap**, and (open) **files**, alongside the **registers**, **program counter** and the **stack**.
 
-When multiple processes run, every process has **an image** like shown below. This means that multiple instances of the same program have **isolated** code segments, stack, ... . 
+As we've seen, when multiple processes run at the same time, every individual process has separate and **isolated** instances of all these segments, like shown in the image below:
 
 <figure>
-    <img src="../../img/os/db_singlethreaded_twice.png"/> <figcaption>
-            <h4>The single threaded process</h4>
+    <img src="../../img/os/db_singlethreaded_twice_v2.png"/> <figcaption>
+            <h4>Two single threaded processes running in parallel</h4>
         </figcaption>
 </figure>
 
@@ -1667,9 +1674,10 @@ When multiple processes run, every process has **an image** like shown below. Th
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 
-As can be learned from even looking at the name **multi-threaded** process, such a process has more than a single thread. It could be seen as multiple processes of the same process that share certain aspects. An image says more than a thousand words ... so below is a comparison between a single-threaded process and a multi-threaded process.
+However, the name "single-threaded" of course also implies the existence of **multi-threaded** processes, which have more than one thread. Each of these threads can execute in parallel and as such also need their own copies of some of the segments: the register contents, current program counter and the full stack are now **independent** for each thread. You could say that each thread has its own "Thread Control Block" (in analogy with the PCB), which tracks this metadata. However, the main difference between parallel threads and parallel processes is that threads do still **share many things**: the copy of the code, the (open) files and the heap memory. This is one reason why threads are more lightweight than processes, as they don't require copying these segments when new threads are created. 
+
 <figure>
-    <img src="../../img/os/db_multithreaded.png"/> <figcaption>
+    <img src="../../img/os/db_multithreaded_v2.png"/> <figcaption>
             <h4>A single-threaded vs multi-threaded process</h4>
         </figcaption>
 </figure>
@@ -1686,6 +1694,8 @@ As can be learned from even looking at the name **multi-threaded** process, such
   }
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
+
+
 
 <style>
   div.twocolumns {
@@ -1706,17 +1716,16 @@ As can be learned from even looking at the name **multi-threaded** process, such
     The multiple threads in a multi-threaded process <b>share</b>:
     <ul>
       <li>the code segment</li>
-      <li>the data segment</li>
+      <li>the heap memory</li>
       <li>the list of open files</li>
-      <li>the heap</li>
     </ul>
   </div>
   <div class="column">
-    The multiple threads in a multi-threaded process <b>have unique</b>:
+    The multiple threads in a multi-threaded process <b>have unique/independent</b>:
     <ul>
-      <li>register content</li>
-      <li>stacks</li>
+      <li>register contents</li>
       <li>program counters</li>
+      <li>stack memory</li>
     </ul>
   </div>
 </div>
@@ -1726,20 +1735,28 @@ As can be learned from even looking at the name **multi-threaded** process, such
 <p>There are 4 major benefits to working with multiple threads:</p>
 
 <ol>
-<li><strong>Responsiveness</strong>: When a single program is broken down into multiple threads the user experience feels more responsive. Dedicated threads can be created to handle user requests an give (visual) feedback.</li>
-<li><strong>Resource sharing</strong>: Programs that have multiple threads typically want some sort of communication between these threads. This is done more easily between threads than between processes.</li>
-<li><strong>Economy</strong>: Context switching becomes cheaper when switching between threads in comparison than switching between processes.</li>
+<li><strong>Responsiveness</strong>: When a single program is broken down into multiple threads, the user experience feels more responsive. Dedicated threads can be created to handle user requests and give (visual) feedback, while other threads can for example process data in the background.</li>
+<li><strong>Resource sharing</strong>: Programs that have multiple threads typically want some sort of communication between these threads. This is done more easily between threads than between processes, as threads <em>implicitly</em> share memory via their heap.</li>
+<li><strong>Economy</strong>: Context switching becomes cheaper when switching between threads in comparison to switching between processes. This is because less per-thread state needs to be tracked, in comparison to more per-process state.</li>
 <li><strong>Scalability</strong>: Multiple threads can run in parallel on multi-core systems in contrast to a single threaded process.</li>
 </ol>
 
 
-<div class="notices warning" ><p>Although there are <strong>many advantages</strong> to multi-threaded programming, it requires <strong>skilled programming</strong> to cash in on these opportunities.</p>
+<div class="notices warning" ><p>Although there are <strong>many advantages</strong> to multi-threaded programming, it requires <strong>skilled programming</strong> to cash in on these opportunities. Not all code can be easily parallelized and communication between threads is not trivial. We will focus on these aspects in the remainder of this chapter.</p>
 </div>
 
 
 <h3 id="amdahl-s-law">Amdahl&rsquo;s law</h3>
 
-<p>At a scientific conference in 1967, the American researcher Gene Amdahl presented a paper that contained a formula. This formula identifies potential performance gains from adding additional computing cores to an application that has both serial and parallel components.</p>
+<p>While threading seems like the ideal, lightweight solution to make your programs run faster, it might be surprising to hear that program performance typically <strong>does not scale linearly</strong> with the amount of threads and/or amount of CPU cores. This is because typically not all code in a process can be parallelized (and thus run in separate threads): there are typically parts of code that need to aggregate results from the parallel computations, which can only be done in a serial fashion. This can be seen in the following image:</p>
+
+<figure>
+    <img src="../../img/os/serial_vs_parallel.png"/> <figcaption>
+            <h4>Parallel processing can lead to serial phases in a process. Source: J. Wolf et al. - Contribution to the Fluid-Structure Interaction Analysis of Ultra-Lightweight Structures using an Embedded Approach</h4>
+        </figcaption>
+</figure>
+
+<p>A theoretical model for assessing the maximal gains from multithreading a program was developed by Gene Amdahl in 1967. His formula identifies potential performance gains from adding additional computing cores to an application that has both serial and parallel components:</p>
 
 <p style="text-align:center;">
   \( 
@@ -1747,7 +1764,7 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
  \)
 </p>
 
-<p>In this formula <strong>S</strong> stands for the portion of the application that <em>has to be</em> run serially. <strong>N</strong> stands for the number of cores on which the parallel portion is spread.</p>
+<p>In this formula <strong>S</strong> stands for the portion of the application that <em>has to be</em> run serially. <strong>N</strong> stands for the number of cores on which the parallel portion is spread. We can see that to maximize the speedup, we need to keep the divisor of the fraction as small as possible. This is done by keeping S as small as possible, and N as high as possible.</p>
 
 <figure>
     <img src="../../img/os/amdahl.png"/> <figcaption>
@@ -1755,36 +1772,31 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
         </figcaption>
 </figure>
 
-<p>The graph above visualises Amdahl&rsquo;s law. For example, if a program has 80% of its code that can be run in parallel, it can be run maximally 2.5 times faster, using 4 cores. This point is marked with a red dot in the graph.</p>
+<p>The graph above visualises Amdahl&rsquo;s law. For example, as marked by the red dot, if a program has 80% of its code that can be run in parallel (and so 20% of the code has to be run serially), it can be run at maximum 2.5 times faster, using 4 cores. If only 50% of the code can be run in parallel, the amount of cores matters much less, with a maximum speedup of 2x being possible even with 16 cores.</p>
 
-<p>As stated above, it requires a skilled programmer to achieve maximal speed-up. If the program needs a lot of data that needs to be communicated between the serial and parallel portions this becomes even harder to achieve.</p>
+<p>However, as stated above, it requires a skilled programmer to achieve maximal speed-up even if a large part of the program can be parallelized. If the program needs a lot of data that needs to be communicated between the serial and parallel portions this becomes even harder to achieve, as this can also cause additional slowdowns.</p>
+
+<h3 id="user-threads-vs-system-threads">User threads vs system threads</h3>
+
+<p>By now, you might still think that using threads is only useful if you have multiple processors, or, if you do have multiple CPU cores, that you should only use as many threads as you have cores. However, this is somewhat incorrect.</p>
+
+<p>While it is true that you might not get a speedup if the number of threads is larger than the number of cores, that does not mean you cannot run tasks in a seemingly parallel fashion. Take for example the simplest case where you have two threads and just a single CPU core. Like with the processes, this does not mean that thread 1 will run fully before thread 2 can start. Instead, the OS will again <strong>schedule</strong> the threads, pausing one and (re-)starting the other several times in quick succession.</p>
+
+<p>As processor speeds are many times what the typical human would notice, this often gives the illusion of parallel execution. A good example is the &ldquo;Responsiveness&rdquo; benefit mentioned above, achieved by using a separate thread for User input/User interface updates. Even if the program has a thread executing heavy calculations, the UI thread will get enough CPU time to listen to User input.</p>
+
+<p>As such, there is often not a direct one-to-one mapping between threads and actual processor cores. Internally, the OS has a concept of <strong>Kernel threads</strong> that it schedules and divides between the processors. The threads we create, sometimes called <strong>User threads</strong> can be mapped onto those kernel threads in several different ways (e.g., one-to-one, one-to-many, many-to-many) and this mapping can also change over time (e.g., transferring a thread to a different CPU). The exact details are out of scope for this course, but it&rsquo;s useful to know that you typically won&rsquo;t control directly how your threads run. In a multi-process setup (which is typical for most OSes) you typically can&rsquo;t even guarantee that all the threads for a given process are really all running in parallel, as other threads from other processes might also require CPU time. This makes it even more difficult in practice to measure and ensure the speedup from using multiple threads.</p>
 
 <h2 id="creating-threads">Creating threads</h2>
 
-<p>In the previous section on processes, multiple processes could be created through the <em>fork</em> and <em>exec</em> functions. These function wrap the system-calls that are required to achieve this. Therefore, this comes intrinsically with the OS.</p>
+<p>Before discussing how to communicate between threads however, we first look at how we can create threads in C.</p>
 
-<p>To allow multi-threading, an additional programmer API is required. There typically are 3 libraries that provide this:</p>
+<p>In the previous sections on processes, multiple processes could be created through the <em>fork</em> and <em>exec</em> functions. These function wrap the OS system-calls that are required to achieve this. Therefore, this comes intrinsically with the OS.</p>
 
-<ol>
-<li>Windows</li>
-<li>Java</li>
-<li>POSIX Pthreads</li>
-</ol>
-
-<p>The Windows library is available only on Windows. The Java library is running on the Java Virtual Machine and translates the multi-threading requirements to the native requirements. Finally, Pthreads runs on Unix-y OSes like Linux, and iOS.</p>
-
-<p>An organisation, led by IEEE, has specified a set of standards and group these under the <strong>POSIX</strong> acronym (Portable Operating System Interface). The goal is to enhance portability of code between different systems. However, controversy exists around (parts of) this and discussing the pro-and-contra&rsquo;s falls out of the scope of this course. This can be added to the long list of &ldquo;cultural wars&rdquo; that still rage on, like:</p>
-
-<ul>
-<li>Emacs vs vi</li>
-<li>Linux vs Windows</li>
-<li>the &ldquo;Final Browser War&rdquo;</li>
-<li>&hellip;</li>
-</ul>
+<p>Threads are of course also fully supported by the OS, but they typically require a more high-level API to easily work with. Most programming languages provide their own versions of these APIs, but they all internally call the OS-provided functionality. As we are working with Linux, we will be using the standard POSIX API library called Pthreads.</p>
 
 <h3 id="pthreads">Pthreads</h3>
 
-<p>An example for creating a new thread is given below.</p>
+<p>An example for creating a new pthread is given below.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -1798,7 +1810,9 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
     counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
 
     printf(<span style="color:#e6db74">&#34;  Job %d started</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, counter);
-    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>(<span style="color:#ae81ff">0xFFFFFFFF</span>);i<span style="color:#f92672">++</span>);
+    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>(<span style="color:#ae81ff">0xFFFFFFFF</span>); i<span style="color:#f92672">++</span>) {
+        <span style="color:#75715e">// do nothing
+</span><span style="color:#75715e"></span>    }
     printf(<span style="color:#e6db74">&#34;  Job %d finished</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, counter);
 
     <span style="color:#66d9ef">return</span> NULL;
@@ -1807,44 +1821,37 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
   <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, err;
   pthread_t tid[<span style="color:#ae81ff">2</span>];
+  counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
   <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
-    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>doSomeThing, NULL);
+
+    <span style="color:#75715e">// 1. pointer to pthread_t to keep thread state, 2. configuration arguments for the thread (we use the defaults here)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3. pointer to function that runs in separate thread, 4. parameters to pass to the thread (empty for doSomeThing)
+</span><span style="color:#75715e"></span>    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>doSomeThing, NULL);
+
     <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
       printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create thread :[%s]&#34;</span>, strerror(err));
     }
+
     i<span style="color:#f92672">++</span>;
   }
 
-  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
+  <span style="color:#75715e">// Pauze the main thread until the thread in the first argument is terminated
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// If the thread was already terminated, pthread_join continues immediately
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// The second argument can be used to store the return value of the thread
+</span><span style="color:#75715e"></span>  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
   pthread_join(tid[<span style="color:#ae81ff">1</span>], NULL);
 
   <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
 
-<div class="ex">
-	<div class="inner">
-    	<p>What will be the printed output of the C-code above ?</p>
-
-	</div>
-</div>
-
-
-<div class="notices note" ><p>When the code above get compiled, the <strong>pthread</strong> library has to be used. This library contains the object files that implemented the functions <em>pthread_create()</em> and <em>pthread_join()</em>. Compilation can be done because of the <code>#include &lt;pthread.h&gt;</code> line.</p>
+<div class="notices note" ><p>When the code above gets compiled, the <strong>pthread</strong> library has to be used. This library contains the object files that implemented the functions <em>pthread_create()</em> and <em>pthread_join()</em>. Compilation can be done because of the <code>#include &lt;pthread.h&gt;</code> line. For linking however, you have to separately tell gcc to use the pthread library as well by adding <code>-lpthread</code> (e.g., <code>gcc -o program program.c -lpthread</code>).</p>
 </div>
 
 
 <figure>
     <img src="../../img/os/sc_compile.png"/> 
 </figure>
-
-
-<div class="ex">
-	<div class="inner">
-    	<p>The code above is provided as boilerplate code in the Git-repository on the VM. Try to <strong>compile</strong> and <strong>run</strong> this code and see what the output is.</p>
-
-	</div>
-</div>
 
 
 <footer class="footline">
@@ -2854,19 +2861,19 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1615892616"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1615892616"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1615892616"></script>
-    <script src="../../js/jquery.sticky.js?1615892616"></script>
-    <script src="../../js/featherlight.min.js?1615892616"></script>
-    <script src="../../js/highlight.pack.js?1615892616"></script>
+    <script src="../../js/clipboard.min.js?1616256742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616256742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616256742"></script>
+    <script src="../../js/jquery.sticky.js?1616256742"></script>
+    <script src="../../js/featherlight.min.js?1616256742"></script>
+    <script src="../../js/highlight.pack.js?1616256742"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1615892616"></script>
-    <script src="../../js/learn.js?1615892616"></script>
-    <script src="../../js/hugo-learn.js?1615892616"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616256742"></script>
+    <script src="../../js/learn.js?1616256742"></script>
+    <script src="../../js/hugo-learn.js?1616256742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1615892616"></script>
+            <script src="../../mermaid/mermaid.js?1616256742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

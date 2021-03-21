@@ -209,19 +209,19 @@ harddisk.lock() // this will not complete, because Thread 2 is holding this lock
 // Both threads are waiting endlessly AND also locking the network and the harddisk for any other threads that might arrive
 ```
 
-Not entirely realistic: network and harddisk can generally be used by multiple threads and processes. This is because the OS has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (e.g., http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!
-
-TODO: finalize this last paragraph above. 
+Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see [this presentation](http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf) (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!
 
 ## Semaphore
 
-A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys. 
+While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a **semaphore**. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys: 
 
 {{% figure src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" title="This photo of Cafe Boulevard is courtesy of Tripadvisor"  width="50%" %}}
 
-Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, he/she needs to take a bracelet and put it on. When there are not more bracelets, a child that also wants to play in the room has to wait until another child leaves the room and places his/her bracelet back in the bowl.
+Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, they need to take a bracelet and put it on. When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait until another child leaves the room and places their bracelet back in the bowl.
 
-This technique is used in e.g. producer-consumer problems, amongst many other types. In contrast with the mutex, a semaphore can have multiple states. It is *number* of tokens. It is pointed out that if there is only a single token in the semaphore, this behaves exactly the same as a mutex. Such a semaphore is referred to as a **binary semaphore**.
+This technique is used in e.g., producer-consumer problems, amongst many other types. In those settings, several producer threads prepare data and put it in shared memory, ready to be used by one or more consumers. Instead of having a separate counter that tracks how many produced items are waiting for processing, a semaphore can be used directly, making state keeping a bit easier. 
+
+ This is because in contrast with the mutex, a semaphore is a *count* of tokens. Put differently, a mutex limits access to a single resource (e.g., a single memory location) to one thread at a time. A semaphore instead allows threads to share a limited pool of resources (e.g., 4 different hard disks), with multiple threads potentially active at the same time. Note though that if there is only a single token in the semaphore, this behaves exactly the same as a mutex (this specific type is referred to as a **binary semaphore**). 
 
 The **pthreads** library also provides an API to program with semaphores. It contains, amongst others, functions like:
 
@@ -229,10 +229,17 @@ The **pthreads** library also provides an API to program with semaphores. It con
 * sem_wait(): decrements the number inside of the semaphore. 
 * sem_post(): increments the number inside of the semaphore.
 
-Note that the ```sem_wait()``` function is blocking. If the value of the semaphore is set to zero, the thread waits until it can acquire a lock. There is a non-blocking alternative sem_trywait(). See the manual pages for more info and the correct usage.
+Note that the ```sem_wait()``` function is _blocking_ (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes ```sem_post()``` (put differently: until the semaphore is "unlocked"). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: ```sem_trywait()```. See the manual pages and search Google for more info and the correct usage.
 
-
-Next to fact that a mutex only has a single token, where a semaphore can have more, the signalling is also a main difference. When a thread wants to get access to a semaphore and there are no more tokens available, it goes into a sleep-like state. When another thread produces a semaphore, a signal is sent to all the threads that were 'sleeping'.
-
+Note that multiple threads can be waiting on  the same semaphore at any given time. When a sem_post occurs, they of course cannot all start immediately, since only one token was added. Here there are again several ways for the OS to decide which thread gets preference (e.g., the one that has been waiting the longest, the one that was most recently started) and gets to consume the token. 
 
 More info on the differences between a semaphore and a mutex are given [here](https://techdifferences.com/difference-between-semaphore-and-mutex.html).
+
+{{% task %}}
+Go to the Deadlock Empire website and do:
+- Semaphores: Semaphores
+- Semaphores: Producer-Consumer
+- Semaphores: Producer-Consumer (Variant)
+{{% /task %}}
+
+Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example conditional variables and barriers). Especially more modern programming languages like Java and C# typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped. 

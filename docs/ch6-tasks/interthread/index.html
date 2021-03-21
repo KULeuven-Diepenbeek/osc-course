@@ -12,21 +12,21 @@
     <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616256742" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616256742" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616256742" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616256742" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616256742" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616256742" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616256742" rel="stylesheet">
-    <link href="../../css/theme.css?1616256742" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616256742" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616271712" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616271712" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616271712" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616271712" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616271712" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616271712" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616271712" rel="stylesheet">
+    <link href="../../css/theme.css?1616271712" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616271712" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616256742" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616271712" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616256742"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616271712"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616256742"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616256742"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616271712"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616271712"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616256742"></script>
+<script type="text/javascript" src="../../js/search.js?1616271712"></script>
 
     
   </div>
@@ -1583,11 +1583,11 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
-<li><a href="#communication-between-threads">Communication between threads</a>
-<ul>
-<li><a href="#mutex">Mutex</a></li>
+<li><a href="#critical-section-and-race-conditions">Critical Section and Race Conditions</a></li>
+<li><a href="#atomic-operations">Atomic operations</a></li>
+<li><a href="#mutexes-and-locking">Mutexes and Locking</a></li>
+<li><a href="#deadlocks">Deadlocks</a></li>
 <li><a href="#semaphore">Semaphore</a></li>
-</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -1615,85 +1615,210 @@ window.MathJax = {
 
 
 
-<p><strong>TODO: add critical section (register updates) and deadlock empire stuff</strong></p>
-
-<p>As you will see, the programm will never print &ldquo;Job 1 finished&rdquo; but you will see &ldquo;Job 2 finished&rdquo; twice. This is because the &ldquo;counter&rdquo; variable is shared by both threads. By the time thread 1 finished, thread 2 has already incremented the counter as well, causing thread 1 to read the value as &ldquo;2&rdquo; when it exits. This is somewhat counter-intuitive and the source of many thread-related bugs as we will see.</p>
-
-<p>It is worth noting that similar problems show up even in non-multithreaded situations, especially when working with callback functions (a common problem in for example JavaScript applications). Later you&rsquo;ll learn more about variable scopes and things named closures, but for now it&rsquo;s just good to get used to thinking about whether certain memory is shared or copied, which is an important skill.</p>
-
-<h2 id="communication-between-threads">Communication between threads</h2>
-
-<p>One <em>raison d&rsquo;être</em> for multi-threaded applications is <strong>resource sharing</strong>. In the example that was given <a href="../../ch6-tasks/threads/#pthreads">earlier</a> a <strong>global variable</strong> &lsquo;counter&rsquo; was used. No measures were taken for securing this approach it went wrong in that example. The output of the example looks like shown below.</p>
+<p>One <em>raison d&rsquo;être</em> for multi-threaded applications is <strong>resource sharing</strong>. In the example that was given <a href="../../ch6-tasks/threads/#pthreads">earlier</a> a <strong>global variable</strong> &lsquo;counter&rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:</p>
 
 <figure>
     <img src="../../img/os/sc_631.png"/> 
 </figure>
 
-<p>This might come as a surprise 😃 <br/>
+<p>This probably came as a surprise 😃 <br/>
 It should be clear that what we wanted to see was <em>Job 1 started</em> followed by <em>Job 1 finished</em> and that this would be repeated again for job number 2.</p>
 
-<p>The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2 in contrast with the intended value of 1.</p>
+<p>The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2, which is in contrast with the intended value of 1.</p>
 
-<h3 id="mutex">Mutex</h3>
+<h2 id="critical-section-and-race-conditions">Critical Section and Race Conditions</h2>
 
-<p>The simplest form of solving inter-thread communication issues is the use of a mutex. This is a portmanteau of <strong>Mut</strong>ual <strong>Ex</strong>clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you <strong>lock</strong> the door. Others that want to occupy the toilet have to wait until you&rsquo;re finished and you <strong>unlock</strong> the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, &hellip;</p>
+<p>At first glance, it might seem that this problem is easily solvable by copying the global counter to a local, per-thread variable for later use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">doSomeThing</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>arg) {
+    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+    <span style="color:#66d9ef">int</span> local_id; <span style="color:#75715e">// new, per-thread variable                                    
+</span><span style="color:#75715e"></span>    counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+    local_id <span style="color:#f92672">=</span> counter; <span style="color:#75715e">// make a local copy of counter for this thread                                
+</span><span style="color:#75715e"></span>
+    printf(<span style="color:#e6db74">&#34;  Job %d started</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);
+    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>(<span style="color:#ae81ff">0xFFFFFFFF</span>);i<span style="color:#f92672">++</span>);
+    printf(<span style="color:#e6db74">&#34;  Job %d finished</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);
+
+    <span style="color:#66d9ef">return</span> NULL;
+}</code></pre></div>
+<p>If you tried to implement this, it would probably work&hellip; most of the time at least. As explained in the first section on threads, threads are not necessarily run in parallel all the time, especially not if the number of threads is larger than the number of CPU cores. In fact, there are many situations where given 2 threads, the first one will get some time to execute, is then paused to give the second one some time to execute, unpaused to get some time etc.</p>
+
+<p>As such, if two Threads executing doSomeThing() would be running on a single CPU, the following sequence of actions could occur:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+local_id <span style="color:#f92672">=</span> counter;
+<span style="color:#75715e">// -----------------------------------
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Thread 1
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// after this, counter == 1
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Before Thread 1 can execute local_id = counter, it is paused by the CPU
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Thread 2
+</span><span style="color:#75715e"></span>    counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// after this, counter == 2
+</span><span style="color:#75715e"></span>    local_id <span style="color:#f92672">=</span> counter; <span style="color:#75715e">// thus, in Thread 2, local_id is correctly 2
+</span><span style="color:#75715e">// Here, the CPU switches back to Thread 1
+</span><span style="color:#75715e">// Thread 1
+</span><span style="color:#75715e"></span>local_id <span style="color:#f92672">=</span> counter; <span style="color:#f92672">//</span> now, local_id is still <span style="color:#ae81ff">2</span>, instead of <span style="color:#ae81ff">1.</span>.. mission failed</code></pre></div>
+<p>We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called <strong>race conditions</strong>, referring to e.g., a car/horse race where it&rsquo;s not always the same contestant that wins, depending on the conditions of the racetrack.</p>
+
+<p>In general, we can see that once multiple threads start accessing shared memory, things can go wrong. As such, these specific points in a multithreaded program are often referred to as the <strong>critical section</strong>: it&rsquo;s of the highest importance (critical) that this section is executed by itself, without outside interference. Otherwise, race conditions can occur and we can introduce bugs.</p>
+
+<p>To make this all a bit more tangible, we will be using an outside interactive tool, called <a href="https://deadlockempire.github.io/">Deadlock Empire</a>. Instead of having you write correct code for a problem, this website challenges you to find bugs in existing code to show the many caveats of multithreaded programming. While the website uses the C# programming language and is a bit different from the C syntax we&rsquo;re using, the high-level concepts are 100% the same.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Go to the Deadlock Empire website and do:
+- Tutorial: Tutorial 1: Interface
+- Unsynchronized Code: Boolean Flags Are Enough For Everyone
+- Unsynchronized Code: Simple Counter</p>
+
+	</div>
+</div>
+
+<h2 id="atomic-operations">Atomic operations</h2>
+
+<p>Now that you have a feeling for race conditions and critical sections, it&rsquo;s time to make things worse.</p>
+
+<p>The example above isn&rsquo;t only vulnerable through the &ldquo;local_id = counter&rdquo; code: the &ldquo;counter += 1&rdquo; code is also vulnerable to a race condition. This is because incrementing a variable (counter += 1) is not a so-called <strong>atomic operation</strong>. This means that internally, it is not implemented with a single CPU instruction, but rather composed out of a series of different operations/instructions.</p>
+
+<p>For example, for counter += 1, the series of executed steps might look like:</p>
+
+<ol>
+<li>Fetch value of counter from RAM and store it in the CPU cache memory</li>
+<li>Fetch value from CPU cache memory and store it in a CPU register for the calculation</li>
+<li>Add 1 to the register value</li>
+<li>Write the register value back to the CPU cache</li>
+
+<li><p>Write the cached value back to the RAM</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// In simple pseudocode, counter += 1 might look like this:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// temp is for example the CPU register here, and &#34;counter&#34; is the value in memory
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> the <span style="color:#66d9ef">register</span> value is written back out to the memory</code></pre></div></li>
+</ol>
+
+<p>To the CPU, all of these steps are one or more instructions, each of which can also have a certain delay associated with them. As such, what can happen in practice is the following sequence of events:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+counter <span style="color:#f92672">=</span> temp;
+<span style="color:#75715e">// -----------------------------------
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Thread 1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// after this, the temp register contains the value 1. The &#34;counter&#34; address in RAM is still 0.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Before Thread 1 can actually store this temporary register result in memory, the CPU gives control to Thread 2
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Thread 2
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// &#34;counter&#34; was still 0 in RAM, so Thread 2&#39;s temp register now also contains the value 1
+</span><span style="color:#75715e"></span>    counter <span style="color:#f92672">=</span> temp; <span style="color:#75715e">// The &#34;counter&#34; address in RAM now contains the value 1
+</span><span style="color:#75715e">// Here, the CPU switches back to Thread 1
+</span><span style="color:#75715e">// Thread 1
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> The <span style="color:#e6db74">&#34;counter&#34;</span> address in RAM still contains the value <span style="color:#ae81ff">1</span></code></pre></div>
+<p>We can see that, even though two &ldquo;counter += 1&rdquo; lines of code were executed, the resulting value in memory is just 1 instead of 2. Again: you probably never saw this when testing the exercise in the lab, but theoretically it -could- happen, leading to randomly failing programmes.</p>
+
+<p>Note that this is a direct consequence of the fact that threads have separate program counters and register values, as discussed in the first Section on threads. Once individual threads are started, even if they are executing the same code, they do so in a partially separated context.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Go to the Deadlock Empire website and do:
+- Tutorial: Tutorial 2: Non-Atomic Instructions
+- Unsynchronized Code: Confused Counter</p>
+
+	</div>
+</div>
+
+<p>You might now think that this can only happen if two threads execute the <em>exact same code</em>. However, you would be wrong, as illustrated by the following example from Wikipedia:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1
+</span><span style="color:#75715e">// ... other code
+</span><span style="color:#75715e"></span>b <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>;
+<span style="color:#75715e">// ... other code
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Thread 2
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// ... other code
+</span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> z;
+    <span style="color:#f92672">//</span> ... other code</code></pre></div>
+
+<div class="ex">
+	<div class="inner">
+    	<p>Give a practical, numerical example of how, depending on CPU scheduling, b can end up with two very different values.</p>
+
+	</div>
+</div>
+
+<h2 id="mutexes-and-locking">Mutexes and Locking</h2>
+
+<p>As we&rsquo;ve seen in many examples, things can go wrong really quickly when dealing with shared memory. Making matters worse, simple solutions (such as making thread-local copies of shared memory) are also doomed to fail eventually.</p>
+
+<p>As such, it should be clear that we need a way to secure the <strong>critical sections</strong> in a thread. We need a way to make sure the OS will not pause a thread during a critical section, to make sure that all instructions are done before another thread gets execution time. Put differently: we need a way to turn groups of non-atomic operations into a single big atomic block.</p>
+
+<p>The simplest way of doing this, is by means of a <strong>mutex</strong>. This term is a portmanteau of <strong>Mut</strong>ual <strong>Ex</strong>clusion. The behaviour can be seen as the lock on a toilet door. If you are using the toilet, you <strong>lock</strong> the door. Others that want to occupy the toilet have to wait until you&rsquo;re finished and you <strong>unlock</strong> the door (and get out, after washing your hands). Hence, the mutex has only two states: one or zero, on or off, locked or unlocked.</p>
+
+<p>Internally, a mutex lock is typically implemented by means of a single, atomic CPU instruction. Otherwise, simply locking or unlocking the mutex would of course potentially lead to the problems it is trying to solve!</p>
 
 <p>The concept of a mutex is implemented in the pthreads library as a new variable type: <strong>pthread_mutex_t</strong>. Locking and unlocking can be done through functions <strong>pthread_mutex_lock()</strong> and <strong>pthread_mutex_unlock()</strong>. As always, read the documentation for the exact usage of these functions.</p>
 
-<p>The example above can be rewritten using a mutex:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> counter;
-pthread_mutex_t lock_counter;                   <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+<p>The problematic example of the shared counter can be rewritten using a mutex:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> counter;
+pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
 
 <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">doSomeThing</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>arg) {
     <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 
-    <span style="color:#66d9ef">int</span> id;                                     <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
-    pthread_mutex_lock(<span style="color:#f92672">&amp;</span>lock_counter);          <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    <span style="color:#66d9ef">int</span> local_id;                               <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    pthread_mutex_lock(<span style="color:#f92672">&amp;</span>counter_lock);          <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
     counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
-    id <span style="color:#f92672">=</span> counter;                               <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
-    pthread_mutex_unlock(<span style="color:#f92672">&amp;</span>lock_counter);        <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    local_id <span style="color:#f92672">=</span> counter;                         <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
+    pthread_mutex_unlock(<span style="color:#f92672">&amp;</span>counter_lock);        <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
 
 
-    printf(<span style="color:#e6db74">&#34;  Job %d started</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);           <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
+    printf(<span style="color:#e6db74">&#34;  Job %d started</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, local_id);     <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
     <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>(<span style="color:#ae81ff">0xFFFFFFFF</span>);i<span style="color:#f92672">++</span>);
-    printf(<span style="color:#e6db74">&#34;  Job %d finished</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, id);          <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
+    printf(<span style="color:#e6db74">&#34;  Job %d finished</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, local_id);    <span style="color:#75715e">/* THIS LINE HAS BEEN CHANGED */</span>
 
     <span style="color:#66d9ef">return</span> NULL;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-  <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, err;
-  pthread_t tid[<span style="color:#ae81ff">2</span>];
-
-  <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
-    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>doSomeThing, NULL);
-    <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create thread :[%s]&#34;</span>, strerror(err));
-    }
-    i<span style="color:#f92672">++</span>;
-  }
-
-  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
-  pthread_join(tid[<span style="color:#ae81ff">1</span>], NULL);
-
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div>
-<p>This solves the issue that was encountered above. Before the counter is accessed the mutex is locked. This provides exclusive access. The counter is then incremented and copied in to variable <em>id</em>. Finally, the mutex is unlocked.</p>
+<p>This solves the issue that was encountered above. Before the counter is accessed, the mutex is locked. This provides exclusive access to the following 2-line critical section untill the mutex is unlocked again. The counter is then incremented and copied in to variable <em>local_id</em>. Finally, the mutex is unlocked.</p>
 
-<p>With this measure in place, the result is as was intended.
+<p>With this measure in place, the result is as was originally intended.</p>
+
 <figure>
-    <img src="../../img/os/sc_mutex.png"/>
-</figure></p>
+    <img src="../../img/os/sc_mutex.png"/> 
+</figure>
 
-<p><strong>PROTIP:</strong> It is pointed out that the time (directionally proportional the number of instructions) between locking and unlocking a mutex should be kept to a minimum. Other threads might be waiting for the mutex to become available.</p>
+<p><strong>Note:</strong> The amount of code/instructions between locking and unlocking a mutex should of course be kept to a minimum. If you put a mutex around your entire threading function, you undo the entire possible benefit of using threads: the fact that they can run in parallel! As such, inter-thread communication via shared memory should be kept to a minimum, and only that should be protected using Mutexes/locks.</p>
 
-<h3 id="semaphore">Semaphore</h3>
+
+<div class="ex">
+	<div class="inner">
+    	<p>Go to the Deadlock Empire website and do:
+- Locks: Insufficient lock
+- Locks: Deadlock
+- Locks: A more complex thread</p>
+
+	</div>
+</div>
+
+<h2 id="deadlocks">Deadlocks</h2>
+
+<p>While locks help with many <strong>critical section</strong> problems, the Deadlock Empire examples above show that they are also not always trivial to apply correctly. This is especially the case if there is more than one shared resource/variable/memory region in play.</p>
+
+<p>For example, a typical problem that can arise is when two threads need to obtain access to two different shared resources, but do so in opposite orders. This can for example happen in complex programs that often interact with outside peripherals like the hard disk and the network:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1 wants to first read from the network, then write result to the hard disk
+</span><span style="color:#75715e">// Thread 2 wants to first read the contents of a file, then send it on the network
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Thread 1:
+</span><span style="color:#75715e"></span>network.lock()
+    <span style="color:#75715e">// CPU pauses Thread 1 and activates Thread 2
+</span><span style="color:#75715e"></span>    harddisk.lock()
+<span style="color:#75715e">// CPU pauses Thread 2 and activates Thread 1 again
+</span><span style="color:#75715e"></span>harddisk.lock() <span style="color:#75715e">// this will not complete, because Thread 2 is holding this lock already. Thread 1 has to wait
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// CPU pauses Thread 1 because it has to wait and activates Thread 2 again
+</span><span style="color:#75715e"></span>    network.lock() <span style="color:#75715e">// this will not complete, because Thread 1 is holding this lock already. Thread 2 has to wait
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">//</span> Both threads are waiting endlessly AND also locking the network and the harddisk <span style="color:#66d9ef">for</span> any other threads that might arrive</code></pre></div>
+<p>Not entirely realistic: network and harddisk can generally be used by multiple threads and processes. This is because the OS has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (e.g., <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf</a>). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!</p>
+
+<p>TODO: finalize this last paragraph above.</p>
+
+<h2 id="semaphore">Semaphore</h2>
 
 <p>A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys.</p>
 
@@ -2729,19 +2854,19 @@ pthread_mutex_t lock_counter;                   <span style="color:#75715e">/* T
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616256742"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616256742"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616256742"></script>
-    <script src="../../js/jquery.sticky.js?1616256742"></script>
-    <script src="../../js/featherlight.min.js?1616256742"></script>
-    <script src="../../js/highlight.pack.js?1616256742"></script>
+    <script src="../../js/clipboard.min.js?1616271712"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616271712"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616271712"></script>
+    <script src="../../js/jquery.sticky.js?1616271712"></script>
+    <script src="../../js/featherlight.min.js?1616271712"></script>
+    <script src="../../js/highlight.pack.js?1616271712"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616256742"></script>
-    <script src="../../js/learn.js?1616256742"></script>
-    <script src="../../js/hugo-learn.js?1616256742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616271712"></script>
+    <script src="../../js/learn.js?1616271712"></script>
+    <script src="../../js/hugo-learn.js?1616271712"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616256742"></script>
+            <script src="../../mermaid/mermaid.js?1616271712"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

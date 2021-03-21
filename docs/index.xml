@@ -452,8 +452,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
-      <description>Source: G.I.    TODO: add proper exercises from Deadlock empire here!
- REVISIT, WITH A TWEAK Write a C-program that has 1 king thread and n servant threads. The number of threads should be configurable through a define. The king thread sleeps for a random amount of time and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID.</description>
+      <description>Source: G.I.    Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
     </item>
     
     <item>

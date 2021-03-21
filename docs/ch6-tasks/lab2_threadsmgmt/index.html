@@ -12,21 +12,21 @@
     <title>6.5: Threads (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616271712" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616271712" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616271712" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616271712" rel="stylesheet">
-    <link href="../../css/theme.css?1616271712" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616271712" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616323793" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616323793" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616323793" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616323793" rel="stylesheet">
+    <link href="../../css/theme.css?1616323793" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616323793" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616271712" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616323793" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616271712"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616323793"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616271712"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616271712"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616323793"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616323793"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616271712"></script>
+<script type="text/javascript" src="../../js/search.js?1616323793"></script>
 
     
   </div>
@@ -1655,7 +1655,7 @@ window.MathJax = {
 <li>Write a C-program that has 4 threads (in addition to the main thread). Each thread calculates all prime numbers between a lower and larger limit. Given a maximum number N which is divisible by 4 (e.g., 100000):
 
 <ul>
-<li>Thread 1 computes all primes between 0 and N/4</li>
+<li>Thread 1 computes all primes between 2 and N/4</li>
 <li>Thread 2 computes all primes between N/4 + 1 and N/2</li>
 <li>Thread 3 computes all primes between N/2 + 1 and 3N/4</li>
 <li>Thread 4 computes all primes between 3N/4 + 1 and N</li>
@@ -1663,10 +1663,14 @@ window.MathJax = {
 <li>After all threads are done, the main thread prints all the resulting primes <strong>in the proper order (low to high)</strong> to the screen.
 
 <ul>
-<li>Note: this means that the threads dont print the primes themselves like in the processes exercise: you have to instead use heap-allocated memory to communicate back the results to the main thread!</li>
-<li>There are several ways of doing this and none of them are perfect (we&rsquo;ll see how to make things better in the next Section). For now, just pick a method you think will work, don&rsquo;t worry too much about cleanliness.<br /></li>
+<li>Note: this means that the threads dont print the primes themselves like in the processes exercise: you have to instead use heap-allocated memory to communicate back the results to the main thread!
+
+<ul>
+<li>For this exercise, it&rsquo;s sufficient for each thread to store their results separately and communicate them back at the end. We will see other options later.</li>
 </ul></li>
-<li>Imagine you wouldn&rsquo;t have to print the results fully ordered from low to high (but still in the main thread). Would you be able to make the program more efficient then? Why (not)?</li>
+<li>There are several ways of doing this and none of them are perfect (we&rsquo;ll see how to make things better in the next Section). For now, just pick a method you think will work, don&rsquo;t worry too much about cleanliness.</li>
+</ul></li>
+<li>Imagine you wouldn&rsquo;t have to print the results fully ordered from low to high (but still in the main thread) (You don&rsquo;t actually have to implement this). Would you be able to make the program more efficient then? Why (not)?</li>
 </ul></li>
 </ul>
 
@@ -2678,19 +2682,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616271712"></script>
-    <script src="../../js/jquery.sticky.js?1616271712"></script>
-    <script src="../../js/featherlight.min.js?1616271712"></script>
-    <script src="../../js/highlight.pack.js?1616271712"></script>
+    <script src="../../js/clipboard.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616323793"></script>
+    <script src="../../js/jquery.sticky.js?1616323793"></script>
+    <script src="../../js/featherlight.min.js?1616323793"></script>
+    <script src="../../js/highlight.pack.js?1616323793"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616271712"></script>
-    <script src="../../js/learn.js?1616271712"></script>
-    <script src="../../js/hugo-learn.js?1616271712"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616323793"></script>
+    <script src="../../js/learn.js?1616323793"></script>
+    <script src="../../js/hugo-learn.js?1616323793"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616271712"></script>
+            <script src="../../mermaid/mermaid.js?1616323793"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

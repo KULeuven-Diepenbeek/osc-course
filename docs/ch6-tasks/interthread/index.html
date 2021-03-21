@@ -12,21 +12,21 @@
     <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616271712" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616271712" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616271712" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616271712" rel="stylesheet">
-    <link href="../../css/theme.css?1616271712" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616271712" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616323793" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616323793" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616323793" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616323793" rel="stylesheet">
+    <link href="../../css/theme.css?1616323793" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616323793" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616271712" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616323793" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616271712"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616323793"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616271712"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616271712"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616323793"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616323793"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616271712"></script>
+<script type="text/javascript" src="../../js/search.js?1616323793"></script>
 
     
   </div>
@@ -1814,13 +1814,11 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 </span><span style="color:#75715e"></span>    network.lock() <span style="color:#75715e">// this will not complete, because Thread 1 is holding this lock already. Thread 2 has to wait
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">//</span> Both threads are waiting endlessly AND also locking the network and the harddisk <span style="color:#66d9ef">for</span> any other threads that might arrive</code></pre></div>
-<p>Not entirely realistic: network and harddisk can generally be used by multiple threads and processes. This is because the OS has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (e.g., <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf</a>). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!</p>
-
-<p>TODO: finalize this last paragraph above.</p>
+<p>Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">this presentation</a> (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!</p>
 
 <h2 id="semaphore">Semaphore</h2>
 
-<p>A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys.</p>
+<p>While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a <strong>semaphore</strong>. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys:</p>
 
 <figure>
     <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" width="50%"/> <figcaption>
@@ -1828,9 +1826,11 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
         </figcaption>
 </figure>
 
-<p>Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, he/she needs to take a bracelet and put it on. When there are not more bracelets, a child that also wants to play in the room has to wait until another child leaves the room and places his/her bracelet back in the bowl.</p>
+<p>Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, they need to take a bracelet and put it on. When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait until another child leaves the room and places their bracelet back in the bowl.</p>
 
-<p>This technique is used in e.g. producer-consumer problems, amongst many other types. In contrast with the mutex, a semaphore can have multiple states. It is <em>number</em> of tokens. It is pointed out that if there is only a single token in the semaphore, this behaves exactly the same as a mutex. Such a semaphore is referred to as a <strong>binary semaphore</strong>.</p>
+<p>This technique is used in e.g., producer-consumer problems, amongst many other types. In those settings, several producer threads prepare data and put it in shared memory, ready to be used by one or more consumers. Instead of having a separate counter that tracks how many produced items are waiting for processing, a semaphore can be used directly, making state keeping a bit easier.</p>
+
+<p>This is because in contrast with the mutex, a semaphore is a <em>count</em> of tokens. Put differently, a mutex limits access to a single resource (e.g., a single memory location) to one thread at a time. A semaphore instead allows threads to share a limited pool of resources (e.g., 4 different hard disks), with multiple threads potentially active at the same time. Note though that if there is only a single token in the semaphore, this behaves exactly the same as a mutex (this specific type is referred to as a <strong>binary semaphore</strong>).</p>
 
 <p>The <strong>pthreads</strong> library also provides an API to program with semaphores. It contains, amongst others, functions like:</p>
 
@@ -1840,11 +1840,24 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 <li>sem_post(): increments the number inside of the semaphore.</li>
 </ul>
 
-<p>Note that the <code>sem_wait()</code> function is blocking. If the value of the semaphore is set to zero, the thread waits until it can acquire a lock. There is a non-blocking alternative sem_trywait(). See the manual pages for more info and the correct usage.</p>
+<p>Note that the <code>sem_wait()</code> function is <em>blocking</em> (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes <code>sem_post()</code> (put differently: until the semaphore is &ldquo;unlocked&rdquo;). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: <code>sem_trywait()</code>. See the manual pages and search Google for more info and the correct usage.</p>
 
-<p>Next to fact that a mutex only has a single token, where a semaphore can have more, the signalling is also a main difference. When a thread wants to get access to a semaphore and there are no more tokens available, it goes into a sleep-like state. When another thread produces a semaphore, a signal is sent to all the threads that were &lsquo;sleeping&rsquo;.</p>
+<p>Note that multiple threads can be waiting on  the same semaphore at any given time. When a sem_post occurs, they of course cannot all start immediately, since only one token was added. Here there are again several ways for the OS to decide which thread gets preference (e.g., the one that has been waiting the longest, the one that was most recently started) and gets to consume the token.</p>
 
 <p>More info on the differences between a semaphore and a mutex are given <a href="https://techdifferences.com/difference-between-semaphore-and-mutex.html">here</a>.</p>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Go to the Deadlock Empire website and do:
+- Semaphores: Semaphores
+- Semaphores: Producer-Consumer
+- Semaphores: Producer-Consumer (Variant)</p>
+
+	</div>
+</div>
+
+<p>Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example conditional variables and barriers). Especially more modern programming languages like Java and C# typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped.</p>
 
 
 <footer class="footline">
@@ -2854,19 +2867,19 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616271712"></script>
-    <script src="../../js/jquery.sticky.js?1616271712"></script>
-    <script src="../../js/featherlight.min.js?1616271712"></script>
-    <script src="../../js/highlight.pack.js?1616271712"></script>
+    <script src="../../js/clipboard.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616323793"></script>
+    <script src="../../js/jquery.sticky.js?1616323793"></script>
+    <script src="../../js/featherlight.min.js?1616323793"></script>
+    <script src="../../js/highlight.pack.js?1616323793"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616271712"></script>
-    <script src="../../js/learn.js?1616271712"></script>
-    <script src="../../js/hugo-learn.js?1616271712"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616323793"></script>
+    <script src="../../js/learn.js?1616323793"></script>
+    <script src="../../js/hugo-learn.js?1616323793"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616271712"></script>
+            <script src="../../mermaid/mermaid.js?1616323793"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

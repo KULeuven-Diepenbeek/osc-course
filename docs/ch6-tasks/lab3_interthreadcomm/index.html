@@ -12,21 +12,21 @@
     <title>6.7: Inter-Thread communication (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616271712" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616271712" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616271712" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616271712" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616271712" rel="stylesheet">
-    <link href="../../css/theme.css?1616271712" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616271712" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616323793" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616323793" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616323793" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616323793" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616323793" rel="stylesheet">
+    <link href="../../css/theme.css?1616323793" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616323793" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616271712" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616323793" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616271712"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616323793"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616271712"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616271712"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616323793"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616323793"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616271712"></script>
+<script type="text/javascript" src="../../js/search.js?1616323793"></script>
 
     
   </div>
@@ -1610,15 +1610,17 @@ window.MathJax = {
 
 
 <ul>
-<li><p>TODO: add proper exercises from Deadlock empire here!</p></li>
-
-<li><p><strong>REVISIT, WITH A TWEAK</strong> Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of threads should be configurable through a define. The king thread sleeps for a random amount of time and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
+<li><p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
 
 <ul>
-<li>the order of the servants <strong>can</strong> vary</li>
-<li>every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
-<li>the king <strong>does</strong> wait for the greetings before he goes back to sleep &lt;&mdash;&mdash;&mdash;&mdash;&ndash; here&rsquo;s the tweak</li>
+<li>Every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
+<li>The king <strong>doesn&rsquo;t</strong> wait for the greetings before he goes back to sleep</li>
+<li>You do not need to make sure that the servants always reply in the same order</li>
+<li>Repeat the wake-greet cycle at least 5 times</li>
+<li>Tip: use the <code>rand()</code> function to get random numbers</li>
 </ul></li>
+
+<li><p><strong>REVISIT, WITH A TWEAK</strong> Change the previous king-servant setup with a single change: now, the king <strong>does</strong> explicitly wait for the greetings of <em>all</em> his servants before he goes back to sleep.</p></li>
 </ul>
 
 <figure>
@@ -1626,6 +1628,40 @@ window.MathJax = {
             <h4>An example output</h4>
         </figcaption>
 </figure>
+
+<ul>
+<li><p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have 4 separate threads, each calculating a subsection of primes between 2 and N. Now however, we will use a single, shared memory structure, instead of having each thread storing their full results in separate memory. Each prime-calculting thread thus communicates each discovered prime <strong>as soon as possible</strong> back to a single processing entity. This can be accomplished in several different ways:</p>
+
+<ul>
+<li>You can have 1 big array and a counter (indicating how many items are in the array) and lock both using a Mutex
+
+<ul>
+<li>Extra points if you can think of a way to not make this array take up excessive memory by the time the calculations are done</li>
+</ul></li>
+<li>You can view the prime-threads as producers and have a separate consumer thread that reads primes as they are produced and puts them in the results array (using Semaphores to signal)
+
+<ul>
+<li>Note that depending on your approach, this might still require a little bit of thread-local memory too of course (why? think about it!), but much less than previously</li>
+</ul></li>
+
+<li><p>Instead of an array + counter, you could use a linked list for both setups</p></li>
+
+<li><p>The goal is to implement <strong>one</strong> of these options (you choose), think deeply about the rest, and then answer the following questions:</p>
+
+<ul>
+<li>Which approach should be faster: this one with shared memory or the one from the previous lab using per-thread memory?</li>
+<li>Which tradeoffs were made here in comparison with the previous version? (e.g., faster but less flexible, slower but less memory, &hellip;)</li>
+<li>Are you able to keep the primes sorted in this new version? Why (not)? If not, can you think of a way to still sort the results afterwards? Explain this in terms of parallel vs sequential phases of a program.<br /></li>
+</ul></li>
+</ul></li>
+
+<li><p>Go to the Deadlock Empire website and complete these two exercises:</p>
+
+<ul>
+<li>The Final Stretch: Dragonfire</li>
+<li>The Final Stretch: Triple Danger</li>
+</ul></li>
+</ul>
 
 
 <footer class="footline">
@@ -2635,19 +2671,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616271712"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616271712"></script>
-    <script src="../../js/jquery.sticky.js?1616271712"></script>
-    <script src="../../js/featherlight.min.js?1616271712"></script>
-    <script src="../../js/highlight.pack.js?1616271712"></script>
+    <script src="../../js/clipboard.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616323793"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616323793"></script>
+    <script src="../../js/jquery.sticky.js?1616323793"></script>
+    <script src="../../js/featherlight.min.js?1616323793"></script>
+    <script src="../../js/highlight.pack.js?1616323793"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616271712"></script>
-    <script src="../../js/learn.js?1616271712"></script>
-    <script src="../../js/hugo-learn.js?1616271712"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616323793"></script>
+    <script src="../../js/learn.js?1616323793"></script>
+    <script src="../../js/hugo-learn.js?1616323793"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616271712"></script>
+            <script src="../../mermaid/mermaid.js?1616323793"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

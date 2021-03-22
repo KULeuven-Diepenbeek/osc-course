@@ -18,19 +18,22 @@ weight: 7
 
 {{% figure src="/img/os/sc_642.png" title="An example output" %}}
 
-* Let's revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have 4 separate threads, each calculating a subsection of primes between 2 and N. Now however, we will use a single, shared memory structure, instead of having each thread storing their full results in separate memory. Each prime-calculting thread thus communicates each discovered prime **as soon as possible** back to a single processing entity. This can be accomplished in several different ways:
+* Let's revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have 4 separate threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory. Instead, each prime-calculting thread (the producers) communicates each discovered prime **as soon as possible** back to a separate "processing" entity that prints the primes to the screen (one or several consumers). Again, this can be accomplished in several different ways:
 
-    * You can have 1 big array and a counter (indicating how many items are in the array) and lock both using a Mutex
+    1. You can use a single shared array and a shared counter (indicating how many items are in the array) to store the results
+        * Access to the array is protected by a Mutex that both the producers and consumer(s) lock
         * Extra points if you can think of a way to not make this array take up excessive memory by the time the calculations are done
-    * You can view the prime-threads as producers and have a separate consumer thread that reads primes as they are produced and puts them in the results array (using Semaphores to signal)
-        * Note that depending on your approach, this might still require a little bit of thread-local memory too of course (why? think about it!), but much less than previously
-    * Instead of an array + counter, you could use a linked list for both setups
+    2. You can pass each prime as an individual value between producer/consumer threads instead of using a shared array
+        * Here, you can use Semaphores and/or Mutexes to coordinate this communication
+            * Tip: ```sem_trywait()``` might be useful here, depending your approach
+        * Extra points if you can think of a way of keeping the producers producing (at least for a small amount of time) while all consumers are busy
+
+    * Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread, then extending it to use multiple.
 
     * The goal is to implement **one** of these options (you choose), think deeply about the rest, and then answer the following questions:
-        * Which approach should be faster: this one with shared memory or the one from the previous lab using per-thread memory?
+        * Which approach should be faster: this one with shared memory/direct value passing or the one from the previous lab using per-thread memory?
         * Which tradeoffs were made here in comparison with the previous version? (e.g., faster but less flexible, slower but less memory, ...)
         * Are you able to keep the primes sorted in this new version? Why (not)? If not, can you think of a way to still sort the results afterwards? Explain this in terms of parallel vs sequential phases of a program.  
-
 
 * Go to the Deadlock Empire website and complete these two exercises:
     * The Final Stretch: Dragonfire

@@ -54,7 +54,7 @@ counter += 1; // after this, counter == 1
 local_id = counter; // now, local_id is still 2, instead of 1... mission failed
 ```
 
-We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called **race conditions**, referring to e.g., a car/horse race where it's not always the same contestant that wins, depending on the conditions of the racetrack. 
+We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called **race conditions**, referring to e.g., a car/horse race where it's not always the same contestant that wins, depending on the conditions of the racetrack. Note that this does not only occur in the case of multiple threads on the same core: similar problems can of course also happen if you have actual parallel threads as well. 
 
 In general, we can see that once multiple threads start accessing shared memory, things can go wrong. As such, these specific points in a multithreaded program are often referred to as the **critical section**: it's of the highest importance (critical) that this section is executed by itself, without outside interference. Otherwise, race conditions can occur and we can introduce bugs. 
 
@@ -62,9 +62,10 @@ To make this all a bit more tangible, we will be using an outside interactive to
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
-- Tutorial: Tutorial 1: Interface
-- Unsynchronized Code: Boolean Flags Are Enough For Everyone
-- Unsynchronized Code: Simple Counter
+
+* Tutorial: Tutorial 1: Interface
+* Unsynchronized Code: Boolean Flags Are Enough For Everyone
+* Unsynchronized Code: Simple Counter
 {{% /task %}}
 
 ## Atomic operations
@@ -73,13 +74,15 @@ Now that you have a feeling for race conditions and critical sections, it's time
 
 The example above isn't only vulnerable through the "local_id = counter" code: the "counter += 1" code is also vulnerable to a race condition. This is because incrementing a variable (counter += 1) is not a so-called **atomic operation**. This means that internally, it is not implemented with a single CPU instruction, but rather composed out of a series of different operations/instructions.
 
-For example, for counter += 1, the series of executed steps might look like:
+For example, for counter += 1, the series of executed steps might look like this:
 
 1. Fetch value of counter from RAM and store it in the CPU cache memory
 2. Fetch value from CPU cache memory and store it in a CPU register for the calculation
 3. Add 1 to the register value
 4. Write the register value back to the CPU cache
 5. Write the cached value back to the RAM
+
+Put differently: the CPU does not act on the value stored in memory directly, but rather a copy in a register. Copying from/to a register is not atomic, so bugs can occur. To make things simpler to reason about, we can boil this down to just two lines of code: 
 
 ```C
 // In simple pseudocode, counter += 1 might look like this:
@@ -96,14 +99,14 @@ counter = temp;
 // -----------------------------------
 
 // Thread 1
-int temp = counter + 1; // after this, the temp register contains the value 1. The "counter" address in RAM is still 0.
+int temp = counter + 1; // after this, Thread 1's temp register contains the value 1. The "counter" value in RAM is still 0.
     // Before Thread 1 can actually store this temporary register result in memory, the CPU gives control to Thread 2
     // Thread 2
     int temp = counter + 1; // "counter" was still 0 in RAM, so Thread 2's temp register now also contains the value 1
-    counter = temp; // The "counter" address in RAM now contains the value 1
+    counter = temp; // The "counter" value in RAM is now 1
 // Here, the CPU switches back to Thread 1
 // Thread 1
-counter = temp; // The "counter" address in RAM still contains the value 1
+counter = temp; // The "counter" value in RAM is still 1
 ```
 
 We can see that, even though two "counter += 1" lines of code were executed, the resulting value in memory is just 1 instead of 2. Again: you probably never saw this when testing the exercise in the lab, but theoretically it -could- happen, leading to randomly failing programmes.
@@ -112,8 +115,9 @@ Note that this is a direct consequence of the fact that threads have separate pr
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
-- Tutorial: Tutorial 2: Non-Atomic Instructions
-- Unsynchronized Code: Confused Counter
+
+* Tutorial: Tutorial 2: Non-Atomic Instructions
+* Unsynchronized Code: Confused Counter
 {{% /task %}}
 
 You might now think that this can only happen if two threads execute the _exact same code_. However, you would be wrong, as illustrated by the following example from Wikipedia:
@@ -181,13 +185,13 @@ With this measure in place, the result is as was originally intended.
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
-- Locks: Insufficient lock
-- Locks: Deadlock
-- Locks: A more complex thread
+
+* Locks: Insufficient lock
+* Locks: Deadlock
 {{% /task %}}
 
 
-## Deadlocks
+### Deadlocks
 
 While locks help with many **critical section** problems, the Deadlock Empire examples above show that they are also not always trivial to apply correctly. This is especially the case if there is more than one shared resource/variable/memory region in play. 
 
@@ -209,7 +213,7 @@ harddisk.lock() // this will not complete, because Thread 2 is holding this lock
 // Both threads are waiting endlessly AND also locking the network and the harddisk for any other threads that might arrive
 ```
 
-Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see [this presentation](http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf) (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!
+Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see [this presentation](http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf) (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing multiple pieces of shared memory, so watch out!
 
 ## Semaphore
 
@@ -225,9 +229,10 @@ This technique is used in e.g., producer-consumer problems, amongst many other t
 
 The **pthreads** library also provides an API to program with semaphores. It contains, amongst others, functions like:
 
-* sem_init(): initialises a semaphore
+* sem_init(): initialises a semaphore.
 * sem_wait(): decrements the number inside of the semaphore. 
 * sem_post(): increments the number inside of the semaphore.
+* sem_destroy(): destroys the semaphore when it's no longer needed.
 
 Note that the ```sem_wait()``` function is _blocking_ (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes ```sem_post()``` (put differently: until the semaphore is "unlocked"). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: ```sem_trywait()```. See the manual pages and search Google for more info and the correct usage.
 
@@ -237,9 +242,9 @@ More info on the differences between a semaphore and a mutex are given [here](ht
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
-- Semaphores: Semaphores
-- Semaphores: Producer-Consumer
-- Semaphores: Producer-Consumer (Variant)
+* Semaphores: Semaphores
+* Semaphores: Producer-Consumer
+* Semaphores: Producer-Consumer (Variant)
 {{% /task %}}
 
 Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example conditional variables and barriers). Especially more modern programming languages like Java and C# typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped. 

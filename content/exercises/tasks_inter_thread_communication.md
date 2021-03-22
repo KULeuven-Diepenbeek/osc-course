@@ -7,7 +7,7 @@ weight: 3
 
 * Analyse exercise 6_4_3.c (shown below) and write a report (2-3 pages):
   1. describe what the program does (in general, not line-by-line)
-  2. make a line chart that plots 'the elapsed real time' the program consumes in function of 'the number of threads that are contributing'
+  2. make a line chart that plots 'the elapsed real time' the program consumes (y-axis) in function of 'the number of threads that are contributing' (x-axis)
       * for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete
       * Note:
         * the scale on the X-axis goes from 2 to 300
@@ -17,9 +17,10 @@ weight: 3
   3. interpret the chart and draw conclusions
   4. explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads)
   5. actually extend the program so it runs more than one producer thread
+      * Note: ```sem_trywait``` can be used to good effect here
   6. compare the actual outcome with your hypothesis from step 4 and explain why this happens
 
-<center>**hand in the report via toledo**</center>
+<center>**hand in the report and the extended source code via toledo**</center>
 
 ```C
 #include <stdio.h>

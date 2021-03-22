@@ -18,6 +18,7 @@ weight: 5
     * Without executing the code, what do you think will be printed to the screen (with regards to the "Job started and finished" messages)? Why?
     * Compile and run the code on your machine
     * What is the actual output? Is it the same as what you guessed? Why (not)?
+    * Note: you do not have to think of a "fix" for this problem just yet: we'll discuss some possible solutions in the next Section.
 
 * In the processes lab, you had to implement a program that spawned different parallel processes, each calculating all the primes between 0 and a given number. Let's adapt this to threads, but with a twist.
 

@@ -12,21 +12,21 @@
     <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616323793" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616323793" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616323793" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616323793" rel="stylesheet">
-    <link href="../../css/theme.css?1616323793" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616323793" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616423350" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616423350" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616423350" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616423350" rel="stylesheet">
+    <link href="../../css/theme.css?1616423350" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616423350" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616323793" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616423350" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616323793"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616423350"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616323793"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616323793"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616423350"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616423350"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616323793"></script>
+<script type="text/javascript" src="../../js/search.js?1616423350"></script>
 
     
   </div>
@@ -1585,8 +1585,10 @@ window.MathJax = {
 <ul>
 <li><a href="#critical-section-and-race-conditions">Critical Section and Race Conditions</a></li>
 <li><a href="#atomic-operations">Atomic operations</a></li>
-<li><a href="#mutexes-and-locking">Mutexes and Locking</a></li>
+<li><a href="#mutexes-and-locking">Mutexes and Locking</a>
+<ul>
 <li><a href="#deadlocks">Deadlocks</a></li>
+</ul></li>
 <li><a href="#semaphore">Semaphore</a></li>
 </ul></li>
 </ul>
@@ -1659,7 +1661,7 @@ local_id <span style="color:#f92672">=</span> counter;
 </span><span style="color:#75715e">// Here, the CPU switches back to Thread 1
 </span><span style="color:#75715e">// Thread 1
 </span><span style="color:#75715e"></span>local_id <span style="color:#f92672">=</span> counter; <span style="color:#f92672">//</span> now, local_id is still <span style="color:#ae81ff">2</span>, instead of <span style="color:#ae81ff">1.</span>.. mission failed</code></pre></div>
-<p>We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called <strong>race conditions</strong>, referring to e.g., a car/horse race where it&rsquo;s not always the same contestant that wins, depending on the conditions of the racetrack.</p>
+<p>We can see that the exact problem we were trying to prevent can still occur, but it depends on how the threads are scheduled by the OS. This is what makes multithreaded programming so difficult in practice: your program can execute without problems 99 times, but still fail the next. These bugs can be very hard to reproduce. They are often called <strong>race conditions</strong>, referring to e.g., a car/horse race where it&rsquo;s not always the same contestant that wins, depending on the conditions of the racetrack. Note that this does not only occur in the case of multiple threads on the same core: similar problems can of course also happen if you have actual parallel threads as well.</p>
 
 <p>In general, we can see that once multiple threads start accessing shared memory, things can go wrong. As such, these specific points in a multithreaded program are often referred to as the <strong>critical section</strong>: it&rsquo;s of the highest importance (critical) that this section is executed by itself, without outside interference. Otherwise, race conditions can occur and we can introduce bugs.</p>
 
@@ -1668,10 +1670,13 @@ local_id <span style="color:#f92672">=</span> counter;
 
 <div class="ex">
 	<div class="inner">
-    	<p>Go to the Deadlock Empire website and do:
-- Tutorial: Tutorial 1: Interface
-- Unsynchronized Code: Boolean Flags Are Enough For Everyone
-- Unsynchronized Code: Simple Counter</p>
+    	<p>Go to the Deadlock Empire website and do:</p>
+
+<ul>
+<li>Tutorial: Tutorial 1: Interface</li>
+<li>Unsynchronized Code: Boolean Flags Are Enough For Everyone</li>
+<li>Unsynchronized Code: Simple Counter</li>
+</ul>
 
 	</div>
 </div>
@@ -1682,20 +1687,20 @@ local_id <span style="color:#f92672">=</span> counter;
 
 <p>The example above isn&rsquo;t only vulnerable through the &ldquo;local_id = counter&rdquo; code: the &ldquo;counter += 1&rdquo; code is also vulnerable to a race condition. This is because incrementing a variable (counter += 1) is not a so-called <strong>atomic operation</strong>. This means that internally, it is not implemented with a single CPU instruction, but rather composed out of a series of different operations/instructions.</p>
 
-<p>For example, for counter += 1, the series of executed steps might look like:</p>
+<p>For example, for counter += 1, the series of executed steps might look like this:</p>
 
 <ol>
 <li>Fetch value of counter from RAM and store it in the CPU cache memory</li>
 <li>Fetch value from CPU cache memory and store it in a CPU register for the calculation</li>
 <li>Add 1 to the register value</li>
 <li>Write the register value back to the CPU cache</li>
-
-<li><p>Write the cached value back to the RAM</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// In simple pseudocode, counter += 1 might look like this:
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// temp is for example the CPU register here, and &#34;counter&#34; is the value in memory
-</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> the <span style="color:#66d9ef">register</span> value is written back out to the memory</code></pre></div></li>
+<li>Write the cached value back to the RAM</li>
 </ol>
 
+<p>Put differently: the CPU does not act on the value stored in memory directly, but rather a copy in a register. Copying from/to a register is not atomic, so bugs can occur. To make things simpler to reason about, we can boil this down to just two lines of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// In simple pseudocode, counter += 1 might look like this:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// temp is for example the CPU register here, and &#34;counter&#34; is the value in memory
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> the <span style="color:#66d9ef">register</span> value is written back out to the memory</code></pre></div>
 <p>To the CPU, all of these steps are one or more instructions, each of which can also have a certain delay associated with them. As such, what can happen in practice is the following sequence of events:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
@@ -1703,14 +1708,14 @@ counter <span style="color:#f92672">=</span> temp;
 <span style="color:#75715e">// -----------------------------------
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// Thread 1
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// after this, the temp register contains the value 1. The &#34;counter&#34; address in RAM is still 0.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// after this, Thread 1&#39;s temp register contains the value 1. The &#34;counter&#34; value in RAM is still 0.
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// Before Thread 1 can actually store this temporary register result in memory, the CPU gives control to Thread 2
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// Thread 2
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// &#34;counter&#34; was still 0 in RAM, so Thread 2&#39;s temp register now also contains the value 1
-</span><span style="color:#75715e"></span>    counter <span style="color:#f92672">=</span> temp; <span style="color:#75715e">// The &#34;counter&#34; address in RAM now contains the value 1
+</span><span style="color:#75715e"></span>    counter <span style="color:#f92672">=</span> temp; <span style="color:#75715e">// The &#34;counter&#34; value in RAM is now 1
 </span><span style="color:#75715e">// Here, the CPU switches back to Thread 1
 </span><span style="color:#75715e">// Thread 1
-</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> The <span style="color:#e6db74">&#34;counter&#34;</span> address in RAM still contains the value <span style="color:#ae81ff">1</span></code></pre></div>
+</span><span style="color:#75715e"></span>counter <span style="color:#f92672">=</span> temp; <span style="color:#f92672">//</span> The <span style="color:#e6db74">&#34;counter&#34;</span> value in RAM is still <span style="color:#ae81ff">1</span></code></pre></div>
 <p>We can see that, even though two &ldquo;counter += 1&rdquo; lines of code were executed, the resulting value in memory is just 1 instead of 2. Again: you probably never saw this when testing the exercise in the lab, but theoretically it -could- happen, leading to randomly failing programmes.</p>
 
 <p>Note that this is a direct consequence of the fact that threads have separate program counters and register values, as discussed in the first Section on threads. Once individual threads are started, even if they are executing the same code, they do so in a partially separated context.</p>
@@ -1718,9 +1723,12 @@ counter <span style="color:#f92672">=</span> temp;
 
 <div class="ex">
 	<div class="inner">
-    	<p>Go to the Deadlock Empire website and do:
-- Tutorial: Tutorial 2: Non-Atomic Instructions
-- Unsynchronized Code: Confused Counter</p>
+    	<p>Go to the Deadlock Empire website and do:</p>
+
+<ul>
+<li>Tutorial: Tutorial 2: Non-Atomic Instructions</li>
+<li>Unsynchronized Code: Confused Counter</li>
+</ul>
 
 	</div>
 </div>
@@ -1788,15 +1796,17 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 
 <div class="ex">
 	<div class="inner">
-    	<p>Go to the Deadlock Empire website and do:
-- Locks: Insufficient lock
-- Locks: Deadlock
-- Locks: A more complex thread</p>
+    	<p>Go to the Deadlock Empire website and do:</p>
+
+<ul>
+<li>Locks: Insufficient lock</li>
+<li>Locks: Deadlock</li>
+</ul>
 
 	</div>
 </div>
 
-<h2 id="deadlocks">Deadlocks</h2>
+<h3 id="deadlocks">Deadlocks</h3>
 
 <p>While locks help with many <strong>critical section</strong> problems, the Deadlock Empire examples above show that they are also not always trivial to apply correctly. This is especially the case if there is more than one shared resource/variable/memory region in play.</p>
 
@@ -1814,7 +1824,7 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 </span><span style="color:#75715e"></span>    network.lock() <span style="color:#75715e">// this will not complete, because Thread 1 is holding this lock already. Thread 2 has to wait
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">//</span> Both threads are waiting endlessly AND also locking the network and the harddisk <span style="color:#66d9ef">for</span> any other threads that might arrive</code></pre></div>
-<p>Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">this presentation</a> (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing shared memory, so watch out!</p>
+<p>Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">this presentation</a> (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing multiple pieces of shared memory, so watch out!</p>
 
 <h2 id="semaphore">Semaphore</h2>
 
@@ -1835,9 +1845,10 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 <p>The <strong>pthreads</strong> library also provides an API to program with semaphores. It contains, amongst others, functions like:</p>
 
 <ul>
-<li>sem_init(): initialises a semaphore</li>
+<li>sem_init(): initialises a semaphore.</li>
 <li>sem_wait(): decrements the number inside of the semaphore.</li>
 <li>sem_post(): increments the number inside of the semaphore.</li>
+<li>sem_destroy(): destroys the semaphore when it&rsquo;s no longer needed.</li>
 </ul>
 
 <p>Note that the <code>sem_wait()</code> function is <em>blocking</em> (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes <code>sem_post()</code> (put differently: until the semaphore is &ldquo;unlocked&rdquo;). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: <code>sem_trywait()</code>. See the manual pages and search Google for more info and the correct usage.</p>
@@ -1850,9 +1861,9 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
 <div class="ex">
 	<div class="inner">
     	<p>Go to the Deadlock Empire website and do:
-- Semaphores: Semaphores
-- Semaphores: Producer-Consumer
-- Semaphores: Producer-Consumer (Variant)</p>
+* Semaphores: Semaphores
+* Semaphores: Producer-Consumer
+* Semaphores: Producer-Consumer (Variant)</p>
 
 	</div>
 </div>
@@ -2867,19 +2878,19 @@ pthread_mutex_t counter_lock;                   <span style="color:#75715e">/* T
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616323793"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616323793"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616323793"></script>
-    <script src="../../js/jquery.sticky.js?1616323793"></script>
-    <script src="../../js/featherlight.min.js?1616323793"></script>
-    <script src="../../js/highlight.pack.js?1616323793"></script>
+    <script src="../../js/clipboard.min.js?1616423350"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616423350"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616423350"></script>
+    <script src="../../js/jquery.sticky.js?1616423350"></script>
+    <script src="../../js/featherlight.min.js?1616423350"></script>
+    <script src="../../js/highlight.pack.js?1616423350"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616323793"></script>
-    <script src="../../js/learn.js?1616323793"></script>
-    <script src="../../js/hugo-learn.js?1616323793"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616423350"></script>
+    <script src="../../js/learn.js?1616423350"></script>
+    <script src="../../js/hugo-learn.js?1616423350"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616323793"></script>
+            <script src="../../mermaid/mermaid.js?1616423350"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

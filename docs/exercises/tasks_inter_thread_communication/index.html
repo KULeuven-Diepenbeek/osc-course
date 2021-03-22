@@ -12,21 +12,21 @@
     <title>3. Inter-thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616323793" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616323793" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616323793" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616323793" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616323793" rel="stylesheet">
-    <link href="../../css/theme.css?1616323793" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616323793" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616423350" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616423350" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616423350" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616423350" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616423350" rel="stylesheet">
+    <link href="../../css/theme.css?1616423350" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616423350" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616323793" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616423350" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616323793"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616423350"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616323793"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616323793"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616423350"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616423350"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616323793"></script>
+<script type="text/javascript" src="../../js/search.js?1616423350"></script>
 
     
   </div>
@@ -1607,7 +1607,7 @@ window.MathJax = {
 
 <ol>
 <li>describe what the program does (in general, not line-by-line)</li>
-<li>make a line chart that plots &lsquo;the elapsed real time&rsquo; the program consumes in function of &lsquo;the number of threads that are contributing&rsquo;
+<li>make a line chart that plots &lsquo;the elapsed real time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
 
 <ul>
 <li>for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
@@ -1619,12 +1619,16 @@ window.MathJax = {
 </ul></li>
 <li>interpret the chart and draw conclusions</li>
 <li>explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads)</li>
-<li>actually extend the program so it runs more than one producer thread</li>
+<li>actually extend the program so it runs more than one producer thread
+
+<ul>
+<li>Note: <code>sem_trywait</code> can be used to good effect here</li>
+</ul></li>
 <li>compare the actual outcome with your hypothesis from step 4 and explain why this happens</li>
 </ol></li>
 </ul>
 
-<p><center><strong>hand in the report via toledo</strong></center></p>
+<p><center><strong>hand in the report and the extended source code via toledo</strong></center></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -2734,19 +2738,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616323793"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616323793"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616323793"></script>
-    <script src="../../js/jquery.sticky.js?1616323793"></script>
-    <script src="../../js/featherlight.min.js?1616323793"></script>
-    <script src="../../js/highlight.pack.js?1616323793"></script>
+    <script src="../../js/clipboard.min.js?1616423350"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616423350"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616423350"></script>
+    <script src="../../js/jquery.sticky.js?1616423350"></script>
+    <script src="../../js/featherlight.min.js?1616423350"></script>
+    <script src="../../js/highlight.pack.js?1616423350"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616323793"></script>
-    <script src="../../js/learn.js?1616323793"></script>
-    <script src="../../js/hugo-learn.js?1616323793"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616423350"></script>
+    <script src="../../js/learn.js?1616423350"></script>
+    <script src="../../js/hugo-learn.js?1616423350"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616323793"></script>
+            <script src="../../mermaid/mermaid.js?1616423350"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

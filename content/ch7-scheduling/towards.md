@@ -6,7 +6,7 @@ weight: 3
 
 The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
 
-How could be mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the *time slice*. Let's try to figure out how that plays out ... but first ...
+How could we mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the *time slice*. Let's try to figure out how that plays out ... but first ...
 
 {{% figure src="/img/sched/ss_dottedline.png" %}}
 

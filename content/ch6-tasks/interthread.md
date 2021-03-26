@@ -227,7 +227,7 @@ This technique is used in e.g., producer-consumer problems, amongst many other t
 
  This is because in contrast with the mutex, a semaphore is a *count* of tokens. Put differently, a mutex limits access to a single resource (e.g., a single memory location) to one thread at a time. A semaphore instead allows threads to share a limited pool of resources (e.g., 4 different hard disks), with multiple threads potentially active at the same time. Note though that if there is only a single token in the semaphore, this behaves exactly the same as a mutex (this specific type is referred to as a **binary semaphore**). 
 
-The **pthreads** library also provides an API to program with semaphores. It contains, amongst others, functions like:
+The **pthreads** library also provides an API to program with semaphores (include semaphore.h to use). It contains, amongst others, functions like:
 
 * sem_init(): initialises a semaphore.
 * sem_wait(): decrements the number inside of the semaphore. 
@@ -242,6 +242,7 @@ More info on the differences between a semaphore and a mutex are given [here](ht
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
+
 * Semaphores: Semaphores
 * Semaphores: Producer-Consumer
 * Semaphores: Producer-Consumer (Variant)

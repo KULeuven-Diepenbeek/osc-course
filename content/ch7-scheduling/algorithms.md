@@ -4,80 +4,85 @@ pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
 
-In the previous chapter on Tasks, we've discussed one of the main responsibilities of an operating system: **task management**. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on the processor is discussed in this chapter: the **scheduler**. For the record, tasks or jobs refer to either processes and/or threads.
+In the previous chapter on Tasks, we've discussed one of the main responsibilities of an operating system: **task management**. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on one or multiple processors, the **scheduler**, is discussed in this chapter. Note that "tasks" or "jobs" can refer to either processes and/or threads.
 
-The scheduler has two main jobs:
+The scheduler has two main responsibilities:
 
-0. Choose the next task task that is allowed on the processor
-0. Dispatching: switching tasks that are running on the processor
+0. Choose the next task that is allowed to run on a given processor
+0. Dispatching: switching tasks that are running on a given processor
 
-Remember the image below ? The first job is the (interrupting and) dispatching of jobs.
+Remember the image below? The first responsibility of the scheduler is the transition between the "ready" and "running" states by interrupting (pausing) and dispatching (starting/resuming) individual tasks:
+
 {{% figure src="/img/os/db_processstate.png" title="The different process states and their transitions" %}}
 {{% dinobook %}}
 
-For the sake of simplicity it is assumed that the system for which the scheduler works only has a single core. The concepts that are elaborated on also hold for multi-core systems.
+{{% notice note %}}
+While the image above is mainly for processes, similar logic of course exists for Threads as well, as they go through similar conceptual lifecycle phases as processes. 
+{{% /notice %}}
 
+For the sake of simplicity, in this chapter we assume a system which has only **a single processor with a single CPU core**. However, the concepts introduced here also (largely) hold for multi-core systems.
 
 ## (Don't) Interrupt me !!
 
-When a scheduler has dispatched a job onto the processor, it has two possibilities to determine when the next job is dispatched. 
+When working with a single core, only a single task can be active at the same time. Say that the scheduler starts with the execution of the first task. It then has two options to determine when the next job is dispatched: 
 
-The easiest way is to just let the task run until it is finished. When it **yields** (to give up/away, to release) the processor, the scheduler can dispatch the next job.
+0. **non-preemptive / cooperative scheduling**: Let the current task run until it is finished or until it (explicitly) **yields** (to give up/away, to release) its time on the processor. One way of yielding is for example by using the ```sleep()```, but also ```pthread_join()``` or ```sem_wait()``` can indicate a task can be paused for the time being. 
+0. **preemptive scheduling**: Interrupt the current task at any time. This is possible because the PCB and equivalent TCB's track fine-grained per-task state.
 
-The alternative is to interrupt the running job and tell it to gather its stuff and get out.
-
-In scheduler-lingo, the interruption of a running task is called: **preemption**.
-
-The easy way (with the yielding) is called **non-preemptive** or **cooperative** scheduling. It should not come as a surprise that the alternative way is called **preemptive** scheduling.
+While the cooperative scheduling approach is the simplest, it also has some severe downsides. If a given task takes a long time to complete or doesn't properly yield at appropriate intervals, it can end up hogging the CPU for a long time, causing other tasks to stall. As such, most modern OSes will employ a form of preemptive scheduling. 
 
 {{% notice note %}}
-If the scheduler needs to preempt jobs after a certain amount of time (or ticks), it requires hardware assistance. The **timer**, as was discussed in chapter 2, is a fundamental piece of hardware for preemptive scheduling.
+If the scheduler needs to preempt jobs after a certain amount of time (or execution ticks), it requires hardware assistance. The **timer**, discussed in chapter 2, is a fundamental piece of hardware for preemptive scheduling.
 {{% /notice %}}
-
 
 ## Scheduler algorithms
 
-There exist many algorithms the scheduler may use to determine **which** job is to be scheduled next. A (very select) number of algorithms are given here. 
+Independent of whether cooperative or preemptive scheduling is used, there exist many algorithms the scheduler may use to determine **which** job is to be scheduled next. A (very select) number of algorithms are given here. 
+
+To be able to reason about different scheduling algorithms, there is a need of some sort of metric to determine which approach is best. When studying schedulers, the following metrics are typically used:
+
+* **Average Throughput:** the number of tasks that are executed in one second.
+* **Average Job Wait Time (AJWT):** the average time that a job needs to wait before it gets scheduled for the first time (first time - creation time).
+* **Average Job Completion Time (AJCT):** the average time that a job needs to wait before it has fully finished (last time - creation time).
+* **CPU efficiency (&#0951;<sub>CPU</sub>):** the percentage of time that the processor performs useful work. Remember that every time the CPU switches between tasks, there is a certain amount of overhead due to *context switching*. As such, the more transitions between tasks there are, the less efficient the CPU is being used. 
 
 ### FCFS
-A simple algorithm that a scheduler can follow is: **First Come, First served** (FCFS). The order in which the jobs arrive is the same as the order on which the jobs are allowed on the processor.
 
-The image below shows three tasks that arrive very close to each other. The result of the schedulers job is shown in the graph.
+A simple algorithm that a scheduler can follow is: **First Come, First served** (FCFS). The order in which the jobs arrive (are started) is the same as the order on which the jobs are allowed on the processor.
+
+The image below shows three tasks that arrive very close to each other. The result of the cooperative scheduler's job is shown in the image:
+
 {{% figure src="/img/sched/ss_coop_fcfs.png" title="FCFS with cooperative scheduling." %}}
-
-To be able different algorithms there is a need of some sort of metric. When studying schedulers, the following metrics can be used:
-
-* **Throughput:** the number of tasks that are executed over time.
-* **Average Job Wait Time (AJWT):** the average time that a job needs to wait before it gets scheduled.
-* **Average Job Completion Time (AJCT):** the average time that a job needs to wait before it has finished.
-* **CPU efficiency (&#0951;<sub>CPU</sub>):** the percentage that the processor performs usual work. 
 
 Applying the first three metrics on the example above gives the following results:
 
-**Throughput:**
+**Average Throughput:**
 
   *  3 jobs over 12 seconds => **0.25 jobs / s**
 
 **AJWT:** 
 
   * Task 1 arrives at 0 sec and can immediately start running => wait time: 0s
-  * Task 2 arrives at 0.1 sec and can after 1s => wait time: 0.9s => 1s
-  * Task 3 arrives at 0.2 sec and can after 11s => wait time: 10.8s => 11s
-  * AJWT = (0 s + 1 s + 11s)/3 = 12s / 3 = **4s**
+  * Task 2 arrives at 0.1 sec and can start after 1s => wait time: 0.9s => 1s (rounded)
+  * Task 3 arrives at 0.2 sec and can start after 11s => wait time: 10.8s => 11s (rounded)
+  * Average Job Wait Time = (0 s + 1 s + 11s)/3 = 12s / 3 = **4s**
 
 **AJCT:** 
 
   * Task 1 arrives at 0 sec, waits 0s and takes 1s => duration: 1s
-  * Task 2 arrives at 0.1 sec, waits 1s and takes 10s => wait time: 11.1s => 11s
-  * Task 2 arrives at 0.2 sec, waits 11s and takes 1s => wait time: 12.2s => 12s
-  * AJWT = (1 s + 11 s + 12s)/3 = 24s / 3 = **8s**
+  * Task 2 arrives at 0.1 sec, waits 0.9s and takes 10s => duration: 11s (rounded)
+  * Task 3 arrives at 0.2 sec, waits 10.8s and takes 1s => duration: 12s
+  * Average Job Completion Time = (1 s + 11 s + 12s)/3 = 24s / 3 = **8s**
 
 {{% notice note%}}
-For these exercises the decimal portion can be rounded away. It is only used to make a distinction in the order of arrival
+For these examples, the decimal portion can be rounded away. It is only used to make a distinction in the order of arrival.
 {{% /notice%}}
 
 ### SJF
-A second algorithm is the **Shortest Job First (SJF)**. With this algorithm the scheduler looks at the tasks that are in the *ready* state. The shortest job within this queue is allowed first on the processor.
+
+By looking at the FCFS metrics, we can immediately see an easy way to improve the AJWT and AJCT metrics: schedule Task 3 before Task 2!
+
+One algorithm that would allow such an optimization is called **Shortest Job First** (SJF). With this algorithm the scheduler looks at the tasks that are in the *ready* state. The shortest job within this queue is allowed first on the processor.
 
 If the scheduler applies the SJF algorithm on the same example, the occupation of the processor looks like shown below.
 
@@ -90,9 +95,12 @@ Calculate **the three metrics** for the result of the SJF example, above: Throug
 <div class="solution" id="q711" style="visibility: hidden">
   <b>Answer:</b><br/>
   <p>
-    Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-    AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
-    AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+    Throughput = 3 taken / 12 s = 0.25 jobs/s <br/>
+    AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1s <br/>
+    AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5s 
+  </p>
+  <p>
+    We can see that the AJWT and AJCT metrics are indeed improved considerably for this example using SJF!
   </p>
 </div>
 
@@ -100,15 +108,15 @@ Calculate **the three metrics** for the result of the SJF example, above: Throug
 {{% /task %}}
 
 
-{{% notice note %}}
-Both algorithms above (FCFS and SJF) are explained using with non-preemptive/cooperative scheduling.
-{{% /notice %}}
-
 ## Preemptive scheduling
 
-With preemptive scheduling the scheduler can **halt** a task running on the processor. Let's illustrate this with another example. When a new job comes in, the scheduler stops the currently running job and takes the most recently added job.
+Both of the examples for FCFS and SJF have so far been for non-preemptive/cooperative scheduling. Tasks have been allowed to run to their full completion. Let's now compare this to preemptive scheduling, where the scheduler can **pause** a task running on the processor. Note that for the practical example we've been using, nothing much would change with preemptive scheduling: the selected next job would always be the same (either the first one started that hasn't finished yet, or the shortest one remaining).
+
+As such, let's use a slightly more advanced example:
 
 {{% figure src="/img/sched/ss_preemt_lcfs.png" title="Preemptive scheduling." %}}
+
+For preemptive scheduling, there are again several options to determine when to preempt a running task, as here we're no longer waiting for a task to end/yield. You could for example switch tasks each x milliseconds/x processor ticks. In our example, the scheduler preempts only when a new job comes in: it stops the currently running job and starts the most recently added job.
 
 In the example above the following actions are taken:
 
@@ -118,7 +126,7 @@ In the example above the following actions are taken:
 * @ 4s, T3 (or T1) has finished; there is one older (T2) => schedule T2
 * @ 12s, T2 has finished; there are no more jobs
 
-In the example above, we sort-of used a Last-Come-First-Served approach.
+As such, this example demonstrates a sort-of **Last-Come-First-Served** (LCFS) approach.
 
 {{% task %}}
 Calculate **the three metrics** for the result of the preemption example, above: Throughput, AJWT, and AJCT.
@@ -128,18 +136,24 @@ Calculate **the three metrics** for the result of the preemption example, above:
   <b>Answer:</b>
   <p>
   Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s <br/>
-  AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s 
+  AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s <br/>
+  AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s
   </p>
 </div>
 
 <input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q712')"/>
 {{% /task %}}
 
-### Priority-based scheduling
-At this point we could try a **SJF** approach with preemption. Although this a perfectly fine exercise **(wink)**, it is pointed out that *estimating* the duration of a job is not an easy task. The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork.
+{{% task %}}
+Apply cooperative FCFS and SJF scheduling to the new example tasks and calculate the necessary metrics. Compare the results to the preemptive LCFS. 
+{{% /task %}}
 
-Another algorithm is priority-based scheduling. If you take a closer look at the example above, more specifically at time 2s, the scheduler has two options: 1) schedule T1, or 2) schedule T3. Priority-base scheduling *could* provide a deterministic answer.
+
+### Priority-based scheduling
+
+At this point we could try a **SJF** approach with preemption. Although this a perfectly fine exercise **(wink)**, in practice *estimating* the duration of a job is not an easy task, as even the program itself typically doesn't know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn't be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn't help the OS to decide which should be run first. Put differently, the scheduler wouldn't be deterministic. 
+
+A more practical approach is **priority-based** scheduling. In this setup, you can assign a given priority to each task, and have jobs with higher priority run before those of lower priority. This still leaves some uncertainty/non-determinism for processes with the same priority, but it's a good first approach. 
 
 
 {{% task %}}
@@ -152,13 +166,14 @@ Let's assume the priorities as mentioned in the image below. Try to complete the
 <input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q713')"/>
 {{% /task %}}
 
-As can be seen from the example above, this approach might hold a potential risk: **starvation**. Some jobs with lower priority might not get any processor time. They *starve*. A solution for starvation is **priority aging**. This mechanism allows the priority of a job to increase over time in case of starvation. The actual priority is a function of the original priority and the age of the task.
+As can be seen from the example above, this approach might hold a potential risk: **starvation**. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they *starve*. One solution for starvation is **priority aging**. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority aging (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot).
 
 
 ### Round-Robin scheduling
-Round-Robin scheduling is a popular algorithm that allows multiple tasks to **time-share** the processor. Jobs are dispatched to and interrupted from the processor on regular moments. 
 
-The smallest amount of time that a job can stay on the processor is called a **time quantum** or **time slice**. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. With the mantra "One image says more than a 1000 words" in mind ... here is an example (with an unrealistic time slice of 1s).
+As you can see, scheduling algorithms can get quite complex and it's not always clear which approach will give the best results for any given job load. As such, it might be easier to just do the simplest preemptive scheduling we can think of: switch between tasks at fixed time intervals in a fixed order (for example ordered by descending Task start time). This is called **Round-Robin scheduling** (RR). 
+
+As such, RR allows multiple tasks to effectively **time-share** the processor. The smallest amount of time that a job can stay on the processor is called a **time quantum** or **time slice**. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:
 
 {{% figure src="/img/sched/ss_preemt_rr.png" title="Round Robin scheduling." %}}
 
@@ -170,20 +185,22 @@ Calculate **the three metrics** for the result of the preemption example, above:
   <b>Answer:</b>
   <p>
   Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 10 s + 11 s + 12 s ) / 3 = 11 s <br/>
-  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s 
+  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s <br/>
+  AJCT = ( 10 s + 11 s + 12 s ) / 3 = 11 s
   </p>
 </div>
 
 <input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q714')"/>
 {{% /task %}}
 
+As can be seen from the example above, RR also has some downsides. While each task gets some CPU time very early on (low AJWT), the average completion time (AJCT) is of course very high, as all tasks are interrupted several times. If we were to compute CPU efficiency, this would also be lowest here, due to the high amount of context switches between tasks. 
+
 
 
 {{% notice warning %}}
-The scheduler does not wait until **a task yields** the CPU, but interrupts its execution after a single time slice. 
-This does **NOT** mean that a task **cannot** yield the CPU !!! 
+A preemptive scheduler does not wait until **a task yields** the CPU, but interrupts its execution after a single time slice (or, in previous examples, when a new task arrives). 
+This does **NOT** mean however that a task **cannot** yield the CPU !!! 
 <br/>
 <br/>
-Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or when the job itself yields the processor.
+Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or until the job itself yields the processor. In practice, both of course happen often during normal executing of tasks in an OS.
 {{% /notice %}}

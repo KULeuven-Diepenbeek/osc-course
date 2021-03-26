@@ -14,8 +14,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</guid>
-      <description>In the previous chapter on Tasks, we&amp;rsquo;ve discussed one of the main responsibilities of an operating system: task management. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on the processor is discussed in this chapter: the scheduler. For the record, tasks or jobs refer to either processes and/or threads.
-The scheduler has two main jobs:</description>
+      <description>In the previous chapter on Tasks, we&amp;rsquo;ve discussed one of the main responsibilities of an operating system: task management. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on one or multiple processors, the scheduler, is discussed in this chapter. Note that &amp;ldquo;tasks&amp;rdquo; or &amp;ldquo;jobs&amp;rdquo; can refer to either processes and/or threads.
+The scheduler has two main responsibilities:</description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@ The scheduler has two main jobs:</description>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</guid>
       <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do it&amp;rsquo;s job. Let&amp;rsquo;s compare them. We assume the following tasks:
- T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority medium T4: arrives @ 7s, takes 1s, and has priority high  Compare Threshold, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
+ T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority high T4: arrives @ 7s, takes 1s, and has priority medium  Compare Threshold, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@ The scheduler has two main jobs:</description>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
       <description>The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
-How could be mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the time slice.</description>
+How could we mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the time slice.</description>
     </item>
     
     <item>

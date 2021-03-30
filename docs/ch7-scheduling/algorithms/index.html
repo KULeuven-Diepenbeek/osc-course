@@ -12,21 +12,21 @@
     <title>7.1: Scheduling algorithms :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616757515" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616757515" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616757515" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616757515" rel="stylesheet">
-    <link href="../../css/theme.css?1616757515" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616757515" rel="stylesheet">
+    <link href="../../css/nucleus.css?1617100553" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/hybrid.css?1617100553" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1617100553" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1617100553" rel="stylesheet">
+    <link href="../../css/theme.css?1617100553" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1617100553" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616757515" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1617100553" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616757515"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1617100553"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616757515"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616757515"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1617100553"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1617100553"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616757515"></script>
+<script type="text/javascript" src="../../js/search.js?1617100553"></script>
 
     
   </div>
@@ -1823,7 +1823,7 @@ window.MathJax = {
 
 <h3 id="priority-based-scheduling">Priority-based scheduling</h3>
 
-<p>At this point we could try a <strong>SJF</strong> approach with preemption. Although this a perfectly fine exercise <strong>(wink)</strong>, in practice <em>estimating</em> the duration of a job is not an easy task, as even the program itself typically doesn&rsquo;t know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn&rsquo;t be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn&rsquo;t help the OS to decide which should be run first. Put differently, the scheduler wouldn&rsquo;t be deterministic.</p>
+<p>At this point we could try a <strong>SJF</strong> approach with preemption (which here would be called shortest-remaining-time-first). Although this a perfectly fine exercise <strong>(wink)</strong>, in practice <em>estimating</em> the duration of a job is not an easy task, as even the program itself typically doesn&rsquo;t know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn&rsquo;t be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn&rsquo;t help the OS to decide which should be run first. Put differently, the scheduler wouldn&rsquo;t be deterministic.</p>
 
 <p>A more practical approach is <strong>priority-based</strong> scheduling. In this setup, you can assign a given priority to each task, and have jobs with higher priority run before those of lower priority. This still leaves some uncertainty/non-determinism for processes with the same priority, but it&rsquo;s a good first approach.</p>
 
@@ -1841,13 +1841,13 @@ window.MathJax = {
 	</div>
 </div>
 
-<p>As can be seen from the example above, this approach might hold a potential risk: <strong>starvation</strong>. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they <em>starve</em>. One solution for starvation is <strong>priority aging</strong>. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority aging (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot).</p>
+<p>As can be seen from the example above, this approach might hold a potential risk: <strong>starvation</strong>. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they <em>starve</em>. One solution for starvation is <strong>priority ageing</strong>. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority ageing (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot). We will later see how this is practically approached in Linux.</p>
 
 <h3 id="round-robin-scheduling">Round-Robin scheduling</h3>
 
 <p>As you can see, scheduling algorithms can get quite complex and it&rsquo;s not always clear which approach will give the best results for any given job load. As such, it might be easier to just do the simplest preemptive scheduling we can think of: switch between tasks at fixed time intervals in a fixed order (for example ordered by descending Task start time). This is called <strong>Round-Robin scheduling</strong> (RR).</p>
 
-<p>As such, RR allows multiple tasks to effectively <strong>time-share</strong> the processor. The smallest amount of time that a job can stay on the processor is called a <strong>time quantum</strong> or <strong>time slice</strong>. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:</p>
+<p>As such, RR allows multiple tasks to effectively <strong>time-share</strong> the processor. The smallest amount of time that a job can stay on the processor is called a <strong>time quantum</strong> or <strong>time slice</strong>. Typically the duration of a time slice in a modern OS is between 10 and 100 ms. All jobs in the ready queue get assigned a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:</p>
 
 <figure>
     <img src="../../img/sched/ss_preemt_rr.png"/> <figcaption>
@@ -2891,19 +2891,19 @@ Another way of putting it is: a job can either run until the time slice has run 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616757515"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616757515"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616757515"></script>
-    <script src="../../js/jquery.sticky.js?1616757515"></script>
-    <script src="../../js/featherlight.min.js?1616757515"></script>
-    <script src="../../js/highlight.pack.js?1616757515"></script>
+    <script src="../../js/clipboard.min.js?1617100553"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1617100553"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1617100553"></script>
+    <script src="../../js/jquery.sticky.js?1617100553"></script>
+    <script src="../../js/featherlight.min.js?1617100553"></script>
+    <script src="../../js/highlight.pack.js?1617100553"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616757515"></script>
-    <script src="../../js/learn.js?1616757515"></script>
-    <script src="../../js/hugo-learn.js?1616757515"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1617100553"></script>
+    <script src="../../js/learn.js?1617100553"></script>
+    <script src="../../js/hugo-learn.js?1617100553"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616757515"></script>
+            <script src="../../mermaid/mermaid.js?1617100553"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

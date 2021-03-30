@@ -12,21 +12,21 @@
     <title>7.4: Mr. nice guy(lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616757515" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616757515" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616757515" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616757515" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616757515" rel="stylesheet">
-    <link href="../../css/theme.css?1616757515" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616757515" rel="stylesheet">
+    <link href="../../css/nucleus.css?1617100553" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/hybrid.css?1617100553" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1617100553" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1617100553" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1617100553" rel="stylesheet">
+    <link href="../../css/theme.css?1617100553" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1617100553" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616757515" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1617100553" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616757515"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1617100553"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616757515"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616757515"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1617100553"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1617100553"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616757515"></script>
+<script type="text/javascript" src="../../js/search.js?1617100553"></script>
 
     
   </div>
@@ -1610,7 +1610,11 @@ window.MathJax = {
 
 
 <ul>
-<li>Write a program in C that fetches its own <strong>PID</strong> and <strong>priority</strong>. Display the PID, the nice value and the priority.</li>
+<li>Write a program in C that fetches its own <strong>PID</strong> and <strong>priority</strong>. Display the PID, the nice value and the priority.
+
+<ul>
+<li>hint: use <code>getpriority()</code> in <code>#include &lt;sys/resource.h&gt;</code> and use PRIO_PROCESS</li>
+</ul></li>
 </ul>
 
 <figure>
@@ -1619,11 +1623,13 @@ window.MathJax = {
         </figcaption>
 </figure>
 
+<!-- https://www.tecmint.com/set-linux-process-priority-using-nice-and-renice-commands/ -->
+
 <ul>
 <li>Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times. Compile and run that program. While that program is running, and is reporting back every 5 seconds:
 
 <ul>
-<li>change the nice value (on another terminal)</li>
+<li>change the nice value (on another terminal. Search on google for the command you need for this.)</li>
 <li>verify in the reporting that it works</li>
 <li>change the nice value so the overall priority is at its lowest</li>
 <li>change the nice value so the overall priority is at its highest</li>
@@ -1637,7 +1643,11 @@ window.MathJax = {
 </figure>
 
 <ul>
-<li>Adjust the program above (after copying it, off course) so it goes through the exact same changes in priority. Instead of changing it <strong>externally</strong> the program should change it <strong>internally</strong>, on itself.</li>
+<li>Adjust the program above (after copying it, off course) so it goes through the exact same changes in priority. Instead of changing it <strong>externally</strong> the program should change it <strong>internally</strong>, on itself.
+
+<ul>
+<li>hint: use <code>setpriority()</code></li>
+</ul></li>
 </ul>
 
 <figure>
@@ -1647,17 +1657,7 @@ window.MathJax = {
 </figure>
 
 <ul>
-<li>Find the Linux kernel version on the CLI.</li>
-</ul>
-
-<figure>
-    <img src="../../img/sched/ss_744.png"/> <figcaption>
-            <h4>An example output</h4>
-        </figcaption>
-</figure>
-
-<ul>
-<li>Write a program in C that forks 25 new processes. Each forked process re-nices itself to one specific value (equally distributed over -20, -10, 0, 10, 19). That re-niced value won&rsquo;t change anymore. After doing that, the processes <strong>count</strong> the number prime numbers lower than 10&rsquo;000. When they are finished they print their count value (together with their ID and the PRIORITY).
+<li>Write a program in C that forks 25 new processes. Each forked process re-nices itself to one specific value (equally distributed over -20, -10, 0, 10, 19). That re-niced value won&rsquo;t change anymore. After doing that, the processes <strong>count</strong> the number prime numbers lower than 10000. When they are finished, they print their count value (together with their ID and the PRIORITY).
 
 <ul>
 <li>Make sure the parent process waits until all its children are done.</li>
@@ -1670,6 +1670,24 @@ window.MathJax = {
             <h4>An example output</h4>
         </figcaption>
 </figure>
+
+<ul>
+<li><p>Use the <code>top</code> command to inspect priority and nice values for running tasks on the system</p>
+
+<ul>
+<li>What are the PR and NI columns? How do you interpret their values? How do you see which tasks are real-time tasks?</li>
+<li>Use <code>top</code> while running the previous two exercises. Do you see the values changing as you&rsquo;d expect? Why (not)?</li>
+</ul></li>
+
+<li><p>Adjust the <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/osc-course/master/archive_jo/scheduling/blink.c">blink program</a></p>
+
+<ul>
+<li>By default, you can configure this to give all of the processes either high, normal or low priority (see the defines on top)</li>
+<li>Change the logic so that the first half of the processes (top of the screen) get highest priority, and the bottom half get lowest priority</li>
+<li>Describe the results. Is this what you expected? Why (not)?</li>
+<li>Note: since you&rsquo;re running Ubuntu in a Virtual Machine, it might be that it can&rsquo;t handle the default amount of processes. If necessary, lower the count and try again.</li>
+</ul></li>
+</ul>
 
 
 <footer class="footline">
@@ -2679,19 +2697,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616757515"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616757515"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616757515"></script>
-    <script src="../../js/jquery.sticky.js?1616757515"></script>
-    <script src="../../js/featherlight.min.js?1616757515"></script>
-    <script src="../../js/highlight.pack.js?1616757515"></script>
+    <script src="../../js/clipboard.min.js?1617100553"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1617100553"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1617100553"></script>
+    <script src="../../js/jquery.sticky.js?1617100553"></script>
+    <script src="../../js/featherlight.min.js?1617100553"></script>
+    <script src="../../js/highlight.pack.js?1617100553"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616757515"></script>
-    <script src="../../js/learn.js?1616757515"></script>
-    <script src="../../js/hugo-learn.js?1616757515"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1617100553"></script>
+    <script src="../../js/learn.js?1617100553"></script>
+    <script src="../../js/hugo-learn.js?1617100553"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616757515"></script>
+            <script src="../../mermaid/mermaid.js?1617100553"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

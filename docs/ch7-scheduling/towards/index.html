@@ -12,21 +12,21 @@
     <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1617102891" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1617102891" rel="stylesheet">
-    <link href="../../css/hybrid.css?1617102891" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1617102891" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1617102891" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1617102891" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1617102891" rel="stylesheet">
-    <link href="../../css/theme.css?1617102891" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1617102891" rel="stylesheet">
+    <link href="../../css/nucleus.css?1617103828" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1617103828" rel="stylesheet">
+    <link href="../../css/hybrid.css?1617103828" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1617103828" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1617103828" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1617103828" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1617103828" rel="stylesheet">
+    <link href="../../css/theme.css?1617103828" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1617103828" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1617102891" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1617103828" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1617102891"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1617103828"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1617102891"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1617102891"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1617103828"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1617103828"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1617102891"></script>
+<script type="text/javascript" src="../../js/search.js?1617103828"></script>
 
     
   </div>
@@ -1959,6 +1959,10 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 
 <p>The O(n) scheduler got his name from the fact that choosing a new task has <strong>linear</strong> complexity. This is because this scheduler uses a <strong>single linked list</strong> to store all the tasks. Upon each context switch, the scheduler iterates over all the ready tasks in the list, (re-)calculating what is called a <strong>&ldquo;goodness&rdquo;</strong> value. This value is a combination of various factors, such as task priority and whether the task fully used its allotted time slice in its previous burst. The task with the highest goodness value is chosen to run next.</p>
 
+<figure>
+    <img src="../../img/sched/ss_runqueue_fifo.png"/> 
+</figure>
+
 <p>This setup combines some of the aspects of the multi-level feedback queue concept, but in a single datastructure. For example, if a task didn&rsquo;t use its entire alotted time slice, it gets half of the remaining time alotted for its next run (somewhat bumping its priority, as the alotted timeslice is taken into account with the goodness value as well). As such, while each task is typically assigned the same time slice length initially, this starts to vary over time.</p>
 
 <p>In practice, this scheduler works, but it has severe issues. Firstly, it is somewhat <strong>unpredictable</strong> (e.g., the time slice could grow unbounded for very short processes, meaning we need additional logic to deal with this). Secondly, and most importantly in practice, the performance was too low. Because each task&rsquo;s goodness needs to be caclculated/checked <em>on every context switch (the O(n))</em>, this adds <strong>large amounts of overhead</strong> if there are many concurrent processes. Thirdly, it also does not scale well to multiple processors: each processor is typically scheduled independently, meaning that for each CPU <strong>a mutex lock</strong> had to be obtained on the single task list to fetch the next candidate.</p>
@@ -1991,6 +1995,10 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 <p>(The code for the examples in the video can be found <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/osc-course/master/archive_jo/scheduling/blink.c">here</a>).</p>
 
 <p>The O(1) scheduler creates a new <strong>queue (linked list) for each of these 140 different priority values</strong>. For the real-time tasks (queues 0-99), processes within each priority list are scheduled either FCFS or RR, which can be toggled by the user (look for SCHED_FCFS and SCHED_RR). The user-space tasks (100-139) are typically scheduled RR per priority (SCHED_NORMAL) but they can also be scheduled based on remaining runtime to improve batch processing (SCHED_BATCH). Each priority list is emptied in full before the next priority list is considered. At every context switch (at every time slice), the highest priority list with a runnable task is selected.</p>
+
+<figure>
+    <img src="../../img/sched/ss_runqueue_multfifo.png"/> 
+</figure>
 
 <p>If we were to use this setup directly, the lower-priority tasks would very often by interrupted by higher-priority ones and we again get the problem of starvation. To prevent the need for manual priority adjustment with ageing, the O(1) scheduler instead uses a clever trick, by introducing a second, parallel datastructure. As such, there are two groups of 140 queues. The first is called the <strong>&ldquo;active&rdquo;</strong> queue, the second the <strong>&ldquo;expired&rdquo;</strong> queue. When a task has consumed its time slice completely (either in 1 run, or by yielding multiple times), it is moved to the corresponding &ldquo;expired&rdquo; queue. This allows all processes in the active queue to get some time. When the active processes are all done, the expired and active lists are swapped and the scheduler can again start with the highest priority processes.</p>
 
@@ -2061,9 +2069,23 @@ expired <span style="color:#f92672">=</span> temp;</code></pre></div>
 
 <h3 id="the-completely-fair-scheduler">The Completely Fair Scheduler</h3>
 
-<p>The current default scheduler was intended to take a bit of a step back from the relatively complex O(1) scheduler and to make things a bit simpler (as we&rsquo;ll see, that&rsquo;s simpler for Linux kernel developers, not necessarily for us).</p>
+<p>The current default scheduler was intended to take a bit of a step back from the relatively complex O(1) scheduler and to make things a bit simpler; as we&rsquo;ll see however, that&rsquo;s simpler for Linux kernel developers, not necessarily for us. The CFS is a relatively complex scheduler, and as such a thorough study on this algorithm falls out of the scope of this course. We will touch upon the main concepts however.</p>
 
-<p>Although there are <strong>more differences</strong> with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers.</p>
+<p>The main insight in the CFS is that <strong>the size of the time slices can be highly dynamic</strong>. Previously, we&rsquo;ve seen that interactive processes for example can get 8ms, while CPU-bound processes could get 16ms. That&rsquo;s already nice, but it doesn&rsquo;t take into account the current load of the system: if there are many different processes waiting, each will still get 8 to 16ms, causing later ones to be significantly delayed.</p>
+
+<p>The CFS solves this problem by calculting the per-task time slice length for a given time period based on the number of ready tasks. Say that N tasks are ready and we want to schedule each of them over the next 100ms (an &ldquo;epoch&rdquo;). Then each task is assigned a time slice of 100ms * 1/N (if we ignore the context switching overhead for a bit). In theory, this gives each task an equal share of the processor, hence the name. As such, if there are fewer tasks active in the system, N will be lower, and the time slices will get larger, and vice versa. Of course, the CFS puts a lower bound on the time slice length (typically 4ms) as otherwise the context switching overhead could become too large.</p>
+
+<p>To determine which task executes first within the next epoch, the CFS keeps track of how much time each task has actually spent on the CPU so far. As such, for I/O-bound processes that yield frequently, this value will be lower than for CPU-bound tasks that always use their full time slice. The scheduler always selects the process that has so far <strong>spent the least amount of time on the CPU</strong>. This automatically makes sure that interactive processes are scheduled frequently enough, but also that CPU-bound processes age correctly.</p>
+
+<p>This timekeeping is done in a quite complex datastructure called a (binary) (self-balancing) <strong>red-black tree</strong>. The details are not important here, but this mainly means that the next task (that has spent the last amount of time on the CPU) is always the most bottom left node in the tree. As such, it can easily be retrieved with low overhead. Similarly, adding new tasks (or moving tasks around) in the tree can be done in O(log N).</p>
+
+<figure>
+    <img src="../../img/sched/ss_runqueue_tree.png"/> 
+</figure>
+
+<p>The complexity increases even more when we look at how this setup incorporates priorities. As there are no longer explicit per-priority lists like in the O(1) scheduler, the CFS simulates this by shrinking/expanding the time slices of low/high priority processes. This is similar to what we&rsquo;ve discussed above, that time slice durations can be used to emulate priorities. As such, if a high priority process executes for 10ms on the CPU, the timekeeper might only record that it spent 5ms of &ldquo;virtual time&rdquo;. This gives the task a &ldquo;priority boost&rdquo; when the scheduler next goes looking for a new task. The opposite is done for low priority tasks (e.g., 10ms of runtime can become 20ms of &ldquo;virtual time&rdquo;). We can see this is no longer a &ldquo;completely fair&rdquo; scheduler in practice, but it&rsquo;s quite elegant in how it combines interactivity, priorities and time slice lengths in practice.</p>
+
+<!-- Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers. -->
 
 <p>For more information on CFS you can read the kernel documentation <a href="https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html">here</a>. For the daredevils &hellip; you can even read (or modify, at your own risk) the kernel C code <a href="https://github.com/torvalds/linux/blob/master/kernel/sched/fair.c">here</a>.</p>
 
@@ -3105,19 +3127,19 @@ Symmetric multiprocessing (SMP) is where each processor is self scheduling -->
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1617102891"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1617102891"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1617102891"></script>
-    <script src="../../js/jquery.sticky.js?1617102891"></script>
-    <script src="../../js/featherlight.min.js?1617102891"></script>
-    <script src="../../js/highlight.pack.js?1617102891"></script>
+    <script src="../../js/clipboard.min.js?1617103828"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1617103828"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1617103828"></script>
+    <script src="../../js/jquery.sticky.js?1617103828"></script>
+    <script src="../../js/featherlight.min.js?1617103828"></script>
+    <script src="../../js/highlight.pack.js?1617103828"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1617102891"></script>
-    <script src="../../js/learn.js?1617102891"></script>
-    <script src="../../js/hugo-learn.js?1617102891"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1617103828"></script>
+    <script src="../../js/learn.js?1617103828"></script>
+    <script src="../../js/hugo-learn.js?1617103828"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1617102891"></script>
+            <script src="../../mermaid/mermaid.js?1617103828"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

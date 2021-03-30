@@ -12,21 +12,21 @@
     <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1617100553" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1617100553" rel="stylesheet">
-    <link href="../../css/hybrid.css?1617100553" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1617100553" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1617100553" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1617100553" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1617100553" rel="stylesheet">
-    <link href="../../css/theme.css?1617100553" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1617100553" rel="stylesheet">
+    <link href="../../css/nucleus.css?1617102891" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1617102891" rel="stylesheet">
+    <link href="../../css/hybrid.css?1617102891" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1617102891" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1617102891" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1617102891" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1617102891" rel="stylesheet">
+    <link href="../../css/theme.css?1617102891" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1617102891" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1617100553" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1617102891" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1617100553"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1617102891"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1617100553"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1617100553"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1617102891"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1617102891"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1617100553"></script>
+<script type="text/javascript" src="../../js/search.js?1617102891"></script>
 
     
   </div>
@@ -1637,22 +1637,27 @@ window.MathJax = {
 
 <p>Say we have 2 user tasks: X and Y. X has already been running for a while on the processor, while Y is in the ready state, waiting for CPU-time. Say that the OS is using a preemptive scheduler (for example a pure Round-Robin algorithm) and decides to give Y some running time. Switching between the tasks involves the following steps:</p>
 
-<p><strong>Step 1</strong>
-X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a <em>snapshot</em> has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, &hellip; ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: <strong>The PCB of X needs to be stored</strong>. The kernel puts this PCB in a list of paused tasks.</p>
+<p><strong>Step 1</strong></p>
+
+<p>X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a <em>snapshot</em> has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, &hellip; ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: <strong>The PCB of X needs to be stored</strong>. The kernel puts this PCB in a list of paused tasks.</p>
 
 <p>Note: something similar happens for Threads (remember there&rsquo;s also a conceptual TCB), but it&rsquo;s more lightweight, since there is more shared state between threads in the same program and so fewer aspects need to be updated.</p>
 
-<p><strong>Step 2</strong>
-X is removed from the processor.</p>
+<p><strong>Step 2</strong></p>
 
-<p><strong>Step 3</strong>
-The scheduler uses the RR scheduling algorithm to determine which process is next. Since Y is the only other process, it is selected. The processor searches Y&rsquo;s PCB in its list of paused tasks.</p>
+<p>X is removed from the processor.</p>
 
-<p><strong>Step 4</strong>
-Everything that happened to the PCB of X, now needs to be done in the opposite direction with the PCB of Y: <strong>the PCB of Y needs to be restored</strong>. The program counter is read and the next instruction is loaded. The values of the registers are restored. The stack pointer is updated.</p>
+<p><strong>Step 3</strong></p>
 
-<p><strong>Step 5</strong>
-Y starts to run on the processor.</p>
+<p>The scheduler uses the RR scheduling algorithm to determine which process is next. Since Y is the only other process, it is selected. The processor searches Y&rsquo;s PCB in its list of paused tasks.</p>
+
+<p><strong>Step 4</strong></p>
+
+<p>Everything that happened to the PCB of X, now needs to be done in the opposite direction with the PCB of Y: <strong>the PCB of Y needs to be restored</strong>. The program counter is read and the next instruction is loaded. The values of the registers are restored. The stack pointer is updated.</p>
+
+<p><strong>Step 5</strong></p>
+
+<p>Y starts to run on the processor.</p>
 
 <p>In the previous Section, we have called this series of actions &ldquo;Dispatching&rdquo;. As such, the  time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>. The actions of updating (and restoring) individual PCB&rsquo;s is typically referred to as <strong>a context switch</strong> (though some sources also call the entire process together a context switch).</p>
 
@@ -1720,24 +1725,33 @@ There are 2 user jobs: X and Y. X is running on the processor while Y is in the 
 <li>There are two I/O-bound tasks. Both run for 1ms, in which they update state and then wait/yield for more input.
 
 <ul>
-<li>Input becomes available after 1ms of wait time</li>
-<li>Both tasks do two rounds of this</li>
+<li>Input becomes available after 3ms of <em>wait</em> time</li>
+<li>Both tasks do three rounds of this (wait for input 3 times in total)</li>
 </ul></li>
 <li>There is one CPU-bound task that runs a total of 10ms without yielding</li>
-<li>In this very unrealistic system, the dispatch latency is 1ms</li>
+<li>All three tasks start at 0s</li>
+<li>The two I/O-bound tasks are higher priority than the CPU-bound task.</li>
+<li>Each task gets to complete its full time slice unless it yields by itself.</li>
+<li>In this very unrealistic system, the dispatch latency is a full 1ms</li>
 </ul>
 
 
 <div class="ex">
 	<div class="inner">
-    	<p>Draw schemas of how these tasks would be scheduled in two scenarios: (1) with a time slice of 2ms and (2) a time slice of 5ms.
-Assume that the two I/O-bound tasks are higher priority than the CPU-bound task.</p>
+    	<p>Draw schemas of how these tasks would be scheduled in two scenarios: (1) with a time slice of 2ms and (2) a time slice of 5ms.</p>
 
-<p>For each scenario, calculate the CPU efficiency (the percentage of time that the processor performs actual work: running task time - dispatch latency).</p>
+<p>Indicate clearly each time a task goes into a ready state and don&rsquo;t forget to take into account the high dispatch latency!</p>
 
-<p>Answer these questions:
-- How many context switches are there in each scenario?
-- Which scenario is more efficient? Why?</p>
+<p>For each scenario, calculate the CPU efficiency (the percentage of time that the processor performs actual work: running task time - dispatch latency).
+Note that calculating AJWT is less useful here to compare both scenarios, as we have multiple waiting periods!
+As such, focus on the AJCT and calculate that for the three tasks as well.</p>
+
+<p>Answer these questions:</p>
+
+<ol>
+<li>How many context switches are there in each scenario?</li>
+<li>Which scenario is more efficient? Why?</li>
+</ol>
 
 	</div>
 </div>
@@ -3091,19 +3105,19 @@ Symmetric multiprocessing (SMP) is where each processor is self scheduling -->
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1617100553"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1617100553"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1617100553"></script>
-    <script src="../../js/jquery.sticky.js?1617100553"></script>
-    <script src="../../js/featherlight.min.js?1617100553"></script>
-    <script src="../../js/highlight.pack.js?1617100553"></script>
+    <script src="../../js/clipboard.min.js?1617102891"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1617102891"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1617102891"></script>
+    <script src="../../js/jquery.sticky.js?1617102891"></script>
+    <script src="../../js/featherlight.min.js?1617102891"></script>
+    <script src="../../js/highlight.pack.js?1617102891"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1617100553"></script>
-    <script src="../../js/learn.js?1617100553"></script>
-    <script src="../../js/hugo-learn.js?1617100553"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1617102891"></script>
+    <script src="../../js/learn.js?1617102891"></script>
+    <script src="../../js/hugo-learn.js?1617102891"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1617100553"></script>
+            <script src="../../mermaid/mermaid.js?1617102891"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

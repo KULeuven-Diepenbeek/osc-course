@@ -12,21 +12,21 @@
     <title>7.1: Scheduling algorithms :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1616423350" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616423350" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616423350" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616423350" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616423350" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616423350" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616423350" rel="stylesheet">
-    <link href="../../css/theme.css?1616423350" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616423350" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616757515" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616757515" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616757515" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616757515" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616757515" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616757515" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616757515" rel="stylesheet">
+    <link href="../../css/theme.css?1616757515" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616757515" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616423350" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616757515" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616423350"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616757515"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616423350"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616423350"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616757515"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616757515"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616423350"></script>
+<script type="text/javascript" src="../../js/search.js?1616757515"></script>
 
     
   </div>
@@ -1621,21 +1621,22 @@ window.MathJax = {
 
 
 
-<p>In the previous chapter on Tasks, we&rsquo;ve discussed one of the main responsibilities of an operating system: <strong>task management</strong>. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on the processor is discussed in this chapter: the <strong>scheduler</strong>. For the record, tasks or jobs refer to either processes and/or threads.</p>
+<p>In the previous chapter on Tasks, we&rsquo;ve discussed one of the main responsibilities of an operating system: <strong>task management</strong>. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on one or multiple processors, the <strong>scheduler</strong>, is discussed in this chapter. Note that &ldquo;tasks&rdquo; or &ldquo;jobs&rdquo; can refer to either processes and/or threads.</p>
 
-<p>The scheduler has two main jobs:</p>
+<p>The scheduler has two main responsibilities:</p>
 
 <ol>
-<li>Choose the next task task that is allowed on the processor</li>
-<li>Dispatching: switching tasks that are running on the processor</li>
+<li>Choose the next task that is allowed to run on a given processor</li>
+<li>Dispatching: switching tasks that are running on a given processor</li>
 </ol>
 
-<p>Remember the image below ? The first job is the (interrupting and) dispatching of jobs.
+<p>Remember the image below? The first responsibility of the scheduler is the transition between the &ldquo;ready&rdquo; and &ldquo;running&rdquo; states by interrupting (pausing) and dispatching (starting/resuming) individual tasks:</p>
+
 <figure>
     <img src="../../img/os/db_processstate.png"/> <figcaption>
             <h4>The different process states and their transitions</h4>
         </figcaption>
-</figure></p>
+</figure>
 
 <p><style>
   p.dinobook {
@@ -1650,52 +1651,57 @@ window.MathJax = {
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
 
-<p>For the sake of simplicity it is assumed that the system for which the scheduler works only has a single core. The concepts that are elaborated on also hold for multi-core systems.</p>
+
+<div class="notices note" ><p>While the image above is mainly for processes, similar logic of course exists for Threads as well, as they go through similar conceptual lifecycle phases as processes.</p>
+</div>
+
+
+<p>For the sake of simplicity, in this chapter we assume a system which has only <strong>a single processor with a single CPU core</strong>. However, the concepts introduced here also (largely) hold for multi-core systems.</p>
 
 <h2 id="don-t-interrupt-me">(Don&rsquo;t) Interrupt me !!</h2>
 
-<p>When a scheduler has dispatched a job onto the processor, it has two possibilities to determine when the next job is dispatched.</p>
+<p>When working with a single core, only a single task can be active at the same time. Say that the scheduler starts with the execution of the first task. It then has two options to determine when the next job is dispatched:</p>
 
-<p>The easiest way is to just let the task run until it is finished. When it <strong>yields</strong> (to give up/away, to release) the processor, the scheduler can dispatch the next job.</p>
+<ol>
+<li><strong>non-preemptive / cooperative scheduling</strong>: Let the current task run until it is finished or until it (explicitly) <strong>yields</strong> (to give up/away, to release) its time on the processor. One way of yielding is for example by using the <code>sleep()</code>, but also <code>pthread_join()</code> or <code>sem_wait()</code> can indicate a task can be paused for the time being.</li>
+<li><strong>preemptive scheduling</strong>: Interrupt the current task at any time. This is possible because the PCB and equivalent TCB&rsquo;s track fine-grained per-task state.</li>
+</ol>
 
-<p>The alternative is to interrupt the running job and tell it to gather its stuff and get out.</p>
-
-<p>In scheduler-lingo, the interruption of a running task is called: <strong>preemption</strong>.</p>
-
-<p>The easy way (with the yielding) is called <strong>non-preemptive</strong> or <strong>cooperative</strong> scheduling. It should not come as a surprise that the alternative way is called <strong>preemptive</strong> scheduling.</p>
+<p>While the cooperative scheduling approach is the simplest, it also has some severe downsides. If a given task takes a long time to complete or doesn&rsquo;t properly yield at appropriate intervals, it can end up hogging the CPU for a long time, causing other tasks to stall. As such, most modern OSes will employ a form of preemptive scheduling.</p>
 
 
-<div class="notices note" ><p>If the scheduler needs to preempt jobs after a certain amount of time (or ticks), it requires hardware assistance. The <strong>timer</strong>, as was discussed in chapter 2, is a fundamental piece of hardware for preemptive scheduling.</p>
+<div class="notices note" ><p>If the scheduler needs to preempt jobs after a certain amount of time (or execution ticks), it requires hardware assistance. The <strong>timer</strong>, discussed in chapter 2, is a fundamental piece of hardware for preemptive scheduling.</p>
 </div>
 
 
 <h2 id="scheduler-algorithms">Scheduler algorithms</h2>
 
-<p>There exist many algorithms the scheduler may use to determine <strong>which</strong> job is to be scheduled next. A (very select) number of algorithms are given here.</p>
+<p>Independent of whether cooperative or preemptive scheduling is used, there exist many algorithms the scheduler may use to determine <strong>which</strong> job is to be scheduled next. A (very select) number of algorithms are given here.</p>
+
+<p>To be able to reason about different scheduling algorithms, there is a need of some sort of metric to determine which approach is best. When studying schedulers, the following metrics are typically used:</p>
+
+<ul>
+<li><strong>Average Throughput:</strong> the number of tasks that are executed in one second.</li>
+<li><strong>Average Job Wait Time (AJWT):</strong> the average time that a job needs to wait before it gets scheduled for the first time (first time - creation time).</li>
+<li><strong>Average Job Completion Time (AJCT):</strong> the average time that a job needs to wait before it has fully finished (last time - creation time).</li>
+<li><strong>CPU efficiency (&#0951;<sub>CPU</sub>):</strong> the percentage of time that the processor performs useful work. Remember that every time the CPU switches between tasks, there is a certain amount of overhead due to <em>context switching</em>. As such, the more transitions between tasks there are, the less efficient the CPU is being used.</li>
+</ul>
 
 <h3 id="fcfs">FCFS</h3>
 
-<p>A simple algorithm that a scheduler can follow is: <strong>First Come, First served</strong> (FCFS). The order in which the jobs arrive is the same as the order on which the jobs are allowed on the processor.</p>
+<p>A simple algorithm that a scheduler can follow is: <strong>First Come, First served</strong> (FCFS). The order in which the jobs arrive (are started) is the same as the order on which the jobs are allowed on the processor.</p>
 
-<p>The image below shows three tasks that arrive very close to each other. The result of the schedulers job is shown in the graph.
+<p>The image below shows three tasks that arrive very close to each other. The result of the cooperative scheduler&rsquo;s job is shown in the image:</p>
+
 <figure>
     <img src="../../img/sched/ss_coop_fcfs.png"/> <figcaption>
             <h4>FCFS with cooperative scheduling.</h4>
         </figcaption>
-</figure></p>
-
-<p>To be able different algorithms there is a need of some sort of metric. When studying schedulers, the following metrics can be used:</p>
-
-<ul>
-<li><strong>Throughput:</strong> the number of tasks that are executed over time.</li>
-<li><strong>Average Job Wait Time (AJWT):</strong> the average time that a job needs to wait before it gets scheduled.</li>
-<li><strong>Average Job Completion Time (AJCT):</strong> the average time that a job needs to wait before it has finished.</li>
-<li><strong>CPU efficiency (&#0951;<sub>CPU</sub>):</strong> the percentage that the processor performs usual work.</li>
-</ul>
+</figure>
 
 <p>Applying the first three metrics on the example above gives the following results:</p>
 
-<p><strong>Throughput:</strong></p>
+<p><strong>Average Throughput:</strong></p>
 
 <ul>
 <li>3 jobs over 12 seconds =&gt; <strong>0.25 jobs / s</strong></li>
@@ -1705,28 +1711,30 @@ window.MathJax = {
 
 <ul>
 <li>Task 1 arrives at 0 sec and can immediately start running =&gt; wait time: 0s</li>
-<li>Task 2 arrives at 0.1 sec and can after 1s =&gt; wait time: 0.9s =&gt; 1s</li>
-<li>Task 3 arrives at 0.2 sec and can after 11s =&gt; wait time: 10.8s =&gt; 11s</li>
-<li>AJWT = (0 s + 1 s + 11s)/3 = 12s / 3 = <strong>4s</strong></li>
+<li>Task 2 arrives at 0.1 sec and can start after 1s =&gt; wait time: 0.9s =&gt; 1s (rounded)</li>
+<li>Task 3 arrives at 0.2 sec and can start after 11s =&gt; wait time: 10.8s =&gt; 11s (rounded)</li>
+<li>Average Job Wait Time = (0 s + 1 s + 11s)/3 = 12s / 3 = <strong>4s</strong></li>
 </ul>
 
 <p><strong>AJCT:</strong></p>
 
 <ul>
 <li>Task 1 arrives at 0 sec, waits 0s and takes 1s =&gt; duration: 1s</li>
-<li>Task 2 arrives at 0.1 sec, waits 1s and takes 10s =&gt; wait time: 11.1s =&gt; 11s</li>
-<li>Task 2 arrives at 0.2 sec, waits 11s and takes 1s =&gt; wait time: 12.2s =&gt; 12s</li>
-<li>AJWT = (1 s + 11 s + 12s)/3 = 24s / 3 = <strong>8s</strong></li>
+<li>Task 2 arrives at 0.1 sec, waits 0.9s and takes 10s =&gt; duration: 11s (rounded)</li>
+<li>Task 3 arrives at 0.2 sec, waits 10.8s and takes 1s =&gt; duration: 12s</li>
+<li>Average Job Completion Time = (1 s + 11 s + 12s)/3 = 24s / 3 = <strong>8s</strong></li>
 </ul>
 
 
-<div class="notices note" ><p>For these exercises the decimal portion can be rounded away. It is only used to make a distinction in the order of arrival</p>
+<div class="notices note" ><p>For these examples, the decimal portion can be rounded away. It is only used to make a distinction in the order of arrival.</p>
 </div>
 
 
 <h3 id="sjf">SJF</h3>
 
-<p>A second algorithm is the <strong>Shortest Job First (SJF)</strong>. With this algorithm the scheduler looks at the tasks that are in the <em>ready</em> state. The shortest job within this queue is allowed first on the processor.</p>
+<p>By looking at the FCFS metrics, we can immediately see an easy way to improve the AJWT and AJCT metrics: schedule Task 3 before Task 2!</p>
+
+<p>One algorithm that would allow such an optimization is called <strong>Shortest Job First</strong> (SJF). With this algorithm the scheduler looks at the tasks that are in the <em>ready</em> state. The shortest job within this queue is allowed first on the processor.</p>
 
 <p>If the scheduler applies the SJF algorithm on the same example, the occupation of the processor looks like shown below.</p>
 
@@ -1745,9 +1753,12 @@ window.MathJax = {
 <div class="solution" id="q711" style="visibility: hidden">
   <b>Answer:</b><br/>
   <p>
-    Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-    AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5 s <br/>
-    AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s
+    Throughput = 3 taken / 12 s = 0.25 jobs/s <br/>
+    AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1s <br/>
+    AJCT = ( 1 s + 2 s + 12 s ) / 3 = 5s
+  </p>
+  <p>
+    We can see that the AJWT and AJCT metrics are indeed improved considerably for this example using SJF!
   </p>
 </div></p>
 
@@ -1756,20 +1767,19 @@ window.MathJax = {
 	</div>
 </div>
 
-
-<div class="notices note" ><p>Both algorithms above (FCFS and SJF) are explained using with non-preemptive/cooperative scheduling.</p>
-</div>
-
-
 <h2 id="preemptive-scheduling">Preemptive scheduling</h2>
 
-<p>With preemptive scheduling the scheduler can <strong>halt</strong> a task running on the processor. Let&rsquo;s illustrate this with another example. When a new job comes in, the scheduler stops the currently running job and takes the most recently added job.</p>
+<p>Both of the examples for FCFS and SJF have so far been for non-preemptive/cooperative scheduling. Tasks have been allowed to run to their full completion. Let&rsquo;s now compare this to preemptive scheduling, where the scheduler can <strong>pause</strong> a task running on the processor. Note that for the practical example we&rsquo;ve been using, nothing much would change with preemptive scheduling: the selected next job would always be the same (either the first one started that hasn&rsquo;t finished yet, or the shortest one remaining).</p>
+
+<p>As such, let&rsquo;s use a slightly more advanced example:</p>
 
 <figure>
     <img src="../../img/sched/ss_preemt_lcfs.png"/> <figcaption>
             <h4>Preemptive scheduling.</h4>
         </figcaption>
 </figure>
+
+<p>For preemptive scheduling, there are again several options to determine when to preempt a running task, as here we&rsquo;re no longer waiting for a task to end/yield. You could for example switch tasks each x milliseconds/x processor ticks. In our example, the scheduler preempts only when a new job comes in: it stops the currently running job and starts the most recently added job.</p>
 
 <p>In the example above the following actions are taken:</p>
 
@@ -1781,7 +1791,7 @@ window.MathJax = {
 <li>@ 12s, T2 has finished; there are no more jobs</li>
 </ul>
 
-<p>In the example above, we sort-of used a Last-Come-First-Served approach.</p>
+<p>As such, this example demonstrates a sort-of <strong>Last-Come-First-Served</strong> (LCFS) approach.</p>
 
 
 <div class="ex">
@@ -1793,8 +1803,8 @@ window.MathJax = {
   <b>Answer:</b>
   <p>
   Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s <br/>
-  AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s
+  AJWT = ( 0 s + 0 s + 1 s ) / 3 = 0.33 s <br/>
+  AJCT = ( 1 s + 12 s + 2 s ) / 3 = 5 s
   </p>
 </div></p>
 
@@ -1803,11 +1813,19 @@ window.MathJax = {
 	</div>
 </div>
 
+
+<div class="ex">
+	<div class="inner">
+    	<p>Apply cooperative FCFS and SJF scheduling to the new example tasks and calculate the necessary metrics. Compare the results to the preemptive LCFS.</p>
+
+	</div>
+</div>
+
 <h3 id="priority-based-scheduling">Priority-based scheduling</h3>
 
-<p>At this point we could try a <strong>SJF</strong> approach with preemption. Although this a perfectly fine exercise <strong>(wink)</strong>, it is pointed out that <em>estimating</em> the duration of a job is not an easy task. The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork.</p>
+<p>At this point we could try a <strong>SJF</strong> approach with preemption. Although this a perfectly fine exercise <strong>(wink)</strong>, in practice <em>estimating</em> the duration of a job is not an easy task, as even the program itself typically doesn&rsquo;t know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn&rsquo;t be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn&rsquo;t help the OS to decide which should be run first. Put differently, the scheduler wouldn&rsquo;t be deterministic.</p>
 
-<p>Another algorithm is priority-based scheduling. If you take a closer look at the example above, more specifically at time 2s, the scheduler has two options: 1) schedule T1, or 2) schedule T3. Priority-base scheduling <em>could</em> provide a deterministic answer.</p>
+<p>A more practical approach is <strong>priority-based</strong> scheduling. In this setup, you can assign a given priority to each task, and have jobs with higher priority run before those of lower priority. This still leaves some uncertainty/non-determinism for processes with the same priority, but it&rsquo;s a good first approach.</p>
 
 
 <div class="ex">
@@ -1823,13 +1841,13 @@ window.MathJax = {
 	</div>
 </div>
 
-<p>As can be seen from the example above, this approach might hold a potential risk: <strong>starvation</strong>. Some jobs with lower priority might not get any processor time. They <em>starve</em>. A solution for starvation is <strong>priority aging</strong>. This mechanism allows the priority of a job to increase over time in case of starvation. The actual priority is a function of the original priority and the age of the task.</p>
+<p>As can be seen from the example above, this approach might hold a potential risk: <strong>starvation</strong>. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they <em>starve</em>. One solution for starvation is <strong>priority aging</strong>. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority aging (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot).</p>
 
 <h3 id="round-robin-scheduling">Round-Robin scheduling</h3>
 
-<p>Round-Robin scheduling is a popular algorithm that allows multiple tasks to <strong>time-share</strong> the processor. Jobs are dispatched to and interrupted from the processor on regular moments.</p>
+<p>As you can see, scheduling algorithms can get quite complex and it&rsquo;s not always clear which approach will give the best results for any given job load. As such, it might be easier to just do the simplest preemptive scheduling we can think of: switch between tasks at fixed time intervals in a fixed order (for example ordered by descending Task start time). This is called <strong>Round-Robin scheduling</strong> (RR).</p>
 
-<p>The smallest amount of time that a job can stay on the processor is called a <strong>time quantum</strong> or <strong>time slice</strong>. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. With the mantra &ldquo;One image says more than a 1000 words&rdquo; in mind &hellip; here is an example (with an unrealistic time slice of 1s).</p>
+<p>As such, RR allows multiple tasks to effectively <strong>time-share</strong> the processor. The smallest amount of time that a job can stay on the processor is called a <strong>time quantum</strong> or <strong>time slice</strong>. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:</p>
 
 <figure>
     <img src="../../img/sched/ss_preemt_rr.png"/> <figcaption>
@@ -1847,8 +1865,8 @@ window.MathJax = {
   <b>Answer:</b>
   <p>
   Throughput = 3 taken / 12 s = 0.25 taken/s <br/>
-  AJCT = ( 10 s + 11 s + 12 s ) / 3 = 11 s <br/>
-  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s
+  AJWT = ( 0 s + 1 s + 2 s ) / 3 = 1 s <br/>
+  AJCT = ( 10 s + 11 s + 12 s ) / 3 = 11 s
   </p>
 </div></p>
 
@@ -1857,12 +1875,14 @@ window.MathJax = {
 	</div>
 </div>
 
+<p>As can be seen from the example above, RR also has some downsides. While each task gets some CPU time very early on (low AJWT), the average completion time (AJCT) is of course very high, as all tasks are interrupted several times. If we were to compute CPU efficiency, this would also be lowest here, due to the high amount of context switches between tasks.</p>
 
-<div class="notices warning" ><p>The scheduler does not wait until <strong>a task yields</strong> the CPU, but interrupts its execution after a single time slice.
-This does <strong>NOT</strong> mean that a task <strong>cannot</strong> yield the CPU !!!
+
+<div class="notices warning" ><p>A preemptive scheduler does not wait until <strong>a task yields</strong> the CPU, but interrupts its execution after a single time slice (or, in previous examples, when a new task arrives).
+This does <strong>NOT</strong> mean however that a task <strong>cannot</strong> yield the CPU !!!
 <br/>
 <br/>
-Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or when the job itself yields the processor.</p>
+Another way of putting it is: a job can either run until the time slice has run out (this is when the scheduler interrupts the job) or until the job itself yields the processor. In practice, both of course happen often during normal executing of tasks in an OS.</p>
 </div>
 
 
@@ -2871,19 +2891,19 @@ Another way of putting it is: a job can either run until the time slice has run 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616423350"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616423350"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616423350"></script>
-    <script src="../../js/jquery.sticky.js?1616423350"></script>
-    <script src="../../js/featherlight.min.js?1616423350"></script>
-    <script src="../../js/highlight.pack.js?1616423350"></script>
+    <script src="../../js/clipboard.min.js?1616757515"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616757515"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616757515"></script>
+    <script src="../../js/jquery.sticky.js?1616757515"></script>
+    <script src="../../js/featherlight.min.js?1616757515"></script>
+    <script src="../../js/highlight.pack.js?1616757515"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616423350"></script>
-    <script src="../../js/learn.js?1616423350"></script>
-    <script src="../../js/hugo-learn.js?1616423350"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616757515"></script>
+    <script src="../../js/learn.js?1616757515"></script>
+    <script src="../../js/hugo-learn.js?1616757515"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616423350"></script>
+            <script src="../../mermaid/mermaid.js?1616757515"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

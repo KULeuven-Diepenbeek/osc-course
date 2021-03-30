@@ -4,7 +4,76 @@ pre: "<i class='fas fa-book'></i> "
 weight: 3
 ---
 
-The before mentioned algorithms are but a select number from an infinite amount of imaginable algorithms that can be thought of. Off course multiple algorithms can also be combined. The combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
+The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges that make them difficult for direct use in real-world scenarios. And we haven't even taken into account all variables that are in play in a typical OS! 
+
+As such, in this Section, we first look at a few factors that come into play in real systems. We then look at how the naive schedulers we've already seen can be adapted to deal with these new problems. Finally, we discuss how all of this has been combined in practice in the Linux OS scheduler over time. 
+
+## Reponsiveness vs Efficiency
+
+### Context switching
+
+As said previously, when a new task is scheduled for execution by the OS, a number of operations need to happen to swap the old task with the new one. In the previous examples, we've pretended these operations happen instantly, but that's of course not the case. 
+
+Say we have 2 user tasks: X and Y. X has already been running for a while on the processor, while Y is in the ready state, waiting for CPU-time. Say that the OS is using a preemptive scheduler (for example a pure Round-Robin algorithm) and decides to give Y some running time. Switching between the tasks involves the following steps:
+
+**Step 1**
+X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a *snapshot* has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, ... ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: **The PCB of X needs to be stored**. The kernel puts this PCB in a list of paused tasks.  
+
+Note: something similar happens for Threads (remember there's also a conceptual TCB), but it's more lightweight, since there is more shared state between threads in the same program and so fewer aspects need to be updated. 
+
+**Step 2**
+X is removed from the processor. 
+
+**Step 3**
+The scheduler uses the RR scheduling algorithm to determine which process is next. Since Y is the only other process, it is selected. The processor searches Y's PCB in its list of paused tasks.
+
+**Step 4**
+Everything that happened to the PCB of X, now needs to be done in the opposite direction with the PCB of Y: **the PCB of Y needs to be restored**. The program counter is read and the next instruction is loaded. The values of the registers are restored. The stack pointer is updated. 
+
+**Step 5**
+Y starts to run on the processor.
+
+
+In the previous Section, we have called this series of actions "Dispatching". As such, the  time it takes for the dispatcher to stop one process and start another running is known as the **dispatch latency**. The actions of updating (and restoring) individual PCB's is typically referred to as **a context switch** (though some sources also call the entire process together a context switch). 
+
+As you can see, during the dispatch period, the CPU is not actually doing any useful work: it is waiting and/or updating its state so the new task can start running. As such, the act of dispatching a new process is considered 100% overhead, and it **should be avoided as much as possible**. _Note: there are also other aspects that make context switches slower, such as the fact that it often means that data in the cache memory is no longer useful. As the cached data belongs to the previous task, the cache needs to be (partially) flushed and updated with data from the new task as well, which again takes time._
+
+However, before you get the wrong idea, it's not all that bad. In practice, the dispatch latency is typically in the order of (10) microseconds (say about 1/100th of a millisecond). Still, if we were to switch processes for example each millisecond, we would have a full 1% overhead, which over time definitely adds up (we don't only spend more time context switching, we also do a larger amount of context switches over time). If you recall from the previous section, we introduced the metric CPU efficiency (&#0951;<sub>CPU</sub>), which helps make concrete how much overhead actually was introduced. 
+
+We can see that we somehow need to **strike a balance** between being CPU efficiency (less overhead) and keeping the system responsive (switching between tasks often enough). This is easy enough in our simple examples with just 3-10 tasks, but modern systems often run hundreds of tasks at the same time.
+
+The concept of the **time slice**, discussed in the previous section on Round-Robin scheduling, can play a large part in this: shorter time slices make things more responsive, but cause more context switches, and vice versa. As such, we want to determine an ideal time slice length, but it's not easy to see how this can be accomplished. In general, we can really only say that the time slice should always be quite a bit larger than the dispatch latency, but that we don't really have an easy way to determine an upper bound. 
+
+
+### I/O-bound vs CPU-bound tasks
+
+A second aspect that's highly relevant in modern systems is that there are typically two large classes of tasks: **I/O-bound** and **CPU-bound** tasks. 
+
+The I/O-bound tasks typically run for only short amounts of time (a few milliseconds) before they already have to wait for an I/O operation. Put differently, these tasks pause themselves (go into the "waiting" state) often. A good example is a program that's listening for user input (keyboard/mouse). These tasks are thus sometimes also referred to as **interactive** tasks. 
+
+The CPU-bound tasks typically do not require outside input and are often computationally heavy. They run for tens of milliseconds (or much more) without ever yielding/waiting themselves. These jobs typically process data in large chunks, and are sometimes called **batch** tasks. 
+
+The fact that there are typically few processes that do "something in between" again makes it difficult to determine a good time slice length. If there are many I/O-bound tasks, shorter timeslices are probably better, as most tasks will pause themselves frequently anyway, and we don't loose much (extra) efficiency for higher responsiveness. 
+
+If there are many CPU-bound tasks, longer timeslices are probably better, as processes will typically fill their slices with useful work and we reduce the amount of context switches (and those tasks typically don't need to be very responsive). 
+
+Simply using an average time slice that's "somewhere in between" can produce the worst of both worlds: it lowers the responsiveness in interactive systems, while (needlessly) increasing the amount of context switches during batch processing. 
+
+As in the previous subsection, it's unclear how long a time slice should ideally be to deal with both I/O and CPU-bound tasks. 
+
+<!-- ### What does it all mean ?
+
+With the examples above, it should be clear that the size of the time quantum has an impact on the CPU efficiency. Be careful, however, that you formulate the correct conclusion. Stating that a larger time slice would **"always"** increases the CPU efficiency is <u>not correct</u>.
+
+Concluding that a system with a lot of IO-intensive tasks is better of with a smaller time slice, and a system with a lot of CPU-intensive tasks is better of with a larger time slice, would be more correct.
+
+If the latter is not the case, the CPU will not only spend a large percentage of time context switching, it will also do a larger amount of those context switches over time. As a rule of thumb it can be assumed that the time for a context switch is (a little) less than 10% of the time slice.  -->
+
+
+
+
+<!-- 
+For example, the combination of round-robin scheduling with priorities is a combo that is used in many real-world schedulers.
 
 How could we mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the *time slice*. Let's try to figure out how that plays out ... but first ...
 
@@ -22,25 +91,34 @@ The algorithms provide the scheduler with an approach to **choose the next task*
 ## Dispatching
 
 There are 2 user jobs: X and Y. X is running on the processor while Y is in the ready state, waiting for CPU-time. The scheduler decides that X's time is over an it's Y's turn on the processor.
+ -->
 
-**Step 1**
 
-X has be stopped in such a state that it can continue the next time it is scheduled. Therefore, a *snapshot* has to be made. What is value of the program counter, what are values in the registers, which address is the stack pointer pointing to, ... ? All these values need to be stored. As was discussed [earlier](http://localhost:1313/osc-course/ch6-tasks/processes/#process-control-block) the OS keeps a PCB for every process. This PCB is an object that has fields to store all the required parameters. **The PCB of X needs to be updated** 
+### Time slice size
 
-**Step 2**
-X is removed from the processor. The scheduler switches to kernel mode and has to some work to determine which process is next: Y. Y is placed on the processor.
+Let's illustrate this with an example:
 
-**Step 3**
-Everything that happened to the PCB of X, needs to be done in the opposite direction with the PCB of Y: **the PCB of Y needs to be restored**
+- There are two I/O-bound tasks. Both run for 1ms, in which they update state and then wait/yield for more input.
+    - Input becomes available after 1ms of wait time
+    - Both tasks do two rounds of this
+- There is one CPU-bound task that runs a total of 10ms without yielding
+- In this very unrealistic system, the dispatch latency is 1ms
 
-**Step 4**
-The scheduler switches back to user mode.
+{{% task %}}
+Draw schemas of how these tasks would be scheduled in two scenarios: (1) with a time slice of 2ms and (2) a time slice of 5ms.
+Assume that the two I/O-bound tasks are higher priority than the CPU-bound task.
 
-The dispatching should be as fast as possible, since it is invoked during every process switch. The time it takes for the dispatcher to stop one process and start another running is known as the **dispatch latency**. This is considered 100% overhead.
+For each scenario, calculate the CPU efficiency (the percentage of time that the processor performs actual work: running task time - dispatch latency).
 
-The updating (an restoring) of PCB's is referred to as **a context switch**.
+Answer these questions:
+- How many context switches are there in each scenario?
+- Which scenario is more efficient? Why? 
+{{% /task %}}
 
-## Time slice size
+
+
+
+<!-- 
 With the knowledge of the dispatch latency, the size of the time slice can re-visited. We assume the following setting:
 
 * there are 10 IO intensive tasks (T1 - T10), these
@@ -103,20 +181,77 @@ Try to understand the load that is put on the CPU. There is a periodic pattern.
 </div>
 
 <input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q722')"/>
-{{% /task %}}
+{{% /task %}} -->
+
+### Priorities
+
+As discussed in the previous Section, a third aspect is that there is typically a need to indicate which processes are more important than others. This is usually done using **priorities**, whereby each task is assigned a number so they can be fully ordered to determine which is most important. 
+
+In the simple Priority-based scheduler we've considered, the priority was mainly used to determine *when* to start which process, as higher priority processes are selected earlier. However, we've also seen that this could lead to **starvation** for low-priority tasks, needing some *ageing* mechanism to correct this. 
+
+However, can we not think of another way of enforcing priorities that solves the ageing problem in a more elegant fashion? Up until this point, we've also been assuming that we want to determine a single time slice length to use for all tasks, independent of how they behave. We've seen that this is suboptimal in several ways in terms of efficiency vs responsiveness. 
+
+So maybe we can solve both ageing and efficiency by moving away from a fixed-length time slice, to using **multiple different time slice lengths, dynamically assigned per priority**?
+
+For example, high priority jobs could get a longer time slice (say 10ms) to make sure they get to do as much work as possible, while lower priority tasks could get less time (say 2ms per burst). We can then **use a simple Round-Robin scheduler** between the different tasks, as the priorities are enforced by the time slice length, rather than by strict execution order. Lower priority processes would get time on the CPU more often than with a direct priority-based scheduler, but in shorter bursts, solving ageing while keeping relative priorities intact.
+
+This seems like a good idea, but we can again question if this will work well in practice. For example, say the high priority tasks in a system are I/O-bound and the low priority tasks are CPU-bound, the proposed system seems to do the exact opposite of what we want (as I/O-bound tasks don't need long time slices, but batch jobs do). 
+
+We can see that this line of thinking is an interesting one, but that once again we're not quite there yet with how to practically apply the concept of **modelling priorities as time slice lengths**.
+
+### A dynamic solution
+
+To summarize: at this point it's clear that we have multiple different requirements of a real world scheduler: it needs to be both responsive and CPU efficient, it needs to support both I/O-bound and CPU-bound tasks in a decent way, and it needs to have support for per-task priorities to allow further tweaking of scheduling logic. As hinted to in the last section, one possible approach for dealing with these issues, is to use a dynamic time slice length.  
+
+As such, a generally proposed solution to these issues is the **multi-level feedback queue scheduler**. In this setup, we no longer have a single long list of processes, but instead distribute them across multiple, independent "run queues". Each of these queues can then employ their own scheduling logic (for example use FCFS or RR or even priority-based) and determine other parameters such as if the queue is processed cooperatively or preemptively (in which case, the time slice length can also vary). That's the "multi-level" part. 
+
+The "feedback" part indicates that tasks can move between these separate queues over time (for example as they become more or less important, as they run for longer or shorter bursts, etc.).
+
+We can then see that we also need a sort of top-level scheduler, that determines how the different run queues are processed (for example, queue 2 can only start if queue 1 is empty). 
+
+<a href="https://en.wikipedia.org/wiki/Multilevel_feedback_queue">One of the first examples of this approach</a> was given by Fernando J. Corbató et al. in 1962. Their setup has three specific goals:
+
+0. Give preference to short jobs.
+0. Give preference to I/O-bound tasks.
+0. Separate processes into categories based on their need for the processor.
+
+To achieve these goals, they employ three differen run queues:
+
+{{% figure src="/img/sched/ss_mlfq.png" %}}
+
+When a newly created process is added to the scheduler, it arrives at the back of the **top queue** (8ms). When it is scheduled, there are two options: (a) either it runs the full 8ms or (b) it yields before that. In the case of (b), it's likely that we have a short and/or I/O bound task. As such, when it is done waiting, it is appended at the back of the top queue again.
+
+In the case of (a) however, it's more likely that we have a CPU-bound task. As such, after the 8ms, it is pre-empted and we move it down to the **middle queue** (16ms), where it should get a longer time slice next time it is run. We can see this improves efficiency, as we can assume the task will remain CPU-bound and thus we have only half the context switches for these processes!
+
+If the processes in the middle queue keep running to their full time slice of 16ms multiple times, this is an indication they are very heavily CPU-bound. In response, we move them down to the **bottom queue**. Here, processes are run in FCFS fashion until completion. 
+
+Finally, processes can move *up* to the previous queue if they yield to an I/O operation. This allows for example mostly batch tasks to still get a bit more execution time if they have phases in their programming that requires some I/O work. 
+
+Across the three different run queues, a simple FCFS logic is applied: the top queue is processed until it is empty and only then are tasks from the middle queue scheduled. Note: if I/O bound tasks are waiting, they are of course no longer in the top queue, otherwise the bottom queues would never get any time! Only tasks ready to execute are in the queues. 
+
+{{% notice note %}}
+As said in the previous Section, it is difficult to do Shortest Job First (SJF) scheduling, since it's difficult to know the total duration of a job. This type of setup however tries to approximate this logic by looking not at the total duration of a job, but at **the duration of individual "bursts"**. Longer jobs automatically move down to the lower queues, leaving more room for jobs with shorter bursts at the top. 
+{{% /notice %}}
+
+The setup described above is of course highly specific to those three goals and needs of a particular system. The concepts of the multi-level feedback queue are however much more flexible, as we can also envision other ways of partioning queues to model other advanced scheduling setups. For example:  
+
+0. Each level can represent a separate priority (doing for example RR within each level gives us the simple Priority-based scheduler from the previous Section)
+0. Each level can represent a separate scheduler (the first level can for example do RR, the next FCFS, the next priority-based, etc.)
+0. Each level can represent a different time slice length (the first has slices of 8ms, the next 16ms, etc.)
+
+Between the levels, we can then also employ other schedulers than FCFS of course (e.g., a RR scheduler, a priority-based scheduler etc.) to improve the responsiveness of tasks in the lower levels.  
+
+In practice, these aspects are often combined in specific ways to get a desired outcome (as with the example above). This outcome depends on the system and intended usage. We will see several options for this in the next Section on Linux schedulers. In some way, most modern OS schedulers are variations on the general multi-level feedback queue scheduling concept. 
 
 
-### What does it all mean ?
+<!-- ## Advanced schedulers
 
-With the examples above, it should be clear that the size of the time quantum has an impact on the CPU efficiency. Be careful, however, that you formulate the correct conclusion. Stating that a larger time slice would **"always"** increases the CPU efficiency is <u>not correct</u>.
+Now that we've discussed a few more real-world aspects of tasks, it's time to start building towards more complex schedulers. At this point, we also have to start to take into account how we're actually planning to implement the scheduler in practice. Specifically, we need to think about the data structures we use to store the PCBs and how to track for example task prioririties. 
 
-Concluding that a system with a lot of IO-intensive tasks is better of with a smaller time slice, and a system with a lot of CPU-intensive tasks is better of with a larger time slice, would be more correct.
-
-For the sake of correctness it is pointed out that the time for context switches is not realistic. With larger time quanta the time for context switching also increases. As a rule of thumb it can be assumed that the time for a context switch is (a little) less than 10% of the time slice.
-
-## Real-world schedulers
+We will first consider a conceptual model of a flexible scheduler
 
 ### Run queue - Hey, you there, get in line !!!
+
 Processes that are ready to be scheduled are in the **ready** state. Processes that are waiting for IO are in **waiting** state. All these **queues** need to be maintained and managed. In the chapter on *Pointers*, *linked lists* were discussed. This technique is heavily used for managing these types of queues.
 
 Depending on the strategy that a scheduler follows different queue systems might be more suited. Remember, the scheduler chooses the next task, a preferably as-fast-as-possible.
@@ -136,61 +271,152 @@ A priority based system might use the exact same scheduling algorithm, with the 
 {{% figure src="/img/sched/ss_runqueue_multfifo.png" %}}
 
 #### Tree
+
 When a more complex algorithms are used in the scheduler, a tree might suit the needs better. Depending on the strategy a tree might be ordered in a certain way. For example, in a **shortest-job-first** algorithm, jobs may be ordered (from **short** to **long**) in the tree from **left** to **right**.
 
 **When a process is created**, calculations have to be done to determine the position in the three of the new process.
 
 {{% figure src="/img/sched/ss_runqueue_tree.png" %}}
 
-### Multi-level feedback queue
-The multi-level feedback queue scheduler was originally develop by Fernando J. Corbató et al. in 1962. It consists of 3 queues. Every queue has a different time slice assigned to it: 8 ms, 16 ms and &#8734; ms.
+### Multi-level feedback queue -->
 
-{{% figure src="/img/sched/ss_mlfq.png" %}}
 
-When a newly created process is added to the scheduler, it arrives in the **shortest queue**. After a number of times being scheduled on the processor, the process might **go down** a level to a queue with a larger time slice. The criterion that is used is whether the job **yielded** from the processor, or whether it was interrupted by the scheduler.
 
-Jobs that always use up the complete time slice are considered to be more CPU intensive. As we have seen earlier, this type of process is more efficient when given a larger time slice. The scheduler moves the process to lower level. The **reverse** holds for moving up in between queues.
+## Linux Schedulers
 
-With this scheduler, jobs might migrate between queues over time depending on what time slice is best suited for that moment. In general it can be stated that CPU intensive processes are to be found on the bottom, while IO intensive processes are on the top.
+Now that we've explored some of the practical issues with real-world scheduling and introduced a basic solution framework, it's time to look at how things are practically done in the Linux OS. This again goes one step beyond the scheduling logic, as we now need to also take into account performance of the implementations and datastructures, as well as the provided API for programmers (for example, how to actually manipulate priorities in practice).
 
-### Linux Scheduler
-The Linux kernel has used different schedulers up until now. Between Linux kernels 2.4 - 2.6 were using the O(n) scheduler, 2.6 - 2.6.11 the used scheduler was O(1), and from 2.6.12 onward the Completely Fair Scheduler (CFS) was used. These schedulers are briefly touched upon here. All of these are preemptive schedulers that are priority-based. 
-
-#### O(n) scheduler
-The O(n) (read as: [Big-Oh-En]) scheduler got his name from the fact that choosing a new task had **linear** complexity. This means that the amount it takes for choosing a new task is proportional the number of tasks that are available. As you can easily see on every OS, there are a huge amount of tasks running nowadays. With this scheduler it would also take a (relatively) huge amount of time for choosing the next task. **This doesn't scale !** Because the scheduler's work is seen as overhead, it should be clear why this scheduler got replaced.
-
-#### O(1) scheduler
-This scheduler has been used in the Linux kernel up to version 2.6.23. This scheduler picks the next task in O(1), constant time. Obviously, this scales better. While this scheduler fixed the scalability problem of its predecessor, it did not perform well with an increasing number of **interactive processes**.
-
-#### CFS (currently used)
-The currently used scheduler has been around since Linux kernel version 2.6.23. As it is more fair towards interactive processes, or more in general, more fair towards all processes, it is named: Completely Fair Scheduler (CFS).
-
-There are 140 different priority levels in the CFS. Processes are divided in 2 types: Real-time processes and time sharing processes. The **real-time** processes are those with a priority from 0 to 99. The **time sharing** processes have a priority from 100 to 139. The real-time processes are processes that run in kernel mode, the time sharing processes run in user mode.
-
-As was seen in the example above, it helps when processes don't have a fixed priority. Additionally, the concept of priority ageing was discussed as means to counteract starvation. A priority should be able to **change throughout the process's lifetime**. This is implemented with the **nice value**. This value is added to the original priority and ranges between -20 and 19. Smaller nice values give higher priorities. Larger nice values (*nicer processes*) give lower priorities.
-
-For more information on CFS you can read the kernel documentation [here](https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html). For the daredevils ... you can even read (or modify, at your own risk) the kernel C code [here](https://github.com/torvalds/linux/blob/master/kernel/sched/fair.c).
-
-{{% task %}}
-What should be the default priority that is given to a user process ?
-{{% /task %}}
+Over time, the Linux kernel has used different schedulers, of which we will discuss three here. Linux kernels with version 2.4 - 2.6 (before 2003) were using the O(n) scheduler, in 2.6 - 2.6.11 (2003-2007) the used scheduler was O(1), and from 2.6.12 (after 2007) onward the Completely Fair Scheduler (CFS) is mainly used. These schedulers are briefly touched upon here. All of these are preemptive schedulers that incorporate priorities, but as we will see, they do this in various different ways.
 
 {{% notice note %}}
-When a process is **nicer** to other processes, it has a higher nice value. Therefore the overall priority of nicer processes is lower, which is reflected by a **higher** overall priority.  
+You might be confused by O(n) and O(1). This "Big Oh" notation is an often used concept in computer science to indicate the **worst-case performance** (called "time complexity") of a program. In general, the factor inside of the O() function should be as small as possible. As such O(1) is optimal ("constant time"), while O(n) indicates that in the worst-case, the program scales linearly with (in this case) the amount of tasks (n). Exponential setups like O(n*n) and especially O(2^n) are to be avoided. In practice, O(log N) is often the best you can do.
 {{% /notice %}}
+
+### O(n) scheduler
+
+The O(n) scheduler got his name from the fact that choosing a new task has **linear** complexity. This is because this scheduler uses a **single linked list** to store all the tasks. Upon each context switch, the scheduler iterates over all the ready tasks in the list, (re-)calculating what is called a **"goodness"** value. This value is a combination of various factors, such as task priority and whether the task fully used its allotted time slice in its previous burst. The task with the highest goodness value is chosen to run next. 
+
+This setup combines some of the aspects of the multi-level feedback queue concept, but in a single datastructure. For example, if a task didn't use its entire alotted time slice, it gets half of the remaining time alotted for its next run (somewhat bumping its priority, as the alotted timeslice is taken into account with the goodness value as well). As such, while each task is typically assigned the same time slice length initially, this starts to vary over time. 
+
+In practice, this scheduler works, but it has severe issues. Firstly, it is somewhat **unpredictable** (e.g., the time slice could grow unbounded for very short processes, meaning we need additional logic to deal with this). Secondly, and most importantly in practice, the performance was too low. Because each task's goodness needs to be caclculated/checked *on every context switch (the O(n))*, this adds **large amounts of overhead** if there are many concurrent processes. Thirdly, it also does not scale well to multiple processors: each processor is typically scheduled independently, meaning that for each CPU **a mutex lock** had to be obtained on the single task list to fetch the next candidate. 
+
+### O(1) scheduler
+
+Given the problems of the previous O(n) scheduler, a new, much more advanced version was introduced. One of its main goals was to reduce the time it takes to identify the next task to run, which can now be done in constant time, expressed as O(1). 
+
+To understand how exactly this works, we first need to understand how Linux practically deals with priorities, since the O(1) scheduler is tightly integrated with this. 
+
+Linux defines task priority as a value between 0 and 139 (so a total of 140 different priorities). 0 is the highest priority, 139 the lowest (somewhat unintuitively...). The range 0-99 is reserved for so-called **"real time" tasks**. In practice, these are kernel-level tasks (as the kernel of course also has internal things to do). These also for example include the concrete I/O operations (for example reading from disk), as other (user-space) (I/O-bound) tasks might be waiting for that. The range between 100 and 139 then is reserved for user-space processes, sometimes called **time sharing** or interactive processes. 
+
+However, programmers don't manually assign priorities between 100 and 139. Instead, Linux APIs add an additional abstraction on top called the "nice value". These nice values are from the range [-20,19], which maps directly onto the "real" priorities in [100,139]. When a process is **nicer** to other processes (a higher nice value), it means it doesn't mind giving some of its time to other processes. As such, **a higher nice value means a lower priority** (just like a higher priority number also indicates a lower priority conceptually).
+
+{{% task %}}
+What should be the default nice value (or priority) that is given to a user process?
+{{% /task %}}
 
 The clip below tries to illustrate the effect of the overall priority.
 {{< youtube Bt-Z_Y5Zl44 >}}
 
+(The code for the examples in the video can be found <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/osc-course/master/archive_jo/scheduling/blink.c">here</a>).
+
+
+The O(1) scheduler creates a new **queue (linked list) for each of these 140 different priority values**. For the real-time tasks (queues 0-99), processes within each priority list are scheduled either FCFS or RR, which can be toggled by the user (look for SCHED_FCFS and SCHED_RR). The user-space tasks (100-139) are typically scheduled RR per priority (SCHED_NORMAL) but they can also be scheduled based on remaining runtime to improve batch processing (SCHED_BATCH). Each priority list is emptied in full before the next priority list is considered. At every context switch (at every time slice), the highest priority list with a runnable task is selected. 
+
+If we were to use this setup directly, the lower-priority tasks would very often by interrupted by higher-priority ones and we again get the problem of starvation. To prevent the need for manual priority adjustment with ageing, the O(1) scheduler instead uses a clever trick, by introducing a second, parallel datastructure. As such, there are two groups of 140 queues. The first is called the **"active"** queue, the second the **"expired"** queue. When a task has consumed its time slice completely (either in 1 run, or by yielding multiple times), it is moved to the corresponding "expired" queue. This allows all processes in the active queue to get some time. When the active processes are all done, the expired and active lists are swapped and the scheduler can again start with the highest priority processes. 
+
+This setup is efficient, because we no longer need to loop through all tasks to find the next one: we just need the first task in the highest priority list! As long as processes are added to the correct priority queue, this can be done in constant time. Some psuedocode to illustrate these aspects can be found below: 
+
+```c
+// pseudocode!!!
+// in reality, the data structures and functions look different!
+
+struct PriorityTask {
+    struct Task *task; // for example the PCB
+    struct PriorityTask *next;
+}
+
+struct PriorityList {
+    struct PriorityTask *first;
+    struct PriorityTask *last;
+}
+
+struct RunQueue {
+    struct PriorityList *tasks[139]; // 140 linked lists, 1 for each priority
+}
+
+void appendToList(struct PriorityList *list, struct Task *newTask) {
+    // TODO: make sure list->last exists etc.
+    list->last->next = newTask;
+    list->last = newTask;
+}
+
+struct RunQueue *active;
+struct RunQueue *expired;
+
+// new task is started with priority x
+appendToList( active->tasks[x], newTask );
+
+// scheduler wants to start a new task
+// loops over "active->tasks" from 0 to 139, looking for the first non-empty list, with index y
+// Note: in reality, a bitmap is used to prevent the need to loop (see below), keeping things O(1)
+struct PriorityTask *runTask = popFirstFromList( active->tasks[y] );
+execute( runTask->task, runTask->task.timeslice )
+
+// task is done running and has consumed its timeslice completely
+appendToList( expired->tasks[x], runTask );
+
+// OR: task is done running and hasn't consumed its timeslice yet (waiting state)
+runTask->task.timeslice = leftoverTimeslice;
+appendToList( active->tasks[x], runTask );
+
+// if all lists in "active" are empty (no "y" found): swap both runqueues and start over
+struct RunQueue *temp = active;
+active = expired;
+expired = temp;
+```
+
+{{% task %}}
+How would you implement appendToList and popFirstFromList in practice? What other properties should struct Task have besides "timeslice"?
+{{% /task %}}
+
+As explained in the pseudocode, we also need a clever way of knowning which priority queue still has pending tasks without looping over all of them. This can be cleverly done by using a so-called **bitmap**, where each individual bit of an integer is used as a boolean to indicate if there are tasks for the priority corresponding to that bit. To represent 140 bits, we need about 5 32-bit integers (total of 160 bits). Checking which bits are set can be done very efficiently. See the image below for a schematic representation:
+
+{{% figure src="/img/sched/o1_bitmap.png" %}}
+
+As such, we can see the O(1) scheduler is an excellent example of a complex multi-level feedback queue! It utilizes several queues for the different priorities, using different schedulers per-queue depending on the real-timeness of the task. On top, it has two higher-level queues (active and expired) for which it uses an FCFS scheduler. Conceptually a different time slice could also be employed (e.g., higher priorities get a longer time slice), though this was typically not employed.
+
+This scheduler is however not perfect. In practice, it turns out that I/O-bound or interactive processes could get delayed considerably by longer-running processes, due to the active vs expired setup. This caused the need for a complex set of **heuristics** (basically: educated guesses) that the OS would use to estimate which processes were I/O-bound or interactive. These processes would then receive an internal priority boost (again a form of ageing), while non-interactive processes would get penalized. In practice however, like with the O(n) scheduler, this process was somewhat unstable and error-prone. 
+
+
+### The Completely Fair Scheduler
+
+The current default scheduler was intended to take a bit of a step back from the relatively complex O(1) scheduler and to make things a bit simpler (as we'll see, that's simpler for Linux kernel developers, not necessarily for us). 
+
 Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers.
 
 
-### Other schedulers
-As might be expected, these are not the only schedulers that exist. There a many scheduler available and, certainly, there will be many more to come. Just a small grasp of existing schedulers: 
+For more information on CFS you can read the kernel documentation [here](https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html). For the daredevils ... you can even read (or modify, at your own risk) the kernel C code [here](https://github.com/torvalds/linux/blob/master/kernel/sched/fair.c).
 
-* Completely Fair Scheduler (Linux)
+
+### Other schedulers
+As might be expected, these are not the only schedulers that exist, even within Linux. There a many schedulers available and, certainly, there will be many more to come. Just a small grasp of existing schedulers: 
+
 * Brain F\*ck Scheduler (Linux)
 * Noop Scheduler (Linux)
 * Task Scheduler 1.0 (Windows)
 * Task Scheduler 2.0 (Windows)
 * JobScheduler (iOS)
+
+{{% task %}}
+Look up at least 1 other scheduler (for example one used in Windows) and grasp its main concepts and compare it to how Linux works.
+{{% /task %}}
+
+<!-- ## Multi-processor considerations
+
+TODO: 
+
+processor affinity/cache locality, NUMA architecture, per-processor queues or shared queues or hybrids
+
+load balancing issues
+
+Symmetric multiprocessing (SMP) is where each processor is self scheduling -->

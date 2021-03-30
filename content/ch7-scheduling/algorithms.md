@@ -151,7 +151,7 @@ Apply cooperative FCFS and SJF scheduling to the new example tasks and calculate
 
 ### Priority-based scheduling
 
-At this point we could try a **SJF** approach with preemption. Although this a perfectly fine exercise **(wink)**, in practice *estimating* the duration of a job is not an easy task, as even the program itself typically doesn't know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn't be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn't help the OS to decide which should be run first. Put differently, the scheduler wouldn't be deterministic. 
+At this point we could try a **SJF** approach with preemption (which here would be called shortest-remaining-time-first). Although this a perfectly fine exercise **(wink)**, in practice *estimating* the duration of a job is not an easy task, as even the program itself typically doesn't know how long it will run for! The OS could base itself on earlier runs of the program (or similar programs), or on the length of the program, but it remains guesswork. As such, SJF is rarely used in practice. In our example, it also wouldn't be the perfect approach, since both T1 and T3 have equal (estimated) durations, and it wouldn't help the OS to decide which should be run first. Put differently, the scheduler wouldn't be deterministic. 
 
 A more practical approach is **priority-based** scheduling. In this setup, you can assign a given priority to each task, and have jobs with higher priority run before those of lower priority. This still leaves some uncertainty/non-determinism for processes with the same priority, but it's a good first approach. 
 
@@ -166,14 +166,13 @@ Let's assume the priorities as mentioned in the image below. Try to complete the
 <input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q713')"/>
 {{% /task %}}
 
-As can be seen from the example above, this approach might hold a potential risk: **starvation**. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they *starve*. One solution for starvation is **priority aging**. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority aging (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot).
-
+As can be seen from the example above, this approach might hold a potential risk: **starvation**. Some jobs with lower priority (in our case T1) might not get any processor time until all other processes are done: they *starve*. One solution for starvation is **priority ageing**. This mechanism allows the priority of a job to increase over time in case of starvation, leading to the job eventually being scheduled. The actual priority thus becomes a function of the original priority and the age of the task. Again, as you can imagine, there are several ways to do this priority ageing (for example at which time intervals to update the priority and by how much, or by how/if you change the priority after the task has been scheduled for its first time slot). We will later see how this is practically approached in Linux. 
 
 ### Round-Robin scheduling
 
 As you can see, scheduling algorithms can get quite complex and it's not always clear which approach will give the best results for any given job load. As such, it might be easier to just do the simplest preemptive scheduling we can think of: switch between tasks at fixed time intervals in a fixed order (for example ordered by descending Task start time). This is called **Round-Robin scheduling** (RR). 
 
-As such, RR allows multiple tasks to effectively **time-share** the processor. The smallest amount of time that a job can stay on the processor is called a **time quantum** or **time slice**. Typically the duration of a time slice is between 10 and 100 ms. All jobs in the ready queue get a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:
+As such, RR allows multiple tasks to effectively **time-share** the processor. The smallest amount of time that a job can stay on the processor is called a **time quantum** or **time slice**. Typically the duration of a time slice in a modern OS is between 10 and 100 ms. All jobs in the ready queue get assigned a time slice in a circular fashion. An (unrealistic) example with a time slice of 1s is shown below:
 
 {{% figure src="/img/sched/ss_preemt_rr.png" title="Round Robin scheduling." %}}
 

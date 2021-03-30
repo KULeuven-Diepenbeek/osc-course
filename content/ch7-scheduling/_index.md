@@ -19,7 +19,7 @@ weight: 7
 
 7.2: Scheduling algorithms (lab)
 
-7.3: Towards real-world scheduler
+7.3: Towards real-world schedulers
 
   * Dispatching
   * Time slice size
@@ -31,4 +31,4 @@ weight: 7
     * Multi-level feedback queue
     * Linux Scheduler
 
-7.4: Towards real-world scheduler (lab)
+7.4: Towards real-world schedulers (lab)

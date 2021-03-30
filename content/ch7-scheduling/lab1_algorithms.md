@@ -15,7 +15,7 @@ We have discussed a number of algorithms the scheduler can use to do it's job. L
 * T3: arrives @ 4s, takes 5s, and has priority high
 * T4: arrives @ 7s, takes 1s, and has priority medium
 
-Compare Threshold, AJWT, and AJCT of the 4 algorithms we've seen up until: 
+Compare Average Throughput, AJWT, and AJCT of the 4 algorithms we've seen up until: 
 
 0. cooperative (non preemptive) FCFS, 
 0. cooperative (non preemptive) SJF, 

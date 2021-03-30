@@ -309,6 +309,8 @@ You might be confused by O(n) and O(1). This "Big Oh" notation is an often used 
 
 The O(n) scheduler got his name from the fact that choosing a new task has **linear** complexity. This is because this scheduler uses a **single linked list** to store all the tasks. Upon each context switch, the scheduler iterates over all the ready tasks in the list, (re-)calculating what is called a **"goodness"** value. This value is a combination of various factors, such as task priority and whether the task fully used its allotted time slice in its previous burst. The task with the highest goodness value is chosen to run next. 
 
+{{% figure src="/img/sched/ss_runqueue_fifo.png" %}}
+
 This setup combines some of the aspects of the multi-level feedback queue concept, but in a single datastructure. For example, if a task didn't use its entire alotted time slice, it gets half of the remaining time alotted for its next run (somewhat bumping its priority, as the alotted timeslice is taken into account with the goodness value as well). As such, while each task is typically assigned the same time slice length initially, this starts to vary over time. 
 
 In practice, this scheduler works, but it has severe issues. Firstly, it is somewhat **unpredictable** (e.g., the time slice could grow unbounded for very short processes, meaning we need additional logic to deal with this). Secondly, and most importantly in practice, the performance was too low. Because each task's goodness needs to be caclculated/checked *on every context switch (the O(n))*, this adds **large amounts of overhead** if there are many concurrent processes. Thirdly, it also does not scale well to multiple processors: each processor is typically scheduled independently, meaning that for each CPU **a mutex lock** had to be obtained on the single task list to fetch the next candidate. 
@@ -334,6 +336,8 @@ The clip below tries to illustrate the effect of the overall priority.
 
 
 The O(1) scheduler creates a new **queue (linked list) for each of these 140 different priority values**. For the real-time tasks (queues 0-99), processes within each priority list are scheduled either FCFS or RR, which can be toggled by the user (look for SCHED_FCFS and SCHED_RR). The user-space tasks (100-139) are typically scheduled RR per priority (SCHED_NORMAL) but they can also be scheduled based on remaining runtime to improve batch processing (SCHED_BATCH). Each priority list is emptied in full before the next priority list is considered. At every context switch (at every time slice), the highest priority list with a runnable task is selected. 
+
+{{% figure src="/img/sched/ss_runqueue_multfifo.png" %}}
 
 If we were to use this setup directly, the lower-priority tasks would very often by interrupted by higher-priority ones and we again get the problem of starvation. To prevent the need for manual priority adjustment with ageing, the O(1) scheduler instead uses a clever trick, by introducing a second, parallel datastructure. As such, there are two groups of 140 queues. The first is called the **"active"** queue, the second the **"expired"** queue. When a task has consumed its time slice completely (either in 1 run, or by yielding multiple times), it is moved to the corresponding "expired" queue. This allows all processes in the active queue to get some time. When the active processes are all done, the expired and active lists are swapped and the scheduler can again start with the highest priority processes. 
 
@@ -403,9 +407,26 @@ This scheduler is however not perfect. In practice, it turns out that I/O-bound 
 
 ### The Completely Fair Scheduler
 
-The current default scheduler was intended to take a bit of a step back from the relatively complex O(1) scheduler and to make things a bit simpler (as we'll see, that's simpler for Linux kernel developers, not necessarily for us). 
+The current default scheduler was intended to take a bit of a step back from the relatively complex O(1) scheduler and to make things a bit simpler; as we'll see however, that's simpler for Linux kernel developers, not necessarily for us. The CFS is a relatively complex scheduler, and as such a thorough study on this algorithm falls out of the scope of this course. We will touch upon the main concepts however.
 
-Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers.
+The main insight in the CFS is that **the size of the time slices can be highly dynamic**. Previously, we've seen that interactive processes for example can get 8ms, while CPU-bound processes could get 16ms. That's already nice, but it doesn't take into account the current load of the system: if there are many different processes waiting, each will still get 8 to 16ms, causing later ones to be significantly delayed. 
+
+The CFS solves this problem by calculting the per-task time slice length for a given time period based on the number of ready tasks. Say that N tasks are ready and we want to schedule each of them over the next 100ms (an "epoch"). Then each task is assigned a time slice of 100ms * 1/N (if we ignore the context switching overhead for a bit). In theory, this gives each task an equal share of the processor, hence the name. As such, if there are fewer tasks active in the system, N will be lower, and the time slices will get larger, and vice versa. Of course, the CFS puts a lower bound on the time slice length (typically 4ms) as otherwise the context switching overhead could become too large. 
+
+To determine which task executes first within the next epoch, the CFS keeps track of how much time each task has actually spent on the CPU so far. As such, for I/O-bound processes that yield frequently, this value will be lower than for CPU-bound tasks that always use their full time slice. The scheduler always selects the process that has so far **spent the least amount of time on the CPU**. This automatically makes sure that interactive processes are scheduled frequently enough, but also that CPU-bound processes age correctly. 
+
+This timekeeping is done in a quite complex datastructure called a (binary) (self-balancing) **red-black tree**. The details are not important here, but this mainly means that the next task (that has spent the last amount of time on the CPU) is always the most bottom left node in the tree. As such, it can easily be retrieved with low overhead. Similarly, adding new tasks (or moving tasks around) in the tree can be done in O(log N).
+
+{{% figure src="/img/sched/ss_runqueue_tree.png" %}}
+
+The complexity increases even more when we look at how this setup incorporates priorities. As there are no longer explicit per-priority lists like in the O(1) scheduler, the CFS simulates this by shrinking/expanding the time slices of low/high priority processes. This is similar to what we've discussed above, that time slice durations can be used to emulate priorities. As such, if a high priority process executes for 10ms on the CPU, the timekeeper might only record that it spent 5ms of "virtual time". This gives the task a "priority boost" when the scheduler next goes looking for a new task. The opposite is done for low priority tasks (e.g., 10ms of runtime can become 20ms of "virtual time"). We can see this is no longer a "completely fair" scheduler in practice, but it's quite elegant in how it combines interactivity, priorities and time slice lengths in practice. 
+
+
+
+
+
+
+<!-- Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers. -->
 
 
 For more information on CFS you can read the kernel documentation [here](https://www.kernel.org/doc/html/latest/scheduler/sched-design-CFS.html). For the daredevils ... you can even read (or modify, at your own risk) the kernel C code [here](https://github.com/torvalds/linux/blob/master/kernel/sched/fair.c).
@@ -423,6 +444,7 @@ As might be expected, these are not the only schedulers that exist, even within 
 {{% task %}}
 Look up at least 1 other scheduler (for example one used in Windows) and grasp its main concepts and compare it to how Linux works.
 {{% /task %}}
+
 
 <!-- ## Multi-processor considerations
 

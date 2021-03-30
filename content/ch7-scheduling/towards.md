@@ -17,20 +17,25 @@ As said previously, when a new task is scheduled for execution by the OS, a numb
 Say we have 2 user tasks: X and Y. X has already been running for a while on the processor, while Y is in the ready state, waiting for CPU-time. Say that the OS is using a preemptive scheduler (for example a pure Round-Robin algorithm) and decides to give Y some running time. Switching between the tasks involves the following steps:
 
 **Step 1**
+
 X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a *snapshot* has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, ... ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: **The PCB of X needs to be stored**. The kernel puts this PCB in a list of paused tasks.  
 
 Note: something similar happens for Threads (remember there's also a conceptual TCB), but it's more lightweight, since there is more shared state between threads in the same program and so fewer aspects need to be updated. 
 
 **Step 2**
+
 X is removed from the processor. 
 
 **Step 3**
+
 The scheduler uses the RR scheduling algorithm to determine which process is next. Since Y is the only other process, it is selected. The processor searches Y's PCB in its list of paused tasks.
 
 **Step 4**
+
 Everything that happened to the PCB of X, now needs to be done in the opposite direction with the PCB of Y: **the PCB of Y needs to be restored**. The program counter is read and the next instruction is loaded. The values of the registers are restored. The stack pointer is updated. 
 
 **Step 5**
+
 Y starts to run on the processor.
 
 
@@ -99,20 +104,28 @@ There are 2 user jobs: X and Y. X is running on the processor while Y is in the 
 Let's illustrate this with an example:
 
 - There are two I/O-bound tasks. Both run for 1ms, in which they update state and then wait/yield for more input.
-    - Input becomes available after 1ms of wait time
-    - Both tasks do two rounds of this
+    - Input becomes available after 3ms of *wait* time
+    - Both tasks do three rounds of this (wait for input 3 times in total)
 - There is one CPU-bound task that runs a total of 10ms without yielding
-- In this very unrealistic system, the dispatch latency is 1ms
+- All three tasks start at 0s
+- The two I/O-bound tasks are higher priority than the CPU-bound task.
+- Each task gets to complete its full time slice unless it yields by itself.
+- In this very unrealistic system, the dispatch latency is a full 1ms
 
 {{% task %}}
 Draw schemas of how these tasks would be scheduled in two scenarios: (1) with a time slice of 2ms and (2) a time slice of 5ms.
-Assume that the two I/O-bound tasks are higher priority than the CPU-bound task.
+
+Indicate clearly each time a task goes into a ready state and don't forget to take into account the high dispatch latency!
 
 For each scenario, calculate the CPU efficiency (the percentage of time that the processor performs actual work: running task time - dispatch latency).
+Note that calculating AJWT is less useful here to compare both scenarios, as we have multiple waiting periods!
+As such, focus on the AJCT and calculate that for the three tasks as well.
 
 Answer these questions:
-- How many context switches are there in each scenario?
-- Which scenario is more efficient? Why? 
+
+1. How many context switches are there in each scenario?
+2. Which scenario is more efficient? Why? 
+
 {{% /task %}}
 
 

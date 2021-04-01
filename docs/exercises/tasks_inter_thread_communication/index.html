@@ -12,21 +12,21 @@
     <title>3. Inter-thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1617103828" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1617103828" rel="stylesheet">
-    <link href="../../css/hybrid.css?1617103828" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1617103828" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1617103828" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1617103828" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1617103828" rel="stylesheet">
-    <link href="../../css/theme.css?1617103828" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1617103828" rel="stylesheet">
+    <link href="../../css/nucleus.css?1617281037" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1617281037" rel="stylesheet">
+    <link href="../../css/hybrid.css?1617281037" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1617281037" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1617281037" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1617281037" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1617281037" rel="stylesheet">
+    <link href="../../css/theme.css?1617281037" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1617281037" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1617103828" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1617281037" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1617103828"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1617281037"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1617103828"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1617103828"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1617281037"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1617281037"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1617103828"></script>
+<script type="text/javascript" src="../../js/search.js?1617281037"></script>
 
     
   </div>
@@ -1602,33 +1602,65 @@ window.MathJax = {
         
 
 
-<ul>
-<li>Analyse exercise 6_4_3.c (shown below) and write a report (2-3 pages):
+<p>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&rsquo;s still not always trivial to know <em>how to apply them to a specific problem</em>. Even for the well-known producer-consumer problem, several different setups are possible.</p>
+
+<p>This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a &ldquo;single right answer&rdquo; and/or are a bit vague: that is intentional.</p>
+
+<p>Analyse the code below and write a report (3-4 pages):</p>
 
 <ol>
-<li>describe what the program does (in general, not line-by-line)</li>
-<li>make a line chart that plots &lsquo;the elapsed real time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
+<li>Describe what the program does (in general, not line-by-line)</li>
+<li>Note that this program does something similar to the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
 
 <ul>
-<li>for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
-<li>Note:</li>
+<li>However, it is fundamentally different in how it divides the responsibilities between producers and consumers.</li>
+<li>Explain this difference in detail.</li>
+<li>Discuss which of both approaches you think is probably more realistic / more likely to occur in practice.</li>
+</ul></li>
+<li>Make a line chart that plots &lsquo;the elapsed real time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
+
+<ul>
+<li>For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
+<li>Note:
+
+<ul>
 <li>the scale on the X-axis goes from 2 to 300</li>
 <li>at least 8 data points should be present in the chart</li>
 <li>you can use any charting program for this (for example excel or google sheets)</li>
 <li><strong>TIP</strong> use the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
+<li><strong>NOTE</strong> printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.</li>
 </ul></li>
-<li>interpret the chart and draw conclusions</li>
-<li>explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads)</li>
-<li>actually extend the program so it runs more than one producer thread
+</ul></li>
+<li>Interpret the chart and draw conclusions</li>
+<li>Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
 
 <ul>
-<li>Note: <code>sem_trywait</code> can be used to good effect here</li>
+<li>Would the program run faster or slower? Why?</li>
+<li>Does it make sense to use multiple <em>producer</em> threads with this setup? Why (not)?</li>
+<li>Does it make sense to use multiple <em>consumer</em> threads with this setup? Why (not)?</li>
+<li>Answer both questions for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a> as well</li>
+<li>For a different problem, how would you decide how many producer and consumer threads you would need?</li>
 </ul></li>
-<li>compare the actual outcome with your hypothesis from step 4 and explain why this happens</li>
-</ol></li>
-</ul>
+<li>The producer-consumer problem comes up in many other settings as well
 
-<p><center><strong>hand in the report and the extended source code via toledo</strong></center></p>
+<ul>
+<li>Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs</li>
+<li>Note: there aren&rsquo;t always literal &ldquo;producers&rdquo; or &ldquo;consumers&rdquo; of course; these are general concepts
+
+<ul>
+<li>For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers</li>
+</ul></li>
+</ul></li>
+<li>Include your solution (source code) for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
+
+<ul>
+<li>This is not part of the page-limit for the report of course ;)<br /></li>
+</ul></li>
+</ol>
+
+<p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
+
+<p><center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -2738,19 +2770,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1617103828"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1617103828"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1617103828"></script>
-    <script src="../../js/jquery.sticky.js?1617103828"></script>
-    <script src="../../js/featherlight.min.js?1617103828"></script>
-    <script src="../../js/highlight.pack.js?1617103828"></script>
+    <script src="../../js/clipboard.min.js?1617281037"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1617281037"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1617281037"></script>
+    <script src="../../js/jquery.sticky.js?1617281037"></script>
+    <script src="../../js/featherlight.min.js?1617281037"></script>
+    <script src="../../js/highlight.pack.js?1617281037"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1617103828"></script>
-    <script src="../../js/learn.js?1617103828"></script>
-    <script src="../../js/hugo-learn.js?1617103828"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1617281037"></script>
+    <script src="../../js/learn.js?1617281037"></script>
+    <script src="../../js/hugo-learn.js?1617281037"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1617103828"></script>
+            <script src="../../mermaid/mermaid.js?1617281037"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

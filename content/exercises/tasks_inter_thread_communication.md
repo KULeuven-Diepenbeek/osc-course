@@ -4,23 +4,42 @@ pre: "<i class='fas fa-pen-square'></i> "
 weight: 3
 ---
 
+Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it's still not always trivial to know *how to apply them to a specific problem*. Even for the well-known producer-consumer problem, several different setups are possible. 
 
-* Analyse exercise 6_4_3.c (shown below) and write a report (2-3 pages):
-  1. describe what the program does (in general, not line-by-line)
-  2. make a line chart that plots 'the elapsed real time' the program consumes (y-axis) in function of 'the number of threads that are contributing' (x-axis)
-      * for this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete
-      * Note:
+This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a "single right answer" and/or are a bit vague: that is intentional. 
+
+Analyse the code below and write a report (3-4 pages):
+
+1. Describe what the program does (in general, not line-by-line)
+2. Note that this program does something similar to the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
+    * However, it is fundamentally different in how it divides the responsibilities between producers and consumers.
+    * Explain this difference in detail. 
+    * Discuss which of both approaches you think is probably more realistic / more likely to occur in practice.
+3. Make a line chart that plots 'the elapsed real time' the program consumes (y-axis) in function of 'the number of threads that are contributing' (x-axis)
+    * For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete
+    * Note:
         * the scale on the X-axis goes from 2 to 300
         * at least 8 data points should be present in the chart
         * you can use any charting program for this (for example excel or google sheets)
         * **TIP** use the command [*time*](https://linux.die.net/man/1/time)
-  3. interpret the chart and draw conclusions
-  4. explain what you think would happen if you would create more than one producer thread (with MAX_COUNT divided between the threads)
-  5. actually extend the program so it runs more than one producer thread
-      * Note: ```sem_trywait``` can be used to good effect here
-  6. compare the actual outcome with your hypothesis from step 4 and explain why this happens
+        * **NOTE** printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.
+3. Interpret the chart and draw conclusions
+4. Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
+    * Would the program run faster or slower? Why? 
+    * Does it make sense to use multiple *producer* threads with this setup? Why (not)?
+    * Does it make sense to use multiple *consumer* threads with this setup? Why (not)?
+    * Answer both questions for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm) as well
+    * For a different problem, how would you decide how many producer and consumer threads you would need? 
+5. The producer-consumer problem comes up in many other settings as well
+    * Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs
+    * Note: there aren't always literal "producers" or "consumers" of course; these are general concepts
+        * For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers
+6. Include your solution (source code) for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
+    * This is not part of the page-limit for the report of course ;)  
 
-<center>**hand in the report and the extended source code via toledo**</center>
+**Note that, like all other tasks, this is an individual assignment!**
+
+<center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center>
 
 ```C
 #include <stdio.h>

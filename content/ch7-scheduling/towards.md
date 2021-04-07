@@ -126,14 +126,14 @@ Answer these questions:
 1. How many context switches are there in each scenario?
 2. Which scenario is more efficient? Why? 
 
-<div class="solution" id="div_q721" style="visibility: hidden">
+<div class="solution" id="div_q721_v2" style="visibility: hidden">
     <figure>
-    <a href="/img/sched/context_switching.png" data-featherlight="image"><img src="../../img/sched/context_switching.png" id="img_q721"></a>
+    <a href="/img/sched/context_switching.png" data-featherlight="image"><img src="../../img/sched/context_switching.png" id="img_q721_v2"></a>
     <figcaption><h4>Comparison between two time slices</h4></figcaption>
     </figure>
 </div>
 
-<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721')"/>
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721_v2')"/>
 
 {{% /task %}}
 

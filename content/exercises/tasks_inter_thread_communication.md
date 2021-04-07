@@ -23,6 +23,7 @@ Analyse the code below and write a report (3-4 pages):
         * you can use any charting program for this (for example excel or google sheets)
         * **TIP** use the command [*time*](https://linux.die.net/man/1/time)
         * **NOTE** printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.
+        * **NOTE** it's best to execute each measurement a few times and on an unloaded system to get consistent results
 3. Interpret the chart and draw conclusions
 4. Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
     * Would the program run faster or slower? Why? 

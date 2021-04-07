@@ -104,7 +104,7 @@ There are 2 user jobs: X and Y. X is running on the processor while Y is in the 
 Let's illustrate this with an example:
 
 - There are two I/O-bound tasks. Both run for 1ms, in which they update state and then wait/yield for more input.
-    - Input becomes available after 3ms of *wait* time
+    - Input becomes available after 4ms of *wait* time (starts when the task yields)
     - Both tasks do three rounds of this (wait for input 3 times in total)
 - There is one CPU-bound task that runs a total of 10ms without yielding
 - All three tasks start at 0s
@@ -125,6 +125,15 @@ Answer these questions:
 
 1. How many context switches are there in each scenario?
 2. Which scenario is more efficient? Why? 
+
+<div class="solution" id="div_q721" style="visibility: hidden">
+    <figure>
+    <a href="/img/sched/context_switching.png" data-featherlight="image"><img src="../../img/sched/context_switching.png" id="img_q721"></a>
+    <figcaption><h4>Comparison between two time slices</h4></figcaption>
+    </figure>
+</div>
+
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721')"/>
 
 {{% /task %}}
 

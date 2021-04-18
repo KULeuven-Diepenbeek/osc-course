@@ -12,21 +12,21 @@
     <title>8.3: Different Scopes in C :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1617802688" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1617802688" rel="stylesheet">
-    <link href="../../css/hybrid.css?1617802688" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1617802688" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1617802688" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1617802688" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1617802688" rel="stylesheet">
-    <link href="../../css/theme.css?1617802688" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1617802688" rel="stylesheet">
+    <link href="../../css/nucleus.css?1618770409" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1618770409" rel="stylesheet">
+    <link href="../../css/hybrid.css?1618770409" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1618770409" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1618770409" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1618770409" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1618770409" rel="stylesheet">
+    <link href="../../css/theme.css?1618770409" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1618770409" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1617802688" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1618770409" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1617802688"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1618770409"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1617802688"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1617802688"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1618770409"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1618770409"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1617802688"></script>
+<script type="text/javascript" src="../../js/search.js?1618770409"></script>
 
     
   </div>
@@ -1656,7 +1656,23 @@ scoping.c:9:5: error: use of undeclared identifier 'age'
 
 <p>Nothing shocking there. Identifiers are <strong>undeclared</strong> when they are not present in <strong>the program stack</strong>.</p>
 
-<p>As a side note referenced from <a href="https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html">here</a>, there is a way to tell C to keep a stack variable around, even after its creator function exits, and that is to use the <code>static</code> keyword when declaring the variable. A variable declared with the static keyword thus becomes something like a global variable, but one that is only visible inside the function that created it. It&rsquo;s a strange construction, one that you probably won&rsquo;t need except under very specific circumstances.</p>
+<p>As a side note referenced from <a href="https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html">here</a>, there is a way to tell C to keep a stack variable around, even after its creator function exits, and that is to use the <code>static</code> keyword when declaring the variable. A variable declared with the static keyword thus becomes something like a global variable, but one that is only visible inside the function that created it.</p>
+
+<p>For instance:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i;
+<span style="color:#66d9ef">int</span> j;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#75715e">// do something!
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div>
+<p>We say that <code>i</code> is <strong>not</strong> visible outside the module, while <code>j</code> <strong>is</strong> visible. Again: adding <code>static</code> <em>reduces</em> visibility, it does not enhance it!</p>
+
+<ul>
+<li><code>i</code> has what is called <em>internal linkage</em>. You cannot use the name <code>i</code> again for variables or functions in any other source files.</li>
+<li><code>j</code> has what is called <em>external linkage</em>. You can still use <code>j</code> from other compilesets using the keyword <code>extern</code>, like this: <code>extern int j;</code></li>
+</ul>
+
+<p>The keyword <code>extern</code> is used to declare a C variable without defining it. You&rsquo;re telling the compiler &ldquo;all right, I&rsquo;ve got this variable x, but it&rsquo;s defined somewhere else, ok?&rdquo;. Thus, it extends the visibility of the variable (or function). It&rsquo;s a strange construction, one that you probably won&rsquo;t need except under very specific circumstances.</p>
 
 <h4 id="global-variables">Global variables</h4>
 
@@ -2714,19 +2730,19 @@ scoping.c:9:5: error: use of undeclared identifier 'age'
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1617802688"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1617802688"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1617802688"></script>
-    <script src="../../js/jquery.sticky.js?1617802688"></script>
-    <script src="../../js/featherlight.min.js?1617802688"></script>
-    <script src="../../js/highlight.pack.js?1617802688"></script>
+    <script src="../../js/clipboard.min.js?1618770409"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1618770409"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1618770409"></script>
+    <script src="../../js/jquery.sticky.js?1618770409"></script>
+    <script src="../../js/featherlight.min.js?1618770409"></script>
+    <script src="../../js/highlight.pack.js?1618770409"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1617802688"></script>
-    <script src="../../js/learn.js?1617802688"></script>
-    <script src="../../js/hugo-learn.js?1617802688"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1618770409"></script>
+    <script src="../../js/learn.js?1618770409"></script>
+    <script src="../../js/hugo-learn.js?1618770409"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1617802688"></script>
+            <script src="../../mermaid/mermaid.js?1618770409"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

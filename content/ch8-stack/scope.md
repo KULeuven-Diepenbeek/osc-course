@@ -42,7 +42,25 @@ scoping.c:9:5: error: use of undeclared identifier 'age'
 
 Nothing shocking there. Identifiers are **undeclared** when they are not present in **the program stack**. 
 
-As a side note referenced from [here](https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html), there is a way to tell C to keep a stack variable around, even after its creator function exits, and that is to use the `static` keyword when declaring the variable. A variable declared with the static keyword thus becomes something like a global variable, but one that is only visible inside the function that created it. It's a strange construction, one that you probably won't need except under very specific circumstances.
+As a side note referenced from [here](https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html), there is a way to tell C to keep a stack variable around, even after its creator function exits, and that is to use the `static` keyword when declaring the variable. A variable declared with the static keyword thus becomes something like a global variable, but one that is only visible inside the function that created it. 
+
+For instance:
+
+```c
+static int i;
+int j;
+int main() {
+    // do something!
+    return 0;
+}
+```
+
+We say that `i` is **not** visible outside the module, while `j` **is** visible. Again: adding `static` _reduces_ visibility, it does not enhance it! 
+
+- `i` has what is called _internal linkage_. You cannot use the name `i` again for variables or functions in any other source files.
+- `j` has what is called _external linkage_. You can still use `j` from other compilesets using the keyword `extern`, like this: `extern int j;`
+
+The keyword `extern` is used to declare a C variable without defining it. You're telling the compiler "all right, I've got this variable x, but it's defined somewhere else, ok?". Thus, it extends the visibility of the variable (or function). It's a strange construction, one that you probably won't need except under very specific circumstances.
 
 #### Global variables
 

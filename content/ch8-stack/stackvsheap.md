@@ -20,7 +20,7 @@ weight: 1
             </li>
             <li>
                 <strong>data</strong><br/>
-                Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. 
+                Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. See <a href="/ch8-stack/scope/">Section 8.3</a>.
             </li>
             <li>
                 <strong>bss</strong><br/>
@@ -46,7 +46,7 @@ weight: 1
 
 Besides (automatic) variables, a few more important things also live in the stack section of the program. These are the **stack pointer** (SP) and the 'program stack' itself. 
 
-Contrary to initialized pointers, arrays within functions are also bound to the stack, such as `char line[512];`.
+Contrary to initialized pointers, **statically sized** arrays within functions are also bound to the stack, such as `char line[512];`. This is an important distinction, since those same arrays are translated into pointers when passing through functions! You can easily remember the difference by looking at the size: if it's `var[XX]`, then it's a stack variable - even if XX is not a literal but a computed value. 
 
 ### The Heap
 
@@ -164,6 +164,39 @@ a.out(83471,0x7fff7e136000) malloc: *** error for object 0x7fff5a24046c: pointer
 Abort trap: 6    
 </pre>
 
+{{% task %}}
+Let's try and write a program that gradually increases heap memory consumption by `malloc()`-ing inside a never-ending loop. For brevity, add `sleep(1)` in-between calls (include from `#include <unistd.h>`). Can you see this in increase in your task manager?
+{{% /task %}}
+
+Some operating systems provide easy to use sampling tools, such as MacOS' sampler. Go to Activity Monitor, rightclick on a process and choose "sample". The above task outputs:
+
+<pre>
+Date/Time:       2021-04-18 20:18:48.499 +0200
+Launch Time:     2021-04-18 20:18:22.379 +0200
+OS Version:      macOS 11.2 (20D5042d)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         977K
+Physical footprint (peak):  977K
+----
+
+Call graph:
+    2891 Thread_357865   DispatchQueue_1: com.apple.main-thread  (serial)
+      2891 start  (in libdyld.dylib) + 4  [0x1a2999f34]
+        2891 main  (in a.out) + 24  [0x10445bf08]
+          2891 sleep  (in libsystem_c.dylib) + 48  [0x1a28c2184]
+            2891 nanosleep  (in libsystem_c.dylib) + 216  [0x1a28c23a0]
+              2891 __semwait_signal  (in libsystem_kernel.dylib) + 8,16  [0x1a2948284,0x1a294828c]
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+        __semwait_signal  (in libsystem_kernel.dylib)        2891
+</pre>
+
+The stack sample is clearly visible, but the heap is not. 
+
 ### Dangling pointers
 
 A second mistake could be that things _are_ indeed being freed, but pointers still refer to the freed up space, which is now being rendered invalid. This is called a **dangling pointer**, and can happen both on the heap (while _dereferencing_ an invalid pointer after freeing up space):
@@ -243,9 +276,9 @@ int main() {
 }
 ```
 
-This causes a _segmentation fault_ on my OSX machine, signaling that it was killed by the OS. Add `printf()` statements to your liking. 
+This causes a _segmentation fault_, signaling that it was killed by the OS. Add `printf()` statements to your liking. 
 
-How do I know how big the stack can be on my OS? Use `ulimit -a` to find out:
+How do I know how big the stack can be on my OS? Use `ulimit -a` to find out: (Executed on a 2012 MacBbook Air)
 
 <pre>
 outers-MacBook-Air:ch8-stack wgroeneveld$ ulimit -a
@@ -263,6 +296,28 @@ virtual memory          (kbytes, -v) unlimited
 </pre>
 
 So it's **8.19 MB**. 
+
+Interestingly, the same command outputs something radically different on a 2021 MacBook Air with an ARM64 chipset:
+
+<pre>
+➜  osc-course git:(master) ✗ ulimit -a
+-t: cpu time (seconds)              unlimited
+-f: file size (blocks)              unlimited
+-d: data seg size (kbytes)          unlimited
+-s: stack size (kbytes)             8176
+-c: core file size (blocks)         0
+-v: address space (kbytes)          unlimited
+-l: locked-in-memory size (kbytes)  unlimited
+-u: processes                       1333
+-n: file descriptors                256
+</pre>
+
+Although the stack size stays more or less the same, the max processes number dramatically increased. Yay for technological advances!
+
+{{% task %}}
+Check your stack limit with `ulimit`. Write a program that blows up the stack using statically sized arrays by defining more than the applied limit. Which data type did you pick? How big is your array? Why?
+{{% /task %}}
+
 
 ## Optimizing C code
 

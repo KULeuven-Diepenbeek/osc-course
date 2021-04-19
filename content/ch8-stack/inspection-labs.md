@@ -41,6 +41,10 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 
 No `[heap]` region allocated yet. Let's do the same, but use `malloc()` to allocate a random block of memory. The return value of the method is a `void*` that can be printed to show the address of the heap region. Use `printf("%p", p)`.
 
+{{% notice warning %}}
+Peeking into the files in `/proc`, we can sometimes see the heap block not moving _at all_. It turns out that this is [completely OS-dependant](https://stackoverflow.com/questions/19991623/why-is-malloc-not-using-up-the-memory-on-my-computer#:~:text=3%20Answers&text=malloc()%20does%20not%20use,It%20allocates%20it.&text=Some%20platforms%20implement%20malloc(),%22%20of%20bytes)%20is%20accessed). Try to use `calloc()` instead and see what happens!
+{{% /notice %}}
+
 ## 2. malloc: use heap
 
 {{% task %}}

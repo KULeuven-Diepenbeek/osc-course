@@ -12,21 +12,21 @@
     <title>8.2: Inspecting memory regions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1618770409" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1618770409" rel="stylesheet">
-    <link href="../../css/hybrid.css?1618770409" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1618770409" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1618770409" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1618770409" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1618770409" rel="stylesheet">
-    <link href="../../css/theme.css?1618770409" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1618770409" rel="stylesheet">
+    <link href="../../css/nucleus.css?1618847767" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1618847767" rel="stylesheet">
+    <link href="../../css/hybrid.css?1618847767" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1618847767" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1618847767" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1618847767" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1618847767" rel="stylesheet">
+    <link href="../../css/theme.css?1618847767" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1618847767" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1618770409" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1618847767" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1618770409"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1618847767"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1618770409"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1618770409"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1618847767"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1618847767"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1618770409"></script>
+<script type="text/javascript" src="../../js/search.js?1618847767"></script>
 
     
   </div>
@@ -1657,6 +1657,11 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 
 <p>No <code>[heap]</code> region allocated yet. Let&rsquo;s do the same, but use <code>malloc()</code> to allocate a random block of memory. The return value of the method is a <code>void*</code> that can be printed to show the address of the heap region. Use <code>printf(&quot;%p&quot;, p)</code>.</p>
 
+
+<div class="notices warning" ><p>Peeking into the files in <code>/proc</code>, we can sometimes see the heap block not moving <em>at all</em>. It turns out that this is <a href="https://stackoverflow.com/questions/19991623/why-is-malloc-not-using-up-the-memory-on-my-computer#:~:text=3%20Answers&amp;text=malloc()%20does%20not%20use,It%20allocates%20it.&amp;text=Some%20platforms%20implement%20malloc(),%22%20of%20bytes">completely OS-dependant</a>%20is%20accessed). Try to use <code>calloc()</code> instead and see what happens!</p>
+</div>
+
+
 <h2 id="2-malloc-use-heap">2. malloc: use heap</h2>
 
 
@@ -2799,19 +2804,19 @@ warning: no debug symbols in executable (-arch x86_64)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1618770409"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1618770409"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1618770409"></script>
-    <script src="../../js/jquery.sticky.js?1618770409"></script>
-    <script src="../../js/featherlight.min.js?1618770409"></script>
-    <script src="../../js/highlight.pack.js?1618770409"></script>
+    <script src="../../js/clipboard.min.js?1618847767"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1618847767"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1618847767"></script>
+    <script src="../../js/jquery.sticky.js?1618847767"></script>
+    <script src="../../js/featherlight.min.js?1618847767"></script>
+    <script src="../../js/highlight.pack.js?1618847767"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1618770409"></script>
-    <script src="../../js/learn.js?1618770409"></script>
-    <script src="../../js/hugo-learn.js?1618770409"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1618847767"></script>
+    <script src="../../js/learn.js?1618847767"></script>
+    <script src="../../js/hugo-learn.js?1618847767"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1618770409"></script>
+            <script src="../../mermaid/mermaid.js?1618847767"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -14,8 +14,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</guid>
-      <description>At multiple times we referred to the registers in processor. These 16 (or at least in that order of magnitude) registers don&amp;rsquo;t suffice to run the complex tasks that are running on our devices. More space is needed !!!
-What good is additional space is you can&amp;rsquo;t access it ? As we do in real life we give every house an address. This provides an unambiguous way of addressing 😉 every single house.</description>
+      <description>In the previous chapters we have many times talked about (RAM) memory and (RAM) memory addresses, as well as specialized memory regions such as the stack and the heap. Up until now, we have pretended as if these concepts mapped directly onto the underlying hardware, but reality is of course a bit more complex. In this chapter, we will consider how physical memory is actually managed by the OS and the CPU.</description>
     </item>
     
     <item>

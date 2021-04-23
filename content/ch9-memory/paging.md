@@ -136,3 +136,12 @@ So, using pages:
 * requires specialised hardware
 * aids in memory protection
 * lessens the fragmentation and puzzling efforts
+
+
+## Security
+
+TODO: specture, meltdown, cloudbleed
+
+
+{{% figure src="/img/mem/ss_mem_meltdown_spectre.png" title="Meltdown and Spectre - Two attacks that got access to other process's memory." %}}
+Some computer hackers try the most insane techniques to get access to another process's memory. Exactly this has recently been shown in the Meltdown and Spectre attacks. 

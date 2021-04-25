@@ -17,13 +17,13 @@ draft: true
 * Week 5: 15/03, 16/03: 1.5h + 3h
   * 1.5h: **ch5** Intro to OS - Robin
   * 3h: **ch6** Processes - Robin
-  * announcement of second exercise (deadline: TBD)
+  * announcement of second exercise (deadline: 1 April 9AM)
 
 * Week 6: 22/03: 1.5h + 3h
   * **ch6** Threads - Robin
 * Week 7: 29/03, 30/03: 1.5h + 3h
   * **ch7** CPU scheduling - Robin
-  * announcement of third exercise (deadline: TBD)
+  * announcement of third exercise (deadline: 29 April 9AM)
 
 * Week 8 : Easter holidays
 * Week 9 : Easter holidays
@@ -33,13 +33,13 @@ draft: true
 
 * Week 11: 26/04, 27/04: 1.5h + 3h
   * **ch9** Memory Management - Robin
-  * announcement of the fourth exercise (deadline: TBD)
+  * announcement of the fourth exercise (deadline: 17 May 9AM)
 
 * Week 12: 03/05: 1.5h + 3h 
-  * Capita Selecta
+  * **Capita Selecta** - Robin
 
 * Week 13: 10/05, 11/05: 1.5h + 3h 
-  * Capita Selecta
+  * **Threads**: group discussion of solutions to producer/consumer problems and exercise 3 ("responsiecollege") - Robin
 
 * Week 14: 17/05: 1.5h + 3h 
-  * Capita Selecta
+  * No class

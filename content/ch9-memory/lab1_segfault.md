@@ -6,10 +6,79 @@ weight: 2
 
 {{<figure src="https://imgs.xkcd.com/comics/compiler_complaint.png" title="source: xkcd.com">}}
 
+## Segfault this
+
+* For each of the programs below:
+    * 1) Guess first if they will give a segmentation fault and where exactly and **why**
+    * 2) Compile and execute them
+    * 3) Were your guesses in the first step correct or not? Why (not)?
+
+```C
+#include <stdio.h>
+
+int main(void) {
+
+    int* i = NULL;
+    *(i) = 666;
+
+	return 0;
+}
+```
+
+```C
+#include <stdio.h>
+
+int main(void) {
+
+    int i = 666;
+    *(&i - 10000) = 777;
+
+	return 0;
+}
+```
+
+```C
+#include <stdio.h>
+
+int main(void) {
+
+    int i = 666;
+    *(&i + 10000) = 777;
+
+	return 0;
+}
+```
+* Try and change the number "10000" to higher and lower numbers in the previous two code samples to help make sense of what's happening.
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+
+    int *i = (int *) malloc(26 * sizeof(int));
+    
+    *i = 20;
+    
+    *(i + 27) = 30;
+    
+    free(i);
+    
+    *i = 40;
+
+	return 0;
+}
+```
+* Try and change the number "100" to "26" and the number "101" to "27" and run the program again. Do you get the same results? 
 
 ## <s>X</s> A to the Z
 
-* Run the program below and verify that it runs without errors
+As we've seen in the previous exercises, segmentation faults don't always happen when we expect them to.
+Let's explore this a bit deeper here. 
+
+* Again, first guess if the program below will give a segmentation fault or not (and why!)
+* Compile and run the program and verify your guess
+
 ```C
 #include <stdio.h>
 
@@ -32,6 +101,10 @@ int main(void) {
 }
 ```
 
-* Recompile the code above, but verify that you have the ```-0s``` option added. This compiler flag sets the optimisation towards size. What do you learn ?
+* Now, recompile the code above, but verify that you have the ```-0s``` option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference? 
 
-* Increase the **WRITE_SIZE** to 27. Compile and run again. Any errors ? If so, what type of error could this be ?
+* Now increase the **WRITE_SIZE** to 27. Compile and run again, with and without the ```-0s``` option. Any errors? If so, what type of error could this be?
+
+* Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here? 
+
+* Do some research online until you can explain what a "stack canary" is and why it's useful. 

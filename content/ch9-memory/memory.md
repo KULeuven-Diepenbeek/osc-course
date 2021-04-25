@@ -68,7 +68,7 @@ We can see that with chunking, the address space for a certain program can (and 
 
 As such, this memory mapping needs to be done at **load time**, when the OS takes a program and turns it into a process instance. However, for the compiler to generate assembly instructions, it still needs to know the addresses of the variables/functions, as we've said above! It seems we have a contradiction here...
 
-The way this is solved, is by having the compiler generate **relative/logical/virtual addresses**. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be increment with the process chunk's **base address** to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address). 
+The way this is solved, is by having the compiler generate **relative/logical/virtual addresses**. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be incremented with the process chunk's **base address** to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address). 
 
 As such, we can see that we have **two different address spaces**: the logical/virtual address space (always starting at 0x0 for each process) and the physical address space (where each process starts at a different offset). 
 
@@ -81,15 +81,19 @@ In practice, this can even be done in hardware outside of the CPU, where a separ
 
 Chunking and load-time address binding works, but it has some downsides. For example, we would need to know all the variables/functions that will be used at load time. While we know more about them than at compile time (as the link step is done now), we often still don't know everything yet. This is for example the case when using dynamically loaded external software libraries (so-called "dynamically linked libraries" or DLLs), which is something you typically do want to enable broad code re-use. These DLLs can be loaded **during the execution of a process** as needed, which is later than the load time we've considered. 
 
-A more important downside of chunking however is that **we would have to assign a fixed-size chunk to each process**. This isn't so much a problem for text/data/bss/stack, but more for the heap. We don't really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you'll use less memory, sometimes more). You can't also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. 
+A more important downside of chunking however is that **we would have to assign a fixed-size chunk to each process**. This isn't so much a problem for text/data/bss/stack, but more for the heap. We don't really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you'll use less memory, sometimes more). You can't also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. As such, you would again have to rely on the programmer to somehow give an indication of program size, or for example learn it from previous executions of the program. 
+
+Finally, there is the problem of **external segmentation**. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are **not always large enough to entirely fit a newly started program**! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called "external" fragmentation, as the fragmentation happens *outside of the space allocated to processes*. We will discuss internal fragmentation later. 
+
+{{% figure src="/img/mem/external_fragmentation.png" title="External fragmentation with chunking" %}}
 
 It is clear we need a more advanced setup in practice. 
 
 ## Segmentation
 
-The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead **reserve several, smaller chunks (called segments)**. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap. 
+Segmentation is a more flexible way than chunking of loading processes into memory. The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead **reserve several, smaller chunks (called segments)**. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap. 
 
-This nicely solves the problems of chunking: we can now create additional segments when loading new libraries/DLLs at runtime and we don't need to reserve huge amounts of memory for each process up-front: we can just add (and remove!) segments as needed! 
+This nicely solves the problems of chunking: we can now appropriately size segments when loading new libraries/DLLs at runtime and we don't need to reserve huge amounts of memory for each process up-front: we can just add (and remove!) segments as needed! 
 
 Additionally, it provides us with extra benefits, such as the fact that the **segments for a single process no longer need to be in contiguous memory blocks!**. This is illustrated by the images below:
 
@@ -103,30 +107,32 @@ Additionally, it provides us with extra benefits, such as the fact that the **se
   </div>
 </div>
 
-This is a very important characteristic, as it helps deal with so-called **external fragmentation** (up to a certain point). As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are **not always large enough to entirely fit a newly started program**! As such, non-contiguous segmentation allows the new program to use several smaller gaps instead!
+This is a very important characteristic, as it helps deal with the aforementioned **external fragmentation** (at least up to a certain point). Even though the full process cannot fit in any given gap, its individual segments can be distributed across several gaps as needed. 
 
-TODO: external fragmentation example image!
-
+{{% figure src="/img/mem/external_fragmentation_2.png" title="External fragmentation is partially solved with segmentation" %}}
 
 ### Address Binding
 
-Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but much more dynamically at **execution time**: segments can be created (or removed) and placed as-needed by the OS. The compiler however can of course still just use a logical address space that -is- contiguous: that makes it much easier for us to reason about programs and even assembly, as we don't need to worry about the segmentation specifics.
+Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but also much more dynamically at **execution time**: segments can be created (or removed) and placed as-needed by the OS.
 
 However, placing multiple segments at various locations in the physical memory does mean it now becomes more difficult to find the correct physical address given a logical/virtual address. A single relocation register is no longer enough (as we also no longer have a simple base address). Instead, we need a **segment table** that tracks the different segments and where exactly they can be found in physical memory. So, instead of having a single base address and a chunk limit, each individual segment has its own base address and limit offset, all of which are stored in the segment table. Again, for performance reasons this is often done in the separate MMU chip, which might look a bit like this: 
 
 {{% figure src="/img/mem/ss_mem_segmhw.png" title="Segmentation hardware" %}}
-
 {{% dinobook %}}
 
-The logical address that the programmer sees (which is generated by the compiler) now *secretly* consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an address in the segment table. Through this table the base address of the segment can be found. The offset number (d) will be used to define an offset within this segment and is simply added to the base address to get the final, physical address. 
 
-If the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.
+This also means that we no longer have a single contiguous logical/virtual address space, but instead multiple smaller ones (one for each segment). In practice, we can still represent addresses with a single number however, which  *secretly* consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an index into the segment table. The value at that index indicates the base address of that segment. The offset number (d) will be used to define an offset within this segment and is simply added to the base address to get the final, physical address. 
+
+As with chunking, if the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.
 
 {{% task %}}
 What, *oh what*, could be the name of the error that the OS produces if the sum of the base address and the offset does **not** fall within the segment limit ?
 {{% /task %}}
 
-### Problems with Segmenation
+### Problems with Segmentation
 
-TODO: external fragmentation
-TODO: overhead of tracking segment sizes and checking limits
+While segmentation already improves a lot on chunking, it still suffers from a few problems. 
+
+In practice, external segmentation can still easily occur in modern systems with hundreds of running processes. This is because the **individual segments are not equally sized**, and gaps (created by removed/stopped segments) can thus easily be smaller than what is needed for a given segment. As such, the OS needs to keep track of **a list of open gaps and their size**. Every time a process needs memory for a segment, the OS would need to **loop over the entire gap list** to determine the most appropriate one, a list which can get very long quite quickly. This overhead can get quite substantial in practice. The OS could instead optimize and look for a "good enough" gap, but this in practice only worsens external fragmentation. Other techniques can be considered, such as compaction: this would "shift" segments of running processes together in memory to fill smaller gaps, making larger gaps available. While possible, this can get highly complex, as the logical addresses would also have to be re-generated. 
+
+As such, even segmentation isn't our "final solution" to this problem. But before we discuss the real deal, let's do some exercises. 

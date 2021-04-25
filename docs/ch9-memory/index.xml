@@ -23,8 +23,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</guid>
-      <description>source: xkcd.com   X A to the Z  Run the program below and verify that it runs without errors
-#include &amp;lt;stdio.h&amp;gt; #define WRITE_SIZE 26 #define READ_SIZE 27  int main(void) { int i; unsigned char alphabet[26]; for(i=0;i&amp;lt;WRITE_SIZE;i++) { alphabet[i] = 65 + i; } for(i=0;i&amp;lt;READ_SIZE;i++) { printf(&amp;#34;%2d -&amp;gt; %c (%02x)\n&amp;#34;, i, alphabet[i], alphabet[i]); } return 0; } Recompile the code above, but verify that you have the -0s option added.</description>
+      <description>source: xkcd.com   Segfault this  For each of the programs below:
+ 1) Guess first if they will give a segmentation fault and where exactly and why 2) Compile and execute them 3) Were your guesses in the first step correct or not? Why (not)?
+#include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; }#include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; }#include &amp;lt;stdio.</description>
     </item>
     
     <item>

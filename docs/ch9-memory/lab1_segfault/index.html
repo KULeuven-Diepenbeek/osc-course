@@ -12,21 +12,21 @@
     <title>9.2: Deliberate Segfaulting :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1619199084" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619199084" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619199084" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619199084" rel="stylesheet">
-    <link href="../../css/theme.css?1619199084" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619199084" rel="stylesheet">
+    <link href="../../css/nucleus.css?1619349262" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/hybrid.css?1619349262" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1619349262" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1619349262" rel="stylesheet">
+    <link href="../../css/theme.css?1619349262" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1619349262" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619199084" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1619349262" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619199084"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1619349262"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619199084"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619199084"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1619349262"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1619349262"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619199084"></script>
+<script type="text/javascript" src="../../js/search.js?1619349262"></script>
 
     
   </div>
@@ -1583,6 +1583,7 @@ window.MathJax = {
 <ul>
 <li>
 <ul>
+<li><a href="#segfault-this">Segfault this</a></li>
 <li><a href="#s-x-s-a-to-the-z"><s>X</s> A to the Z</a></li>
 </ul></li>
 </ul>
@@ -1618,10 +1619,74 @@ window.MathJax = {
 </figure>
 
 
-<h2 id="s-x-s-a-to-the-z"><s>X</s> A to the Z</h2>
+<h2 id="segfault-this">Segfault this</h2>
 
 <ul>
-<li><p>Run the program below and verify that it runs without errors</p>
+<li><p>For each of the programs below:</p>
+
+<ul>
+<li>1) Guess first if they will give a segmentation fault and where exactly and <strong>why</strong></li>
+<li>2) Compile and execute them</li>
+
+<li><p>3) Were your guesses in the first step correct or not? Why (not)?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+
+<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> i <span style="color:#f92672">=</span> NULL;
+<span style="color:#f92672">*</span>(i) <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
+<span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>i <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span>;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+
+<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
+<span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>i <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span>;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div></li>
+</ul></li>
+
+<li><p>Try and change the number &ldquo;10000&rdquo; to higher and lower numbers in the previous two code samples to help make sense of what&rsquo;s happening.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+
+<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) malloc(<span style="color:#ae81ff">26</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+    
+<span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    
+<span style="color:#f92672">*</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">27</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+    
+free(i);
+    
+<span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>;
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}</code></pre></div></li>
+
+<li><p>Try and change the number &ldquo;100&rdquo; to &ldquo;26&rdquo; and the number &ldquo;101&rdquo; to &ldquo;27&rdquo; and run the program again. Do you get the same results?</p></li>
+</ul>
+
+<h2 id="s-x-s-a-to-the-z"><s>X</s> A to the Z</h2>
+
+<p>As we&rsquo;ve seen in the previous exercises, segmentation faults don&rsquo;t always happen when we expect them to.
+Let&rsquo;s explore this a bit deeper here.</p>
+
+<ul>
+<li>Again, first guess if the program below will give a segmentation fault or not (and why!)</li>
+
+<li><p>Compile and run the program and verify your guess</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">#define WRITE_SIZE 26
@@ -1642,9 +1707,13 @@ window.MathJax = {
 	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }</code></pre></div></li>
 
-<li><p>Recompile the code above, but verify that you have the <code>-0s</code> option added. This compiler flag sets the optimisation towards size. What do you learn ?</p></li>
+<li><p>Now, recompile the code above, but verify that you have the <code>-0s</code> option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference?</p></li>
 
-<li><p>Increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again. Any errors ? If so, what type of error could this be ?</p></li>
+<li><p>Now increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again, with and without the <code>-0s</code> option. Any errors? If so, what type of error could this be?</p></li>
+
+<li><p>Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here?</p></li>
+
+<li><p>Do some research online until you can explain what a &ldquo;stack canary&rdquo; is and why it&rsquo;s useful.</p></li>
 </ul>
 
 
@@ -2655,19 +2724,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619199084"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619199084"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619199084"></script>
-    <script src="../../js/jquery.sticky.js?1619199084"></script>
-    <script src="../../js/featherlight.min.js?1619199084"></script>
-    <script src="../../js/highlight.pack.js?1619199084"></script>
+    <script src="../../js/clipboard.min.js?1619349262"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1619349262"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1619349262"></script>
+    <script src="../../js/jquery.sticky.js?1619349262"></script>
+    <script src="../../js/featherlight.min.js?1619349262"></script>
+    <script src="../../js/highlight.pack.js?1619349262"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619199084"></script>
-    <script src="../../js/learn.js?1619199084"></script>
-    <script src="../../js/hugo-learn.js?1619199084"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1619349262"></script>
+    <script src="../../js/learn.js?1619349262"></script>
+    <script src="../../js/hugo-learn.js?1619349262"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619199084"></script>
+            <script src="../../mermaid/mermaid.js?1619349262"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

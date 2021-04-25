@@ -12,21 +12,21 @@
     <title>9.1: Memory management :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1619199084" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619199084" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619199084" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619199084" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619199084" rel="stylesheet">
-    <link href="../../css/theme.css?1619199084" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619199084" rel="stylesheet">
+    <link href="../../css/nucleus.css?1619349262" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/hybrid.css?1619349262" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1619349262" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1619349262" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1619349262" rel="stylesheet">
+    <link href="../../css/theme.css?1619349262" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1619349262" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619199084" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1619349262" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619199084"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1619349262"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619199084"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619199084"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1619349262"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1619349262"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619199084"></script>
+<script type="text/javascript" src="../../js/search.js?1619349262"></script>
 
     
   </div>
@@ -1592,7 +1592,7 @@ window.MathJax = {
 <li><a href="#segmentation">Segmentation</a>
 <ul>
 <li><a href="#address-binding-1">Address Binding</a></li>
-<li><a href="#problems-with-segmenation">Problems with Segmenation</a></li>
+<li><a href="#problems-with-segmentation">Problems with Segmentation</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1696,7 +1696,7 @@ window.MathJax = {
 
 <p>As such, this memory mapping needs to be done at <strong>load time</strong>, when the OS takes a program and turns it into a process instance. However, for the compiler to generate assembly instructions, it still needs to know the addresses of the variables/functions, as we&rsquo;ve said above! It seems we have a contradiction here&hellip;</p>
 
-<p>The way this is solved, is by having the compiler generate <strong>relative/logical/virtual addresses</strong>. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be increment with the process chunk&rsquo;s <strong>base address</strong> to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address).</p>
+<p>The way this is solved, is by having the compiler generate <strong>relative/logical/virtual addresses</strong>. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be incremented with the process chunk&rsquo;s <strong>base address</strong> to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address).</p>
 
 <p>As such, we can see that we have <strong>two different address spaces</strong>: the logical/virtual address space (always starting at 0x0 for each process) and the physical address space (where each process starts at a different offset).</p>
 
@@ -1725,15 +1725,23 @@ window.MathJax = {
 
 <p>Chunking and load-time address binding works, but it has some downsides. For example, we would need to know all the variables/functions that will be used at load time. While we know more about them than at compile time (as the link step is done now), we often still don&rsquo;t know everything yet. This is for example the case when using dynamically loaded external software libraries (so-called &ldquo;dynamically linked libraries&rdquo; or DLLs), which is something you typically do want to enable broad code re-use. These DLLs can be loaded <strong>during the execution of a process</strong> as needed, which is later than the load time we&rsquo;ve considered.</p>
 
-<p>A more important downside of chunking however is that <strong>we would have to assign a fixed-size chunk to each process</strong>. This isn&rsquo;t so much a problem for text/data/bss/stack, but more for the heap. We don&rsquo;t really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you&rsquo;ll use less memory, sometimes more). You can&rsquo;t also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time.</p>
+<p>A more important downside of chunking however is that <strong>we would have to assign a fixed-size chunk to each process</strong>. This isn&rsquo;t so much a problem for text/data/bss/stack, but more for the heap. We don&rsquo;t really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you&rsquo;ll use less memory, sometimes more). You can&rsquo;t also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. As such, you would again have to rely on the programmer to somehow give an indication of program size, or for example learn it from previous executions of the program.</p>
+
+<p>Finally, there is the problem of <strong>external segmentation</strong>. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called &ldquo;external&rdquo; fragmentation, as the fragmentation happens <em>outside of the space allocated to processes</em>. We will discuss internal fragmentation later.</p>
+
+<figure>
+    <img src="../../img/mem/external_fragmentation.png"/> <figcaption>
+            <h4>External fragmentation with chunking</h4>
+        </figcaption>
+</figure>
 
 <p>It is clear we need a more advanced setup in practice.</p>
 
 <h2 id="segmentation">Segmentation</h2>
 
-<p>The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead <strong>reserve several, smaller chunks (called segments)</strong>. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap.</p>
+<p>Segmentation is a more flexible way than chunking of loading processes into memory. The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead <strong>reserve several, smaller chunks (called segments)</strong>. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap.</p>
 
-<p>This nicely solves the problems of chunking: we can now create additional segments when loading new libraries/DLLs at runtime and we don&rsquo;t need to reserve huge amounts of memory for each process up-front: we can just add (and remove!) segments as needed!</p>
+<p>This nicely solves the problems of chunking: we can now appropriately size segments when loading new libraries/DLLs at runtime and we don&rsquo;t need to reserve huge amounts of memory for each process up-front: we can just add (and remove!) segments as needed!</p>
 
 <p>Additionally, it provides us with extra benefits, such as the fact that the <strong>segments for a single process no longer need to be in contiguous memory blocks!</strong>. This is illustrated by the images below:</p>
 
@@ -1757,13 +1765,17 @@ window.MathJax = {
 <p></div>
 </div></p>
 
-<p>This is a very important characteristic, as it helps deal with so-called <strong>external fragmentation</strong> (up to a certain point). As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, non-contiguous segmentation allows the new program to use several smaller gaps instead!</p>
+<p>This is a very important characteristic, as it helps deal with the aforementioned <strong>external fragmentation</strong> (at least up to a certain point). Even though the full process cannot fit in any given gap, its individual segments can be distributed across several gaps as needed.</p>
 
-<p>TODO: external fragmentation example image!</p>
+<figure>
+    <img src="../../img/mem/external_fragmentation_2.png"/> <figcaption>
+            <h4>External fragmentation is partially solved with segmentation</h4>
+        </figcaption>
+</figure>
 
 <h3 id="address-binding-1">Address Binding</h3>
 
-<p>Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but much more dynamically at <strong>execution time</strong>: segments can be created (or removed) and placed as-needed by the OS. The compiler however can of course still just use a logical address space that -is- contiguous: that makes it much easier for us to reason about programs and even assembly, as we don&rsquo;t need to worry about the segmentation specifics.</p>
+<p>Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but also much more dynamically at <strong>execution time</strong>: segments can be created (or removed) and placed as-needed by the OS.</p>
 
 <p>However, placing multiple segments at various locations in the physical memory does mean it now becomes more difficult to find the correct physical address given a logical/virtual address. A single relocation register is no longer enough (as we also no longer have a simple base address). Instead, we need a <strong>segment table</strong> that tracks the different segments and where exactly they can be found in physical memory. So, instead of having a single base address and a chunk limit, each individual segment has its own base address and limit offset, all of which are stored in the segment table. Again, for performance reasons this is often done in the separate MMU chip, which might look a bit like this:</p>
 
@@ -1786,9 +1798,9 @@ window.MathJax = {
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
 
-<p>The logical address that the programmer sees (which is generated by the compiler) now <em>secretly</em> consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an address in the segment table. Through this table the base address of the segment can be found. The offset number (d) will be used to define an offset within this segment and is simply added to the base address to get the final, physical address.</p>
+<p>This also means that we no longer have a single contiguous logical/virtual address space, but instead multiple smaller ones (one for each segment). In practice, we can still represent addresses with a single number however, which  <em>secretly</em> consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an index into the segment table. The value at that index indicates the base address of that segment. The offset number (d) will be used to define an offset within this segment and is simply added to the base address to get the final, physical address.</p>
 
-<p>If the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.</p>
+<p>As with chunking, if the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.</p>
 
 
 <div class="ex">
@@ -1798,10 +1810,13 @@ window.MathJax = {
 	</div>
 </div>
 
-<h3 id="problems-with-segmenation">Problems with Segmenation</h3>
+<h3 id="problems-with-segmentation">Problems with Segmentation</h3>
 
-<p>TODO: external fragmentation
-TODO: overhead of tracking segment sizes and checking limits</p>
+<p>While segmentation already improves a lot on chunking, it still suffers from a few problems.</p>
+
+<p>In practice, external segmentation can still easily occur in modern systems with hundreds of running processes. This is because the <strong>individual segments are not equally sized</strong>, and gaps (created by removed/stopped segments) can thus easily be smaller than what is needed for a given segment. As such, the OS needs to keep track of <strong>a list of open gaps and their size</strong>. Every time a process needs memory for a segment, the OS would need to <strong>loop over the entire gap list</strong> to determine the most appropriate one, a list which can get very long quite quickly. This overhead can get quite substantial in practice. The OS could instead optimize and look for a &ldquo;good enough&rdquo; gap, but this in practice only worsens external fragmentation. Other techniques can be considered, such as compaction: this would &ldquo;shift&rdquo; segments of running processes together in memory to fill smaller gaps, making larger gaps available. While possible, this can get highly complex, as the logical addresses would also have to be re-generated.</p>
+
+<p>As such, even segmentation isn&rsquo;t our &ldquo;final solution&rdquo; to this problem. But before we discuss the real deal, let&rsquo;s do some exercises.</p>
 
 
 <footer class="footline">
@@ -2808,19 +2823,19 @@ TODO: overhead of tracking segment sizes and checking limits</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619199084"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619199084"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619199084"></script>
-    <script src="../../js/jquery.sticky.js?1619199084"></script>
-    <script src="../../js/featherlight.min.js?1619199084"></script>
-    <script src="../../js/highlight.pack.js?1619199084"></script>
+    <script src="../../js/clipboard.min.js?1619349262"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1619349262"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1619349262"></script>
+    <script src="../../js/jquery.sticky.js?1619349262"></script>
+    <script src="../../js/featherlight.min.js?1619349262"></script>
+    <script src="../../js/highlight.pack.js?1619349262"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619199084"></script>
-    <script src="../../js/learn.js?1619199084"></script>
-    <script src="../../js/hugo-learn.js?1619199084"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1619349262"></script>
+    <script src="../../js/learn.js?1619349262"></script>
+    <script src="../../js/hugo-learn.js?1619349262"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619199084"></script>
+            <script src="../../mermaid/mermaid.js?1619349262"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

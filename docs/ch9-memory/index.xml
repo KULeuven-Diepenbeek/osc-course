@@ -34,8 +34,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</guid>
-      <description>A memory management technique that is used both in Linux and all other main operating systems is paging. The core of the concept is similar to segmentation: The main memory is divided into pieces. These pieces are mapped to the hardware and give the programmer the illusion of having a continuous memory space. However, internally these pieces might be spread all over the hardware.
-With segmentation there might be the following issue: we need to allocate a segment of 1024 bytes.</description>
+      <description>In the previous part, we have discussed both the benefits and problems with segmentation. One of the main issues was the fact that the segments could be of different sizes, making it difficult to find memory gaps of an appropriate size and adding overhead when doing so.
+As such, the actual method used most commonly in practice is segmentation with all the segments being of the same size. This means that not only the segments, but also the gaps they leave, are always the same, predictable size.</description>
     </item>
     
     <item>

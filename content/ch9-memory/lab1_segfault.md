@@ -8,18 +8,21 @@ weight: 2
 
 ## Segfault this
 
-* For each of the programs below:
-    * 1) Guess first if they will give a segmentation fault and where exactly and **why**
-    * 2) Compile and execute them
-    * 3) Were your guesses in the first step correct or not? Why (not)?
+For each of the programs below:
+
+* Guess first if they will give a segmentation fault and where exactly and **why**
+* Compile and execute them
+* Were your guesses in the first step correct or not? Why (not)?
+
+<!-- try to force end of the list -->
 
 ```C
 #include <stdio.h>
 
 int main(void) {
 
-    int* i = NULL;
-    *(i) = 666;
+	int* i = NULL;
+	*(i) = 666;
 
 	return 0;
 }
@@ -30,8 +33,8 @@ int main(void) {
 
 int main(void) {
 
-    int i = 666;
-    *(&i - 10000) = 777;
+	int i = 666;
+	*(&i - 10000) = 777;
 
 	return 0;
 }
@@ -42,13 +45,16 @@ int main(void) {
 
 int main(void) {
 
-    int i = 666;
-    *(&i + 10000) = 777;
+	int i = 666;
+	*(&i + 10000) = 777;
 
 	return 0;
 }
 ```
+
 * Try and change the number "10000" to higher and lower numbers in the previous two code samples to help make sense of what's happening.
+
+<!-- try to force end of the list -->
 
 ```C
 #include <stdio.h>
@@ -56,22 +62,23 @@ int main(void) {
 
 int main(void) {
 
-    int *i = (int *) malloc(26 * sizeof(int));
-    
-    *i = 20;
-    
-    *(i + 27) = 30;
-    
-    free(i);
-    
-    *i = 40;
+	int *i = (int *) malloc(26 * sizeof(int));
+	
+	*i = 20;
+	
+	*(i + 27) = 30;
+	
+	free(i);
+	
+	*i = 40;
 
 	return 0;
 }
 ```
+
 * Try and change the number "100" to "26" and the number "101" to "27" and run the program again. Do you get the same results? 
 
-## <s>X</s> A to the Z
+## A to the Z
 
 As we've seen in the previous exercises, segmentation faults don't always happen when we expect them to.
 Let's explore this a bit deeper here. 

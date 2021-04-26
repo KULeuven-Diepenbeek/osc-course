@@ -151,50 +151,52 @@ It should be obvious that, the larger the page size, the more risk of internal f
 
 ## Added benefits of paging
 
-As we've seen above, paging is a very flexible setup, but it requires quite a bit of work to tune/optimize for practical use. Once we've done that however, we get plenty of additional benefits from this approach. Let's look at a few.
+As we've seen above, paging is a very flexible setup, but it requires quite a bit of work to tune/optimize for practical use. Once we've done that however, we get plenty of additional benefits from this approach. Let's look at a few. 
 
-### Addressing more memory than is physically available
+(Side note: we will now discuss some of the extra "status bits" that are kept for each page table entry, which as we've seen above (search "status bits"), force the page table to store more bits than required by the frame number alone, causing the page table size to increase).
+
+### Allocating more memory than is physically available
 
 As you can imagine, no machine today has enough physical (RAM) memory to allow the use of the entire 64-bit address space at once. In reality, you typically "only" have 8 - 32 GB of RAM in your home PC, while large servers have 512 GB to 2 TB of RAM nowadays. 
 
 However, you can also easily imagine processes using up more than the available amount of memory, especially on your PC (have you ever run Google Chrome? Photoshop?). In that case, you wouldn't be able to start new processes any more, until you've manually closed some others, even if you have a lot of processes that are idle/running in the background. 
 
+To prevent this from happening, modern OSes will **use the harddisk storage as a semi-transparent extension to the RAM memory**. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously "hibernated" pages. This process of storing pages to disk and restoring them to main memory at a later time is called **swapping**.
+
+{{% figure src="/img/mem/swapping.png" title="Pages can be swapped in/out to the harddisk to reduce main memory occupancy" %}}
+{{% dinobook %}}
+
+In practice, this all happens transparently for the programmer. For each page in the per-process page table, the OS tracks whether this page is currently in the main memory or not. This is done using a so-called **valid/invalid bit**. If the program attempts to access a page with the invalid bit set, the OS generates a **page fault**. Other than with a segmentation fault, the OS will not actually regard this as an error. Instead, a new page location (free gap in main memory) is found and the contents of the page are again read from disk into that space. If there are no free pages in main memory, old pages are first swapped out to disk for both. 
+
+Something very similar happens if we try to access a page that has never actually been allocated before (say with a new `malloc()`). In this case, the OS will look for a new page in main memory and allow the program to start using it (this is what we saw above when trying to use logical address 15, which was not mapped in the page table yet). It is even possible to take this one step further, and to **not actually allocate memory for a given page until it is actually used/written to**. For example, if you allocate 2GB of memory with `malloc()` (which you can certainly do), the OS won't actually start reserving that much space in the memory. It will just add the necessary placeholders in the page table until you actually start writing to this 2GB of memory. Something similar happens if you start allocating lots of smaller blocks: you're only storing the pointers to those blocks; the actual block memory is only converted to pages when data is written to them (this is why in some exercises in the previous chapter you can use a "logical" amount of memory of many hundreds of gigabytes before you actually run out of "real" memory). This approach can also be used to reduce the amount of code each process needs to load. In most programs, large parts of the code are never actually executed in normal executions of the program. As such, the OS can decide not to load pages in the text/code segment of the process until it actually needs to execute them, an approach called **load-on-use**. 
+
+As such, we can see that this allows us to, in theory, **extend the size of the physical RAM to encompass our entire hard disk as well** (e.g., going from 16GB of RAM to 2TB "extended" RAM). In practice, modern OSes reserve a fixed amount of hard disk space for swapping purposes (linux typically has a separate swap partition, while windows typically has a large file of 1x or 2x the RAM size it uses for swap space). It's only when this extra space also runs out, that the OS will have to start shutting down processes to make room for more. This is something you still see today in mobile OSes such as Android and iOS, which occasionally will auto-close (long-idle or heavy) apps to make room for new ones. 
+
+However, there are of course also downsides to this approach. Hard disk memory (even if you're using an SSD drive) is still much slower than using RAM directly. As such, every time a page needs to be swapped, this **adds additional overhead**, as memory needs to be copied to the RAM first before use. The OS tries to hide this overhead by scheduling other instructions while it's waiting (up to even scheduling another process while waiting), and especially by being clever about which pages it keeps in memory and which it switches out. This can again be done with a variety of algorithms with descriptive names such as Least-Recently-Used (LRU), Not-Frequently-Used (NFU), First-In-First-Out (FIFO), Second Chance, etc. A final approach is by tracking whether a page that was previously stored to disk (and is currently still on disk), has actually been changed in main memory (this is done by using a **modified bit** (or "dirty" bit)). If the modified bit is not set for a page in main memory, we can simply overwrite it without first serializing it to disk, as we know the version already-on-disk is the same as the one in main memory, and we don't loose any state by overwriting it. In general, the OS prevents the use of swapping as much as possible. 
+
+### Optimizing multiprocess and multithreading
+
+    page sharing
+    - copy-on-write
+        - read-only bit
 
 
 
-TODO:
-
-
-While the idea of paging is relatively simple, the effects however are not. With a strict decoupling between the logical an physical address spaces, one does not put any restrictions on the other. A 64-bit processor, capable of addressing 2<sup>64</sup> (= 1.8 x 10<sup>19</sup>) different memory locations, can run on a physical memory with less than 264 bytes. (We're not guaranteeing it'll run smoothly, though :smile:).
-
-
-Page faults
-    - refer to example above
+### Using virtual address spaces to access other hardware
 
 Address more than available physical memory
     memory-mapped I/O
 
-    page sharing
-    - copy-on-write
-	- allocate-on-write 
-		=> vandaar de discrepancies vorige week 
-			-> blijf maar alloceren, maar echt geheugen ging niet omhoog
-			-> malloc reserveert page table entry, maar nog niet echt geheugen! 
 
 
 
 
-Additional information could be stored in the page table. One common bit of meta-data that is stored is a **protection bit**. Depending on whether the bit is set, the page can be read-only or read-write. Another bit that is added is the **valid bit**. From the name it should be clear that a valid bit shows whether the associated page is valid or not. A reason for setting resetting this bit is that the process is not using all the entries in the page table. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the **modified bit**. This bit indicates that its associated block of memory has been modified and has not been saved to storage yet. It is also often referred to as the **dirty bit**.
+
+Additional information could be stored in the page table. One common bit of meta-data that is stored is a **protection bit**. Depending on whether the bit is set, the page can be read-only or read-write. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the **modified bit**. 
 
 {{% notice info %}}
 Have you ever wondered why you should **eject** a USB stick ? One of the reasons is the **Dirty bit**. It might happen that you have written data to the USB stick, by writing to its physical memory addresses, but the data has not reached its destination yet. Off course, cache memory also play a role. It has a similar dirty bit.
 {{% /notice %}}
-
-### swapping
-
-
-
-
 
 ## In summary
 

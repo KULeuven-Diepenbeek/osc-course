@@ -12,21 +12,21 @@
     <title>9.3: Paging :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1619363581" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619363581" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619363581" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619363581" rel="stylesheet">
-    <link href="../../css/theme.css?1619363581" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619363581" rel="stylesheet">
+    <link href="../../css/nucleus.css?1619520290" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/hybrid.css?1619520290" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1619520290" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1619520290" rel="stylesheet">
+    <link href="../../css/theme.css?1619520290" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1619520290" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619363581" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1619520290" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619363581"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1619520290"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619363581"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619363581"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1619520290"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1619520290"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619363581"></script>
+<script type="text/javascript" src="../../js/search.js?1619520290"></script>
 
     
   </div>
@@ -1592,10 +1592,10 @@ window.MathJax = {
 </ul></li>
 <li><a href="#added-benefits-of-paging">Added benefits of paging</a>
 <ul>
-<li><a href="#addressing-more-memory-than-is-physically-available">Addressing more memory than is physically available</a></li>
-<li><a href="#swapping">swapping</a></li>
+<li><a href="#allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</a></li>
+<li><a href="#optimized-data-sharing">Optimized data sharing</a></li>
+<li><a href="#memory-mapped-i-o">Memory-Mapped I/O</a></li>
 </ul></li>
-<li><a href="#in-summary">In summary</a></li>
 <li><a href="#security">Security</a></li>
 </ul></li>
 </ul>
@@ -1841,50 +1841,70 @@ window.MathJax = {
 
 <p>As we&rsquo;ve seen above, paging is a very flexible setup, but it requires quite a bit of work to tune/optimize for practical use. Once we&rsquo;ve done that however, we get plenty of additional benefits from this approach. Let&rsquo;s look at a few.</p>
 
-<h3 id="addressing-more-memory-than-is-physically-available">Addressing more memory than is physically available</h3>
+<p>(Side note: we will now discuss some of the extra &ldquo;status bits&rdquo; that are kept for each page table entry, which as we&rsquo;ve seen above (search &ldquo;status bits&rdquo;), force the page table to store more bits than required by the frame number alone, causing the page table size to increase).</p>
+
+<h3 id="allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</h3>
 
 <p>As you can imagine, no machine today has enough physical (RAM) memory to allow the use of the entire 64-bit address space at once. In reality, you typically &ldquo;only&rdquo; have 8 - 32 GB of RAM in your home PC, while large servers have 512 GB to 2 TB of RAM nowadays.</p>
 
 <p>However, you can also easily imagine processes using up more than the available amount of memory, especially on your PC (have you ever run Google Chrome? Photoshop?). In that case, you wouldn&rsquo;t be able to start new processes any more, until you&rsquo;ve manually closed some others, even if you have a lot of processes that are idle/running in the background.</p>
 
-<p>TODO:</p>
+<p>To prevent this from happening, modern OSes will <strong>use the harddisk storage as a semi-transparent extension to the RAM memory</strong>. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously &ldquo;hibernated&rdquo; pages. This process of storing pages to disk and restoring them to main memory at a later time is called <strong>swapping</strong>.</p>
 
-<p>While the idea of paging is relatively simple, the effects however are not. With a strict decoupling between the logical an physical address spaces, one does not put any restrictions on the other. A 64-bit processor, capable of addressing 2<sup>64</sup> (= 1.8 x 10<sup>19</sup>) different memory locations, can run on a physical memory with less than 264 bytes. (We&rsquo;re not guaranteeing it&rsquo;ll run smoothly, though 😄).</p>
+<figure>
+    <img src="../../img/mem/swapping.png"/> <figcaption>
+            <h4>Pages can be swapped in/out to the harddisk to reduce main memory occupancy</h4>
+        </figcaption>
+</figure>
 
-<p>Page faults
-    - refer to example above</p>
+<p><style>
+  p.dinobook {
+    color: #7E7E7E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-top: 0px;
+    margin-top: -20px;
+    text-align: center;
+  }
+</style>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
 
-<p>Address more than available physical memory
-    memory-mapped I/O</p>
-<pre><code>page sharing
-- copy-on-write
-- allocate-on-write 
-    =&gt; vandaar de discrepancies vorige week 
-        -&gt; blijf maar alloceren, maar echt geheugen ging niet omhoog
-        -&gt; malloc reserveert page table entry, maar nog niet echt geheugen! </code></pre>
-<p>Additional information could be stored in the page table. One common bit of meta-data that is stored is a <strong>protection bit</strong>. Depending on whether the bit is set, the page can be read-only or read-write. Another bit that is added is the <strong>valid bit</strong>. From the name it should be clear that a valid bit shows whether the associated page is valid or not. A reason for setting resetting this bit is that the process is not using all the entries in the page table. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the <strong>modified bit</strong>. This bit indicates that its associated block of memory has been modified and has not been saved to storage yet. It is also often referred to as the <strong>dirty bit</strong>.</p>
+<p>In practice, this all happens transparently for the programmer. For each page in the per-process page table, the OS tracks whether this page is currently in the main memory or not. This is done using a so-called <strong>valid/invalid bit</strong>. If the program attempts to access a page with the invalid bit set, the OS generates a <strong>page fault</strong>. Other than with a segmentation fault, the OS will not actually regard this as an error. Instead, a new page location (free gap in main memory) is found and the contents of the page are again read from disk into that space. If there are no free pages in main memory, old pages are first swapped out to disk for both.</p>
 
+<p>Something very similar happens if we try to access a page that has never actually been allocated before (say with a new <code>malloc()</code>). In this case, the OS will look for a new page in main memory and allow the program to start using it (this is what we saw above when trying to use logical address 15, which was not mapped in the page table yet). It is even possible to take this one step further, and to <strong>not actually allocate memory for a given page until it is actually used/written to</strong>. For example, if you allocate 2GB of memory with <code>malloc()</code> (which you can certainly do), the OS won&rsquo;t actually start reserving that much space in the memory. It will just add the necessary placeholders in the page table until you actually start writing to this 2GB of memory. Something similar happens if you start allocating lots of smaller blocks: you&rsquo;re only storing the pointers to those blocks; the actual block memory is only converted to pages when data is written to them (this is why in some exercises in the previous chapter you can use a &ldquo;logical&rdquo; amount of memory of many hundreds of gigabytes before you actually run out of &ldquo;real&rdquo; memory). This approach can also be used to reduce the amount of code each process needs to load. In most programs, large parts of the code are never actually executed in normal executions of the program. As such, the OS can decide not to load pages in the text/code segment of the process until it actually needs to execute them, an approach called <strong>load-on-use</strong>.</p>
 
-<div class="notices info" ><p>Have you ever wondered why you should <strong>eject</strong> a USB stick ? One of the reasons is the <strong>Dirty bit</strong>. It might happen that you have written data to the USB stick, by writing to its physical memory addresses, but the data has not reached its destination yet. Off course, cache memory also play a role. It has a similar dirty bit.</p>
-</div>
+<p>As such, we can see that this allows us to, in theory, <strong>extend the size of the physical RAM to encompass our entire hard disk as well</strong> (e.g., going from 16GB of RAM to 2TB &ldquo;extended&rdquo; RAM). In practice, modern OSes reserve a fixed amount of hard disk space for swapping purposes (linux typically has a separate swap partition, while windows typically has a large file of 1x or 2x the RAM size it uses for swap space). It&rsquo;s only when this extra space also runs out, that the OS will have to start shutting down processes to make room for more. This is something you still see today in mobile OSes such as Android and iOS, which occasionally will auto-close (long-idle or heavy) apps to make room for new ones.</p>
 
+<p>However, there are of course also downsides to this approach. Hard disk memory (even if you&rsquo;re using an SSD drive) is still much slower than using RAM directly. As such, every time a page needs to be swapped, this <strong>adds additional overhead</strong>, as memory needs to be copied to the RAM first before use. The OS tries to hide this overhead by scheduling other instructions while it&rsquo;s waiting (up to even scheduling another process while waiting), and especially by being clever about which pages it keeps in memory and which it switches out. This can again be done with a variety of algorithms with descriptive names such as Least-Recently-Used (LRU), Not-Frequently-Used (NFU), First-In-First-Out (FIFO), Second Chance, etc. A final approach is by tracking whether a page that was previously stored to disk (and is currently still on disk), has actually been changed in main memory (this is done by using a <strong>modified bit</strong> (or &ldquo;dirty&rdquo; bit)). If the modified bit is not set for a page in main memory, we can simply overwrite it without first serializing it to disk, as we know the version already-on-disk is the same as the one in main memory, and we don&rsquo;t loose any state by overwriting it. In general, the OS prevents the use of swapping as much as possible.</p>
 
-<h3 id="swapping">swapping</h3>
+<h3 id="optimized-data-sharing">Optimized data sharing</h3>
 
-<h2 id="in-summary">In summary</h2>
+<p>Another common optimization is to allow multiple processes and threads to <strong>share individual pages</strong> amongst themselves. For example, we have seen that when fork()&lsquo;ing processes, they each get a new copy of the PCB and all the program segments. This is <em>conceptually</em> true, but in practice this would of course be quite wasteful, as the child will probably never change the text/data/bss segments and will probably keep re-using much of the same heap and stack data as the parent (at least in the beginning).</p>
 
-<p>So, using pages:</p>
+<p>Instead, when fork()&lsquo;ing a new process or starting a new thread, the new task typically still just points to the old pages. This only changes when the new task tries to <strong>write</strong> to one of the shared pages: at this point, the <strong>copy-on-write</strong> approach is used, and the to-be-changed page is copied for the new task before it is changed. This is conceptually similar to the allocate-on-write approach discussed in the previous subsection.</p>
 
-<ul>
-<li>provides separation between the logical and physical address spaces</li>
-<li>requires specialised hardware</li>
-<li>aids in memory protection</li>
-<li>lessens the fragmentation and puzzling efforts</li>
-</ul>
+<p>Something similar happens for the previously mentioned (dynamically) loaded libraries, where code can be shared between many processes. In this case, the libraries&rsquo; pages can be marked with a special <strong>read-only</strong> bit, to make sure that processes don&rsquo;t overwrite the library internals and mess up other processes that way.</p>
+
+<h3 id="memory-mapped-i-o">Memory-Mapped I/O</h3>
+
+<p>As discussed before, no modern system actually has enough RAM/harddiks memory to back the full 64-bit address space, meaning that we always have quite a few addresses leftover, even under full load. Additionally, the concept of swapping has shown that we can view memory addresses as <strong>proxies</strong> to access -other- hardware (in that case, the harddisk) in an indirect way.</p>
+
+<p>If we take this concept further, we can imagine also addressing other hardware in the same way, by exposing them as logical memory addresses that are mapped internally by the OS to something else than the RAM. This is generally called <strong>memory-mapped I/O</strong> and it is a very common technique.</p>
+
+<p>For example, in Chapter 2, we&rsquo;ve mentioned that Arduino CPU registers are accessible from C code in this way: they are assigned a logical address, which the OS maps not to the RAM/harddisk, but to the CPU registers for setting/reading them. Similarly, modern GPUs typically also have a large amount of &ldquo;VRAM&rdquo; (Video RAM), specifically for storing (graphical) data. Instead of addressing this VRAM in a completely separate way, the OS instead maps it to its own logical address space (pretending as if it&rsquo;s &ldquo;normal RAM&rdquo;) which can be read/written using standard methods. Other examples include serial peripheral devices (for example mouse/keyboard/older modems/many sensor systems/&hellip;) that can be accessed by pretending their output can just be read from a memory region. Finally of course, we can also do this for &ldquo;normal&rdquo; files on the harddisk (and not just swapped pages).</p>
+
+<p>While powerful, this technique can sometimes be tricky to get right, as in some cases the memory access is not immediately propagated directly to the other hardware, but instead the RAM is still used as intermediate storage. For example, have you ever wondered why you should <strong>eject</strong> a USB stick ? It might happen that you have written data to the USB stick, by writing to its memory-mapped addresses, but the data has not reached its destination yet. This is because the data is first written to RAM, and then transferred over time (by the OS) to the actual hardware. In these cases, the earlier mentioned <strong>dirty bit</strong> again comes into play. This is not just something that happens with memory-mapped I/O though: any intermediate memory layer has these issues, and this frequently shows up with CPU cache memory as well.</p>
 
 <h2 id="security">Security</h2>
 
-<p>TODO: specture, meltdown, cloudbleed</p>
+<p>Finally, let&rsquo;s discuss security a bit more. As we&rsquo;ve seen at the start of this Chapter, one of the main reasons for keeping track of chunks/segments/pages is to provide memory protection: to prevent process A from accessing process B&rsquo;s memory. This is for example needed to prevent A from stealing passwords or sensitive data stored in B&rsquo;s memory during execution.</p>
+
+<p>However, in the first lab, we&rsquo;ve also seen that this protection is rarely enough, and that there are plenty of ways for hackers to still mess with your system, even if it&rsquo;s just within a single process. Over time, OSes and compilers have added many advanced techniques to help deal with these issues.</p>
+
+<p>One such technique is called <strong>Address Space Layout Randomization (ASLR)</strong>. A common attack vector is for the hacker to &ldquo;escape&rdquo; the stack/heap (e.g., through an array overflow, as we&rsquo;ve seen). With that, they then attempt to overwrite code/data for a known vulnerable function in the program that allows for example execution of new code. This requires the hacker to reliably know where exactly this vulnerable function is in the logical address space. While pages can be randomly distributed inside the physical memory, without ASLR the logical address space would always look the same (starts at 0x00, text ends at 0x?? every time, since it&rsquo;s always the same length, so data segment starts at a predictable location as well etc.). As such, ASLR randomizes the logical base address of the program, as well as the logical starting locations of the other segments as well, to make it more difficult (though far from impossible) for hackers to guess where certain code/data is located between different runs of the same program.</p>
+
+<p>Even with all this, it&rsquo;s still possible for attackers to steal data, albeit via very complex methods. For example, the <strong>Spectre and Meltdown</strong> make use of several advanced features of modern CPUs, such as out-of-order execution, speculative execution, caching and, -indeed-, also virtual addressing and paging. The details are far too complex to discuss here (that&rsquo;s more 2nd master level), but one of the key parts in the attack is that the OS and CPU actually <strong>does not check the segment/page boundaries immediately when an access occurs</strong>. To speed things up, CPUs will allow out-of-bounds accesses to occur and they will load privileged data into cache memory. It is only when this memory is then being used/read that the check occurs and it is prevented. However, the fact that the data is loaded into (cache) memory allows the hacker to use other methods (&ldquo;side-channel attacks&rdquo;/&ldquo;timing attacks&rdquo;) to decipher the contents of the cache, thus stealing the protected memory, across process boundaries and even from inside the kernel! Spectre and Meltdown have been very impactful, often requiring changes at the OS and even hardware level, lowering performance by up to 20% in some cases!</p>
 
 <figure>
     <img src="../../img/mem/ss_mem_meltdown_spectre.png"/> <figcaption>
@@ -1892,7 +1912,9 @@ window.MathJax = {
         </figcaption>
 </figure>
 
-<p>Some computer hackers try the most insane techniques to get access to another process&rsquo;s memory. Exactly this has recently been shown in the Meltdown and Spectre attacks.</p>
+<p>Finally, even if hackers can just stay within a single process, things can still go terribly wrong. For example, in the <strong>cloudbleed</strong> attack, the large content distribution network Cloudflare suffered massive data leaks. This is because they used a single Web server process to serve requests/responses from many different clients. Using a simple buffer overflow, this allowed the attacker to read not just their intended response, but also the responses to request from other clients (which were located on the same heap), which often contained passwords, banking information, etc. This is because, within a single process as we&rsquo;ve seen, memory checks are typically absent. Making matters much worse, this could be triggered by requesting a specially crafted HTML page, causing some search engines like Google to actually <strong>cache the leaked passwords</strong> in their search results! As such, fixing the bug at the Cloudflare servers was not enough: many search engine caches also had to be purged manually!</p>
+
+<p>As such, it should be clear that memory access protection is a complex topic, going far beyond what we&rsquo;ve discussed, and still an active area of research and development.</p>
 
 
 <footer class="footline">
@@ -2902,19 +2924,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619363581"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619363581"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619363581"></script>
-    <script src="../../js/jquery.sticky.js?1619363581"></script>
-    <script src="../../js/featherlight.min.js?1619363581"></script>
-    <script src="../../js/highlight.pack.js?1619363581"></script>
+    <script src="../../js/clipboard.min.js?1619520290"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1619520290"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1619520290"></script>
+    <script src="../../js/jquery.sticky.js?1619520290"></script>
+    <script src="../../js/featherlight.min.js?1619520290"></script>
+    <script src="../../js/highlight.pack.js?1619520290"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619363581"></script>
-    <script src="../../js/learn.js?1619363581"></script>
-    <script src="../../js/hugo-learn.js?1619363581"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1619520290"></script>
+    <script src="../../js/learn.js?1619520290"></script>
+    <script src="../../js/hugo-learn.js?1619520290"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619363581"></script>
+            <script src="../../mermaid/mermaid.js?1619520290"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,21 @@
     <title>9.1: Memory management :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1619363581" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619363581" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619363581" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619363581" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619363581" rel="stylesheet">
-    <link href="../../css/theme.css?1619363581" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619363581" rel="stylesheet">
+    <link href="../../css/nucleus.css?1619520290" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/hybrid.css?1619520290" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1619520290" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1619520290" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1619520290" rel="stylesheet">
+    <link href="../../css/theme.css?1619520290" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1619520290" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619363581" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1619520290" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619363581"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1619520290"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619363581"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619363581"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1619520290"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1619520290"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619363581"></script>
+<script type="text/javascript" src="../../js/search.js?1619520290"></script>
 
     
   </div>
@@ -1589,7 +1589,7 @@ window.MathJax = {
 <li><a href="#address-binding">Address Binding</a></li>
 <li><a href="#problems-with-chunking">Problems with Chunking</a></li>
 </ul></li>
-<li><a href="#segmentation">Segmentation</a>
+<li><a href="#option-2-segmentation">Option 2: Segmentation</a>
 <ul>
 <li><a href="#address-binding-1">Address Binding</a></li>
 <li><a href="#problems-with-segmentation">Problems with Segmentation</a></li>
@@ -1727,7 +1727,7 @@ window.MathJax = {
 
 <p>A more important downside of chunking however is that <strong>we would have to assign a fixed-size chunk to each process</strong>. This isn&rsquo;t so much a problem for text/data/bss/stack, but more for the heap. We don&rsquo;t really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you&rsquo;ll use less memory, sometimes more). You can&rsquo;t also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. As such, you would again have to rely on the programmer to somehow give an indication of program size, or for example learn it from previous executions of the program.</p>
 
-<p>Finally, there is the problem of <strong>external segmentation</strong>. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called &ldquo;external&rdquo; fragmentation, as the fragmentation happens <em>outside of the space allocated to processes</em>. We will discuss internal fragmentation later.</p>
+<p>Finally, there is the problem of <strong>external fragmentation</strong>. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called &ldquo;external&rdquo; fragmentation, as the fragmentation happens <em>outside of the space allocated to processes</em>. We will discuss internal fragmentation later.</p>
 
 <figure>
     <img src="../../img/mem/external_fragmentation.png"/> <figcaption>
@@ -1737,7 +1737,7 @@ window.MathJax = {
 
 <p>It is clear we need a more advanced setup in practice.</p>
 
-<h2 id="segmentation">Segmentation</h2>
+<h2 id="option-2-segmentation">Option 2: Segmentation</h2>
 
 <p>Segmentation is a more flexible way than chunking of loading processes into memory. The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead <strong>reserve several, smaller chunks (called segments)</strong>. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap.</p>
 
@@ -1814,7 +1814,7 @@ window.MathJax = {
 
 <p>While segmentation already improves a lot on chunking, it still suffers from a few problems.</p>
 
-<p>In practice, external segmentation can still easily occur in modern systems with hundreds of running processes. This is because the <strong>individual segments are not equally sized</strong>, and gaps (created by removed/stopped segments) can thus easily be smaller than what is needed for a given segment. As such, the OS needs to keep track of <strong>a list of open gaps and their size</strong>. Every time a process needs memory for a segment, the OS would need to <strong>loop over the entire gap list</strong> to determine the most appropriate one, a list which can get very long quite quickly. This overhead can get quite substantial in practice. The OS could instead optimize and look for a &ldquo;good enough&rdquo; gap, but this in practice only worsens external fragmentation. Other techniques can be considered, such as compaction: this would &ldquo;shift&rdquo; segments of running processes together in memory to fill smaller gaps, making larger gaps available. While possible, this can get highly complex, as the logical addresses would also have to be re-generated.</p>
+<p>In practice, external fragmentation can still easily occur in modern systems with hundreds of running processes. This is because the <strong>individual segments are not equally sized</strong>, and gaps (created by removed/stopped segments) can thus easily be smaller than what is needed for a given segment. As such, the OS needs to keep track of <strong>a list of open gaps and their size</strong>. Every time a process needs memory for a segment, the OS would need to <strong>loop over the entire gap list</strong> to determine the most appropriate one, a list which can get very long quite quickly. This overhead can get quite substantial in practice. The OS could instead optimize and look for a &ldquo;good enough&rdquo; gap, but this in practice only worsens external fragmentation. Other techniques can be considered, such as compaction: this would &ldquo;shift&rdquo; segments of running processes together in memory to fill smaller gaps, making larger gaps available. While possible, this can get highly complex, as the logical addresses would also have to be re-generated.</p>
 
 <p>As such, even segmentation isn&rsquo;t our &ldquo;final solution&rdquo; to this problem. But before we discuss the real deal, let&rsquo;s do some exercises.</p>
 
@@ -2823,19 +2823,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619363581"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619363581"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619363581"></script>
-    <script src="../../js/jquery.sticky.js?1619363581"></script>
-    <script src="../../js/featherlight.min.js?1619363581"></script>
-    <script src="../../js/highlight.pack.js?1619363581"></script>
+    <script src="../../js/clipboard.min.js?1619520290"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1619520290"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1619520290"></script>
+    <script src="../../js/jquery.sticky.js?1619520290"></script>
+    <script src="../../js/featherlight.min.js?1619520290"></script>
+    <script src="../../js/highlight.pack.js?1619520290"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619363581"></script>
-    <script src="../../js/learn.js?1619363581"></script>
-    <script src="../../js/hugo-learn.js?1619363581"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1619520290"></script>
+    <script src="../../js/learn.js?1619520290"></script>
+    <script src="../../js/hugo-learn.js?1619520290"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619363581"></script>
+            <script src="../../mermaid/mermaid.js?1619520290"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

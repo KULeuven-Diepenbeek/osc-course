@@ -174,44 +174,36 @@ As such, we can see that this allows us to, in theory, **extend the size of the 
 
 However, there are of course also downsides to this approach. Hard disk memory (even if you're using an SSD drive) is still much slower than using RAM directly. As such, every time a page needs to be swapped, this **adds additional overhead**, as memory needs to be copied to the RAM first before use. The OS tries to hide this overhead by scheduling other instructions while it's waiting (up to even scheduling another process while waiting), and especially by being clever about which pages it keeps in memory and which it switches out. This can again be done with a variety of algorithms with descriptive names such as Least-Recently-Used (LRU), Not-Frequently-Used (NFU), First-In-First-Out (FIFO), Second Chance, etc. A final approach is by tracking whether a page that was previously stored to disk (and is currently still on disk), has actually been changed in main memory (this is done by using a **modified bit** (or "dirty" bit)). If the modified bit is not set for a page in main memory, we can simply overwrite it without first serializing it to disk, as we know the version already-on-disk is the same as the one in main memory, and we don't loose any state by overwriting it. In general, the OS prevents the use of swapping as much as possible. 
 
-### Optimizing multiprocess and multithreading
+### Optimized data sharing
 
-    page sharing
-    - copy-on-write
-        - read-only bit
+Another common optimization is to allow multiple processes and threads to **share individual pages** amongst themselves. For example, we have seen that when fork()'ing processes, they each get a new copy of the PCB and all the program segments. This is _conceptually_ true, but in practice this would of course be quite wasteful, as the child will probably never change the text/data/bss segments and will probably keep re-using much of the same heap and stack data as the parent (at least in the beginning).
 
+Instead, when fork()'ing a new process or starting a new thread, the new task typically still just points to the old pages. This only changes when the new task tries to **write** to one of the shared pages: at this point, the **copy-on-write** approach is used, and the to-be-changed page is copied for the new task before it is changed. This is conceptually similar to the allocate-on-write approach discussed in the previous subsection.
 
+Something similar happens for the previously mentioned (dynamically) loaded libraries, where code can be shared between many processes. In this case, the libraries' pages can be marked with a special **read-only** bit, to make sure that processes don't overwrite the library internals and mess up other processes that way. 
 
-### Using virtual address spaces to access other hardware
+### Memory-Mapped I/O
 
-Address more than available physical memory
-    memory-mapped I/O
+As discussed before, no modern system actually has enough RAM/harddiks memory to back the full 64-bit address space, meaning that we always have quite a few addresses leftover, even under full load. Additionally, the concept of swapping has shown that we can view memory addresses as **proxies** to access -other- hardware (in that case, the harddisk) in an indirect way. 
 
+If we take this concept further, we can imagine also addressing other hardware in the same way, by exposing them as logical memory addresses that are mapped internally by the OS to something else than the RAM. This is generally called **memory-mapped I/O** and it is a very common technique. 
 
+For example, in Chapter 2, we've mentioned that Arduino CPU registers are accessible from C code in this way: they are assigned a logical address, which the OS maps not to the RAM/harddisk, but to the CPU registers for setting/reading them. Similarly, modern GPUs typically also have a large amount of "VRAM" (Video RAM), specifically for storing (graphical) data. Instead of addressing this VRAM in a completely separate way, the OS instead maps it to its own logical address space (pretending as if it's "normal RAM") which can be read/written using standard methods. Other examples include serial peripheral devices (for example mouse/keyboard/older modems/many sensor systems/...) that can be accessed by pretending their output can just be read from a memory region. Finally of course, we can also do this for "normal" files on the harddisk (and not just swapped pages).
 
-
-
-
-Additional information could be stored in the page table. One common bit of meta-data that is stored is a **protection bit**. Depending on whether the bit is set, the page can be read-only or read-write. Entries that are unused have a valid bit that is set to 0. Although more bits could be or are available, the last one touched here is the **modified bit**. 
-
-{{% notice info %}}
-Have you ever wondered why you should **eject** a USB stick ? One of the reasons is the **Dirty bit**. It might happen that you have written data to the USB stick, by writing to its physical memory addresses, but the data has not reached its destination yet. Off course, cache memory also play a role. It has a similar dirty bit.
-{{% /notice %}}
-
-## In summary
-
-So, using pages:
-
-* provides separation between the logical and physical address spaces
-* requires specialised hardware
-* aids in memory protection
-* lessens the fragmentation and puzzling efforts
-
+While powerful, this technique can sometimes be tricky to get right, as in some cases the memory access is not immediately propagated directly to the other hardware, but instead the RAM is still used as intermediate storage. For example, have you ever wondered why you should **eject** a USB stick ? It might happen that you have written data to the USB stick, by writing to its memory-mapped addresses, but the data has not reached its destination yet. This is because the data is first written to RAM, and then transferred over time (by the OS) to the actual hardware. In these cases, the earlier mentioned **dirty bit** again comes into play. This is not just something that happens with memory-mapped I/O though: any intermediate memory layer has these issues, and this frequently shows up with CPU cache memory as well.
 
 ## Security
 
-TODO: specture, meltdown, cloudbleed
+Finally, let's discuss security a bit more. As we've seen at the start of this Chapter, one of the main reasons for keeping track of chunks/segments/pages is to provide memory protection: to prevent process A from accessing process B's memory. This is for example needed to prevent A from stealing passwords or sensitive data stored in B's memory during execution. 
 
+However, in the first lab, we've also seen that this protection is rarely enough, and that there are plenty of ways for hackers to still mess with your system, even if it's just within a single process. Over time, OSes and compilers have added many advanced techniques to help deal with these issues.
+
+One such technique is called **Address Space Layout Randomization (ASLR)**. A common attack vector is for the hacker to "escape" the stack/heap (e.g., through an array overflow, as we've seen). With that, they then attempt to overwrite code/data for a known vulnerable function in the program that allows for example execution of new code. This requires the hacker to reliably know where exactly this vulnerable function is in the logical address space. While pages can be randomly distributed inside the physical memory, without ASLR the logical address space would always look the same (starts at 0x00, text ends at 0x?? every time, since it's always the same length, so data segment starts at a predictable location as well etc.). As such, ASLR randomizes the logical base address of the program, as well as the logical starting locations of the other segments as well, to make it more difficult (though far from impossible) for hackers to guess where certain code/data is located between different runs of the same program.
+
+Even with all this, it's still possible for attackers to steal data, albeit via very complex methods. For example, the **Spectre and Meltdown** make use of several advanced features of modern CPUs, such as out-of-order execution, speculative execution, caching and, -indeed-, also virtual addressing and paging. The details are far too complex to discuss here (that's more 2nd master level), but one of the key parts in the attack is that the OS and CPU actually **does not check the segment/page boundaries immediately when an access occurs**. To speed things up, CPUs will allow out-of-bounds accesses to occur and they will load privileged data into cache memory. It is only when this memory is then being used/read that the check occurs and it is prevented. However, the fact that the data is loaded into (cache) memory allows the hacker to use other methods ("side-channel attacks"/"timing attacks") to decipher the contents of the cache, thus stealing the protected memory, across process boundaries and even from inside the kernel! Spectre and Meltdown have been very impactful, often requiring changes at the OS and even hardware level, lowering performance by up to 20% in some cases!
 
 {{% figure src="/img/mem/ss_mem_meltdown_spectre.png" title="Meltdown and Spectre - Two attacks that got access to other process's memory." %}}
-Some computer hackers try the most insane techniques to get access to another process's memory. Exactly this has recently been shown in the Meltdown and Spectre attacks. 
+
+Finally, even if hackers can just stay within a single process, things can still go terribly wrong. For example, in the **cloudbleed** attack, the large content distribution network Cloudflare suffered massive data leaks. This is because they used a single Web server process to serve requests/responses from many different clients. Using a simple buffer overflow, this allowed the attacker to read not just their intended response, but also the responses to request from other clients (which were located on the same heap), which often contained passwords, banking information, etc. This is because, within a single process as we've seen, memory checks are typically absent. Making matters much worse, this could be triggered by requesting a specially crafted HTML page, causing some search engines like Google to actually **cache the leaked passwords** in their search results! As such, fixing the bug at the Cloudflare servers was not enough: many search engine caches also had to be purged manually! 
+
+As such, it should be clear that memory access protection is a complex topic, going far beyond what we've discussed, and still an active area of research and development. 

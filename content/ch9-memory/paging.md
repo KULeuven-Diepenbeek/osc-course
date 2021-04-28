@@ -163,7 +163,7 @@ However, you can also easily imagine processes using up more than the available 
 
 To prevent this from happening, modern OSes will **use the harddisk storage as a semi-transparent extension to the RAM memory**. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously "hibernated" pages. This process of storing pages to disk and restoring them to main memory at a later time is called **swapping**.
 
-{{% figure src="/img/mem/swapping.png" title="Pages can be swapped in/out to the harddisk to reduce main memory occupancy" %}}
+{{% figure src="/img/mem/swapping.jpg" title="Pages can be swapped in/out to the harddisk to reduce main memory occupancy" %}}
 {{% dinobook %}}
 
 In practice, this all happens transparently for the programmer. For each page in the per-process page table, the OS tracks whether this page is currently in the main memory or not. This is done using a so-called **valid/invalid bit**. If the program attempts to access a page with the invalid bit set, the OS generates a **page fault**. Other than with a segmentation fault, the OS will not actually regard this as an error. Instead, a new page location (free gap in main memory) is found and the contents of the page are again read from disk into that space. If there are no free pages in main memory, old pages are first swapped out to disk for both. 

@@ -10,35 +10,44 @@ This task requires you to think about the bigger picture and forces you to expla
 
 Analyse the code below and write a report (3-4 pages):
 
-1. Describe what the program does (in general, not line-by-line)
+1. Describe the most important aspects of this program in terms of threading (in general, not line-by-line)
 2. Note that this program does something similar to the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
     * However, it is fundamentally different in how it divides the responsibilities between producers and consumers.
     * Explain this difference in detail. 
-    * Discuss which of both approaches you think is probably more realistic / more likely to occur in practice.
-3. Make a line chart that plots 'the elapsed real time' the program consumes (y-axis) in function of 'the number of threads that are contributing' (x-axis)
+    * Discuss which of both approaches you think is probably more realistic / more likely to occur in practice and why.
+3. Make a line chart that plots 'the elapsed time' the program consumes (y-axis) in function of 'the number of threads that are contributing' (x-axis)
     * For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete
     * Note:
         * the scale on the X-axis goes from 2 to 300
+        * don't just sample the number of threads between 2 and 300 uniformly though: be smart in how you choose your threadcounts!
         * at least 8 data points should be present in the chart
         * you can use any charting program for this (for example excel or google sheets)
         * **TIP** use the command [*time*](https://linux.die.net/man/1/time)
         * **NOTE** printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.
         * **NOTE** it's best to execute each measurement a few times and on an unloaded system to get consistent results
-3. Interpret the chart and draw conclusions
-4. Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
+4. Interpret the chart and draw conclusions
+    * It is not sufficient to simply describe what's visible on the chart: you need to explain **WHY** this behaviour occurs.
+5. Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
     * Would the program run faster or slower? Why? 
     * Does it make sense to use multiple *producer* threads with this setup? Why (not)?
     * Does it make sense to use multiple *consumer* threads with this setup? Why (not)?
     * Answer both questions for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm) as well
-    * For a different problem, how would you decide how many producer and consumer threads you would need? 
-5. The producer-consumer problem comes up in many other settings as well
+    * For a different problem, how would you decide how to split the available number of threads between producers and consumers? 
+6. The producer-consumer problem comes up in many other settings as well
     * Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs
     * Note: there aren't always literal "producers" or "consumers" of course; these are general concepts
         * For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers
-6. Include your solution (source code) for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
+7. Include your solution (source code) for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
     * This is not part of the page-limit for the report of course ;)  
 
 **Note that, like all other tasks, this is an individual assignment!**
+
+Note: It's possible that you've solved exercise 6.7.3 (question 7 above) in group during class. 
+In this case, you MUST add sufficient personal comments to the code that explain how it works and why the used approach was chosen.
+You must also clearly list the students that collaborated on the code. 
+This is to make it easier for the teaching team to assess if you actually understand the code or only copy-pasted it without contributing.
+Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned. 
+Note that this is only for question 7: questions 1-6 MUST be answered fully individually!
 
 <center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center>
 

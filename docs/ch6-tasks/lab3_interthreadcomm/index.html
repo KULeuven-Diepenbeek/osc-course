@@ -12,21 +12,21 @@
     <title>6.7: Inter-Thread communication (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1619604381" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619604381" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619604381" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619604381" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619604381" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619604381" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619604381" rel="stylesheet">
-    <link href="../../css/theme.css?1619604381" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619604381" rel="stylesheet">
+    <link href="../../css/nucleus.css?1622122187" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1622122187" rel="stylesheet">
+    <link href="../../css/hybrid.css?1622122187" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1622122187" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1622122187" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1622122187" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1622122187" rel="stylesheet">
+    <link href="../../css/theme.css?1622122187" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1622122187" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619604381" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1622122187" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619604381"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1622122187"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619604381"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619604381"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1622122187"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1622122187"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619604381"></script>
+<script type="text/javascript" src="../../js/search.js?1622122187"></script>
 
     
   </div>
@@ -1630,13 +1630,13 @@ window.MathJax = {
 </figure>
 
 <ul>
-<li><p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have 4 separate threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory. Instead, each prime-calculting thread (the producers) communicates each discovered prime <strong>as soon as possible</strong> back to a separate &ldquo;processing&rdquo; entity that prints the primes to the screen (one or several consumers). Again, this can be accomplished in several different ways:</p>
+<li><p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have several separate producer threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory and later print it in one go. Instead, each prime-calculting thread (the producers) will share the same memory. Additionally, they will communicate each discovered prime <strong>as soon as possible</strong> back to separate &ldquo;processing&rdquo; entities that print the primes to the screen (several consumers). Put differently: we will have multiple producers and consumers working <strong>at the same time</strong> and <strong>sharing the same memory</strong>. Again, this can be accomplished in several different ways:</p>
 
 <ol>
 <li>You can use a single shared array and a shared counter (indicating how many items are in the array) to store the results
 
 <ul>
-<li>Access to the array is protected by a Mutex that both the producers and consumer(s) lock</li>
+<li>Access to the array is protected by a Mutex that both the producers and consumers lock</li>
 <li>Extra points if you can think of a way to not make this array take up excessive memory by the time the calculations are done</li>
 </ul></li>
 <li>You can pass each prime as an individual value between producer/consumer threads instead of using a shared array
@@ -1652,9 +1652,9 @@ window.MathJax = {
 </ol>
 
 <ul>
-<li><p>Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread, then extending it to use multiple.</p></li>
+<li><p>Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread (but still with multiple producers), then extending it to use multiple consumers later.</p></li>
 
-<li><p>The goal is to implement <strong>one</strong> of these options (you choose), think deeply about the rest, and then answer the following questions:</p>
+<li><p>The goal is to implement <strong>one</strong> of these options (mutex or semaphore, shared array or individual value(s), you choose), think deeply about the rest, and then answer the following questions:</p>
 
 <ul>
 <li>Which approach should be faster: this one with shared memory/direct value passing or the one from the previous lab using per-thread memory?</li>
@@ -2679,19 +2679,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619604381"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619604381"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619604381"></script>
-    <script src="../../js/jquery.sticky.js?1619604381"></script>
-    <script src="../../js/featherlight.min.js?1619604381"></script>
-    <script src="../../js/highlight.pack.js?1619604381"></script>
+    <script src="../../js/clipboard.min.js?1622122187"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1622122187"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1622122187"></script>
+    <script src="../../js/jquery.sticky.js?1622122187"></script>
+    <script src="../../js/featherlight.min.js?1622122187"></script>
+    <script src="../../js/highlight.pack.js?1622122187"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619604381"></script>
-    <script src="../../js/learn.js?1619604381"></script>
-    <script src="../../js/hugo-learn.js?1619604381"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1622122187"></script>
+    <script src="../../js/learn.js?1622122187"></script>
+    <script src="../../js/hugo-learn.js?1622122187"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619604381"></script>
+            <script src="../../mermaid/mermaid.js?1622122187"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

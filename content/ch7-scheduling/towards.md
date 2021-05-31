@@ -133,7 +133,7 @@ Answer these questions:
     </figure>
 </div>
 
-<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721_v2')"/>
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q721_v2', 1)"/>
 
 {{% /task %}}
 

@@ -153,7 +153,7 @@ In C, the `new` keyword does _not_ exist. Creating instances is done using `mall
 
 ### 4. Linked Lists
 
-You will discover in exercise '[the ancient library](/ch3-pointers/lab/)', you can link different `struct` instnaces together to create a list of items, instead of simply using Arrays or other existing data structures. Internally in the C libraries, pointers are applied to connect elements of a collection. Let us try to do the same. 
+You will discover in exercise '[the ancient library](/ch3-pointers/lab/)', you can link different `struct` instances together to create a list of items, instead of simply using Arrays or other existing data structures. Internally in the C libraries, pointers are applied to connect elements of a collection. Let us try to do the same. 
 
 This is how the memory structure of your C code looks like without initializing any single variable:
 

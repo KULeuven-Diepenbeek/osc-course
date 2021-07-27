@@ -12,19 +12,19 @@
     <title>8.1: The Stack &amp; the Heap :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
-    <link href="../../css/theme.css?1627372742" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627373289" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627373289" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627373289" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627373289" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627373289" rel="stylesheet">
+    <link href="../../css/theme.css?1627373289" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627373289" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627373289" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627373289"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627373289"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627373289"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1627372742"></script>
+<script type="text/javascript" src="../../js/search.js?1627373289"></script>
 
     
   </div>
@@ -1629,36 +1629,35 @@ window.MathJax = {
 <h2 id="the-stack-and-the-heap">The Stack and the Heap</h2>
 <h3 id="program-memory">Program Memory</h3>
 <div>
-    <span style="float: left; width: 70%">
-        Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the <strong>program memory</strong>.<br/>
-        The following image represents these sections, from bottom to top:
-<pre><code>    &lt;ol&gt;
-        &lt;li&gt;
-            &lt;strong&gt;text&lt;/strong&gt;&lt;br/&gt;
-            Read-only, fixed size. Contains executable instructions.
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;strong&gt;data&lt;/strong&gt;&lt;br/&gt;
-            Can be modified. Contains global or static variables that are initialized, such as &lt;code&gt;static int i = 5;&lt;/code&gt;. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as &lt;code&gt;int i = 5; int main() { printf(&quot;%d&quot;, i); }&lt;/code&gt;. See &lt;a href=&quot;/ch8-stack/scope/&quot;&gt;Section 8.3&lt;/a&gt;.
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;strong&gt;bss&lt;/strong&gt;&lt;br/&gt;
-            Can be modified. Contains &lt;em&gt;uninitialized&lt;/em&gt; data, such as &lt;code&gt;static int i;&lt;/code&gt;.
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;strong&gt;heap&lt;/strong&gt;&lt;br/&gt;
-            Dynamically growing. Contains data maintained by &lt;code&gt;malloc()&lt;/code&gt; and &lt;code&gt;free()&lt;/code&gt;, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;strong&gt;stack&lt;/strong&gt;&lt;br/&gt;
-            Set size. Contains &lt;em&gt;automatic variables&lt;/em&gt;: variables created when (automatically) entered a function, such as &lt;code&gt;int main() { int i = 5; }&lt;/code&gt;. Can be modified manually using the command &lt;code&gt;ulimit&lt;/code&gt; - but this cannot be modified once the process is running. 
-        &lt;/li&gt;
-    &lt;/ol&gt;
-&lt;/span&gt;
-&lt;span style=&quot;float: right; width: 30%&quot;&gt;
-    &lt;img src=&quot;/img/Program_memory_layout.pdf.jpg&quot; title=&quot;Source: Wikipedia&quot; /&gt;
-&lt;/span&gt;
-</code></pre>
+<span style="float: left; width: 70%">
+Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the <strong>program memory</strong>.<br/>
+The following image represents these sections, from bottom to top:
+<ol>
+<li>
+<strong>text</strong><br/>
+Read-only, fixed size. Contains executable instructions.
+</li>
+<li>
+<strong>data</strong><br/>
+Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. See <a href="../../ch8-stack/scope/">Section 8.3</a>.
+</li>
+<li>
+<strong>bss</strong><br/>
+Can be modified. Contains <em>uninitialized</em> data, such as <code>static int i;</code>.
+</li>
+<li>
+<strong>heap</strong><br/>
+Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
+</li>
+<li>
+<strong>stack</strong><br/>
+Set size. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>. Can be modified manually using the command <code>ulimit</code> - but this cannot be modified once the process is running. 
+</li>
+</ol>
+</span>
+<span style="float: right; width: 30%">
+<img src="../../img/Program_memory_layout.pdf.jpg" title="Source: Wikipedia" />
+</span>
 </div>
 <div style="clear: both;">&nbsp; </div>
 <h3 id="the-stack">The Stack</h3>
@@ -3000,17 +2999,17 @@ main:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1627372742"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
-    <script src="../../js/jquery.sticky.js?1627372742"></script>
-    <script src="../../js/featherlight.min.js?1627372742"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
-    <script src="../../js/learn.js?1627372742"></script>
-    <script src="../../js/hugo-learn.js?1627372742"></script>
+    <script src="../../js/clipboard.min.js?1627373289"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627373289"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627373289"></script>
+    <script src="../../js/jquery.sticky.js?1627373289"></script>
+    <script src="../../js/featherlight.min.js?1627373289"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627373289"></script>
+    <script src="../../js/learn.js?1627373289"></script>
+    <script src="../../js/hugo-learn.js?1627373289"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1627372742"></script>
+            <script src="../../mermaid/mermaid.js?1627373289"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

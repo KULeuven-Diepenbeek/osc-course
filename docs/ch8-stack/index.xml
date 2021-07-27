@@ -14,7 +14,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</guid>
-      <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:  &amp;lt;ol&amp;gt; &amp;lt;li&amp;gt; &amp;lt;strong&amp;gt;text&amp;lt;/strong&amp;gt;&amp;lt;br/&amp;gt; Read-only, fixed size. Contains executable instructions. &amp;lt;/li&amp;gt; &amp;lt;li&amp;gt; &amp;lt;strong&amp;gt;data&amp;lt;/strong&amp;gt;&amp;lt;br/&amp;gt; Can be modified. Contains global or static variables that are initialized, such as &amp;lt;code&amp;gt;static int i = 5;&amp;lt;/code&amp;gt;.</description>
+      <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:   text Read-only, fixed size. Contains executable instructions.   data Can be modified. Contains global or static variables that are initialized, such as static int i = 5;. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as int i = 5; int main() { printf(&#34;</description>
     </item>
     
     <item>

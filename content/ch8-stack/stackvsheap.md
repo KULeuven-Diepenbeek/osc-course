@@ -9,36 +9,36 @@ weight: 1
 ### Program Memory
 
 <div>
-    <span style="float: left; width: 70%">
-        Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the <strong>program memory</strong>.<br/>
-        The following image represents these sections, from bottom to top:
+<span style="float: left; width: 70%">
+Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the <strong>program memory</strong>.<br/>
+The following image represents these sections, from bottom to top:
 
-        <ol>
-            <li>
-                <strong>text</strong><br/>
-                Read-only, fixed size. Contains executable instructions.
-            </li>
-            <li>
-                <strong>data</strong><br/>
-                Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. See <a href="/ch8-stack/scope/">Section 8.3</a>.
-            </li>
-            <li>
-                <strong>bss</strong><br/>
-                Can be modified. Contains <em>uninitialized</em> data, such as <code>static int i;</code>.
-            </li>
-            <li>
-                <strong>heap</strong><br/>
-                Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
-            </li>
-            <li>
-                <strong>stack</strong><br/>
-                Set size. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>. Can be modified manually using the command <code>ulimit</code> - but this cannot be modified once the process is running. 
-            </li>
-        </ol>
-    </span>
-    <span style="float: right; width: 30%">
-        <img src="/img/Program_memory_layout.pdf.jpg" title="Source: Wikipedia" />
-    </span>
+<ol>
+<li>
+<strong>text</strong><br/>
+Read-only, fixed size. Contains executable instructions.
+</li>
+<li>
+<strong>data</strong><br/>
+Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. See <a href="/ch8-stack/scope/">Section 8.3</a>.
+</li>
+<li>
+<strong>bss</strong><br/>
+Can be modified. Contains <em>uninitialized</em> data, such as <code>static int i;</code>.
+</li>
+<li>
+<strong>heap</strong><br/>
+Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
+</li>
+<li>
+<strong>stack</strong><br/>
+Set size. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>. Can be modified manually using the command <code>ulimit</code> - but this cannot be modified once the process is running. 
+</li>
+</ol>
+</span>
+<span style="float: right; width: 30%">
+<img src="/img/Program_memory_layout.pdf.jpg" title="Source: Wikipedia" />
+</span>
 </div>
 <div style="clear: both;">&nbsp; </div>
 

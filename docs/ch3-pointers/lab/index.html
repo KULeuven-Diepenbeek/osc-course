@@ -12,21 +12,19 @@
     <title>3.3: The Ancient Library :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,19 +1578,17 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-ancient-library">The Ancient Library</a>
-<ul>
-<li><a href="#1-modeling-the-books">1. Modeling the books</a></li>
-<li><a href="#2-linking-things-together">2. Linking things together</a></li>
-<li><a href="#3-cleaning-up-the-library">3. Cleaning up the library</a></li>
-<li><a href="#4-wild-surge-asc-desc">4. Wild Surge! ASC/DESC</a></li>
-<li><a href="#5-do-you-rest-until-fully-healed">5. Do you rest until fully healed?</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-ancient-library">The Ancient Library</a>
+      <ul>
+        <li><a href="#1-modeling-the-books">1. Modeling the books</a></li>
+        <li><a href="#2-linking-things-together">2. Linking things together</a></li>
+        <li><a href="#3-cleaning-up-the-library">3. Cleaning up the library</a></li>
+        <li><a href="#4-wild-surge-ascdesc">4. Wild Surge! ASC/DESC</a></li>
+        <li><a href="#5-do-you-rest-until-fully-healed">5. Do you rest until fully healed?</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1616,75 +1612,58 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="the-ancient-library">The Ancient Library</h2>
-
 <blockquote>
 <p>Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.</p>
 </blockquote>
-
 <figure>
     <img src="../../img/labs/library.png"/> <figcaption>
             <h4>Source: dublin2019.com</h4>
         </figcaption>
 </figure>
-
 <h3 id="1-modeling-the-books">1. Modeling the books</h3>
-
 <p>The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</p>
-
 <ul>
 <li><em>Cleaning the streets Beyond the Gate</em>, by <em>Ulder Ravengard</em></li>
 <li><em>Beyond the depths of the Underdark</em>, by <em>Drizzt Do&rsquo;Urden</em></li>
 <li><em>Ancient Aberrations and how to prevent them</em>, by <em>Elminster Aumar</em></li>
 <li><em>Killing people with cows: the ins and outs of Wild Magic</em>, by <em>Neera</em></li>
 </ul>
-
 <p>How should we proceed to model the concept of a book? Right, a <code>struct</code>! Keep track of the title and the author using <code>char*</code> properties. <br/>
 Proceed with caution and whatever you do, do not directly look into the green light! Use the following blueprint:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define SIZE 4
-</span><span style="color:#75715e"></span>Book<span style="color:#f92672">*</span> <span style="color:#a6e22e">create_books</span>() {
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define SIZE 4
+</span><span style="color:#75715e"></span><span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#75af00">create_books</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// ??
-</span><span style="color:#75715e"></span>}
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print_books</span>(Book<span style="color:#f92672">*</span> library) {
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">print_books</span><span style="color:#111">(</span><span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// ??
-</span><span style="color:#75715e"></span>}
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    Book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
-    print_books(library);               <span style="color:#75715e">// should print the above list ([title], by [author])
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<h3 id="2-linking-things-together">2. Linking things together</h3>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
+    <span style="color:#111">print_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>               <span style="color:#75715e">// should print the above list ([title], by [author])
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><h3 id="2-linking-things-together">2. Linking things together</h3>
 <p>The strcuture you provided can be expanded with a third property: <code>Book* next</code>, pointing to the next element in the row. That way, when looping through all books, we simply need to follow the &lsquo;next&rsquo; pointer, until a <code>NULL</code> is reached, indicating the end of the library. This technique makes it possible to loop through things <strong>without knowing it&rsquo;s size</strong>!</p>
-
 <p>Rework your implementation by removing the <code>#define SIZE 4</code> statement, and by relying on the <code>next</code> pointer in the <code>print_books()</code> method.</p>
-
 <p>Tips:</p>
-
 <ol>
 <li>What should the value of <code>next</code> be when creating the book instances in <code>create_books()</code>? What should that function return? A handle to what?</li>
 <li>You can use <code>while(ptr) { ... }</code> instead of a <code>for</code> loop. The value within the <code>while()</code> statement always evaluates to <code>true</code>, unless a &ldquo;nullpointer&rdquo; (a value of <code>0</code> or <code>NULL</code>) is detected. That is exactly what we want.</li>
 <li>Another method to ease use of the <code>malloc()</code> statements might come in handy, such as <code>Book* create_book(char* title, char* author)</code>.</li>
 </ol>
-
 <h3 id="3-cleaning-up-the-library">3. Cleaning up the library</h3>
-
 <p>The place looks dusty, doesn&rsquo;t it? <br/>
 Also, the books seem to be placed in a random order. Why don&rsquo;t we take the time, now that we are here and enjoy the green glow, to order these books alphabetically <strong>by author</strong>? You can ignore the surnames, simply sort on the property <code>author</code>. That is, the expected output of your program should be:</p>
-
 <pre>
 Beyond the depths of the Underdark, by Drizzt Do'Urden
 Ancient Aberrations and how to prevent them, by Elminster Aumar
 Killing people with cows: the ins and outs of Wild Magic, by Neera
 Cleaning the streets Beyond the Gate, by Ulder Ravengard
 </pre>
-
 <p>Create and call <code>void sort_books(Book* library)</code> before printing them.</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1713,48 +1692,37 @@ graph LR;
     T --> B
 
 </div>
-
 <p>Tips:</p>
-
 <ol>
 <li>Use the <a href="https://www.tutorialspoint.com/c_standard_library/c_function_strcmp">strcmp()</a> function from <code>&lt;string.h&gt;</code> to compare two strings.</li>
 <li>Sorting a <em>linked list</em> is not as difficult as you might think. You will need some sort of <em>swapping</em> function. Take a look at the above drawing. If book 4 needs to be first, how do you swap it with book 1, <strong>while keeping the links intact</strong>?</li>
 <li>Use <em>recursion</em> to repeatedly call <code>sort_books()</code> within the same function. Which book should be placed in the beginning? What should you process next? Think in terms of <em>head</em> and <em>tail</em>.</li>
 </ol>
-
-<h3 id="4-wild-surge-asc-desc">4. Wild Surge! ASC/DESC</h3>
-
+<h3 id="4-wild-surge-ascdesc">4. Wild Surge! ASC/DESC</h3>
 <blockquote>
 <p>A sudden gust of wind enters the old library. You immediately halt what you were doing to carefully listen if imminent threats are upon you and your party. A cloaked figure swings open a side-door and starts casting a spell that sounds very unfamiliar to you. <em>Praeses, Alia, Fero&hellip;</em> An alteration, but which one?! Quick, hide the books! But alas, it was too late&hellip; <br/>
 While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild surges!</em>&rdquo;. The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar&hellip; Suddenly, you know it. The book! The cow book! That was the author! Neera&hellip;</p>
 </blockquote>
-
 <p>Neera managed to completely reverse our sorting strategy, sorting Z to A instead of A to Z. She used a function pointer to encapsulate <code>strcmp()</code>. The following is your main function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    Book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
-    neera_encounter();  <span style="color:#75715e">// changes a function pointer from asc to desc
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
+    <span style="color:#111">neera_encounter</span><span style="color:#111">();</span>  <span style="color:#75715e">// changes a function pointer from asc to desc
 </span><span style="color:#75715e"></span>
-    sort_books(library);
-    print_books(library);   <span style="color:#75715e">// prints Z -&gt; A
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>Create a function pointer that is initialized to the address of your ascending sorter. Neera her Wild Magic switches this to the address of a descending sorter. That pointer will be used inside <code>sort_books()</code> instead of <code>strcmp()</code>.</p>
-
+    <span style="color:#111">sort_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>
+    <span style="color:#111">print_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>   <span style="color:#75715e">// prints Z -&gt; A
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Create a function pointer that is initialized to the address of your ascending sorter. Neera her Wild Magic switches this to the address of a descending sorter. That pointer will be used inside <code>sort_books()</code> instead of <code>strcmp()</code>.</p>
 <p>Tips:</p>
-
 <ol>
 <li>Re-read <a href="../../ch3-pointers">chapter 3 (pointers)</a>!</li>
 <li>You will need two extra functions, <code>asc()</code> and <code>desc()</code>, besides <code>neera_encounter()</code>.</li>
 </ol>
-
 <h3 id="5-do-you-rest-until-fully-healed">5. Do you rest until fully healed?</h3>
-
 <blockquote>
 <p>The rumble of Neera&rsquo;s spell made your head rush and you fill dizzy. Maybe it would be better for you and your party to stay for the night and set up camp. During the night, you make the time to write up on the past events. It looks like it will be quite a thick book, something new to add to the old library. Now, should you add the book at the beginning of the row, or all the way at the end?</p>
 </blockquote>
-
 <p>Create a function called <code>void add_book(Book* library, Book* book)</code>, that adds a new book to <strong>the end</strong> of the library.</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1776,17 +1744,16 @@ graph LR;
     A -->|next| B
 
 </div>
-
 <p>That was quite simple, wasn&rsquo;t it? What if we want it to add new books to <strong>the beginning</strong> of the library? You cannot change the <code>Book* library</code> pointer as it is copied over by-value. For this to work, we need to change the signature to a <em>pointer of a pointer</em>: <code>void add_book(Book** library, Book* book)</code>.</p>
-
 <p>Use the following main function to test your code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    Book<span style="color:#f92672">*</span> library <span style="color:#f92672">=</span> create_books();
-    Book<span style="color:#f92672">*</span> newbook <span style="color:#f92672">=</span> create_book(<span style="color:#e6db74">&#34;My adventures&#34;</span>, <span style="color:#e6db74">&#34;The Hero&#34;</span>);
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
+    <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">newbook</span> <span style="color:#f92672">=</span> <span style="color:#111">create_book</span><span style="color:#111">(</span><span style="color:#d88200">&#34;My adventures&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;The Hero&#34;</span><span style="color:#111">);</span>
     <span style="color:#75715e">// add newbook to the library. But how? 
-</span><span style="color:#75715e"></span>    print_books(library);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
+</span><span style="color:#75715e"></span>    <span style="color:#111">print_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 
 <footer class="footline">
 	
@@ -2795,19 +2762,17 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

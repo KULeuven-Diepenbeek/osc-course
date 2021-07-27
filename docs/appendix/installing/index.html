@@ -12,21 +12,19 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,13 +1578,10 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#recipe-for-installing-the-osc-virtual-machine">Recipe for installing the OSC virtual machine</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#recipe-for-installing-the-osc-virtual-machine">Recipe for installing the OSC virtual machine</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1610,156 +1605,156 @@ window.MathJax = {
         
 
 
-
-
 <p>The exercises for this course are to be done on the <strong>Linux</strong> Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.</p>
-
 <p>We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle. So for this course we use a third option, called a &ldquo;virtual machine&rdquo;. We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it&rsquo;s running on normal hardware.</p>
-
 <p>Notes:</p>
-
 <ul>
 <li>If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!</li>
 <li>If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible.</li>
 <li>If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you&rsquo;re out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See <a href="https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/">https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/</a> - although beware and follow it at your own risk!</li>
 </ul>
-
 <h2 id="recipe-for-installing-the-osc-virtual-machine">Recipe for installing the OSC virtual machine</h2>
-
 <ol>
-<li><p>Download and install <a href="https://www.virtualbox.org/">VirtualBox</a></p></li>
-
-<li><p>Download Linux</p>
-
+<li>
+<p>Download and install <a href="https://www.virtualbox.org/">VirtualBox</a></p>
+</li>
+<li>
+<p>Download Linux</p>
 <ul>
 <li>There are many types of Linux available. We will use either Ubuntu or Bodhi (which is a more lightweight, smaller version of Ubuntu)
-
 <ul>
 <li>download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 20.04.2 LTS, filename ubuntu-20.04.2-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)</li>
 <li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-5.1.0-64.iso) (800MB image, will require 6GB disk space)</li>
-</ul></li>
-</ul></li>
-
-<li><p>Prepare VirtualBox</p>
-
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Prepare VirtualBox</p>
 <ul>
 <li>For this first part, we will follow <a href="https://brb.nci.nih.gov/seqtools/installUbuntu.html">an existing guide</a>
-
 <ul>
 <li>Note that this is for an older version of Ubuntu, but everything is the same up until where you need to actually install Linux (the &ldquo;Install Ubuntu&rdquo; heading), which is where you go to step 4 below</li>
-</ul></li>
+</ul>
+</li>
 <li>Follow the guide until the &ldquo;Install Ubuntu&rdquo; Heading, taking into account these changes/options:
-
 <ul>
 <li>Memory size:
-
 <ul>
 <li>Best to choose at least 2048MB of RAM for the Virtual machine</li>
-</ul></li>
+</ul>
+</li>
 <li>Disk size:
-
 <ul>
 <li>For Ubuntu: choose a disk size of at least 10GB</li>
 <li>For Bodhi: choose a disk size of at least 6GB</li>
 <li>For both: you may choose the &ldquo;Dynamically allocated&rdquo; disk for this course if you don&rsquo;t have much disk space on your machine</li>
-</ul></li>
-</ul></li>
-</ul></li>
-
-<li><p>Install Linux</p>
-
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Install Linux</p>
 <ul>
 <li>In theory, you can run Linux without installing it (the &ldquo;Try Ubuntu&rdquo; option or the default state that Bodhi starts in). However, you would loose all files every time you shutdown the Virtual machine, so we recommend installing it proper for the duration of this course</li>
 <li>For Ubuntu:
-
 <ul>
 <li>Ubuntu starts into a selection screen where you can choose to either Try Ubuntu or install it. Choose install.</li>
 <li>Follow the default installation instructions in the wizard (similar to <a href="https://brb.nci.nih.gov/seqtools/installUbuntu.html">the guide we&rsquo;ve been following</a>)</li>
 <li>You can safely erase the disk: this only erases the virtual disk, not your real hard drive</li>
 <li>You do NOT need to choose additional encryption</li>
-</ul></li>
+</ul>
+</li>
 <li>For Bodhi:
-
 <ul>
 <li>Bodhi starts into a selection screen with several options. You need to be fast, because after a while it auto-selects the first option (= try without installing). Instead, use the arrow keys to choose &ldquo;Install Bodhi&rdquo;</li>
 <li>Follow the default install wizard, choosing the default options</li>
 <li>You do NOT need to choose additional encryption</li>
-</ul></li>
+</ul>
+</li>
 <li>After installation, reboot and login with your created account</li>
-</ul></li>
-
-<li><p>Prepare GCC</p>
-
+</ul>
+</li>
+<li>
+<p>Prepare GCC</p>
 <ul>
 <li>For many exercises in this course, we will use the &ldquo;GNU Compiler Collection&rdquo; (GCC) to run our C program code.</li>
 <li>We will do this from the &ldquo;terminal&rdquo; or &ldquo;command line&rdquo;, a textual interface. This comes pre-installed in Linux. Look for an <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/1200px-GNOME_Terminal_icon_2019.svg.png">icon like this one</a>, which should open a screen that looks a bit like <a href="https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png">this one</a>.</li>
 <li>To check if GCC is installed (it should be), type the following command in the terminal and hit enter: <code>gcc -v</code>
-
 <ul>
 <li>the output should be a list of details of the GCC program, and should end with a line starting with &ldquo;gcc version&rdquo;</li>
 <li>if this is not the case and you get an error message saying GCC is not installed, please execute the following command <code>sudo apt update &amp;&amp; sudo apt install -y gcc</code> (it will ask you for your password) and try again</li>
-</ul></li>
-</ul></li>
-
-<li><p>Get the course files</p>
-
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Get the course files</p>
 <ul>
 <li>For some exercises, we provide some basic code to help you get started</li>
 <li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
 <li>For now, you just need to execute following commands in the terminal:
-
 <ul>
 <li>Install git: <code>sudo apt update &amp;&amp; sudo apt install -y git</code></li>
 <li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files</code>
-
 <ul>
 <li>This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items</li>
-</ul></li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-
 <p>You should now be ready to follow along with the classes!</p>
-
 <h2 id="faq">FAQ</h2>
-
 <ol>
-<li>[WINDOWS] The screen looks very interlaced
-
+<li>[WINDOWS] The screen looks very interlaced</li>
+</ol>
 <ul>
-<li>Settings &gt; Display</li>
+<li>Settings &gt; Display
+<ul>
 <li>Graphics Controller VBoxVGA -&gt; VMSVGA</li>
-</ul></li>
-<li>I want to change the keyboard layout!
-
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>I want to change the keyboard layout!</li>
+</ol>
 <ul>
 <li>(<a href="https://www.bodhilinux.com/w/configuring-your-new-bodhi-system/">https://www.bodhilinux.com/w/configuring-your-new-bodhi-system/</a> Go to Menu &gt; Applications &gt; System Tools &gt; System Settings &gt; Keyboard Layout to open the Keyboard Layout dialog box.  Click your language from the list and hit Apply Selected.)</li>
-</ul></li>
-<li>I want to be able to copy-and-paste text between my Host (my own computer) and the Guest (Linux ISO)!
-
+</ul>
+<ol start="3">
+<li>I want to be able to copy-and-paste text between my Host (my own computer) and the Guest (Linux ISO)!</li>
+</ol>
 <ul>
 <li>This is not possible without the installation of an additional package: <a href="https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745">https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745</a></li>
-</ul></li>
-<li>I want to install something else such as my own favorite editor!
-
+</ul>
+<ol start="4">
+<li>I want to install something else such as my own favorite editor!</li>
+</ol>
 <ul>
 <li><code>sudo apt install [package]</code></li>
-</ul></li>
-<li>I want to change the resolution of the VirtualBox display
-
+</ul>
+<ol start="5">
+<li>I want to change the resolution of the VirtualBox display</li>
+</ol>
 <ul>
 <li>This is sadly non-trivial with VirtualBox, where by default you can either choose the small/windowed view (default), or a fullscreen view from the menu.</li>
-<li>To choose a dynamic resolution, you need to install the &ldquo;VirtualBox Guest Additions&rdquo;</li>
+<li>To choose a dynamic resolution, you need to install the &ldquo;VirtualBox Guest Additions&rdquo;
+<ul>
 <li>Boot the Virtual Machine and login</li>
 <li>In the VirtualBox menu on top, choose &ldquo;Mount Guest Additions CD Image&rdquo; (bottom option)</li>
 <li>This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
-
 <ul>
 <li>Sometimes this step requires additional software to be installed first. This typically does the trick: <code>sudo apt install -y make perl</code>. After this, reboot the VM and re-Mount the CD image.</li>
-</ul></li>
-</ul></li>
-</ol>
-
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
 <figure>
     <img src="../../img/installVM/arduino_01.png"/> 
@@ -2789,19 +2784,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

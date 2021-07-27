@@ -12,21 +12,19 @@
     <title>8.3: Different Scopes in C :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,19 +1578,13 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#scoping-issues">Scoping issues</a>
-<ul>
-<li>
-<ul>
-<li><a href="#local-variables">Local variables</a></li>
-<li><a href="#global-variables">Global variables</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#scoping-issues">Scoping issues</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1616,110 +1608,90 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="scoping-issues">Scoping issues</h2>
-
 <p>Now that you have some basic knowledge on the stack and the heap, it is time to take a better look at the different scopes present in the C programming language. These concepts are very important because they in part determine whether variables live (or not) - and whether anything is pushed to the local stack (or not). Let&rsquo;s start with a basic example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">whats_my_age</span>() {
-    <span style="color:#66d9ef">int</span> age <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>; <span style="color:#75715e">// I&#39;m being generous here!
-</span><span style="color:#75715e"></span>}
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">whats_my_age</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span> <span style="color:#75715e">// I&#39;m being generous here!
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> my_age <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>) whats_my_age();
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>my_age);
-}</code></pre></div>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">my_age</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">whats_my_age</span><span style="color:#111">();</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">my_age</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
     	<p>What is the output of the above program? I&rsquo;m sure you know the answer, but&hellip; why?</p>
 
 	</div>
 </div>
-
 <p>If you forget how <code>void*</code> works, please re-read <a href="../../ch3-pointers">chapter 3: pointers and arrays</a>.</p>
-
 <h4 id="local-variables">Local variables</h4>
-
 <p>The <em>local</em> variabel, <code>age</code>, exists as soon as <code>whats_my_age</code> is pushed to <strong>the stack</strong>. That automatically includes all locally defined variables. When the method is done, after the <code>}</code> sign, things are popped from the stack to make room for future methods and their local variables. This means <code>whats_my_age</code> and <code>age</code> disappear. Forever.</p>
-
 <p>If we were to try and change the <code>age</code> variable from inside the <code>main()</code> method (another method, so the variable is not local anymore) by adding <code>age = 5;</code> in the main method, we would get a compile error:</p>
-
 <pre>
 scoping.c:9:5: error: use of undeclared identifier 'age'
     age = 5;
     ^
 1 warning and 1 error generated.    
 </pre>
-
 <p>Nothing shocking there. Identifiers are <strong>undeclared</strong> when they are not present in <strong>the program stack</strong>.</p>
-
 <p>As a side note referenced from <a href="https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html">here</a>, there is a way to tell C to keep a stack variable around, even after its creator function exits, and that is to use the <code>static</code> keyword when declaring the variable. A variable declared with the static keyword thus becomes something like a global variable, but one that is only visible inside the function that created it.</p>
-
 <p>For instance:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> i;
-<span style="color:#66d9ef">int</span> j;
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">static</span> <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">j</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// do something!
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>We say that <code>i</code> is <strong>not</strong> visible outside the module, while <code>j</code> <strong>is</strong> visible. Again: adding <code>static</code> <em>reduces</em> visibility, it does not enhance it!</p>
-
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>We say that <code>i</code> is <strong>not</strong> visible outside the module, while <code>j</code> <strong>is</strong> visible. Again: adding <code>static</code> <em>reduces</em> visibility, it does not enhance it!</p>
 <ul>
 <li><code>i</code> has what is called <em>internal linkage</em>. You cannot use the name <code>i</code> again for variables or functions in any other source files.</li>
 <li><code>j</code> has what is called <em>external linkage</em>. You can still use <code>j</code> from other compilesets using the keyword <code>extern</code>, like this: <code>extern int j;</code></li>
 </ul>
-
 <p>The keyword <code>extern</code> is used to declare a C variable without defining it. You&rsquo;re telling the compiler &ldquo;all right, I&rsquo;ve got this variable x, but it&rsquo;s defined somewhere else, ok?&rdquo;. Thus, it extends the visibility of the variable (or function). It&rsquo;s a strange construction, one that you probably won&rsquo;t need except under very specific circumstances.</p>
-
 <h4 id="global-variables">Global variables</h4>
-
 <p>Once we change the above program by moving <code>age</code> outside of the method scope, into the <strong>global scope</strong>, we get something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> age;
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">whats_my_age</span>() {
-    age <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#111">age</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">whats_my_age</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    whats_my_age();
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, age);
-}</code></pre></div>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">whats_my_age</span><span style="color:#111">();</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">age</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
     	<p>Compile the above program. It correctly prints the age. What is the biggest disadvantage of having a global variable?</p>
 
 	</div>
 </div>
-
 <p>Can you figure out where global variables resize in the memory of a program? Take another good look at the schematic in <a href="../../ch8-stack/stackvsheap">8.1: program memory</a>. It lives <strong>outside of</strong> the stack, <em>and also</em> outside of the heap, in a separate block called &ldquo;data&rdquo;. Note that we are not employing any kind of pointer system. Thus, we are not calling upon the heap to transfer data from one method to the other.</p>
-
 <p><strong>When should I use global variables?</strong> The answer is <em>never</em>, if possible. In practice, in an iterative programming language such as C, that is very difficult to achieve. In essence, function and <code>struct</code> declarations are all part of the global scope. Methods can be accessed from any other method (provided you used <em>forward declarations</em>), because the method name itself is declared globally, instead of locally.</p>
-
 <p>Consider the following example in Javascript:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">someMethod</span>() {
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">function</span> <span style="color:#75af00">someMethod</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#75af00">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
 
-    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">someMethodInAMethod</span>() {
-        <span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// will work: the variable is part of this (closed) scope
-</span><span style="color:#75715e"></span>    }
+    <span style="color:#00a8c8">function</span> <span style="color:#75af00">someMethodInAMethod</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span> <span style="color:#75715e">// will work: the variable is part of this (closed) scope
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
 
-    <span style="color:#a6e22e">someMethodInAMethod</span>();
-}
+    <span style="color:#75af00">someMethodInAMethod</span><span style="color:#111">();</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">otherMethod</span>() {
-    <span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// will not work: age is accessible in someMethod only
+<span style="color:#00a8c8">function</span> <span style="color:#75af00">otherMethod</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span> <span style="color:#75715e">// will not work: age is accessible in someMethod only
 </span><span style="color:#75715e"></span>
-    <span style="color:#a6e22e">otherMethod</span>(); <span style="color:#75715e">// will work and cause an infinite loop
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">someMethodInAMethod</span>(); <span style="color:#75715e">// will not work: same reason as age 
-</span><span style="color:#75715e"></span>}
-</code></pre></div>
-<p>Calling functions within functions is only possible in C in the form of function pointers leveraging the power of <code>void*</code>, but there is no change in the functionality of the scopes. In C, everything in <strong>top level</strong> is <em>global scope</em>. Top level is declared as the lowermost level, the body of your source file where all delcarations are put. <code>main()</code> is globally scoped at top level. In the above JS example, so is <code>someMethod</code>, but not <code>someMethodInAMethod</code>: that method is not part of the global scope.</p>
-
+    <span style="color:#75af00">otherMethod</span><span style="color:#111">();</span> <span style="color:#75715e">// will work and cause an infinite loop
+</span><span style="color:#75715e"></span>    <span style="color:#75af00">someMethodInAMethod</span><span style="color:#111">();</span> <span style="color:#75715e">// will not work: same reason as age 
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p>Calling functions within functions is only possible in C in the form of function pointers leveraging the power of <code>void*</code>, but there is no change in the functionality of the scopes. In C, everything in <strong>top level</strong> is <em>global scope</em>. Top level is declared as the lowermost level, the body of your source file where all delcarations are put. <code>main()</code> is globally scoped at top level. In the above JS example, so is <code>someMethod</code>, but not <code>someMethodInAMethod</code>: that method is not part of the global scope.</p>
 <p>In practice, most C programs are constructed as a sequence of method calls, all residing in the global scope. You should try to avoid using global <em>variables</em> as any method can change the value of that variable, causing all kinds of wreckage. If you need to pass something, use <code>return</code>. If you need to pass multiple things, use a <code>struct</code>, or refactor it!</p>
 
 
@@ -2730,19 +2702,17 @@ scoping.c:9:5: error: use of undeclared identifier 'age'
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

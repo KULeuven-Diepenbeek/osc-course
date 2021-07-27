@@ -12,21 +12,19 @@
     <title>1.5: C Ecosystems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,33 +1578,19 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</a></li>
-</ul></li>
-<li><a href="#compiling-everything">Compiling everything</a>
-<ul>
-<li>
-<ul>
-<li><a href="#step-1-compiling">Step 1: compiling</a></li>
-<li><a href="#step-2-linking">Step 2: linking</a></li>
-</ul></li>
-<li><a href="#repeatedly-compiling">Repeatedly compiling</a>
-<ul>
-<li><a href="#1-using-a-script">(1) using a script</a></li>
-<li><a href="#2-makefiles">(2) Makefiles</a></li>
-<li><a href="#3-ides">(3) IDEs</a>
-<ul>
-<li><a href="#lightweights">Lightweights</a></li>
-<li><a href="#heavyweights">Heavyweights</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</a></li>
+      </ul>
+    </li>
+    <li><a href="#compiling-everything">Compiling everything</a>
+      <ul>
+        <li></li>
+        <li><a href="#repeatedly-compiling">Repeatedly compiling</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1630,26 +1614,21 @@ window.MathJax = {
         
 
 
-
-
 <h3 id="separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</h3>
-
 <p>To make the division clearer, we prepare the following C code, split into two different files:</p>
-
 <p>File <code>hello.c</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// hello.c
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">hello</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;heykes&#34;</span>;
-}</code></pre></div>
-<p>File <code>main.c</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// main.c
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// hello.c
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#75af00">hello</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;heykes&#34;</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>File <code>main.c</code>:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// main.c
 </span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;printf.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    printf(<span style="color:#e6db74">&#34;%s&#34;</span>, hello());
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>The main function has no knowledge of <code>hello()</code> because it lives in a different source file. This will be fine if we link the machine code together after compiling. compiling main.c separately gives this:</p>
-
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s&#34;</span><span style="color:#111">,</span> <span style="color:#111">hello</span><span style="color:#111">());</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The main function has no knowledge of <code>hello()</code> because it lives in a different source file. This will be fine if we link the machine code together after compiling. compiling main.c separately gives this:</p>
 <pre>
 Wouters-MacBook-Air:cmake-build-debug wgroenev$ gcc -c main.c
 main.c:5:18: warning: implicit declaration of function 'hello' is invalid in C99
@@ -1658,9 +1637,7 @@ main.c:5:18: warning: implicit declaration of function 'hello' is invalid in C99
                  ^
 1 warning generated.
 </pre>
-
 <p>It is a <strong>WARNING</strong> - not an <strong>ERROR</strong> - so it still compiles! Wow! That is thanks to the <code>-c</code> flag (compile only). The warning is easily solved with a <strong>forward function declarations</strong> before the main function: <code>char* hello ();</code>. This is the crucial difference between declaration and definition. However, the problems are not yet solved if we want to link this without hello.c:</p>
-
 <pre>
 Wouters-MacBook-Air:cmake-build-debug wgroenev$ gcc main.o
 Undefined symbols for architecture x86_64:
@@ -1669,11 +1646,8 @@ Undefined symbols for architecture x86_64:
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 </pre>
-
-<p>Okay, so now a blocking <strong>ERROR</strong> was generated. We also need the hello.o binaries to arrive at a successful working program. For that, we first have to execute <code>gcc -c hello.c</code> and then<code>gcc main.o hello.o -o hey</code>.</p>
-
+<p>Okay, so now a blocking <strong>ERROR</strong> was generated. We also need the hello.o binaries to arrive at a successful working program. For that, we first have to execute <code>gcc -c hello.c</code> and then<code> gcc main.o hello.o -o hey</code>.</p>
 <p>With the UNIX tool <code>nm</code> we can view the addresses that the linker needs to arrive at the <code>hey</code> executable. Try opening hello.o with a text editor. You then see something like this:</p>
-
 <pre>
 cffa edfe 0700 0001 0300 0000 0100 0000
 0300 0000 f001 0000 0020 0000 0000 0000
@@ -1724,9 +1698,7 @@ cffa edfe 0700 0001 0300 0000 0100 0000
 5f68 616c 6c6f 2e65 6800 4c5f 2e73 7472
 0045 485f 6672 616d 6530 0000
 </pre>
-
 <p>Beautiful, but not very clear. <code>nm</code> does help some:</p>
-
 <pre>
 Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm main.o
 0000000000000060 s EH_frame0
@@ -1741,16 +1713,12 @@ Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm hello.o
 0000000000000000 T _hello
 0000000000000050 S _hello.eh
 </pre>
-
 <p>You can see that in main.o the function <code>_hello</code> is assigned an <strong>unknown address</strong> (hence the U). This means that the left hand should assume that it is yet to come - and luckily it is correctly defined in hello.o at address <code>0000000000000000</code> (there is only 1 function).</p>
-
 
 <div class="notices note" ><p>Note that both .o files have overlapping &ldquo;address spaces&rdquo;: both <code>_hello</code> and <code>_main</code> are at address <code>0000000000000000</code>; this is normal. The linker will properly change/offset these addresses when creating the final program so they no longer overlap.</p>
 </div>
 
-
 <p>This is the way the files will be coupled to each other:</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1774,26 +1742,18 @@ graph TD
     D -.->|"search hello() via linker"|C
 
 </div>
-
 <p>Functions that have been declared in other source files must therefore be redefined (possibly with the <code>external</code> keyword) in your own source file where you wish to use the function. This way the compiler knows that there is a function with that signature, but &ldquo;he will still come across it&rdquo;. This will be further elaborated in the next labs.</p>
-
 <h2 id="compiling-everything">Compiling everything</h2>
-
 <p>We use the UNIX GNU <code>gcc</code> compiler to compile C source files and convert them into binaries. The simplest possible way to do so is:</p>
-
 <blockquote>
 <p><code>gcc *.c</code></p>
 </blockquote>
-
 <p>Due to the lack of a target file name, the compiler creates an &ldquo;a.out&rdquo; file that you can execute (<code>chmod +x</code> has already been done for you). You can specify this with the &ldquo;-o&rdquo; flag. If you have something more to link, put everything in a row one after the other.</p>
-
 <p>However, there are still a lot of compiler options that are <a href="https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html">explained at gcc.gnu.org</a> that you can play with.</p>
-
 
 <div class="notices note" ><p>When targeting another platform, you will need a <strong>cross-compiler</strong> that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, &hellip;)<br/>
 Instead of using the default GCC compiler: <code>gcc bla.c</code>, you will download and install a custom cross-compiler and evoke it the same way: <code>arm-eabi-none-gcc bla.c</code>. The Game Boy Advance (GBA) or RaspberryPi for instance have an ARM chip-set and require this cross-compiler. This differs from most x86 chip-sets that leverages <code>gcc</code>.</p>
 </div>
-
 
 
 <div class="ex">
@@ -1802,28 +1762,18 @@ Instead of using the default GCC compiler: <code>gcc bla.c</code>, you will down
 
 	</div>
 </div>
-
 <h4 id="step-1-compiling">Step 1: compiling</h4>
-
 <p>As seen in the above schematic, executing your source code requires the activation of two steps: compiling (1), and linking (2). <a href="https://en.wikipedia.org/wiki/C_preprocessor">C Preprocessor flags</a> get parsed just before compiling. Simply calling the <code>gcc</code> compiler executes all steps at once. Only compiling is done using the <code>-c</code> statement (source input) and providing the source files as arguments, producing <strong>object files</strong>, which can be then linked into a binary.</p>
-
 <h4 id="step-2-linking">Step 2: linking</h4>
-
 <p>After obtaining object files it is simply a matter of concatenating them (&lsquo;linking&rsquo;), to create the native executable binary file, using the <code>-o</code> flag and providing the object files as arguments. After linking, inspecting the disassembly (see <a href="../../theory/c/chap4">chapter 4</a> on how to do so in detail) shows the concatenated results.</p>
-
 <h3 id="repeatedly-compiling">Repeatedly compiling</h3>
-
 <h4 id="1-using-a-script">(1) using a script</h4>
-
 <p>It is annoying to have to type the same command all the time, so a simple alternative is to put your <code>gcc</code> command in a shell script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
-</span><span style="color:#75715e"></span>clear <span style="color:#f92672">&amp;&amp;</span> gcc -o mystuff source.c <span style="color:#f92672">&amp;&amp;</span> ./mystuff</code></pre></div>
-<h4 id="2-makefiles">(2) Makefiles</h4>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>clear <span style="color:#f92672">&amp;&amp;</span> gcc -o mystuff source.c <span style="color:#f92672">&amp;&amp;</span> ./mystuff
+</code></pre></div><h4 id="2-makefiles">(2) Makefiles</h4>
 <p>In the C world there is such a thing as a &ldquo;Makefile&rdquo; that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.</p>
-
 <p>With Makefiles you can describe &ldquo;targets&rdquo; that perform certain actions for you. For example, cleaning up binaries, compiling and linking, all as a separate step. Stringing steps together is of course also possible.</p>
-
 <p>File <code>Makefile</code>:</p>
 <pre><code>.DEFAULT_GOAL := all
 
@@ -1839,13 +1789,10 @@ compile:
 link:
     $(CC) -o main.out main.o
 
-all: clean compile link</code></pre>
-<p>Typically, the compiler used is set as a shell variable (CC = gcc). You can see here that compiling (gcc with the -c option does not link) and linking is split into separate make &lsquo;actions&rsquo;. This is not really necessary in our exercises, but shows the organizational strength of Make here.</p>
-
+all: clean compile link
+</code></pre><p>Typically, the compiler used is set as a shell variable (CC = gcc). You can see here that compiling (gcc with the -c option does not link) and linking is split into separate make &lsquo;actions&rsquo;. This is not really necessary in our exercises, but shows the organizational strength of Make here.</p>
 <p>Executing the above steps can be done using the <code>make</code> command and a default goal (all), or <code>make compile</code> for a specific goal (executes the &lsquo;compile&rsquo; steps only).</p>
-
 <p>For more information on the correct Makefile syntax, see the <a href="ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html">GNU make</a> documentation.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1853,30 +1800,20 @@ all: clean compile link</code></pre>
 
 	</div>
 </div>
-
 <h4 id="3-ides">(3) IDEs</h4>
-
 <h5 id="lightweights">Lightweights</h5>
-
 <p>A source file consists of simply plain text. Any text editor is sufficient to write your C program. However, it may be useful to use Sublime Text or Visual Studio Code. These modern powerful editors have built-in auto-completion and build tools.</p>
-
 <ul>
 <li><a href="https://www.thecrazyprogrammer.com/2017/04/how-to-run-c-and-c-program-in-sublime-text.html">Sublime Text 3 Build Systems en C/C++</a> and <a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html">docs</a></li>
 <li><a href="https://code.visualstudio.com/docs/languages/cpp">Visual Studio Code C/C++ integration</a></li>
 </ul>
-
 <p>We will not stop old-school fans from using Emacs or Vi(m).</p>
-
 <h5 id="heavyweights">Heavyweights</h5>
-
 <p><a href="https://www.jetbrains.com/clion/">CLion</a> is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it&rsquo;s built on the same platform (IDEA) - even most shortcuts are the same.</p>
-
 <figure>
     <img src="../../img/clion.png"/> 
 </figure>
-
-<p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: <code>CMakeLists.txt</code> contains instructions to generate a<code>Makefile</code>:</p>
-
+<p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: <code>CMakeLists.txt</code> contains instructions to generate a<code> Makefile</code>:</p>
 <pre>
 cmake_minimum_required(VERSION 3.10)
 project(my_little_pony)
@@ -1884,11 +1821,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
 </pre>
-
 <p>A simple CMake file is much easier to read and write than a Makefile. See <a href="https://cmake.org/cmake-tutorial/">CMake tutorial</a> for more information. CLion manages the <code>add_executable</code> arguments for you: adding new files to your project will also automatically add them to the list.</p>
-
 <p>Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling <code>gcc file.c</code> yourself every single time.</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -2913,19 +2847,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

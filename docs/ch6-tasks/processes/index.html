@@ -12,21 +12,19 @@
     <title>6.1: Processes :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,19 +1578,17 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#what-s-in-a-process">What&rsquo;s in a process ?</a></li>
-<li><a href="#run-process">Run process !</a>
-<ul>
-<li><a href="#process-control-block">Process Control Block</a></li>
-<li><a href="#process-state">Process state</a></li>
-<li><a href="#open-files-list">Open files list</a></li>
-</ul></li>
-<li><a href="#creating-processes">Creating processes</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#whats-in-a-process-">What&rsquo;s in a process ?</a></li>
+    <li><a href="#run-process-">Run process !</a>
+      <ul>
+        <li><a href="#process-control-block">Process Control Block</a></li>
+        <li><a href="#process-state">Process state</a></li>
+        <li><a href="#open-files-list">Open files list</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-processes">Creating processes</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1616,14 +1612,9 @@ window.MathJax = {
         
 
 
-
-
 <p>One of the three core tasks of an OS is the <strong>management of tasks</strong>. These different tasks are all running on the same processor. To make this magic happen some form of management is required.</p>
-
-<h2 id="what-s-in-a-process">What&rsquo;s in a process ?</h2>
-
+<h2 id="whats-in-a-process-">What&rsquo;s in a process ?</h2>
 <p>By definition, a process is an instance of a program. As was dicussed in the &ldquo;C-portion&rdquo; of this course, a basic program can be divided in multiple <strong>segments</strong>. When source code is compiled into a binary, these segments are <em>fixed</em>.</p>
-
 <ul>
 <li><strong>text/code</strong>: is the machine code in assembly. This section is compiled for one (type of) processor(s).</li>
 <li><strong>data</strong>: is the segment that contains initialised variables. These variables could be global, static, or external. A further distinction can be made between normal initialised variables and constants. This distinction is often referred to with read-only (<strong>ro-data</strong>) and read-write (<strong>rw-data</strong>), with the former the part where the constants reside and the latter that of the normal variables.</li>
@@ -1631,59 +1622,49 @@ window.MathJax = {
 <li><strong>stack</strong>: dynamic part of memory used to store typically short-lived data. <em>see Chapter 8</em></li>
 <li><strong>heap</strong>: dynamic part of memory used to store typically longer-lived data. <em>see Chapter 8</em></li>
 </ul>
-
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-225px-Program_memory_layout.pdf.jpg"/> <figcaption>
             <h4>source: Wikipedia</h4>
         </figcaption>
 </figure>
-
 <p>Let&rsquo;s put these definitions to the test. A very simple program could be written as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
-  printf(<span style="color:#e6db74">&#34;hello world !</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+  <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world !</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
 
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>As you know by now, this program can be compiled with the command below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ gcc -o hello hello.c
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-jvliegen@localhost:~/$ </code></pre></div>
-<p>On the CLI there is a command <strong>size</strong> that can be used to examine these segments.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ size -B hello
+</code></pre></div><p>As you know by now, this program can be compiled with the command below:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ gcc -o hello hello.c
+
+jvliegen@localhost:~/$ 
+</code></pre></div><p>On the CLI there is a command <strong>size</strong> that can be used to examine these segments.</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ size -B hello
    text    data     bss     dec     hex filename
    <span style="color:#ae81ff">1516</span>     <span style="color:#ae81ff">600</span>       <span style="color:#ae81ff">8</span>    <span style="color:#ae81ff">2124</span>     84c hello
-jvliegen@localhost:~/$ </code></pre></div>
-<p>This command shows the sizes of the sections that are discussed above. The text, data and bss sections are 1516, 600, and 8 bytes. In total this sums up to 2124 bytes, which can be written hexadecimally as 0x84C.</p>
-
+jvliegen@localhost:~/$ 
+</code></pre></div><p>This command shows the sizes of the sections that are discussed above. The text, data and bss sections are 1516, 600, and 8 bytes. In total this sums up to 2124 bytes, which can be written hexadecimally as 0x84C.</p>
 <p>OK, this makes sense :)</p>
-
-<h2 id="run-process">Run process !</h2>
-
+<h2 id="run-process-">Run process !</h2>
 <p>By the time you&rsquo;re reading this part of the course, running the binary that was compiled above should be a walk in the park.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./hello
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ./hello
 hello world !
 
-jvliegen@localhost:~/$ </code></pre></div>
-<p>When a program is started, an <strong>instance</strong> of the program is created, which we now call a <strong>process</strong>. Many of such processes can be active at the same time. Starting a process results (among many other things) in an allocation of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in <a href="../../osc-course/ch8-memory">chapter 8</a>.</p>
-
+jvliegen@localhost:~/$ 
+</code></pre></div><p>When a program is started, an <strong>instance</strong> of the program is created, which we now call a <strong>process</strong>. Many of such processes can be active at the same time. Starting a process results (among many other things) in an allocation of the program in the memory. This means that the program is mapped somewhere in the memory space. How this mapping in the memory space is achieved will be discussed in <a href="../../osc-course/ch8-memory">chapter 8</a>.</p>
 <p>So now the program was loaded into the memory. But to actually run it, we need to keep additional state for each instance. This additional space is kept in the <strong>Process Control Block (PCB)</strong>, which is created in the kernel upon mapping an instance of the program in memory space.</p>
-
 <h3 id="process-control-block">Process Control Block</h3>
-
 <p>The Process Control Block (PCB) is a representation of the process in the OS. It is created as a <em>task_struct</em> object. Such a PCB is made for every process and the definition of its struct is in the kernel source.</p>
-
 <p><strong>HOLD ON</strong> Linux is an open source OS, so does that mean we should be able to find this struct in the source code ?</p>
-
 <p><strong>WELL YES</strong> Inspecting the <a href="https://github.com/torvalds/linux/blob/master/include/linux/sched.h">sched.h</a> file verifies:</p>
-
 <ol>
 <li>that we <strong>can</strong> read the source code</li>
 <li>that the <strong>task_struct</strong> is indeed there,</li>
-<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at line 649 and ends at line 1389 (at the moment of writing, March 15th 2021). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
-
+<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at line 649 and ends at line 1389 (at the moment of writing, March 15th 2021). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:</li>
+</ol>
 <ul>
 <li>the process state</li>
 <li>the process identifier (PID)</li>
@@ -1693,32 +1674,28 @@ jvliegen@localhost:~/$ </code></pre></div>
 <li>memory limits</li>
 <li>the CPU registers</li>
 <li>the program counter (PC)</li>
-</ul></li>
-</ol>
-
+</ul>
 <p>Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pauze a process for a while: simply stop updating the PC.</p>
-
 <p>The PCBs of all the processes are contained in a doubly-linked list which is headed by the <strong>mother of all processes</strong>. This process is called <strong>init</strong> and has <strong>PID 0</strong>. The doubly-linked list is commonly known as the <strong>process table</strong>.</p>
-
 <p>Let&rsquo;s verify all of the above. To do that, we need to keep a process running for long enough to determine its PID.
 For this, we&rsquo;ll adapt the C program so it takes much more time to run.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">#define DURATION_IN_MINUTES 2
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-  <span style="color:#66d9ef">int</span> i;
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
 
-  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>(DURATION_IN_MINUTES<span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>);i<span style="color:#f92672">++</span>) {
-    printf(<span style="color:#e6db74">&#34;hello world !</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    sleep(<span style="color:#ae81ff">1</span>);
-  }
+  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">(</span><span style="color:#111">DURATION_IN_MINUTES</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span><span style="color:#111">);</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hello world !</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+    <span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">);</span>
+  <span style="color:#111">}</span>
 
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>After starting the program, the PID of the <strong>./longhello</strong> process can now be looked for using the <code>ps</code> command (&ldquo;Process Status&rdquo;).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ps -u
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>After starting the program, the PID of the <strong>./longhello</strong> process can now be looked for using the <code>ps</code> command (&ldquo;Process Status&rdquo;).</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ps -u
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 jvliegen <span style="color:#ae81ff">14339</span>  0.0  0.0  <span style="color:#ae81ff">30408</span>  <span style="color:#ae81ff">5500</span> pts/3    Ss   09:57   0:00 bash
 jvliegen <span style="color:#ae81ff">20162</span>  0.0  0.0   <span style="color:#ae81ff">4504</span>   <span style="color:#ae81ff">804</span> pts/1    S+   11:49   0:00 ./longhello
@@ -1727,10 +1704,10 @@ jvliegen <span style="color:#ae81ff">27675</span>  0.0  0.0  <span style="color:
 jvliegen <span style="color:#ae81ff">27700</span>  0.2  0.5 <span style="color:#ae81ff">207400</span> <span style="color:#ae81ff">96300</span> pts/0    Sl   08:55   0:30 /usr/local/bin/
 jvliegen <span style="color:#ae81ff">29414</span>  0.0  0.0  <span style="color:#ae81ff">30412</span>  <span style="color:#ae81ff">5504</span> pts/1    Ss   09:13   0:00 bash
 
-...</code></pre></div>
-<p>In the example above the PID is 20162. Now we want to get some information on this process. Remember how we said that in Linux, almost everything is a file?
+...
+</code></pre></div><p>In the example above the PID is 20162. Now we want to get some information on this process. Remember how we said that in Linux, almost everything is a file?
 Well, while this process is running, Linux magically creates a folder in the <strong>/proc</strong> map that has the same name as the PID. There is a lot of metadata on the process that can be consulted here. For example, certain fields in the struct_task are reflected in this folder.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ls /proc/20162 
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ ls /proc/20162 
 attr             exe        mounts         projid_map    status
 autogroup        fd         mountstats     root          syscall
 auxv             fdinfo     net            sched         task
@@ -1741,26 +1718,24 @@ comm             loginuid   oom_score      smaps         wchan
 coredump_filter  map_files  oom_score_adj  smaps_rollup
 cpuset           maps       pagemap        stack
 cwd              mem        patch_state    stat
-environ          mountinfo  personality    statm</code></pre></div>
-
+environ          mountinfo  personality    statm
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
-    	<p>Let&rsquo;s try to execute some commands here and see what they do:
-1. ls -al /proc/20162/cwd
-2. cat /proc/20162/sched
-3. cat /proc/20162/status
-4. cat /proc/20162/limits
-4. ls -al /proc/20162/net</p>
-
+    	<p>Let&rsquo;s try to execute some commands here and see what they do:</p>
+<ol>
+<li>ls -al /proc/20162/cwd</li>
+<li>cat /proc/20162/sched</li>
+<li>cat /proc/20162/status</li>
+<li>cat /proc/20162/limits</li>
+<li>ls -al /proc/20162/net</li>
+</ol>
 <p>(tip: the <code>cat</code> command (short for concatenate) can be used to read a file and display its contents.)</p>
 
 	</div>
 </div>
-
 <h3 id="process-state">Process state</h3>
-
 <p>One of the fields in the PCB is the <strong>process state</strong>. This value can be set to any of these values:</p>
-
 <ul>
 <li><strong>New</strong> The process is being created</li>
 <li><strong>Ready</strong> The process is waiting to be assigned to a processor</li>
@@ -1768,14 +1743,12 @@ environ          mountinfo  personality    statm</code></pre></div>
 <li><strong>Waiting</strong> The process is waiting for some event to occur (such as an I/O completion or reception of a signal)</li>
 <li><strong>Terminated</strong> The process has finished execution</li>
 </ul>
-
 <figure>
     <img src="../../img/os/db_processstate.png"/> <figcaption>
             <h4>The different process states and their transitions</h4>
         </figcaption>
 </figure>
-
-<p><style>
+<style>
   p.dinobook {
     color: #7E7E7E;
     font-size: 14px;
@@ -1786,32 +1759,21 @@ environ          mountinfo  personality    statm</code></pre></div>
     text-align: center;
   }
 </style>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
-
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <h3 id="open-files-list">Open files list</h3>
-
 <p>Every process that is created has a list of open files. Even programs that do not actually work with files have this list, and it is <strong>never empty</strong>. Typically three files are open by default:</p>
-
 <ol>
 <li>standard input (stdin)</li>
 <li>standard output (stdout)</li>
 <li>standard error (stderr)</li>
 </ol>
-
 <p>As you might have understood by now, these are not -actual- files on your hard disk. This is gain some Linux magic, where input/output logic is represented as files, to make them easy to read/write from.</p>
-
 <p>For example, by default, stdin is mapped to the keyboard and both stdout and stderr are mapped to the command line. These mappings can be altered and redirected, however. For example, we might want to send errors (stderr) to a file instead. Redirecting can be done and will be briefly touched in <a href="../../ch6-tasks/intertasks/">section 6.5</a>.</p>
-
 <h2 id="creating-processes">Creating processes</h2>
-
 <p>In Linux there are two typical ways for users to create processes: using <strong>fork</strong> or <strong>exec</strong>. There is a third option using a system() function, but because it is less secure and less efficient then the other two, it is not discussed here.</p>
-
 <p>Both fork and exec create a new process, but in very different ways. The fork function copies the PCB and the entire memory space of its current process to a new PCB and memory location. The process that calls the fork() is referred to as the <strong>parent</strong> process, while the new process is its <strong>child</strong>. The child process will continue operations on the same line as the parent process (because of the copying of the PCB, the program counter is also copied!). This method is useful if you want to for example process a lot of data on multiple processors: you first get everything ready, then fork() new child processes that each deal with a part of the data. This is easier than manually starting new processes from scratch.</p>
-
 <p>The exec function in contrast doesn&rsquo;t really spawn a new process, but instead replaces itself entirely with a new program. While it initially starts by copying its own PCB, it then replaces its internal &lsquo;program&rsquo; (read the <em>text</em>, <em>data</em>, and <em>bss</em>) with the new program to be executed. It then clears all its memory and starts executing the new program from the first instruction. Note that the new program can be a copy of the current one (essentially &ldquo;starting over&rdquo;), but more typically it&rsquo;s an entirely new program. The main way in which Linux starts new processes is to first fork() the current process, and then to call exec() directly inside of the new fork&rsquo;ed clone, replacing it with the intended new program.</p>
-
 <p>It is mentioned earlier that the first process that is started is the <strong>init</strong> process. When the complete OS starts, the init process spawns a lot of other processes. There are processes that handle connecting to the network, processes that do logging, and so on. Using the <strong>pstree</strong> command we can see the processes in a tree, and have a visual representation of which child-parent relations exist between processes.</p>
-
 <figure>
     <img src="../../img/0x_31.png"/> <figcaption>
             <h4>An example of the pstree command. The left image shows the result of Linux on an embedded system. The right image shows the result of Linux running on a laptop</h4>
@@ -2824,19 +2786,17 @@ environ          mountinfo  personality    statm</code></pre></div>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -46,7 +46,7 @@ We would of course not ask you to remove Windows to install Linux on your person
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</guid>
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
-Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;ldquo;, or even google the manpage on Google.
+Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;rdquo;, or even google the manpage on Google.
 Navigation    command goal     cd change directory   pwd &amp;lsquo;present working directory&amp;rsquo;   ls list (show content of current directory) - params: -la   mkdir create a directory   history show a history of used commands.</description>
     </item>
     

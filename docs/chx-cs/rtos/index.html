@@ -12,21 +12,19 @@
     <title>X.2: Real-time Operating Systems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,17 +1578,15 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#operating-systems">Operating Systems</a></li>
-<li><a href="#real-time-operating-systems">Real-time Operating Systems</a>
-<ul>
-<li><a href="#freertos">FreeRTOS</a></li>
-</ul></li>
-<li><a href="#outdated">Outdated ?</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#operating-systems">Operating Systems</a></li>
+    <li><a href="#real-time-operating-systems">Real-time Operating Systems</a>
+      <ul>
+        <li><a href="#freertos">FreeRTOS</a></li>
+      </ul>
+    </li>
+    <li><a href="#outdated-">Outdated ?</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1614,78 +1610,63 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="operating-systems">Operating Systems</h2>
-
 <p>In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.</p>
-
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Simplified_Structure_of_the_Linux_Kernel.svg/1920px-Simplified_Structure_of_the_Linux_Kernel.svg.png" width="60%"/> <figcaption>
             <h4>source: wikipedia.com</h4>
         </figcaption>
 </figure>
-
 <p>The image above shows:</p>
-
 <ul>
 <li>Task management</li>
 <li>Memory management</li>
 <li>the IO subsystem</li>
 </ul>
-
 <div class="multicolumn">
-    <div class="column">
-        <figure>
+	<div class="column">
+		<figure>
     <img src="../../img/chx/desired.svg"/> <figcaption>
             <h4>The desired situation.</h4>
         </figcaption>
 </figure>
-
-    </div>
-    <div class="column">
-        <figure>
-    <img src="../../img/chx/reality.svg"/> <figcaption>
-            <h4>The real situation.</h4>
-        </figcaption>
+<pre><code>&lt;/div&gt;
+&lt;div class=&quot;column&quot;&gt;
+	&lt;figure&gt;
+&lt;img src=&quot;/img/chx/reality.svg&quot;/&gt; &lt;figcaption&gt;
+        &lt;h4&gt;The real situation.&lt;/h4&gt;
+    &lt;/figcaption&gt;
+</code></pre>
 </figure>
-
-    </div>
+<pre><code>&lt;/div&gt;
+</code></pre>
 </div>
-
-<p>The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware. On the left-hand side of the image above a visual representation is given of what we want to experience. Everything is running truly in parallel.    We have touched on a number of reasons why reality is more like is shown on the right-hand side of the image. The OS will do its best to achieve the desired situation as good as possible. However, sometimes doing your best is <strong>not good enough</strong>.</p>
-
+<p>The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware. On the left-hand side of the image above a visual representation is given of what we want to experience. Everything is running truly in parallel.	We have touched on a number of reasons why reality is more like is shown on the right-hand side of the image. The OS will do its best to achieve the desired situation as good as possible. However, sometimes doing your best is <strong>not good enough</strong>.</p>
 <p>Try to imagine these situations (and the possible explanations from the developers):</p>
-
 <ul>
 <li>A pacemaker <strong>missed</strong> an arrhythmia
-
 <ul>
 <li><em>Sorry, at that moment the tiny OS was switching tasks.</em></li>
-</ul></li>
+</ul>
+</li>
 <li>A surveillance drone <strong>crashed</strong> against a construction crane
-
 <ul>
 <li><em>Sorry, at that moment the drone should have detected the crane, the flight computer was in the middle of a TCP time-out while sending telemetry.</em></li>
-</ul></li>
+</ul>
+</li>
 <li>The motor of a high-end sports car <strong>burned</strong> out due to a faulty-timed gear shift
-
 <ul>
 <li><em>Sorry, at the moment the timer ended, the microcontroller was handling a switch in radio stations.</em></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 
 <div class="notices warning" ><p><strong>Sometimes doing your best is not good enough</strong></p>
 </div>
 
-
 <h2 id="real-time-operating-systems">Real-time Operating Systems</h2>
-
 <p>While a general OS tries its best to meet all constraints, a sporadic failure is not a vital problem. If there is a dip in network handling resulting in a short lag of a youtube-clip the computer will not crash-and-burn. Operating systems like this are called <strong>soft real-time operating systems</strong> and examples are: Linux, Windows, iOS, &hellip;</p>
-
 <p>Like illustrated above, some situations have tasks which <strong>have to meet their constraints</strong>. Failing to do so results in a system failure. For these applications Real-Time Operating Systems (RTOS) can be used. These operating systems are called <strong>hard real-time systems</strong>. They have very specific deterministic constraints and ALL of them should be MET, at ALL TIME. Examples of RTOSes are:</p>
-
 <ul>
 <li>FreeRTOS</li>
 <li>mbedOS</li>
@@ -1693,21 +1674,15 @@ window.MathJax = {
 <li>Xenomai</li>
 <li><em>(there are many more)</em></li>
 </ul>
-
 <p>For the sake of completeness it is pointed out that tweaks are available to turn the Linux kernel into a real-time kernel.</p>
-
 <h3 id="freertos">FreeRTOS</h3>
-
 <figure>
     <img src="https://www.freertos.org/wp-content/uploads/2018/07/logo-1.jpg"/> <figcaption>
             <h4>The FreeRTOS logo</h4>
         </figcaption>
 </figure>
-
 <p><a href="https://www.freertos.org/">FreeRTOS</a> is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in <a href="../../ch2-interrupts/">chapter 2</a>. Again &hellip; you can run <strong>this OS</strong> on the little microcontroller 😄</p>
-
 <p>This OS essentially consists out 5 files:</p>
-
 <ul>
 <li><strong>tasks.c</strong>: handles task management</li>
 <li><strong>queue.c</strong>: handles queues &amp; synchronisation</li>
@@ -1715,39 +1690,37 @@ window.MathJax = {
 <li><strong>port.c</strong>: details for porting to a specific processor</li>
 <li><strong>heap_x.c</strong>: handles the heap</li>
 </ul>
-
 <p>FreeRTOS is a trade-off between bare-metal programming and the luxury of an OS. With everything you&rsquo;ve seen in this course you should be able, after some studying perhaps, to understand how a <strong>task</strong> is described.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runClock</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> pvParameters) {
-	<span style="color:#66d9ef">short</span> i, j, k, l;
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span> <span style="color:#75af00">runClock</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#111">pvParameters</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">short</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#111">k</span><span style="color:#111">,</span> <span style="color:#111">l</span><span style="color:#111">;</span>
 
-	<span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span>(;;) {
-		<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">24</span>;i<span style="color:#f92672">++</span>){
-			<span style="color:#66d9ef">for</span>(j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;j<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span>;j<span style="color:#f92672">++</span>){
-				d[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span> j <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> (j<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>;
-				d[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">=</span> (i<span style="color:#f92672">-</span>d[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+	<span style="color:#00a8c8">for</span><span style="color:#75715e">/*ever*/</span><span style="color:#111">(;;)</span> <span style="color:#111">{</span>
+		<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">24</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">){</span>
+			<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">j</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">j</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">60</span><span style="color:#111">;</span><span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">){</span>
+				<span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#f92672">=</span> <span style="color:#111">j</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+				<span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">j</span><span style="color:#f92672">-</span><span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">])</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+				<span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">2</span><span style="color:#111">]</span><span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+				<span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">3</span><span style="color:#111">]</span><span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">-</span><span style="color:#111">d</span><span style="color:#111">[</span><span style="color:#ae81ff">2</span><span style="color:#111">])</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
 
-				<span style="color:#66d9ef">for</span>(k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;k<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>;k<span style="color:#f92672">++</span>) {
-					<span style="color:#66d9ef">for</span>(l<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;l<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>;l<span style="color:#f92672">++</span>) {
-						_delay_ms(<span style="color:#ae81ff">5</span>);
-					}			 
-				}
-		}}
-	} <span style="color:#75715e">/* end of for/*ever*/</span>
+				<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">k</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">k</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span><span style="color:#111">;</span><span style="color:#111">k</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+					<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">l</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">l</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span><span style="color:#111">;</span><span style="color:#111">l</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+						<span style="color:#111">_delay_ms</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">);</span>
+					<span style="color:#111">}</span>			 
+				<span style="color:#111">}</span>
+		<span style="color:#111">}}</span>
+	<span style="color:#111">}</span> <span style="color:#75715e">/* end of for/*ever*/</span>
 
 	<span style="color:#75715e">// no return statement
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>The function above is the program/tasks that simulates time. The time is written in <strong>shared memory</strong> that is accessible by other programs/tasks.</p>
-
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p>The function above is the program/tasks that simulates time. The time is written in <strong>shared memory</strong> that is accessible by other programs/tasks.</p>
 <p>The main function could like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
   <span style="color:#75715e">/* Perform any hardware setup necessary. */</span>
 
   <span style="color:#75715e">// define the outputs to be the 4 digit-selectors and the 7 segement-selectors
-</span><span style="color:#75715e"></span>  DDRB <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b00111111; 
-  DDRD <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span>b11111000; 
+</span><span style="color:#75715e"></span>  <span style="color:#111">DDRB</span> <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span><span style="color:#111">b00111111</span><span style="color:#111">;</span> 
+  <span style="color:#111">DDRD</span> <span style="color:#f92672">|=</span> <span style="color:#ae81ff">0</span><span style="color:#111">b11111000</span><span style="color:#111">;</span> 
 
   <span style="color:#75715e">/* APPLICATION TASKS CAN BE CREATED HERE 
 </span><span style="color:#75715e">   * eg. xTaskCreate(TaskBlinkGreenLED, (const portCHAR*) &#34;GreenLED&#34;, 256, NULL, 3, NULL);
@@ -1760,23 +1733,20 @@ window.MathJax = {
 </span><span style="color:#75715e">   *                    be used to reference the task in API calls that, for example, change the task priority or
 </span><span style="color:#75715e">   *                    delete the task.
 </span><span style="color:#75715e">   **/</span>
-  xTaskCreate(runClock, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;runclock&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
-  xTaskCreate(showOnDisplay, (<span style="color:#66d9ef">const</span> portCHAR<span style="color:#f92672">*</span>) <span style="color:#e6db74">&#34;displayer&#34;</span>, <span style="color:#ae81ff">256</span>, NULL, <span style="color:#ae81ff">3</span>, NULL);
+  <span style="color:#111">xTaskCreate</span><span style="color:#111">(</span><span style="color:#111">runClock</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">portCHAR</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#d88200">&#34;runclock&#34;</span><span style="color:#111">,</span> <span style="color:#ae81ff">256</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
+  <span style="color:#111">xTaskCreate</span><span style="color:#111">(</span><span style="color:#111">showOnDisplay</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">portCHAR</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#d88200">&#34;displayer&#34;</span><span style="color:#111">,</span> <span style="color:#ae81ff">256</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
   
   <span style="color:#75715e">/* start the scheduler */</span>
-  vTaskStartScheduler();
+  <span style="color:#111">vTaskStartScheduler</span><span style="color:#111">();</span>
 
   <span style="color:#75715e">/* Execution will only reach here if there was insufficient heap to start the scheduler. */</span>
-  <span style="color:#66d9ef">for</span><span style="color:#75715e">/*ever*/</span> (;;);
+  <span style="color:#00a8c8">for</span><span style="color:#75715e">/*ever*/</span> <span style="color:#111">(;;);</span>
 
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<h2 id="outdated">Outdated ?</h2>
-
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="outdated-">Outdated ?</h2>
 <p>One could state that RTOS-es are outdated. Processors and OS-es, anno 2020, are <strong>so powerful</strong> that no additional measures should be taken to guarantee specific constraints. While that might be true, there is also <strong>scalability</strong>.</p>
-
 <p>It might be feasible to write all the desired software (networking stacks, logging, sensor reading, &hellip;) in such a way all constraints are met, <strong>BUT</strong> it requires a state-of-the-art system. For example: a processor with 2 GB of RAM memory and 160 GB of solid state storage. Installing this in every gearbox of a car, for example, simply is <strong>too expensive</strong>. If the same constraints and performance requirements can be met for a fraction of the price, industry dictates the latter option should be chosen.</p>
-
 <p>That&rsquo;s good news for whoever is studying this course, as skill-full programmers and engineers are a necessity to make this work 😄</p>
 
 
@@ -2787,19 +2757,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

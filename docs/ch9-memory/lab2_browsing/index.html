@@ -12,21 +12,19 @@
     <title>9.4: Simply browsing through pages :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1579,7 +1577,7 @@ window.MathJax = {
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -1608,44 +1606,47 @@ window.MathJax = {
         </figcaption>
 </figure>
 
-
 <ul>
 <li><strong>Get page size</strong> on your Linux system through a C program</li>
 </ul>
-
 <figure>
     <img src="../../img/mem/ss_941.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-
 <ul>
 <li>Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.
-
 <ul>
 <li>Try with at least addresses 19986 and 3638136</li>
 <li>Hint: lookup &ldquo;bit masking&rdquo;</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <figure>
     <img src="../../img/mem/ss_942.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-
 <ul>
-<li><p>Imagine the following system that is using a 2-level hierarchical page table:</p>
-
+<li>Imagine the following system that is using a 2-level hierarchical page table:
 <ul>
-<li>5-bit processor (so physical memory of 32 bytes, starting at 0x00 and ending at 0x1F)</li>
-<li>page size of 4 bytes (so 8 pages of 4 bytes each)</li>
-<li>The outer page table has 4 entries, the inner page table has 8 entries</li>
-<li>The outer page table&rsquo;s values are [3,0,2,1], the inner page table&rsquo;s values are [3,5,6,0,7,4,1,2]</li>
-<li>Write a program that, given a logical address, returns the physical address by looking it up through the two-level page table</li>
-
-<li><p>Test this with the following inputs and expected outputs:</p>
-
+<li>
+<p>5-bit processor (so physical memory of 32 bytes, starting at 0x00 and ending at 0x1F)</p>
+</li>
+<li>
+<p>page size of 4 bytes (so 8 pages of 4 bytes each)</p>
+</li>
+<li>
+<p>The outer page table has 4 entries, the inner page table has 8 entries</p>
+</li>
+<li>
+<p>The outer page table&rsquo;s values are [3,0,2,1], the inner page table&rsquo;s values are [3,5,6,0,7,4,1,2]</p>
+</li>
+<li>
+<p>Write a program that, given a logical address, returns the physical address by looking it up through the two-level page table</p>
+</li>
+<li>
+<p>Test this with the following inputs and expected outputs:</p>
 <ul>
 <li>21 =&gt; 0x11</li>
 <li>0 =&gt; 0x04</li>
@@ -1655,14 +1656,19 @@ window.MathJax = {
 <li>28 = 0x00</li>
 <li>19 = 0X1F</li>
 <li>32 =&gt; out-of-bounds error</li>
-</ul></li>
-
-<li><p>Tip: it helps to first make a drawing/sketch/schematic of what this looks like before programming</p></li>
-
-<li><p>Note: logical addresses will still be 5-bits in length! Think up-front about how the bits should be used!</p></li>
-
-<li><p>Extra challenge (optional): add a way to have gaps in your page tables (i.e., for not-yet-allocated pages, so you can simulate page faults to find a new main memory gap and assign that to the page tables dynamically). Track whether a page is already assigned or not using an additional valid/invalid status bit.</p></li>
-</ul></li>
+</ul>
+</li>
+<li>
+<p>Tip: it helps to first make a drawing/sketch/schematic of what this looks like before programming</p>
+</li>
+<li>
+<p>Note: logical addresses will still be 5-bits in length! Think up-front about how the bits should be used!</p>
+</li>
+<li>
+<p>Extra challenge (optional): add a way to have gaps in your page tables (i.e., for not-yet-allocated pages, so you can simulate page faults to find a new main memory gap and assign that to the page tables dynamically). Track whether a page is already assigned or not using an additional valid/invalid status bit.</p>
+</li>
+</ul>
+</li>
 </ul>
 
 
@@ -2673,19 +2679,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

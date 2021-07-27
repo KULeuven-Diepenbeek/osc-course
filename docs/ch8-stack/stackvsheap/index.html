@@ -12,21 +12,19 @@
     <title>8.1: The Stack &amp; the Heap :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,36 +1578,31 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#the-stack-and-the-heap">The Stack and the Heap</a>
-<ul>
-<li><a href="#program-memory">Program Memory</a></li>
-<li><a href="#the-stack">The Stack</a></li>
-<li><a href="#the-heap">The Heap</a></li>
-<li><a href="#inspecting-program-memory-in-the-os">Inspecting program memory in the OS</a></li>
-<li><a href="#should-i-use-the-stack-or-the-heap">Should I use the stack or the heap?</a></li>
-</ul></li>
-<li><a href="#memory-management">Memory management</a>
-<ul>
-<li><a href="#freeing-up-space">Freeing up space</a></li>
-<li><a href="#dangling-pointers">Dangling pointers</a></li>
-<li><a href="#garbage-collection-not-happening-in-c">Garbage Collection - not happening in C&hellip;</a></li>
-<li><a href="#what-happens-when-the-stack-and-heap-collide">What happens when the stack and heap collide?</a></li>
-<li><a href="#what-s-a-stack-overflow">What&rsquo;s a stack overflow?</a></li>
-</ul></li>
-<li><a href="#optimizing-c-code">Optimizing C code</a>
-<ul>
-<li>
-<ul>
-<li><a href="#compiler-flags">Compiler flags</a></li>
-<li><a href="#volatile">volatile</a></li>
-<li><a href="#function-call-order">Function call order</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#the-stack-and-the-heap">The Stack and the Heap</a>
+      <ul>
+        <li><a href="#program-memory">Program Memory</a></li>
+        <li><a href="#the-stack">The Stack</a></li>
+        <li><a href="#the-heap">The Heap</a></li>
+        <li><a href="#inspecting-program-memory-in-the-os">Inspecting program memory in the OS</a></li>
+        <li><a href="#should-i-use-the-stack-or-the-heap">Should I use the stack or the heap?</a></li>
+      </ul>
+    </li>
+    <li><a href="#memory-management">Memory management</a>
+      <ul>
+        <li><a href="#freeing-up-space">Freeing up space</a></li>
+        <li><a href="#dangling-pointers">Dangling pointers</a></li>
+        <li><a href="#garbage-collection---not-happening-in-c">Garbage Collection - not happening in C&hellip;</a></li>
+        <li><a href="#what-happens-when-the-stack-and-heap-collide">What happens when the stack and heap collide?</a></li>
+        <li><a href="#whats-a-stack-overflow">What&rsquo;s a stack overflow?</a></li>
+      </ul>
+    </li>
+    <li><a href="#optimizing-c-code">Optimizing C code</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1633,79 +1626,68 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="the-stack-and-the-heap">The Stack and the Heap</h2>
-
 <h3 id="program-memory">Program Memory</h3>
-
 <div>
     <span style="float: left; width: 70%">
         Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the <strong>program memory</strong>.<br/>
         The following image represents these sections, from bottom to top:
-
-        <ol>
-            <li>
-                <strong>text</strong><br/>
-                Read-only, fixed size. Contains executable instructions.
-            </li>
-            <li>
-                <strong>data</strong><br/>
-                Can be modified. Contains global or static variables that are initialized, such as <code>static int i = 5;</code>. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as <code>int i = 5; int main() { printf("%d", i); }</code>. See <a href="../../ch8-stack/scope/">Section 8.3</a>.
-            </li>
-            <li>
-                <strong>bss</strong><br/>
-                Can be modified. Contains <em>uninitialized</em> data, such as <code>static int i;</code>.
-            </li>
-            <li>
-                <strong>heap</strong><br/>
-                Dynamically growing. Contains data maintained by <code>malloc()</code> and <code>free()</code>, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
-            </li>
-            <li>
-                <strong>stack</strong><br/>
-                Set size. Contains <em>automatic variables</em>: variables created when (automatically) entered a function, such as <code>int main() { int i = 5; }</code>. Can be modified manually using the command <code>ulimit</code> - but this cannot be modified once the process is running. 
-            </li>
-        </ol>
-    </span>
-    <span style="float: right; width: 30%">
-        <img src="../../img/Program_memory_layout.pdf.jpg" title="Source: Wikipedia" />
-    </span>
+<pre><code>    &lt;ol&gt;
+        &lt;li&gt;
+            &lt;strong&gt;text&lt;/strong&gt;&lt;br/&gt;
+            Read-only, fixed size. Contains executable instructions.
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;data&lt;/strong&gt;&lt;br/&gt;
+            Can be modified. Contains global or static variables that are initialized, such as &lt;code&gt;static int i = 5;&lt;/code&gt;. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as &lt;code&gt;int i = 5; int main() { printf(&quot;%d&quot;, i); }&lt;/code&gt;. See &lt;a href=&quot;/ch8-stack/scope/&quot;&gt;Section 8.3&lt;/a&gt;.
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;bss&lt;/strong&gt;&lt;br/&gt;
+            Can be modified. Contains &lt;em&gt;uninitialized&lt;/em&gt; data, such as &lt;code&gt;static int i;&lt;/code&gt;.
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;heap&lt;/strong&gt;&lt;br/&gt;
+            Dynamically growing. Contains data maintained by &lt;code&gt;malloc()&lt;/code&gt; and &lt;code&gt;free()&lt;/code&gt;, meaning most pointer variables. The heap is shared by all threads, shared librarys, and dynamically loaded modules in a process. Can be modified while the process is running. 
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;stack&lt;/strong&gt;&lt;br/&gt;
+            Set size. Contains &lt;em&gt;automatic variables&lt;/em&gt;: variables created when (automatically) entered a function, such as &lt;code&gt;int main() { int i = 5; }&lt;/code&gt;. Can be modified manually using the command &lt;code&gt;ulimit&lt;/code&gt; - but this cannot be modified once the process is running. 
+        &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/span&gt;
+&lt;span style=&quot;float: right; width: 30%&quot;&gt;
+    &lt;img src=&quot;/img/Program_memory_layout.pdf.jpg&quot; title=&quot;Source: Wikipedia&quot; /&gt;
+&lt;/span&gt;
+</code></pre>
 </div>
 <div style="clear: both;">&nbsp; </div>
-
 <h3 id="the-stack">The Stack</h3>
-
 <p>Besides (automatic) variables, a few more important things also live in the stack section of the program. These are the <strong>stack pointer</strong> (SP) and the &lsquo;program stack&rsquo; itself.</p>
-
 <p>Contrary to initialized pointers, <strong>statically sized</strong> arrays within functions are also bound to the stack, such as <code>char line[512];</code>. This is an important distinction, since those same arrays are translated into pointers when passing through functions! You can easily remember the difference by looking at the size: if it&rsquo;s <code>var[XX]</code>, then it&rsquo;s a stack variable - even if XX is not a literal but a computed value.</p>
-
 <h3 id="the-heap">The Heap</h3>
-
 <p>Contrary to arrays, initialized pointers are bound to the heap, such as <code>char* line = malloc(sizeof(char) * 10)</code> - <em>except for</em> pointer values that are being assigned directly with a string constant such as <code>char* line = &quot;hello&quot;;</code>. Freeing the last line would result in the error <em>munmap_chunk(): invalid pointer</em>.</p>
-
 <p>The usage of <code>malloc()</code> and such is required if you want to reserve space on the heap. <a href="https://www.tutorialspoint.com/c_standard_library/c_function_memcpy">memcpy()</a> from <code>&lt;string.h&gt;</code> makes it possible to copy values from the stack to the heap, without having to reassign every single property. Make sure to reserve space first!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Data {
-    <span style="color:#66d9ef">int</span> one;
-    <span style="color:#66d9ef">int</span> two;
-} Data;
+<span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">Data</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">one</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">two</span><span style="color:#111">;</span>
+<span style="color:#111">}</span> <span style="color:#111">Data</span><span style="color:#111">;</span>
 
-Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack</span>() {
-    Data data <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span> };
-    Data <span style="color:#f92672">*</span>heap_data <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Data));
-    memcpy(heap_data, <span style="color:#f92672">&amp;</span>data, <span style="color:#66d9ef">sizeof</span>(Data));
-    <span style="color:#66d9ef">return</span> heap_data;
-}
+<span style="color:#111">Data</span><span style="color:#f92672">*</span> <span style="color:#75af00">from_stack</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Data</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span> <span style="color:#111">};</span>
+    <span style="color:#111">Data</span> <span style="color:#f92672">*</span><span style="color:#111">heap_data</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Data</span><span style="color:#111">));</span>
+    <span style="color:#111">memcpy</span><span style="color:#111">(</span><span style="color:#111">heap_data</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">data</span><span style="color:#111">,</span> <span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Data</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">heap_data</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    Data<span style="color:#f92672">*</span> heap <span style="color:#f92672">=</span> from_stack();
-    printf(<span style="color:#e6db74">&#34;one: %d, two: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, heap<span style="color:#f92672">-&gt;</span>one, heap<span style="color:#f92672">-&gt;</span>two);
-}</code></pre></div>
-<p>This is called creating a <strong>deep copy</strong>, while a <strong>shallow copy</strong> creates a copy of a pointer, still pointing to the same value in memory space.</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Data</span><span style="color:#f92672">*</span> <span style="color:#111">heap</span> <span style="color:#f92672">=</span> <span style="color:#111">from_stack</span><span style="color:#111">();</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;one: %d, two: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">heap</span><span style="color:#f92672">-&gt;</span><span style="color:#111">one</span><span style="color:#111">,</span> <span style="color:#111">heap</span><span style="color:#f92672">-&gt;</span><span style="color:#111">two</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>This is called creating a <strong>deep copy</strong>, while a <strong>shallow copy</strong> creates a copy of a pointer, still pointing to the same value in memory space.</p>
 
 <div class="ex">
 	<div class="inner">
@@ -1713,34 +1695,23 @@ Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack<
 
 	</div>
 </div>
-
 <p>As another side node, it is possible to resize variables on the heap, using <code>realloc()</code>. This is simply not possible on the stack: they cannot be resized. Also, using <a href="https://www.tutorialspoint.com/c_standard_library/c_function_calloc.htm">calloc</a> instead of malloc initializes the allocated memory to zero instead of &ldquo;nothing&rdquo;. So now you know how to use <code>malloc</code>, <code>calloc</code>, <code>realloc</code>, and <code>free</code>.</p>
-
 <h3 id="inspecting-program-memory-in-the-os">Inspecting program memory in the OS</h3>
-
 <p>Unix-like operating systems implement <a href="https://en.wikipedia.org/wiki/Procfs">procfs</a>, a special filesystem mapped to <code>/proc</code>, that makes it easy for us to inspect program running program state. You will need the process ID (PID) as it is the subdir name. Interesting files to inspect are:</p>
-
 <ul>
 <li><code>/proc/PID/maps</code>, a text file containing information about mapped files and blocks (like heap and stack).</li>
 <li><code>/proc/PID/mem</code>, a binary image representing the process&rsquo;s virtual memory, can only be accessed by a ptrace&rsquo;ing process.</li>
 </ul>
-
 <p>We will take a closer look at these during the labs.</p>
-
 <p>Mac OSX Does not have <em>procfs</em>. Instead, you will have to rely on commandline tools such as <code>sysctl</code> to query process information.</p>
-
 <h3 id="should-i-use-the-stack-or-the-heap">Should I use the stack or the heap?</h3>
-
 <p>Good question. The answer is obviously <strong>both</strong>. Use the stack when:</p>
-
 <ul>
 <li>You do not want to de-allocate variables yourself.</li>
 <li>You need speed (space is managed efficiently by the CPU).</li>
 <li>Variable size is static.</li>
 </ul>
-
 <p>Use the heap when:</p>
-
 <ul>
 <li>You require a large amount of space (virtually no memory limit).</li>
 <li>You don&rsquo;t mind a bit slower access (fragmentation problems can occur).</li>
@@ -1748,53 +1719,45 @@ Data<span style="color:#f92672">*</span> <span style="color:#a6e22e">from_stack<
 <li>You like managing things yourself.</li>
 <li>Variable size could be dynamic.</li>
 </ul>
-
 <p>What piece of code could be <em>dynamic</em> in size? Data structures, such as linked lists from <a href="../../ch3-pointers">chapter 3: pointers and arrays</a>, are a good candidate for this: arrays, sets, maps, and any other form of collection can grow and shrink in size, therefore need dynamic memory mapped. Using <code>[]</code> will, in most cases, not suffice in the C programming language, unless you are doing something very simple.</p>
-
 <h2 id="memory-management">Memory management</h2>
-
 <h3 id="freeing-up-space">Freeing up space</h3>
-
 <p>In order to create an instance of a structure and return it, you have to allocate memory using <code>malloc()</code> from <code>&lt;stdlib.h&gt;</code> - we now that already. In contrast with higher level languages such as Java, C requires programmes to clean up the allocaed memory themselves! This means calling <code>free()</code> to free up the space for future use. For instance:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">struct</span> Stuff {
-    <span style="color:#66d9ef">int</span> number;
-};
-<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Stuff Stuff;
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">struct</span> <span style="color:#111">Stuff</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">number</span><span style="color:#111">;</span>
+<span style="color:#111">};</span>
+<span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">Stuff</span> <span style="color:#111">Stuff</span><span style="color:#111">;</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">do_nasty_things</span>() {
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">do_nasty_things</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>    Stuff<span style="color:#f92672">*</span> ugly <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Stuff));
-    ugly<span style="color:#f92672">-&gt;</span>number <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span><span style="color:#75715e"></span>    <span style="color:#111">Stuff</span><span style="color:#f92672">*</span> <span style="color:#111">ugly</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Stuff</span><span style="color:#111">));</span>
+    <span style="color:#111">ugly</span><span style="color:#f92672">-&gt;</span><span style="color:#111">number</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
     <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    do_nasty_things();
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">do_nasty_things</span><span style="color:#111">();</span>
     <span style="color:#75715e">// other things
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>As soon as the method <code>do_nasty_things()</code> ends, <code>ugly</code> is not accessible anymore because it was not returned and there are no other references to it. However, after the function, memory is still reserved for it. To counter <strong>memory leaks</strong> such as these, you can do a few things:</p>
-
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p>As soon as the method <code>do_nasty_things()</code> ends, <code>ugly</code> is not accessible anymore because it was not returned and there are no other references to it. However, after the function, memory is still reserved for it. To counter <strong>memory leaks</strong> such as these, you can do a few things:</p>
 <ol>
 <li>Keep things <em>local</em>, by keeping things on the stack. The Stack, for that function, will be cleared after calling it. Change <code>Stuff*</code> to <code>Stuff</code>.</li>
 <li>Free the pointer space at the end of the function by calling <code>free(ugly)</code>.</li>
 </ol>
-
 <p>Since this is a small program that ends after <code>main()</code> statements are executed, it does not matter much. However, programs with a main loop that require a lot of work can also contain memory leaks. If that is the case, leak upon leak will cause the program to take op too much memory and simply freeze.</p>
-
-<p>Do not make the mistake to free up stack memory, such as in this nice example, from the &lsquo;<a href="https://www.acodersjourney.com/top-20-c-pointer-mistakes/">Top 20 C pointer mistakes</a>&lsquo;:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> p1;
-  <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;  <span style="color:#75715e">// stack var
-</span><span style="color:#75715e"></span>  p1 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>m;      <span style="color:#75715e">// pointer to stack var
+<p>Do not make the mistake to free up stack memory, such as in this nice example, from the &lsquo;<a href="https://www.acodersjourney.com/top-20-c-pointer-mistakes/">Top 20 C pointer mistakes</a>':</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">p1</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">m</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span><span style="color:#111">;</span>  <span style="color:#75715e">// stack var
+</span><span style="color:#75715e"></span>  <span style="color:#111">p1</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">m</span><span style="color:#111">;</span>      <span style="color:#75715e">// pointer to stack var
 </span><span style="color:#75715e"></span>
-  free(p1);     <span style="color:#75715e">// BOOM headshot!
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<pre>
+  <span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">p1</span><span style="color:#111">);</span>     <span style="color:#75715e">// BOOM headshot!
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><pre>
 a.out(83471,0x7fff7e136000) malloc: *** error for object 0x7fff5a24046c: pointer being freed was not allocated
 *** set a breakpoint in malloc_error_break to debug
 Abort trap: 6    
 </pre>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1802,9 +1765,7 @@ Abort trap: 6
 
 	</div>
 </div>
-
 <p>Some operating systems provide easy to use sampling tools, such as MacOS&rsquo; sampler. Go to Activity Monitor, rightclick on a process and choose &ldquo;sample&rdquo;. The above task outputs:</p>
-
 <pre>
 Date/Time:       2021-04-18 20:18:48.499 +0200
 Launch Time:     2021-04-18 20:18:22.379 +0200
@@ -1829,55 +1790,47 @@ Total number in stack (recursive counted multiple, when >=5):
 Sort by top of stack, same collapsed (when >= 5):
         __semwait_signal  (in libsystem_kernel.dylib)        2891
 </pre>
-
 <p>The stack sample is clearly visible, but the heap is not.</p>
-
 <h3 id="dangling-pointers">Dangling pointers</h3>
-
 <p>A second mistake could be that things <em>are</em> indeed being freed, but pointers still refer to the freed up space, which is now being rendered invalid. This is called a <strong>dangling pointer</strong>, and can happen both on the heap (while <em>dereferencing</em> an invalid pointer after freeing up space):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p, <span style="color:#f92672">*</span>q, <span style="color:#f92672">*</span>r;
-p <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</span>);
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">p</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">q</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">r</span><span style="color:#111">;</span>
+<span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">8</span><span style="color:#111">);</span>
 <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>q <span style="color:#f92672">=</span> p;
+</span><span style="color:#75715e"></span><span style="color:#111">q</span> <span style="color:#f92672">=</span> <span style="color:#111">p</span><span style="color:#111">;</span>
 <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>free(p);
-r <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">8</span>);
+</span><span style="color:#75715e"></span><span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">p</span><span style="color:#111">);</span>
+<span style="color:#111">r</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">8</span><span style="color:#111">);</span>
 <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>something <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>q; <span style="color:#f92672">//</span> aha<span style="color:#f92672">!</span> </code></pre></div>
-<p>, and on the stack (while <em>dereferencing</em> an invalid pointer after returning an address to a local variable that gets cleaned up because it resides on the stack):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>q;
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() {
-    <span style="color:#66d9ef">int</span> a;
-    q <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>a;
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    foo();
-    something <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>q; <span style="color:#75715e">// aha!
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<h3 id="garbage-collection-not-happening-in-c">Garbage Collection - not happening in C&hellip;</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#111">something</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">q</span><span style="color:#111">;</span> <span style="color:#75715e">// aha! 
+</span></code></pre></div><p>, and on the stack (while <em>dereferencing</em> an invalid pointer after returning an address to a local variable that gets cleaned up because it resides on the stack):</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">q</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">foo</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">;</span>
+    <span style="color:#111">q</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">a</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">foo</span><span style="color:#111">();</span>
+    <span style="color:#111">something</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">q</span><span style="color:#111">;</span> <span style="color:#75715e">// aha!
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><h3 id="garbage-collection---not-happening-in-c">Garbage Collection - not happening in C&hellip;</h3>
 <p>The above mistakes are easily made if you are used to Java:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    Animal cow <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal<span style="color:#f92672">();</span>
-    cow<span style="color:#f92672">.</span><span style="color:#a6e22e">eat</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">void</span> <span style="color:#75af00">foo</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">Animal</span> <span style="color:#111">cow</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Animal</span><span style="color:#f92672">();</span>
+    <span style="color:#111">cow</span><span style="color:#f92672">.</span><span style="color:#75af00">eat</span><span style="color:#f92672">();</span>
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    foo<span style="color:#f92672">();</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">foo</span><span style="color:#f92672">();</span>
     <span style="color:#75715e">// cow instances are cleaned up for you...
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span></code></pre></div>
-<p>This cleaning process, that automatically frees up space in multiple parts of the allocated memory space, is called <strong>garbage collecting</strong>. <br/>
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>This cleaning process, that automatically frees up space in multiple parts of the allocated memory space, is called <strong>garbage collecting</strong>. <br/>
 And it is completely <em>absent</em> in C, so beware!</p>
-
 <h3 id="what-happens-when-the-stack-and-heap-collide">What happens when the stack and heap collide?</h3>
-
 <p>That is <strong>platform-dependent</strong> and will hopefully crash instead of cause all forms of pain. There are a few possibilities:</p>
-
 <ol>
 <li>Stack &ndash;&gt; heap. The C compiler will silently overwrite the heap datastructure! On modern OS systems, there are <strong>guard pages</strong> that prevent the stack from growing, resulting in a <em>segmentation fault</em>. Also, modern compilers throw exceptions such as <strong>stack overflow</strong> if you attempt to go outside the reserved space (= segfault).</li>
 <li>Heap &ndash;&gt; Stack. The <code>malloc()</code> implementation will notice this and return <code>NULL</code>. It is up to you to do something with that result.</li>
 </ol>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1886,25 +1839,21 @@ Do the same with infinite malloc()&rsquo;s. What happens now?</p>
 
 	</div>
 </div>
-
-<h3 id="what-s-a-stack-overflow">What&rsquo;s a stack overflow?</h3>
-
+<h3 id="whats-a-stack-overflow">What&rsquo;s a stack overflow?</h3>
 <p>The stack is a limited, but fast piece of program memory, made available for your program by the OS. The keyword here is <strong>limited</strong>. Unlike the heap, it will not dynamically grow, and it is typically hard-wired in the OS. Simply keeping on adding stuff to the stack, such as calling methods within methods without a stop condition (infinite recursion), will cause a stack overflow exception, signaling that the OS prevented your program from taking over everything:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// forward definition
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flow</span>();
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// forward definition
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">flow</span><span style="color:#111">();</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">flow</span>() {  <span style="color:#75715e">// on the stack
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// on the stack
-</span><span style="color:#75715e"></span>    flow();    <span style="color:#75715e">// keep on going
-</span><span style="color:#75715e"></span>}
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">flow</span><span style="color:#111">()</span> <span style="color:#111">{</span>  <span style="color:#75715e">// on the stack
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span> <span style="color:#75715e">// on the stack
+</span><span style="color:#75715e"></span>    <span style="color:#111">flow</span><span style="color:#111">();</span>    <span style="color:#75715e">// keep on going
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    flow();
-}</code></pre></div>
-<p>This causes a <em>segmentation fault</em>, signaling that it was killed by the OS. Add <code>printf()</code> statements to your liking.</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">flow</span><span style="color:#111">();</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>This causes a <em>segmentation fault</em>, signaling that it was killed by the OS. Add <code>printf()</code> statements to your liking.</p>
 <p>How do I know how big the stack can be on my OS? Use <code>ulimit -a</code> to find out: (Executed on a 2012 MacBbook Air)</p>
-
 <pre>
 outers-MacBook-Air:ch8-stack wgroeneveld$ ulimit -a
 core file size          (blocks, -c) 0
@@ -1919,11 +1868,8 @@ cpu time               (seconds, -t) unlimited
 max user processes              (-u) 709
 virtual memory          (kbytes, -v) unlimited
 </pre>
-
 <p>So it&rsquo;s <strong>8.19 MB</strong>.</p>
-
 <p>Interestingly, the same command outputs something radically different on a 2021 MacBook Air with an ARM64 chipset:</p>
-
 <pre>
 ➜  osc-course git:(master) ✗ ulimit -a
 -t: cpu time (seconds)              unlimited
@@ -1936,9 +1882,7 @@ virtual memory          (kbytes, -v) unlimited
 -u: processes                       1333
 -n: file descriptors                256
 </pre>
-
 <p>Although the stack size stays more or less the same, the max processes number dramatically increased. Yay for technological advances!</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1946,23 +1890,19 @@ virtual memory          (kbytes, -v) unlimited
 
 	</div>
 </div>
-
 <h2 id="optimizing-c-code">Optimizing C code</h2>
-
 <h4 id="compiler-flags">Compiler flags</h4>
-
 <p>Depending on your compiler and your target platform, the C compiler will try to optimize code by rearranging declarations and possibly even removing lines such as completely unused variables. The GNU and LLVM <code>gcc</code> compilers offer multiple levels of optimization that can be enabled by passing along <code>-O1</code>, <code>-O2</code>, and <code>-O3</code> flags (O = Optimize). Consider the following code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stuff</span>() {
-    <span style="color:#66d9ef">char</span> dingdong[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello? who&#39;s there?&#34;</span>;
-    printf(<span style="color:#e6db74">&#34;doing things</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    stuff();
-}</code></pre></div>
-<p><code>stuff</code> is not doging anything with the char array. Compile with <code>gcc -g -O3 test.c</code> to enable debug output and optimize. When disassembling using <code>lldb</code> (LLVM) or <code>gdb</code> (GNU), we see something like this:</p>
-
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">stuff</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#111">dingdong</span><span style="color:#111">[]</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;hello? who&#39;s there?&#34;</span><span style="color:#111">;</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;doing things</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">stuff</span><span style="color:#111">();</span>
+<span style="color:#111">}</span>
+</code></pre></div><p><code>stuff</code> is not doging anything with the char array. Compile with <code>gcc -g -O3 test.c</code> to enable debug output and optimize. When disassembling using <code>lldb</code> (LLVM) or <code>gdb</code> (GNU), we see something like this:</p>
 <pre>
 (lldb) disassemble --name stuff
 a.out`stuff at test.c:3:
@@ -1978,9 +1918,7 @@ a.out[0x100000f54]:  leaq   0x2b(%rip), %rdi          ; "doing things"
 a.out[0x100000f5b]:  callq  0x100000f64               ; symbol stub for: puts
 a.out[0x100000f60]:  xorl   %eax, %eax
 </pre>
-
 <p>Where is <code>dingdong</code>? The compiler saw it was not used and removed it. Without the <code>-O3</code> flag:</p>
-
 <pre>
 (lldb) disassemble --name stuff
 a.out`stuff at test.c:3:
@@ -2018,35 +1956,28 @@ a.out[0x100000f1b]:  popq   %rbp
 a.out[0x100000f1c]:  retq
 a.out[0x100000f1d]:  callq  0x100000f40               ; symbol stub for: __stack_chk_fail
 </pre>
-
 <p>You can fiddle with options and such yourself in <a href="https://godbolt.org/">godbolt.org</a>.</p>
-
 
 <div class="notices note" ><p>Instead of bootstrapping the debugger to inspect disassembly, you can also simply dump the object contents using <code>objdump -D</code> (GNU) or <code>otool -tV</code> (OSX).</p>
 </div>
 
-
 <h4 id="volatile">volatile</h4>
-
 <p>When heavily optimizing, sometimes you do not want the compiler to leave things out. This is especially important on embedded devices with raw pointer access to certain memory mapped spaces. In that case, use the <code>volatile</code> keyword on a variable to tell the compiler to &ldquo;leave this variable alone&rdquo; - do not move it&rsquo;s declaration and do not leave it out. <a href="https://godbolt.org/z/Dm5YHx">For instance</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> array[<span style="color:#ae81ff">1024</span>];
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span> (<span style="color:#66d9ef">void</span>) {
-    <span style="color:#66d9ef">int</span>  x;
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#ae81ff">1024</span><span style="color:#111">];</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span> <span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span>  <span style="color:#111">x</span><span style="color:#111">;</span>
 
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1024</span>; i<span style="color:#f92672">++</span>) {
-        x <span style="color:#f92672">=</span> array[i];
-    }
-}</code></pre></div>
-<p>Does pretty much nothing. Compiling with <code>-O3</code> results in 2 assembly instructions:</p>
-
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1024</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">];</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Does pretty much nothing. Compiling with <code>-O3</code> results in 2 assembly instructions:</p>
 <pre>
 main:
   xor eax, eax
   ret
 </pre>
-
 <p>However, if you want <code>x</code> to be left alone, use <code>volatile int x;</code> and recompile:</p>
-
 <pre>
 main:
   mov eax, OFFSET FLAT:array
@@ -2059,13 +1990,9 @@ main:
   xor eax, eax
   ret
 </pre>
-
 <p>That&rsquo;s a big difference.</p>
-
 <h4 id="function-call-order">Function call order</h4>
-
 <p>Another part of optimizing code is the determination of function call order. For instance, consider the following statement: <code>x = f() + g() * h()</code>. Which function gets called first?</p>
-
 <p>The answer is <strong>we do not know</strong>. Do <em>not</em> rely on function order to calculate something! Each function should be completely independant. There should not be a global variable manipulated in <code>f()</code> which will then be needed in <code>g()</code> or <code>h()</code>. You can inspect disassembled code for different compilers on <a href="https://godbolt.org/">https://godbolt.org/</a>. It will differ from platform to platform, and from compiler to compiler (and even from option flag to flag).</p>
 
 
@@ -3073,19 +3000,17 @@ main:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

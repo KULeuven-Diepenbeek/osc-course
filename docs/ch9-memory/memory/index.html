@@ -12,21 +12,19 @@
     <title>9.1: Memory management :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,22 +1578,21 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#memory-addresses-and-address-lengths">Memory addresses and address lengths</a></li>
-<li><a href="#option-1-chunking">Option 1: Chunking</a>
-<ul>
-<li><a href="#address-binding">Address Binding</a></li>
-<li><a href="#problems-with-chunking">Problems with Chunking</a></li>
-</ul></li>
-<li><a href="#option-2-segmentation">Option 2: Segmentation</a>
-<ul>
-<li><a href="#address-binding-1">Address Binding</a></li>
-<li><a href="#problems-with-segmentation">Problems with Segmentation</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#memory-addresses-and-address-lengths">Memory addresses and address lengths</a></li>
+    <li><a href="#option-1-chunking">Option 1: Chunking</a>
+      <ul>
+        <li><a href="#address-binding">Address Binding</a></li>
+        <li><a href="#problems-with-chunking">Problems with Chunking</a></li>
+      </ul>
+    </li>
+    <li><a href="#option-2-segmentation">Option 2: Segmentation</a>
+      <ul>
+        <li><a href="#address-binding-1">Address Binding</a></li>
+        <li><a href="#problems-with-segmentation">Problems with Segmentation</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1619,26 +1616,15 @@ window.MathJax = {
         
 
 
-
-
 <p>In the previous chapters we have many times talked about (RAM) memory and (RAM) memory addresses, as well as specialized memory regions such as the stack and the heap. Up until now, we have pretended as if these concepts mapped directly onto the underlying hardware, but reality is of course a bit more complex. In this chapter, we will consider how physical memory is actually managed by the OS and the CPU.</p>
-
 <h2 id="memory-addresses-and-address-lengths">Memory addresses and address lengths</h2>
-
 <p>In modern computers and embedded systems there is typically a large amount of memory available. To be able to read and write to this memory, we need a way to access individual units of storage. This is done using <strong>memory addresses</strong>, numbers that uniquely identify memory locations. In theory, we could assign an address to each individual bit of physical memory, but in practice we address groups of 8 bits (or 1 byte). This means we always read/write 8 bits at a time. This is firstly because we don&rsquo;t often work with individual bits and secondly because more addresses means more overhead, as we will soon see.</p>
-
 <p>How many individual bytes we can support depends on how long our address numbers are. For example, a relatively simple/embedded system like the ATMega 328p on the Arduino Uno, has an address length of 8 bits. Consequently, this chip is said to be an <strong>8-bit processor</strong>. 8 bits worth of addresses gives us 2<sup>8</sup> = 256 individual memory locations of 8 bits each, so a total of 256 bytes (not exactly a lot).</p>
-
 <p>For a long time, more complex chips and general purpose CPU&rsquo;s were 32-bit. This allows for a maximum of 2<sup>32</sup> = 4.294.967.296 individual bytes to be addressed. This comes down to about <strong>4 GigaBytes of memory</strong>. For a long time, this was sufficient, as (RAM) memory was almost always (much) smaller than 4GB. However, as we know, over time memory was made that could be much larger than that, meaning that 32-bit processors were no longer enough.</p>
-
 <p>This is when <strong>the big switch to 64-bit processors</strong> happened. This allows for a maximum of 2<sup>64</sup>, which is equivalent to 2<sup>24+10+10+10+10</sup>, which means 2<sup>24</sup> terabyte or <strong>16 exabyte</strong>. The expectation is that that will remain enough for quite a while ;)</p>
-
 <p>You might notice that, especially for 64-bit, there won&rsquo;t always be enough physical memory to back the entire addressable space. As we will see later, this is where virtual memory addresses come in. To get there however, we need to introduce a few concepts first.</p>
-
 <h2 id="option-1-chunking">Option 1: Chunking</h2>
-
 <p>On small systems-on-chip (SOCs) that do not run an operating system, the world of memory addresses looks flat (starting at 0x00 and ending at 0xFF). Your singular program has full and direct access to the entire memory. However, as we&rsquo;ve seen many times, one of the key purposes of an OS is to provide <strong>the ability to run multiple different tasks on shared hardware</strong>. As such we somehow need to subdivide the available memory amongst these tasks.</p>
-
 <div class="multicolumn">
   <div class="column">
     The simplest approach would be to subdivide the physical memory into separate chunks, and to reserve a single chunk of contiguous memory per-process. This is the mental model that we've been using so far, where each process/thread has a <b>base memory address</b> where it starts, and a <b>"limit" offset</b> where it ends (highest address = base + limit). Within those addresses, it's free to do as it pleases. 
@@ -1651,35 +1637,28 @@ window.MathJax = {
             <h4>The complete memory space, divided to one chunk per process.</h4>
         </figcaption>
 </figure>
-
   </div>
 </div>
-
 <p>This approach can be easily implemented in hardware with two registers. When a process is scheduled, the OS loads the CPU base register and the limit register with the correct values. The CPU can then check that the addresses of all memory accesses fall within the interval of the base address PLUS the limit. If this condition does not hold, there might be an (un-)intentional error. The CPU propagates this error to the OS for handling.</p>
-
 <figure>
     <img src="../../img/mem/ss_mem_logical_BA_LMT.png"/> <figcaption>
             <h4>Base address register and limit register in logical addressing.</h4>
         </figcaption>
 </figure>
-
 <p>Importantly in this design, the two CPU registers that store the base and limit values should only be written by processes from the OS&rsquo;s <strong>kernel-space</strong>, for example by employing a special privileged instruction.</p>
-
 <h3 id="address-binding">Address Binding</h3>
-
 <p>With this simple approach, let&rsquo;s consider how memory addresses can be assigned to programs/processes in practice. This is important, as each variable/function in a program needs to reside at a specific address so it can be used/called. For example, assembly doesn&rsquo;t call functions by their name like C, but by the address at which that function&rsquo;s instructions start. As we&rsquo;ve seen earlier, in a modern CPU architecture, code is stored in the same way as data (the text/data/bss segments).</p>
-
 <div class="multicolumn">
   <div class="column">
     <p>Consider for example the following code, which includes some variables. These variables need to be somehow assigned one or more addresses in the memory for the running process:</p>
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-      <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-        <span style="color:#66d9ef">short</span> i;
-        <span style="color:#66d9ef">short</span> my_array[<span style="color:#ae81ff">4</span>];
-        <span style="color:#66d9ef">long</span> a_long_value;
-        ...
-      }
+      <span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#00a8c8">short</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+        <span style="color:#00a8c8">short</span> <span style="color:#111">my_array</span><span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">];</span>
+        <span style="color:#00a8c8">long</span> <span style="color:#111">a_long_value</span><span style="color:#111">;</span>
+        <span style="color:#111">...</span>
+      <span style="color:#111">}</span>
     </code></pre></div>
     <p> The question is then for example: at which address does the value for `i` begin? </p>
   </div>
@@ -1687,28 +1666,19 @@ window.MathJax = {
     <figure>
     <img src="../../img/mem/ss_mem_binding.png"/> 
 </figure>
-
-
   </div>
 </div>
-
 <p>We can see that with chunking, the address space for a certain program can (and will) be different for each run of the program, as the chosen chunk won&rsquo;t always be at the same place in memory. As such, we cannot assign these addresses at <strong>compile time</strong> for example, as the compiler won&rsquo;t know where exactly the program will be loaded (and we cannot expect the OS to load a given program at the same place all the time). Additionally, the compiler also won&rsquo;t have full information about everything the program needs: for example, a program can load external software libraries, whose details are not yet known at compile time (and are for example resolved (mostly) at link time).</p>
-
 <p>As such, this memory mapping needs to be done at <strong>load time</strong>, when the OS takes a program and turns it into a process instance. However, for the compiler to generate assembly instructions, it still needs to know the addresses of the variables/functions, as we&rsquo;ve said above! It seems we have a contradiction here&hellip;</p>
-
 <p>The way this is solved, is by having the compiler generate <strong>relative/logical/virtual addresses</strong>. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be incremented with the process chunk&rsquo;s <strong>base address</strong> to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address).</p>
-
 <p>As such, we can see that we have <strong>two different address spaces</strong>: the logical/virtual address space (always starting at 0x0 for each process) and the physical address space (where each process starts at a different offset).</p>
-
 <p>In practice, this can even be done in hardware outside of the CPU, where a separate chip, the so-called <strong>&ldquo;Memory Management Unit&rdquo; (MMU)</strong>, takes care of the translation. Using virtual/logical addresses at the CPU then simply requires the use of a <strong>relocation register</strong> (which can be loaded with the chunk&rsquo;s base address) to obtain the final physical address:</p>
-
 <figure>
     <img src="../../img/mem/ss_mem_mmu.png"/> <figcaption>
             <h4>The MMU</h4>
         </figcaption>
 </figure>
-
-<p><style>
+<style>
   p.dinobook {
     color: #7E7E7E;
     font-size: 14px;
@@ -1719,32 +1689,21 @@ window.MathJax = {
     text-align: center;
   }
 </style>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
-
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <h3 id="problems-with-chunking">Problems with Chunking</h3>
-
 <p>Chunking and load-time address binding works, but it has some downsides. For example, we would need to know all the variables/functions that will be used at load time. While we know more about them than at compile time (as the link step is done now), we often still don&rsquo;t know everything yet. This is for example the case when using dynamically loaded external software libraries (so-called &ldquo;dynamically linked libraries&rdquo; or DLLs), which is something you typically do want to enable broad code re-use. These DLLs can be loaded <strong>during the execution of a process</strong> as needed, which is later than the load time we&rsquo;ve considered.</p>
-
 <p>A more important downside of chunking however is that <strong>we would have to assign a fixed-size chunk to each process</strong>. This isn&rsquo;t so much a problem for text/data/bss/stack, but more for the heap. We don&rsquo;t really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you&rsquo;ll use less memory, sometimes more). You can&rsquo;t also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. As such, you would again have to rely on the programmer to somehow give an indication of program size, or for example learn it from previous executions of the program.</p>
-
 <p>Finally, there is the problem of <strong>external fragmentation</strong>. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called &ldquo;external&rdquo; fragmentation, as the fragmentation happens <em>outside of the space allocated to processes</em>. We will discuss internal fragmentation later.</p>
-
 <figure>
     <img src="../../img/mem/external_fragmentation.png"/> <figcaption>
             <h4>External fragmentation with chunking</h4>
         </figcaption>
 </figure>
-
 <p>It is clear we need a more advanced setup in practice.</p>
-
 <h2 id="option-2-segmentation">Option 2: Segmentation</h2>
-
 <p>Segmentation is a more flexible way than chunking of loading processes into memory. The concept of segmentation is pretty simple: instead of reserving a single, large chunk for each process, we will instead <strong>reserve several, smaller chunks (called segments)</strong>. For example, we can have a chunk for the text section, for data, bss, and the stack. And then we can have one (or more!) segments for the heap.</p>
-
 <p>This nicely solves the problems of chunking: we can now appropriately size segments when loading new libraries/DLLs at runtime and we don&rsquo;t need to reserve huge amounts of memory for each process up-front: we can just add (and remove!) segments as needed!</p>
-
 <p>Additionally, it provides us with extra benefits, such as the fact that the <strong>segments for a single process no longer need to be in contiguous memory blocks!</strong>. This is illustrated by the images below:</p>
-
 <div class="multicolumn">
   <div>
     <figure>
@@ -1752,40 +1711,30 @@ window.MathJax = {
             <h4>Continuous image: the logical address space of a process. Source: G.I.</h4>
         </figcaption>
 </figure>
-
   </div>
-
-<p><div>
+  <div>
     <figure>
     <img src="../../img/mem/ss_mem_segmented.jpg" height="413px"/> <figcaption>
             <h4>Segmented image: the physical address space in which the process&#39; chunks can be located in different areas.</h4>
         </figcaption>
-</figure></p>
-
-<p></div>
-</div></p>
-
+</figure>
+  </div>
+</div>
 <p>This is a very important characteristic, as it helps deal with the aforementioned <strong>external fragmentation</strong> (at least up to a certain point). Even though the full process cannot fit in any given gap, its individual segments can be distributed across several gaps as needed.</p>
-
 <figure>
     <img src="../../img/mem/external_fragmentation_2.png"/> <figcaption>
             <h4>External fragmentation is partially solved with segmentation</h4>
         </figcaption>
 </figure>
-
 <h3 id="address-binding-1">Address Binding</h3>
-
 <p>Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but also much more dynamically at <strong>execution time</strong>: segments can be created (or removed) and placed as-needed by the OS.</p>
-
 <p>However, placing multiple segments at various locations in the physical memory does mean it now becomes more difficult to find the correct physical address given a logical/virtual address. A single relocation register is no longer enough (as we also no longer have a simple base address). Instead, we need a <strong>segment table</strong> that tracks the different segments and where exactly they can be found in physical memory. So, instead of having a single base address and a chunk limit, each individual segment has its own base address and limit offset, all of which are stored in the segment table. Again, for performance reasons this is often done in the separate MMU chip, which might look a bit like this:</p>
-
 <figure>
     <img src="../../img/mem/ss_mem_segmhw.png"/> <figcaption>
             <h4>Segmentation hardware</h4>
         </figcaption>
 </figure>
-
-<p><style>
+<style>
   p.dinobook {
     color: #7E7E7E;
     font-size: 14px;
@@ -1796,12 +1745,9 @@ window.MathJax = {
     text-align: center;
   }
 </style>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
-
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <p>This also means that we no longer have a single contiguous logical/virtual address space, but instead multiple smaller ones (one for each segment). In practice, we can still represent addresses with a single number however, which  <em>secretly</em> consists of two parts: a segment number (s) and an offset (d). The segment number (s) will be used as an index into the segment table. The value at that index indicates the base address of that segment. The offset number (d) will be used to define an offset within this segment and is simply added to the base address to get the final, physical address.</p>
-
 <p>As with chunking, if the sum of the base address and the offset falls within the segment limit, everything is fine. Otherwise the operating system will catch this error.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1809,13 +1755,9 @@ window.MathJax = {
 
 	</div>
 </div>
-
 <h3 id="problems-with-segmentation">Problems with Segmentation</h3>
-
 <p>While segmentation already improves a lot on chunking, it still suffers from a few problems.</p>
-
 <p>In practice, external fragmentation can still easily occur in modern systems with hundreds of running processes. This is because the <strong>individual segments are not equally sized</strong>, and gaps (created by removed/stopped segments) can thus easily be smaller than what is needed for a given segment. As such, the OS needs to keep track of <strong>a list of open gaps and their size</strong>. Every time a process needs memory for a segment, the OS would need to <strong>loop over the entire gap list</strong> to determine the most appropriate one, a list which can get very long quite quickly. This overhead can get quite substantial in practice. The OS could instead optimize and look for a &ldquo;good enough&rdquo; gap, but this in practice only worsens external fragmentation. Other techniques can be considered, such as compaction: this would &ldquo;shift&rdquo; segments of running processes together in memory to fill smaller gaps, making larger gaps available. While possible, this can get highly complex, as the logical addresses would also have to be re-generated.</p>
-
 <p>As such, even segmentation isn&rsquo;t our &ldquo;final solution&rdquo; to this problem. But before we discuss the real deal, let&rsquo;s do some exercises.</p>
 
 
@@ -2823,19 +2765,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,19 @@
     <title>9.3: Paging :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,25 +1578,24 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#address-binding">Address binding</a>
-<ul>
-<li><a href="#paged-addresses">Paged addresses</a></li>
-<li><a href="#page-table-size">Page table size</a></li>
-<li><a href="#hierarchical-page-tables">Hierarchical page tables</a></li>
-<li><a href="#internal-fragmentation">Internal fragmentation</a></li>
-</ul></li>
-<li><a href="#added-benefits-of-paging">Added benefits of paging</a>
-<ul>
-<li><a href="#allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</a></li>
-<li><a href="#optimized-data-sharing">Optimized data sharing</a></li>
-<li><a href="#memory-mapped-i-o">Memory-Mapped I/O</a></li>
-</ul></li>
-<li><a href="#security">Security</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#address-binding">Address binding</a>
+      <ul>
+        <li><a href="#paged-addresses">Paged addresses</a></li>
+        <li><a href="#page-table-size">Page table size</a></li>
+        <li><a href="#hierarchical-page-tables">Hierarchical page tables</a></li>
+        <li><a href="#internal-fragmentation">Internal fragmentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#added-benefits-of-paging">Added benefits of paging</a>
+      <ul>
+        <li><a href="#allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</a></li>
+        <li><a href="#optimized-data-sharing">Optimized data sharing</a></li>
+        <li><a href="#memory-mapped-io">Memory-Mapped I/O</a></li>
+      </ul>
+    </li>
+    <li><a href="#security">Security</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1622,44 +1619,30 @@ window.MathJax = {
         
 
 
-
-
 <p>In the previous part, we have discussed both the benefits and problems with segmentation. One of the main issues was the fact that the segments could be of different sizes, making it difficult to find memory gaps of an appropriate size and adding overhead when doing so.</p>
-
 <p>As such, the actual method used most commonly in practice is <strong>segmentation with all the segments being of the same size</strong>. This means that not only the segments, but also the gaps they leave, are always the same, predictable size. As such, any empty gap is immediately a good candidate for when a new segment is created, without having to actively look for a gap that is large enough (but not too large as to prevent external segmentation).</p>
-
 <p>In practice, this approach is called <strong>paging</strong>, as each same-sized segment is called a <strong>page</strong>. In other sources, you might also find the term &ldquo;frame&rdquo;, as each logical page is mapped to a physical memory block of the same size, called a <strong>frame</strong>.</p>
-
 <figure>
     <img src="../../img/mem/segments_to_pages.png"/> <figcaption>
             <h4>The pieces of memory with (logical) segmentation (left) and paging (right). Source: Wikipedia</h4>
         </figcaption>
 </figure>
-
 <figure>
     <img src="../../img/mem/ss_mem_paging.png"/> <figcaption>
             <h4>Each page has an equally sized frame in physical memory</h4>
         </figcaption>
 </figure>
-
 <h2 id="address-binding">Address binding</h2>
-
 <p>Paging of course retains most of the benefits of segmentation: it&rsquo;s easy to perform address binding/memory mapping at execution time, making it highly flexible.</p>
-
-<p>The way that logical addresses are transformed into physical addresses are also similar: the address&rsquo; first part indicates the <strong>page number</strong> (p) (similar to the segment number from before) and the second pard is the <strong>page offset</strong> (d), that again indicates where exactly the address is in a given page. Instead of a segment table, we now have a <strong>page table</strong> that keeps track of where the pages actually start in memory.</p>
-
+<p>The way that logical addresses are transformed into physical addresses are also similar: the address' first part indicates the <strong>page number</strong> (p) (similar to the segment number from before) and the second pard is the <strong>page offset</strong> (d), that again indicates where exactly the address is in a given page. Instead of a segment table, we now have a <strong>page table</strong> that keeps track of where the pages actually start in memory.</p>
 <h3 id="paged-addresses">Paged addresses</h3>
-
 <p>However, this is where things start to diverge between the two approaches, as the page table no longer needs to store the size of each page (the &ldquo;limit&rdquo;), as it&rsquo;s always the same. However, the chosen page size still (implicitly) impacts how exactly the (p) and (d) parts of the single address are assigned. This is because the (p) part needs enough bits to identify each page individually, and the bits needed depends on the page size and the total amount of memory.</p>
-
 <p>Put differently, if the size of the logical address space is defined as 2<sup>m</sup>, and a page size as 2<sup>n</sup> bytes, then the m-n left-most bits of the logical address define the page number (p), and the n remaining bits form the page offset (d).</p>
-
 <div class="multicolumn">
   <div style="width: 30%">
     <figure>
     <img src="../../img/mem/ss_mem_paging_logicaladdress.png"/> 
 </figure>
-
   </div>
   <div>
     <figure>
@@ -1667,24 +1650,22 @@ window.MathJax = {
             <h4>Paging hardware</h4>
         </figcaption>
 </figure>
-
-    <style>
-  p.dinobook {
-    color: #7E7E7E;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: -1px;
-    padding-top: 0px;
-    margin-top: -20px;
-    text-align: center;
-  }
-</style>
+<pre><code>&lt;style&gt;
+</code></pre>
+<p>p.dinobook {
+color: #7E7E7E;
+font-size: 14px;
+font-weight: 300;
+letter-spacing: -1px;
+padding-top: 0px;
+margin-top: -20px;
+text-align: center;
+}
+</style></p>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
   </div>
 </div>
-
 <p>To make this more concrete, consider an example. In a hypothetical 4-bit system (each address is 4 bits long) the processor can address 2<sup>4</sup> different addresses. This gives us a maximum of 16 bytes of physical memory (physical addresses from 0x0 to 0xF). Say we choose a page size of 2 bytes. With the definitions as declared above, this comes down to:</p>
-
 <ul>
 <li>m = 4</li>
 <li>n = 1</li>
@@ -1693,28 +1674,21 @@ window.MathJax = {
 <li>amount of bits needed to indicate offset in page (d): n = 1 (indeed, 1 bit gives us two options: 0 and 1, enough to differentiate between the 2 bytes in each page)</li>
 <li>So, the first 3 bits of a logical address indicate (p), the last 1 (d)</li>
 </ul>
-
 <p>Now let&rsquo;s imagine that the (first half of the) page table would look like this: <strong>[5, 6, 1, 3]</strong>. This means that the page with nr/index 0 (first in the table) maps to physical &ldquo;frame&rdquo; 5. Frames are the same size as pages, so the page&rsquo;s physical base address if frame 5 is: 5 x page size = 5 x 2 = 10 = 0xA.</p>
-
 <figure>
     <img src="../../img/mem/paging_example.png"/> <figcaption>
             <h4>The page table maps page numbers to frame numbers, which in turn represent base-addresses of physical memory blocks.</h4>
         </figcaption>
 </figure>
-
 <p>Now let&rsquo;s convert some logical addresses. The simplest one is logical address 0, which we can write with 4 bits as 0b0000. The first 3 bits (0b000) are the page table index (p), which is 0. As said above, this maps to frame 5, and the page&rsquo;s base address 0xA. Now we need to add the offset (d), the last bit, which is 0, so the phyiscal byte we address is simply 0xA (0b1010).</p>
-
 <p>Similarly, if we were to look up logical address 1, we get 0b0001. We see this only changes the offset (d) within frame 5, so we get phyiscal address 0xB (0b1011).</p>
-
 <p>A bit more complex, consider logical address 5 (0b0101). The first 3 bits give 0b010 = page number 2. Page number/index 2 maps to physical frame 1 in the page table, which is physical address 0x2 (frame nr x page size = 1 x 2). The final bit indicates the offset, which is 1. So we need to do 0x2 (base) + 0x1 (offset) = physical address 0x3. We can see that logical address 5, which is higher than logical address 1, is stored &ldquo;lower&rdquo; in physical memory!</p>
-
 
 <div class="ex">
 	<div class="inner">
     	<p>Given the hypothetical system as described above, what would be the corresponding physical addresses for the logical addresses 6, 3 and 15?
 <br/>
 <br/></p>
-
 <div class="solution" id="div_q941" style="visibility: hidden">
   <b>Answer:</b><br/>
   <p>
@@ -1725,18 +1699,13 @@ window.MathJax = {
     Logical address 15 = 0b1111 (page 7, offset 1) doesn't map to a physical address, because page 7 is not yet mapped! We'll later see that this is a variation of what is called a "page fault". Can you already think of how/why this might happen and how to solve this problem? 
   </p>
 </div>
-
 <p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q941', 1)" /></p>
 
 	</div>
 </div>
-
 <h3 id="page-table-size">Page table size</h3>
-
 <p>However, choosing this singular <strong>page size</strong> in an optimal way is not simple. As we will discuss below, we cannot simply choose too large a page size (say 10MB per page), since that might lead to leftover memory (called internal fragmentation). However, we also cannot choose a very small page size (say 1KB), since then we would need to keep a large amount of page numbers in our page table!</p>
-
 <p>To understand this second aspect a bit better, let&rsquo;s assume a single segment of 5MB. If this is stored in pages of 1KB each, we would need <em>5000 indidivual pages</em> to represent this segment. While the segment table can just contain a single entry (segment number 0 starting at address 0x1111, with size of 5MB), the page table needs to contain 5000 entries (page number 0 at 0x1111, page number 1 at 0x1511, page number 2 at 0x1911, etc.). While looking up the page addressess will be fast in the page table, it will <strong>take up a lot of memory</strong>!</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1744,47 +1713,40 @@ window.MathJax = {
 
 	</div>
 </div>
-
 <p>Let&rsquo;s calculate how much memory we would need in a practical scenario: take a 32-bit processor that can address 2<sup>32</sup> different locations. Let&rsquo;s also assume a a page size of 4kB (=2<sup>12</sup>, = 4096 bytes).</p>
-
 
 <div class="ex">
 	<div class="inner">
     	<p>In this more realistich scenario, calculate how many bits we need for the page number (p) and offset (d) in our logical addresses.
 <br/><br/></p>
-
 <div class="solution" id="div_q942" style="visibility: hidden">
   <b>Answer:</b><br/>
   <p>
     m = 32, n = 12. As such, we need 32-12 = 20 bits for the page number, and 12 for the offset. 
   </p>
 </div>
-
 <p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q942', 1)" /></p>
 
 	</div>
 </div>
-
 <ul>
-<li>The amount of pages is then: 2<sup>32</sup> / 2<sup>12</sup> = 2<sup>32 - 12</sup> = 2<sup>20</sup> entries (1048576 individual pages)</li>
-
-<li><p>Since the page table maps page numbers to physical addresses, and physical addresses are 32-bits on this system, each page entry needs to be 32 bits in size (= 4 bytes, = 2<sup>2</sup>).</p>
-
+<li>
+<p>The amount of pages is then: 2<sup>32</sup> / 2<sup>12</sup> = 2<sup>32 - 12</sup> = 2<sup>20</sup> entries (1048576 individual pages)</p>
+</li>
+<li>
+<p>Since the page table maps page numbers to physical addresses, and physical addresses are 32-bits on this system, each page entry needs to be 32 bits in size (= 4 bytes, = 2<sup>2</sup>).</p>
 <ul>
 <li>Note that in practice, this is a bit more complicated, as we&rsquo;ve seen before that the page table stores frame numbers, not full 32-bit addresses. However, in practice, each page also stores a few additional status bits (see below), and the page table entries are rounded up to a power of 2, so we still get 4 bytes for each page entry.</li>
-</ul></li>
-
-<li><p>As such, the total page table size = entries * size per entry = 2<sup>20</sup> * 2<sup>2</sup> = 2<sup>22</sup> bytes = 2<sup>12</sup> kB = 2<sup>2</sup> MB = <strong>4 MB</strong></p></li>
 </ul>
-
+</li>
+<li>
+<p>As such, the total page table size = entries * size per entry = 2<sup>20</sup> * 2<sup>2</sup> = 2<sup>22</sup> bytes = 2<sup>12</sup> kB = 2<sup>2</sup> MB = <strong>4 MB</strong></p>
+</li>
+</ul>
 <p>Now, 4MB might not seem like a lot. However, consider that the page table is needed <em>for each memory access</em>! As such, you need to store it very close to the CPU executing instructions to keep the lookup latency overhead low. We cannot simply store it in RAM, since that is conceptually quite far from the CPU (remember that the speed decreases considerably from registers -&gt; cache memory -&gt; RAM -&gt; disk). Typical register memory is at the order of a few (hundreds of)bytes, while cache memory is typically less than 8MB (and it needs to store much more than just the page table!). Also consider that for modern 64-bit setups, things are much, much worse. This requires 2<sup>54</sup> = 18.014.398.509.481.984 bytes, which can&rsquo;t even fit on modern hard drives!</p>
-
 <p>There are several options for dealing with this problem. Firstly, we can choose <strong>larger page sizes</strong> (say 2MB or even 1GB) to reduce the amount of entries needed. However, as we&rsquo;ll see below, this is a trade-off with internal fragmentation. Secondly, we can use a <strong>multi-layered/hierarchical page-table</strong>, so that we don&rsquo;t need to keep the full page table in memory all the time (as it&rsquo;s unlikely all those 64-bit addresses are actually used!). However, this increases lookup time (as each layer needs to be traversed). Thirdly, we can have <strong>each process track its own page table</strong> individually and swap the page tables in/out when a process is scheduled/context switched. This means we only need memory for the pages that are actually used, but this increases context switch overhead.</p>
-
 <p>In practice, all of these techniques are combined in clever ways on modern OSes to get the best of each. Full details of how this works would take us too far, but let&rsquo;s consider one common approach.</p>
-
 <h3 id="hierarchical-page-tables">Hierarchical page tables</h3>
-
 <div class="multicolumn">
   <div class="column">
     <figure>
@@ -1792,8 +1754,55 @@ window.MathJax = {
             <h4>A two-level page-table scheme</h4>
         </figcaption>
 </figure>
-
-    <style>
+<pre><code>&lt;style&gt;
+</code></pre>
+<p>p.dinobook {
+color: #7E7E7E;
+font-size: 14px;
+font-weight: 300;
+letter-spacing: -1px;
+padding-top: 0px;
+margin-top: -20px;
+text-align: center;
+}
+</style></p>
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
+  </div>
+  <div class="column">
+    <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses <b>paging for page tables</b>. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
+    <figure>
+    <img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/> 
+</figure>
+<pre><code>&lt;p&gt;With this setting, p&lt;sub&gt;1&lt;/sub&gt; is the index into the outer page. Similarly, p&lt;sub&gt;2&lt;/sub&gt; is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p&lt;sub&gt;1&lt;/sub&gt;. With the inner table index found, the base address can be searched for in the inner table using p&lt;sub&gt;2&lt;/sub&gt;. Finally the page offset is added to the base address to end up with the mapped physical address.&lt;/p&gt;
+&lt;p&gt;The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as &lt;b&gt;a forward-mapped page table&lt;/b&gt;. The are also &quot;inverted&quot; and &quot;hashed&quot; approaches that do things differently.&lt;/p&gt;
+</code></pre>
+  </div>
+</div>
+<p>In practice, this approach can be repeated at will, adding more and more lookup tables in between. For example, for a typical 64-bit system, a hierarchy of 4 page tables is used with page sizes of 4KB, where each page number pN is stored in <a href="https://cs61.seas.harvard.edu/site/2018/Kernel3/">9 bits</a>. This approach is chosen so that <a href="https://www.cs.cornell.edu/courses/cs4410/2015su/lectures/lec14-pagetables.html">each page table nicely subdivides into 4KB pages itself</a>, which allows them to be &ldquo;swapped&rdquo; as well (see below).</p>
+<p>This approach can then be combined with per-process page tables and make them hierarchical as well (which is useful for processes that use a large amount of memory, such as for example databases).</p>
+<p>These approaches can then also be implemented in the hardware MMU, which can for example keep a few per-process page tables in its local memory at a time, replacing them with others as new process are scheduled.</p>
+<p>Modern hardware typically supports a number of different page sizes (typically 4KB, 2MB and 1GB) that allow some level of tweaking if the programmer knows the expected memory usage up front.</p>
+<h3 id="internal-fragmentation">Internal fragmentation</h3>
+<p>As mentioned several times above, next to the large page table size, another problem with paging is <strong>internal fragmentation</strong>. Before, we&rsquo;ve discussed external fragmentation (with segmentation), which means that memory -outside- of the processes gets fragmented. With paging however, the memory -assigned to the processes- can get fragmented as well. Consider for example the case where we have pages of 4KB each, but we now need to allocate space for an array of 5KB. We can&rsquo;t allocate memory smaller than a page, so we need to reserve at least 2 pages of 4KB, <strong>wasting 3KB</strong>. In theory, this 3KB can be filled with other data of the same process, but that requires the memory allocator to keep track of such things (which doesn&rsquo;t always happen for various reasons).</p>
+<figure>
+    <img src="../../img/mem/internal_fragmentation.png"/> <figcaption>
+            <h4>Each process can have some leftover memory, leading to internal fragmentation.</h4>
+        </figcaption>
+</figure>
+<p>It should be obvious that, the larger the page size, the more risk of internal fragmentation occurs. Again: this is why we don&rsquo;t just use 1GB pages for each process.</p>
+<h2 id="added-benefits-of-paging">Added benefits of paging</h2>
+<p>As we&rsquo;ve seen above, paging is a very flexible setup, but it requires quite a bit of work to tune/optimize for practical use. Once we&rsquo;ve done that however, we get plenty of additional benefits from this approach. Let&rsquo;s look at a few.</p>
+<p>(Side note: we will now discuss some of the extra &ldquo;status bits&rdquo; that are kept for each page table entry, which as we&rsquo;ve seen above (search &ldquo;status bits&rdquo;), force the page table to store more bits than required by the frame number alone, causing the page table size to increase).</p>
+<h3 id="allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</h3>
+<p>As you can imagine, no machine today has enough physical (RAM) memory to allow the use of the entire 64-bit address space at once. In reality, you typically &ldquo;only&rdquo; have 8 - 32 GB of RAM in your home PC, while large servers have 512 GB to 2 TB of RAM nowadays.</p>
+<p>However, you can also easily imagine processes using up more than the available amount of memory, especially on your PC (have you ever run Google Chrome? Photoshop?). In that case, you wouldn&rsquo;t be able to start new processes any more, until you&rsquo;ve manually closed some others, even if you have a lot of processes that are idle/running in the background.</p>
+<p>To prevent this from happening, modern OSes will <strong>use the harddisk storage as a semi-transparent extension to the RAM memory</strong>. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously &ldquo;hibernated&rdquo; pages. This process of storing pages to disk and restoring them to main memory at a later time is called <strong>swapping</strong>.</p>
+<figure>
+    <img src="../../img/mem/swapping.jpg"/> <figcaption>
+            <h4>Pages can be swapped in/out to the harddisk to reduce main memory occupancy</h4>
+        </figcaption>
+</figure>
+<style>
   p.dinobook {
     color: #7E7E7E;
     font-size: 14px;
@@ -1805,115 +1814,30 @@ window.MathJax = {
   }
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
-  </div>
-  <div class="column">
-    <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses <b>paging for page tables</b>. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
-    <figure>
-    <img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/> 
-</figure>
-
-    <p>With this setting, p<sub>1</sub> is the index into the outer page. Similarly, p<sub>2</sub> is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p<sub>1</sub>. With the inner table index found, the base address can be searched for in the inner table using p<sub>2</sub>. Finally the page offset is added to the base address to end up with the mapped physical address.</p>
-    <p>The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as <b>a forward-mapped page table</b>. The are also "inverted" and "hashed" approaches that do things differently.</p>
-  </div>
-</div>
-
-<p>In practice, this approach can be repeated at will, adding more and more lookup tables in between. For example, for a typical 64-bit system, a hierarchy of 4 page tables is used with page sizes of 4KB, where each page number pN is stored in <a href="https://cs61.seas.harvard.edu/site/2018/Kernel3/">9 bits</a>. This approach is chosen so that <a href="https://www.cs.cornell.edu/courses/cs4410/2015su/lectures/lec14-pagetables.html">each page table nicely subdivides into 4KB pages itself</a>, which allows them to be &ldquo;swapped&rdquo; as well (see below).</p>
-
-<p>This approach can then be combined with per-process page tables and make them hierarchical as well (which is useful for processes that use a large amount of memory, such as for example databases).</p>
-
-<p>These approaches can then also be implemented in the hardware MMU, which can for example keep a few per-process page tables in its local memory at a time, replacing them with others as new process are scheduled.</p>
-
-<p>Modern hardware typically supports a number of different page sizes (typically 4KB, 2MB and 1GB) that allow some level of tweaking if the programmer knows the expected memory usage up front.</p>
-
-<h3 id="internal-fragmentation">Internal fragmentation</h3>
-
-<p>As mentioned several times above, next to the large page table size, another problem with paging is <strong>internal fragmentation</strong>. Before, we&rsquo;ve discussed external fragmentation (with segmentation), which means that memory -outside- of the processes gets fragmented. With paging however, the memory -assigned to the processes- can get fragmented as well. Consider for example the case where we have pages of 4KB each, but we now need to allocate space for an array of 5KB. We can&rsquo;t allocate memory smaller than a page, so we need to reserve at least 2 pages of 4KB, <strong>wasting 3KB</strong>. In theory, this 3KB can be filled with other data of the same process, but that requires the memory allocator to keep track of such things (which doesn&rsquo;t always happen for various reasons).</p>
-
-<figure>
-    <img src="../../img/mem/internal_fragmentation.png"/> <figcaption>
-            <h4>Each process can have some leftover memory, leading to internal fragmentation.</h4>
-        </figcaption>
-</figure>
-
-<p>It should be obvious that, the larger the page size, the more risk of internal fragmentation occurs. Again: this is why we don&rsquo;t just use 1GB pages for each process.</p>
-
-<h2 id="added-benefits-of-paging">Added benefits of paging</h2>
-
-<p>As we&rsquo;ve seen above, paging is a very flexible setup, but it requires quite a bit of work to tune/optimize for practical use. Once we&rsquo;ve done that however, we get plenty of additional benefits from this approach. Let&rsquo;s look at a few.</p>
-
-<p>(Side note: we will now discuss some of the extra &ldquo;status bits&rdquo; that are kept for each page table entry, which as we&rsquo;ve seen above (search &ldquo;status bits&rdquo;), force the page table to store more bits than required by the frame number alone, causing the page table size to increase).</p>
-
-<h3 id="allocating-more-memory-than-is-physically-available">Allocating more memory than is physically available</h3>
-
-<p>As you can imagine, no machine today has enough physical (RAM) memory to allow the use of the entire 64-bit address space at once. In reality, you typically &ldquo;only&rdquo; have 8 - 32 GB of RAM in your home PC, while large servers have 512 GB to 2 TB of RAM nowadays.</p>
-
-<p>However, you can also easily imagine processes using up more than the available amount of memory, especially on your PC (have you ever run Google Chrome? Photoshop?). In that case, you wouldn&rsquo;t be able to start new processes any more, until you&rsquo;ve manually closed some others, even if you have a lot of processes that are idle/running in the background.</p>
-
-<p>To prevent this from happening, modern OSes will <strong>use the harddisk storage as a semi-transparent extension to the RAM memory</strong>. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously &ldquo;hibernated&rdquo; pages. This process of storing pages to disk and restoring them to main memory at a later time is called <strong>swapping</strong>.</p>
-
-<figure>
-    <img src="../../img/mem/swapping.jpg"/> <figcaption>
-            <h4>Pages can be swapped in/out to the harddisk to reduce main memory occupancy</h4>
-        </figcaption>
-</figure>
-
-<p><style>
-  p.dinobook {
-    color: #7E7E7E;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: -1px;
-    padding-top: 0px;
-    margin-top: -20px;
-    text-align: center;
-  }
-</style>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
-
 <p>In practice, this all happens transparently for the programmer. For each page in the per-process page table, the OS tracks whether this page is currently in the main memory or not. This is done using a so-called <strong>valid/invalid bit</strong>. If the program attempts to access a page with the invalid bit set, the OS generates a <strong>page fault</strong>. Other than with a segmentation fault, the OS will not actually regard this as an error. Instead, a new page location (free gap in main memory) is found and the contents of the page are again read from disk into that space. If there are no free pages in main memory, old pages are first swapped out to disk for both.</p>
-
 <p>Something very similar happens if we try to access a page that has never actually been allocated before (say with a new <code>malloc()</code>). In this case, the OS will look for a new page in main memory and allow the program to start using it (this is what we saw above when trying to use logical address 15, which was not mapped in the page table yet). It is even possible to take this one step further, and to <strong>not actually allocate memory for a given page until it is actually used/written to</strong>. For example, if you allocate 2GB of memory with <code>malloc()</code> (which you can certainly do), the OS won&rsquo;t actually start reserving that much space in the memory. It will just add the necessary placeholders in the page table until you actually start writing to this 2GB of memory. Something similar happens if you start allocating lots of smaller blocks: you&rsquo;re only storing the pointers to those blocks; the actual block memory is only converted to pages when data is written to them (this is why in some exercises in the previous chapter you can use a &ldquo;logical&rdquo; amount of memory of many hundreds of gigabytes before you actually run out of &ldquo;real&rdquo; memory). This approach can also be used to reduce the amount of code each process needs to load. In most programs, large parts of the code are never actually executed in normal executions of the program. As such, the OS can decide not to load pages in the text/code segment of the process until it actually needs to execute them, an approach called <strong>load-on-use</strong>.</p>
-
 <p>As such, we can see that this allows us to, in theory, <strong>extend the size of the physical RAM to encompass our entire hard disk as well</strong> (e.g., going from 16GB of RAM to 2TB &ldquo;extended&rdquo; RAM). In practice, modern OSes reserve a fixed amount of hard disk space for swapping purposes (linux typically has a separate swap partition, while windows typically has a large file of 1x or 2x the RAM size it uses for swap space). It&rsquo;s only when this extra space also runs out, that the OS will have to start shutting down processes to make room for more. This is something you still see today in mobile OSes such as Android and iOS, which occasionally will auto-close (long-idle or heavy) apps to make room for new ones.</p>
-
 <p>However, there are of course also downsides to this approach. Hard disk memory (even if you&rsquo;re using an SSD drive) is still much slower than using RAM directly. As such, every time a page needs to be swapped, this <strong>adds additional overhead</strong>, as memory needs to be copied to the RAM first before use. The OS tries to hide this overhead by scheduling other instructions while it&rsquo;s waiting (up to even scheduling another process while waiting), and especially by being clever about which pages it keeps in memory and which it switches out. This can again be done with a variety of algorithms with descriptive names such as Least-Recently-Used (LRU), Not-Frequently-Used (NFU), First-In-First-Out (FIFO), Second Chance, etc. A final approach is by tracking whether a page that was previously stored to disk (and is currently still on disk), has actually been changed in main memory (this is done by using a <strong>modified bit</strong> (or &ldquo;dirty&rdquo; bit)). If the modified bit is not set for a page in main memory, we can simply overwrite it without first serializing it to disk, as we know the version already-on-disk is the same as the one in main memory, and we don&rsquo;t loose any state by overwriting it. In general, the OS prevents the use of swapping as much as possible.</p>
-
 <h3 id="optimized-data-sharing">Optimized data sharing</h3>
-
 <p>Another common optimization is to allow multiple processes and threads to <strong>share individual pages</strong> amongst themselves. For example, we have seen that when fork()&lsquo;ing processes, they each get a new copy of the PCB and all the program segments. This is <em>conceptually</em> true, but in practice this would of course be quite wasteful, as the child will probably never change the text/data/bss segments and will probably keep re-using much of the same heap and stack data as the parent (at least in the beginning).</p>
-
 <p>Instead, when fork()&lsquo;ing a new process or starting a new thread, the new task typically still just points to the old pages. This only changes when the new task tries to <strong>write</strong> to one of the shared pages: at this point, the <strong>copy-on-write</strong> approach is used, and the to-be-changed page is copied for the new task before it is changed. This is conceptually similar to the allocate-on-write approach discussed in the previous subsection.</p>
-
 <p>Something similar happens for the previously mentioned (dynamically) loaded libraries, where code can be shared between many processes. In this case, the libraries&rsquo; pages can be marked with a special <strong>read-only</strong> bit, to make sure that processes don&rsquo;t overwrite the library internals and mess up other processes that way.</p>
-
-<h3 id="memory-mapped-i-o">Memory-Mapped I/O</h3>
-
+<h3 id="memory-mapped-io">Memory-Mapped I/O</h3>
 <p>As discussed before, no modern system actually has enough RAM/harddiks memory to back the full 64-bit address space, meaning that we always have quite a few addresses leftover, even under full load. Additionally, the concept of swapping has shown that we can view memory addresses as <strong>proxies</strong> to access -other- hardware (in that case, the harddisk) in an indirect way.</p>
-
 <p>If we take this concept further, we can imagine also addressing other hardware in the same way, by exposing them as logical memory addresses that are mapped internally by the OS to something else than the RAM. This is generally called <strong>memory-mapped I/O</strong> and it is a very common technique.</p>
-
 <p>For example, in Chapter 2, we&rsquo;ve mentioned that Arduino CPU registers are accessible from C code in this way: they are assigned a logical address, which the OS maps not to the RAM/harddisk, but to the CPU registers for setting/reading them. Similarly, modern GPUs typically also have a large amount of &ldquo;VRAM&rdquo; (Video RAM), specifically for storing (graphical) data. Instead of addressing this VRAM in a completely separate way, the OS instead maps it to its own logical address space (pretending as if it&rsquo;s &ldquo;normal RAM&rdquo;) which can be read/written using standard methods. Other examples include serial peripheral devices (for example mouse/keyboard/older modems/many sensor systems/&hellip;) that can be accessed by pretending their output can just be read from a memory region. Finally of course, we can also do this for &ldquo;normal&rdquo; files on the harddisk (and not just swapped pages).</p>
-
 <p>While powerful, this technique can sometimes be tricky to get right, as in some cases the memory access is not immediately propagated directly to the other hardware, but instead the RAM is still used as intermediate storage. For example, have you ever wondered why you should <strong>eject</strong> a USB stick ? It might happen that you have written data to the USB stick, by writing to its memory-mapped addresses, but the data has not reached its destination yet. This is because the data is first written to RAM, and then transferred over time (by the OS) to the actual hardware. In these cases, the earlier mentioned <strong>dirty bit</strong> again comes into play. This is not just something that happens with memory-mapped I/O though: any intermediate memory layer has these issues, and this frequently shows up with CPU cache memory as well.</p>
-
 <h2 id="security">Security</h2>
-
 <p>Finally, let&rsquo;s discuss security a bit more. As we&rsquo;ve seen at the start of this Chapter, one of the main reasons for keeping track of chunks/segments/pages is to provide memory protection: to prevent process A from accessing process B&rsquo;s memory. This is for example needed to prevent A from stealing passwords or sensitive data stored in B&rsquo;s memory during execution.</p>
-
 <p>However, in the first lab, we&rsquo;ve also seen that this protection is rarely enough, and that there are plenty of ways for hackers to still mess with your system, even if it&rsquo;s just within a single process. Over time, OSes and compilers have added many advanced techniques to help deal with these issues.</p>
-
 <p>One such technique is called <strong>Address Space Layout Randomization (ASLR)</strong>. A common attack vector is for the hacker to &ldquo;escape&rdquo; the stack/heap (e.g., through an array overflow, as we&rsquo;ve seen). With that, they then attempt to overwrite code/data for a known vulnerable function in the program that allows for example execution of new code. This requires the hacker to reliably know where exactly this vulnerable function is in the logical address space. While pages can be randomly distributed inside the physical memory, without ASLR the logical address space would always look the same (starts at 0x00, text ends at 0x?? every time, since it&rsquo;s always the same length, so data segment starts at a predictable location as well etc.). As such, ASLR randomizes the logical base address of the program, as well as the logical starting locations of the other segments as well, to make it more difficult (though far from impossible) for hackers to guess where certain code/data is located between different runs of the same program.</p>
-
 <p>Even with all this, it&rsquo;s still possible for attackers to steal data, albeit via very complex methods. For example, the <strong>Spectre and Meltdown</strong> make use of several advanced features of modern CPUs, such as out-of-order execution, speculative execution, caching and, -indeed-, also virtual addressing and paging. The details are far too complex to discuss here (that&rsquo;s more 2nd master level), but one of the key parts in the attack is that the OS and CPU actually <strong>does not check the segment/page boundaries immediately when an access occurs</strong>. To speed things up, CPUs will allow out-of-bounds accesses to occur and they will load privileged data into cache memory. It is only when this memory is then being used/read that the check occurs and it is prevented. However, the fact that the data is loaded into (cache) memory allows the hacker to use other methods (&ldquo;side-channel attacks&rdquo;/&ldquo;timing attacks&rdquo;) to decipher the contents of the cache, thus stealing the protected memory, across process boundaries and even from inside the kernel! Spectre and Meltdown have been very impactful, often requiring changes at the OS and even hardware level, lowering performance by up to 20% in some cases!</p>
-
 <figure>
     <img src="../../img/mem/ss_mem_meltdown_spectre.png"/> <figcaption>
             <h4>Meltdown and Spectre - Two attacks that got access to other process&#39;s memory.</h4>
         </figcaption>
 </figure>
-
 <p>Finally, even if hackers can just stay within a single process, things can still go terribly wrong. For example, in the <strong>cloudbleed</strong> attack, the large content distribution network Cloudflare suffered massive data leaks. This is because they used a single Web server process to serve requests/responses from many different clients. Using a simple buffer overflow, this allowed the attacker to read not just their intended response, but also the responses to request from other clients (which were located on the same heap), which often contained passwords, banking information, etc. This is because, within a single process as we&rsquo;ve seen, memory checks are typically absent. Making matters much worse, this could be triggered by requesting a specially crafted HTML page, causing some search engines like Google to actually <strong>cache the leaked passwords</strong> in their search results! As such, fixing the bug at the Cloudflare servers was not enough: many search engine caches also had to be purged manually!</p>
-
 <p>As such, it should be clear that memory access protection is a complex topic, going far beyond what we&rsquo;ve discussed, and still an active area of research and development.</p>
 
 
@@ -2924,19 +2848,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

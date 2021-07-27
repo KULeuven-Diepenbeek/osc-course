@@ -12,21 +12,19 @@
     <title>1.2: String Manipulation :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,15 +1578,13 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#we-are-at-war">We are at War!</a>
-<ul>
-<li><a href="#1-string-manipulation">1. String manipulation</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#we-are-at-war">We are at War!</a>
+      <ul>
+        <li><a href="#1-string-manipulation">1. String manipulation</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1612,26 +1608,17 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="we-are-at-war">We are at War!</h2>
-
 <p>We&rsquo;re at <strong>war</strong>! The orcs are attacking and are looking very hungry! Look at them!</p>
-
 <figure>
     <img src="../../img/labs/orcs.png"/> <figcaption>
             <h4>Orcs attacking! source: G.I.</h4>
         </figcaption>
 </figure>
-
 <h3 id="1-string-manipulation">1. String manipulation</h3>
-
 <p>However, instead of simply killing you, these not so friendly looking beasts target <em>vowels</em> instead of <em>bowels</em>. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called <code>char* munch(char* sentence)</code> that obscures all vowels with an &lsquo;X&rsquo;, and then prints the results. You will also need a <code>int main()</code> function.</p>
-
 <p>Assume a maximum character length of 100 for the input sentence.</p>
-
 <p>Tips:</p>
-
 <ol>
 <li>Re-read <a href="../../ch1-c/">chapter 1</a>.</li>
 <li>How do you start writing a program in C? Create one file, create a main function, print something and compile/run to test if it works. Then expand.</li>
@@ -1639,30 +1626,28 @@ window.MathJax = {
 <li>You can safely ignore the <code>*</code>. A char array gets converted to a pointer if returned or given as an argument. Remember, in Java, the function signature would simply be <code>char[] munch(char[] sentence)</code></li>
 <li>Go through the <a href="https://www.gnu.org/prep/standards/html_node/Writing-C.html">GNU Coding standards</a>. Methods in C are <em>snake-cased</em>: <code>my_nice_method</code> instead of Java&rsquo;s <em>camelcasing</em> <code>myNiceMethod</code>.</li>
 </ol>
-
 <pre>
 INPUT: 'hello friendly green guys'
 OUTPUT: 'hXllX frXXndly grXXn gXys'
 </pre>
-
 <p>Start from this blueprint:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">munch</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> sentence) {
-    <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> response <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>);
+<span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#75af00">munch</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">sentence</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">response</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span><span style="color:#111">);</span>
     <span style="color:#75715e">// TODO eat those vowels!
 </span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">return</span> response;
-}
+    <span style="color:#00a8c8">return</span> <span style="color:#111">response</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">char</span> sentence[<span style="color:#ae81ff">100</span>];
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#111">sentence</span><span style="color:#111">[</span><span style="color:#ae81ff">100</span><span style="color:#111">];</span>
     <span style="color:#75715e">// TODO read input
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;INPUT: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, sentence);
-    printf(<span style="color:#e6db74">&#34;OUTPUT: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, munch(sentence));
-}</code></pre></div>
-<p>The correct use of <code>malloc()</code> will be explained in the coming labs.</p>
+</span><span style="color:#75715e"></span>    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;INPUT: %s</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">sentence</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;OUTPUT: %s</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">munch</span><span style="color:#111">(</span><span style="color:#111">sentence</span><span style="color:#111">));</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The correct use of <code>malloc()</code> will be explained in the coming labs.</p>
 
 
 <footer class="footline">
@@ -2669,19 +2654,17 @@ OUTPUT: 'hXllX frXXndly grXXn gXys'
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

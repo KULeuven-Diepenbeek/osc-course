@@ -28,7 +28,7 @@ The following functions are given:
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</guid>
       <description>Download the start project files here: cpp-testing.cpp, cpp-testing-main.cpp. Remember that in order to run this as a Google Test Suite, you need to compile it using g++ and bootstrap GTest in a separate .cpp file where the main() function resides. Go back to the lab notes if you&amp;rsquo;re not sure how to pull this off.
 The following code is given:
- date and period structs to represent a date and a period of dates in code.</description>
+date and period structs to represent a date and a period of dates in code.</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@ This task requires you to think about the bigger picture and forces you to expla
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
       <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.
 The scheduler follows these rules:
- The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
+The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
     </item>
     
   </channel>

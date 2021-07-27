@@ -24,7 +24,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</guid>
       <description>source: xkcd.com   Segfault this For each of the programs below:
- Guess first if they will give a segmentation fault and where exactly and why Compile and execute them Were your guesses in the first step correct or not? Why (not)?  #include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; }#include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; }#include &amp;lt;stdio.</description>
+ Guess first if they will give a segmentation fault and where exactly and why Compile and execute them Were your guesses in the first step correct or not? Why (not)?  #include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; } #include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; } #include &amp;lt;stdio.</description>
     </item>
     
     <item>

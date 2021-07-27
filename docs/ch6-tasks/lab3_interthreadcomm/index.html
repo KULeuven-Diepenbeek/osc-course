@@ -12,21 +12,19 @@
     <title>6.7: Inter-Thread communication (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1579,7 +1577,7 @@ window.MathJax = {
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -1608,67 +1606,68 @@ window.MathJax = {
         </figcaption>
 </figure>
 
-
 <ul>
-<li><p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
-
+<li>
+<p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
 <ul>
 <li>Every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
 <li>The king <strong>doesn&rsquo;t</strong> wait for the greetings before he goes back to sleep</li>
 <li>You do not need to make sure that the servants always reply in the same order</li>
 <li>Repeat the wake-greet cycle at least 5 times</li>
 <li>Tip: use the <code>rand()</code> function to get random numbers</li>
-</ul></li>
-
-<li><p><strong>REVISIT, WITH A TWEAK</strong> Change the previous king-servant setup with a single change: now, the king <strong>does</strong> explicitly wait for the greetings of <em>all</em> his servants before he goes back to sleep.</p></li>
 </ul>
-
+</li>
+<li>
+<p><strong>REVISIT, WITH A TWEAK</strong> Change the previous king-servant setup with a single change: now, the king <strong>does</strong> explicitly wait for the greetings of <em>all</em> his servants before he goes back to sleep.</p>
+</li>
+</ul>
 <figure>
     <img src="../../img/os/sc_642.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-
 <ul>
-<li><p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have several separate producer threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory and later print it in one go. Instead, each prime-calculting thread (the producers) will share the same memory. Additionally, they will communicate each discovered prime <strong>as soon as possible</strong> back to separate &ldquo;processing&rdquo; entities that print the primes to the screen (several consumers). Put differently: we will have multiple producers and consumers working <strong>at the same time</strong> and <strong>sharing the same memory</strong>. Again, this can be accomplished in several different ways:</p>
-
+<li>
+<p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have several separate producer threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory and later print it in one go. Instead, each prime-calculting thread (the producers) will share the same memory. Additionally, they will communicate each discovered prime <strong>as soon as possible</strong> back to separate &ldquo;processing&rdquo; entities that print the primes to the screen (several consumers). Put differently: we will have multiple producers and consumers working <strong>at the same time</strong> and <strong>sharing the same memory</strong>. Again, this can be accomplished in several different ways:</p>
 <ol>
 <li>You can use a single shared array and a shared counter (indicating how many items are in the array) to store the results
-
 <ul>
 <li>Access to the array is protected by a Mutex that both the producers and consumers lock</li>
 <li>Extra points if you can think of a way to not make this array take up excessive memory by the time the calculations are done</li>
-</ul></li>
+</ul>
+</li>
 <li>You can pass each prime as an individual value between producer/consumer threads instead of using a shared array
-
 <ul>
 <li>Here, you can use Semaphores and/or Mutexes to coordinate this communication
-
 <ul>
 <li>Tip: <code>sem_trywait()</code> might be useful here, depending your approach</li>
-</ul></li>
+</ul>
+</li>
 <li>Extra points if you can think of a way of keeping the producers producing (at least for a small amount of time) while all consumers are busy</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
 <ul>
-<li><p>Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread (but still with multiple producers), then extending it to use multiple consumers later.</p></li>
-
-<li><p>The goal is to implement <strong>one</strong> of these options (mutex or semaphore, shared array or individual value(s), you choose), think deeply about the rest, and then answer the following questions:</p>
-
+<li>
+<p>Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread (but still with multiple producers), then extending it to use multiple consumers later.</p>
+</li>
+<li>
+<p>The goal is to implement <strong>one</strong> of these options (mutex or semaphore, shared array or individual value(s), you choose), think deeply about the rest, and then answer the following questions:</p>
 <ul>
 <li>Which approach should be faster: this one with shared memory/direct value passing or the one from the previous lab using per-thread memory?</li>
 <li>Which tradeoffs were made here in comparison with the previous version? (e.g., faster but less flexible, slower but less memory, &hellip;)</li>
-<li>Are you able to keep the primes sorted in this new version? Why (not)? If not, can you think of a way to still sort the results afterwards? Explain this in terms of parallel vs sequential phases of a program.<br /></li>
-</ul></li>
-</ul></li>
-
-<li><p>Go to the Deadlock Empire website and complete these two exercises:</p>
-
+<li>Are you able to keep the primes sorted in this new version? Why (not)? If not, can you think of a way to still sort the results afterwards? Explain this in terms of parallel vs sequential phases of a program.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Go to the Deadlock Empire website and complete these two exercises:</p>
 <ul>
 <li>The Final Stretch: Dragonfire</li>
 <li>The Final Stretch: Triple Danger</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
 
@@ -2679,19 +2678,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

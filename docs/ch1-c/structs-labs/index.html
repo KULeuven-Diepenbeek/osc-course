@@ -12,21 +12,19 @@
     <title>1.4: Structs :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,16 +1578,14 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#we-are-still-at-war">We are (still&hellip;) at War!</a>
-<ul>
-<li><a href="#2-modelling-the-orcs">2. Modelling the orcs</a></li>
-<li><a href="#3-orcs-eating-each-other">3. Orcs eating each other??</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#we-are-still-at-war">We are (still&hellip;) at War!</a>
+      <ul>
+        <li><a href="#2-modelling-the-orcs">2. Modelling the orcs</a></li>
+        <li><a href="#3-orcs-eating-each-other">3. Orcs eating each other??</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1613,51 +1609,37 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="we-are-still-at-war">We are (still&hellip;) at War!</h2>
-
 <p>We&rsquo;re <em>still</em> at <strong>war</strong>! The orcs are attacking and are looking very hungry! Look at them!</p>
-
 <figure>
     <img src="../../img/labs/orcs.png"/> <figcaption>
             <h4>Orcs attacking! source: G.I.</h4>
         </figcaption>
 </figure>
-
 <h3 id="2-modelling-the-orcs">2. Modelling the orcs</h3>
-
 <p>Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many <code>struct</code> instances with random property values and print these on the screen. An orc has the following properties (both simple numbers, between 1 and 10, use <a href="https://www.tutorialspoint.com/c_standard_library/c_function_rand">rand()</a> from <code>stdlib</code>):</p>
-
 <ul>
 <li><code>attack</code></li>
 <li><code>life</code></li>
 </ul>
-
 <pre>
 INPUT: 3
 OUTPUT: orc 1: attack 3, life 5. orc 2: attack 5, life 6. orc 3: attack 1, life 1.
 </pre>
-
 <p>Tips:</p>
-
 <ol>
 <li>Do not forget to generate a new seed for the random value, see the <code>rand()</code> docs.</li>
 <li>Creating a separate function <code>generate_orcs()</code> will keep your <code>main()</code> function short and clean. The function will return a list of orcs, the &ldquo;army&rdquo;, so to speak. Remember that returning an array is of type <code>Orc*</code>.</li>
 </ol>
-
 <p>The generate method will look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">Orc<span style="color:#f92672">*</span> <span style="color:#a6e22e">generate_orcs</span>(<span style="color:#66d9ef">int</span> amount) {
-  Orc<span style="color:#f92672">*</span> army <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Orc) <span style="color:#f92672">*</span> amount);
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">Orc</span><span style="color:#f92672">*</span> <span style="color:#75af00">generate_orcs</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">amount</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#111">Orc</span><span style="color:#f92672">*</span> <span style="color:#111">army</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Orc</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">amount</span><span style="color:#111">);</span>
   <span style="color:#75715e">// add stuff to army
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> army; 
-}</code></pre></div>
-<p>Details on how the <code>malloc()</code> function works will be explained later.</p>
-
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">return</span> <span style="color:#111">army</span><span style="color:#111">;</span> 
+<span style="color:#111">}</span>
+</code></pre></div><p>Details on how the <code>malloc()</code> function works will be explained later.</p>
 <h3 id="3-orcs-eating-each-other">3. Orcs eating each other??</h3>
-
 <p>Vowels did not seem to fully satisfy them, now they are turning on each other!? All the better for us. Expand the program such that the first orc fights the next one. (life minus attack). Create a function <code>Orc fight(Orc attacker, Orc defender)</code>. Is the defender still alive after the attack? Then he is victorious (and will be returned). Print the last man stending. Input stays the same.</p>
-
 <pre>
 INPUT: 3
 OUTPUT:
@@ -1666,9 +1648,7 @@ OUTPUT:
   orc 2 VS 3: 2 wins (1 - 5 = dead)
   orc 2 is victorious!
 </pre>
-
 <p>Tips:</p>
-
 <ol>
 <li>You will need to loop through all orcs and take two elements out of the array to pit them against each other. Reassign <code>Orc winner = army[0]</code> with the result of the <code>fight()</code> function, within the loop.</li>
 <li>If both orcs survive, the first one wins.</li>
@@ -2679,19 +2659,17 @@ OUTPUT:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

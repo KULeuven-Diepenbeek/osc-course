@@ -12,21 +12,19 @@
     <title>6.2: Processes (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,12 +1578,9 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#creating-and-inspecting-processes">Creating and inspecting processes</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#creating-and-inspecting-processes">Creating and inspecting processes</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1609,9 +1604,7 @@ window.MathJax = {
         
 
 
-
-
-<p><figure>
+<figure>
     <img src="../../img/os/db_pstree.png"/> 
 </figure>
 
@@ -1626,44 +1619,36 @@ window.MathJax = {
     text-align: center;
   }
 </style>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p></p>
-
+<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <h2 id="creating-and-inspecting-processes">Creating and inspecting processes</h2>
-
 <p><strong>TIP:</strong> the unistd.h header has some useful functions. You may also want to check out the <code>wait()</code> function in sys/wait.h and <code>exit()</code> in stdlib.h.</p>
-
 <ul>
 <li>Write a C-program that prints its own PID on the screen.</li>
 </ul>
-
 <figure>
     <img src="../../img/os/sc_621.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-
 <ul>
 <li>Write a C-program that spawns another process using <code>fork()</code>. Both parent and child processes announce their existence (through a printf) and their PIDs.</li>
 </ul>
-
 <figure>
     <img src="../../img/os/sc_622.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-
 <ul>
 <li>Write a C-program that creates 4 child processes using <code>fork()</code>
-
 <ul>
 <li>each of the childeren checks which numbers below 10000 are <a href="https://en.wikipedia.org/wiki/Prime_number">prime</a></li>
 <li>every child reports only numbers that are prime (using printf), together with its own PID</li>
 <li>before exiting, a child must announce how many prime numbers it has found in total</li>
 <li><strong>TIP:</strong> don&rsquo;t worry too much about the efficienty of calculating whether a number is prime or not. The calculation is meant to be time-consuming.</li>
 <li>Answer this question: how are the processes scheduled? Do they all execute one after the other or at the same time? <strong>How can you tell?</strong></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <figure>
     <img src="../../img/os/sc_623.png"/> <figcaption>
             <h4>An example output</h4>
@@ -2678,19 +2663,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

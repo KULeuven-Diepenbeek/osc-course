@@ -44,8 +44,8 @@ A lot of applications that are built using an Arduino need some sense of time. A
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</guid>
-      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:  
-Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
+      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
+  Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
   </channel>

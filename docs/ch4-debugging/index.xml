@@ -23,7 +23,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</guid>
-      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.</description>
+      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.
+2.1 With debug flags Let&amp;rsquo;s start with a heap-based application we would like to inspect:</description>
     </item>
     
     <item>
@@ -33,7 +34,8 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</guid>
       <description>Test-Driven Development: Google Test A concept you learned to love in the Software Engineering Skills course.
-It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.</description>
+It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.
+Google Test is a C++ (11) framework, not a C framework!</description>
     </item>
     
   </channel>

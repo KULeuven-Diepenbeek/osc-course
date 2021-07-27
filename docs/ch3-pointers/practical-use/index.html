@@ -12,21 +12,19 @@
     <title>3.2: Practical Use of Pointers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,18 +1578,16 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-changing-values-around">1. Changing values around</a></li>
-<li><a href="#2-not-chaining-values-around-const">2. Not chaining values around: const</a></li>
-<li><a href="#3-arithmetics-with-pointers">3. Arithmetics with pointers</a></li>
-<li><a href="#4-linked-lists">4. Linked Lists</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-changing-values-around">1. Changing values around</a></li>
+        <li><a href="#2-not-chaining-values-around-const">2. Not chaining values around: const</a></li>
+        <li><a href="#3-arithmetics-with-pointers">3. Arithmetics with pointers</a></li>
+        <li><a href="#4-linked-lists">4. Linked Lists</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1615,25 +1611,22 @@ window.MathJax = {
         
 
 
-
-
 <h3 id="1-changing-values-around">1. Changing values around</h3>
-
 <p>Because in C everything passed <em>by-value</em>, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not <strong>primitives</strong>! How do you switch two numbers without giving anything back?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>px, <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>py) {
-    <span style="color:#66d9ef">int</span> temp;
-    temp <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>px;
-    <span style="color:#f92672">*</span>px <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>py;
-    <span style="color:#f92672">*</span>py <span style="color:#f92672">=</span> temp;
-}
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">swap</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">px</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">py</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
+    <span style="color:#111">temp</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">px</span><span style="color:#111">;</span>
+    <span style="color:#f92672">*</span><span style="color:#111">px</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">py</span><span style="color:#111">;</span>
+    <span style="color:#f92672">*</span><span style="color:#111">py</span> <span style="color:#f92672">=</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
-    swap(<span style="color:#f92672">&amp;</span>x, <span style="color:#f92672">&amp;</span>y);
-    printf(<span style="color:#e6db74">&#34;(%d, %d)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x, y); <span style="color:#75715e">// print (20, 10)
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<script defer src="../../mermaid/mermaid.min.js">
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#111">y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
+    <span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">y</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;(%d, %d)</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#111">);</span> <span style="color:#75715e">// print (20, 10)
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1655,13 +1648,9 @@ graph TD;
     temp -.->|*px, follow pointer for the value| px
 
 </div>
-
 <p>Something like that is unthinkable in Java - we need extra tricks for that, such as passing objects. Of course this implementation is also <strong>disadvantageous</strong>: is it clear to the caller that variables are being changed? Not really. High-performance algorithm implementations benefit from these possibilities. Clear domain-driven applications are not: a higher language is used for that.</p>
-
 <h3 id="2-not-chaining-values-around-const">2. Not chaining values around: const</h3>
-
 <p>To prevent further confusion, it is possible to mark pointers with the <code>const</code> keyword, meaning <strong>the value</strong> should not be changed. The pointer can still point to another value! As such, this is by <em>no means</em> a &ldquo;constant&rdquo;, like in many other traditional programming languages. Take the above example, and change swap&rsquo;s signature to <code>void swap(const int *px, const int *py)</code>. While compiling the code, the following errors are generated:</p>
-
 <pre>
 test.c:5:9: error: read-only variable is not assignable
     *px = *py;
@@ -1671,31 +1660,23 @@ test.c:6:9: error: read-only variable is not assignable
     ~~~ ^
 2 errors generated.
 </pre>
-
 <p>With the <code>const</code> keyword, we prohibit programmers from using <code>*ptr = ...</code> - that is, assigning another value as a <em>dereferenced</em> pointer. <code>ptr = &amp;temp</code> is still possible, however. If you do not want pointers to change addresses, use <code>const int* const px</code>. That&rsquo;s right, two times <code>const</code> - this is not a mistake. This reads, from <strong>right to left</strong>, as:</p>
-
 <ol>
 <li>px is a</li>
 <li>constant</li>
 <li>pointer to an int</li>
 <li>constant</li>
 </ol>
-
 <p>Introducing the second <code>const</code> gives the following error when attempting to change the pointer itself:</p>
-
 <pre>
 test.c:5:8: error: read-only variable is not assignable
     px = &temp;
     ~~ ^
 1 error generated.
 </pre>
-
 <p>In practice, try to use as many constant variables as possible, if you want to make sure the passed values stay the same.</p>
-
 <h3 id="3-arithmetics-with-pointers">3. Arithmetics with pointers</h3>
-
 <p>Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and subtracting. On pointers you can also perform operations such as <code>++</code> and <code>--</code> that move the pointer in the memory one place to the left or right. With <code>char * text = &quot;sup&quot;</code> the pointer refers to the first character:</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1714,33 +1695,30 @@ graph TD
     A-.->F['\0']
 
 </div>
-
 <p>Creating an own version of <code>printf(&quot;%s&quot;, tekst)</code> could be implemented by looping through the pointer until nothing is left to print, like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print_text</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>txt) {
-    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">*</span>txt <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>) {
-        printf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">*</span>txt);
-        txt<span style="color:#f92672">++</span>;
-    }
-}</code></pre></div>
-<p>Notice <code>txt++</code>. We simply point to the next possible value in the memory space, which hopefully is still a character. If it is not, and it came from a string, it will be ended with <code>\0</code>. Adding some value <em>beyond the limit</em> will result in calling upon unintended memory values, resulting in possible glitches. But C will not crash, it is very robust. You should pay extra attention while fiddling about with pointers! For instance:</p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print_text</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">txt</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">txt</span> <span style="color:#f92672">!=</span> <span style="color:#d88200">&#39;\0&#39;</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%c&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">txt</span><span style="color:#111">);</span>
+        <span style="color:#111">txt</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Notice <code>txt++</code>. We simply point to the next possible value in the memory space, which hopefully is still a character. If it is not, and it came from a string, it will be ended with <code>\0</code>. Adding some value <em>beyond the limit</em> will result in calling upon unintended memory values, resulting in possible glitches. But C will not crash, it is very robust. You should pay extra attention while fiddling about with pointers! For instance:</p>
 
 <div class="notices note" ><p>In C, <code>a[i]</code> exactly the same as <code>*(a + i)</code>!</p>
 </div>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">char</span> txt[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hey&#34;</span>;
-    <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> ptr <span style="color:#f92672">=</span> txt;
-    <span style="color:#66d9ef">char</span> otherstuff[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;other&#34;</span>;
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#111">txt</span><span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;hey&#34;</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">txt</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#111">otherstuff</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;other&#34;</span><span style="color:#111">;</span>
 
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>; i<span style="color:#f92672">++</span>) {
-        printf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">*</span>ptr);
-        ptr<span style="color:#f92672">++</span>;
-    }
-}</code></pre></div>
-<p><strong>Depending on your compiler</strong>, the above code will print &ldquo;hey ot&rdquo;, meaning your ptr pointer is pointing to the next variable on the local stack after the four characters &ldquo;h&rdquo;, &ldquo;e&rdquo;, &ldquo;y&rdquo;, &ldquo;\0&rdquo;, from the txt variable, are processed within the for loop. We will go more into detail on this in <a href="../../theory/c/chap4">chapter 4</a>.</p>
-
+    <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%c&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">);</span>
+        <span style="color:#111">ptr</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><p><strong>Depending on your compiler</strong>, the above code will print &ldquo;hey ot&rdquo;, meaning your ptr pointer is pointing to the next variable on the local stack after the four characters &ldquo;h&rdquo;, &ldquo;e&rdquo;, &ldquo;y&rdquo;, &ldquo;\0&rdquo;, from the txt variable, are processed within the for loop. We will go more into detail on this in <a href="../../theory/c/chap4">chapter 4</a>.</p>
 
 <div class="ex">
 	<div class="inner">
@@ -1748,111 +1726,93 @@ graph TD
 
 	</div>
 </div>
-
 <p>Jumping to the next available address space also works with structures instead of a character array:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Doos { <span style="color:#66d9ef">int</span> one; <span style="color:#66d9ef">int</span> two; } Doos;
+<span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">Doos</span> <span style="color:#111">{</span> <span style="color:#00a8c8">int</span> <span style="color:#111">one</span><span style="color:#111">;</span> <span style="color:#00a8c8">int</span> <span style="color:#111">two</span><span style="color:#111">;</span> <span style="color:#111">}</span> <span style="color:#111">Doos</span><span style="color:#111">;</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    Doos doos1 <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span> };
-    Doos doos2 <span style="color:#f92672">=</span> { <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span> };
-    Doos<span style="color:#f92672">*</span> doosje <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Doos) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
-    doosje[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> doos1;
-    doosje[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> doos2;
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">Doos</span> <span style="color:#111">doos1</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span> <span style="color:#111">};</span>
+    <span style="color:#111">Doos</span> <span style="color:#111">doos2</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">4</span> <span style="color:#111">};</span>
+    <span style="color:#111">Doos</span><span style="color:#f92672">*</span> <span style="color:#111">doosje</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Doos</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">);</span>
+    <span style="color:#111">doosje</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">doos1</span><span style="color:#111">;</span>
+    <span style="color:#111">doosje</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">doos2</span><span style="color:#111">;</span>
 
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
-        printf(<span style="color:#e6db74">&#34;doos: one %d two %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, doosje<span style="color:#f92672">-&gt;</span>one, doosje<span style="color:#f92672">-&gt;</span>two);
-        doosje<span style="color:#f92672">++</span>;
-    }
+    <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;doos: one %d two %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">doosje</span><span style="color:#f92672">-&gt;</span><span style="color:#111">one</span><span style="color:#111">,</span> <span style="color:#111">doosje</span><span style="color:#f92672">-&gt;</span><span style="color:#111">two</span><span style="color:#111">);</span>
+        <span style="color:#111">doosje</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
 
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>The only problem here is that we cannot loop &ldquo;until the end&rdquo; using <code>while(*doosje) { ... }</code>. For that to work, we need linked lists (see <a href="../../practice/lab2">lab 2</a>).</p>
-
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The only problem here is that we cannot loop &ldquo;until the end&rdquo; using <code>while(*doosje) { ... }</code>. For that to work, we need linked lists (see <a href="../../practice/lab2">lab 2</a>).</p>
 
 <div class="notices note" ><p>In C, the <code>new</code> keyword does <em>not</em> exist. Creating instances is done using <code>malloc()</code> instead.</p>
 </div>
 
-
 <h3 id="4-linked-lists">4. Linked Lists</h3>
-
 <p>You will discover in exercise &lsquo;<a href="../../ch3-pointers/lab/">the ancient library</a>&rsquo;, you can link different <code>struct</code> instances together to create a list of items, instead of simply using Arrays or other existing data structures. Internally in the C libraries, pointers are applied to connect elements of a collection. Let us try to do the same.</p>
-
 <p>This is how the memory structure of your C code looks like without initializing any single variable:</p>
-
-<p><center>
-    <img src="../../img/lists1.png" alt="" />
-</center></p>
-
+<center>
+    ![](/img/lists1.png)
+</center>
 <p>Given the following structure:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> node {
-    <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> name;
-    <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> value;
-    <span style="color:#66d9ef">struct</span> node<span style="color:#f92672">*</span> next;
-};</code></pre></div>
-<p>When instantiating a <code>node</code> element using <code>malloc()</code>, we create a new variable on the heap instead of the stack:</p>
-
-<p><center>
-    <img src="../../img/lists2.png" alt="" />
-</center></p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">struct</span> <span style="color:#111">node</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">value</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">struct</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
+<span style="color:#111">};</span>
+</code></pre></div><p>When instantiating a <code>node</code> element using <code>malloc()</code>, we create a new variable on the heap instead of the stack:</p>
+<center>
+    ![](/img/lists2.png)
+</center>
 <p>However, this representation is <strong>incomplete</strong>! We create a new local variable, a pointer, and this pointer is actually also a variable on the stack. So, this code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create_node</span>() {
-    node<span style="color:#f92672">*</span> newelement <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(node));
-    newelement<span style="color:#f92672">-&gt;</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;something&#34;</span>;
-    newelement<span style="color:#f92672">-&gt;</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;value&#34;</span>;
-    newelement<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
-}</code></pre></div>
-<p>Reserves some space on the heap, but also creates a local variable named <code>newelement</code> on the stack:</p>
-
-<p><center>
-    <img src="../../img/lists3.png" alt="" />
-</center></p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">create_node</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">newelement</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#111">));</span>
+    <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">name</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;something&#34;</span><span style="color:#111">;</span>
+    <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">value</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;value&#34;</span><span style="color:#111">;</span>
+    <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Reserves some space on the heap, but also creates a local variable named <code>newelement</code> on the stack:</p>
+<center>
+    ![](/img/lists3.png)
+</center>
 <p>The <code>next</code> value is pointing to <code>NULL</code> (&ldquo;nothing&rdquo;), hence the white arrow in the right side of the Figure. Now, what if I want to create a second element, and connect both together? A second local variable reserves a second block on both the stack and the heap:</p>
-
-<p><center>
-    <img src="../../img/lists4.png" alt="" />
-</center></p>
-
+<center>
+    ![](/img/lists4.png)
+</center>
 <p>Now, we want to assign the second element to the <code>next</code> property of the first element. That&rsquo;s very simple with the statement <code>newelement-&gt;next = newelement2;</code>. Now, our memory looks like this:</p>
-
-<p><center>
-    <img src="../../img/lists5.png" alt="" />
-</center></p>
-
+<center>
+    ![](/img/lists5.png)
+</center>
 <p>Notice the changed arrow in the right side of the Figure. Ok, what if we want to loop over all elements by following the arrows from each element, starting with the first, what happens with our variables in the memory space? A new method creates a new chunk in the stack space, where a new variable will be created:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(node<span style="color:#f92672">*</span> printer) {
-    <span style="color:#66d9ef">while</span>(printer <span style="color:#f92672">!=</span> NULL) {
-        printf(<span style="color:#e6db74">&#34;%s </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, printer<span style="color:#f92672">-&gt;</span>value);
-        printer <span style="color:#f92672">=</span> printer<span style="color:#f92672">-&gt;</span>next;
-    }
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>() {
-    node<span style="color:#f92672">*</span> head <span style="color:#f92672">=</span> create_node();
-    node<span style="color:#f92672">*</span> tail <span style="color:#f92672">=</span> create_node();
-    head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> tail;
-    print(head);
-}</code></pre></div>
-<p><center>
-    <img src="../../img/lists6.png" alt="" />
-</center></p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">printer</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#111">printer</span> <span style="color:#f92672">!=</span> <span style="color:#111">NULL</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">printer</span><span style="color:#f92672">-&gt;</span><span style="color:#111">value</span><span style="color:#111">);</span>
+        <span style="color:#111">printer</span> <span style="color:#f92672">=</span> <span style="color:#111">printer</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">head</span> <span style="color:#f92672">=</span> <span style="color:#111">create_node</span><span style="color:#111">();</span>
+    <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">tail</span> <span style="color:#f92672">=</span> <span style="color:#111">create_node</span><span style="color:#111">();</span>
+    <span style="color:#111">head</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span> <span style="color:#f92672">=</span> <span style="color:#111">tail</span><span style="color:#111">;</span>
+    <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">head</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div><center>
+    ![](/img/lists6.png)
+</center>
 <p>In the above Figure, <code>printer</code> points to the first value in the heap, which is the same as the variable <code>head</code>. When the <code>while()</code> loop starts doing it&rsquo;s work, the variable will point to the next value, and the next, and the next, until it points to <code>NULL</code>.</p>
-
 <p>This will become clear in the exercise when you will implement these concepts yourself.</p>
-
 
 <div class="notices note" ><p>When changing the value of <code>printer</code>, the value of <code>head</code> stays pointing to the first element of the heap! This is because the variable is <strong>a copy</strong> on the stack.</p>
 </div>
 
-
 <p>What if we want to change the pointer of <code>head</code> using another variable? Then you will need double pointers, or <code>node**</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change_ptr</span>(node<span style="color:#f92672">**</span> ptr_to_ptr, node<span style="color:#f92672">*</span> new_value) {
-    <span style="color:#f92672">*</span>ptr_to_ptr <span style="color:#f92672">=</span> new_value;
-}</code></pre></div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">change_ptr</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">**</span> <span style="color:#111">ptr_to_ptr</span><span style="color:#111">,</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">new_value</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#f92672">*</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">new_value</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 
 <footer class="footline">
 	
@@ -2861,19 +2821,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

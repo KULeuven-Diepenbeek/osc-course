@@ -12,21 +12,19 @@
     <title>3. Inter-thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1579,7 +1577,7 @@ window.MathJax = {
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -1603,26 +1601,21 @@ window.MathJax = {
 
 
 <p>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&rsquo;s still not always trivial to know <em>how to apply them to a specific problem</em>. Even for the well-known producer-consumer problem, several different setups are possible.</p>
-
 <p>This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a &ldquo;single right answer&rdquo; and/or are a bit vague: that is intentional.</p>
-
 <p>Analyse the code below and write a report (3-4 pages):</p>
-
 <ol>
 <li>Describe the most important aspects of this program in terms of threading (in general, not line-by-line)</li>
 <li>Note that this program does something similar to the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
-
 <ul>
 <li>However, it is fundamentally different in how it divides the responsibilities between producers and consumers.</li>
 <li>Explain this difference in detail.</li>
 <li>Discuss which of both approaches you think is probably more realistic / more likely to occur in practice and why.</li>
-</ul></li>
+</ul>
+</li>
 <li>Make a line chart that plots &lsquo;the elapsed time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
-
 <ul>
 <li>For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
 <li>Note:
-
 <ul>
 <li>the scale on the X-axis goes from 2 to 300</li>
 <li>don&rsquo;t just sample the number of threads between 2 and 300 uniformly though: be smart in how you choose your threadcounts!</li>
@@ -1631,50 +1624,49 @@ window.MathJax = {
 <li><strong>TIP</strong> use the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
 <li><strong>NOTE</strong> printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.</li>
 <li><strong>NOTE</strong> it&rsquo;s best to execute each measurement a few times and on an unloaded system to get consistent results</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Interpret the chart and draw conclusions
-
 <ul>
 <li>It is not sufficient to simply describe what&rsquo;s visible on the chart: you need to explain <strong>WHY</strong> this behaviour occurs.</li>
-</ul></li>
+</ul>
+</li>
 <li>Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
-
 <ul>
 <li>Would the program run faster or slower? Why?</li>
 <li>Does it make sense to use multiple <em>producer</em> threads with this setup? Why (not)?</li>
 <li>Does it make sense to use multiple <em>consumer</em> threads with this setup? Why (not)?</li>
 <li>Answer both questions for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a> as well</li>
 <li>For a different problem, how would you decide how to split the available number of threads between producers and consumers?</li>
-</ul></li>
+</ul>
+</li>
 <li>The producer-consumer problem comes up in many other settings as well
-
 <ul>
 <li>Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs</li>
 <li>Note: there aren&rsquo;t always literal &ldquo;producers&rdquo; or &ldquo;consumers&rdquo; of course; these are general concepts
-
 <ul>
 <li>For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Include your solution (source code) for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
-
 <ul>
-<li>This is not part of the page-limit for the report of course ;)<br /></li>
-</ul></li>
+<li>This is not part of the page-limit for the report of course ;)</li>
+</ul>
+</li>
 </ol>
-
 <p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
-
 <p>Note: It&rsquo;s possible that you&rsquo;ve solved exercise 6.7.3 (question 7 above) in group during class.
 In this case, you MUST add sufficient personal comments to the code that explain how it works and why the used approach was chosen.
 You must also clearly list the students that collaborated on the code.
 This is to make it easier for the teaching team to assess if you actually understand the code or only copy-pasted it without contributing.
 Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned.
 Note that this is only for question 7: questions 1-6 MUST be answered fully individually!</p>
-
-<p><center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;semaphore.h&gt; </span><span style="color:#75715e">
@@ -1685,96 +1677,98 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
 <span style="color:#75715e">#define NUMBER_OF_THREADS 5
 </span><span style="color:#75715e">#define MAX_COUNT 500000
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">static</span> sem_t obj_produced;
-<span style="color:#66d9ef">static</span> sem_t obj_consumed;
+<span style="color:#00a8c8">static</span> <span style="color:#111">sem_t</span> <span style="color:#111">obj_produced</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">static</span> <span style="color:#111">sem_t</span> <span style="color:#111">obj_consumed</span><span style="color:#111">;</span>
 
-<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> shelf;
+<span style="color:#00a8c8">static</span> <span style="color:#00a8c8">int</span> <span style="color:#111">shelf</span><span style="color:#111">;</span>
 
 
-<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">producer</span>() {
-  <span style="color:#66d9ef">int</span> i;
+<span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#75af00">producer</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
   
-  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>; i<span style="color:#f92672">&lt;</span> MAX_COUNT; i<span style="color:#f92672">++</span>) {
-    shelf <span style="color:#f92672">=</span> i;
-    sem_post(<span style="color:#f92672">&amp;</span>obj_produced);
-    sem_wait(<span style="color:#f92672">&amp;</span>obj_consumed);
-  }
+  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">&lt;</span> <span style="color:#111">MAX_COUNT</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">shelf</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+    <span style="color:#111">sem_post</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
+    <span style="color:#111">sem_wait</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
+  <span style="color:#111">}</span>
 
-  <span style="color:#66d9ef">return</span> NULL;
-}
-
-
-<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">consumer</span>() {
-  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> isPrime;
-  <span style="color:#66d9ef">int</span> i;
-  <span style="color:#66d9ef">int</span> VUT;
-
-  <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>) {
-    sem_wait(<span style="color:#f92672">&amp;</span>obj_produced);
-    VUT <span style="color:#f92672">=</span> shelf;
-    sem_post(<span style="color:#f92672">&amp;</span>obj_consumed);
-    printf(<span style="color:#e6db74">&#34;[CONSUMER] %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, VUT);
-
-    isPrime <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-    <span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">&lt;</span>VUT; i<span style="color:#f92672">++</span>) {
-      <span style="color:#66d9ef">if</span> (VUT <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) {
-        isPrime <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-      }
-    }
-    <span style="color:#66d9ef">if</span>(isPrime<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>) {
-      printf(<span style="color:#e6db74">&#34;    thread #x announces that %d is prime.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
-    }
-  }
-}
+  <span style="color:#00a8c8">return</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-  <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, err;
-  pthread_t tid[NUMBER_OF_THREADS];
+<span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#75af00">consumer</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">isPrime</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">VUT</span><span style="color:#111">;</span>
+
+  <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">sem_wait</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
+    <span style="color:#111">VUT</span> <span style="color:#f92672">=</span> <span style="color:#111">shelf</span><span style="color:#111">;</span>
+    <span style="color:#111">sem_post</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;[CONSUMER] %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">VUT</span><span style="color:#111">);</span>
+
+    <span style="color:#111">isPrime</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">VUT</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">VUT</span> <span style="color:#f92672">%</span> <span style="color:#111">i</span> <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">isPrime</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+      <span style="color:#111">}</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">isPrime</span><span style="color:#f92672">==</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+      <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;    thread #x announces that %d is prime.</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+  <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">err</span><span style="color:#111">;</span>
+  <span style="color:#111">pthread_t</span> <span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">];</span>
 
   <span style="color:#75715e">// create semaphores
-</span><span style="color:#75715e"></span>  err <span style="color:#f92672">=</span> sem_init(<span style="color:#f92672">&amp;</span>obj_produced, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
-  <span style="color:#66d9ef">if</span>(err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create semaphore: obj_produced [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  }
-  err <span style="color:#f92672">=</span> sem_init(<span style="color:#f92672">&amp;</span>obj_consumed, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
-  <span style="color:#66d9ef">if</span>(err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create semaphore: obj_produced [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  }
+</span><span style="color:#75715e"></span>  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">sem_init</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create semaphore: obj_produced [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+  <span style="color:#111">}</span>
+  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">sem_init</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create semaphore: obj_produced [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+  <span style="color:#111">}</span>
 
   <span style="color:#75715e">// create producer thread
-</span><span style="color:#75715e"></span>  err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>producer, NULL);
-  <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create producer thread: [%s]&#34;</span>, strerror(err));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-  } 
-  printf(<span style="color:#e6db74">&#34;Producer thread created</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span><span style="color:#75715e"></span>  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">pthread_create</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]),</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">producer</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create producer thread: [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+  <span style="color:#111">}</span> 
+  <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Producer thread created</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
 
   <span style="color:#75715e">// create consumer threads
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>NUMBER_OF_THREADS;i<span style="color:#f92672">++</span>) {
-    err <span style="color:#f92672">=</span> pthread_create(<span style="color:#f92672">&amp;</span>(tid[i]), NULL, <span style="color:#f92672">&amp;</span>consumer, NULL);
-    <span style="color:#66d9ef">if</span> (err <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-      printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">can&#39;t create consumer thread %d: [%s]&#34;</span>, i, strerror(err));
-    }
-    printf(<span style="color:#e6db74">&#34;Consumer thread %d created</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
-  }
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">pthread_create</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]),</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">consumer</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+      <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create consumer thread %d: [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
+    <span style="color:#111">}</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Consumer thread %d created</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+  <span style="color:#111">}</span>
 
   <span style="color:#75715e">// wait for producer thread
-</span><span style="color:#75715e"></span>  pthread_join(tid[<span style="color:#ae81ff">0</span>], NULL);
+</span><span style="color:#75715e"></span>  <span style="color:#111">pthread_join</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
 
   <span style="color:#75715e">// kill consumer threads 
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>NUMBER_OF_THREADS;i<span style="color:#f92672">++</span>) {
-    pthread_kill(tid[i], <span style="color:#ae81ff">9</span>);
-  }
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">pthread_kill</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#ae81ff">9</span><span style="color:#111">);</span>
+  <span style="color:#111">}</span>
 
   <span style="color:#75715e">// delete the semaphores
-</span><span style="color:#75715e"></span>  sem_destroy(<span style="color:#f92672">&amp;</span>obj_produced);
-  sem_destroy(<span style="color:#f92672">&amp;</span>obj_consumed);
+</span><span style="color:#75715e"></span>  <span style="color:#111">sem_destroy</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
+  <span style="color:#111">sem_destroy</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
 
-  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
+  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+</code></pre></div>
 
 <footer class="footline">
 	
@@ -2783,19 +2777,17 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -14,7 +14,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</guid>
-      <description>The C language is a programming language developed in the &amp;lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
+      <description>The C language is a programming language developed in the &amp;rsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
 A quick intro to C C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types.</description>
     </item>
     
@@ -74,7 +74,7 @@ The scheduler has two main responsibilities:</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</guid>
-      <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:   text Read-only, fixed size. Contains executable instructions.   data Can be modified. Contains global or static variables that are initialized, such as static int i = 5;.</description>
+      <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:  &amp;lt;ol&amp;gt; &amp;lt;li&amp;gt; &amp;lt;strong&amp;gt;text&amp;lt;/strong&amp;gt;&amp;lt;br/&amp;gt; Read-only, fixed size. Contains executable instructions. &amp;lt;/li&amp;gt; &amp;lt;li&amp;gt; &amp;lt;strong&amp;gt;data&amp;lt;/strong&amp;gt;&amp;lt;br/&amp;gt; Can be modified. Contains global or static variables that are initialized, such as &amp;lt;code&amp;gt;static int i = 5;&amp;lt;/code&amp;gt;.</description>
     </item>
     
     <item>
@@ -137,7 +137,7 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</guid>
       <description>Download the start project files here: cpp-testing.cpp, cpp-testing-main.cpp. Remember that in order to run this as a Google Test Suite, you need to compile it using g++ and bootstrap GTest in a separate .cpp file where the main() function resides. Go back to the lab notes if you&amp;rsquo;re not sure how to pull this off.
 The following code is given:
- date and period structs to represent a date and a period of dates in code.</description>
+date and period structs to represent a date and a period of dates in code.</description>
     </item>
     
     <item>
@@ -156,7 +156,8 @@ The following code is given:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</guid>
-      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.</description>
+      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.
+2.1 With debug flags Let&amp;rsquo;s start with a heap-based application we would like to inspect:</description>
     </item>
     
     <item>
@@ -165,8 +166,7 @@ The following code is given:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
-      <description>Source: Neo
-Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
+      <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
 Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
     </item>
     
@@ -209,7 +209,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</guid>
       <description>source: xkcd.com   Segfault this For each of the programs below:
- Guess first if they will give a segmentation fault and where exactly and why Compile and execute them Were your guesses in the first step correct or not? Why (not)?  #include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; }#include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; }#include &amp;lt;stdio.</description>
+ Guess first if they will give a segmentation fault and where exactly and why Compile and execute them Were your guesses in the first step correct or not? Why (not)?  #include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; } #include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; } #include &amp;lt;stdio.</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
   source: wikipedia.com   The image above shows:
- Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+ Task management Memory management the IO subsystem    The desired situation.   &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;column&amp;quot;&amp;gt; &amp;lt;figure&amp;gt; &amp;lt;img src=&amp;quot;/img/chx/reality.svg&amp;quot;/&amp;gt; &amp;lt;figcaption&amp;gt; &amp;lt;h4&amp;gt;The real situation.&amp;lt;/h4&amp;gt; &amp;lt;/figcaption&amp;gt;   &amp;lt;/div&amp;gt;   The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
     </item>
     
     <item>
@@ -261,7 +261,8 @@ This task requires you to think about the bigger picture and forces you to expla
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</guid>
       <description>Test-Driven Development: Google Test A concept you learned to love in the Software Engineering Skills course.
-It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.</description>
+It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.
+Google Test is a C++ (11) framework, not a C framework!</description>
     </item>
     
     <item>
@@ -272,7 +273,8 @@ It&amp;rsquo;s concepts and definitions will not be repeated here, but we will i
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
-There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.</description>
+There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
+ Shared memory Message passing    The two main techniques for inter process communication    p.</description>
     </item>
     
     <item>
@@ -330,8 +332,8 @@ As such, the actual method used most commonly in practice is segmentation with a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</guid>
-      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:  
-Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
+      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
+  Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
     <item>
@@ -352,7 +354,7 @@ Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  on
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
       <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.
 The scheduler follows these rules:
- The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
+The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
     </item>
     
     <item>
@@ -371,7 +373,7 @@ We have however also seen that this is not trivial: new processes need their own
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
-      <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS     An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
+      <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS      An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
     </item>
     
     <item>
@@ -402,7 +404,7 @@ File hello.c:
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
-   Source: dublin2019.com   1.</description>
+   Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>
@@ -452,7 +454,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
-      <description>Source: G.I.    Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
+      <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
     </item>
     
     <item>
@@ -483,7 +485,7 @@ We would of course not ask you to remove Windows to install Linux on your person
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</guid>
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
-Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;ldquo;, or even google the manpage on Google.
+Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;rdquo;, or even google the manpage on Google.
 Navigation    command goal     cd change directory   pwd &amp;lsquo;present working directory&amp;rsquo;   ls list (show content of current directory) - params: -la   mkdir create a directory   history show a history of used commands.</description>
     </item>
     

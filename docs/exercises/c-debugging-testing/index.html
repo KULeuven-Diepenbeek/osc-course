@@ -12,21 +12,19 @@
     <title>2. Testing in C(&#43;&#43;) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,18 +1578,16 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
-<li><a href="#2-create-test-cases">2. Create Test cases</a></li>
-<li><a href="#3-implement-the-isinperiod-method">3. Implement the isInPeriod method</a></li>
-<li><a href="#4-add-new-functionality-merging-two-periods">4. Add new functionality: merging two periods</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
+        <li><a href="#2-create-test-cases">2. Create Test cases</a></li>
+        <li><a href="#3-implement-the-isinperiod-method">3. Implement the isInPeriod method</a></li>
+        <li><a href="#4-add-new-functionality-merging-two-periods">4. Add new functionality: merging two periods</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1615,31 +1611,21 @@ window.MathJax = {
         
 
 
-
-
 <p><strong>Download the start project files here</strong>: <a href="../../exercises/cpp-testing.cpp">cpp-testing.cpp</a>, <a href="../../exercises/cpp-testing-main.cpp">cpp-testing-main.cpp</a>. Remember that in order to run this as a Google Test Suite, you need to compile it using <code>g++</code> and bootstrap GTest in a separate <code>.cpp</code> file where the <code>main()</code> function resides. Go back to the lab notes if you&rsquo;re not sure how to pull this off.</p>
-
 <p>The following code is given:</p>
-
-<ol>
+<ol start="2">
 <li><code>date</code> and <code>period</code> structs to represent a date and a period of dates in code.</li>
 <li><code>isInPeriod()</code> which needs to be completed, and takes a pointer of a period struct and a date, to check whether or not the date is inside the period.</li>
 </ol>
-
 <p>The C++-specific code is kept to a bare minimum, but remember to compile using <code>g++</code> because Google Test asks us to do so.</p>
-
 <h3 id="1-commandline-compiling">1. Commandline compiling</h3>
-
 <p>Create a simplified <code>Makefile</code> which does the following when executing the command <code>make</code>:</p>
-
 <ol>
 <li>Clean up any left object files</li>
 <li>Compile the exercise, using C++ and linking against GTest</li>
 <li>Run the exercise</li>
 </ol>
-
 <p>The result of the executed start project is the following:</p>
-
 <pre>
 Wouters-Air:exercises wgroeneveld$ ./a.out
 [==========] Running 1 test from 1 test case.
@@ -1661,31 +1647,23 @@ Add as many TEST cases as you can think of and complete isInPeriod()!
 
  1 FAILED TEST
 </pre>
-
 <h3 id="2-create-test-cases">2. Create Test cases</h3>
-
 <p>Replace the single test case called &ldquo;GoodLuckWithThat&rdquo; with as many test cases as you can think of to cover all possible cases. What if a date is outside of the period, being in the past, or in the future, or&hellip; We expect at least <strong>6 different scenarios</strong> - and of course they have to be unique. A test case which tests the same but with different data is not enough.</p>
-
 <h3 id="3-implement-the-isinperiod-method">3. Implement the isInPeriod method</h3>
-
 <p>Only <em>after creating test cases</em>, you can move on to the completion of this method. It will return:</p>
-
 <ul>
 <li><code>0</code> if the given date is not inside the period.</li>
 <li><code>1</code> if the given date is inside the period.</li>
 </ul>
-
 <p>Rerun your tests and make sure everything is passing (not by changing values in your test cases!).</p>
-
 <h3 id="4-add-new-functionality-merging-two-periods">4. Add new functionality: merging two periods</h3>
-
 <p>Add a new method:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">period<span style="color:#f92672">*</span> <span style="color:#a6e22e">mergePeriods</span>(period<span style="color:#f92672">*</span> one, period<span style="color:#f92672">*</span> two) {
-    period<span style="color:#f92672">*</span> result <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(period));
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#111">period</span><span style="color:#f92672">*</span> <span style="color:#75af00">mergePeriods</span><span style="color:#111">(</span><span style="color:#111">period</span><span style="color:#f92672">*</span> <span style="color:#111">one</span><span style="color:#111">,</span> <span style="color:#111">period</span><span style="color:#f92672">*</span> <span style="color:#111">two</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">period</span><span style="color:#f92672">*</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">period</span><span style="color:#111">));</span>
 
-    <span style="color:#66d9ef">return</span> result;
-}</code></pre></div>
-<p>Write <strong>all possible test cases</strong> for this method. Some will fail because it simply returns an empty period instance, but let&rsquo;s assume we&rsquo;ve got working code here. You do <strong>not need to implement</strong> this method, only to think about Google Test cases for this one. Write as many <code>TEST()</code> cases as you can think of. And yes, you can ignore the memory leaks.</p>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">result</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Write <strong>all possible test cases</strong> for this method. Some will fail because it simply returns an empty period instance, but let&rsquo;s assume we&rsquo;ve got working code here. You do <strong>not need to implement</strong> this method, only to think about Google Test cases for this one. Write as many <code>TEST()</code> cases as you can think of. And yes, you can ignore the memory leaks.</p>
 
 
 <footer class="footline">
@@ -2695,19 +2673,17 @@ Add as many TEST cases as you can think of and complete isInPeriod()!
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

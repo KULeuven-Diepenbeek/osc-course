@@ -12,21 +12,19 @@
     <title>8.2: Inspecting memory regions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,17 +1578,14 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-no-malloc-no-heap">1. No malloc, no heap</a></li>
-<li><a href="#2-malloc-use-heap">2. malloc: use heap</a></li>
-<li><a href="#3-multiple-mallocs">3. multiple mallocs</a></li>
-<li><a href="#4-free">4. Free</a></li>
-<li><a href="#extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</a></li>
-<li><a href="#further-reading">Further Reading</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-no-malloc-no-heap">1. No malloc, no heap</a></li>
+    <li><a href="#2-malloc-use-heap">2. malloc: use heap</a></li>
+    <li><a href="#3-multiple-mallocs">3. multiple mallocs</a></li>
+    <li><a href="#4-free">4. Free</a></li>
+    <li><a href="#extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</a></li>
+    <li><a href="#further-reading">Further Reading</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1614,29 +1609,23 @@ window.MathJax = {
         
 
 
-
-
 <p>Accompanying Screencast:</p>
-
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://player.vimeo.com/video/400606180" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 
-
 <h2 id="1-no-malloc-no-heap">1. No malloc, no heap</h2>
-
 <p>Let&rsquo;s look at memory regions of a process that does not call <code>malloc()</code>.
 This means we will not use the heap just yet. Compile the following code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    getchar();  <span style="color:#75715e">// breaks process until char input
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>To explore the above example, we will introduce <code>getchar()</code> before ending the <code>main()</code> loop, so the program pauses and gives us a change to look under the hood.</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">getchar</span><span style="color:#111">();</span>  <span style="color:#75715e">// breaks process until char input
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>To explore the above example, we will introduce <code>getchar()</code> before ending the <code>main()</code> loop, so the program pauses and gives us a change to look under the hood.</p>
 
 <div class="ex">
 	<div class="inner">
@@ -1644,9 +1633,7 @@ This means we will not use the heap just yet. Compile the following code:</p>
 
 	</div>
 </div>
-
 <p>Locate the following:</p>
-
 <pre>
 7f8122192000-7f8122193000 rw-p 00000000 00:00 0 
 7fffc566a000-7fffc568b000 rw-p 00000000 00:00 0                          [stack]
@@ -1654,16 +1641,12 @@ This means we will not use the heap just yet. Compile the following code:</p>
 7fffc5780000-7fffc5782000 r-xp 00000000 00:00 0                          [vdso]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
 </pre>
-
 <p>No <code>[heap]</code> region allocated yet. Let&rsquo;s do the same, but use <code>malloc()</code> to allocate a random block of memory. The return value of the method is a <code>void*</code> that can be printed to show the address of the heap region. Use <code>printf(&quot;%p&quot;, p)</code>.</p>
-
 
 <div class="notices warning" ><p>Peeking into the files in <code>/proc</code>, we can sometimes see the heap block not moving <em>at all</em>. It turns out that this is <a href="https://stackoverflow.com/questions/19991623/why-is-malloc-not-using-up-the-memory-on-my-computer#:~:text=3%20Answers&amp;text=malloc()%20does%20not%20use,It%20allocates%20it.&amp;text=Some%20platforms%20implement%20malloc(),%22%20of%20bytes">completely OS-dependant</a>%20is%20accessed). Try to use <code>calloc()</code> instead and see what happens!</p>
 </div>
 
-
 <h2 id="2-malloc-use-heap">2. malloc: use heap</h2>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1671,11 +1654,8 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 
 	</div>
 </div>
-
 <p>Let us use the program <code>strace</code> to figure out what <code>malloc()</code> exactly does. It should be a system call that asks the Operating System to allocate a certain amount of dynamic memory. But we have yet to figure out <strong>which system calls</strong> exactly are called. The program <code>strace</code> is used to track system calls and signals. Don&rsquo;t be surprised by the amount of calls a simple program like ours makes! Let us try to find the calls for memory allocation.</p>
-
 <p>It is a good idea to <code>printf(&quot;before malloc! &quot;)</code> to make sense of the <code>strace</code> output.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1683,7 +1663,6 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 
 	</div>
 </div>
-
 <pre>
 munmap(0x7f88a38dc000, 114791)          = 0
 brk(NULL)                               = 0x5644fb34d000
@@ -1694,15 +1673,10 @@ write(1, "0x5644fb34d260\n", 150x5644fb34d260
 fstat(0, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 1), ...}) = 0
 read(0,
 </pre>
-
 <p>Aha, <code>brk</code>! What is that? Use <code>man brk</code> to find out more.</p>
-
 <p>The data segment gets expanded by moving the <em>program break</em> pointer up, so the heap is actually an extension of the data segment of the program.</p>
-
 <h2 id="3-multiple-mallocs">3. multiple mallocs</h2>
-
 <p>What happens when we call <code>malloc()</code> multiple times in a row?</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1710,11 +1684,8 @@ read(0,
 
 	</div>
 </div>
-
 <p>Memory allocation is optimized by avoiding a system call each time. It firsts allocates more than needed that will (hopefully) suffice.</p>
-
 <p>Instead of calling malloc four times, let&rsquo;s see what happens when we use a loop to see how many times <code>brk</code> is called. More importantly, we will also see that he heap <strong>grows &lsquo;upward&rsquo;</strong>!</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1722,39 +1693,29 @@ read(0,
 
 	</div>
 </div>
-
 <ul>
 <li>Before loop: <code>556a1a947000-556a1a968000 rw-p 00000000 00:00 0                          [heap]</code></li>
 <li>After loop: <code>556a1a947000-556a1aa4f000 rw-p 00000000 00:00 0                          [heap]</code></li>
 </ul>
-
 <p>Converted to decimal: 93914201911296 - 93914200965120 = 946176 bytes used.</p>
-
 <p>Indeed, the Figure from <a href="../../ch7-stack/stackvsheap">chapter 7.1</a> and our findings confirm that the heap grows upwards.</p>
-
 <h2 id="4-free">4. Free</h2>
-
 <p>Until now the above examples have never taken into consideration the fact that one has to get rid unused space using <code>free()</code>. We will leave it up to you to inspect what happens in <code>/proc</code>.</p>
-
 <h2 id="extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</h2>
-
-<p><img src="../../img/valgrind.png" alt="" /></p>
-
+<p><img src="../../img/valgrind.png" alt=""></p>
 <p>Valgrind is a useful commandline tool that makes it easy for C programmers to inspect how much dynamic (heap) memory a program actually consumed, and how much of it was freed. It is a lot easier to use than dabbling in different disassemble commands, but it does NOT come with the GNU toolchain. Use <code>apt-get install valgrind</code> to install it onto your virtual machine.</p>
-
 <p>Let&rsquo;s assume a simple program that reserves some memory, fills in the blanks, and then frees up some space: (also available in the <code>osc-exercises</code> repository)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> ptr;
-    ptr <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">ptr</span><span style="color:#111">;</span>
+    <span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span><span style="color:#111">);</span>
     <span style="color:#75715e">// we allocated 4000 bytes (since an int is usually 4 bytes)
 </span><span style="color:#75715e"></span>
-    free(ptr);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>After compiling this, we can let the tool figure out how much space we took up, how many leaks there were, and much more:</p>
-
+    <span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">ptr</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>After compiling this, we can let the tool figure out how much space we took up, how many leaks there were, and much more:</p>
 <pre>
 Wouters-MacBook-Air:ch8-stack wgroeneveld$ valgrind ./a.out
 ==87742== Memcheck, a memory error detector
@@ -1781,16 +1742,13 @@ warning: no debug symbols in executable (-arch x86_64)
 ==87742== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 </pre>
 
-
 <div class="ex">
 	<div class="inner">
     	<p>Try to let the above program produce a few memory leaks. Does valgrind notice you did not clean up your mess? The <em>definitely lost</em> amount should skyrocket after a few uncleaned <code>malloc()</code> calls. Are amount of reported bytes correct? Recalculate this manually.</p>
 
 	</div>
 </div>
-
 <h2 id="further-reading">Further Reading</h2>
-
 <ul>
 <li><a href="https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/">Hack the Virtual Memory: malloc, the heap &amp; the program break</a></li>
 <li><a href="http://valgrind.org/docs/manual/QuickStart.html">Valgrind quickstart</a></li>
@@ -2804,19 +2762,17 @@ warning: no debug symbols in executable (-arch x86_64)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

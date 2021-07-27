@@ -12,21 +12,19 @@
     <title>9.2: Deliberate Segfaulting :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,13 +1578,10 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#segfault-this">Segfault this</a></li>
-<li><a href="#a-to-the-z">A to the Z</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#segfault-this">Segfault this</a></li>
+    <li><a href="#a-to-the-z">A to the Z</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1610,113 +1605,110 @@ window.MathJax = {
         
 
 
-
-
 <figure>
     <img src="https://imgs.xkcd.com/comics/compiler_complaint.png"/> <figcaption>
             <h4>source: xkcd.com</h4>
         </figcaption>
 </figure>
 
-
 <h2 id="segfault-this">Segfault this</h2>
-
 <p>For each of the programs below:</p>
-
 <ul>
 <li>Guess first if they will give a segmentation fault and where exactly and <strong>why</strong></li>
 <li>Compile and execute them</li>
 <li>Were your guesses in the first step correct or not? Why (not)?</li>
 </ul>
-
 <!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
-	<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> i <span style="color:#f92672">=</span> NULL;
-	<span style="color:#f92672">*</span>(i) <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
+	<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
+	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
 
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
-	<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
-	<span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>i <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span>;
+	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
+	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
 
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
-	<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span>;
-	<span style="color:#f92672">*</span>(<span style="color:#f92672">&amp;</span>i <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span>;
+	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
+	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
 
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<ul>
+	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><ul>
 <li>Try and change the number &ldquo;10000&rdquo; to higher and lower numbers in the previous two code samples to help make sense of what&rsquo;s happening.</li>
 </ul>
-
 <!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
 
-	<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>) malloc(<span style="color:#ae81ff">26</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+	<span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">26</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
 	
-	<span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
 	
-	<span style="color:#f92672">*</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">27</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">27</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
 	
-	free(i);
+	<span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
 	
-	<span style="color:#f92672">*</span>i <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>;
+	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span><span style="color:#111">;</span>
 
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<ul>
+	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><ul>
 <li>Try and change the number &ldquo;100&rdquo; to &ldquo;26&rdquo; and the number &ldquo;101&rdquo; to &ldquo;27&rdquo; and run the program again. Do you get the same results?</li>
 </ul>
-
 <h2 id="a-to-the-z">A to the Z</h2>
-
 <p>As we&rsquo;ve seen in the previous exercises, segmentation faults don&rsquo;t always happen when we expect them to.
 Let&rsquo;s explore this a bit deeper here.</p>
-
 <ul>
 <li>Again, first guess if the program below will give a segmentation fault or not (and why!)</li>
-
-<li><p>Compile and run the program and verify your guess</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<li>Compile and run the program and verify your guess</li>
+</ul>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">#define WRITE_SIZE 26
 </span><span style="color:#75715e">#define READ_SIZE 27
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>) {
-	<span style="color:#66d9ef">int</span> i;
-	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> alphabet[<span style="color:#ae81ff">26</span>];
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+	<span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#ae81ff">26</span><span style="color:#111">];</span>
 
-	<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>WRITE_SIZE;i<span style="color:#f92672">++</span>) {
-		alphabet[i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> i;
-	}
+	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">WRITE_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+	<span style="color:#111">}</span>
 
-	<span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>READ_SIZE;i<span style="color:#f92672">++</span>) {
-		printf(<span style="color:#e6db74">&#34;%2d -&gt; %c (%02x)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i, alphabet[i], alphabet[i]);
-	}
+	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">READ_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+		<span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%2d -&gt; %c (%02x)</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]);</span>
+	<span style="color:#111">}</span>
 
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div></li>
-
-<li><p>Now, recompile the code above, but verify that you have the <code>-0s</code> option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference?</p></li>
-
-<li><p>Now increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again, with and without the <code>-0s</code> option. Any errors? If so, what type of error could this be?</p></li>
-
-<li><p>Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here?</p></li>
-
-<li><p>Do some research online until you can explain what a &ldquo;stack canary&rdquo; is and why it&rsquo;s useful.</p></li>
+	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><ul>
+<li>
+<p>Now, recompile the code above, but verify that you have the <code>-0s</code> option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference?</p>
+</li>
+<li>
+<p>Now increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again, with and without the <code>-0s</code> option. Any errors? If so, what type of error could this be?</p>
+</li>
+<li>
+<p>Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here?</p>
+</li>
+<li>
+<p>Do some research online until you can explain what a &ldquo;stack canary&rdquo; is and why it&rsquo;s useful.</p>
+</li>
 </ul>
 
 
@@ -2727,19 +2719,17 @@ Let&rsquo;s explore this a bit deeper here.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

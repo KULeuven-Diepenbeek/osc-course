@@ -12,21 +12,19 @@
     <title>1. Integrated C exercise :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,17 +1578,15 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
-<li><a href="#2-create-two-books">2. Create two &ldquo;books&rdquo;</a></li>
-<li><a href="#3-refer-to-previous-objects">3. Refer to previous objects</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-commandline-compiling">1. Commandline compiling</a></li>
+        <li><a href="#2-create-two-books">2. Create two &ldquo;books&rdquo;</a></li>
+        <li><a href="#3-refer-to-previous-objects">3. Refer to previous objects</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1614,14 +1610,9 @@ window.MathJax = {
         
 
 
-
-
 <p><strong>Download the start project here</strong>: <a href="../../exercises/c-integrated-start.c">c-integrated-start.c</a>.</p>
-
 <p>The program represents a <strong>book</strong>, consisting out of multiple <strong>pages</strong>, of which each page contains (random) <strong>text</strong>, represented as a <code>char[]</code>.</p>
-
 <p>The following functions are given:</p>
-
 <ol>
 <li><code>printBook()</code> prints all pages of the book (no need to modify this)</li>
 <li><code>clearBook()</code> clears pages and frees memory (no need to modify this)</li>
@@ -1629,25 +1620,18 @@ window.MathJax = {
 <li><code>createRandompage()</code> creates a new page with random text</li>
 <li><code>main()</code> bootstraps everything.</li>
 </ol>
-
 <h3 id="1-commandline-compiling">1. Commandline compiling</h3>
-
 <p>Create a simplified <code>Makefile</code> which does the following when executing the command <code>make</code>:</p>
-
 <ol>
 <li>Clean up any left object files</li>
 <li>Compile the exercise</li>
 <li>Run the exercise</li>
 </ol>
-
 <p>This file should also be submitted.</p>
-
 <h3 id="2-create-two-books">2. Create two &ldquo;books&rdquo;</h3>
-
 <p>This program makes a book of 10 <em>pages</em>, instances of the <code>page</code> struct, represented as a linked list. Each object has a random bit of text as it&rsquo;s <em>text</em> value, stolen from the <a href="https://lipsum.com/">Lorem Ipsum generator</a> (thank you, Cicero). In this exercise, you have to extend the program such that the book will be <em>split up</em> into two books: one with text on pages that start with a <em>vowel</em>, and another with text that starts with a consonant. The pages have to continue to exist, but have to be relinked. It is of paramount importance <strong>not to</strong> make copies of objects! (Remember pointers?)</p>
-
 <p>So, output without modifications:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">printing the list:
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">printing the list:
   faucibus
   quam.
   eget,
@@ -1659,9 +1643,9 @@ window.MathJax = {
   dui,
   velit.
 end of the list
-the list is empty</code></pre></div>
-<p>Output with modifications:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">printing the list:
+the list is empty
+</code></pre></div><p>Output with modifications:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">printing the list:
   faucibus
   quam.
   dui
@@ -1674,16 +1658,14 @@ printing the list:
   eget,
   elit.
   ipsum
-end of the list</code></pre></div>
-<h3 id="3-refer-to-previous-objects">3. Refer to previous objects</h3>
-
+end of the list
+</code></pre></div><h3 id="3-refer-to-previous-objects">3. Refer to previous objects</h3>
 <p>Extend the structure in such a way that not only a pointer to the next page is available, but also to the previous one. Currently, the structure looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">struct</span> page {
-  <span style="color:#66d9ef">char</span> text[<span style="color:#ae81ff">100</span>];
-  <span style="color:#66d9ef">struct</span> page<span style="color:#f92672">*</span> next;
-};</code></pre></div>
-<p>A third variable should be added called <code>previous</code>. Think about which of the above functions you need to modify in order to set the correct values. This is essentially creating a <strong>double-linked list</strong> instead of a single-linked one.</p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">struct</span> <span style="color:#111">page</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">char</span> <span style="color:#111">text</span><span style="color:#111">[</span><span style="color:#ae81ff">100</span><span style="color:#111">];</span>
+  <span style="color:#00a8c8">struct</span> <span style="color:#111">page</span><span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
+<span style="color:#111">};</span>
+</code></pre></div><p>A third variable should be added called <code>previous</code>. Think about which of the above functions you need to modify in order to set the correct values. This is essentially creating a <strong>double-linked list</strong> instead of a single-linked one.</p>
 <p>Change the <code>main()</code> and <code>printBook()</code> functions such that they keep track of and print the <strong>TAIL</strong> of the list instead of the <strong>HEAD</strong>, using your newly created variable.</p>
 
 
@@ -2691,19 +2673,17 @@ end of the list</code></pre></div>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

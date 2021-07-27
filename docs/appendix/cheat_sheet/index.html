@@ -12,21 +12,19 @@
     <title>Cheat sheet :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,18 +1578,16 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#linux-commands">Linux commands</a>
-<ul>
-<li><a href="#navigation">Navigation</a></li>
-<li><a href="#cli-tools">CLI tools</a></li>
-<li><a href="#compiling">Compiling</a></li>
-<li><a href="#system-administration">System administration</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#linux-commands">Linux commands</a>
+      <ul>
+        <li><a href="#navigation">Navigation</a></li>
+        <li><a href="#cli-tools">CLI tools</a></li>
+        <li><a href="#compiling">Compiling</a></li>
+        <li><a href="#system-administration">System administration</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1615,16 +1611,10 @@ window.MathJax = {
         
 
 
-
-
 <p>This cheat sheet summarises a set of commands, so you don&rsquo;t have to Google everything.</p>
-
 <h2 id="linux-commands">Linux commands</h2>
-
-<p>Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &ldquo;[command] <code>-h&quot;</code>, &ldquo;<code>man</code> [command]&ldquo;, or even google the manpage on Google.</p>
-
+<p>Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &ldquo;[command] <code>-h&quot;</code>, &ldquo;<code>man</code> [command]&rdquo;, or even google the manpage on Google.</p>
 <h3 id="navigation">Navigation</h3>
-
 <table>
 <thead>
 <tr>
@@ -1632,42 +1622,34 @@ window.MathJax = {
 <th>goal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>cd</td>
 <td>change directory</td>
 </tr>
-
 <tr>
 <td>pwd</td>
 <td>&lsquo;present working directory&rsquo;</td>
 </tr>
-
 <tr>
 <td>ls</td>
 <td>list (show content of current directory) - params: <code>-la</code></td>
 </tr>
-
 <tr>
 <td>mkdir</td>
 <td>create a directory</td>
 </tr>
-
 <tr>
 <td>history</td>
 <td>show a history of used commands. Re-execute with <code>![number]</code>.</td>
 </tr>
-
 <tr>
 <td>clear</td>
 <td>clears all text from terminal window</td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="cli-tools">CLI tools</h3>
-
 <table>
 <thead>
 <tr>
@@ -1675,47 +1657,38 @@ window.MathJax = {
 <th>goal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>rm</td>
 <td>remove a file/directory - params: <code>-rf</code></td>
 </tr>
-
 <tr>
 <td>touch</td>
 <td>create a file</td>
 </tr>
-
 <tr>
 <td>cat</td>
 <td>print raw file contents to terminal output</td>
 </tr>
-
 <tr>
 <td>grep</td>
 <td>search for content in a file</td>
 </tr>
-
 <tr>
 <td>vi</td>
-<td>powerful editor with a steep learning curve (FYI: exiting is through: &ldquo;:q!&ldquo;)</td>
+<td>powerful editor with a steep learning curve (FYI: exiting is through: &ldquo;:q!&quot;)</td>
 </tr>
-
 <tr>
 <td>chmod</td>
 <td>change modifiers of a file (r/w/x/d) - params: <code>+/-[modifier]</code></td>
 </tr>
-
 <tr>
 <td>time</td>
 <td>time a simple command or give resource usage</td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="compiling">Compiling</h3>
-
 <table>
 <thead>
 <tr>
@@ -1723,22 +1696,18 @@ window.MathJax = {
 <th>goal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>gcc</td>
 <td>GNU C Compiler - params: <code>-c</code>, <code>-o</code>, &hellip;</td>
 </tr>
-
 <tr>
 <td>make</td>
 <td>Execute a <code>Makefile</code> - params: <code>[target]</code></td>
 </tr>
 </tbody>
 </table>
-
 <h3 id="system-administration">System administration</h3>
-
 <table>
 <thead>
 <tr>
@@ -1746,38 +1715,31 @@ window.MathJax = {
 <th>goal</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>lsusb</td>
 <td>list USB devices</td>
 </tr>
-
 <tr>
 <td>ps</td>
 <td>report a snaptshot of the current processes</td>
 </tr>
-
 <tr>
 <td>pstree</td>
 <td>display a tree of processes</td>
 </tr>
-
 <tr>
 <td>kill</td>
 <td>send a signal to a process</td>
 </tr>
-
 <tr>
 <td>bg</td>
 <td>send process to the background</td>
 </tr>
-
 <tr>
 <td>fg</td>
 <td>retrieve process to the background</td>
 </tr>
-
 <tr>
 <td>jobs</td>
 <td>list processes in the background</td>
@@ -2790,19 +2752,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

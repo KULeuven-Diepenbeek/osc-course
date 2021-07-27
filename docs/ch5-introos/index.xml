@@ -25,8 +25,7 @@ The image below shows the classic picture when introducing OSes.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
-      <description>Source: Neo
-Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
+      <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
 Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
     </item>
     

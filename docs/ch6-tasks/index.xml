@@ -37,7 +37,8 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
-There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.</description>
+There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
+ Shared memory Message passing    The two main techniques for inter process communication    p.</description>
     </item>
     
     <item>
@@ -76,7 +77,7 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
-      <description>Source: G.I.    Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
+      <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
     </item>
     
   </channel>

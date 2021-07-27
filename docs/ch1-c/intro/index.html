@@ -12,21 +12,19 @@
     <title>1.1: The C programming language :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,24 +1578,23 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#a-quick-intro-to-c">A quick intro to C</a>
-<ul>
-<li><a href="#comparison-with-java">Comparison with Java</a></li>
-<li><a href="#why-should-you-learn-c">Why should you learn C?</a></li>
-</ul></li>
-<li><a href="#basic-c">Basic C</a>
-<ul>
-<li><a href="#hello-world">Hello World</a></li>
-<li><a href="#use-functions-to-structure-code">Use functions to structure code</a></li>
-<li><a href="#primitives-and-combinational-types">Primitives and combinational types</a></li>
-<li><a href="#strings-what-do-you-mean">Strings? What do you mean?</a></li>
-<li><a href="#the-c-language-a-quick-reference">The C Language - a quick reference</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#a-quick-intro-to-c">A quick intro to C</a>
+      <ul>
+        <li><a href="#comparison-with-java">Comparison with Java</a></li>
+        <li><a href="#why-should-you-learn-c">Why should you learn C?</a></li>
+      </ul>
+    </li>
+    <li><a href="#basic-c">Basic C</a>
+      <ul>
+        <li><a href="#hello-world">Hello World</a></li>
+        <li><a href="#use-functions-to-structure-code">Use functions to structure code</a></li>
+        <li><a href="#primitives-and-combinational-types">Primitives and combinational types</a></li>
+        <li><a href="#strings-what-do-you-mean">Strings? What do you mean?</a></li>
+        <li><a href="#the-c-language---a-quick-reference">The C Language - a quick reference</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1621,55 +1618,48 @@ window.MathJax = {
         
 
 
-
-
-<p>The <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C language</a> is a programming language developed in the &lsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.</p>
-
+<p>The <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C language</a> is a programming language developed in the &rsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.</p>
 <h2 id="a-quick-intro-to-c">A quick intro to C</h2>
-
 <p>C is an <strong>imperative</strong> programming language. You will notice this when writing some code yourself: we write instructions as <em>statements</em>. These rules or statements are structured in <code>function</code> and <code>struct</code> types. There is little <strong>declarative</strong> to it, compared to other higher level languages. C&rsquo;s footprint is quite small, the syntax is concise and easy to learn. Statements always express <em>how</em> to do things, instead of <em>what</em> it is doing. Increasing readability is of course important. We could for instance use <code>#define</code> to give meaning to a few symbols, or write clear <code>function</code> blocks.</p>
-
 <p>C is primarily being used in embedded system development because it is so closely related to the hardware itself. The UNIX, Windows and OSX kernels are fully written in C. The operating system of your cellphone, smartwatch or handheld all build on top of C. A huge amount of languages such as Java (JVM), Python, Ruby and PHP are first and foremost implemented in C.</p>
-
 <iframe height="400px" width="100%" src="https://replit.com/@wgroeneveld1/osc-1-files?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-
 <h3 id="comparison-with-java">Comparison with Java</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.io.IOException<span style="color:#f92672">;</span>
-<span style="color:#f92672">import</span> java.nio.*<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#111">java.io.IOException</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> <span style="color:#111">java.nio.*</span><span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileReader</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">FileReader</span> <span style="color:#f92672">{</span>
 
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">read</span><span style="color:#f92672">(</span>String file<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">(</span>Files<span style="color:#f92672">.</span><span style="color:#a6e22e">readAllBytes</span><span style="color:#f92672">(</span>Paths<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>file<span style="color:#f92672">)));</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">read</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">file</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">throws</span> <span style="color:#111">IOException</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">String</span><span style="color:#f92672">(</span><span style="color:#111">Files</span><span style="color:#f92672">.</span><span style="color:#75af00">readAllBytes</span><span style="color:#f92672">(</span><span style="color:#111">Paths</span><span style="color:#f92672">.</span><span style="color:#75af00">get</span><span style="color:#f92672">(</span><span style="color:#111">file</span><span style="color:#f92672">)));</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;reading file: &#34;</span><span style="color:#f92672">);</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> FileReader<span style="color:#f92672">().</span><span style="color:#a6e22e">read</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sup.txt&#34;</span><span style="color:#f92672">));</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;reading file: &#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">FileReader</span><span style="color:#f92672">().</span><span style="color:#75af00">read</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;sup.txt&#34;</span><span style="color:#f92672">));</span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>How would one go around doing something like that in C? That will become difficult as C does not have a <code>class</code> system! A lower level implementation could look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<span style="color:#f92672">}</span>
+</code></pre></div><p>How would one go around doing something like that in C? That will become difficult as C does not have a <code>class</code> system! A lower level implementation could look like this:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">read</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> file) {
-    FILE <span style="color:#f92672">*</span>filePointer <span style="color:#f92672">=</span> fopen(file, <span style="color:#e6db74">&#34;r&#34;</span>);
-    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>buffer <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">255</span>);
+<span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#75af00">read</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">file</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">FILE</span> <span style="color:#f92672">*</span><span style="color:#111">filePointer</span> <span style="color:#f92672">=</span> <span style="color:#111">fopen</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">buffer</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">255</span><span style="color:#111">);</span>
 
-    fgets(buffer, <span style="color:#ae81ff">255</span>, (FILE<span style="color:#f92672">*</span>) filePointer);
-    fclose(filePointer);
-    <span style="color:#66d9ef">return</span> buffer;
-}
+    <span style="color:#111">fgets</span><span style="color:#111">(</span><span style="color:#111">buffer</span><span style="color:#111">,</span> <span style="color:#ae81ff">255</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#111">FILE</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">filePointer</span><span style="color:#111">);</span>
+    <span style="color:#111">fclose</span><span style="color:#111">(</span><span style="color:#111">filePointer</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">buffer</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    printf(<span style="color:#e6db74">&#34;reading file: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    printf(<span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, read(<span style="color:#e6db74">&#34;sup.txt&#34;</span>));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;reading file: </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">read</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sup.txt&#34;</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
     	<p>Compile the above with <code>gcc -o fileio fileio.c</code>. <br/>
@@ -1678,11 +1668,8 @@ Congratulations on your first compiled C program!</p>
 
 	</div>
 </div>
-
 <p>There are a lot of problems with this implementation: the buffer length is hardcoded and the memory has not been released. A <code>FileReader</code> Java class that does everything for you simply cannot be created. As you can see it&rsquo;s a lot more <strong>low-level</strong> work than Java&rsquo;s one-liners like <code>Files.readAllBytes</code>! C does not even have the keyword <code>new</code>. Ouch.</p>
-
 <p>Key differences between C and a higher level language such as C#:</p>
-
 <ol>
 <li>C&rsquo;s syntax footprint is small: no private/protected/class/interface/inheritance/bool/string&hellip; No &ldquo;standard&rdquo; libraries.</li>
 <li>C does NOT have exceptions! It works with <em>interrupts</em> and error codes (<code>return 0</code>).</li>
@@ -1692,82 +1679,68 @@ Congratulations on your first compiled C program!</p>
 <li>C allows for combination-integer-types (<code>unsigned short int</code>)</li>
 <li>C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for <a href="https://www.devdungeon.com/content/how-mix-c-and-assembly">mixing with assembly</a>.</li>
 </ol>
-
 <p>The following figure represents the Java Virtual Machine you have been using in the INF1 course (<a href="https://www.quora.com/What-is-the-Java-virtual-machine-JVM">source</a>):</p>
-
-<p><img src="../../img/jvm.jpg" alt="The JVM" /></p>
-
+<p><img src="../../img/jvm.jpg" alt="The JVM"></p>
 <p>Note that there is <strong>only one</strong> source code and byte code block. Any <code>.class</code> file can be executed on any Linux/Windows/MacOS machine, provided you installed the correct JVM on top of the OS, as also pictured. When you compile <code>.c</code> C files, they do not translate into byte code but into <strong>OS-specific binaries</strong>! That means you cannot simply share your Windows binaries with a friend that runs Linux on his or her machine.</p>
-
 <h3 id="why-should-you-learn-c">Why should you learn C?</h3>
-
 <p>Good question. A few answers:</p>
-
 <ol>
 <li>Take a look at the <a href="https://www.tiobe.com/tiobe-index/">TIOBE index</a> and guess which programming language is the single most used throughout the world.</li>
 <li>Since this course is part of an <em>engineering</em> curriculum, it needs to stay close to its engineering roots: <strong>the hardware</strong> (<em>embedded systems</em>). Controlling hardware components on a PCB chip can only be done with low level machine instructions, that are coming from a low-level programming language such as C. Of course, writing in Assembly is even more precise, but hurts just a tad bit more.</li>
-<li>This is more of an operating systems course than it is a programming course. However, to learn concepts of an OS, you&rsquo;ll need a firm grasp of the basics in C.<br /></li>
+<li>This is more of an operating systems course than it is a programming course. However, to learn concepts of an OS, you&rsquo;ll need a firm grasp of the basics in C.</li>
 </ol>
-
-<p><img src="../../img/tiobe.jpg" alt="" title="The TIOBE Index" /></p>
-
+<p><img src="../../img/tiobe.jpg" alt="" title="The TIOBE Index"></p>
 <h2 id="basic-c">Basic C</h2>
-
 <h3 id="hello-world">Hello World</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> nr <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span>;
-    printf(<span style="color:#e6db74">&#34;sup? %d&#34;</span>, nr);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>The <code>main()</code> function returns a number that determines whether or not your program was executed successfully (0), else some kind of error code will be returned. <code>printf</code> is a function in the default IO header that we need to include, just like Java&rsquo;s <code>import</code>.</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">42</span><span style="color:#111">;</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sup? %d&#34;</span><span style="color:#111">,</span> <span style="color:#111">nr</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The <code>main()</code> function returns a number that determines whether or not your program was executed successfully (0), else some kind of error code will be returned. <code>printf</code> is a function in the default IO header that we need to include, just like Java&rsquo;s <code>import</code>.</p>
 <p>The &ldquo;f&rdquo; of printf stands for &ldquo;formatting&rdquo; as you can see in the example. See <a href="https://www.gnu.org/software/libc/manual/html_node/Formatted-Output.html">Formatted output</a>.</p>
-
 
 <div class="ex">
 	<div class="inner">
     	<p>Write a program that outputs the following: <br/>
-&ldquo;pi is&nbsp;&nbsp;&nbsp;&nbsp;3.1415&rdquo;<br/>
+&ldquo;pi is    3.1415&rdquo;<br/>
 Based on the floating-point variable pi with a value of <code>3.1415</code>. The output should end with a new line and contain a tab.</p>
 
 	</div>
 </div>
-
 <h3 id="use-functions-to-structure-code">Use functions to structure code</h3>
-
 <p>Done with <code>function</code>. Blocks such as if, for, while, do are familiar and work just like in other languages:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">say_something_if_positive</span>(<span style="color:#66d9ef">int</span> number) {
-    <span style="color:#66d9ef">if</span>(number <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>) {
-        printf(<span style="color:#e6db74">&#34;wow, positive or what? </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> number; i<span style="color:#f92672">++</span>) {
-            printf(<span style="color:#e6db74">&#34;%d &#34;</span>, i);
-        }
-        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    }
-}
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">say_something_if_positive</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">number</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">number</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;wow, positive or what? </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+        <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">number</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+            <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d &#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
+        <span style="color:#111">}</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    say_something_if_positive(<span style="color:#ae81ff">5</span>);
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>You <strong>cannot overload</strong> functions in C, unlike in C++ and Java. That means each function name is unique:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">yay</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">say_something_if_positive</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>You <strong>cannot overload</strong> functions in C, unlike in C++ and Java. That means each function name is unique:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">yay</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">yay</span>() {
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">yay</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">return</span> yay();   <span style="color:#75715e">// ??
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<p>Does, depending on the compiler, not compile:</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">yay</span><span style="color:#111">();</span>   <span style="color:#75715e">// ??
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><p>Does, depending on the compiler, not compile:</p>
 <pre>
 test.c:5:5: error: redefinition of 'yay'
 int yay() {
@@ -1777,29 +1750,22 @@ int yay() {
     ^
 1 error generated.
 </pre>
-
 <h3 id="primitives-and-combinational-types">Primitives and combinational types</h3>
-
 <p>The C language provides the four basic arithmetic type specifiers:</p>
-
 <ol>
 <li><code>char</code> (1 byte)</li>
 <li><code>int</code> (4 bytes)</li>
 <li><code>float</code> (4 bytes)</li>
 <li><code>double</code> (8 bytes)</li>
 </ol>
-
 <p>Together with the modifiers:</p>
-
 <ol>
 <li><code>signed</code> (minus and plus signs supported)</li>
 <li><code>unsigned</code> (only plus signs, greater range)</li>
 <li><code>short</code> (/2 bytes)</li>
 <li><code>long</code> (x2 bytes)</li>
 </ol>
-
 <p><a href="https://en.wikipedia.org/wiki/C_data_types">The table on Wikipedia</a> lists the permissible combinations to specify a large set of storage size-specific declarations. <code>char</code> is the smallest addressable unit, and <code>long double</code> is the biggest. For instance, <code>unsigned char</code> gives you a range of 0 to 255, while <code>signed char</code> works from -127 to 127.</p>
-
 
 <div class="notices note" ><p>Actual byte sizes are dependent on the target platform - the amount of bytes given above is usually correct for a 64-BIT machine. This can be retrieved using <code>sizeof(type)</code>.
 <br/>
@@ -1807,32 +1773,29 @@ int yay() {
 Try this out for yourself! See the <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises/blob/master/ch1_c/combinational.c">combinational types demo C file</a> in <code>osc-exercises/ch1_c/combinational.c</code></p>
 </div>
 
-
 <h3 id="strings-what-do-you-mean">Strings? What do you mean?</h3>
-
 <p>Forget it: <code>char[]</code> or a <code>char*</code> pointer is the only possibility. And no, it is not as easy as in Java to handle arrays due to the way they are defined.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#define SIZE 10
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> arr[SIZE];
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> SIZE; i<span style="color:#f92672">++</span>) {
-        arr[i] <span style="color:#f92672">=</span> i <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>;
-    }
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">arr</span><span style="color:#111">[</span><span style="color:#111">SIZE</span><span style="color:#111">];</span>
+    <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">SIZE</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">arr</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
 
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> SIZE; j<span style="color:#f92672">++</span>) {
-        printf(<span style="color:#e6db74">&#34;array index %d has value %d </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, j, arr[j]);
-    }
+    <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">j</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">SIZE</span><span style="color:#111">;</span> <span style="color:#111">j</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;array index %d has value %d </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">j</span><span style="color:#111">,</span> <span style="color:#111">arr</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">]);</span>
+    <span style="color:#111">}</span>
 
-    <span style="color:#66d9ef">char</span> string[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi there&#34;</span>;
-    printf(<span style="color:#e6db74">&#34;%s&#34;</span>, string);
+    <span style="color:#00a8c8">char</span> <span style="color:#111">string</span><span style="color:#111">[]</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;hi there&#34;</span><span style="color:#111">;</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s&#34;</span><span style="color:#111">,</span> <span style="color:#111">string</span><span style="color:#111">);</span>
 
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>C reserves the right amount of memory with string literals you know from Java. The <code>string[]</code> char array does contain <strong>9 characters</strong> and not 8! That is because the end of the array is determined by a magical <strong>NULL terminator</strong>, <code>\0</code>. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using <code>%s</code>.</p>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<p>In C, strings are just concatenations of <code>char</code>acters, terminated with <code>\0</code>. For instance, <code>string[] msg = &quot;hey&quot;;</code> looks like this in memory<sup class="footnote-ref" id="fnref:dep"><a href="#fn:dep">1</a></sup>:</p>
-
+</code></pre></div><p>C reserves the right amount of memory with string literals you know from Java. The <code>string[]</code> char array does contain <strong>9 characters</strong> and not 8! That is because the end of the array is determined by a magical <strong>NULL terminator</strong>, <code>\0</code>. That makes it easier to loop through all characters and print them - or just let printf do that for you by formatting using <code>%s</code>.</p>
+<p>In C, strings are just concatenations of <code>char</code>acters, terminated with <code>\0</code>. For instance, <code>string[] msg = &quot;hey&quot;;</code> looks like this in memory<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1854,11 +1817,8 @@ graph LR
     Y --> T
 
 </div>
-
 <p>An elaborated example that illustrates how character sequences work, and how they are terminated with <code>\0</code>, can be found at <a href="http://www.cplusplus.com/doc/oldtutorial/ntcs/">http://www.cplusplus.com/doc/oldtutorial/ntcs/</a>.</p>
-
 <p>Handy string utility functions reside in the header file <code>&lt;string.h&gt;</code> (copying, concatenating, asking for the length, &hellip;) See <a href="https://www.gnu.org/software/libc/manual/html_node/String-and-Array-Utilities.html">GNU C: String utils</a>.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1867,29 +1827,23 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
 
 	</div>
 </div>
-
 <p>Hint: <code>man strcmp</code>!</p>
-
 <p><strong>Online C compilers</strong>:</p>
-
 <ul>
 <li><a href="https://rextester.com/">https://rextester.com/</a></li>
 <li><a href="https://godbolt.org/">https://godbolt.org/</a></li>
 <li><a href="https://repl.it/">https://repl.it/</a> (requires logging in)</li>
 </ul>
-
-<h3 id="the-c-language-a-quick-reference">The C Language - a quick reference</h3>
-
+<h3 id="the-c-language---a-quick-reference">The C Language - a quick reference</h3>
 <p>Actually, the ANSI C syntax fits in just <em>two index cards</em> - that&rsquo;s how small it really is. <a href="../../pdf/c-refcard.pdf">Download the quick reference cards here</a>. Compared to Java, C# or C++, C is very much falls in the category &ldquo;easy to learn, hard to master&rdquo;. See the <a href="https://kuleuven-diepenbeek.github.io/cpp-course/img/teaching/cpp/cppbooks.jpg">handbook comparison of C++ and C</a> and you&rsquo;ll know what we mean.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:dep">The backslash (<code>\</code>) is depicted as a forward slash (<code>/</code>) in the Figure.
- <a class="footnote-return" href="#fnref:dep"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>The backslash (<code>\</code>) is depicted as a forward slash (<code>/</code>) in the Figure. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
 
 <footer class="footline">
@@ -2893,19 +2847,17 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,19 @@
     <title>2.2: Arduino multi frequencies :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,14 +1578,11 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#three-s-a-charm">Three&rsquo;s a charm</a></li>
-<li><a href="#making-a-second-application">Making a second &lsquo;application&rsquo;</a></li>
-<li><a href="#merge-the-two-applications">Merge the two applications</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#threes-a-charm">Three&rsquo;s a charm</a></li>
+    <li><a href="#making-a-second-application">Making a second &lsquo;application&rsquo;</a></li>
+    <li><a href="#merge-the-two-applications">Merge the two applications</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1611,21 +1606,15 @@ window.MathJax = {
         
 
 
-
-
 <p>Time to make some harmonics.</p>
-
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Moodswingerscale.jpg"/> <figcaption>
             <h4>image source: wikipedia.org</h4>
         </figcaption>
 </figure>
 
-
-<h2 id="three-s-a-charm">Three&rsquo;s a charm</h2>
-
+<h2 id="threes-a-charm">Three&rsquo;s a charm</h2>
 <p>The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example <a href="https://www.tinkercad.com" target="_blank">Tinkercad</a>.</p>
-
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
     <figure>
@@ -1634,28 +1623,27 @@ window.MathJax = {
 
   </div>
   <div style="width: 50%">
-    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
 </span><span style="color:#75715e">#define LED_2Hz 6
 </span><span style="color:#75715e">#define LED_3Hz 5
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>()
-{
-  pinMode(LED_1Hz, OUTPUT);
-  pinMode(LED_2Hz, OUTPUT);
-  pinMode(LED_3Hz, OUTPUT);
-}
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">setup</span><span style="color:#111">()</span>
+<span style="color:#111">{</span>
+  <span style="color:#111">pinMode</span><span style="color:#111">(</span><span style="color:#111">LED_1Hz</span><span style="color:#111">,</span> <span style="color:#111">OUTPUT</span><span style="color:#111">);</span>
+  <span style="color:#111">pinMode</span><span style="color:#111">(</span><span style="color:#111">LED_2Hz</span><span style="color:#111">,</span> <span style="color:#111">OUTPUT</span><span style="color:#111">);</span>
+  <span style="color:#111">pinMode</span><span style="color:#111">(</span><span style="color:#111">LED_3Hz</span><span style="color:#111">,</span> <span style="color:#111">OUTPUT</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>()
-{
-  digitalWrite(LED_1Hz, HIGH);
-  delay(<span style="color:#ae81ff">500</span>);
-  digitalWrite(LED_1Hz, LOW);
-  delay(<span style="color:#ae81ff">500</span>);
-}
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">loop</span><span style="color:#111">()</span>
+<span style="color:#111">{</span>
+  <span style="color:#111">digitalWrite</span><span style="color:#111">(</span><span style="color:#111">LED_1Hz</span><span style="color:#111">,</span> <span style="color:#111">HIGH</span><span style="color:#111">);</span>
+  <span style="color:#111">delay</span><span style="color:#111">(</span><span style="color:#ae81ff">500</span><span style="color:#111">);</span>
+  <span style="color:#111">digitalWrite</span><span style="color:#111">(</span><span style="color:#111">LED_1Hz</span><span style="color:#111">,</span> <span style="color:#111">LOW</span><span style="color:#111">);</span>
+  <span style="color:#111">delay</span><span style="color:#111">(</span><span style="color:#ae81ff">500</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
     </code></pre></div>
   </div>
 </div>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1663,13 +1651,9 @@ window.MathJax = {
 
 	</div>
 </div>
-
 <p>Something to point out is the preciseness of the LEDs. If you&rsquo;d hold a high-speed camera on the setup and do some precise timing, it becomes clear that the frequencies are not very precise. Take the example of 1 Hz. Executing the <strong>digitalWrite()</strong> function is not instantaneous. As you&rsquo;ll learn in this course, executing a function involves some steps which are overhead. Nonetheless, if lives were at stake, this could be measured very precisely. The additional overhead time could be reduced from the 500 ms, to achieve a better precision.</p>
-
 <h2 id="making-a-second-application">Making a second &lsquo;application&rsquo;</h2>
-
 <p>A second application that can be run on the Arduino is a Serial port echo service. You know this is a killer-app and could make you millions ;-)</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1677,11 +1661,8 @@ window.MathJax = {
 
 	</div>
 </div>
-
 <h2 id="merge-the-two-applications">Merge the two applications</h2>
-
 <p>The third exercise is simple, at least on <s>paper</s> screen it is.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1690,8 +1671,7 @@ window.MathJax = {
 	</div>
 </div>
 
-
-<div class="notices warning" ><p>What is effect of the additional application on the <strong>preciseness</strong> of the blinking LEDs&rsquo; frequency ?</p>
+<div class="notices warning" ><p>What is effect of the additional application on the <strong>preciseness</strong> of the blinking LEDs' frequency ?</p>
 </div>
 
 
@@ -2703,19 +2683,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

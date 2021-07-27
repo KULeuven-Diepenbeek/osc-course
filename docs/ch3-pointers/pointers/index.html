@@ -12,21 +12,19 @@
     <title>3.1: Pointers and arrays :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,23 +1578,16 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#compound-types">&ldquo;Compound&rdquo; types</a></li>
-<li><a href="#pointer-types">Pointer types</a>
-<ul>
-<li><a href="#c-s-by-value-vs-java-s-by-ref-redux">C&rsquo;s By-Value VS Java&rsquo;s By-Ref - redux</a></li>
-<li><a href="#pointer-instantiation">Pointer instantiation</a></li>
-<li><a href="#function-pointers">Function pointers</a></li>
-</ul></li>
-<li><a href="#watch-out-for-syntax">Watch out for syntax!</a></li>
-</ul></li>
-<li><a href="#ponder-on-this">Ponder on this</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#compound-types">&ldquo;Compound&rdquo; types</a></li>
+        <li><a href="#pointer-types">Pointer types</a></li>
+        <li><a href="#watch-out-for-syntax">Watch out for syntax!</a></li>
+      </ul>
+    </li>
+    <li><a href="#ponder-on-this">Ponder on this</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1620,24 +1611,17 @@ window.MathJax = {
         
 
 
-
-
 <p>In the schematic examples below, the following concepts can be explicitly distinguished:</p>
-
 <ol>
 <li>The <strong>name</strong> of a variable</li>
 <li>The <strong>value</strong> of a variable</li>
 </ol>
-
 <p>And the following implicitly:</p>
-
 <ol>
 <li>The <strong>type</strong> of a variable</li>
 <li>The <strong>adres</strong> of a variable</li>
 </ol>
-
 <p>The <strong>type</strong> of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value. Each variable has a unique address. Variables can therefore refer to each other.</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1653,9 +1637,7 @@ graph TD;
     B{varname<br/>address}
 
 </div>
-
 <p>This example visualizes the instruction <code>int a = 5</code>:</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1670,53 +1652,41 @@ graph TD;
     A[a<br/>5]
 
 </div>
-
 <p>Where the type, <code>int</code>, reserves a few bytes depending on the target platform (<code>sizeof(int)</code>), on a specific address. We can manipulate the address itself - this is essential when working with arrays.</p>
-
 <h3 id="compound-types">&ldquo;Compound&rdquo; types</h3>
-
 <p>C uses a <em>pass-by-value</em> system to pass variables to functions. This means that the value is copied, and that function cannot make changes to the original value. That is something positive: <strong>separation of concerns</strong>.</p>
-
 <p>When we think of our person example of <a href="../../theory/c/chap1">chapter 1</a>, that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a &ldquo;pointer&rdquo;: a reference to the current data. Objects are <em>passed by-reference</em> by default in Java - so in C we have to do something extra for this.</p>
-
 <p>Instead of <code>is_old(struct Person person)</code> the signature becomes <code>is_old(struct Person * person)</code> (note the added asterik *). We have two options for reading a value here:</p>
-
 <ol>
 <li><em>&ldquo;dereferencing&rdquo;</em> the pointer: asking for the real value, behind the reference. Following the arrow where it points towards, so to speak.</li>
 <li>Ask for members of the pointer using &ldquo;<code>.</code>&rdquo;.</li>
 </ol>
-
 <p>Because in C, the <code>.</code> operator takes precedence over <code>*</code>, we have to add brackets to combine both: <code>(*person).age</code>. It is annoying to constantly have to use brackets, so the creators came up with an alternative, the <code>-&gt;</code> operator: <code>person-&gt;age</code>.</p>
-
 
 <div class="notices note" ><p><code>(*pointervariable).property</code> equals to <code>pointervariable-&gt;property</code>.</p>
 </div>
 
-
 <p>In Java properties are accessed using the dot operator <code>.</code>.</p>
-
 <h3 id="pointer-types">Pointer types</h3>
-
 <p>A pointer is a &ldquo;changeable&rdquo; reference to a variable. Pointers have their own memory address on the stack and can refer to something else at any time: they are not constant. They are recognizable by <code>*</code> after variable type.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> young <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-    <span style="color:#66d9ef">int</span> old <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span>;
-    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>age <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>young;
-    age <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>old;
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">young</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">old</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">young</span><span style="color:#111">;</span>
+    <span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">old</span><span style="color:#111">;</span>
 
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>age);
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, age);
-}</code></pre></div>
-
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">age</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">age</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
     	<p>What will be printed in the above example? The first line should be obvious, but the second one&hellip;</p>
 
 	</div>
 </div>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1732,12 +1702,9 @@ graph LR;
     A -.-> |after second assignment| C[old<br/>80]
 
 </div>
-
 <p>Notice the use of the <code>&amp;</code> operator, it is the <em>address-of</em> operator to fetch the address of a variable. A pointer points to an address, not to a value (of a variable).</p>
-
 <p>Look at it this way: I live in streetname, city. When I give you my card, you have a <strong>reference</strong> to my address. I can hand out cards to more people. The card does not represent my house, but points towards it.
 If you wish to do so, you can write a different address on the card, eliminating my previous address. From that point on, your card points to a different address, while other cards I dealt out still point to my original address.</p>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1753,30 +1720,24 @@ graph LR;
   B[your house]
 
 </div>
-
 <p>If I want to get the address of your house, I&rsquo;d have to use the address-of operator: <code>&amp;your_house</code>. If I want to get the house itself (physically impossible&hellip;), I&rsquo;d use the <em>dereference</em> operator on the card: <code>*card</code>. This simply <strong>follows the arrow</strong> where card currently points to.</p>
-
 <p>So, what was the output of <code>printf(&quot;%d\n&quot;, age);</code>? 1389434244! Huh? We are printing the <strong>address</strong> of the pointer, not the actual value (by following where it points to). Remember, to do that, you have to use the dereference <code>*</code> operator: <code>printf(&quot;%d&quot;, *age);</code>. The compiler hints at this with the following warning:</p>
-
 <blockquote>
 <p>warning: format specifies type &lsquo;int&rsquo; but the argument has type &lsquo;int *&rsquo; [-Wformat]</p>
 </blockquote>
-
-<h4 id="c-s-by-value-vs-java-s-by-ref-redux">C&rsquo;s By-Value VS Java&rsquo;s By-Ref - redux</h4>
-
+<h4 id="cs-by-value-vs-javas-by-ref---redux">C&rsquo;s By-Value VS Java&rsquo;s By-Ref - redux</h4>
 <p>Pointers can point to pointers which can point to pointers which can &hellip; Add enough <code>*</code> symbols!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>val;
-<span style="color:#66d9ef">int</span> <span style="color:#f92672">**</span>ptr_to_ptr <span style="color:#f92672">=</span> ptr;
-<span style="color:#66d9ef">int</span> <span style="color:#f92672">**</span>ptr_to_ptr <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>ptr;</code></pre></div>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">val</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">ptr</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
+</code></pre></div>
 <div class="ex">
 	<div class="inner">
     	<p>Why does <code>int **ptr_to_ptr = ptr;</code> generate a compiler error?</p>
 
 	</div>
 </div>
-
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1792,33 +1753,29 @@ graph LR;
     B --> |ref| C[val<br/>10]
 
 </div>
-
 <p>Practical use of the double <code>**</code> notation would be to relink a pointer to another location. As you know from <a href="../../theory/c/chap1">chapter one</a>, variables in C are passed along <strong>by value</strong>: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the <em>dereference</em> operator. But chaining <em>the address</em> itself is only possible with double pointers:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">increase</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> nr) {
-    (<span style="color:#f92672">*</span>nr)<span style="color:#f92672">++</span>;
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reassign</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">**</span> nr, <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> dest) {
-    <span style="color:#f92672">*</span>nr <span style="color:#f92672">=</span> dest;
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> nr <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>)), <span style="color:#f92672">*</span>nr2 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
-    <span style="color:#f92672">*</span>nr <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, <span style="color:#f92672">*</span>nr2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-    increase(nr);
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>nr);    <span style="color:#75715e">// prints 11
-</span><span style="color:#75715e"></span>    reassign(<span style="color:#f92672">&amp;</span>nr, nr2);
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>nr);    <span style="color:#75715e">// prints 5
-</span><span style="color:#75715e"></span>}</code></pre></div>
-<h4 id="pointer-instantiation">Pointer instantiation</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">)</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">reassign</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">**</span> <span style="color:#111">nr</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">dest</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#f92672">*</span><span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#111">dest</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)),</span> <span style="color:#f92672">*</span><span style="color:#111">nr2</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
+    <span style="color:#f92672">*</span><span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr2</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+    <span style="color:#111">increase</span><span style="color:#111">(</span><span style="color:#111">nr</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">);</span>    <span style="color:#75715e">// prints 11
+</span><span style="color:#75715e"></span>    <span style="color:#111">reassign</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">nr</span><span style="color:#111">,</span> <span style="color:#111">nr2</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">);</span>    <span style="color:#75715e">// prints 5
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><h4 id="pointer-instantiation">Pointer instantiation</h4>
 <p>Where does a new pointer point to that is not yet instantiated?:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ptr;
-printf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">*</span>ptr); <span style="color:#f92672">//</span> prints <span style="color:#f92672">-</span><span style="color:#ae81ff">12599900072</span></code></pre></div>
-<p>Whoops. Always assign &lsquo;nothing&rsquo; to a pointer, using <code>int *ptr = NULL</code>. Note that depending on the C implementation (such as VC++, clang, GNU C), an uninitialized pointer might contain the value <code>0</code>.</p>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
+<span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">);</span> <span style="color:#75715e">// prints -12599900072
+</span></code></pre></div><p>Whoops. Always assign &lsquo;nothing&rsquo; to a pointer, using <code>int *ptr = NULL</code>. Note that depending on the C implementation (such as VC++, clang, GNU C), an uninitialized pointer might contain the value <code>0</code>.</p>
 <p><code>NULL</code> is a <strong>platform dependent</strong> (!!) macro that in C refers to zero (<code>0</code>), usually in the form of a void pointer. A <code>void *</code> pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.</p>
-
 
 <div class="ex">
 	<div class="inner">
@@ -1826,32 +1783,28 @@ printf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f926
 
 	</div>
 </div>
-
-<p>The definition of a pointer does not prescribe the exact location of the <code>*</code>: <code>int* age</code> is the same as<code>int *age</code> (notice the placement of the stars). Be careful with things like &lsquo;int *age, old_age&rsquo;! The last variable here is an ordinary int, and not a pointer!</p>
-
+<p>The definition of a pointer does not prescribe the exact location of the <code>*</code>: <code>int* age</code> is the same as<code> int *age</code> (notice the placement of the stars). Be careful with things like &lsquo;int *age, old_age&rsquo;! The last variable here is an ordinary int, and not a pointer!</p>
 <h4 id="function-pointers">Function pointers</h4>
-
 <p>Now things are getting interesting. A pointer can also point <strong>to a function</strong>. (Remember the datastructure from <a href="../../theory/c/chap1">chapter one</a>?). You will need the same signature definition to do that:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">increase</span>(<span style="color:#66d9ef">int</span> nr) {
-    <span style="color:#66d9ef">return</span> nr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">doublenr</span>(<span style="color:#66d9ef">int</span> nr) {
-    <span style="color:#66d9ef">return</span> nr <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">doublenr</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>op)(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>increase;
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">op</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">increase</span><span style="color:#111">;</span>
 
-    printf(<span style="color:#e6db74">&#34;increase 5: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, op(<span style="color:#ae81ff">5</span>));
-    op <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>doublenr;
-    printf(<span style="color:#e6db74">&#34;double 5: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, op(<span style="color:#ae81ff">5</span>));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>The definition of the op pointer looks a bit strange, but the signature predicts that we will return an <code>int</code> (far left), and that one parameter is needed, also in the form of an<code>int</code> (in brackets). If you fail to do so (for instance, by creating a <code>double doublenr(int nr)</code> function), weird things happen, but the program does not crash:</p>
-
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;increase 5: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+    <span style="color:#111">op</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">doublenr</span><span style="color:#111">;</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;double 5: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The definition of the op pointer looks a bit strange, but the signature predicts that we will return an <code>int</code> (far left), and that one parameter is needed, also in the form of an<code> int</code> (in brackets). If you fail to do so (for instance, by creating a <code>double doublenr(int nr)</code> function), weird things happen, but the program does not crash:</p>
 <pre>
 Wouters-Air:development jefklak$ gcc test.c && ./a.out
 test.c:15:8: warning: incompatible pointer types assigning to 'int (*)(int)' from 'double (*)(int)' [-Wincompatible-pointer-types]
@@ -1861,47 +1814,41 @@ test.c:15:8: warning: incompatible pointer types assigning to 'int (*)(int)' fro
 increase 5: 6
 double 5: 14
 </pre>
-
 <p>Function pointers can also be given as a parameter, for example with <code>void exec (int (* op) (int)) {</code>. A function can return a function (pointer), for example with <code>int (* choose_op (int mod)) (int) {</code>. The function &ldquo;choose_op&rdquo; expects 1 int parameter and returns a function pointer that refers to a function with 1 int parameter and return value int. To simplify that mess, <code>typedef</code> is usually used:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span>(<span style="color:#f92672">*</span>func_type)(<span style="color:#66d9ef">int</span>);
+<span style="color:#00a8c8">typedef</span> <span style="color:#75af00">int</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">func_type</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">);</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">increase</span>(<span style="color:#66d9ef">int</span> nr) {
-    <span style="color:#66d9ef">return</span> nr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">doublenr</span>(<span style="color:#66d9ef">int</span> nr) {
-    <span style="color:#66d9ef">return</span> nr <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
-}
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">doublenr</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-func_type <span style="color:#a6e22e">choose_op</span>(<span style="color:#66d9ef">int</span> mod) {
-    <span style="color:#66d9ef">return</span> mod <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">&amp;</span>increase : <span style="color:#f92672">&amp;</span>doublenr;
-}
+<span style="color:#111">func_type</span> <span style="color:#75af00">choose_op</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">mod</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">mod</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">&amp;</span><span style="color:#111">increase</span> <span style="color:#111">:</span> <span style="color:#f92672">&amp;</span><span style="color:#111">doublenr</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">exec</span>(<span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>op)(<span style="color:#66d9ef">int</span>)) {
-    printf(<span style="color:#e6db74">&#34;exec: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, op(<span style="color:#ae81ff">5</span>));
-}
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">exec</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">op</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">))</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;exec: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+<span style="color:#111">}</span>
 
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-    exec(choose_op(<span style="color:#ae81ff">0</span>));       <span style="color:#75715e">// print 6
-</span><span style="color:#75715e"></span>    exec(choose_op(<span style="color:#ae81ff">1</span>));       <span style="color:#75715e">// print 10
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}</code></pre></div>
-<p>Now you understand how we used the &lsquo;callback function&rsquo; <code>is_old()</code> in the Person struct in <a href="../../theory/c/chap1">chapter 1</a>.</p>
-
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">exec</span><span style="color:#111">(</span><span style="color:#111">choose_op</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">));</span>       <span style="color:#75715e">// print 6
+</span><span style="color:#75715e"></span>    <span style="color:#111">exec</span><span style="color:#111">(</span><span style="color:#111">choose_op</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">));</span>       <span style="color:#75715e">// print 10
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Now you understand how we used the &lsquo;callback function&rsquo; <code>is_old()</code> in the Person struct in <a href="../../theory/c/chap1">chapter 1</a>.</p>
 <h3 id="watch-out-for-syntax">Watch out for syntax!</h3>
-
 <p>Remember that symbols such as <code>*</code> en <code>&amp;</code> have different meanings.</p>
-
 <ul>
 <li><code>int *p;</code> - * after a type: it&rsquo;s a pointer.</li>
 <li><code>p = &amp;i</code> - &amp; used in an expression: <em>address-of</em> operation</li>
 <li><code>*p = i</code> - * used in an expression: <em>dereference</em> operation</li>
 </ul>
-
 <h2 id="ponder-on-this">Ponder on this</h2>
-
 <ol>
 <li>What is the difference between <code>char msg[] = &quot;heykes&quot;</code> and <code>char *msg = &quot;heykes&quot;</code>? Clarify your answer with a drawing.</li>
 <li>Wat is the difference between <code>int a[10][20]</code> and <code>int *b[10]</code>? Can you also say something about memory usage?</li>
@@ -2914,19 +2861,17 @@ func_type <span style="color:#a6e22e">choose_op</span>(<span style="color:#66d9e
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

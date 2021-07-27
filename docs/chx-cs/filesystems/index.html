@@ -12,21 +12,19 @@
     <title>X.1: File systems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1623682282" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/hybrid.css?1623682282" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1623682282" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1623682282" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1623682282" rel="stylesheet">
-    <link href="../../css/theme.css?1623682282" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1623682282" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372742" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372742" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372742" rel="stylesheet">
+    <link href="../../css/theme.css?1627372742" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372742" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1623682282" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372742" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1623682282"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372742"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1623682282"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1623682282"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372742"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372742"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1623682282"></script>
+<script type="text/javascript" src="../../js/search.js?1627372742"></script>
 
     
   </div>
@@ -1580,31 +1578,31 @@ window.MathJax = {
                     <div class="progress">
     <div class="wrapper">
 <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#introduction-in-unix-filesystems">Introduction in Unix filesystems</a>
-<ul>
-<li><a href="#files-in-unix">Files in Unix</a></li>
-<li><a href="#file-attributes">File attributes</a></li>
-</ul></li>
-<li><a href="#file-system-fs-flavors">File system (FS) flavors</a>
-<ul>
-<li><a href="#ext-extended-file-system">EXT (Extended File System)</a></li>
-<li><a href="#fat-file-allocation-table">FAT (File Allocation Table)</a></li>
-<li><a href="#ntfs-new-tech-file-system">NTFS (New Tech. File System)</a></li>
-<li><a href="#nfs-network-file-system">NFS (Network File System)</a></li>
-</ul></li>
-<li><a href="#common-file-system-techniques">Common File System techniques</a>
-<ul>
-<li><a href="#fragmentation">Fragmentation</a></li>
-<li><a href="#transactions">Transactions</a></li>
-<li><a href="#journaling">Journaling</a></li>
-<li><a href="#compressing">Compressing</a></li>
-</ul></li>
-<li><a href="#more-resources">More Resources</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#introduction-in-unix-filesystems">Introduction in Unix filesystems</a>
+      <ul>
+        <li><a href="#files-in-unix">Files in Unix</a></li>
+        <li><a href="#file-attributes">File attributes</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-system-fs-flavors">File system (FS) flavors</a>
+      <ul>
+        <li><a href="#ext-extended-file-system">EXT (Extended File System)</a></li>
+        <li><a href="#fat-file-allocation-table">FAT (File Allocation Table)</a></li>
+        <li><a href="#ntfs-new-tech-file-system">NTFS (New Tech. File System)</a></li>
+        <li><a href="#nfs-network-file-system">NFS (Network File System)</a></li>
+      </ul>
+    </li>
+    <li><a href="#common-file-system-techniques">Common File System techniques</a>
+      <ul>
+        <li><a href="#fragmentation">Fragmentation</a></li>
+        <li><a href="#transactions">Transactions</a></li>
+        <li><a href="#journaling">Journaling</a></li>
+        <li><a href="#compressing">Compressing</a></li>
+      </ul>
+    </li>
+    <li><a href="#more-resources">More Resources</a></li>
+  </ul>
 </nav>
     </div>
 </div>
@@ -1628,38 +1626,26 @@ window.MathJax = {
         
 
 
-
-
 <h2 id="introduction-in-unix-filesystems">Introduction in Unix filesystems</h2>
-
 <h3 id="files-in-unix">Files in Unix</h3>
-
 <p>Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a <em>file</em> in Unix: we have used this to our advantage to inspect the inner workings of a process in the <code>/proc</code> directory.</p>
-
 <p>A <strong>file</strong> is the smallest possible unit of storage in a unix system. However, a <strong>filesystem</strong> is more than mere data (the file itself): it also contains relations to other files, and attributes or <em>metadata</em> of the file itself, such as:</p>
-
 <ul>
 <li>name</li>
 <li>size</li>
 <li>timestamp</li>
 <li>owner, protection parameters</li>
 </ul>
-
 <p>A <strong>directory</strong> is a special kind of file, in which other files can be stored. It simply references to other files it contains and does not duplicate the data itself.</p>
-
 <figure>
     <img src="../../img/filesystem.gif"/> <figcaption>
             <h4>src: http://www.rhyshaden.com/unix.htm</h4>
         </figcaption>
 </figure>
 
-
 <p>The image above gives an overview of common Unix directory structures, starting from the root <code>/</code> (forward slash). Depending on the Unix flavor, there will be slight variations. For example, Linux usually has <code>/home</code> as user root, while OSX has <code>/Users</code> (capital).</p>
-
 <p>There are also special <strong>device files</strong>, mapped at <code>/dev</code>, that form the bridge between the virtual OS system and the physical machine system. These device files are char or block systems that enable the OS to read data from an external device. For instance, your USB devices, listed through <code>lsusb</code>, can be read directly using <code>cat /dev/ttyXX</code>.</p>
-
 <p>Hard drives are mapped using the same technique, in <code>/dev/sdx</code>, listed through <code>cat /etc/fstab</code> (<code>mount</code>). <code>lsblk</code> (list block devices) allows you to see which block devices are currently linked through files to the OS. On OSX, my <code>mount</code> command outputs:</p>
-
 <pre>
 Wouters-MacBook-Air:~ wgroeneveld$ mount
 /dev/disk1 on / (hfs, local, journaled)
@@ -1667,24 +1653,17 @@ devfs on /dev (devfs, local, nobrowse)
 map -hosts on /net (autofs, nosuid, automounted, nobrowse)
 map auto_home on /home (autofs, automounted, nobrowse)
 </pre>
-
 <p>Depending on the Unix flavor, the location of the device files will be different.</p>
-
 <h3 id="file-attributes">File attributes</h3>
-
 <p>When you list all files using <code>ls -la</code>, you see something like this:</p>
-
 <figure>
     <img src="../../img/file_attributes.png"/> <figcaption>
             <h4>src: https://homepages.uc.edu/~thomam/</h4>
         </figcaption>
 </figure>
 
-
 <p>These are attributes of each file. As you can see in the above image, the permission mode also indicates whether it&rsquo;s a directory file or not, denoted by <code>d</code> at the beginning. The rest of the permissiom modes indicate whether or not the file is writable.</p>
-
 <p>There are five different permissiom mode characters displayed:</p>
-
 <ol>
 <li><code>r</code> (readable),</li>
 <li><code>w</code> (writable),</li>
@@ -1692,133 +1671,87 @@ map auto_home on /home (autofs, automounted, nobrowse)
 <li><code>-</code> means everything is disabled, and</li>
 <li><code>d</code> means it&rsquo;s a directory file.</li>
 </ol>
-
 <p>The <em>default file permissions</em> of new files can be set using <code>umask</code>, while the the permission mode of existing files can be set using the <code>chmod</code> command. For example:</p>
-
 <ul>
 <li><code>chmod +x</code> adds a flag: execute.</li>
 <li><code>chmod -x</code> removes a flag</li>
 <li><code>chmod 640</code> changes all flags to the <strong>octal number-coded</strong> version (0-7).</li>
 </ul>
-
 <p>File security happens on three different levels in Unix:</p>
-
 <ol>
 <li>Owner mode. (mumber 1)</li>
 <li>Group mode. (mumber 2)</li>
 <li>Everyone else. (mumber 3)</li>
 </ol>
-
 <p>Changing the owner of the file can be done using <code>chown user:group [file]</code>. To set read permission for any grouping (i.e. user, group or other) you add the value of 4 to the respective i, j, or k value, to set write permission, you add 2 and to set execute permission, you add 1. The values of 4, 2, and 1 are derived from the first three powers of two, i.e. 22, 21, 20 respectively. Thus to set the user permissions to rwx, you set i to 7 (4 for read + 2 for write + 1 for execute), to set the group and other permissions to r-x, you set j to 5 (4 + 1) and likewise for k.</p>
-
 <p>Some examples:</p>
-
 <ul>
 <li>permission <code>640</code> means the user can read and write, the group can read, and the rest can&rsquo;t access the file.</li>
 <li>permission <code>777</code> means everyone can do everything. <em>Bad idea</em>.</li>
 </ul>
-
 <p>Of course the <code>root</code> user can still write to files with permission <code>400</code>.</p>
-
 <h2 id="file-system-fs-flavors">File system (FS) flavors</h2>
-
 <h3 id="ext-extended-file-system">EXT (Extended File System)</h3>
-
 <p>The EXT filesystem is originally developed for Unix-like Operating Systems. Its first variant came into market in 1992. Variant by variant this has overcome the limitations like size of single file, size of volume, number of files in a folder or directory. Journaling was introduced in ext3, and extended features in ext4, such as persistent pre-allocation, delayed allocation, an unlimited number of subdirectories, checksums, transparent encryption, online defrag.</p>
-
 <p>Ext4 is backwards compatible with Ext2, meaning you can safely <code>mount</code> an older disk formatted with the older file system using ext4 drivers. Using Ext filesystems in Windows usually requires some driver that enables mounting of these file systems (<a href="https://www.ext2fsd.com">Ext2Fsd for example</a>).</p>
-
 <h3 id="fat-file-allocation-table">FAT (File Allocation Table)</h3>
-
 <p>FAT stands for File Allocation Table and this is called so because it allocates different file and folders using lookup <em>tables</em>. This was originally designed to handle small file systems and disks. This system majorly has three variant FAT12, FAT16 and FAT32 which were introduced in 1980, 1984 and 1996 respectively.</p>
-
 <figure>
     <img src="../../img/floppy.jpg"/> <figcaption>
             <h4>Remember this? src: http://www.youtube.com/watch?v=EHRc-QMoUE4</h4>
         </figcaption>
 </figure>
 
-
 <p>(Magnetic) <a href="https://en.wikipedia.org/wiki/Floppy_disk">Floppy disks</a> that could store up to 1.2 MB and later on 1.44 MB, were ideally for this FS. FAT32 is still mostly used in pen drive and micro SDs. It can store or copy a file with a max size of 4GB (size of a single file to be stored). If the size of file exceeds 4GB it won’t copy on storage media, but its partition size was up to 8TB (size of partition on which FAT could be applied).</p>
-
 <h3 id="ntfs-new-tech-file-system">NTFS (New Tech. File System)</h3>
-
 <p>Microsoft too has moved on from FAT to NTFS with the introduction of <a href="https://www.youtube.com/watch?v=12mx5GbQh2Q">Windows NT (nice intro video for the curious student)</a> (<em>New Technology</em> - what an original name!) in 1993. This was an enhanced and more advanced version of FAT systems. All modenr Windows installations are done on NTFS. NTFS has no file size limit and no partition or volume limit.</p>
-
 <p>Modern features of this brand New Technology:</p>
-
 <ul>
 <li>Journaling</li>
 <li>Transactions</li>
 <li>File Compression</li>
 <li>Security</li>
 </ul>
-
 <p>Since NTFS is a proprietary technology, is has long been difficult to mount NTFS partitions using Unix systems. Read-only is no problem, but writing is another matter. Even on OSX, it still requires the use of third-party software such as <a href="https://mounty.app">Mounty</a>.</p>
-
 <h3 id="nfs-network-file-system">NFS (Network File System)</h3>
-
 <p>File systems usually enable the storage of files on local disks. The NFS FS, Network File System, does enable us to manage files in a <strong>distributed manner</strong>, where <em>multiple client machines</em> can connect to one or <em>a few servers</em>.  To be able to do that, there are two different File Systems:</p>
-
 <ul>
 <li>A <em>client-side</em> one, connected to a network layer</li>
 <li>A <em>server-side</em> one, connected to a network layer - with underlying effective FS</li>
 </ul>
-
 <figure>
     <img src="../../img/nfs.jpg"/> <figcaption>
             <h4>src: http://bigdata-guide.blogspot.com/2014/02/network-file-system-nfs.html</h4>
         </figcaption>
 </figure>
 
-
 <p>Client system calls such as <code>read()</code>, <code>write()</code> and others pass through these. That means the Virtual FS is completely <strong>transparent</strong>: no special API is required. A network protocol (TCP/UDP) through a network layer enables communication between both client and server. The server is also called the &lsquo;<em>file server</em>&rsquo;. NFS was originally developed by Sun Microsystems, and it contains much needed server crash recovery modules.</p>
-
 <p>NFS version 2 migrated from a <em>stateful</em> to a <em>stateless</em> network protocol. Statelessness means the server is unaware of what the client is doing (what blocks are being cached, for instance) - it simply delivers al information that is required to service a client request. If a server crash happens, the client would simply have to retry the request.</p>
-
 <h2 id="common-file-system-techniques">Common File System techniques</h2>
-
 <h3 id="fragmentation">Fragmentation</h3>
-
 <p>A hard disk drive has a number of sectors on it, each of which can contain a small piece of data. Files, particularly large ones, must be stored across a number of different sectors (in <strong>file fragments</strong>). As files grow in size (for example, by altering them), these chunks drift apart, depending on the file system. in the old FAT FS, file parts are simply saved as close to the physical start of the disk as possible, and so on, becoming <em>fragmented</em> over time.</p>
-
 <figure>
     <img src="../../img/fragment.jpg"/> <figcaption>
             <h4>src: https://7datarecovery.com/best-registry-cleaners/</h4>
         </figcaption>
 </figure>
 
-
 <p>NTFS is a bit smarter, allocating free <em>buffer</em> space around the files on the drive. However, after a set amount of time, NTFS systems still become fragmented. The <strong>Defragmentation</strong> process then is the process of rearranging file fragments from different sectors closer to each other, to minimize disk IO, especially without solid state.</p>
-
 <p>The EXT file system handles sectors differently. The FS scatters different files all over the disk, leaving a large amount of free space between them. When a file is edited and needs to grow, there’s usually plenty of free space for the file to grow into. This means fragmentation will only occur if the disk space is used up from <code>80%</code> and onwards.</p>
-
 <h3 id="transactions">Transactions</h3>
-
 <p>When programs need to make multiple changes at FS level, if one or two changes fail for some reason, no change at all should occur. That is the main premise of a transactional system, in which <strong>rollback</strong> behavior will occur when something goes wrong.</p>
-
 <p>It&rsquo;s the same principle applied to most database transactions: a transaction should be an <em>atomic</em> operation, meaning no change or influence can occur in-between different changes. This usually involves some kind of locking mechanism.</p>
-
 <p>Windows Vista introduced Transactions in NTFS, but the use is now discouraged. The transaction system has largely been superseded by the Journaling system.</p>
-
 <h3 id="journaling">Journaling</h3>
-
 <p>A definition from Wikipedia:</p>
-
 <blockquote>
 <p>A journaling file system is a file system that <strong>keeps track of changes not yet committed to the file system&rsquo;s main part</strong> by recording the intentions of such changes in a data structure known as a &ldquo;journal&rdquo;, which is usually a circular log. In the event of a system crash or power failure, such file systems can be brought back online more quickly with a lower likelihood of becoming corrupted.</p>
 </blockquote>
-
 <p>Journaling minimizes the loss of data when hard disks crash by recording additional metadata in a circular log. EXT4 and NTFS both implement this technique.</p>
-
 <h3 id="compressing">Compressing</h3>
-
 <p>Some file systems, such as the open-source Btrfs, introduce transparent file compression. In NTFS, it is not completely transparent: you can enable NTFS compression by changing advanced attributes of directories in Windows Explorer. It does come at a cost: CPU power. Therefore, it should never be applied to OS-specific and frequently-modified files.</p>
-
 <p>Ext4 does not have transparent file compression, but it can be enabled in conjunction with ZFS. The APFS (Apple File System), a proprietary system by Apple for High Sierra (10.13) and later, does come with auto-compression systems based on Zlib and LZVN. HFS+, Apple&rsquo;s older FS, comes without it.</p>
-
 <h2 id="more-resources">More Resources</h2>
-
 <ul>
 <li><a href="https://kerneltalks.com/disk-management/difference-between-ext2-ext3-and-ext4/">https://kerneltalks.com/disk-management/difference-between-ext2-ext3-and-ext4/</a></li>
 <li><a href="https://www.freebsd.org/doc/handbook/network-nfs.html">https://www.freebsd.org/doc/handbook/network-nfs.html</a></li>
@@ -2833,19 +2766,17 @@ map auto_home on /home (autofs, automounted, nobrowse)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1623682282"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1623682282"></script>
-    <script src="../../js/jquery.sticky.js?1623682282"></script>
-    <script src="../../js/featherlight.min.js?1623682282"></script>
-    <script src="../../js/highlight.pack.js?1623682282"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1623682282"></script>
-    <script src="../../js/learn.js?1623682282"></script>
-    <script src="../../js/hugo-learn.js?1623682282"></script>
+    <script src="../../js/clipboard.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372742"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372742"></script>
+    <script src="../../js/jquery.sticky.js?1627372742"></script>
+    <script src="../../js/featherlight.min.js?1627372742"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372742"></script>
+    <script src="../../js/learn.js?1627372742"></script>
+    <script src="../../js/hugo-learn.js?1627372742"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1623682282"></script>
+            <script src="../../mermaid/mermaid.js?1627372742"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

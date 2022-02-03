@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.92.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1628695122" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1628695122" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1628695122" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1628695122" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1628695122" rel="stylesheet">
-    <link href="../../css/theme.css?1628695122" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1628695122" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895051" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895051" rel="stylesheet">
+    <link href="../../css/theme.css?1643895051" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895051" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1628695122" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895051" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1628695122"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895051"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1628695122"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1628695122"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895051"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895051"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1628695122"></script>
+<script type="text/javascript" src="../../js/search.js?1643895051"></script>
 
     
   </div>
@@ -114,13 +114,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item
+    <li data-nav-id="/ch1-introos/" title="1: Intro in OS" class="dd-item
         
         
         
         ">
-      <a href="../../ch1-c/">
-          <i class='far fa-keyboard'></i> 1: Introduction in C
+      <a href="../../ch1-introos/">
+          <i class='fab fa-linux'></i> 1: Intro in OS
           
       </a>
       
@@ -141,9 +141,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
-        <a href="../../ch1-c/intro/">
-        <i class='fas fa-book'></i> 1.1: The C programming language
+      <li data-nav-id="/ch1-introos/intro-os/" title="1.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch1-introos/intro-os/">
+        <i class='fas fa-book'></i> 1.1: Intro to OS using Linux
         
         </a>
     </li>
@@ -162,9 +162,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
-        <a href="../../ch1-c/intro-labs/">
-        <i class='fas fa-vial'></i> 1.2: String Manipulation
+      <li data-nav-id="/ch1-introos/filesystems/" title="1.2: File systems" class="dd-item ">
+        <a href="../../ch1-introos/filesystems/">
+        <i class='fab fa-linux'></i> 1.2: File systems
         
         </a>
     </li>
@@ -183,72 +183,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
-        <a href="../../ch1-c/structs/">
-        <i class='fas fa-book'></i> 1.3: Creating order: Structures
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
-        <a href="../../ch1-c/structs-labs/">
-        <i class='fas fa-vial'></i> 1.4: Structs
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
-        <a href="../../ch1-c/ecosystems/">
-        <i class='fas fa-book'></i> 1.5: C Ecosystems
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
-        <a href="../../ch1-c/ecosystems-labs/">
-        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+      <li data-nav-id="/ch1-introos/cli/" title="1.3: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch1-introos/cli/">
+        <i class='fas fa-vial'></i> 1.3: Getting your CLI-feet wet
         
         </a>
     </li>
@@ -274,13 +211,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item
+    <li data-nav-id="/ch2-c/" title="2: Introduction in C" class="dd-item
         
         
         
         ">
-      <a href="../../ch2-interrupts/">
-          <i class='fab fa-linux'></i> 2: Interrupts
+      <a href="../../ch2-c/">
+          <i class='far fa-keyboard'></i> 2: Introduction in C
           
       </a>
       
@@ -301,9 +238,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
-        <a href="../../ch2-interrupts/theory1_arduino/">
-        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+      <li data-nav-id="/ch2-c/intro/" title="2.1: The C programming language" class="dd-item ">
+        <a href="../../ch2-c/intro/">
+        <i class='fas fa-book'></i> 2.1: The C programming language
         
         </a>
     </li>
@@ -322,9 +259,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/lab1_arduino-multfreq/" title="2.2: Arduino multi frequencies" class="dd-item ">
-        <a href="../../ch2-interrupts/lab1_arduino-multfreq/">
-        <i class='fas fa-vial'></i> 2.2: Arduino multi frequencies
+      <li data-nav-id="/ch2-c/intro-labs/" title="2.2: String Manipulation" class="dd-item ">
+        <a href="../../ch2-c/intro-labs/">
+        <i class='fas fa-vial'></i> 2.2: String Manipulation
         
         </a>
     </li>
@@ -343,9 +280,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
-        <a href="../../ch2-interrupts/theory2_timer/">
-        <i class='fab fa-linux'></i> 2.3 The timer
+      <li data-nav-id="/ch2-c/structs/" title="2.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch2-c/structs/">
+        <i class='fas fa-book'></i> 2.3: Creating order: Structures
         
         </a>
     </li>
@@ -364,9 +301,51 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
-        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
-        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+      <li data-nav-id="/ch2-c/structs-labs/" title="2.4: Structs" class="dd-item ">
+        <a href="../../ch2-c/structs-labs/">
+        <i class='fas fa-vial'></i> 2.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems/" title="2.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch2-c/ecosystems/">
+        <i class='fas fa-book'></i> 2.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems-labs/" title="2.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch2-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 2.6: Splitting up Code
         
         </a>
     </li>
@@ -392,13 +371,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item
+    <li data-nav-id="/ch3-interrupts/" title="3: TODO Robins New Thing" class="dd-item
         
         
         
         ">
-      <a href="../../ch3-pointers/">
-          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+      <a href="../../ch3-interrupts/">
+          <i class='fab fa-linux'></i> 3: TODO Robins New Thing
           
       </a>
       
@@ -419,9 +398,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
-        <a href="../../ch3-pointers/pointers/">
-        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+      <li data-nav-id="/ch3-interrupts/theory1_arduino/" title="3.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch3-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 3.1 Arduino UNO
         
         </a>
     </li>
@@ -440,9 +419,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
-        <a href="../../ch3-pointers/practical-use/">
-        <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
+      <li data-nav-id="/ch3-interrupts/lab1_arduino-multfreq/" title="3.2: Arduino multi frequencies" class="dd-item ">
+        <a href="../../ch3-interrupts/lab1_arduino-multfreq/">
+        <i class='fas fa-vial'></i> 3.2: Arduino multi frequencies
         
         </a>
     </li>
@@ -461,9 +440,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
-        <a href="../../ch3-pointers/lab/">
-        <i class='fas fa-vial'></i> 3.3: The Ancient Library
+      <li data-nav-id="/ch3-interrupts/theory2_timer/" title="3.3 The timer" class="dd-item ">
+        <a href="../../ch3-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 3.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab2_rocketlaunch/" title="3.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch3-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 3.4: Launch that rocket !!
         
         </a>
     </li>
@@ -489,13 +489,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item
+    <li data-nav-id="/ch4-pointers/" title="4: Pointers &amp; Arrays" class="dd-item
         
         
         
         ">
-      <a href="../../ch4-debugging/">
-          <i class='far fa-keyboard'></i> 4: Debugging
+      <a href="../../ch4-pointers/">
+          <i class='far fa-keyboard'></i> 4: Pointers &amp; Arrays
           
       </a>
       
@@ -516,9 +516,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
-        <a href="../../ch4-debugging/debugging-ide/">
-        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+      <li data-nav-id="/ch4-pointers/pointers/" title="4.1: Pointers and arrays" class="dd-item ">
+        <a href="../../ch4-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 4.1: Pointers and arrays
         
         </a>
     </li>
@@ -537,9 +537,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
-        <a href="../../ch4-debugging/debugging-gdb/">
-        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+      <li data-nav-id="/ch4-pointers/practical-use/" title="4.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch4-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 4.2: Practical Use of Pointers
         
         </a>
     </li>
@@ -558,9 +558,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
-        <a href="../../ch4-debugging/testing/">
-        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+      <li data-nav-id="/ch4-pointers/lab/" title="4.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch4-pointers/lab/">
+        <i class='fas fa-vial'></i> 4.3: The Ancient Library
         
         </a>
     </li>
@@ -586,13 +586,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item
+    <li data-nav-id="/ch5-debugging/" title="5: Debugging" class="dd-item
         
         
         
         ">
-      <a href="../../ch5-introos/">
-          <i class='fab fa-linux'></i> 5: Intro in OS
+      <a href="../../ch5-debugging/">
+          <i class='far fa-keyboard'></i> 5: Debugging
           
       </a>
       
@@ -613,9 +613,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
-        <a href="../../ch5-introos/intro-os/">
-        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+      <li data-nav-id="/ch5-debugging/debugging-ide/" title="5.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 5.1: The Easy Way: IDEs
         
         </a>
     </li>
@@ -634,9 +634,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
-        <a href="../../ch5-introos/lab1_wetfeet/">
-        <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
+      <li data-nav-id="/ch5-debugging/testing/" title="5.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch5-debugging/testing/">
+        <i class='far fa-keyboard'></i> 5.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-gdb/" title="5.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 5.2: The Hard Way: GDB
         
         </a>
     </li>
@@ -1203,27 +1224,6 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/chx-cs/filesystems/" title="X.1: File systems" class="dd-item ">
-        <a href="../../chx-cs/filesystems/">
-        <i class='fab fa-linux'></i> X.1: File systems
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
         <a href="../../chx-cs/rtos/">
         <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
@@ -1612,15 +1612,14 @@ window.MathJax = {
 
 
 <p>One <em>raison d&rsquo;être</em> for multi-threaded applications is <strong>resource sharing</strong>. In the example that was given <a href="../../ch6-tasks/threads/#pthreads">earlier</a> a <strong>global variable</strong> &lsquo;counter&rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:</p>
-<figure>
-    <img src="../../img/os/sc_631.png"/> 
+<figure><img src="../../img/os/sc_631.png"/>
 </figure>
 <p>This probably came as a surprise 😃 <br/>
 It should be clear that what we wanted to see was <em>Job 1 started</em> followed by <em>Job 1 finished</em> and that this would be repeated again for job number 2.</p>
 <p>The first of both threads that gets to its function increments the counter from 0 to 1. However, before this thread has finished its execution, the second thread has started and has incremented the counter from 1 to 2. By the time the first thread finishes, the counter value is 2, which is in contrast with the intended value of 1.</p>
 <h2 id="critical-section-and-race-conditions">Critical Section and Race Conditions</h2>
 <p>At first glance, it might seem that this problem is easily solvable by copying the global counter to a local, per-thread variable for later use:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">doSomeThing</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">arg</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">doSomeThing</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">arg</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">long</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
 
     <span style="color:#00a8c8">int</span> <span style="color:#111">local_id</span><span style="color:#111">;</span> <span style="color:#75715e">// new, per-thread variable                                    
@@ -1635,7 +1634,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 <span style="color:#111">}</span>
 </code></pre></div><p>If you tried to implement this, it would probably work&hellip; most of the time at least. As explained in the first section on threads, threads are not necessarily run in parallel all the time, especially not if the number of threads is larger than the number of CPU cores. In fact, there are many situations where given 2 threads, the first one will get some time to execute, is then paused to give the second one some time to execute, unpaused to get some time etc.</p>
 <p>As such, if two Threads executing doSomeThing() would be running on a single CPU, the following sequence of actions could occur:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
 </span><span style="color:#75715e"></span><span style="color:#111">counter</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
 <span style="color:#111">local_id</span> <span style="color:#f92672">=</span> <span style="color:#111">counter</span><span style="color:#111">;</span>
 <span style="color:#75715e">// -----------------------------------
@@ -1676,11 +1675,11 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 <li>Write the cached value back to the RAM</li>
 </ol>
 <p>Put differently: the CPU does not act on the value stored in memory directly, but rather a copy in a register. Copying from/to a register is not atomic, so bugs can occur. To make things simpler to reason about, we can boil this down to just two lines of code:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// In simple pseudocode, counter += 1 might look like this:
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// In simple pseudocode, counter += 1 might look like this:
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#111">temp</span> <span style="color:#f92672">=</span> <span style="color:#111">counter</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span> <span style="color:#75715e">// temp is for example the CPU register here, and &#34;counter&#34; is the value in memory
 </span><span style="color:#75715e"></span><span style="color:#111">counter</span> <span style="color:#f92672">=</span> <span style="color:#111">temp</span><span style="color:#111">;</span> <span style="color:#75715e">// the register value is written back out to the memory
 </span></code></pre></div><p>To the CPU, all of these steps are one or more instructions, each of which can also have a certain delay associated with them. As such, what can happen in practice is the following sequence of events:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Code that both threads will execute:
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#111">temp</span> <span style="color:#f92672">=</span> <span style="color:#111">counter</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
 <span style="color:#111">counter</span> <span style="color:#f92672">=</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
 <span style="color:#75715e">// -----------------------------------
@@ -1708,7 +1707,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 	</div>
 </div>
 <p>You might now think that this can only happen if two threads execute the <em>exact same code</em>. However, you would be wrong, as illustrated by the following example from Wikipedia:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1
 </span><span style="color:#75715e">// ... other code
 </span><span style="color:#75715e"></span><span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
 <span style="color:#75715e">// ... other code
@@ -1731,7 +1730,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 <p>Internally, a mutex lock is typically implemented by means of a single, atomic CPU instruction. Otherwise, simply locking or unlocking the mutex would of course potentially lead to the problems it is trying to solve!</p>
 <p>The concept of a mutex is implemented in the pthreads library as a new variable type: <strong>pthread_mutex_t</strong>. Locking and unlocking can be done through functions <strong>pthread_mutex_lock()</strong> and <strong>pthread_mutex_unlock()</strong>. As always, read the documentation for the exact usage of these functions.</p>
 <p>The problematic example of the shared counter can be rewritten using a mutex:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">counter</span><span style="color:#111">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">counter</span><span style="color:#111">;</span>
 <span style="color:#111">pthread_mutex_t</span> <span style="color:#111">counter_lock</span><span style="color:#111">;</span>                   <span style="color:#75715e">/* THIS LINE HAS BEEN ADDED */</span>
 
 <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">doSomeThing</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">arg</span><span style="color:#111">)</span> <span style="color:#111">{</span>
@@ -1752,8 +1751,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 <span style="color:#111">}</span>
 </code></pre></div><p>This solves the issue that was encountered above. Before the counter is accessed, the mutex is locked. This provides exclusive access to the following 2-line critical section untill the mutex is unlocked again. The counter is then incremented and copied in to variable <em>local_id</em>. Finally, the mutex is unlocked.</p>
 <p>With this measure in place, the result is as was originally intended.</p>
-<figure>
-    <img src="../../img/os/sc_mutex.png"/> 
+<figure><img src="../../img/os/sc_mutex.png"/>
 </figure>
 <p><strong>Note:</strong> The amount of code/instructions between locking and unlocking a mutex should of course be kept to a minimum. If you put a mutex around your entire threading function, you undo the entire possible benefit of using threads: the fact that they can run in parallel! As such, inter-thread communication via shared memory should be kept to a minimum, and only that should be protected using Mutexes/locks.</p>
 
@@ -1770,7 +1768,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 <h3 id="deadlocks">Deadlocks</h3>
 <p>While locks help with many <strong>critical section</strong> problems, the Deadlock Empire examples above show that they are also not always trivial to apply correctly. This is especially the case if there is more than one shared resource/variable/memory region in play.</p>
 <p>For example, a typical problem that can arise is when two threads need to obtain access to two different shared resources, but do so in opposite orders. This can for example happen in complex programs that often interact with outside peripherals like the hard disk and the network:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1 wants to first read from the network, then write result to the hard disk
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// Thread 1 wants to first read from the network, then write result to the hard disk
 </span><span style="color:#75715e">// Thread 2 wants to first read the contents of a file, then send it on the network
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// Thread 1:
@@ -1786,8 +1784,7 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 </span></code></pre></div><p>Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">this presentation</a> (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing multiple pieces of shared memory, so watch out!</p>
 <h2 id="semaphore">Semaphore</h2>
 <p>While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a <strong>semaphore</strong>. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys:</p>
-<figure>
-    <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" width="50%"/> <figcaption>
+<figure><img src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" width="50%"/><figcaption>
             <h4>This photo of Cafe Boulevard is courtesy of Tripadvisor</h4>
         </figcaption>
 </figure>
@@ -1913,54 +1910,6 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -2041,22 +1990,6 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
             
             
@@ -2077,270 +2010,6 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -2561,6 +2230,206 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -2608,6 +2477,134 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
                     
             
         
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -2826,17 +2823,17 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1628695122"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1628695122"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1628695122"></script>
-    <script src="../../js/jquery.sticky.js?1628695122"></script>
-    <script src="../../js/featherlight.min.js?1628695122"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1628695122"></script>
-    <script src="../../js/learn.js?1628695122"></script>
-    <script src="../../js/hugo-learn.js?1628695122"></script>
+    <script src="../../js/clipboard.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895051"></script>
+    <script src="../../js/jquery.sticky.js?1643895051"></script>
+    <script src="../../js/featherlight.min.js?1643895051"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895051"></script>
+    <script src="../../js/learn.js?1643895051"></script>
+    <script src="../../js/hugo-learn.js?1643895051"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1628695122"></script>
+            <script src="../../mermaid/mermaid.js?1643895051"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

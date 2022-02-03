@@ -1,0 +1,2884 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>4.1: Pointers and arrays :: Operating Systems and C</title>
+
+    
+    <link href="../../css/nucleus.css?1643895051" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895051" rel="stylesheet">
+    <link href="../../css/theme.css?1643895051" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895051" rel="stylesheet">
+    
+    <link href="../../css/theme-kul.css?1643895051" rel="stylesheet">
+    
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1643895051"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="../../ch4-pointers/pointers/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1643895051"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895051"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1643895051"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='../../'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-introos/" title="1: Intro in OS" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch1-introos/">
+          <i class='fab fa-linux'></i> 1: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/intro-os/" title="1.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch1-introos/intro-os/">
+        <i class='fas fa-book'></i> 1.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/filesystems/" title="1.2: File systems" class="dd-item ">
+        <a href="../../ch1-introos/filesystems/">
+        <i class='fab fa-linux'></i> 1.2: File systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/cli/" title="1.3: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch1-introos/cli/">
+        <i class='fas fa-vial'></i> 1.3: Getting your CLI-feet wet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-c/" title="2: Introduction in C" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch2-c/">
+          <i class='far fa-keyboard'></i> 2: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/intro/" title="2.1: The C programming language" class="dd-item ">
+        <a href="../../ch2-c/intro/">
+        <i class='fas fa-book'></i> 2.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/intro-labs/" title="2.2: String Manipulation" class="dd-item ">
+        <a href="../../ch2-c/intro-labs/">
+        <i class='fas fa-vial'></i> 2.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/structs/" title="2.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch2-c/structs/">
+        <i class='fas fa-book'></i> 2.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/structs-labs/" title="2.4: Structs" class="dd-item ">
+        <a href="../../ch2-c/structs-labs/">
+        <i class='fas fa-vial'></i> 2.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems/" title="2.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch2-c/ecosystems/">
+        <i class='fas fa-book'></i> 2.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems-labs/" title="2.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch2-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 2.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-interrupts/" title="3: TODO Robins New Thing" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch3-interrupts/">
+          <i class='fab fa-linux'></i> 3: TODO Robins New Thing
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/theory1_arduino/" title="3.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch3-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 3.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab1_arduino-multfreq/" title="3.2: Arduino multi frequencies" class="dd-item ">
+        <a href="../../ch3-interrupts/lab1_arduino-multfreq/">
+        <i class='fas fa-vial'></i> 3.2: Arduino multi frequencies
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/theory2_timer/" title="3.3 The timer" class="dd-item ">
+        <a href="../../ch3-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 3.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab2_rocketlaunch/" title="3.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch3-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 3.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-pointers/" title="4: Pointers &amp; Arrays" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="../../ch4-pointers/">
+          <i class='far fa-keyboard'></i> 4: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/pointers/" title="4.1: Pointers and arrays" class="dd-item active">
+        <a href="../../ch4-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 4.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/practical-use/" title="4.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch4-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 4.2: Practical Use of Pointers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/lab/" title="4.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch4-pointers/lab/">
+        <i class='fas fa-vial'></i> 4.3: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-debugging/" title="5: Debugging" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch5-debugging/">
+          <i class='far fa-keyboard'></i> 5: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-ide/" title="5.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 5.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/testing/" title="5.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch5-debugging/testing/">
+        <i class='far fa-keyboard'></i> 5.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-gdb/" title="5.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 5.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Task management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/processes/">
+        <i class='fas fa-book'></i> 6.1: Processes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/interprocess/" title="6.3: Inter Process communication" class="dd-item ">
+        <a href="../../ch6-tasks/interprocess/">
+        <i class='fas fa-book'></i> 6.3: Inter Process communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/threads/" title="6.4: Threads" class="dd-item ">
+        <a href="../../ch6-tasks/threads/">
+        <i class='fas fa-book'></i> 6.4: Threads
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.5: Threads (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
+        <i class='fas fa-vial'></i>6.5: Threads (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/interthread/" title="6.6: Inter Thread communication" class="dd-item ">
+        <a href="../../ch6-tasks/interthread/">
+        <i class='fas fa-book'></i> 6.6: Inter Thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab3_interthreadcomm/" title="6.7: Inter-Thread communication (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab3_interthreadcomm/">
+        <i class='fas fa-vial'></i> 6.7: Inter-Thread communication (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-scheduling/" title="7: CPU scheduling" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch7-scheduling/">
+          <i class='fab fa-linux'></i> 7: CPU scheduling
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/algorithms/" title="7.1: Scheduling algorithms" class="dd-item ">
+        <a href="../../ch7-scheduling/algorithms/">
+        <i class='fas fa-book'></i> 7.1: Scheduling algorithms
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab1_algorithms/">
+        <i class='fas fa-vial'></i> 7.2: Scheduling algorithms (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/towards/" title="7.3: Towards real-world schedulers" class="dd-item ">
+        <a href="../../ch7-scheduling/towards/">
+        <i class='fas fa-book'></i> 7.3: Towards real-world schedulers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab2_niceguy/">
+        <i class='fas fa-vial'></i> 7.4: Mr. nice guy(lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-stack/" title="8: The Stack &amp; The Heap" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch8-stack/">
+          <i class='far fa-keyboard'></i> 8: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="../../ch8-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 8.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/inspection-labs/" title="8.2: Inspecting memory regions" class="dd-item ">
+        <a href="../../ch8-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 8.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/scope/" title="8.3: Different Scopes in C" class="dd-item ">
+        <a href="../../ch8-stack/scope/">
+        <i class='fas fa-book'></i> 8.3: Different Scopes in C
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch9-memory/">
+          <i class='fab fa-linux'></i> 9: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item ">
+        <a href="../../ch9-memory/memory/">
+        <i class='fas fa-book'></i> 9.1: Memory management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item ">
+        <a href="../../ch9-memory/lab1_segfault/">
+        <i class='fas fa-vial'></i> 9.2: Deliberate Segfaulting
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/paging/" title="9.3: Paging" class="dd-item ">
+        <a href="../../ch9-memory/paging/">
+        <i class='fas fa-book'></i> 9.3: Paging
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab2_browsing/" title="9.4: Simply browsing through pages" class="dd-item ">
+        <a href="../../ch9-memory/lab2_browsing/">
+        <i class='fas fa-vial'></i> 9.4: Simply browsing through pages
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/chx-cs/" title="X: Capita Selecta" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../chx-cs/">
+          <i class='fab fa-linux'></i> X: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
+        <a href="../../chx-cs/rtos/">
+        <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/devdrivers/" title="X.3: Device Drivers" class="dd-item ">
+        <a href="../../chx-cs/devdrivers/">
+        <i class='fab fa-linux'></i> X.3: Device Drivers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
+        <a href="../../exercises/c-integrated-ex/">
+        <i class='fas fa-pen-square'></i> 1. Integrated C exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
+        <a href="../../exercises/c-debugging-testing/">
+        <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
+        <a href="../../exercises/tasks_inter_thread_communication/">
+        <i class='fas fa-pen-square'></i> 3. Inter-thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/scheduler/" title="4. Pseudo scheduler" class="dd-item ">
+        <a href="../../exercises/scheduler/">
+        <i class='fas fa-pen-square'></i> 4. Pseudo scheduler
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
+        <a href="../../appendix/lab_ll_rtos/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="../../appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Linux Installation Instructions" class="dd-item ">
+        <a href="../../appendix/installing/">
+        2. Linux Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="../../appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://kuleuven-diepenbeek.github.io/osc-course/TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch4-pointers/'>4: Pointers & Arrays</a> > 4.1: Pointers and arrays
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#compound-types">&ldquo;Compound&rdquo; types</a></li>
+        <li><a href="#pointer-types">Pointer types</a></li>
+        <li><a href="#watch-out-for-syntax">Watch out for syntax!</a></li>
+      </ul>
+    </li>
+    <li><a href="#ponder-on-this">Ponder on this</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              4.1: Pointers and arrays
+            </h1>
+          
+
+        
+
+
+<p>In the schematic examples below, the following concepts can be explicitly distinguished:</p>
+<ol>
+<li>The <strong>name</strong> of a variable</li>
+<li>The <strong>value</strong> of a variable</li>
+</ol>
+<p>And the following implicitly:</p>
+<ol>
+<li>The <strong>type</strong> of a variable</li>
+<li>The <strong>adres</strong> of a variable</li>
+</ol>
+<p>The <strong>type</strong> of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value. Each variable has a unique address. Variables can therefore refer to each other.</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD;
+    A[varname<br/>value]
+    B{varname<br/>address}
+
+</div>
+<p>This example visualizes the instruction <code>int a = 5</code>:</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD;
+    A[a<br/>5]
+
+</div>
+<p>Where the type, <code>int</code>, reserves a few bytes depending on the target platform (<code>sizeof(int)</code>), on a specific address. We can manipulate the address itself - this is essential when working with arrays.</p>
+<h3 id="compound-types">&ldquo;Compound&rdquo; types</h3>
+<p>C uses a <em>pass-by-value</em> system to pass variables to functions. This means that the value is copied, and that function cannot make changes to the original value. That is something positive: <strong>separation of concerns</strong>.</p>
+<p>When we think of our person example of <a href="../../ch2-c">chapter 2</a>, that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a &ldquo;pointer&rdquo;: a reference to the current data. Objects are <em>passed by-reference</em> by default in Java - so in C we have to do something extra for this.</p>
+<p>Instead of <code>is_old(struct Person person)</code> the signature becomes <code>is_old(struct Person * person)</code> (note the added asterik *). We have two options for reading a value here:</p>
+<ol>
+<li><em>&ldquo;dereferencing&rdquo;</em> the pointer: asking for the real value, behind the reference. Following the arrow where it points towards, so to speak.</li>
+<li>Ask for members of the pointer using &ldquo;<code>.</code>&rdquo;.</li>
+</ol>
+<p>Because in C, the <code>.</code> operator takes precedence over <code>*</code>, we have to add brackets to combine both: <code>(*person).age</code>. It is annoying to constantly have to use brackets, so the creators came up with an alternative, the <code>-&gt;</code> operator: <code>person-&gt;age</code>.</p>
+
+<div class="notices note" ><p><code>(*pointervariable).property</code> equals to <code>pointervariable-&gt;property</code>.</p>
+</div>
+
+<p>In Java properties are accessed using the dot operator <code>.</code>.</p>
+<h3 id="pointer-types">Pointer types</h3>
+<p>A pointer is a &ldquo;changeable&rdquo; reference to a variable. Pointers have their own memory address on the stack and can refer to something else at any time: they are not constant. They are recognizable by <code>*</code> after variable type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">young</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">old</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">80</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">young</span><span style="color:#111">;</span>
+    <span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">old</span><span style="color:#111">;</span>
+
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">age</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">age</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div>
+<div class="ex">
+	<div class="inner">
+    	<p>What will be printed in the above example? The first line should be obvious, but the second one&hellip;</p>
+
+	</div>
+</div>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+    A{*age} -->|after first assignment| B[young<br/>10]
+    A -.-> |after second assignment| C[old<br/>80]
+
+</div>
+<p>Notice the use of the <code>&amp;</code> operator, it is the <em>address-of</em> operator to fetch the address of a variable. A pointer points to an address, not to a value (of a variable).</p>
+<p>Look at it this way: I live in streetname, city. When I give you my card, you have a <strong>reference</strong> to my address. I can hand out cards to more people. The card does not represent my house, but points towards it.
+If you wish to do so, you can write a different address on the card, eliminating my previous address. From that point on, your card points to a different address, while other cards I dealt out still point to my original address.</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+  C{my card} -->|contains directions to| A[my house]
+  B[your house]
+
+</div>
+<p>If I want to get the address of your house, I&rsquo;d have to use the address-of operator: <code>&amp;your_house</code>. If I want to get the house itself (physically impossible&hellip;), I&rsquo;d use the <em>dereference</em> operator on the card: <code>*card</code>. This simply <strong>follows the arrow</strong> where card currently points to.</p>
+<p>So, what was the output of <code>printf(&quot;%d\n&quot;, age);</code>? 1389434244! Huh? We are printing the <strong>address</strong> of the pointer, not the actual value (by following where it points to). Remember, to do that, you have to use the dereference <code>*</code> operator: <code>printf(&quot;%d&quot;, *age);</code>. The compiler hints at this with the following warning:</p>
+<blockquote>
+<p>warning: format specifies type &lsquo;int&rsquo; but the argument has type &lsquo;int *&rsquo; [-Wformat]</p>
+</blockquote>
+<h4 id="cs-by-value-vs-javas-by-ref---redux">C&rsquo;s By-Value VS Java&rsquo;s By-Ref - redux</h4>
+<p>Pointers can point to pointers which can point to pointers which can &hellip; Add enough <code>*</code> symbols!</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">val</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">ptr</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
+</code></pre></div>
+<div class="ex">
+	<div class="inner">
+    	<p>Why does <code>int **ptr_to_ptr = ptr;</code> generate a compiler error?</p>
+
+	</div>
+</div>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+    A{"**ptr_to_ptr"} -->|ref| B{"*ptr"}
+    B --> |ref| C[val<br/>10]
+
+</div>
+<p>Practical use of the double <code>**</code> notation would be to relink a pointer to another location. As you know from <a href="../../ch2-c">chapter two</a>, variables in C are passed along <strong>by value</strong>: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the <em>dereference</em> operator. But chaining <em>the address</em> itself is only possible with double pointers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">)</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">reassign</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">**</span> <span style="color:#111">nr</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">dest</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#f92672">*</span><span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#111">dest</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)),</span> <span style="color:#f92672">*</span><span style="color:#111">nr2</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
+    <span style="color:#f92672">*</span><span style="color:#111">nr</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr2</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+    <span style="color:#111">increase</span><span style="color:#111">(</span><span style="color:#111">nr</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">);</span>    <span style="color:#75715e">// prints 11
+</span><span style="color:#75715e"></span>    <span style="color:#111">reassign</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">nr</span><span style="color:#111">,</span> <span style="color:#111">nr2</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">);</span>    <span style="color:#75715e">// prints 5
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></div><h4 id="pointer-instantiation">Pointer instantiation</h4>
+<p>Where does a new pointer point to that is not yet instantiated?:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
+<span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">);</span> <span style="color:#75715e">// prints -12599900072
+</span></code></pre></div><p>Whoops. Always assign &lsquo;nothing&rsquo; to a pointer, using <code>int *ptr = NULL</code>. Note that depending on the C implementation (such as VC++, clang, GNU C), an uninitialized pointer might contain the value <code>0</code>.</p>
+<p><code>NULL</code> is a <strong>platform dependent</strong> (!!) macro that in C refers to zero (<code>0</code>), usually in the form of a void pointer. A <code>void *</code> pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.</p>
+
+<div class="ex">
+	<div class="inner">
+    	<p>What gets printed in the above example if we assign <code>NULL</code> to <code>*ptr</code>?</p>
+
+	</div>
+</div>
+<p>The definition of a pointer does not prescribe the exact location of the <code>*</code>: <code>int* age</code> is the same as<code> int *age</code> (notice the placement of the stars). Be careful with things like &lsquo;int *age, old_age&rsquo;! The last variable here is an ordinary int, and not a pointer!</p>
+<h4 id="function-pointers">Function pointers</h4>
+<p>Now things are getting interesting. A pointer can also point <strong>to a function</strong>. (Remember the datastructure from <a href="../../ch2-c">chapter 2</a>?). You will need the same signature definition to do that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">doublenr</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">op</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">increase</span><span style="color:#111">;</span>
+
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;increase 5: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+    <span style="color:#111">op</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">doublenr</span><span style="color:#111">;</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;double 5: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The definition of the op pointer looks a bit strange, but the signature predicts that we will return an <code>int</code> (far left), and that one parameter is needed, also in the form of an<code> int</code> (in brackets). If you fail to do so (for instance, by creating a <code>double doublenr(int nr)</code> function), weird things happen, but the program does not crash:</p>
+<pre>
+Wouters-Air:development jefklak$ gcc test.c && ./a.out
+test.c:15:8: warning: incompatible pointer types assigning to 'int (*)(int)' from 'double (*)(int)' [-Wincompatible-pointer-types]
+    op = &doublenr;
+       ^ ~~~~~~~~~
+1 warning generated.
+increase 5: 6
+double 5: 14
+</pre>
+<p>Function pointers can also be given as a parameter, for example with <code>void exec (int (* op) (int)) {</code>. A function can return a function (pointer), for example with <code>int (* choose_op (int mod)) (int) {</code>. The function &ldquo;choose_op&rdquo; expects 1 int parameter and returns a function pointer that refers to a function with 1 int parameter and return value int. To simplify that mess, <code>typedef</code> is usually used:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">typedef</span> <span style="color:#75af00">int</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">func_type</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">);</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">doublenr</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#111">func_type</span> <span style="color:#75af00">choose_op</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">mod</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">mod</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#f92672">&amp;</span><span style="color:#111">increase</span> <span style="color:#111">:</span> <span style="color:#f92672">&amp;</span><span style="color:#111">doublenr</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">exec</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">op</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">))</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;exec: %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">op</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">));</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">exec</span><span style="color:#111">(</span><span style="color:#111">choose_op</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">));</span>       <span style="color:#75715e">// print 6
+</span><span style="color:#75715e"></span>    <span style="color:#111">exec</span><span style="color:#111">(</span><span style="color:#111">choose_op</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">));</span>       <span style="color:#75715e">// print 10
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Now you understand how we used the &lsquo;callback function&rsquo; <code>is_old()</code> in the Person struct in <a href="../../ch2-c">chapter 2</a>.</p>
+<h3 id="watch-out-for-syntax">Watch out for syntax!</h3>
+<p>Remember that symbols such as <code>*</code> en <code>&amp;</code> have different meanings.</p>
+<ul>
+<li><code>int *p;</code> - * after a type: it&rsquo;s a pointer.</li>
+<li><code>p = &amp;i</code> - &amp; used in an expression: <em>address-of</em> operation</li>
+<li><code>*p = i</code> - * used in an expression: <em>dereference</em> operation</li>
+</ul>
+<h2 id="ponder-on-this">Ponder on this</h2>
+<ol>
+<li>What is the difference between <code>char msg[] = &quot;heykes&quot;</code> and <code>char *msg = &quot;heykes&quot;</code>? Clarify your answer with a drawing.</li>
+<li>Wat is the difference between <code>int a[10][20]</code> and <code>int *b[10]</code>? Can you also say something about memory usage?</li>
+<li>In which case would you definitely use pointers in C, and in which case would you not? Explain your choice.</li>
+<li>What happens when I get the address of a stack variable, like <code>&amp;x</code> in section &lsquo;changing values around&rsquo;, but the stack got cleared because the method call was finished?</li>
+</ol>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../ch4-pointers/" title="4: Pointers &amp; Arrays"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../ch4-pointers/practical-use/" title="4.2: Practical Use of Pointers" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895051"></script>
+    <script src="../../js/jquery.sticky.js?1643895051"></script>
+    <script src="../../js/featherlight.min.js?1643895051"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895051"></script>
+    <script src="../../js/learn.js?1643895051"></script>
+    <script src="../../js/hugo-learn.js?1643895051"></script>
+    
+        
+            <script src="../../mermaid/mermaid.js?1643895051"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

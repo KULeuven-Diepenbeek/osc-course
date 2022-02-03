@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.92.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>9.3: Paging :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1628695123" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1628695123" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1628695123" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1628695123" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1628695123" rel="stylesheet">
-    <link href="../../css/theme.css?1628695123" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1628695123" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895051" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895051" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895051" rel="stylesheet">
+    <link href="../../css/theme.css?1643895051" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895051" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1628695123" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895051" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1628695123"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895051"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1628695123"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1628695123"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895051"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895051"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1628695123"></script>
+<script type="text/javascript" src="../../js/search.js?1643895051"></script>
 
     
   </div>
@@ -114,13 +114,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch1-c/" title="1: Introduction in C" class="dd-item
+    <li data-nav-id="/ch1-introos/" title="1: Intro in OS" class="dd-item
         
         
         
         ">
-      <a href="../../ch1-c/">
-          <i class='far fa-keyboard'></i> 1: Introduction in C
+      <a href="../../ch1-introos/">
+          <i class='fab fa-linux'></i> 1: Intro in OS
           
       </a>
       
@@ -141,9 +141,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/intro/" title="1.1: The C programming language" class="dd-item ">
-        <a href="../../ch1-c/intro/">
-        <i class='fas fa-book'></i> 1.1: The C programming language
+      <li data-nav-id="/ch1-introos/intro-os/" title="1.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch1-introos/intro-os/">
+        <i class='fas fa-book'></i> 1.1: Intro to OS using Linux
         
         </a>
     </li>
@@ -162,9 +162,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/intro-labs/" title="1.2: String Manipulation" class="dd-item ">
-        <a href="../../ch1-c/intro-labs/">
-        <i class='fas fa-vial'></i> 1.2: String Manipulation
+      <li data-nav-id="/ch1-introos/filesystems/" title="1.2: File systems" class="dd-item ">
+        <a href="../../ch1-introos/filesystems/">
+        <i class='fab fa-linux'></i> 1.2: File systems
         
         </a>
     </li>
@@ -183,72 +183,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch1-c/structs/" title="1.3: Creating order: Structures" class="dd-item ">
-        <a href="../../ch1-c/structs/">
-        <i class='fas fa-book'></i> 1.3: Creating order: Structures
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/structs-labs/" title="1.4: Structs" class="dd-item ">
-        <a href="../../ch1-c/structs-labs/">
-        <i class='fas fa-vial'></i> 1.4: Structs
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/ecosystems/" title="1.5: C Ecosystems" class="dd-item ">
-        <a href="../../ch1-c/ecosystems/">
-        <i class='fas fa-book'></i> 1.5: C Ecosystems
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-      <li data-nav-id="/ch1-c/ecosystems-labs/" title="1.6: Splitting up Code" class="dd-item ">
-        <a href="../../ch1-c/ecosystems-labs/">
-        <i class='fas fa-vial'></i> 1.6: Splitting up Code
+      <li data-nav-id="/ch1-introos/cli/" title="1.3: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch1-introos/cli/">
+        <i class='fas fa-vial'></i> 1.3: Getting your CLI-feet wet
         
         </a>
     </li>
@@ -274,13 +211,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch2-interrupts/" title="2: Interrupts" class="dd-item
+    <li data-nav-id="/ch2-c/" title="2: Introduction in C" class="dd-item
         
         
         
         ">
-      <a href="../../ch2-interrupts/">
-          <i class='fab fa-linux'></i> 2: Interrupts
+      <a href="../../ch2-c/">
+          <i class='far fa-keyboard'></i> 2: Introduction in C
           
       </a>
       
@@ -301,9 +238,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/theory1_arduino/" title="2.1 Arduino UNO" class="dd-item ">
-        <a href="../../ch2-interrupts/theory1_arduino/">
-        <i class='fab fa-linux'></i> 2.1 Arduino UNO
+      <li data-nav-id="/ch2-c/intro/" title="2.1: The C programming language" class="dd-item ">
+        <a href="../../ch2-c/intro/">
+        <i class='fas fa-book'></i> 2.1: The C programming language
         
         </a>
     </li>
@@ -322,9 +259,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/lab1_arduino-multfreq/" title="2.2: Arduino multi frequencies" class="dd-item ">
-        <a href="../../ch2-interrupts/lab1_arduino-multfreq/">
-        <i class='fas fa-vial'></i> 2.2: Arduino multi frequencies
+      <li data-nav-id="/ch2-c/intro-labs/" title="2.2: String Manipulation" class="dd-item ">
+        <a href="../../ch2-c/intro-labs/">
+        <i class='fas fa-vial'></i> 2.2: String Manipulation
         
         </a>
     </li>
@@ -343,9 +280,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/theory2_timer/" title="2.3 The timer" class="dd-item ">
-        <a href="../../ch2-interrupts/theory2_timer/">
-        <i class='fab fa-linux'></i> 2.3 The timer
+      <li data-nav-id="/ch2-c/structs/" title="2.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch2-c/structs/">
+        <i class='fas fa-book'></i> 2.3: Creating order: Structures
         
         </a>
     </li>
@@ -364,9 +301,51 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch2-interrupts/lab2_rocketlaunch/" title="2.4: Launch that rocket !!" class="dd-item ">
-        <a href="../../ch2-interrupts/lab2_rocketlaunch/">
-        <i class='fas fa-vial'></i> 2.4: Launch that rocket !!
+      <li data-nav-id="/ch2-c/structs-labs/" title="2.4: Structs" class="dd-item ">
+        <a href="../../ch2-c/structs-labs/">
+        <i class='fas fa-vial'></i> 2.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems/" title="2.5: C Ecosystems" class="dd-item ">
+        <a href="../../ch2-c/ecosystems/">
+        <i class='fas fa-book'></i> 2.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems-labs/" title="2.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch2-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 2.6: Splitting up Code
         
         </a>
     </li>
@@ -392,13 +371,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch3-pointers/" title="3: Pointers &amp; Arrays" class="dd-item
+    <li data-nav-id="/ch3-interrupts/" title="3: TODO Robins New Thing" class="dd-item
         
         
         
         ">
-      <a href="../../ch3-pointers/">
-          <i class='far fa-keyboard'></i> 3: Pointers &amp; Arrays
+      <a href="../../ch3-interrupts/">
+          <i class='fab fa-linux'></i> 3: TODO Robins New Thing
           
       </a>
       
@@ -419,9 +398,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/pointers/" title="3.1: Pointers and arrays" class="dd-item ">
-        <a href="../../ch3-pointers/pointers/">
-        <i class='far fa-keyboard'></i> 3.1: Pointers and arrays
+      <li data-nav-id="/ch3-interrupts/theory1_arduino/" title="3.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch3-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 3.1 Arduino UNO
         
         </a>
     </li>
@@ -440,9 +419,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/practical-use/" title="3.2: Practical Use of Pointers" class="dd-item ">
-        <a href="../../ch3-pointers/practical-use/">
-        <i class='far fa-keyboard'></i> 3.2: Practical Use of Pointers
+      <li data-nav-id="/ch3-interrupts/lab1_arduino-multfreq/" title="3.2: Arduino multi frequencies" class="dd-item ">
+        <a href="../../ch3-interrupts/lab1_arduino-multfreq/">
+        <i class='fas fa-vial'></i> 3.2: Arduino multi frequencies
         
         </a>
     </li>
@@ -461,9 +440,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-pointers/lab/" title="3.3: The Ancient Library" class="dd-item ">
-        <a href="../../ch3-pointers/lab/">
-        <i class='fas fa-vial'></i> 3.3: The Ancient Library
+      <li data-nav-id="/ch3-interrupts/theory2_timer/" title="3.3 The timer" class="dd-item ">
+        <a href="../../ch3-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 3.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab2_rocketlaunch/" title="3.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch3-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 3.4: Launch that rocket !!
         
         </a>
     </li>
@@ -489,13 +489,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch4-debugging/" title="4: Debugging" class="dd-item
+    <li data-nav-id="/ch4-pointers/" title="4: Pointers &amp; Arrays" class="dd-item
         
         
         
         ">
-      <a href="../../ch4-debugging/">
-          <i class='far fa-keyboard'></i> 4: Debugging
+      <a href="../../ch4-pointers/">
+          <i class='far fa-keyboard'></i> 4: Pointers &amp; Arrays
           
       </a>
       
@@ -516,9 +516,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/debugging-ide/" title="4.1: The Easy Way: IDEs" class="dd-item ">
-        <a href="../../ch4-debugging/debugging-ide/">
-        <i class='far fa-keyboard'></i> 4.1: The Easy Way: IDEs
+      <li data-nav-id="/ch4-pointers/pointers/" title="4.1: Pointers and arrays" class="dd-item ">
+        <a href="../../ch4-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 4.1: Pointers and arrays
         
         </a>
     </li>
@@ -537,9 +537,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/debugging-gdb/" title="4.2: The Hard Way: GDB" class="dd-item ">
-        <a href="../../ch4-debugging/debugging-gdb/">
-        <i class='fas fa-vial'></i> 4.2: The Hard Way: GDB
+      <li data-nav-id="/ch4-pointers/practical-use/" title="4.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch4-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 4.2: Practical Use of Pointers
         
         </a>
     </li>
@@ -558,9 +558,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch4-debugging/testing/" title="4.3: The Middle Way: TDD" class="dd-item ">
-        <a href="../../ch4-debugging/testing/">
-        <i class='far fa-keyboard'></i> 4.3: The Middle Way: TDD
+      <li data-nav-id="/ch4-pointers/lab/" title="4.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch4-pointers/lab/">
+        <i class='fas fa-vial'></i> 4.3: The Ancient Library
         
         </a>
     </li>
@@ -586,13 +586,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/ch5-introos/" title="5: Intro in OS" class="dd-item
+    <li data-nav-id="/ch5-debugging/" title="5: Debugging" class="dd-item
         
         
         
         ">
-      <a href="../../ch5-introos/">
-          <i class='fab fa-linux'></i> 5: Intro in OS
+      <a href="../../ch5-debugging/">
+          <i class='far fa-keyboard'></i> 5: Debugging
           
       </a>
       
@@ -613,9 +613,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch5-introos/intro-os/" title="5.1: Intro to OS using Linux" class="dd-item ">
-        <a href="../../ch5-introos/intro-os/">
-        <i class='fas fa-book'></i> 5.1: Intro to OS using Linux
+      <li data-nav-id="/ch5-debugging/debugging-ide/" title="5.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 5.1: The Easy Way: IDEs
         
         </a>
     </li>
@@ -634,9 +634,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch5-introos/lab1_wetfeet/" title="5.2: Getting your CLI-feet wet" class="dd-item ">
-        <a href="../../ch5-introos/lab1_wetfeet/">
-        <i class='fas fa-vial'></i> 5.2: Getting your CLI-feet wet
+      <li data-nav-id="/ch5-debugging/testing/" title="5.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch5-debugging/testing/">
+        <i class='far fa-keyboard'></i> 5.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-gdb/" title="5.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 5.2: The Hard Way: GDB
         
         </a>
     </li>
@@ -1203,27 +1224,6 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/chx-cs/filesystems/" title="X.1: File systems" class="dd-item ">
-        <a href="../../chx-cs/filesystems/">
-        <i class='fab fa-linux'></i> X.1: File systems
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
         <a href="../../chx-cs/rtos/">
         <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
@@ -1622,13 +1622,11 @@ window.MathJax = {
 <p>In the previous part, we have discussed both the benefits and problems with segmentation. One of the main issues was the fact that the segments could be of different sizes, making it difficult to find memory gaps of an appropriate size and adding overhead when doing so.</p>
 <p>As such, the actual method used most commonly in practice is <strong>segmentation with all the segments being of the same size</strong>. This means that not only the segments, but also the gaps they leave, are always the same, predictable size. As such, any empty gap is immediately a good candidate for when a new segment is created, without having to actively look for a gap that is large enough (but not too large as to prevent external segmentation).</p>
 <p>In practice, this approach is called <strong>paging</strong>, as each same-sized segment is called a <strong>page</strong>. In other sources, you might also find the term &ldquo;frame&rdquo;, as each logical page is mapped to a physical memory block of the same size, called a <strong>frame</strong>.</p>
-<figure>
-    <img src="../../img/mem/segments_to_pages.png"/> <figcaption>
+<figure><img src="../../img/mem/segments_to_pages.png"/><figcaption>
             <h4>The pieces of memory with (logical) segmentation (left) and paging (right). Source: Wikipedia</h4>
         </figcaption>
 </figure>
-<figure>
-    <img src="../../img/mem/ss_mem_paging.png"/> <figcaption>
+<figure><img src="../../img/mem/ss_mem_paging.png"/><figcaption>
             <h4>Each page has an equally sized frame in physical memory</h4>
         </figcaption>
 </figure>
@@ -1640,13 +1638,11 @@ window.MathJax = {
 <p>Put differently, if the size of the logical address space is defined as 2<sup>m</sup>, and a page size as 2<sup>n</sup> bytes, then the m-n left-most bits of the logical address define the page number (p), and the n remaining bits form the page offset (d).</p>
 <div class="multicolumn">
   <div style="width: 30%">
-    <figure>
-    <img src="../../img/mem/ss_mem_paging_logicaladdress.png"/> 
+    <figure><img src="../../img/mem/ss_mem_paging_logicaladdress.png"/>
 </figure>
   </div>
   <div>
-    <figure>
-    <img src="../../img/mem/ss_mem_paginghw.png"/> <figcaption>
+    <figure><img src="../../img/mem/ss_mem_paginghw.png"/><figcaption>
             <h4>Paging hardware</h4>
         </figcaption>
 </figure>
@@ -1675,8 +1671,7 @@ text-align: center;
 <li>So, the first 3 bits of a logical address indicate (p), the last 1 (d)</li>
 </ul>
 <p>Now let&rsquo;s imagine that the (first half of the) page table would look like this: <strong>[5, 6, 1, 3]</strong>. This means that the page with nr/index 0 (first in the table) maps to physical &ldquo;frame&rdquo; 5. Frames are the same size as pages, so the page&rsquo;s physical base address if frame 5 is: 5 x page size = 5 x 2 = 10 = 0xA.</p>
-<figure>
-    <img src="../../img/mem/paging_example.png"/> <figcaption>
+<figure><img src="../../img/mem/paging_example.png"/><figcaption>
             <h4>The page table maps page numbers to frame numbers, which in turn represent base-addresses of physical memory blocks.</h4>
         </figcaption>
 </figure>
@@ -1699,7 +1694,7 @@ text-align: center;
     Logical address 15 = 0b1111 (page 7, offset 1) doesn't map to a physical address, because page 7 is not yet mapped! We'll later see that this is a variation of what is called a "page fault". Can you already think of how/why this might happen and how to solve this problem? 
   </p>
 </div>
-<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q941', 1)" /></p>
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q941', 1)" />
 
 	</div>
 </div>
@@ -1725,7 +1720,7 @@ text-align: center;
     m = 32, n = 12. As such, we need 32-12 = 20 bits for the page number, and 12 for the offset. 
   </p>
 </div>
-<p><input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q942', 1)" /></p>
+<input value="Toggle solution" type="button" style="margin: 0 auto;" onclick="toggleAnswer('q942', 1)" />
 
 	</div>
 </div>
@@ -1749,8 +1744,7 @@ text-align: center;
 <h3 id="hierarchical-page-tables">Hierarchical page tables</h3>
 <div class="multicolumn">
   <div class="column">
-    <figure>
-    <img src="../../img/mem/ss_mem_paging_2levelpaging.png"/> <figcaption>
+    <figure><img src="../../img/mem/ss_mem_paging_2levelpaging.png"/><figcaption>
             <h4>A two-level page-table scheme</h4>
         </figcaption>
 </figure>
@@ -1770,8 +1764,7 @@ text-align: center;
   </div>
   <div class="column">
     <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses <b>paging for page tables</b>. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
-    <figure>
-    <img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/> 
+    <figure><img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/>
 </figure>
 <pre><code>&lt;p&gt;With this setting, p&lt;sub&gt;1&lt;/sub&gt; is the index into the outer page. Similarly, p&lt;sub&gt;2&lt;/sub&gt; is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p&lt;sub&gt;1&lt;/sub&gt;. With the inner table index found, the base address can be searched for in the inner table using p&lt;sub&gt;2&lt;/sub&gt;. Finally the page offset is added to the base address to end up with the mapped physical address.&lt;/p&gt;
 &lt;p&gt;The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as &lt;b&gt;a forward-mapped page table&lt;/b&gt;. The are also &quot;inverted&quot; and &quot;hashed&quot; approaches that do things differently.&lt;/p&gt;
@@ -1784,8 +1777,7 @@ text-align: center;
 <p>Modern hardware typically supports a number of different page sizes (typically 4KB, 2MB and 1GB) that allow some level of tweaking if the programmer knows the expected memory usage up front.</p>
 <h3 id="internal-fragmentation">Internal fragmentation</h3>
 <p>As mentioned several times above, next to the large page table size, another problem with paging is <strong>internal fragmentation</strong>. Before, we&rsquo;ve discussed external fragmentation (with segmentation), which means that memory -outside- of the processes gets fragmented. With paging however, the memory -assigned to the processes- can get fragmented as well. Consider for example the case where we have pages of 4KB each, but we now need to allocate space for an array of 5KB. We can&rsquo;t allocate memory smaller than a page, so we need to reserve at least 2 pages of 4KB, <strong>wasting 3KB</strong>. In theory, this 3KB can be filled with other data of the same process, but that requires the memory allocator to keep track of such things (which doesn&rsquo;t always happen for various reasons).</p>
-<figure>
-    <img src="../../img/mem/internal_fragmentation.png"/> <figcaption>
+<figure><img src="../../img/mem/internal_fragmentation.png"/><figcaption>
             <h4>Each process can have some leftover memory, leading to internal fragmentation.</h4>
         </figcaption>
 </figure>
@@ -1797,8 +1789,7 @@ text-align: center;
 <p>As you can imagine, no machine today has enough physical (RAM) memory to allow the use of the entire 64-bit address space at once. In reality, you typically &ldquo;only&rdquo; have 8 - 32 GB of RAM in your home PC, while large servers have 512 GB to 2 TB of RAM nowadays.</p>
 <p>However, you can also easily imagine processes using up more than the available amount of memory, especially on your PC (have you ever run Google Chrome? Photoshop?). In that case, you wouldn&rsquo;t be able to start new processes any more, until you&rsquo;ve manually closed some others, even if you have a lot of processes that are idle/running in the background.</p>
 <p>To prevent this from happening, modern OSes will <strong>use the harddisk storage as a semi-transparent extension to the RAM memory</strong>. If the main memory is full, pages that are not currently being used, can be stored on the hard disk for a while, making room for new pages in the RAM. If those stored pages are later again needed, the OS can again move other in-memory pages to disk, to make room to restore the previously &ldquo;hibernated&rdquo; pages. This process of storing pages to disk and restoring them to main memory at a later time is called <strong>swapping</strong>.</p>
-<figure>
-    <img src="../../img/mem/swapping.jpg"/> <figcaption>
+<figure><img src="../../img/mem/swapping.jpg"/><figcaption>
             <h4>Pages can be swapped in/out to the harddisk to reduce main memory occupancy</h4>
         </figcaption>
 </figure>
@@ -1832,8 +1823,7 @@ text-align: center;
 <p>However, in the first lab, we&rsquo;ve also seen that this protection is rarely enough, and that there are plenty of ways for hackers to still mess with your system, even if it&rsquo;s just within a single process. Over time, OSes and compilers have added many advanced techniques to help deal with these issues.</p>
 <p>One such technique is called <strong>Address Space Layout Randomization (ASLR)</strong>. A common attack vector is for the hacker to &ldquo;escape&rdquo; the stack/heap (e.g., through an array overflow, as we&rsquo;ve seen). With that, they then attempt to overwrite code/data for a known vulnerable function in the program that allows for example execution of new code. This requires the hacker to reliably know where exactly this vulnerable function is in the logical address space. While pages can be randomly distributed inside the physical memory, without ASLR the logical address space would always look the same (starts at 0x00, text ends at 0x?? every time, since it&rsquo;s always the same length, so data segment starts at a predictable location as well etc.). As such, ASLR randomizes the logical base address of the program, as well as the logical starting locations of the other segments as well, to make it more difficult (though far from impossible) for hackers to guess where certain code/data is located between different runs of the same program.</p>
 <p>Even with all this, it&rsquo;s still possible for attackers to steal data, albeit via very complex methods. For example, the <strong>Spectre and Meltdown</strong> make use of several advanced features of modern CPUs, such as out-of-order execution, speculative execution, caching and, -indeed-, also virtual addressing and paging. The details are far too complex to discuss here (that&rsquo;s more 2nd master level), but one of the key parts in the attack is that the OS and CPU actually <strong>does not check the segment/page boundaries immediately when an access occurs</strong>. To speed things up, CPUs will allow out-of-bounds accesses to occur and they will load privileged data into cache memory. It is only when this memory is then being used/read that the check occurs and it is prevented. However, the fact that the data is loaded into (cache) memory allows the hacker to use other methods (&ldquo;side-channel attacks&rdquo;/&ldquo;timing attacks&rdquo;) to decipher the contents of the cache, thus stealing the protected memory, across process boundaries and even from inside the kernel! Spectre and Meltdown have been very impactful, often requiring changes at the OS and even hardware level, lowering performance by up to 20% in some cases!</p>
-<figure>
-    <img src="../../img/mem/ss_mem_meltdown_spectre.png"/> <figcaption>
+<figure><img src="../../img/mem/ss_mem_meltdown_spectre.png"/><figcaption>
             <h4>Meltdown and Spectre - Two attacks that got access to other process&#39;s memory.</h4>
         </figcaption>
 </figure>
@@ -1935,19 +1925,6 @@ text-align: center;
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
             
         
                     
@@ -1963,313 +1940,6 @@ text-align: center;
                     
                     
 
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -2519,6 +2189,342 @@ text-align: center;
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -2614,22 +2620,6 @@ text-align: center;
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -2848,17 +2838,17 @@ text-align: center;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1628695123"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1628695123"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1628695123"></script>
-    <script src="../../js/jquery.sticky.js?1628695123"></script>
-    <script src="../../js/featherlight.min.js?1628695123"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1628695123"></script>
-    <script src="../../js/learn.js?1628695123"></script>
-    <script src="../../js/hugo-learn.js?1628695123"></script>
+    <script src="../../js/clipboard.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895051"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895051"></script>
+    <script src="../../js/jquery.sticky.js?1643895051"></script>
+    <script src="../../js/featherlight.min.js?1643895051"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895051"></script>
+    <script src="../../js/learn.js?1643895051"></script>
+    <script src="../../js/hugo-learn.js?1643895051"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1628695123"></script>
+            <script src="../../mermaid/mermaid.js?1643895051"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

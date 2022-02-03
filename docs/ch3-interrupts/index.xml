@@ -15,7 +15,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
- An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+  An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</guid>
       <description>Time to make some harmonics.
- image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
+  image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@ A lot of applications that are built using an Arduino need some sense of time. A
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</guid>
       <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
- Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
+  Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
   </channel>

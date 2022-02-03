@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>3.3: The Ancient Library (RTOS) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1625,7 +1625,7 @@ window.MathJax = {
 </ul>
 <p>How should we proceed to model the concept of a book? Right, a <code>struct</code>! Keep track of the title and the author using <code>char*</code> properties. <br/>
 Proceed with caution and whatever you do, do not directly look into the green light! Use the following blueprint:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
@@ -1677,7 +1677,7 @@ Cleaning the streets Beyond the Gate, by Ulder Ravengard
 <li>For the sake of simplicity, you may assume that the length of the library is fixed to 4.</li>
 </ol>
 <p> </p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
 
     <span style="color:#111">book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
     <span style="color:#111">print_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>
@@ -1700,7 +1700,7 @@ Cleaning the streets Beyond the Gate, by Ulder Ravengard
 While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild surges!</em>&rdquo;. The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar&hellip; Suddenly, you know it. The book! The cow book! That was the author! Neera&hellip;</p>
 </blockquote>
 <p>Neera managed to completely mess up our sorting strategy, sorting on the <strong>title</strong> of the book instead of on the <strong>author</strong>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
 
     <span style="color:#111">book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
     <span style="color:#111">print_books</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#111">);</span>
@@ -2734,17 +2734,17 @@ While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

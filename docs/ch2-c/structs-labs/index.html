@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>2.4: Structs :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1611,7 +1611,8 @@ window.MathJax = {
 
 <h2 id="we-are-still-at-war">We are (still&hellip;) at War!</h2>
 <p>We&rsquo;re <em>still</em> at <strong>war</strong>! The orcs are attacking and are looking very hungry! Look at them!</p>
-<figure><img src="../../img/labs/orcs.png"/><figcaption>
+<figure>
+    <img src="../../img/labs/orcs.png"/> <figcaption>
             <h4>Orcs attacking! source: G.I.</h4>
         </figcaption>
 </figure>
@@ -1631,7 +1632,7 @@ OUTPUT: orc 1: attack 3, life 5. orc 2: attack 5, life 6. orc 3: attack 1, life 
 <li>Creating a separate function <code>generate_orcs()</code> will keep your <code>main()</code> function short and clean. The function will return a list of orcs, the &ldquo;army&rdquo;, so to speak. Remember that returning an array is of type <code>Orc*</code>.</li>
 </ol>
 <p>The generate method will look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">Orc</span><span style="color:#f92672">*</span> <span style="color:#75af00">generate_orcs</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">amount</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">Orc</span><span style="color:#f92672">*</span> <span style="color:#75af00">generate_orcs</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">amount</span><span style="color:#111">)</span> <span style="color:#111">{</span>
   <span style="color:#111">Orc</span><span style="color:#f92672">*</span> <span style="color:#111">army</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Orc</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">amount</span><span style="color:#111">);</span>
   <span style="color:#75715e">// add stuff to army
 </span><span style="color:#75715e"></span>  <span style="color:#00a8c8">return</span> <span style="color:#111">army</span><span style="color:#111">;</span> 
@@ -2661,17 +2662,17 @@ OUTPUT:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

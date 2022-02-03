@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>5.3: The Middle Way: TDD :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1638,7 +1638,7 @@ Since <code>g++</code> is not installed on the image by default, use <code>apt i
 <p>Using the library is a matter of doing two things:</p>
 <h4 id="1-adding-include-folders">1. Adding include folders</h4>
 <p>You will need a <code>main()</code> function to bootstrap the framework:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// main.cpp
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// main.cpp
 </span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;gtest/gtest.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[])</span> <span style="color:#111">{</span>
@@ -1646,7 +1646,7 @@ Since <code>g++</code> is not installed on the image by default, use <code>apt i
     <span style="color:#00a8c8">return</span> <span style="color:#111">RUN_ALL_TESTS</span><span style="color:#111">();</span>
 <span style="color:#111">}</span>
 </code></pre></div><p>And another file where our tests reside:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// test.cpp
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// test.cpp
 </span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;gtest/gtest.h&#34;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">int</span> <span style="color:#75af00">add</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">one</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">two</span><span style="color:#111">)</span> <span style="color:#111">{</span>
@@ -1719,7 +1719,7 @@ Without this flag, you will get the following errors: &ldquo;ld returned 1 exit 
 
 <h3 id="c-debugging-with-gtest">C. &lsquo;Debugging&rsquo; with GTest</h3>
 <p>Going back to the crackme implementation, a simplified method that verifies input is the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">int</span> <span style="color:#75af00">verify</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">pwd</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">int</span> <span style="color:#75af00">verify</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">pwd</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// return 1 if verified against a pre-determined password, 0 otherwise.
 </span><span style="color:#75715e"></span><span style="color:#111">}</span>
 </code></pre></div>
@@ -2745,17 +2745,17 @@ Without this flag, you will get the following errors: &ldquo;ld returned 1 exit 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

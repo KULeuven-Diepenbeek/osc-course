@@ -34,7 +34,7 @@ A quick intro to C C is an imperative programming language. You will notice this
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
- An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+  An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
@@ -124,7 +124,7 @@ date and period structs to represent a date and a period of dates in code.</desc
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</guid>
       <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
- Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
+  Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
     </item>
     
     <item>
@@ -145,7 +145,7 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</guid>
       <description>Time to make some harmonics.
- image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
+  image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
     </item>
     
     <item>
@@ -197,8 +197,8 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
- source: wikipedia.com   The image above shows:
- Task management Memory management the IO subsystem   The desired situation.   &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;column&amp;quot;&amp;gt; &amp;lt;figure&amp;gt;&amp;lt;img src=&amp;quot;/img/chx/reality.svg&amp;quot;/&amp;gt;&amp;lt;figcaption&amp;gt; &amp;lt;h4&amp;gt;The real situation.&amp;lt;/h4&amp;gt; &amp;lt;/figcaption&amp;gt;   &amp;lt;/div&amp;gt;   The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+  source: wikipedia.com   The image above shows:
+ Task management Memory management the IO subsystem    The desired situation.   &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;column&amp;quot;&amp;gt; &amp;lt;figure&amp;gt; &amp;lt;img src=&amp;quot;/img/chx/reality.svg&amp;quot;/&amp;gt; &amp;lt;figcaption&amp;gt; &amp;lt;h4&amp;gt;The real situation.&amp;lt;/h4&amp;gt; &amp;lt;/figcaption&amp;gt;   &amp;lt;/div&amp;gt;   The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
     </item>
     
     <item>
@@ -262,7 +262,7 @@ Google Test is a C++ (11) framework, not a C framework!</description>
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
 There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
- Shared memory Message passing   The two main techniques for inter process communication    p.</description>
+ Shared memory Message passing    The two main techniques for inter process communication    p.</description>
     </item>
     
     <item>
@@ -311,7 +311,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
- Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
+  Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
     </item>
     
     <item>
@@ -321,7 +321,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</guid>
       <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
- Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
+  Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
     <item>
@@ -361,7 +361,7 @@ We have however also seen that this is not trivial: new processes need their own
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
-      <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS     An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
+      <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS      An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
     </item>
     
     <item>
@@ -370,7 +370,7 @@ We have however also seen that this is not trivial: new processes need their own
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</guid>
-      <description>image source: wikipedia.com    Get page size on your Linux system through a C program   An example output    Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.</description>
+      <description>image source: wikipedia.com    Get page size on your Linux system through a C program    An example output    Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.</description>
     </item>
     
     <item>
@@ -402,7 +402,7 @@ File hello.c:
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
-  Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+   Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>
@@ -443,7 +443,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
       <description>One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
- This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
+  This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
     </item>
     
     <item>

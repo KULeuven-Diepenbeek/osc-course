@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>3.2: Arduino multi frequencies :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1607,7 +1607,8 @@ window.MathJax = {
 
 
 <p>Time to make some harmonics.</p>
-<figure><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Moodswingerscale.jpg"/><figcaption>
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Moodswingerscale.jpg"/> <figcaption>
             <h4>image source: wikipedia.org</h4>
         </figcaption>
 </figure>
@@ -1616,12 +1617,13 @@ window.MathJax = {
 <p>The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example <a href="https://www.tinkercad.com" target="_blank">Tinkercad</a>.</p>
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    <figure><img src="../../img/tinkercad/tinkercad_harmonics.png"/>
+    <figure>
+    <img src="../../img/tinkercad/tinkercad_harmonics.png"/> 
 </figure>
 
   </div>
   <div style="width: 50%">
-    <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
 </span><span style="color:#75715e">#define LED_2Hz 6
 </span><span style="color:#75715e">#define LED_3Hz 5
 </span><span style="color:#75715e"></span>
@@ -1639,8 +1641,7 @@ window.MathJax = {
   <span style="color:#111">digitalWrite</span><span style="color:#111">(</span><span style="color:#111">LED_1Hz</span><span style="color:#111">,</span> <span style="color:#111">LOW</span><span style="color:#111">);</span>
   <span style="color:#111">delay</span><span style="color:#111">(</span><span style="color:#ae81ff">500</span><span style="color:#111">);</span>
 <span style="color:#111">}</span>
-    
-</code></pre></div>
+    </code></pre></div>
   </div>
 </div>
 
@@ -2682,17 +2683,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

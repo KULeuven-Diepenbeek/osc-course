@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>6.4: Threads :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1621,18 +1621,21 @@ window.MathJax = {
 <p>A thread is an independent unit of execution within a process. Put differently, it&rsquo;s a sequence of code instructions that can be executed independently from and, crucially, in parallel with other threads. As such, each thread can for example be assigned to a single CPU core for parallel processing.</p>
 <h2 id="whats-in-a-thread-">What&rsquo;s in a thread ?</h2>
 <p>Up until now all the processes that were discussed contained just one thread (sometimes called the <strong>main</strong> thread). Such a process is referred to as a <strong>single-threaded process</strong>:</p>
-<figure><img src="../../img/os/db_singlethreaded_v2.png"/><figcaption>
+<figure>
+    <img src="../../img/os/db_singlethreaded_v2.png"/> <figcaption>
             <h4>The single threaded process</h4>
         </figcaption>
 </figure>
 <p>Let&rsquo;s examine the image above. On the top of this image the following segments are mentioned: <strong>code</strong>, <strong>heap</strong>, and (open) <strong>files</strong>, alongside the <strong>registers</strong>, <strong>program counter</strong> and the <strong>stack</strong>.</p>
 <p>As we&rsquo;ve seen, when multiple processes run at the same time, every individual process has separate and <strong>isolated</strong> instances of all these segments, like shown in the image below:</p>
-<figure><img src="../../img/os/db_singlethreaded_twice_v2.png"/><figcaption>
+<figure>
+    <img src="../../img/os/db_singlethreaded_twice_v2.png"/> <figcaption>
             <h4>Two single threaded processes running in parallel</h4>
         </figcaption>
 </figure>
 <p>However, the name &ldquo;single-threaded&rdquo; of course also implies the existence of <strong>multi-threaded</strong> processes, which have more than one thread. Each of these threads can execute in parallel and as such also need their own copies of some of the segments: the register contents, current program counter and the full stack are now <strong>independent</strong> for each thread. You could say that each thread has its own &ldquo;Thread Control Block&rdquo; (in analogy with the PCB), which tracks this metadata. However, the main difference between parallel threads and parallel processes is that threads do still <strong>share many things</strong>: the copy of the code, the (open) files and the heap memory. This is one reason why threads are more lightweight than processes, as they don&rsquo;t require copying these segments when new threads are created.</p>
-<figure><img src="../../img/os/db_multithreaded_v2.png"/><figcaption>
+<figure>
+    <img src="../../img/os/db_multithreaded_v2.png"/> <figcaption>
             <h4>A single-threaded vs multi-threaded process</h4>
         </figcaption>
 </figure>
@@ -1681,7 +1684,8 @@ window.MathJax = {
 
 <h3 id="amdahls-law">Amdahl&rsquo;s law</h3>
 <p>While threading seems like the ideal, lightweight solution to make your programs run faster, it might be surprising to hear that program performance typically <strong>does not scale linearly</strong> with the amount of threads and/or amount of CPU cores. This is because typically not all code in a process can be parallelized (and thus run in separate threads): there are typically parts of code that need to aggregate results from the parallel computations, which can only be done in a serial fashion. This can be seen in the following image:</p>
-<figure><img src="../../img/os/serial_vs_parallel.png"/><figcaption>
+<figure>
+    <img src="../../img/os/serial_vs_parallel.png"/> <figcaption>
             <h4>Parallel processing can lead to serial phases in a process. Source: J. Wolf et al. - Contribution to the Fluid-Structure Interaction Analysis of Ultra-Lightweight Structures using an Embedded Approach</h4>
         </figcaption>
 </figure>
@@ -1692,7 +1696,8 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
  \)
 </p>
 <p>In this formula <strong>S</strong> stands for the portion of the application that <em>has to be</em> run serially. <strong>N</strong> stands for the number of cores on which the parallel portion is spread. We can see that to maximize the speedup, we need to keep the divisor of the fraction as small as possible. This is done by keeping S as small as possible, and N as high as possible.</p>
-<figure><img src="../../img/os/amdahl.png"/><figcaption>
+<figure>
+    <img src="../../img/os/amdahl.png"/> <figcaption>
             <h4>Source: Wikipedia</h4>
         </figcaption>
 </figure>
@@ -1709,7 +1714,7 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
 <p>Threads are of course also fully supported by the OS, but they typically require a more high-level API to easily work with. Most programming languages provide their own versions of these APIs, but they all internally call the OS-provided functionality. As we are working with Linux, we will be using the standard POSIX API library called Pthreads.</p>
 <h3 id="pthreads">Pthreads</h3>
 <p>An example for creating a new pthread is given below.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
@@ -1760,7 +1765,8 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
 <div class="notices note" ><p>When the code above gets compiled, the <strong>pthread</strong> library has to be used. This library contains the object files that implemented the functions <em>pthread_create()</em> and <em>pthread_join()</em>. Compilation can be done because of the <code>#include &lt;pthread.h&gt;</code> line. For linking however, you have to separately tell gcc to use the pthread library as well by adding <code>-lpthread</code> (e.g., <code>gcc -o program program.c -lpthread</code>).</p>
 </div>
 
-<figure><img src="../../img/os/sc_compile.png"/>
+<figure>
+    <img src="../../img/os/sc_compile.png"/> 
 </figure>
 
 
@@ -2771,17 +2777,17 @@ speedup < { 1 \over { S + { (1-S) \over N } } }
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

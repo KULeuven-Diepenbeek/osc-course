@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>3.3 The timer :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1611,7 +1611,8 @@ window.MathJax = {
 <p>A lot of applications that are built using an Arduino need some sense of <strong>time</strong>. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer. Through these timers the concept of time can be implemented.</p>
 <h2 id="16-bit-timer">16-bit Timer</h2>
 <p>One component that is in almost every microcontroller is a Timer/counter. This timer/counter can be used for many things: stopwatch, wave generation, timing, &hellip; The block diagram of the 16-bit timer/counter in the Arduino is shown here. Next to this 16-bit timer/counter there are 2 8-bit timer/counters available. The documentation reports registers like TCNTn and OCnB. The letter n is a placeholder for the number of the timer. In the case of the micro controller on the Arduino, the 16-bit counter results in <strong>n = 1</strong>.</p>
-<figure><img src="../../img/0x_12.png"/><figcaption>
+<figure>
+    <img src="../../img/0x_12.png"/> <figcaption>
             <h4>Block Diagram of the 16-bit counter in the Arduino microcontroller. Source: arduino.cc</h4>
         </figcaption>
 </figure>
@@ -1619,14 +1620,16 @@ window.MathJax = {
 <p>During <strong>normal operation</strong> the counter simply <em>counts</em> from 0x0 to its maximum value.. The left-side image below shows what happens to the 16-bit value <strong>TCNT1</strong>. The counter can also be used in a different mode: <strong>Clear-timer-on-compare (CTC)</strong>. In this mode the timer starts again at 0x0000, but only counts to a certain value. When this value is reached, the counter resets and starts over. The right-side image below shows the CTC mode with the cap at <strong>0x7FFF</strong> and at <span style="color:red"><strong>0x3FFF</strong></span>.</p>
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    <figure><img src="../../img/jo/timer_normal.jpg" width="200%"/><figcaption>
+    <figure>
+    <img src="../../img/jo/timer_normal.jpg" width="200%"/> <figcaption>
             <h4>Value of TCNT during normal operation of the 16-bit counter.</h4>
         </figcaption>
 </figure>
 
   </div>
   <div style="width: 50%">
-    <figure><img src="../../img/jo/timer_ctc.jpg" width="200%"/><figcaption>
+    <figure>
+    <img src="../../img/jo/timer_ctc.jpg" width="200%"/> <figcaption>
             <h4>Value of TCNT during clear-timer-on-compare (CTC) operation of the 16-bit counter.</h4>
         </figcaption>
 </figure>
@@ -1645,14 +1648,16 @@ window.MathJax = {
 <p>To determine the frequency at which the counter operates a quick visit to the datasheet holds the answer. The <strong>clk<sub>T1</sub></strong> can be generated from an external or internal clock source: <strong>clk<sub>I/O</sub></strong>. This incoming clock goes through a prescaler which can be set  by the Clock Select bits (CS12, CS11, and CS10).</p>
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    <figure><img src="../../img/clock_distribution.png"/><figcaption>
+    <figure>
+    <img src="../../img/clock_distribution.png"/> <figcaption>
             <h4>Clock Distribution (source: Datasheet)</h4>
         </figcaption>
 </figure>
 
   </div>
   <div style="width: 50%">
-    <figure><img src="../../img/timer_cs1x.png"/><figcaption>
+    <figure>
+    <img src="../../img/timer_cs1x.png"/> <figcaption>
             <h4>Clock Select bits for prescaler cconfiguration (source: Datasheet)</h4>
         </figcaption>
 </figure>
@@ -1669,7 +1674,8 @@ f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15
  \)
 </p>
 <p>Because the counter needs 2<sup>16</sup> clock ticks to reach its maximum, this maximum will be reached every \( 2^{16} \over 15625 \) = 4.19 s. If a LED were to be toggled every time the counter reaches its maximum, the frequency of the toggling LED would be (<strong>2</strong> * 4.19 s)<sup>-1</sup> = 0.119 Hz.</p>
-<figure><img src="../../img/jo/timer_time.jpg" width="50%"/><figcaption>
+<figure>
+    <img src="../../img/jo/timer_time.jpg" width="50%"/> <figcaption>
             <h4>Value of TCNT during clear-timer-on-compare (CTC) operation of the 16-bit counter.</h4>
         </figcaption>
 </figure>
@@ -1700,7 +1706,8 @@ f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15
 <li><strong>TCCRnA:</strong> Timer/Counter Control Register for counter n</li>
 </ul>
 <p>The first three registers (TCNT, OCRA/OCRB, and ICR) are all 16-bit registers. Their functionality is self-explanatory. The Control Register needs more explanation, though. Luckily for us, there is &hellip; the datasheet.</p>
-<figure><img src="../../img/TCCR1.png"/><figcaption>
+<figure>
+    <img src="../../img/TCCR1.png"/> <figcaption>
             <h4>Timer/Counter Configuration Register 1 (TCCR1)</h4>
         </figcaption>
 </figure>
@@ -1713,14 +1720,15 @@ f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15
 </ul>
 <p>In summary, TCCR1A should be set to <strong>0b00000000</strong> (or <strong>0x00</strong>) and TCCR1B should be set to <strong>0b00000101</strong> (or <strong>0x05</strong>).</p>
 <p>The settings above configure TIMER/COUNTER 1 to operate like requested, but the interrupts still have to be set. To set this, two different flags need to be enabled. In the final section of this chapter these two flags are elaborated on. For now, it suffices to know there is a <strong>general Interrupt Enable</strong> and a <strong>&lsquo;maskable&rsquo; Interrupt Enable</strong>. The former can be set by calling the function <strong>sie()</strong> the latter should be set through a register: Timer Interrupt Mask Register (TIMSK1).</p>
-<figure><img src="../../img/TIMSK1.png"/><figcaption>
+<figure>
+    <img src="../../img/TIMSK1.png"/> <figcaption>
             <h4>Timer Interrupt Mask Register (TIMSK1)</h4>
         </figcaption>
 </figure>
 <p>As can be seen from the image above, there are other Interrupts that can be set. For this example only the final one (Timer Overflow Interrupt Enable) should be set to one. This results in setting TIMSK1 to <strong>0b00000001</strong> (or <strong>0x01</strong>).</p>
 <p>Finally, when the interrupt is triggered, something should happen. Otherwise this would be quite useless. When an interrupt occurs, the processor <strong>halts</strong> whatever it was doing and executes a <em>function</em>. In stead of &ldquo;calling&rdquo; the function ourselves, this function call is done automatically. To be able to distinguish between different interrupt sources, different prefixed function names are available. The next section of this chapter will elaborate on this as well. The function-name that is linked to the TIMER/COUNTER 1 overflowing is: <strong>TIMER1_OVF_vect</strong>.</p>
 <p>The example code below puts <strong>everything together</strong>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define LED_1Hz 7
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">int</span> <span style="color:#111">led0_status</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
 
@@ -2772,17 +2780,17 @@ f_{clk_{T1}} = { f_{clk_{I/O}} \over prescaler_{T1}} = { 16e6 \over 2^{10}} = 15
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

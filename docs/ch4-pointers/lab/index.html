@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>4.3: The Ancient Library :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1616,7 +1616,8 @@ window.MathJax = {
 <blockquote>
 <p>Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.</p>
 </blockquote>
-<figure><img src="../../img/labs/library.png"/><figcaption>
+<figure>
+    <img src="../../img/labs/library.png"/> <figcaption>
             <h4>Source: dublin2019.com</h4>
         </figcaption>
 </figure>
@@ -1630,7 +1631,7 @@ window.MathJax = {
 </ul>
 <p>How should we proceed to model the concept of a book? Right, a <code>struct</code>! Keep track of the title and the author using <code>char*</code> properties. <br/>
 Proceed with caution and whatever you do, do not directly look into the green light! Use the following blueprint:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define SIZE 4
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#define SIZE 4
 </span><span style="color:#75715e"></span><span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#75af00">create_books</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// ??
 </span><span style="color:#75715e"></span><span style="color:#111">}</span>
@@ -1703,7 +1704,7 @@ graph LR;
 While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild surges!</em>&rdquo;. The voice sounds like a woman. She rushes off, but the part of her face you were able to catch in the glimpse of an eye seems oddly familiar&hellip; Suddenly, you know it. The book! The cow book! That was the author! Neera&hellip;</p>
 </blockquote>
 <p>Neera managed to completely reverse our sorting strategy, sorting Z to A instead of A to Z. She used a function pointer to encapsulate <code>strcmp()</code>. The following is your main function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
     <span style="color:#111">neera_encounter</span><span style="color:#111">();</span>  <span style="color:#75715e">// changes a function pointer from asc to desc
 </span><span style="color:#75715e"></span>
@@ -1745,7 +1746,7 @@ graph LR;
 </div>
 <p>That was quite simple, wasn&rsquo;t it? What if we want it to add new books to <strong>the beginning</strong> of the library? You cannot change the <code>Book* library</code> pointer as it is copied over by-value. For this to work, we need to change the signature to a <em>pointer of a pointer</em>: <code>void add_book(Book** library, Book* book)</code>.</p>
 <p>Use the following main function to test your code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">library</span> <span style="color:#f92672">=</span> <span style="color:#111">create_books</span><span style="color:#111">();</span>
     <span style="color:#111">Book</span><span style="color:#f92672">*</span> <span style="color:#111">newbook</span> <span style="color:#f92672">=</span> <span style="color:#111">create_book</span><span style="color:#111">(</span><span style="color:#d88200">&#34;My adventures&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;The Hero&#34;</span><span style="color:#111">);</span>
     <span style="color:#75715e">// add newbook to the library. But how? 
@@ -2761,17 +2762,17 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>4. Pseudo scheduler :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895120" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895120" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895120" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895120" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895120" rel="stylesheet">
+    <link href="../../css/theme.css?1643895120" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895120" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895120" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895120"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895120"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895120"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895120"></script>
 
     
   </div>
@@ -1612,7 +1612,8 @@ window.MathJax = {
         
 
 
-<figure><img src="../../img/ass4_sched/poepjee.jpg"/><figcaption>
+<figure>
+    <img src="../../img/ass4_sched/poepjee.jpg"/> <figcaption>
             <h4>image source: youtube.com</h4>
         </figcaption>
 </figure>
@@ -1629,14 +1630,15 @@ window.MathJax = {
 <h3 id="circular-linked-list">Circular Linked List</h3>
 <p>As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks. To be consistent with this course and Linux, the run queue is to be implemented using a <strong>linked list</strong>.</p>
 <p>The <strong>struct</strong> that is to hold the tasks is predefined:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#111">{</span>
   <span style="color:#00a8c8">int</span> <span style="color:#111">arrival_time</span><span style="color:#111">;</span>
   <span style="color:#00a8c8">char</span> <span style="color:#111">name</span><span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">];</span>
   <span style="color:#00a8c8">int</span> <span style="color:#111">duration</span><span style="color:#111">;</span>
   <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
 <span style="color:#111">}</span> <span style="color:#111">T_PCB</span><span style="color:#111">;</span></code></pre></div>
 <p>However, instead of using just a linear linked list (as we did earlier), this time you should aim for using a <strong>circular linked list</strong> as well. This is nothing more than a <em>normal</em> linked list where the final element&rsquo;s <strong>next</strong> field points back to the <strong>head</strong> of the list.</p>
-<figure><img src="../../img/ass4_sched/linear_vs_circular_ll.gif"/>
+<figure>
+    <img src="../../img/ass4_sched/linear_vs_circular_ll.gif"/> 
 </figure>
 
 <p>With this run queue all the tasks are on a merry-go-round (see image above) 😃, which makes it easier to keep scheduling them until they are all done.</p>
@@ -1645,7 +1647,7 @@ window.MathJax = {
 <div class="multicolumn">
   <div class="column">
     <h4>INPUT</h4>
-    <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">3</span>
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">3</span>
 <span style="color:#ae81ff">1</span>
 T0000003
 <span style="color:#ae81ff">6</span>
@@ -1659,7 +1661,7 @@ T0000001
   </div>
   <div class="column">
     <h4>OUTPUT</h4>
-    <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">00</span> - idle
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">00</span> - idle
 <span style="color:#ae81ff">01</span> - T0000003 <span style="color:#f92672">(</span>new<span style="color:#f92672">)</span>
 <span style="color:#ae81ff">02</span> - T0000002 <span style="color:#f92672">(</span>new<span style="color:#f92672">)</span>
 <span style="color:#ae81ff">03</span> - T0000003
@@ -1720,18 +1722,17 @@ Test this by directly comparing your output for the test example with the exampl
 </li>
 <li>
 <p>two functions to show linked lists (to aid in debugging)
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">show_tasks_lin</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">show_tasks_lin</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span>
 <span style="color:#00a8c8">void</span> <span style="color:#75af00">show_tasks_circ</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span></code></pre></div></p>
 </li>
 <li>
 <p>two functions that should be completed
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">read_tasks</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">);</span>
-<span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">sort_tasks_on_arrival</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span> <span style="color:#75715e">// you cannot assume the tasks in the file are in the order they arrive!
-</span></code></pre></div></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">read_tasks</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">);</span>
+<span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">sort_tasks_on_arrival</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span> <span style="color:#f92672">//</span> <span style="color:#111">you</span> <span style="color:#111">cannot</span> <span style="color:#111">assume</span> <span style="color:#111">the</span> <span style="color:#111">tasks</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">file</span> <span style="color:#111">are</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">order</span> <span style="color:#111">they</span> <span style="color:#111">arrive</span><span style="color:#f92672">!</span></code></pre></div></p>
 </li>
 <li>
 <p>a main function that should only be modified between these two lines. You MUST make use of all already defined variables!
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* MODIFY BELOW HERE --------------------------------------------------------*/</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* MODIFY BELOW HERE --------------------------------------------------------*/</span>
 
 <span style="color:#75715e">/* MODIFY ABOVE HERE --------------------------------------------------------*/</span></code></pre></div></p>
 </li>
@@ -2789,17 +2790,17 @@ Test this by directly comparing your output for the test example with the exampl
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895120"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895120"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895120"></script>
+    <script src="../../js/jquery.sticky.js?1643895120"></script>
+    <script src="../../js/featherlight.min.js?1643895120"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895120"></script>
+    <script src="../../js/learn.js?1643895120"></script>
+    <script src="../../js/hugo-learn.js?1643895120"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895120"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

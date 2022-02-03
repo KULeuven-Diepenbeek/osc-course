@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1639,7 +1639,7 @@ window.MathJax = {
 <p>Y starts to run on the processor.</p>
 <p>In the previous Section, we have called this series of actions &ldquo;Dispatching&rdquo;. As such, the  time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>. The actions of updating (and restoring) individual PCB&rsquo;s is typically referred to as <strong>a context switch</strong> (though some sources also call the entire process together a context switch).</p>
 <p>As you can see, during the dispatch period, the CPU is not actually doing any useful work: it is waiting and/or updating its state so the new task can start running. As such, the act of dispatching a new process is considered 100% overhead, and it <strong>should be avoided as much as possible</strong>. <em>Note: there are also other aspects that make context switches slower, such as the fact that it often means that data in the cache memory is no longer useful. As the cached data belongs to the previous task, the cache needs to be (partially) flushed and updated with data from the new task as well, which again takes time.</em></p>
-<p>However, before you get the wrong idea, it&rsquo;s not all that bad. In practice, the dispatch latency is typically in the order of (10) microseconds (say about 1/100th of a millisecond). Still, if we were to switch processes for example each millisecond, we would have a full 1% overhead, which over time definitely adds up (we don&rsquo;t only spend more time context switching, we also do a larger amount of context switches over time). If you recall from the previous section, we introduced the metric CPU efficiency (η<sub>CPU</sub>), which helps make concrete how much overhead actually was introduced.</p>
+<p>However, before you get the wrong idea, it&rsquo;s not all that bad. In practice, the dispatch latency is typically in the order of (10) microseconds (say about 1/100th of a millisecond). Still, if we were to switch processes for example each millisecond, we would have a full 1% overhead, which over time definitely adds up (we don&rsquo;t only spend more time context switching, we also do a larger amount of context switches over time). If you recall from the previous section, we introduced the metric CPU efficiency (�<sub>CPU</sub>), which helps make concrete how much overhead actually was introduced.</p>
 <p>We can see that we somehow need to <strong>strike a balance</strong> between being CPU efficiency (less overhead) and keeping the system responsive (switching between tasks often enough). This is easy enough in our simple examples with just 3-10 tasks, but modern systems often run hundreds of tasks at the same time.</p>
 <p>The concept of the <strong>time slice</strong>, discussed in the previous section on Round-Robin scheduling, can play a large part in this: shorter time slices make things more responsive, but cause more context switches, and vice versa. As such, we want to determine an ideal time slice length, but it&rsquo;s not easy to see how this can be accomplished. In general, we can really only say that the time slice should always be quite a bit larger than the dispatch latency, but that we don&rsquo;t really have an easy way to determine an upper bound.</p>
 <h3 id="io-bound-vs-cpu-bound-tasks">I/O-bound vs CPU-bound tasks</h3>
@@ -1662,7 +1662,8 @@ For example, the combination of round-robin scheduling with priorities is a comb
 
 How could we mix both algorithms ? One takes priority into account while the other one does not. The only parameter that can tweaked in Round Robin is the *time slice*. Let's try to figure out how that plays out ... but first ...
 
-<figure><img src="../../img/sched/ss_dottedline.png"/>
+<figure>
+    <img src="../../img/sched/ss_dottedline.png"/> 
 </figure>
 
 
@@ -1737,7 +1738,7 @@ With the knowledge of the dispatch latency, the size of the time slice can re-vi
 <ol start="0">
 <li>Try to <strong>draw</strong> the repeating pattern in this timing diagram</li>
 <li>How many <strong>context switches</strong> are there ?</li>
-<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (η<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
+<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (�<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
 </ol>
 <figure>
   <a href="../../img/sched/ss_ts.png" data-featherlight="image"><img src="../../img/sched/ss_ts.png" id="img_q721"></a>
@@ -1765,7 +1766,7 @@ With the knowledge of the dispatch latency, the size of the time slice can re-vi
 <ol start="0">
 <li>Try to <strong>draw</strong> the repeating pattern in this timing diagram</li>
 <li>How many <strong>context switches</strong> are there ?</li>
-<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (η<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
+<li>What is the <strong>efficiency</strong> of the CPU ? (Reminder: CPU efficiency (�<sub>CPU</sub>): the percentage that the processor performs actual work.) <strong>Tip</strong>: read the title of this section !!</li>
 </ol>
 <figure>
   <a href="../../img/sched/ss_ts.png" data-featherlight="image"><img src="../../img/sched/ss_ts_l.png" id="img_q722"></a>
@@ -1804,7 +1805,8 @@ With the knowledge of the dispatch latency, the size of the time slice can re-vi
 <li>Separate processes into categories based on their need for the processor.</li>
 </ol>
 <p>To achieve these goals, they employ three differen run queues:</p>
-<figure><img src="../../img/sched/ss_mlfq.png"/>
+<figure>
+    <img src="../../img/sched/ss_mlfq.png"/> 
 </figure>
 <p>When a newly created process is added to the scheduler, it arrives at the back of the <strong>top queue</strong> (8ms). When it is scheduled, there are two options: (a) either it runs the full 8ms or (b) it yields before that. In the case of (b), it&rsquo;s likely that we have a short and/or I/O bound task. As such, when it is done waiting, it is appended at the back of the top queue again.</p>
 <p>In the case of (a) however, it&rsquo;s more likely that we have a CPU-bound task. As such, after the 8ms, it is pre-empted and we move it down to the <strong>middle queue</strong> (16ms), where it should get a longer time slice next time it is run. We can see this improves efficiency, as we can assume the task will remain CPU-bound and thus we have only half the context switches for these processes!</p>
@@ -1840,7 +1842,8 @@ The simplest type of a run queue would be a FIFO (first-in-first-out). It should
 
 **When a process is created**, it is simply added to the back of the queue.
 
-<figure><img src="../../img/sched/ss_runqueue_fifo.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_fifo.png"/> 
 </figure>
 
 
@@ -1849,7 +1852,8 @@ A priority based system might use the exact same scheduling algorithm, with the 
 
 **When a process is created**, it is simply added to the back of the queue that matches the process's priority level.
 
-<figure><img src="../../img/sched/ss_runqueue_multfifo.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_multfifo.png"/> 
 </figure>
 
 
@@ -1859,7 +1863,8 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 
 **When a process is created**, calculations have to be done to determine the position in the three of the new process.
 
-<figure><img src="../../img/sched/ss_runqueue_tree.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_tree.png"/> 
 </figure>
 
 
@@ -1873,7 +1878,8 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 
 <h3 id="on-scheduler">O(n) scheduler</h3>
 <p>The O(n) scheduler got his name from the fact that choosing a new task has <strong>linear</strong> complexity. This is because this scheduler uses a <strong>single linked list</strong> to store all the tasks. Upon each context switch, the scheduler iterates over all the ready tasks in the list, (re-)calculating what is called a <strong>&ldquo;goodness&rdquo;</strong> value. This value is a combination of various factors, such as task priority and whether the task fully used its allotted time slice in its previous burst. The task with the highest goodness value is chosen to run next.</p>
-<figure><img src="../../img/sched/ss_runqueue_fifo.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_fifo.png"/> 
 </figure>
 <p>This setup combines some of the aspects of the multi-level feedback queue concept, but in a single datastructure. For example, if a task didn&rsquo;t use its entire alotted time slice, it gets half of the remaining time alotted for its next run (somewhat bumping its priority, as the alotted timeslice is taken into account with the goodness value as well). As such, while each task is typically assigned the same time slice length initially, this starts to vary over time.</p>
 <p>In practice, this scheduler works, but it has severe issues. Firstly, it is somewhat <strong>unpredictable</strong> (e.g., the time slice could grow unbounded for very short processes, meaning we need additional logic to deal with this). Secondly, and most importantly in practice, the performance was too low. Because each task&rsquo;s goodness needs to be caclculated/checked <em>on every context switch (the O(n))</em>, this adds <strong>large amounts of overhead</strong> if there are many concurrent processes. Thirdly, it also does not scale well to multiple processors: each processor is typically scheduled independently, meaning that for each CPU <strong>a mutex lock</strong> had to be obtained on the single task list to fetch the next candidate.</p>
@@ -1897,11 +1903,12 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 </p>
 <p>(The code for the examples in the video can be found <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/osc-course/master/archive_jo/scheduling/blink.c">here</a>).</p>
 <p>The O(1) scheduler creates a new <strong>queue (linked list) for each of these 140 different priority values</strong>. For the real-time tasks (queues 0-99), processes within each priority list are scheduled either FCFS or RR, which can be toggled by the user (look for SCHED_FCFS and SCHED_RR). The user-space tasks (100-139) are typically scheduled RR per priority (SCHED_NORMAL) but they can also be scheduled based on remaining runtime to improve batch processing (SCHED_BATCH). Each priority list is emptied in full before the next priority list is considered. At every context switch (at every time slice), the highest priority list with a runnable task is selected.</p>
-<figure><img src="../../img/sched/ss_runqueue_multfifo.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_multfifo.png"/> 
 </figure>
 <p>If we were to use this setup directly, the lower-priority tasks would very often by interrupted by higher-priority ones and we again get the problem of starvation. To prevent the need for manual priority adjustment with ageing, the O(1) scheduler instead uses a clever trick, by introducing a second, parallel datastructure. As such, there are two groups of 140 queues. The first is called the <strong>&ldquo;active&rdquo;</strong> queue, the second the <strong>&ldquo;expired&rdquo;</strong> queue. When a task has consumed its time slice completely (either in 1 run, or by yielding multiple times), it is moved to the corresponding &ldquo;expired&rdquo; queue. This allows all processes in the active queue to get some time. When the active processes are all done, the expired and active lists are swapped and the scheduler can again start with the highest priority processes.</p>
 <p>This setup is efficient, because we no longer need to loop through all tasks to find the next one: we just need the first task in the highest priority list! As long as processes are added to the correct priority queue, this can be done in constant time. Some psuedocode to illustrate these aspects can be found below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// pseudocode!!!
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// pseudocode!!!
 </span><span style="color:#75715e">// in reality, the data structures and functions look different!
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">struct</span> <span style="color:#111">PriorityTask</span> <span style="color:#111">{</span>
@@ -1955,7 +1962,8 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 	</div>
 </div>
 <p>As explained in the pseudocode, we also need a clever way of knowning which priority queue still has pending tasks without looping over all of them. This can be cleverly done by using a so-called <strong>bitmap</strong>, where each individual bit of an integer is used as a boolean to indicate if there are tasks for the priority corresponding to that bit. To represent 140 bits, we need about 5 32-bit integers (total of 160 bits). Checking which bits are set can be done very efficiently. See the image below for a schematic representation:</p>
-<figure><img src="../../img/sched/o1_bitmap.png"/>
+<figure>
+    <img src="../../img/sched/o1_bitmap.png"/> 
 </figure>
 <p>As such, we can see the O(1) scheduler is an excellent example of a complex multi-level feedback queue! It utilizes several queues for the different priorities, using different schedulers per-queue depending on the real-timeness of the task. On top, it has two higher-level queues (active and expired) for which it uses an FCFS scheduler. Conceptually a different time slice could also be employed (e.g., higher priorities get a longer time slice), though this was typically not employed.</p>
 <p>This scheduler is however not perfect. In practice, it turns out that I/O-bound or interactive processes could get delayed considerably by longer-running processes, due to the active vs expired setup. This caused the need for a complex set of <strong>heuristics</strong> (basically: educated guesses) that the OS would use to estimate which processes were I/O-bound or interactive. These processes would then receive an internal priority boost (again a form of ageing), while non-interactive processes would get penalized. In practice however, like with the O(n) scheduler, this process was somewhat unstable and error-prone.</p>
@@ -1965,7 +1973,8 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 <p>The CFS solves this problem by calculting the per-task time slice length for a given time period based on the number of ready tasks. Say that N tasks are ready and we want to schedule each of them over the next 100ms (an &ldquo;epoch&rdquo;). Then each task is assigned a time slice of 100ms * 1/N (if we ignore the context switching overhead for a bit). In theory, this gives each task an equal share of the processor, hence the name. As such, if there are fewer tasks active in the system, N will be lower, and the time slices will get larger, and vice versa. Of course, the CFS puts a lower bound on the time slice length (typically 4ms) as otherwise the context switching overhead could become too large.</p>
 <p>To determine which task executes first within the next epoch, the CFS keeps track of how much time each task has actually spent on the CPU so far. As such, for I/O-bound processes that yield frequently, this value will be lower than for CPU-bound tasks that always use their full time slice. The scheduler always selects the process that has so far <strong>spent the least amount of time on the CPU</strong>. This automatically makes sure that interactive processes are scheduled frequently enough, but also that CPU-bound processes age correctly.</p>
 <p>This timekeeping is done in a quite complex datastructure called a (binary) (self-balancing) <strong>red-black tree</strong>. The details are not important here, but this mainly means that the next task (that has spent the last amount of time on the CPU) is always the most bottom left node in the tree. As such, it can easily be retrieved with low overhead. Similarly, adding new tasks (or moving tasks around) in the tree can be done in O(log N).</p>
-<figure><img src="../../img/sched/ss_runqueue_tree.png"/>
+<figure>
+    <img src="../../img/sched/ss_runqueue_tree.png"/> 
 </figure>
 <p>The complexity increases even more when we look at how this setup incorporates priorities. As there are no longer explicit per-priority lists like in the O(1) scheduler, the CFS simulates this by shrinking/expanding the time slices of low/high priority processes. This is similar to what we&rsquo;ve discussed above, that time slice durations can be used to emulate priorities. As such, if a high priority process executes for 10ms on the CPU, the timekeeper might only record that it spent 5ms of &ldquo;virtual time&rdquo;. This gives the task a &ldquo;priority boost&rdquo; when the scheduler next goes looking for a new task. The opposite is done for low priority tasks (e.g., 10ms of runtime can become 20ms of &ldquo;virtual time&rdquo;). We can see this is no longer a &ldquo;completely fair&rdquo; scheduler in practice, but it&rsquo;s quite elegant in how it combines interactivity, priorities and time slice lengths in practice.</p>
 <!-- Although there are **more differences** with earlier scheduler, albeit not so drastically, a thorough study on this algorithm falls out of the scope of this course. In summary, CFS eliminates the concept of a static time slice. This approach solves several problems in mapping priorities to time slices. CFS solves the problems with a simple algorithm that performs well on interactive workloads such as mobile devices without compromising throughput performance on the largest of servers. -->
@@ -3005,17 +3014,17 @@ Symmetric multiprocessing (SMP) is where each processor is self scheduling --><b
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

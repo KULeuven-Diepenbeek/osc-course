@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>9.1: Memory management :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1632,14 +1632,16 @@ window.MathJax = {
     The OS then mainly has to make sure that process A doesn't try to address memory of process B and vice versa. Often this is referred to as <b>memory protection</b>.
   </div>
   <div class="column">
-    <figure><img src="../../img/mem/ss_mem_logical.png"/><figcaption>
+    <figure>
+    <img src="../../img/mem/ss_mem_logical.png"/> <figcaption>
             <h4>The complete memory space, divided to one chunk per process.</h4>
         </figcaption>
 </figure>
   </div>
 </div>
 <p>This approach can be easily implemented in hardware with two registers. When a process is scheduled, the OS loads the CPU base register and the limit register with the correct values. The CPU can then check that the addresses of all memory accesses fall within the interval of the base address PLUS the limit. If this condition does not hold, there might be an (un-)intentional error. The CPU propagates this error to the OS for handling.</p>
-<figure><img src="../../img/mem/ss_mem_logical_BA_LMT.png"/><figcaption>
+<figure>
+    <img src="../../img/mem/ss_mem_logical_BA_LMT.png"/> <figcaption>
             <h4>Base address register and limit register in logical addressing.</h4>
         </figcaption>
 </figure>
@@ -1649,7 +1651,7 @@ window.MathJax = {
 <div class="multicolumn">
   <div class="column">
     <p>Consider for example the following code, which includes some variables. These variables need to be somehow assigned one or more addresses in the memory for the running process:</p>
-    <div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+    <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">      <span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
       <span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
         <span style="color:#00a8c8">short</span> <span style="color:#111">i</span><span style="color:#111">;</span>
@@ -1657,12 +1659,12 @@ window.MathJax = {
         <span style="color:#00a8c8">long</span> <span style="color:#111">a_long_value</span><span style="color:#111">;</span>
         <span style="color:#111">...</span>
       <span style="color:#111">}</span>
-    
-</code></pre></div>
+    </code></pre></div>
     <p> The question is then for example: at which address does the value for `i` begin? </p>
   </div>
   <div class="column">
-    <figure><img src="../../img/mem/ss_mem_binding.png"/>
+    <figure>
+    <img src="../../img/mem/ss_mem_binding.png"/> 
 </figure>
   </div>
 </div>
@@ -1671,7 +1673,8 @@ window.MathJax = {
 <p>The way this is solved, is by having the compiler generate <strong>relative/logical/virtual addresses</strong>. The compiler for example pretends that the program will always be loaded at address 0x0 and places all variables/functions relative to 0x0. Then, when the program is executed, the addresses can just be incremented with the process chunk&rsquo;s <strong>base address</strong> to get the real, physical address in RAM (so physical adress = compiler-generated/logical/virtual address + base address).</p>
 <p>As such, we can see that we have <strong>two different address spaces</strong>: the logical/virtual address space (always starting at 0x0 for each process) and the physical address space (where each process starts at a different offset).</p>
 <p>In practice, this can even be done in hardware outside of the CPU, where a separate chip, the so-called <strong>&ldquo;Memory Management Unit&rdquo; (MMU)</strong>, takes care of the translation. Using virtual/logical addresses at the CPU then simply requires the use of a <strong>relocation register</strong> (which can be loaded with the chunk&rsquo;s base address) to obtain the final physical address:</p>
-<figure><img src="../../img/mem/ss_mem_mmu.png"/><figcaption>
+<figure>
+    <img src="../../img/mem/ss_mem_mmu.png"/> <figcaption>
             <h4>The MMU</h4>
         </figcaption>
 </figure>
@@ -1691,7 +1694,8 @@ window.MathJax = {
 <p>Chunking and load-time address binding works, but it has some downsides. For example, we would need to know all the variables/functions that will be used at load time. While we know more about them than at compile time (as the link step is done now), we often still don&rsquo;t know everything yet. This is for example the case when using dynamically loaded external software libraries (so-called &ldquo;dynamically linked libraries&rdquo; or DLLs), which is something you typically do want to enable broad code re-use. These DLLs can be loaded <strong>during the execution of a process</strong> as needed, which is later than the load time we&rsquo;ve considered.</p>
 <p>A more important downside of chunking however is that <strong>we would have to assign a fixed-size chunk to each process</strong>. This isn&rsquo;t so much a problem for text/data/bss/stack, but more for the heap. We don&rsquo;t really know how much heap memory a program will want to use up front, and this often also depends on how the program is used (sometimes you&rsquo;ll use less memory, sometimes more). You can&rsquo;t also just give each program a huge amount of memory (say 1GB of heap), as that would severely limit the amount of processes you could run at the same time. As such, you would again have to rely on the programmer to somehow give an indication of program size, or for example learn it from previous executions of the program.</p>
 <p>Finally, there is the problem of <strong>external fragmentation</strong>. As more and more programs are loaded into memory, the available space is reduced. Luckily, as programs are stopped/done, they also release the space they took up. As such, after a while, there will be gaps in the physical memory where older programs were removed. The thing is: those gaps are <strong>not always large enough to entirely fit a newly started program</strong>! As such, even though conceptually there is enough memory free when we regard the entire memory space, there is not enough -contiguous- memory to fit a new process. This is called &ldquo;external&rdquo; fragmentation, as the fragmentation happens <em>outside of the space allocated to processes</em>. We will discuss internal fragmentation later.</p>
-<figure><img src="../../img/mem/external_fragmentation.png"/><figcaption>
+<figure>
+    <img src="../../img/mem/external_fragmentation.png"/> <figcaption>
             <h4>External fragmentation with chunking</h4>
         </figcaption>
 </figure>
@@ -1702,27 +1706,31 @@ window.MathJax = {
 <p>Additionally, it provides us with extra benefits, such as the fact that the <strong>segments for a single process no longer need to be in contiguous memory blocks!</strong>. This is illustrated by the images below:</p>
 <div class="multicolumn">
   <div>
-    <figure><img src="../../img/mem/ss_mem_non_segmented.jpg" height="413px"/><figcaption>
+    <figure>
+    <img src="../../img/mem/ss_mem_non_segmented.jpg" height="413px"/> <figcaption>
             <h4>Continuous image: the logical address space of a process. Source: G.I.</h4>
         </figcaption>
 </figure>
   </div>
   <div>
-    <figure><img src="../../img/mem/ss_mem_segmented.jpg" height="413px"/><figcaption>
+    <figure>
+    <img src="../../img/mem/ss_mem_segmented.jpg" height="413px"/> <figcaption>
             <h4>Segmented image: the physical address space in which the process&#39; chunks can be located in different areas.</h4>
         </figcaption>
 </figure>
   </div>
 </div>
 <p>This is a very important characteristic, as it helps deal with the aforementioned <strong>external fragmentation</strong> (at least up to a certain point). Even though the full process cannot fit in any given gap, its individual segments can be distributed across several gaps as needed.</p>
-<figure><img src="../../img/mem/external_fragmentation_2.png"/><figcaption>
+<figure>
+    <img src="../../img/mem/external_fragmentation_2.png"/> <figcaption>
             <h4>External fragmentation is partially solved with segmentation</h4>
         </figcaption>
 </figure>
 <h3 id="address-binding-1">Address Binding</h3>
 <p>Additionally, segmentation allows us to do the memory mapping not at load time (as with chunking), but also much more dynamically at <strong>execution time</strong>: segments can be created (or removed) and placed as-needed by the OS.</p>
 <p>However, placing multiple segments at various locations in the physical memory does mean it now becomes more difficult to find the correct physical address given a logical/virtual address. A single relocation register is no longer enough (as we also no longer have a simple base address). Instead, we need a <strong>segment table</strong> that tracks the different segments and where exactly they can be found in physical memory. So, instead of having a single base address and a chunk limit, each individual segment has its own base address and limit offset, all of which are stored in the segment table. Again, for performance reasons this is often done in the separate MMU chip, which might look a bit like this:</p>
-<figure><img src="../../img/mem/ss_mem_segmhw.png"/><figcaption>
+<figure>
+    <img src="../../img/mem/ss_mem_segmhw.png"/> <figcaption>
             <h4>Segmentation hardware</h4>
         </figcaption>
 </figure>
@@ -2757,17 +2765,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895120"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895120"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895120"></script>
+    <script src="../../js/jquery.sticky.js?1643895120"></script>
+    <script src="../../js/featherlight.min.js?1643895120"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895120"></script>
+    <script src="../../js/learn.js?1643895120"></script>
+    <script src="../../js/hugo-learn.js?1643895120"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895120"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

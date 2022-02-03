@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>2.5: C Ecosystems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1617,12 +1617,12 @@ window.MathJax = {
 <h3 id="separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</h3>
 <p>To make the division clearer, we prepare the following C code, split into two different files:</p>
 <p>File <code>hello.c</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// hello.c
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// hello.c
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#75af00">hello</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;heykes&#34;</span><span style="color:#111">;</span>
 <span style="color:#111">}</span>
 </code></pre></div><p>File <code>main.c</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// main.c
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// main.c
 </span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;printf.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s&#34;</span><span style="color:#111">,</span> <span style="color:#111">hello</span><span style="color:#111">());</span>
@@ -1769,13 +1769,13 @@ Instead of using the default GCC compiler: <code>gcc bla.c</code>, you will down
 <h3 id="repeatedly-compiling">Repeatedly compiling</h3>
 <h4 id="1-using-a-script">(1) using a script</h4>
 <p>It is annoying to have to type the same command all the time, so a simple alternative is to put your <code>gcc</code> command in a shell script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>clear <span style="color:#f92672">&amp;&amp;</span> gcc -o mystuff source.c <span style="color:#f92672">&amp;&amp;</span> ./mystuff
 </code></pre></div><h4 id="2-makefiles">(2) Makefiles</h4>
 <p>In the C world there is such a thing as a &ldquo;Makefile&rdquo; that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.</p>
 <p>With Makefiles you can describe &ldquo;targets&rdquo; that perform certain actions for you. For example, cleaning up binaries, compiling and linking, all as a separate step. Stringing steps together is of course also possible.</p>
 <p>File <code>Makefile</code>:</p>
-<pre tabindex="0"><code>.DEFAULT_GOAL := all
+<pre><code>.DEFAULT_GOAL := all
 
 CC=gcc
 
@@ -1810,7 +1810,8 @@ all: clean compile link
 <p>We will not stop old-school fans from using Emacs or Vi(m).</p>
 <h5 id="heavyweights">Heavyweights</h5>
 <p><a href="https://www.jetbrains.com/clion/">CLion</a> is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it&rsquo;s built on the same platform (IDEA) - even most shortcuts are the same.</p>
-<figure><img src="../../img/clion.png"/>
+<figure>
+    <img src="../../img/clion.png"/> 
 </figure>
 <p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: <code>CMakeLists.txt</code> contains instructions to generate a<code> Makefile</code>:</p>
 <pre>
@@ -2849,17 +2850,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

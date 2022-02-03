@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>4.1: Pointers and arrays :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1669,7 +1669,7 @@ graph TD;
 <p>In Java properties are accessed using the dot operator <code>.</code>.</p>
 <h3 id="pointer-types">Pointer types</h3>
 <p>A pointer is a &ldquo;changeable&rdquo; reference to a variable. Pointers have their own memory address on the stack and can refer to something else at any time: they are not constant. They are recognizable by <code>*</code> after variable type.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">int</span> <span style="color:#111">young</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
@@ -1727,7 +1727,7 @@ graph LR;
 </blockquote>
 <h4 id="cs-by-value-vs-javas-by-ref---redux">C&rsquo;s By-Value VS Java&rsquo;s By-Ref - redux</h4>
 <p>Pointers can point to pointers which can point to pointers which can &hellip; Add enough <code>*</code> symbols!</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">val</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
 <span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">val</span><span style="color:#111">;</span>
 <span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">ptr</span><span style="color:#111">;</span>
 <span style="color:#00a8c8">int</span> <span style="color:#f92672">**</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
@@ -1754,7 +1754,7 @@ graph LR;
 
 </div>
 <p>Practical use of the double <code>**</code> notation would be to relink a pointer to another location. As you know from <a href="../../ch2-c">chapter two</a>, variables in C are passed along <strong>by value</strong>: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the <em>dereference</em> operator. But chaining <em>the address</em> itself is only possible with double pointers:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">nr</span><span style="color:#111">)</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
@@ -1772,7 +1772,7 @@ graph LR;
 </span><span style="color:#75715e"></span><span style="color:#111">}</span>
 </code></pre></div><h4 id="pointer-instantiation">Pointer instantiation</h4>
 <p>Where does a new pointer point to that is not yet instantiated?:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">;</span>
 <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%d&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">);</span> <span style="color:#75715e">// prints -12599900072
 </span></code></pre></div><p>Whoops. Always assign &lsquo;nothing&rsquo; to a pointer, using <code>int *ptr = NULL</code>. Note that depending on the C implementation (such as VC++, clang, GNU C), an uninitialized pointer might contain the value <code>0</code>.</p>
 <p><code>NULL</code> is a <strong>platform dependent</strong> (!!) macro that in C refers to zero (<code>0</code>), usually in the form of a void pointer. A <code>void *</code> pointer can refer to any type and is usually used to address low-level memory, as we will see using embedded hardware equipment.</p>
@@ -1786,7 +1786,7 @@ graph LR;
 <p>The definition of a pointer does not prescribe the exact location of the <code>*</code>: <code>int* age</code> is the same as<code> int *age</code> (notice the placement of the stars). Be careful with things like &lsquo;int *age, old_age&rsquo;! The last variable here is an ordinary int, and not a pointer!</p>
 <h4 id="function-pointers">Function pointers</h4>
 <p>Now things are getting interesting. A pointer can also point <strong>to a function</strong>. (Remember the datastructure from <a href="../../ch2-c">chapter 2</a>?). You will need the same signature definition to do that:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">int</span> <span style="color:#75af00">increase</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">nr</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">nr</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
@@ -1815,7 +1815,7 @@ increase 5: 6
 double 5: 14
 </pre>
 <p>Function pointers can also be given as a parameter, for example with <code>void exec (int (* op) (int)) {</code>. A function can return a function (pointer), for example with <code>int (* choose_op (int mod)) (int) {</code>. The function &ldquo;choose_op&rdquo; expects 1 int parameter and returns a function pointer that refers to a function with 1 int parameter and return value int. To simplify that mess, <code>typedef</code> is usually used:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">typedef</span> <span style="color:#75af00">int</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">func_type</span><span style="color:#111">)(</span><span style="color:#00a8c8">int</span><span style="color:#111">);</span>
 
@@ -2861,17 +2861,17 @@ double 5: 14
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>1.2: File systems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1638,7 +1638,8 @@ window.MathJax = {
 <li>owner, protection parameters</li>
 </ul>
 <p>A <strong>directory</strong> is a special kind of file, in which other files can be stored. It simply references to other files it contains and does not duplicate the data itself.</p>
-<figure><img src="../../img/filesystem.gif"/><figcaption>
+<figure>
+    <img src="../../img/filesystem.gif"/> <figcaption>
             <h4>src: http://www.rhyshaden.com/unix.htm</h4>
         </figcaption>
 </figure>
@@ -1656,7 +1657,8 @@ map auto_home on /home (autofs, automounted, nobrowse)
 <p>Depending on the Unix flavor, the location of the device files will be different.</p>
 <h3 id="file-attributes">File attributes</h3>
 <p>When you list all files using <code>ls -la</code> (list all), you see something like this:</p>
-<figure><img src="../../img/file_attributes.png"/><figcaption>
+<figure>
+    <img src="../../img/file_attributes.png"/> <figcaption>
             <h4>src: https://homepages.uc.edu/~thomam/</h4>
         </figcaption>
 </figure>
@@ -1694,7 +1696,8 @@ map auto_home on /home (autofs, automounted, nobrowse)
 </ul>
 <p>Of course the <code>root</code> user can still write to files with permission <code>400</code>.</p>
 <p>A complete overview of the permission system, neatly summarized by Julia Evans:</p>
-<figure><img src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg"/><figcaption>
+<figure>
+    <img src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg"/> <figcaption>
             <h4>source: drawings.jvns.ca</h4>
         </figcaption>
 </figure>
@@ -1704,7 +1707,8 @@ map auto_home on /home (autofs, automounted, nobrowse)
 <p>Ext4 is backwards compatible with Ext2, meaning you can safely <code>mount</code> an older disk formatted with the older file system using ext4 drivers. Using Ext filesystems in Windows usually requires some driver that enables mounting of these file systems (<a href="https://www.ext2fsd.com">Ext2Fsd for example</a>).</p>
 <h3 id="fat-file-allocation-table">FAT (File Allocation Table)</h3>
 <p>FAT stands for File Allocation Table and this is called so because it allocates different file and folders using lookup <em>tables</em>. This was originally designed to handle small file systems and disks. This system majorly has three variant FAT12, FAT16 and FAT32 which were introduced in 1980, 1984 and 1996 respectively.</p>
-<figure><img src="../../img/floppy.jpg"/><figcaption>
+<figure>
+    <img src="../../img/floppy.jpg"/> <figcaption>
             <h4>Remember this? src: http://www.youtube.com/watch?v=EHRc-QMoUE4</h4>
         </figcaption>
 </figure>
@@ -1726,7 +1730,8 @@ map auto_home on /home (autofs, automounted, nobrowse)
 <li>A <em>client-side</em> one, connected to a network layer</li>
 <li>A <em>server-side</em> one, connected to a network layer - with underlying effective FS</li>
 </ul>
-<figure><img src="../../img/nfs.jpg"/><figcaption>
+<figure>
+    <img src="../../img/nfs.jpg"/> <figcaption>
             <h4>src: http://bigdata-guide.blogspot.com/2014/02/network-file-system-nfs.html</h4>
         </figcaption>
 </figure>
@@ -1736,7 +1741,8 @@ map auto_home on /home (autofs, automounted, nobrowse)
 <h2 id="common-file-system-techniques">Common File System techniques</h2>
 <h3 id="fragmentation">Fragmentation</h3>
 <p>A hard disk drive has a number of sectors on it, each of which can contain a small piece of data. Files, particularly large ones, must be stored across a number of different sectors (in <strong>file fragments</strong>). As files grow in size (for example, by altering them), these chunks drift apart, depending on the file system. in the old FAT FS, file parts are simply saved as close to the physical start of the disk as possible, and so on, becoming <em>fragmented</em> over time.</p>
-<figure><img src="../../img/fragment.jpg"/><figcaption>
+<figure>
+    <img src="../../img/fragment.jpg"/> <figcaption>
             <h4>src: https://7datarecovery.com/best-registry-cleaners/</h4>
         </figcaption>
 </figure>
@@ -2771,17 +2777,17 @@ map auto_home on /home (autofs, automounted, nobrowse)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

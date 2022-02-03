@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>4.2: Practical Use of Pointers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1613,7 +1613,7 @@ window.MathJax = {
 
 <h3 id="1-changing-values-around">1. Changing values around</h3>
 <p>Because in C everything passed <em>by-value</em>, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not <strong>primitives</strong>! How do you switch two numbers without giving anything back?</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">swap</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">px</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">py</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">int</span> <span style="color:#111">temp</span><span style="color:#111">;</span>
     <span style="color:#111">temp</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">px</span><span style="color:#111">;</span>
@@ -1696,7 +1696,7 @@ graph TD
 
 </div>
 <p>Creating an own version of <code>printf(&quot;%s&quot;, tekst)</code> could be implemented by looping through the pointer until nothing is left to print, like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print_text</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">txt</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print_text</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">txt</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">txt</span> <span style="color:#f92672">!=</span> <span style="color:#d88200">&#39;\0&#39;</span><span style="color:#111">)</span> <span style="color:#111">{</span>
         <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%c&#34;</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">txt</span><span style="color:#111">);</span>
         <span style="color:#111">txt</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
@@ -1707,7 +1707,7 @@ graph TD
 <div class="notices note" ><p>In C, <code>a[i]</code> exactly the same as <code>*(a + i)</code>!</p>
 </div>
 
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">char</span> <span style="color:#111">txt</span><span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;hey&#34;</span><span style="color:#111">;</span>
     <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">txt</span><span style="color:#111">;</span>
@@ -1727,7 +1727,7 @@ graph TD
 	</div>
 </div>
 <p>Jumping to the next available address space also works with structures instead of a character array:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
 <span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">Doos</span> <span style="color:#111">{</span> <span style="color:#00a8c8">int</span> <span style="color:#111">one</span><span style="color:#111">;</span> <span style="color:#00a8c8">int</span> <span style="color:#111">two</span><span style="color:#111">;</span> <span style="color:#111">}</span> <span style="color:#111">Doos</span><span style="color:#111">;</span>
@@ -1758,7 +1758,7 @@ graph TD
     ![](/img/lists1.png)
 </center>
 <p>Given the following structure:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">struct</span> <span style="color:#111">node</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">struct</span> <span style="color:#111">node</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">name</span><span style="color:#111">;</span>
     <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">value</span><span style="color:#111">;</span>
     <span style="color:#00a8c8">struct</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
@@ -1768,7 +1768,7 @@ graph TD
     ![](/img/lists2.png)
 </center>
 <p>However, this representation is <strong>incomplete</strong>! We create a new local variable, a pointer, and this pointer is actually also a variable on the stack. So, this code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">create_node</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">create_node</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">newelement</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#111">));</span>
     <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">name</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;something&#34;</span><span style="color:#111">;</span>
     <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">value</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;value&#34;</span><span style="color:#111">;</span>
@@ -1787,7 +1787,7 @@ graph TD
     ![](/img/lists5.png)
 </center>
 <p>Notice the changed arrow in the right side of the Figure. Ok, what if we want to loop over all elements by following the arrows from each element, starting with the first, what happens with our variables in the memory space? A new method creates a new chunk in the stack space, where a new variable will be created:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">printer</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">printer</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#111">printer</span> <span style="color:#f92672">!=</span> <span style="color:#111">NULL</span><span style="color:#111">)</span> <span style="color:#111">{</span>
         <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">printer</span><span style="color:#f92672">-&gt;</span><span style="color:#111">value</span><span style="color:#111">);</span>
         <span style="color:#111">printer</span> <span style="color:#f92672">=</span> <span style="color:#111">printer</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span><span style="color:#111">;</span>
@@ -1809,7 +1809,7 @@ graph TD
 </div>
 
 <p>What if we want to change the pointer of <code>head</code> using another variable? Then you will need double pointers, or <code>node**</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">change_ptr</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">**</span> <span style="color:#111">ptr_to_ptr</span><span style="color:#111">,</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">new_value</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">change_ptr</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">**</span> <span style="color:#111">ptr_to_ptr</span><span style="color:#111">,</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">new_value</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#f92672">*</span><span style="color:#111">ptr_to_ptr</span> <span style="color:#f92672">=</span> <span style="color:#111">new_value</span><span style="color:#111">;</span>
 <span style="color:#111">}</span>
 </code></pre></div>
@@ -2821,17 +2821,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -25,7 +25,7 @@ A quick intro to C C is an imperative programming language. You will notice this
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</guid>
       <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
- Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
+  Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
- Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
+  Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
     </item>
     
     <item>

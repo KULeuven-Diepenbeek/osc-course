@@ -43,7 +43,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</guid>
-      <description>image source: wikipedia.com    Get page size on your Linux system through a C program   An example output    Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.</description>
+      <description>image source: wikipedia.com    Get page size on your Linux system through a C program    An example output    Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.</description>
     </item>
     
   </channel>

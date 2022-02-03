@@ -38,7 +38,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
 There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
- Shared memory Message passing   The two main techniques for inter process communication    p.</description>
+ Shared memory Message passing    The two main techniques for inter process communication    p.</description>
     </item>
     
     <item>
@@ -68,7 +68,7 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
       <description>One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
- This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
+  This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
     </item>
     
     <item>

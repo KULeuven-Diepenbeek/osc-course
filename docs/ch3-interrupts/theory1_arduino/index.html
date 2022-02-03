@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.92.0" />
+    <meta name="generator" content="Hugo 0.81.0" />
     <meta name="description" content="">
 
 
@@ -12,19 +12,19 @@
     <title>3.1 Arduino UNO :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1643895085" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1643895085" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1643895085" rel="stylesheet">
-    <link href="../../css/theme.css?1643895085" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1643895085" rel="stylesheet">
+    <link href="../../css/nucleus.css?1643895119" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643895119" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643895119" rel="stylesheet">
+    <link href="../../css/theme.css?1643895119" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643895119" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1643895085" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1643895119" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1643895085"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1643895119"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1643895085"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1643895085"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1643895119"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643895119"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1643895085"></script>
+<script type="text/javascript" src="../../js/search.js?1643895119"></script>
 
     
   </div>
@@ -1623,7 +1623,8 @@ Microchip
 here
 </a>
 .</p>
-<figure><img src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg"/><figcaption>
+<figure>
+    <img src="https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/520x330/604a3538c15e081937dbfbd20aa60aad/a/0/a000066_featured_4.jpg"/> <figcaption>
             <h4>An Arduino UNO. Source. arduino.cc</h4>
         </figcaption>
 </figure>
@@ -1631,7 +1632,8 @@ here
 <p>This datasheet contains a <strong>block diagram</strong> of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well. The image should be familiar to students that took up the <em>Elektronische systemen</em> course at KU Leuven. 😄</p>
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    <figure><img src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif"/><figcaption>
+    <figure>
+    <img src="http://blog.podkalicki.com/wp-content/uploads/2015/04/avr_architechture.gif"/> <figcaption>
             <h4>Block diagram of the AVR Architecture.  Source. podkalicki.com</h4>
         </figcaption>
 </figure>
@@ -1644,7 +1646,8 @@ here
 </div>
 <h3 id="low-level-programming">Low Level programming</h3>
 <p>Programming the Arduino UNO can be easily done with the <strong>Arduino IDE</strong>. This user friendly environment is a very nice entry point for new users of microcontrollers. Future engineers, however, should be able to understand what is going on behind the curtain. After all, <strong>magic</strong> doesn&rsquo;t exist.</p>
-<figure><img src="../../img/0x_02.png"/><figcaption>
+<figure>
+    <img src="../../img/0x_02.png"/> <figcaption>
             <h4>The Arduino IDE</h4>
         </figcaption>
 </figure>
@@ -1653,7 +1656,8 @@ here
 <p>When bare metal programming a microcontroller it is often required to start poking specific bits in a register. A quick background refresh is given first.</p>
 <div style="display: flex; flex-direction: row; align-items: center;">
   <div style="width: 50%">
-    <figure><img src="../../img/endianness.png"/><figcaption>
+    <figure>
+    <img src="../../img/endianness.png"/> <figcaption>
             <h4>Endianness and approaches in hardware and software</h4>
         </figcaption>
 </figure>
@@ -1674,24 +1678,24 @@ here
   </div>
 </div>
 <p>Let&rsquo;s explore the bit manipulations. First we assign the value 1 to an 8-bit type variable.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
   <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
 </code></pre></div><p>With this line, <strong>x</strong> holds the number &ldquo;00000001&rdquo;. This means the bytes are represented in Little Endian.</p>
 <p>Setting the sixth bit, might be a bit cumbersome. First the result of 2<sup>5</sup> has to be calculated. After googling the result, the programmer can write:</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
   <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">32</span><span style="color:#111">;</span>
 </code></pre></div><p>More seasoned C programmers might be inclined to use the <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators" target="_blank">
 shift operator
 </a>
 : &laquo;. This litteraly takes te value 1 (remember: this is represented as 00000001) and shifts this value 5 positions to the left, while inserting 0&rsquo;s on the right ( 00000001 + 00000 =&gt; 00000 + 00100000 =&gt;  00100000).</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#111">;</span>
   <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span><span style="color:#111">);</span>
 </code></pre></div><p>Next to the shift operator, <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Bitwise_operators" target="_blank">
 bitwise operators
 </a>
  are also heavily used for setting and/or clearing certain bits. The logical functions AND (&amp;), OR(|) and NOT(~) can be used as efficient tools for bit fiddling.</p>
 <p>❗ ❗ 🐉 Beware of the <span style="color: green; font-weight: bold;">dragons</span> 🐉 ❗ ❗.</p>
-<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">x</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">y</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span>
   <span style="color:#111">...</span>
   <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span><span style="color:#111">);</span>
   <span style="color:#111">y</span> <span style="color:#f92672">=</span> <span style="color:#111">y</span> <span style="color:#f92672">|</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">5</span><span style="color:#111">);</span>
@@ -1723,7 +1727,8 @@ bitwise operators
 datasheet
 </a>
  of the microcontroller on the Arduino many CRs can be found. Section 36 summarises these registers on more than 3 pages. An example of a register that serves both as a CR and as a SR for controlling of the Analog-to-Digital Converter is shown below. As can be learned from the datasheet, the MSB of this register is used to enable or disable the hardware ADC through software instructions.</p>
-<figure><img src="../../img/0x_03.png"/><figcaption>
+<figure>
+    <img src="../../img/0x_03.png"/> <figcaption>
             <h4>Example of a CR in the ATMega microcontroller. Source: arduino.cc</h4>
         </figcaption>
 </figure>
@@ -2794,17 +2799,17 @@ A number of things should be pointed out.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1643895085"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895085"></script>
-    <script src="../../js/jquery.sticky.js?1643895085"></script>
-    <script src="../../js/featherlight.min.js?1643895085"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1643895085"></script>
-    <script src="../../js/learn.js?1643895085"></script>
-    <script src="../../js/hugo-learn.js?1643895085"></script>
+    <script src="../../js/clipboard.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643895119"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643895119"></script>
+    <script src="../../js/jquery.sticky.js?1643895119"></script>
+    <script src="../../js/featherlight.min.js?1643895119"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643895119"></script>
+    <script src="../../js/learn.js?1643895119"></script>
+    <script src="../../js/hugo-learn.js?1643895119"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1643895085"></script>
+            <script src="../../mermaid/mermaid.js?1643895119"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>4: Pointers &amp; Arrays on Operating Systems and C</title>
+    <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/</link>
+    <description>Recent content in 4: Pointers &amp; Arrays on Operating Systems and C</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>4.1: Pointers and arrays</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</guid>
+      <description>In the schematic examples below, the following concepts can be explicitly distinguished:
+ The name of a variable The value of a variable  And the following implicitly:
+ The type of a variable The adres of a variable  The type of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value.</description>
+    </item>
+    
+    <item>
+      <title>4.2: Practical Use of Pointers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</guid>
+      <description>1. Changing values around Because in C everything passed by-value, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not primitives! How do you switch two numbers without giving anything back?
+#include &amp;lt;stdio.h&amp;gt;void swap(int *px, int *py) { int temp; temp = *px; *px = *py; *py = temp; } int main() { int x = 10, y = 20; swap(&amp;amp;x, &amp;amp;y); printf(&amp;#34;(%d, %d)\n&amp;#34;, x, y); // print (20, 10) } mermaid.</description>
+    </item>
+    
+    <item>
+      <title>4.3: The Ancient Library</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</guid>
+      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
+   Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+    </item>
+    
+  </channel>
+</rss>

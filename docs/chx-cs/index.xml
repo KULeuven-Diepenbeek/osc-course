@@ -9,16 +9,6 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>X.1: File systems</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</guid>
-      <description>Introduction in Unix filesystems Files in Unix Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a file in Unix: we have used this to our advantage to inspect the inner workings of a process in the /proc directory.
-A file is the smallest possible unit of storage in a unix system.</description>
-    </item>
-    
-    <item>
       <title>X.2: Real-time Operating Systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

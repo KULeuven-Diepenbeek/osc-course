@@ -9,43 +9,44 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>1.1: The C programming language</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</link>
+      <title>1.1: Intro to OS using Linux</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/intro-os/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/intro-os/</guid>
+      <description>TODO intro tekst aanpassen
+In Chapter X the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?
+When more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !!! (OSes)
+The image below shows the classic picture when introducing OSes.</description>
+    </item>
+    
+    <item>
+      <title>2.1: The C programming language</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro/</guid>
       <description>The C language is a programming language developed in the &amp;rsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
 A quick intro to C C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types.</description>
     </item>
     
     <item>
-      <title>2.1 Arduino UNO</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</link>
+      <title>3.1 Arduino UNO</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory1_arduino/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</guid>
       <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
   An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
     </item>
     
     <item>
-      <title>4.1: The Easy Way: IDEs</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-ide/</link>
+      <title>5.1: The Easy Way: IDEs</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-ide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-ide/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-ide/</guid>
       <description>1. The easy way: Debugging using an IDE Arguably one of the better integrated C/C++ IDEs out there is CLion, a toolkit from Jetbrains based on the IDEA platform you all know from IntelliJ. It has exactly the same tools and capabilities but is fully geared towards C and C++. Cross-compiling and toolchain setup is also very easy using CLion. The Figure below is a screen capture of CLion showcasing it&amp;rsquo;s integrated unit testing capabilities which we will expand upon in the coming sections.</description>
-    </item>
-    
-    <item>
-      <title>5.1: Intro to OS using Linux</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/intro-os/</guid>
-      <description>In Chapter 2 the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?
-When more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: Operating systems !!! (OSes)
-The image below shows the classic picture when introducing OSes.</description>
     </item>
     
     <item>
@@ -87,16 +88,6 @@ The scheduler has two main responsibilities:</description>
     </item>
     
     <item>
-      <title>X.1: File systems</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/filesystems/</guid>
-      <description>Introduction in Unix filesystems Files in Unix Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a file in Unix: we have used this to our advantage to inspect the inner workings of a process in the /proc directory.
-A file is the smallest possible unit of storage in a unix system.</description>
-    </item>
-    
-    <item>
       <title>1. Integrated C exercise</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -109,24 +100,13 @@ The following functions are given:
     </item>
     
     <item>
-      <title>1.2: String Manipulation</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</link>
+      <title>1.2: File systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/intro-labs/</guid>
-      <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
-  Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
-    </item>
-    
-    <item>
-      <title>1.3: Creating order: Structures</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs/</guid>
-      <description>Structs The only way to structure data in C is using the struct keyword:
-struct Person { int age; int gender; // no bool, remember?  char name[100]; // do not forget to add a size } We can use this structure to assign values like this:
-struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &amp;#34;Jaak Trekhaak&amp;#34;; - this is too easy - won&amp;#39;t work strcpy(jaak.name, &amp;#34;Jaak Trekhaak&amp;#34;); // include &amp;lt;string.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</guid>
+      <description>Introduction in Unix filesystems Files in Unix Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a file in Unix: we have used this to our advantage to inspect the inner workings of a process in the /proc directory.
+A file is the smallest possible unit of storage in a unix system.</description>
     </item>
     
     <item>
@@ -141,33 +121,34 @@ date and period structs to represent a date and a period of dates in code.</desc
     </item>
     
     <item>
-      <title>2.2: Arduino multi frequencies</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</link>
+      <title>2.2: String Manipulation</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab1_arduino-multfreq/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</guid>
+      <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
+  Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
+    </item>
+    
+    <item>
+      <title>2.3: Creating order: Structures</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs/</guid>
+      <description>Structs The only way to structure data in C is using the struct keyword:
+struct Person { int age; int gender; // no bool, remember?  char name[100]; // do not forget to add a size } We can use this structure to assign values like this:
+struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &amp;#34;Jaak Trekhaak&amp;#34;; - this is too easy - won&amp;#39;t work strcpy(jaak.name, &amp;#34;Jaak Trekhaak&amp;#34;); // include &amp;lt;string.</description>
+    </item>
+    
+    <item>
+      <title>3.2: Arduino multi frequencies</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</guid>
       <description>Time to make some harmonics.
   image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
-    </item>
-    
-    <item>
-      <title>4.2: The Hard Way: GDB</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/debugging-gdb/</guid>
-      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.
-2.1 With debug flags Let&amp;rsquo;s start with a heap-based application we would like to inspect:</description>
-    </item>
-    
-    <item>
-      <title>5.2: Getting your CLI-feet wet</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-introos/lab1_wetfeet/</guid>
-      <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
-Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
     </item>
     
     <item>
@@ -224,16 +205,6 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
     </item>
     
     <item>
-      <title>2.3 The timer</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/theory2_timer/</guid>
-      <description>With our sleeves rolled up and dirt all the way up to our elbows, it&amp;rsquo;s time to grab a coffee and do so reading/studying again. In this section interrupts will be introduced through the use of a timer.
-A lot of applications that are built using an Arduino need some sense of time. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.</description>
-    </item>
-    
-    <item>
       <title>3. Inter-thread communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -244,22 +215,42 @@ This task requires you to think about the bigger picture and forces you to expla
     </item>
     
     <item>
-      <title>3.1: Pointers and arrays</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</link>
+      <title>3.3 The timer</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory2_timer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/pointers/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory2_timer/</guid>
+      <description>With our sleeves rolled up and dirt all the way up to our elbows, it&amp;rsquo;s time to grab a coffee and do so reading/studying again. In this section interrupts will be introduced through the use of a timer.
+A lot of applications that are built using an Arduino need some sense of time. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.</description>
+    </item>
+    
+    <item>
+      <title>4.1: Pointers and arrays</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</guid>
       <description>In the schematic examples below, the following concepts can be explicitly distinguished:
  The name of a variable The value of a variable  And the following implicitly:
  The type of a variable The adres of a variable  The type of a variable determines the amount of memory that is freed up to be able to save the value. The value is either a current value or an address that refers to a different value.</description>
     </item>
     
     <item>
-      <title>4.3: The Middle Way: TDD</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</link>
+      <title>5.3: Getting your CLI-feet wet</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/lab1_wetfeet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-debugging/testing/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/lab1_wetfeet/</guid>
+      <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
+Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
+    </item>
+    
+    <item>
+      <title>5.3: The Middle Way: TDD</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/</guid>
       <description>Test-Driven Development: Google Test A concept you learned to love in the Software Engineering Skills course.
 It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.
 Google Test is a C++ (11) framework, not a C framework!</description>
@@ -317,33 +308,23 @@ As such, the actual method used most commonly in practice is segmentation with a
     </item>
     
     <item>
-      <title>1.4: Structs</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</link>
+      <title>2.4: Structs</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/structs-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
   Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
     </item>
     
     <item>
-      <title>2.4: Launch that rocket !!</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</link>
+      <title>3.4: Launch that rocket !!</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-interrupts/lab2_rocketlaunch/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</guid>
       <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
   Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
-    </item>
-    
-    <item>
-      <title>3.2: Practical Use of Pointers</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/practical-use/</guid>
-      <description>1. Changing values around Because in C everything passed by-value, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not primitives! How do you switch two numbers without giving anything back?
-#include &amp;lt;stdio.h&amp;gt;void swap(int *px, int *py) { int temp; temp = *px; *px = *py; *py = temp; } int main() { int x = 10, y = 20; swap(&amp;amp;x, &amp;amp;y); printf(&amp;#34;(%d, %d)\n&amp;#34;, x, y); // print (20, 10) } mermaid.</description>
     </item>
     
     <item>
@@ -355,6 +336,16 @@ As such, the actual method used most commonly in practice is segmentation with a
       <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.
 The scheduler follows these rules:
 The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
+    </item>
+    
+    <item>
+      <title>4.2: Practical Use of Pointers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</guid>
+      <description>1. Changing values around Because in C everything passed by-value, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not primitives! How do you switch two numbers without giving anything back?
+#include &amp;lt;stdio.h&amp;gt;void swap(int *px, int *py) { int temp; temp = *px; *px = *py; *py = temp; } int main() { int x = 10, y = 20; swap(&amp;amp;x, &amp;amp;y); printf(&amp;#34;(%d, %d)\n&amp;#34;, x, y); // print (20, 10) } mermaid.</description>
     </item>
     
     <item>
@@ -386,25 +377,15 @@ We have however also seen that this is not trivial: new processes need their own
     </item>
     
     <item>
-      <title>1.5: C Ecosystems</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</link>
+      <title>2.5: C Ecosystems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems/</guid>
       <description>Separation of concerns: functions in different C files To make the division clearer, we prepare the following C code, split into two different files:
 File hello.c:
 // hello.c char* hello() { return &amp;#34;heykes&amp;#34;; } File main.c:
 // main.c #include &amp;lt;printf.h&amp;gt;int main() { printf(&amp;#34;%s&amp;#34;, hello()); return 0; } The main function has no knowledge of hello() because it lives in a different source file. This will be fine if we link the machine code together after compiling.</description>
-    </item>
-    
-    <item>
-      <title>3.3: The Ancient Library</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-pointers/lab/</guid>
-      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
-   Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>
@@ -418,6 +399,26 @@ File hello.c:
     </item>
     
     <item>
+      <title>4.3: The Ancient Library</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</guid>
+      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
+   Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
+    </item>
+    
+    <item>
+      <title>5.2: The Hard Way: GDB</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-gdb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-gdb/</guid>
+      <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.
+2.1 With debug flags Let&amp;rsquo;s start with a heap-based application we would like to inspect:</description>
+    </item>
+    
+    <item>
       <title>6.5: Threads (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -428,11 +429,11 @@ Creating and inspecting threads  Write a C-program that has 3 threads. Each thre
     </item>
     
     <item>
-      <title>1.6: Splitting up Code</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</link>
+      <title>2.6: Splitting up Code</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-c/ecosystems-labs/</guid>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems-labs/</guid>
       <description>Building with Makefiles It is time to split up our Orc exercise code into different parts:
 mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  graph TD E{Executable} A[main.c] AAmain.o] B[orcs.c] BBorcs.o] D[orcs.h] E -- AA E -- BB AA -- A AA -- D BB -- B BB -- D  Create four different files:
  orcs.h - this is where your struct definition resides. orcs.c - this is where your methods related to orcs reside.</description>

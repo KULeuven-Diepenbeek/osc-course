@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>2.5: C Ecosystems :: Operating Systems and C</title>
+
+    
+    <link href="../../css/nucleus.css?1643892272" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1643892272" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1643892272" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1643892272" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1643892272" rel="stylesheet">
+    <link href="../../css/theme.css?1643892272" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1643892272" rel="stylesheet">
+    
+    <link href="../../css/theme-kul.css?1643892272" rel="stylesheet">
+    
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1643892272"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="../../ch2-c/ecosystems/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1643892272"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1643892272"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1643892272"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='../../'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch1-introos/" title="1: Intro in OS" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch1-introos/">
+          <i class='fab fa-linux'></i> 1: Intro in OS
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/intro-os/" title="1.1: Intro to OS using Linux" class="dd-item ">
+        <a href="../../ch1-introos/intro-os/">
+        <i class='fas fa-book'></i> 1.1: Intro to OS using Linux
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/filesystems/" title="1.2: File systems" class="dd-item ">
+        <a href="../../ch1-introos/filesystems/">
+        <i class='fab fa-linux'></i> 1.2: File systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch1-introos/lab1_wetfeet/" title="5.3: Getting your CLI-feet wet" class="dd-item ">
+        <a href="../../ch1-introos/lab1_wetfeet/">
+        <i class='fas fa-vial'></i> 5.3: Getting your CLI-feet wet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch2-c/" title="2: Introduction in C" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="../../ch2-c/">
+          <i class='far fa-keyboard'></i> 2: Introduction in C
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/intro/" title="2.1: The C programming language" class="dd-item ">
+        <a href="../../ch2-c/intro/">
+        <i class='fas fa-book'></i> 2.1: The C programming language
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/intro-labs/" title="2.2: String Manipulation" class="dd-item ">
+        <a href="../../ch2-c/intro-labs/">
+        <i class='fas fa-vial'></i> 2.2: String Manipulation
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/structs/" title="2.3: Creating order: Structures" class="dd-item ">
+        <a href="../../ch2-c/structs/">
+        <i class='fas fa-book'></i> 2.3: Creating order: Structures
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/structs-labs/" title="2.4: Structs" class="dd-item ">
+        <a href="../../ch2-c/structs-labs/">
+        <i class='fas fa-vial'></i> 2.4: Structs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems/" title="2.5: C Ecosystems" class="dd-item active">
+        <a href="../../ch2-c/ecosystems/">
+        <i class='fas fa-book'></i> 2.5: C Ecosystems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch2-c/ecosystems-labs/" title="2.6: Splitting up Code" class="dd-item ">
+        <a href="../../ch2-c/ecosystems-labs/">
+        <i class='fas fa-vial'></i> 2.6: Splitting up Code
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch3-interrupts/" title="3: TODO Robins New Thing" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch3-interrupts/">
+          <i class='fab fa-linux'></i> 3: TODO Robins New Thing
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/theory1_arduino/" title="3.1 Arduino UNO" class="dd-item ">
+        <a href="../../ch3-interrupts/theory1_arduino/">
+        <i class='fab fa-linux'></i> 3.1 Arduino UNO
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab1_arduino-multfreq/" title="3.2: Arduino multi frequencies" class="dd-item ">
+        <a href="../../ch3-interrupts/lab1_arduino-multfreq/">
+        <i class='fas fa-vial'></i> 3.2: Arduino multi frequencies
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/theory2_timer/" title="3.3 The timer" class="dd-item ">
+        <a href="../../ch3-interrupts/theory2_timer/">
+        <i class='fab fa-linux'></i> 3.3 The timer
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-interrupts/lab2_rocketlaunch/" title="3.4: Launch that rocket !!" class="dd-item ">
+        <a href="../../ch3-interrupts/lab2_rocketlaunch/">
+        <i class='fas fa-vial'></i> 3.4: Launch that rocket !!
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch4-pointers/" title="4: Pointers &amp; Arrays" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch4-pointers/">
+          <i class='far fa-keyboard'></i> 4: Pointers &amp; Arrays
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/pointers/" title="4.1: Pointers and arrays" class="dd-item ">
+        <a href="../../ch4-pointers/pointers/">
+        <i class='far fa-keyboard'></i> 4.1: Pointers and arrays
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/practical-use/" title="4.2: Practical Use of Pointers" class="dd-item ">
+        <a href="../../ch4-pointers/practical-use/">
+        <i class='far fa-keyboard'></i> 4.2: Practical Use of Pointers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch4-pointers/lab/" title="4.3: The Ancient Library" class="dd-item ">
+        <a href="../../ch4-pointers/lab/">
+        <i class='fas fa-vial'></i> 4.3: The Ancient Library
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch5-debugging/" title="5: Debugging" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch5-debugging/">
+          <i class='far fa-keyboard'></i> 5: Debugging
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-ide/" title="5.1: The Easy Way: IDEs" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-ide/">
+        <i class='far fa-keyboard'></i> 5.1: The Easy Way: IDEs
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/testing/" title="5.3: The Middle Way: TDD" class="dd-item ">
+        <a href="../../ch5-debugging/testing/">
+        <i class='far fa-keyboard'></i> 5.3: The Middle Way: TDD
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch5-debugging/debugging-gdb/" title="5.2: The Hard Way: GDB" class="dd-item ">
+        <a href="../../ch5-debugging/debugging-gdb/">
+        <i class='fas fa-vial'></i> 5.2: The Hard Way: GDB
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch6-tasks/" title="6: Task management" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch6-tasks/">
+          <i class='fab fa-linux'></i> 6: Task management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/processes/" title="6.1: Processes" class="dd-item ">
+        <a href="../../ch6-tasks/processes/">
+        <i class='fas fa-book'></i> 6.1: Processes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab1_processmgmt/" title="6.2: Processes (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab1_processmgmt/">
+        <i class='fas fa-vial'></i> 6.2: Processes (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/interprocess/" title="6.3: Inter Process communication" class="dd-item ">
+        <a href="../../ch6-tasks/interprocess/">
+        <i class='fas fa-book'></i> 6.3: Inter Process communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/threads/" title="6.4: Threads" class="dd-item ">
+        <a href="../../ch6-tasks/threads/">
+        <i class='fas fa-book'></i> 6.4: Threads
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab2_threadsmgmt/" title="6.5: Threads (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab2_threadsmgmt/">
+        <i class='fas fa-vial'></i>6.5: Threads (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/interthread/" title="6.6: Inter Thread communication" class="dd-item ">
+        <a href="../../ch6-tasks/interthread/">
+        <i class='fas fa-book'></i> 6.6: Inter Thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch6-tasks/lab3_interthreadcomm/" title="6.7: Inter-Thread communication (lab)" class="dd-item ">
+        <a href="../../ch6-tasks/lab3_interthreadcomm/">
+        <i class='fas fa-vial'></i> 6.7: Inter-Thread communication (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch7-scheduling/" title="7: CPU scheduling" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch7-scheduling/">
+          <i class='fab fa-linux'></i> 7: CPU scheduling
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/algorithms/" title="7.1: Scheduling algorithms" class="dd-item ">
+        <a href="../../ch7-scheduling/algorithms/">
+        <i class='fas fa-book'></i> 7.1: Scheduling algorithms
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab1_algorithms/" title="7.2: Scheduling algorithms (lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab1_algorithms/">
+        <i class='fas fa-vial'></i> 7.2: Scheduling algorithms (lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/towards/" title="7.3: Towards real-world schedulers" class="dd-item ">
+        <a href="../../ch7-scheduling/towards/">
+        <i class='fas fa-book'></i> 7.3: Towards real-world schedulers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch7-scheduling/lab2_niceguy/" title="7.4: Mr. nice guy(lab)" class="dd-item ">
+        <a href="../../ch7-scheduling/lab2_niceguy/">
+        <i class='fas fa-vial'></i> 7.4: Mr. nice guy(lab)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch8-stack/" title="8: The Stack &amp; The Heap" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch8-stack/">
+          <i class='far fa-keyboard'></i> 8: The Stack &amp; The Heap
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/stackvsheap/" title="8.1: The Stack &amp; the Heap" class="dd-item ">
+        <a href="../../ch8-stack/stackvsheap/">
+        <i class='fas fa-book'></i> 8.1: The Stack &amp; the Heap
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/inspection-labs/" title="8.2: Inspecting memory regions" class="dd-item ">
+        <a href="../../ch8-stack/inspection-labs/">
+        <i class='fas fa-vial'></i> 8.2: Inspecting memory regions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch8-stack/scope/" title="8.3: Different Scopes in C" class="dd-item ">
+        <a href="../../ch8-stack/scope/">
+        <i class='fas fa-book'></i> 8.3: Different Scopes in C
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../ch9-memory/">
+          <i class='fab fa-linux'></i> 9: Memory Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/memory/" title="9.1: Memory management" class="dd-item ">
+        <a href="../../ch9-memory/memory/">
+        <i class='fas fa-book'></i> 9.1: Memory management
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item ">
+        <a href="../../ch9-memory/lab1_segfault/">
+        <i class='fas fa-vial'></i> 9.2: Deliberate Segfaulting
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/paging/" title="9.3: Paging" class="dd-item ">
+        <a href="../../ch9-memory/paging/">
+        <i class='fas fa-book'></i> 9.3: Paging
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch9-memory/lab2_browsing/" title="9.4: Simply browsing through pages" class="dd-item ">
+        <a href="../../ch9-memory/lab2_browsing/">
+        <i class='fas fa-vial'></i> 9.4: Simply browsing through pages
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/chx-cs/" title="X: Capita Selecta" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../chx-cs/">
+          <i class='fab fa-linux'></i> X: Capita Selecta
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/rtos/" title="X.2: Real-time Operating Systems" class="dd-item ">
+        <a href="../../chx-cs/rtos/">
+        <i class='fab fa-linux'></i> X.2: Real-time Operating Systems
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/chx-cs/devdrivers/" title="X.3: Device Drivers" class="dd-item ">
+        <a href="../../chx-cs/devdrivers/">
+        <i class='fab fa-linux'></i> X.3: Device Drivers
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../exercises/">
+          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-integrated-ex/" title="1. Integrated C exercise" class="dd-item ">
+        <a href="../../exercises/c-integrated-ex/">
+        <i class='fas fa-pen-square'></i> 1. Integrated C exercise
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)" class="dd-item ">
+        <a href="../../exercises/c-debugging-testing/">
+        <i class='fas fa-pen-square'></i> 2. Testing in C(&#43;&#43;)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
+        <a href="../../exercises/tasks_inter_thread_communication/">
+        <i class='fas fa-pen-square'></i> 3. Inter-thread communication
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/exercises/scheduler/" title="4. Pseudo scheduler" class="dd-item ">
+        <a href="../../exercises/scheduler/">
+        <i class='fas fa-pen-square'></i> 4. Pseudo scheduler
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/appendix/" title="B. Appendix" class="dd-item
+        
+        
+        
+        ">
+      <a href="../../appendix/">
+          <i class='fab fa-github'></i> B. Appendix
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/lab_ll_rtos/" title="3.3: The Ancient Library (RTOS)" class="dd-item ">
+        <a href="../../appendix/lab_ll_rtos/">
+        <i class='fas fa-vial'></i> 3.3: The Ancient Library (RTOS)
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/reading/" title="1. Recommended reading" class="dd-item ">
+        <a href="../../appendix/reading/">
+        1. Recommended reading
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/installing/" title="2. Linux Installation Instructions" class="dd-item ">
+        <a href="../../appendix/installing/">
+        2. Linux Installation Instructions
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/appendix/cheat_sheet/" title="Cheat sheet" class="dd-item ">
+        <a href="../../appendix/cheat_sheet/">
+        Cheat sheet
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&amp;i=4082&amp;n=4&amp;t=01"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://kuleuven-diepenbeek.github.io/osc-course/TODO"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch2-c/'>2: Introduction in C</a> > 2.5: C Ecosystems
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</a></li>
+      </ul>
+    </li>
+    <li><a href="#compiling-everything">Compiling everything</a>
+      <ul>
+        <li></li>
+        <li><a href="#repeatedly-compiling">Repeatedly compiling</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              2.5: C Ecosystems
+            </h1>
+          
+
+        
+
+
+<h3 id="separation-of-concerns-functions-in-different-c-files">Separation of concerns: functions in different C files</h3>
+<p>To make the division clearer, we prepare the following C code, split into two different files:</p>
+<p>File <code>hello.c</code>:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// hello.c
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#75af00">hello</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;heykes&#34;</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>File <code>main.c</code>:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// main.c
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;printf.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%s&#34;</span><span style="color:#111">,</span> <span style="color:#111">hello</span><span style="color:#111">());</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>The main function has no knowledge of <code>hello()</code> because it lives in a different source file. This will be fine if we link the machine code together after compiling. compiling main.c separately gives this:</p>
+<pre>
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ gcc -c main.c
+main.c:5:18: warning: implicit declaration of function 'hello' is invalid in C99
+      [-Wimplicit-function-declaration]
+    printf("%s", hello());
+                 ^
+1 warning generated.
+</pre>
+<p>It is a <strong>WARNING</strong> - not an <strong>ERROR</strong> - so it still compiles! Wow! That is thanks to the <code>-c</code> flag (compile only). The warning is easily solved with a <strong>forward function declarations</strong> before the main function: <code>char* hello ();</code>. This is the crucial difference between declaration and definition. However, the problems are not yet solved if we want to link this without hello.c:</p>
+<pre>
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ gcc main.o
+Undefined symbols for architecture x86_64:
+  "_hello", referenced from:
+      _main in main.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+</pre>
+<p>Okay, so now a blocking <strong>ERROR</strong> was generated. We also need the hello.o binaries to arrive at a successful working program. For that, we first have to execute <code>gcc -c hello.c</code> and then<code> gcc main.o hello.o -o hey</code>.</p>
+<p>With the UNIX tool <code>nm</code> we can view the addresses that the linker needs to arrive at the <code>hey</code> executable. Try opening hello.o with a text editor. You then see something like this:</p>
+<pre>
+cffa edfe 0700 0001 0300 0000 0100 0000
+0300 0000 f001 0000 0020 0000 0000 0000
+1900 0000 8801 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+7800 0000 0000 0000 1002 0000 0000 0000
+7800 0000 0000 0000 0700 0000 0700 0000
+0400 0000 0000 0000 5f5f 7465 7874 0000
+0000 0000 0000 0000 5f5f 5445 5854 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0d00 0000 0000 0000 1002 0000 0400 0000
+8802 0000 0100 0000 0004 0080 0000 0000
+0000 0000 0000 0000 5f5f 6373 7472 696e
+6700 0000 0000 0000 5f5f 5445 5854 0000
+0000 0000 0000 0000 0d00 0000 0000 0000
+0700 0000 0000 0000 1d02 0000 0000 0000
+0000 0000 0000 0000 0200 0000 0000 0000
+0000 0000 0000 0000 5f5f 636f 6d70 6163
+745f 756e 7769 6e64 5f5f 4c44 0000 0000
+0000 0000 0000 0000 1800 0000 0000 0000
+2000 0000 0000 0000 2802 0000 0300 0000
+9002 0000 0100 0000 0000 0002 0000 0000
+0000 0000 0000 0000 5f5f 6568 5f66 7261
+6d65 0000 0000 0000 5f5f 5445 5854 0000
+0000 0000 0000 0000 3800 0000 0000 0000
+4000 0000 0000 0000 4802 0000 0300 0000
+0000 0000 0000 0000 0b00 0068 0000 0000
+0000 0000 0000 0000 0200 0000 1800 0000
+9802 0000 0400 0000 d802 0000 2400 0000
+0b00 0000 5000 0000 0000 0000 0200 0000
+0200 0000 0200 0000 0400 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+0000 0000 0000 0000 0000 0000 0000 0000
+5548 89e5 488d 0500 0000 005d c368 6579
+6b65 7300 0000 0000 0000 0000 0000 0000
+0d00 0000 0000 0001 0000 0000 0000 0000
+0000 0000 0000 0000 1400 0000 0000 0000
+017a 5200 0178 1001 100c 0708 9001 0000
+2400 0000 1c00 0000 a8ff ffff ffff ffff
+0d00 0000 0000 0000 0041 0e10 8602 430d
+0600 0000 0000 0000 0700 0000 0000 001d
+0000 0000 0100 0006 1200 0000 0e02 0000
+0d00 0000 0000 0000 1900 0000 0e04 0000
+3800 0000 0000 0000 0100 0000 0f01 0000
+0000 0000 0000 0000 0800 0000 0f04 0000
+5000 0000 0000 0000 005f 6861 6c6c 6f00
+5f68 616c 6c6f 2e65 6800 4c5f 2e73 7472
+0045 485f 6672 616d 6530 0000
+</pre>
+<p>Beautiful, but not very clear. <code>nm</code> does help some:</p>
+<pre>
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm main.o
+0000000000000060 s EH_frame0
+0000000000000037 s L_.str
+                 U _hello
+0000000000000000 T _main
+0000000000000078 S _main.eh
+                 U _printf
+Wouters-MacBook-Air:cmake-build-debug wgroenev$ nm hello.o
+0000000000000038 s EH_frame0
+000000000000000d s L_.str
+0000000000000000 T _hello
+0000000000000050 S _hello.eh
+</pre>
+<p>You can see that in main.o the function <code>_hello</code> is assigned an <strong>unknown address</strong> (hence the U). This means that the left hand should assume that it is yet to come - and luckily it is correctly defined in hello.o at address <code>0000000000000000</code> (there is only 1 function).</p>
+
+<div class="notices note" ><p>Note that both .o files have overlapping &ldquo;address spaces&rdquo;: both <code>_hello</code> and <code>_main</code> are at address <code>0000000000000000</code>; this is normal. The linker will properly change/offset these addresses when creating the final program so they no longer overlap.</p>
+</div>
+
+<p>This is the way the files will be coupled to each other:</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD
+    A[hello.c]
+    B[main.c]
+    C>hello.o]
+    D>main.o]
+    E{hey executable}
+    E --> C
+    E -->|"search main() via linker"|D
+    C --> A
+    D --> B
+    D -.->|"search hello() via linker"|C
+
+</div>
+<p>Functions that have been declared in other source files must therefore be redefined (possibly with the <code>external</code> keyword) in your own source file where you wish to use the function. This way the compiler knows that there is a function with that signature, but &ldquo;he will still come across it&rdquo;. This will be further elaborated in the next labs.</p>
+<h2 id="compiling-everything">Compiling everything</h2>
+<p>We use the UNIX GNU <code>gcc</code> compiler to compile C source files and convert them into binaries. The simplest possible way to do so is:</p>
+<blockquote>
+<p><code>gcc *.c</code></p>
+</blockquote>
+<p>Due to the lack of a target file name, the compiler creates an &ldquo;a.out&rdquo; file that you can execute (<code>chmod +x</code> has already been done for you). You can specify this with the &ldquo;-o&rdquo; flag. If you have something more to link, put everything in a row one after the other.</p>
+<p>However, there are still a lot of compiler options that are <a href="https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html">explained at gcc.gnu.org</a> that you can play with.</p>
+
+<div class="notices note" ><p>When targeting another platform, you will need a <strong>cross-compiler</strong> that compiles on your computer for another computer. That is, the instruction set might differ! (64 or 32-BIT, RISC/ARM, &hellip;)<br/>
+Instead of using the default GCC compiler: <code>gcc bla.c</code>, you will download and install a custom cross-compiler and evoke it the same way: <code>arm-eabi-none-gcc bla.c</code>. The Game Boy Advance (GBA) or RaspberryPi for instance have an ARM chip-set and require this cross-compiler. This differs from most x86 chip-sets that leverages <code>gcc</code>.</p>
+</div>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>Are you still cross-compiling if you are compiling on an ARM machine yourself, using <code>gcc</code>, compiled for that chip-set? What if you compile code on the Raspberry for your laptop?</p>
+
+	</div>
+</div>
+<h4 id="step-1-compiling">Step 1: compiling</h4>
+<p>As seen in the above schematic, executing your source code requires the activation of two steps: compiling (1), and linking (2). <a href="https://en.wikipedia.org/wiki/C_preprocessor">C Preprocessor flags</a> get parsed just before compiling. Simply calling the <code>gcc</code> compiler executes all steps at once. Only compiling is done using the <code>-c</code> statement (source input) and providing the source files as arguments, producing <strong>object files</strong>, which can be then linked into a binary.</p>
+<h4 id="step-2-linking">Step 2: linking</h4>
+<p>After obtaining object files it is simply a matter of concatenating them (&lsquo;linking&rsquo;), to create the native executable binary file, using the <code>-o</code> flag and providing the object files as arguments. After linking, inspecting the disassembly (see <a href="../../ch5-debugging">chapter 5, debugging</a> on how to do so in detail) shows the concatenated results.</p>
+<h3 id="repeatedly-compiling">Repeatedly compiling</h3>
+<h4 id="1-using-a-script">(1) using a script</h4>
+<p>It is annoying to have to type the same command all the time, so a simple alternative is to put your <code>gcc</code> command in a shell script:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>clear <span style="color:#f92672">&amp;&amp;</span> gcc -o mystuff source.c <span style="color:#f92672">&amp;&amp;</span> ./mystuff
+</code></pre></div><h4 id="2-makefiles">(2) Makefiles</h4>
+<p>In the C world there is such a thing as a &ldquo;Makefile&rdquo; that defines which source files should be compiled, and in which order. This is useful for large applications where an overview must be kept.</p>
+<p>With Makefiles you can describe &ldquo;targets&rdquo; that perform certain actions for you. For example, cleaning up binaries, compiling and linking, all as a separate step. Stringing steps together is of course also possible.</p>
+<p>File <code>Makefile</code>:</p>
+<pre><code>.DEFAULT_GOAL := all
+
+CC=gcc
+
+clean:
+    rm -rf *.o
+    rm -rf *.out
+
+compile:
+    $(CC) -c main.c -o main.o
+
+link:
+    $(CC) -o main.out main.o
+
+all: clean compile link
+</code></pre><p>Typically, the compiler used is set as a shell variable (CC = gcc). You can see here that compiling (gcc with the -c option does not link) and linking is split into separate make &lsquo;actions&rsquo;. This is not really necessary in our exercises, but shows the organizational strength of Make here.</p>
+<p>Executing the above steps can be done using the <code>make</code> command and a default goal (all), or <code>make compile</code> for a specific goal (executes the &lsquo;compile&rsquo; steps only).</p>
+<p>For more information on the correct Makefile syntax, see the <a href="ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html">GNU make</a> documentation.</p>
+
+<div class="ex">
+	<div class="inner">
+    	<p>Create a Makefile that contains two targets: <code>compile</code> and <code>run</code>. The default target should execute both in sequence. As for what to compile, write a simple program that outputs &ldquo;hello, (name)&rdquo;. The name is something you ask from the user using the stdio function <code>gets()</code>.</p>
+
+	</div>
+</div>
+<h4 id="3-ides">(3) IDEs</h4>
+<h5 id="lightweights">Lightweights</h5>
+<p>A source file consists of simply plain text. Any text editor is sufficient to write your C program. However, it may be useful to use Sublime Text or Visual Studio Code. These modern powerful editors have built-in auto-completion and build tools.</p>
+<ul>
+<li><a href="https://www.thecrazyprogrammer.com/2017/04/how-to-run-c-and-c-program-in-sublime-text.html">Sublime Text 3 Build Systems en C/C++</a> and <a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html">docs</a></li>
+<li><a href="https://code.visualstudio.com/docs/languages/cpp">Visual Studio Code C/C++ integration</a></li>
+</ul>
+<p>We will not stop old-school fans from using Emacs or Vi(m).</p>
+<h5 id="heavyweights">Heavyweights</h5>
+<p><a href="https://www.jetbrains.com/clion/">CLion</a> is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it&rsquo;s built on the same platform (IDEA) - even most shortcuts are the same.</p>
+<figure>
+    <img src="../../img/clion.png"/> 
+</figure>
+<p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: <code>CMakeLists.txt</code> contains instructions to generate a<code> Makefile</code>:</p>
+<pre>
+cmake_minimum_required(VERSION 3.10)
+project(my_little_pony)
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
+</pre>
+<p>A simple CMake file is much easier to read and write than a Makefile. See <a href="https://cmake.org/cmake-tutorial/">CMake tutorial</a> for more information. CLion manages the <code>add_executable</code> arguments for you: adding new files to your project will also automatically add them to the list.</p>
+<p>Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling <code>gcc file.c</code> yourself every single time.</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD
+    cmake[CMake]
+    make[Makefiles]
+    cmd[gcc & cmdline]
+    cmake --> make
+    make --> cmd
+
+</div>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../ch2-c/structs-labs/" title="2.4: Structs"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../ch2-c/ecosystems-labs/" title="2.6: Splitting up Code" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1643892272"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1643892272"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1643892272"></script>
+    <script src="../../js/jquery.sticky.js?1643892272"></script>
+    <script src="../../js/featherlight.min.js?1643892272"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1643892272"></script>
+    <script src="../../js/learn.js?1643892272"></script>
+    <script src="../../js/hugo-learn.js?1643892272"></script>
+    
+        
+            <script src="../../mermaid/mermaid.js?1643892272"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
+

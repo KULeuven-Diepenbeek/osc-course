@@ -6,7 +6,9 @@ weight: 2
 
 ## Introduction in Unix filesystems
 
-### Files in Unix
+### Everything is a file
+
+On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users' privileges for that file (read, write, execute) are based on the **access permissions** (see below).
 
 Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a _file_ in Unix: we have used this to our advantage to inspect the inner workings of a process in the `/proc` directory. 
 
@@ -39,11 +41,15 @@ Depending on the Unix flavor, the location of the device files will be different
 
 ### File attributes
 
-When you list all files using `ls -la`, you see something like this:
+When you list all files using `ls -la` (list all), you see something like this:
 
 {{<figure src="/img/file_attributes.png" title="src: https://homepages.uc.edu/~thomam/">}}
 
 These are attributes of each file. As you can see in the above image, the permission mode also indicates whether it's a directory file or not, denoted by `d` at the beginning. The rest of the permissiom modes indicate whether or not the file is writable. 
+
+{{% notice note %}}
+You will also notice two special/strange entries at the top of the `ls -al` output, named "." and "..". These are not real files on the disk, but rather virtual files that help navigation in the filesystem and the execution of commands. Firstly, the ".." always means "the parent of this directory". So if you are at the path "/home/user/test" and you do `cd ..`, you will automatically go to "/home/user". Doing `cd ../..` will go to "/home". Secondly, the single dot "." means "the current directory". This comes in handy if you want to search for something in files in the current directory or copy something to where you are at that moment without having to type the entire path. 
+{{% /notice %}}
 
 There are five different permissiom mode characters displayed: 
 
@@ -73,6 +79,11 @@ Some examples:
 - permission `777` means everyone can do everything. _Bad idea_.
 
 Of course the `root` user can still write to files with permission `400`.
+
+A complete overview of the permission system, neatly summarized by Julia Evans:
+
+{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: drawings.jvns.ca"%}}
+
 
 ## File system (FS) flavors
 

@@ -4,11 +4,7 @@ pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
 
-TODO intro tekst aanpassen
-
-In Chapter X the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?  
-
-When more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: **Operating systems !!!** (OSes)
+Operating systems are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the "bare metal"---the hardware. Even as a programmer, you'll always have to go through the operating system and ask for permissions and so forth. In this chapter, we'll have our first look at how this works. 
 
 The image below shows the classic picture when introducing OSes. The user **never** talks directly to hardware (or the OS), but always to the software.
 
@@ -35,13 +31,13 @@ Giving a single, clear definition of what an operating system is, is no simple j
 * Guaranteeing that different tasks are isolated and protected (from each other);
 * ...
 
-One could say an OS is **an abstraction layer** that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. 
+One could say an OS is **an abstraction layer** that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. By providing common services for computer programs, the OS negotiates between different layers: the hardware and the application. 
 
 
 Different OSes exist for different computing platforms.
 <table style="border: 0px;">
     <tr>
-        <td width="50%"><h4>Laptops, desktops, and servers</h4>On laptops, desktops, and servers, the most well known operating systems are used. These include: Microsoft's Windows, Linux, and MAC OS. It goes without saying that there are many more operating systems for these platforms, but some/many of them are fairly unknown to the wider public. These might include: DOS, BeOS, BSD, Unix, Solaris, SunOS, ...</td>
+        <td width="50%"><h4>Laptops, desktops, and servers</h4>On laptops, desktops, and servers, the most well known operating systems are used. These include: Microsoft's Windows, Linux, and MacOS. It goes without saying that there are many more operating systems for these platforms, but some/many of them are fairly unknown to the wider public. These might include: DOS, BeOS, BSD, Unix, Solaris, SunOS, ...</td>
         <td>{{< figure src="https://3.imimg.com/data3/OP/NK/MY-2971758/laptop-desktop-and-server-trading-service-250x250.jpg" width="500px" title="Source: imimg.com" >}}</td>
     </tr>
     <tr><td>{{< figure src="https://images.fridaymagazine.ae/1_2244719/imagesList_0/159508486_main.jpg" width="500px" title="Source: fridaymagazine.ae" >}}</td>
@@ -53,6 +49,21 @@ In recent years, the distinction between these types of OSes has started to fade
 {{% task %}}
 Which operating system is the best ?
 {{% /task %}}
+
+Perhaps a more interesting question:
+
+{{% task %}}
+Do you know which flavor of OS runs on:
+
+- An [Evercade system](https://evercade.co.uk/) that emulates older games?
+- The original Xbox and Xbox 360? 
+- What about the later Xbox One X/S?
+- The [Nokia 500](https://www.gsmarena.com/nokia_500-4085.php) smartphone?
+- Your average Virtual Private Server?
+- (trick question) the Game Boy Advance?
+- (trick question) An arcade system that hosts Street Fighter II?
+{{% /task %}}
+
 
 ### Types of operating systems
 
@@ -85,13 +96,16 @@ When the user, or the software on the user's behalf, needs something from the mo
 
 These System Calls form the **API** (Application Programming Interface) between the higher-level software/applications in user mode (what you will typically write) and the lower-level features and hardware in kernel mode.
 
+
 ## Linux
 
 Since there are many OSes, we can of course not discuss them all. Most are however very similar in concept and in the basic systems they provide. As such, we will mainly focus on explaining these basic mechanisms in this course (see above).  
 
 Still, to be able to get some hands-on experience with these systems, we need to choose one OS: the **Linux OS**. We do this because it is a very advanced and stable OS that is used extensively worldwide, and because it is open source (meaning that, unlike Windows and MacOS, we can view all the code in the kernel and even change it). 
 
-The Linux kernel almost never comes on its own but is packaged in a distribution (a.k.a. a "distro"). Such a distro is the combination of various pieces of software and the linux kernel. A distro can for example include a Graphical User Interface (GUI) layer, Web browsers, file management programs etc. As such, there is a large number of Linux distributions available, which mainly differ in the additional software they provide on top of the Linux kernel (which is pretty much the same across distros). Which one to pick was (and probably is) the start of multiple programmer wars, as everyone has their own preference. Our recommendation is to take into consideration what you want to use it for. For example when using Linux on a Web server, you probably don't need a full GUI or a Web browser, which is different from when you want to use it as your main OS on your laptop. 
+The Linux kernel, available at [kernel.org](https://kernel.org/), almost never comes on its own but is packaged in a distribution (a.k.a. a "distro"). Such a distro is the combination of various pieces of software and the linux kernel itself. A distro can for example include a Graphical User Interface (GUI) layer, Web browsers, file management programs etc. 
+
+As such, there is a large number of Linux distributions available, which mainly differ in the additional software they provide on top of the Linux kernel (which is pretty much the same across distros). Which one to pick was (and probably is) the start of multiple programmer wars, as everyone has their own preference. Our recommendation is to take into consideration what you want to use it for. For example when using Linux on a Web server, you probably don't need a full GUI or a Web browser, which is different from when you want to use it as your main OS on your laptop. 
 
 {{< figure src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" title="source: Wikimedia" >}}
 
@@ -114,12 +128,29 @@ If you search for Bodhi in the image above, you'll learn that Bodhi is based on 
 {{% task %}}
 1. Use apt to see a list of the installed packages in the VM
 2. Update the list of packages in the VM
-3. Upgrade all packages to the most recently available version
-4. Install **frozen-bubble** in your VM
+3. Install **frozen-bubble** in your VM
+4. Upgrade all packages to the most recently available version (this can take a while... Interrupting with `CTRL+C`/`CTRL+Z` shouldn't be dangerous, but sometimes can be!)
 
 (tip: adding -h or --help to a Linux command typically shows you the main options. Try `apt -h`.)
 {{% /task %}}
 
+Note that Windows nowadays also has a decent first- and third-party package manager ([Chocolatey](https://chocolatey.org/)), as does MacOS ([Homebrew](https://brew.sh/)). These systems work exactly like the above Linux package managers and can be interacted with through the command line.
+
+### Where does Linux fit in with other UNIX-like OSes?
+
+Good question. The huge image above merely displays **different distros** of the Linux OS, but Linux originated from experimental builds of the research OS called UNIX in the sixties---as does MacOS, BSD, and the like ([source](https://www.quora.com/How-are-BSD-Unix-and-Linux-different)):
+
+![](/img/unix.png)
+
+For more information on how UNIX fits within Linux and other OSes, see [Awesome-UNIX](https://github.com/sirredbeard/Awesome-UNIX).
+
+#### But what about the difference between GNU/Linux and Linux?
+
+"Linux", as it is, is just `kernel.org`: the kernel on its own. A great start, but not exactly an operating system. To be a complete OS, you'll need other applications that help managing the software on top of it. Such as a "toolchain": compilers (GCC), makefiles, text editors (Emacs), etc---which we'll use in chapter 2 and forward. 
+
+Modern Linux distros always come equipped with the GNU toolchain. The creator of GNU, Richard Stalman, envisioned a fully open source version of UNIX (GNU stands for "GNU's Not UNIX!"), but by 1991, only the toolchains were done. Thanks to Linus Torvalds, the creator of the Linux kernel, finally an open source version of an OS could exist, hence GNU/Linux. The "pure" GNU kernel (GNU/Hurd on the image above) still isn't production-ready... 
+
+Conclusion: when we talk about "Linux" as a complete OS, we actually mean GNU/Linux. 
 
 ## Got Root ?
 Most operating systems allow for multiple users to share one system and provide ways to clearly separate those users (and what they can access) from each other. Like in most OSes, Linux also has an **administrative** user, or super-user: the **root** user, who can access -everything- on the system. This highly privileged user is typically not used when doing day-to-day work, as it can be dangerous (for example, the root user can remove all files on the hard drive with a single command).
@@ -133,22 +164,6 @@ Every user that has a login on a Linux system also automatically belongs to a **
 {{% task %}}
 Find the single command that can remove all files on the hard drive online (but please don't try it!)
 {{% /task %}}
-
-## On files and such
-
-On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users' privileges for that file (read, write, execute) are based on the **access permissions**.
-
-{{% figure src="/img/os/accesspermissions.png" title="Access permissions in an example folder"%}}
-
-The image above shows the content of a folder **example** this folder contains: 2 files, 2 directories, a *hidden* directory (.secretfolder), and a *hidden* file (.ssshhhtt.txt). With *hidden* is meant that these files are not seen with a normal *ls*. To see these files the **-a** options has to be present. In Linux, all files starting with a "dot" character (.) are hidden and are often called "dotfiles". They are often used to store configuration metadata; for example, git repositories have a .gitignore file with a list of files/directories that should not be included in the version control system.
-
-You will also notice two special/strange entries at the top of the `ls -al` output, named "." and "..". These are not real files on the disk, but rather virtual files that help navigation in the filesystem and the execution of commands. Firstly, the ".." always means "the parent of this directory". So if you are at the path "/home/user/test" and you do `cd ..`, you will automatically go to "/home/user". Doing `cd ../..` will go to "/home". Secondly, the single dot "." means "the current directory". This comes in handy if you want to search for something in files in the current directory or copy something to where you are at that moment without having to type the entire path. 
-
-With the **-l** parameter for `ls` the *long listing* format is shown (as is seen in the image above). With this, the access permissions are shown in the first 10 characters of each line:
-
-{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: drawings.jvns.ca"%}}
-
-The first character indicates whether the entry is a directory (d) or a file (-). 
 
 
 ## Out of fuel ? Take a Shell
@@ -164,10 +179,14 @@ For a desktop/laptop that is running Linux, the GUI approach is typically used. 
 
 For embedded systems or Linux running on servers, the CLI is more appropriate. Running the Graphical User Interface requires CPU time and storage. Both are scarce on an embedded system. Since everything can be done through the command line, removing the GUI is a win-win. Additionally, it is useful to learn the CLI commands even if you normally use the GUI, because they play a large part in writing automation scripts for the OS: automation scripts typically do not indicate commands like "click button at location x,y" but rather execute the necessary CLI commands directly.
 
-When a CLI is used in Linux (or an emulator), a **shell** is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As with anything, there are many flavours of shells: sh, bash, ksh, zsh, ... Most shells provide the same basic commands, but others allow additional functionality and even full programming environments. You can write so-called "shell scripts" (typically have the file extension ".sh"), which are mostly lists of CLI commands, that are used extensively to automate operations on Linux systems.
+No idea what terminal you're running? No problem, `echo $TERM` will tell you exactly that. On my MacOS, it outputs `xterm-256color` (using the [iTerm2 terminal](https://iterm2.com/)).
+
+When a CLI is used in Linux (or an emulator), a **shell** is started. The shell is a small program that translates commands, given by the user, and gives these translations to the OS. As with anything, there are many flavours of shells: sh, bash, ksh, [fish](https://fishshell.com/), [zsh](https://www.zsh.org/), ... Most shells provide the same basic commands, but others allow additional functionality and even full programming environments. You can write so-called "shell scripts" (typically have the file extension ".sh"), which are mostly lists of CLI commands, that are used extensively to automate operations on Linux systems.
 
 Once the shell is running and the user asks to create new processes, all of these newly create processes will have the shell as a parent process (this will become important later on).
 
 {{% notice note %}}
 As a side note: Linux is not the only OS that uses a CLI. Windows for example has multiple, including the older "Command Prompt" and the more recent "Powershell". 
 {{% /notice %}}
+
+No idea what shell you're running? No problem, `echo $SHELL` will tell you exactly that. On my MacOS, it outputs `/bin/zsh`: I have Z shell installed. 

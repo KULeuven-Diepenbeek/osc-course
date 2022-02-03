@@ -1,5 +1,5 @@
 ---
-title: '5.3: Getting your CLI-feet wet'
+title: '1.3: Getting your CLI-feet wet'
 pre: "<i class='fas fa-vial'></i> "
 weight: 3
 ---

@@ -1,5 +1,5 @@
 ---
-title: '3.1: Pointers and arrays'
+title: '4.1: Pointers and arrays'
 pre: "<i class='far fa-keyboard'></i> "
 weight: 3
 ---
@@ -35,7 +35,7 @@ Where the type, `int`, reserves a few bytes depending on the target platform (`s
 
 C uses a _pass-by-value_ system to pass variables to functions. This means that the value is copied, and that function cannot make changes to the original value. That is something positive: **separation of concerns**.
 
-When we think of our person example of [chapter 1](/theory/c/chap1), that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a "pointer": a reference to the current data. Objects are _passed by-reference_ by default in Java - so in C we have to do something extra for this.
+When we think of our person example of [chapter 2](/ch2-c), that struct is therefore always copied. That can be very inefficient, depending on the size of the data! To avoid this, we use a "pointer": a reference to the current data. Objects are _passed by-reference_ by default in Java - so in C we have to do something extra for this.
 
 Instead of `is_old(struct Person person)` the signature becomes `is_old(struct Person * person)` (note the added asterik *). We have two options for reading a value here:
 
@@ -117,7 +117,7 @@ graph LR;
     B --> |ref| C[val<br/>10]
 {{< /mermaid >}}
 
-Practical use of the double `**` notation would be to relink a pointer to another location. As you know from [chapter one](/theory/c/chap1), variables in C are passed along **by value**: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the _dereference_ operator. But chaining _the address_ itself is only possible with double pointers:
+Practical use of the double `**` notation would be to relink a pointer to another location. As you know from [chapter two](/ch2-c), variables in C are passed along **by value**: even pointer values. This means a copy of a pointer is created whenever calling a function with a pointer. Chaining the actual value is possible by following the address using the _dereference_ operator. But chaining _the address_ itself is only possible with double pointers:
 
 ```C
 #include <stdio.h>
@@ -159,7 +159,7 @@ The definition of a pointer does not prescribe the exact location of the `*`: `i
 
 #### Function pointers
 
-Now things are getting interesting. A pointer can also point **to a function**. (Remember the datastructure from [chapter one](/theory/c/chap1)?). You will need the same signature definition to do that:
+Now things are getting interesting. A pointer can also point **to a function**. (Remember the datastructure from [chapter 2](/ch2-c)?). You will need the same signature definition to do that:
 
 ```C
 #include <stdio.h>
@@ -224,7 +224,7 @@ int main() {
 }
 ```
 
-Now you understand how we used the 'callback function' `is_old()` in the Person struct in [chapter 1](/theory/c/chap1).
+Now you understand how we used the 'callback function' `is_old()` in the Person struct in [chapter 2](/ch2-c).
 
 ### Watch out for syntax!
 

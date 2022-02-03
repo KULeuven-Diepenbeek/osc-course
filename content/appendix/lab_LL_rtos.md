@@ -128,7 +128,7 @@ int main() {
 
 Tips:
 
-1. Re-read [chapter 3 (pointers)](/ch3-pointers)!
+1. Re-read [chapter 4 (pointers)](/ch4-pointers)!
 2. You will need two extra functions, `sort_books_by_author()` and `sort_books_by_title()`.
 
 {{% task %}}

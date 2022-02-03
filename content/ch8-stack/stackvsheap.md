@@ -112,7 +112,7 @@ Use the heap when:
 * You like managing things yourself.
 * Variable size could be dynamic.
 
-What piece of code could be _dynamic_ in size? Data structures, such as linked lists from [chapter 3: pointers and arrays](/ch3-pointers), are a good candidate for this: arrays, sets, maps, and any other form of collection can grow and shrink in size, therefore need dynamic memory mapped. Using `[]` will, in most cases, not suffice in the C programming language, unless you are doing something very simple. 
+What piece of code could be _dynamic_ in size? Data structures, such as linked lists from [chapter 4: pointers and arrays](/ch4-pointers), are a good candidate for this: arrays, sets, maps, and any other form of collection can grow and shrink in size, therefore need dynamic memory mapped. Using `[]` will, in most cases, not suffice in the C programming language, unless you are doing something very simple. 
 
 ## Memory management
 

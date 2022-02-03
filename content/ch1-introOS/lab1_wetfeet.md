@@ -1,7 +1,7 @@
 ---
-title: '5.2: Getting your CLI-feet wet'
+title: '5.3: Getting your CLI-feet wet'
 pre: "<i class='fas fa-vial'></i> "
-weight: 2
+weight: 3
 ---
 
 <center><video src="/img/os/b.mp4" autoplay loop style="width: 60%"></video>

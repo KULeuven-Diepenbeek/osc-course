@@ -1,5 +1,5 @@
 ---
-title: '2.2: Arduino multi frequencies'
+title: '3.2: Arduino multi frequencies'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---

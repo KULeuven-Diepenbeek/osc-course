@@ -1,7 +1,7 @@
 ---
-title: 'X.1: File systems'
+title: '1.2: File systems'
 pre: "<i class='fab fa-linux'></i> "
-weight: 1
+weight: 2
 ---
 
 ## Introduction in Unix filesystems

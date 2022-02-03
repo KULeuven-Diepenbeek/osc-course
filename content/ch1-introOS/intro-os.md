@@ -1,10 +1,12 @@
 ---
-title: '5.1: Intro to OS using Linux'
+title: '1.1: Intro to OS using Linux'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
 
-In Chapter 2 the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?  
+TODO intro tekst aanpassen
+
+In Chapter X the concept of interrupts was introduced. By using these interrupts it becomes easier to execute multiple independent tasks on a single processor. However, can you imagine developing a complete office-suite using interrupts?  
 
 When more tasks come into play, interrupts will not be the answer to our question. But guess what the answer could be: **Operating systems !!!** (OSes)
 

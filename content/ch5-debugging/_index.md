@@ -1,11 +1,11 @@
 ---
-title: '4: Debugging'
+title: '5: Debugging'
 pre: "<i class='far fa-keyboard'></i> "
 chapter: true
-weight: 4
+weight: 5
 ---
 
-### Chapter 4
+### Chapter 5
 
 # Debugging in C
 

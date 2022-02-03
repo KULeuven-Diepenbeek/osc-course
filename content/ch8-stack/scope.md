@@ -25,7 +25,7 @@ int main() {
 What is the output of the above program? I'm sure you know the answer, but... why?
 {{% /task %}}
 
-If you forget how `void*` works, please re-read [chapter 3: pointers and arrays](/ch3-pointers).
+If you forget how `void*` works, please re-read [chapter 4: pointers and arrays](/ch4-pointers).
 
 #### Local variables
 

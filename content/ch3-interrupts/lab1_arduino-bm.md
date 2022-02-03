@@ -1,5 +1,5 @@
 ---
-title: '2.2: Bare metal Arduino'
+title: '3.2: Bare metal Arduino'
 pre: "<i class='fas fa-vial'></i> "
 weight: 2
 draft: true
@@ -43,7 +43,7 @@ int main(void) {
 To compile these example files, simply use `make`. The Makefile can also be used to flash the binary to the arduino: `make flash t=filename`. The *filename* should be replaced with the actual filename of the binary.
 
 
-#### What is happening in this code ? 
+#### What is happening in this code ?
 
 The approach in the C code is not too different from the Arduino IDE approach. The direction bit of the LED is set to *output*: `bit_set(PORTD, HEARTBEAT_LED_BIT);` In the *Loop* function, 4 statements are repeated forever:
 

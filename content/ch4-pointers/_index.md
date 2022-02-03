@@ -1,15 +1,15 @@
 ---
-title: '3: Pointers & Arrays'
+title: '4: Pointers & Arrays'
 pre: "<i class='far fa-keyboard'></i> "
 chapter: true
-weight: 3
+weight: 4
 ---
 
-### Chapter 3
+### Chapter 4
 
 # Pointers and Arrays
 
-Chapter 3 handles the following subjects: 
+Chapter 4 handles the following subjects: 
 
 - Arrays in C
 - Pointers in C: arrays don't exist!

@@ -1,5 +1,5 @@
 ---
-title: '3.3: The Ancient Library'
+title: '4.3: The Ancient Library'
 pre: "<i class='fas fa-vial'></i> "
 weight: 5
 ---
@@ -114,10 +114,10 @@ Create a function pointer that is initialized to the address of your ascending s
 
 Tips:
 
-1. Re-read [chapter 3 (pointers)](/ch3-pointers)!
+1. Re-read [chapter 4 (pointers)](/ch4-pointers)!
 2. You will need two extra functions, `asc()` and `desc()`, besides `neera_encounter()`.
 
-### 5. Do you rest until fully healed? 
+### 5. Do you rest until fully healed?
 
 > The rumble of Neera's spell made your head rush and you fill dizzy. Maybe it would be better for you and your party to stay for the night and set up camp. During the night, you make the time to write up on the past events. It looks like it will be quite a thick book, something new to add to the old library. Now, should you add the book at the beginning of the row, or all the way at the end?
 

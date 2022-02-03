@@ -1,7 +1,7 @@
 ---
-title: '4.2: The Hard Way: GDB'
+title: '5.2: The Hard Way: GDB'
 pre: "<i class='fas fa-vial'></i> "
-weight: 2
+weight: 5
 ---
 
 ## 2. The hard way: Command-line debugging using GDB

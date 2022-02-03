@@ -1,5 +1,5 @@
 ---
-title: '2.3 The timer'
+title: '3.3 The timer'
 pre: "<i class='fab fa-linux'></i> "
 weight: 3
 ---

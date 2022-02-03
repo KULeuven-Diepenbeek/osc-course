@@ -1,5 +1,5 @@
 ---
-title: '1.4: Structs'
+title: '2.4: Structs'
 pre: "<i class='fas fa-vial'></i> "
 weight: 4
 ---

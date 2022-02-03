@@ -1,5 +1,5 @@
 ---
-title: '3.2: Practical Use of Pointers'
+title: '4.2: Practical Use of Pointers'
 pre: "<i class='far fa-keyboard'></i> "
 weight: 4
 ---
@@ -115,7 +115,7 @@ int main() {
 }
 ```
 
-**Depending on your compiler**, the above code will print "hey ot", meaning your ptr pointer is pointing to the next variable on the local stack after the four characters "h", "e", "y", "\0", from the txt variable, are processed within the for loop. We will go more into detail on this in [chapter 4](/theory/c/chap4).
+**Depending on your compiler**, the above code will print "hey ot", meaning your ptr pointer is pointing to the next variable on the local stack after the four characters "h", "e", "y", "\0", from the txt variable, are processed within the for loop. We will go more into detail on this in [chapter 5](/ch5-debugging).
 
 {{% task %}}
 What happens when I change `txt[4]` to `txt[3]`?

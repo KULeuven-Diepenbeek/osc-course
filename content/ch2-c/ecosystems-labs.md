@@ -1,5 +1,5 @@
 ---
-title: '1.6: Splitting up Code'
+title: '2.6: Splitting up Code'
 pre: "<i class='fas fa-vial'></i> "
 weight: 6
 ---

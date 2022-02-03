@@ -1,5 +1,5 @@
 ---
-title: '1.3: Creating order: Structures'
+title: '2.3: Creating order: Structures'
 pre: "<i class='fas fa-book'></i> "
 weight: 2
 ---
@@ -60,7 +60,7 @@ int main() {
 }
 ```
 
-It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. The function pointer, or callback method, will be further explained in [chapter 2](/theory/c/chap2).
+It looks a bit weird because there is no such thing as a magical variable named `this` - that's one argument you have to provide yourself. You can emulate functions as members of a data structure, but as you can see it's going to cost you. The function pointer, or callback method, will be further explained in [chapter 4: pointers](/ch4-pointers).
 
 {{% task %}}
 Compile and execute the above code. what happens when you comment out `jaak.is_old = &is_old;`?<br/>
@@ -121,7 +121,7 @@ graph LR;
     happy -->|push to local fn stack| copy
 {{< /mermaid >}}
 
-To fix this, we need the use of **pointers**, as explained in [chapter three](/ch3-pointers). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
+To fix this, we need the use of **pointers**, as explained in [chapter 4](/ch4-pointers). In Java, every object is passed _by reference_, meaning it points to the same value and changes will be persistent. As expected, In Java (and in pretty much any other programming langauge) this is not the case for primitives:
 
 ```c
 public static void increase(int i) {

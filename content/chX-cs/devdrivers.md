@@ -7,7 +7,7 @@ weight: 3
 ## General
 The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware **devices** that are typically connected to a processor in a laptop, desktop, or server. The OS has to know **how** to talk to a certain device. Typically an Application Programming Interface (an **API**) is provided to the user space, so users can interact with the hardware.
 
-Let's take the timer from [chapter 2](../../ch2-interrupts/theory2_timer/) as an example. Enabling the interrupt for when Timer1 overflows was done by writing a '1' to the LSB of address 0x6F. Although this is no rocket science, it is not realistic to assume that the user *simply knows this*. The manufacturer of the hardware, the timer in this example, is the one that knows and should make this knowledge available to the user. This is typically done through documentation, or through a driver.
+Let's take the timer from [chapter 3](/ch3-interrupts/theory2_timer/) as an example. Enabling the interrupt for when Timer1 overflows was done by writing a '1' to the LSB of address 0x6F. Although this is no rocket science, it is not realistic to assume that the user *simply knows this*. The manufacturer of the hardware, the timer in this example, is the one that knows and should make this knowledge available to the user. This is typically done through documentation, or through a driver.
 
 <div class="multicolumn">
   <div class="column">

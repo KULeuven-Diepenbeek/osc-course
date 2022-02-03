@@ -1,5 +1,5 @@
 ---
-title: '1.1: The C programming language'
+title: '2.1: The C programming language'
 pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
@@ -82,7 +82,7 @@ The following figure represents the Java Virtual Machine you have been using in 
 
 Note that there is **only one** source code and byte code block. Any `.class` file can be executed on any Linux/Windows/MacOS machine, provided you installed the correct JVM on top of the OS, as also pictured. When you compile `.c` C files, they do not translate into byte code but into **OS-specific binaries**! That means you cannot simply share your Windows binaries with a friend that runs Linux on his or her machine. 
 
-### Why should you learn C? 
+### Why should you learn C?
 
 Good question. A few answers:
 

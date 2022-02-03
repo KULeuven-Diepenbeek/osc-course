@@ -1,5 +1,5 @@
 ---
-title: '2.5 The internals of interrupts'
+title: '3.5 The internals of interrupts'
 pre: "<i class='fab fa-linux'></i> "
 weight: 5
 draft: true

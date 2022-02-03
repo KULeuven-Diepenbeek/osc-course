@@ -1,5 +1,5 @@
 ---
-title: '1.5: C Ecosystems'
+title: '2.5: C Ecosystems'
 pre: "<i class='fas fa-book'></i> "
 weight: 5
 ---
@@ -171,7 +171,7 @@ As seen in the above schematic, executing your source code requires the activati
 
 #### Step 2: linking
 
-After obtaining object files it is simply a matter of concatenating them ('linking'), to create the native executable binary file, using the `-o` flag and providing the object files as arguments. After linking, inspecting the disassembly (see [chapter 4](/theory/c/chap4) on how to do so in detail) shows the concatenated results. 
+After obtaining object files it is simply a matter of concatenating them ('linking'), to create the native executable binary file, using the `-o` flag and providing the object files as arguments. After linking, inspecting the disassembly (see [chapter 5, debugging](/ch5-debugging) on how to do so in detail) shows the concatenated results. 
 
 ### Repeatedly compiling
 

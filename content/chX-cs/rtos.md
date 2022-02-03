@@ -59,7 +59,7 @@ For the sake of completeness it is pointed out that tweaks are available to turn
 
 {{% figure src="https://www.freertos.org/wp-content/uploads/2018/07/logo-1.jpg" title="The FreeRTOS logo" %}}
 
-[FreeRTOS](https://www.freertos.org/) is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in [chapter 2](../../ch2-interrupts/). Again ... you can run **this OS** on the little microcontroller :smile:
+[FreeRTOS](https://www.freertos.org/) is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in [chapter 3](/ch3-interrupts/). Again ... you can run **this OS** on the little microcontroller :smile:
 
 This OS essentially consists out 5 files:
 

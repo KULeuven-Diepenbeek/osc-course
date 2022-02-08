@@ -14,6 +14,7 @@ Notes:
 * If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
 * If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. 
 * If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on "apple" - "about": does "Chip" say "Apple M1"?), then you're out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/ - although beware and follow it at your own risk!
+* If you are using Windows **and have a bit more experience**, you can also install the WSL (Windows Subsystem for Linux) instead of VirtualBox. See https://docs.microsoft.com/en-us/windows/wsl/install for a tutorial. This is only recommended for students who know what they are doing though!
 
 
 ## Recipe for installing the OSC virtual machine
@@ -22,8 +23,9 @@ Notes:
 
 2. Download Linux
     * There are many types of Linux available. We will use either Ubuntu or Bodhi (which is a more lightweight, smaller version of Ubuntu)
-        * download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 20.04.2 LTS, filename ubuntu-20.04.2-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)
-        * OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-5.1.0-64.iso) (800MB image, will require 6GB disk space)
+        * download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 20.04.3 LTS, filename ubuntu-20.04.3-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)
+        * OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)
+    * We strongly recommend you use Ubuntu if possible
 
 3. Prepare VirtualBox
     * For this first part, we will follow [an existing guide](https://brb.nci.nih.gov/seqtools/installUbuntu.html)
@@ -58,11 +60,12 @@ Notes:
 
 6. Get the course files
     * For some exercises, we provide some basic code to help you get started
-    * This code is hosted in a [GitHub repository](https://github.com/KULeuven-Diepenbeek/osc-exercises). If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon
+    * This code is hosted in a [GitHub repository](https://github.com/KULeuven-Diepenbeek/osc-exercises). If that sounds like Gobbledygook to you, no worries: the Software Engineering course will explain all about Git and version control soon
     * For now, you just need to execute following commands in the terminal:
         * Install git: `sudo apt update && sudo apt install -y git`
+        * Go to your home directory: `cd ~/`
         * Download the course files: `git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files`
-            * This will create a new directory named "course-files" containing the necessary items
+            * This will create a new directory named "course-files" containing the necessary items. You can verify this by typing `ls -al`
 
 
 You should now be ready to follow along with the classes! 
@@ -85,6 +88,7 @@ You should now be ready to follow along with the classes!
     * In the VirtualBox menu on top, choose "Mount Guest Additions CD Image" (bottom option)
     * This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
         * Sometimes this step requires additional software to be installed first. This typically does the trick: `sudo apt install -y make perl`. After this, reboot the VM and re-Mount the CD image. 
+6. If you have other issues, Google is your friend. There's a high chance others have encountered the same problem as you have, and have posted a solution.
 
 <!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
 {{% figure src="/img/installVM/arduino_01.png" %}}

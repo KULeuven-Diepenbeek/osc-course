@@ -12,19 +12,19 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1644051643" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1644051643" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1644051643" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1644051643" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1644051643" rel="stylesheet">
-    <link href="../../css/theme.css?1644051643" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1644051643" rel="stylesheet">
+    <link href="../../css/nucleus.css?1644316022" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1644316022" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1644316022" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1644316022" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1644316022" rel="stylesheet">
+    <link href="../../css/theme.css?1644316022" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1644316022" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1644051643" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1644316022" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1644051643"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1644316022"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1644051643"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1644051643"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1644316022"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1644316022"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1644051643"></script>
+<script type="text/javascript" src="../../js/search.js?1644316022"></script>
 
     
   </div>
@@ -1612,6 +1612,7 @@ window.MathJax = {
 <li>If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!</li>
 <li>If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible.</li>
 <li>If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you&rsquo;re out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See <a href="https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/">https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/</a> - although beware and follow it at your own risk!</li>
+<li>If you are using Windows <strong>and have a bit more experience</strong>, you can also install the WSL (Windows Subsystem for Linux) instead of VirtualBox. See <a href="https://docs.microsoft.com/en-us/windows/wsl/install">https://docs.microsoft.com/en-us/windows/wsl/install</a> for a tutorial. This is only recommended for students who know what they are doing though!</li>
 </ul>
 <h2 id="recipe-for-installing-the-osc-virtual-machine">Recipe for installing the OSC virtual machine</h2>
 <ol>
@@ -1623,10 +1624,11 @@ window.MathJax = {
 <ul>
 <li>There are many types of Linux available. We will use either Ubuntu or Bodhi (which is a more lightweight, smaller version of Ubuntu)
 <ul>
-<li>download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 20.04.2 LTS, filename ubuntu-20.04.2-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)</li>
-<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-5.1.0-64.iso) (800MB image, will require 6GB disk space)</li>
+<li>download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 20.04.3 LTS, filename ubuntu-20.04.3-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)</li>
+<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)</li>
 </ul>
 </li>
+<li>We strongly recommend you use Ubuntu if possible</li>
 </ul>
 </li>
 <li>
@@ -1694,13 +1696,14 @@ window.MathJax = {
 <p>Get the course files</p>
 <ul>
 <li>For some exercises, we provide some basic code to help you get started</li>
-<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Chinese to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
+<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Gobbledygook to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
 <li>For now, you just need to execute following commands in the terminal:
 <ul>
 <li>Install git: <code>sudo apt update &amp;&amp; sudo apt install -y git</code></li>
+<li>Go to your home directory: <code>cd ~/</code></li>
 <li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files</code>
 <ul>
-<li>This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items</li>
+<li>This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items. You can verify this by typing <code>ls -al</code></li>
 </ul>
 </li>
 </ul>
@@ -1755,6 +1758,9 @@ window.MathJax = {
 </ul>
 </li>
 </ul>
+<ol start="6">
+<li>If you have other issues, Google is your friend. There&rsquo;s a high chance others have encountered the same problem as you have, and have posted a solution.</li>
+</ol>
 <!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
 <figure>
     <img src="../../img/installVM/arduino_01.png"/> 
@@ -2784,17 +2790,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1644051643"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1644051643"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1644051643"></script>
-    <script src="../../js/jquery.sticky.js?1644051643"></script>
-    <script src="../../js/featherlight.min.js?1644051643"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1644051643"></script>
-    <script src="../../js/learn.js?1644051643"></script>
-    <script src="../../js/hugo-learn.js?1644051643"></script>
+    <script src="../../js/clipboard.min.js?1644316022"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1644316022"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1644316022"></script>
+    <script src="../../js/jquery.sticky.js?1644316022"></script>
+    <script src="../../js/featherlight.min.js?1644316022"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1644316022"></script>
+    <script src="../../js/learn.js?1644316022"></script>
+    <script src="../../js/hugo-learn.js?1644316022"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1644051643"></script>
+            <script src="../../mermaid/mermaid.js?1644316022"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

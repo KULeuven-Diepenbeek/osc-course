@@ -45,40 +45,54 @@ When you list all files using `ls -la` (list all), you see something like this:
 
 {{<figure src="/img/file_attributes.png" title="src: https://homepages.uc.edu/~thomam/">}}
 
-These are attributes of each file. As you can see in the above image, the permission mode also indicates whether it's a directory file or not, denoted by `d` at the beginning. The rest of the permissiom modes indicate whether or not the file is writable. 
+You can see that each file has a large number of associated attributes. Some of which you'll know (size, date, name), others are somewhat more linux-specific (users, groups and permissions).
 
 {{% notice note %}}
-You will also notice two special/strange entries at the top of the `ls -al` output, named "." and "..". These are not real files on the disk, but rather virtual files that help navigation in the filesystem and the execution of commands. Firstly, the ".." always means "the parent of this directory". So if you are at the path "/home/user/test" and you do `cd ..`, you will automatically go to "/home/user". Doing `cd ../..` will go to "/home". Secondly, the single dot "." means "the current directory". This comes in handy if you want to search for something in files in the current directory or copy something to where you are at that moment without having to type the entire path. 
+You will notice two special/strange entries at the top of the `ls -al` output, named "." and "..". These are not real files on the disk, but rather virtual files that help navigation in the filesystem and the execution of commands. Firstly, the ".." always means "the parent of this directory". So if you are at the path "/home/user/test" and you do `cd ..`, you will automatically go to "/home/user". Doing `cd ../..` will go to "/home". Secondly, the single dot "." means "the current directory". This comes in handy if you want to search for something in files in the current directory or copy something to where you are at that moment without having to type the entire path. 
 {{% /notice %}}
 
-There are five different permissiom mode characters displayed: 
+An important attribute is listed at the start: the `permission modes` of a given file or directory. As we've discussed with `sudo` before, not all users or user groups have equal capabilities in a UNIX system. Each file is "owned" by a single user (typically the user that created it) and single user group (the group of the user that created it). The permission modes allow us to very finegrainedly control what each a user can do with each (group of) files (and, because everything is a file, also with each device etc.).
+
+There are five different permission mode characters displayed: 
 
 1. `r` (readable), 
 2. `w` (writable), 
 3. `x` (executable). 
-4. `-` means everything is disabled, and
-5. `d` means it's a directory file. 
+4. `-` means this specific permission is disabled or this flag is not set, and
+5. `d` means it's a directory. If this is -, it means it's a normal file.
 
-The _default file permissions_ of new files can be set using `umask`, while the the permission mode of existing files can be set using the `chmod` command. For example:
+The first character is always the directory indicator, but after that we see 3 collections of 3 characters. These are a repetition of `rwx` with potentially also `-`. Each group of 3 indicates permissions for a (group of) user(s) (so 9 in total).
 
-- `chmod +x` adds a flag: execute.
-- `chmod -x` removes a flag
-- `chmod 640` changes all flags to the **octal number-coded** version (0-7). 
+1. The first collection indicates the permissions for the **owning user**.
+2. The second collection indicates the permissions for the **owning user group**.
+3. The thid collection indicates the permissions for **all users**. 
 
-File security happens on three different levels in Unix:
+For example, -rwxrw---- can be divided into - rwx rw- --- and would mean that:
 
-1. Owner mode. (mumber 1)
-2. Group mode. (mumber 2)
-3. Everyone else. (mumber 3)
+1. The owner can read, write and execute the file.
+2. All users in the owner user group can read and write but NOT execute the file.
+3. No other users can do anything with the file.
 
-Changing the owner of the file can be done using `chown user:group [file]`. To set read permission for any grouping (i.e. user, group or other) you add the value of 4 to the respective i, j, or k value, to set write permission, you add 2 and to set execute permission, you add 1. The values of 4, 2, and 1 are derived from the first three powers of two, i.e. 22, 21, 20 respectively. Thus to set the user permissions to rwx, you set i to 7 (4 for read + 2 for write + 1 for execute), to set the group and other permissions to r-x, you set j to 5 (4 + 1) and likewise for k. 
+For example, if a file was not created by you, and you're not in the same user group as the creator, you'd get the permissions of the third collection. 
 
-Some examples:
+The _default file permission modes_ of new files can be set using `umask`, while the the permission mode of existing files can be changed using the `chmod` (change mode) command. For example:
 
-- permission `640` means the user can read and write, the group can read, and the rest can't access the file. 
-- permission `777` means everyone can do everything. _Bad idea_.
+- `chmod +x [filepath]` adds the execute permission for **all three collections**.
+- `chmod -x [filepath]` removes the execute permission for all three collections.
+- `chmod 640 [filepath]` uses "bitflags" to change all the 9 different permissions at once. 
 
-Of course the `root` user can still write to files with permission `400`.
+Especially the last one deserves some further explanation. Each collection of `rwx` can be seen as 3 bits, where a value of 0 means the permission is OFF, and 1 means the permission is ON. So `101` would mean `r-x` for example. Now, we don't always want to write `chmod 101111010` for example, so we use a shorter version by representing each collection of 3 bits as a number from 0-7 (the octal number system). This is what you get when you interpret the 3 binary digits as decimal numbers (for example, 110 is 6, 101 is 5, while 011 is 3). Some examples:
+
+- `chmod 640 [filepath]` maps to `chmod 110 010 000` which means permissions `rw- -w- ---` for that particular file. Thus, the current user can read and write, the user group can only write and no one can execute. 
+- `chmod 777 [filepath]` maps to `chmod 111 111 111` which means permissions `rwx rwx rwx`. Put differently: everyone can do everything. This is often the "lazy option" because it's sure to work, but also very insecure!
+
+Of course the `root` user (for example, when using `sudo`) can always write to files, even if they just have permission `400`, as it has full permission on the entire system. 
+
+{{% notice note %}}
+For this course, you will primarily use `chmod +x` to make a script or compiled file executable so it can be run as a program (since that doesn't always happen automatically).
+{{% /notice %}}
+
+Changing the owners of the file can be done using `chown user:group [filepath]`.
 
 A complete overview of the permission system, neatly summarized by Julia Evans:
 

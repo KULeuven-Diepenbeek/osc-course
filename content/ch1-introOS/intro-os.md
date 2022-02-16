@@ -4,7 +4,7 @@ pre: "<i class='fas fa-book'></i> "
 weight: 1
 ---
 
-Operating systems are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the "bare metal"---the hardware. Even as a programmer, you'll always have to go through the operating system and ask for permissions and so forth. In this chapter, we'll have our first look at how this works. 
+Operating systems (OSes) are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the "bare metal"---the hardware. Even as a programmer, you'll always have to go through the operating system and ask for permissions and so forth. In this chapter, we'll have our first look at how this works. 
 
 The image below shows the classic picture when introducing OSes. The user **never** talks directly to hardware (or the OS), but always to the software.
 
@@ -27,11 +27,11 @@ Giving a single, clear definition of what an operating system is, is no simple j
 
 * Allowing separate independent programs to use the hardware (ideally at the same time);
 * Directly accessing the hardware;
-* Hiding most of the complexity of the computer for the user;
-* Guaranteeing that different tasks are isolated and protected (from each other);
+* Hiding most of the complexity of the computer for the user and user-space software;
+* Guaranteeing that different tasks are isolated and protected (from each other); security in general;
 * ...
 
-One could say an OS is **an abstraction layer** that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. By providing common services for computer programs, the OS negotiates between different layers: the hardware and the application. 
+One could say an OS is **an abstraction layer** that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. By providing common services for computer programs, the OS negotiates between different layers: the hardware and the user application. 
 
 
 Different OSes exist for different computing platforms.
@@ -55,7 +55,7 @@ Perhaps a more interesting question:
 {{% task %}}
 Do you know which flavor of OS runs on:
 
-- An [Evercade system](https://evercade.co.uk/) that emulates older games?
+- An [Evercade system](https://evercade.co.uk/) that emulates older games? 
 - The original Xbox and Xbox 360? 
 - What about the later Xbox One X/S?
 - The [Nokia 500](https://www.gsmarena.com/nokia_500-4085.php) smartphone?
@@ -63,6 +63,16 @@ Do you know which flavor of OS runs on:
 - (trick question) the Game Boy Advance?
 - (trick question) An arcade system that hosts Street Fighter II?
 {{% /task %}}
+
+<!--- 
+    evercade: linux
+    xbox and xbox 360: modified windows 2000
+    xbox one: modified windows 8 and windows 10 later
+    Nokia 500: Symbian
+    VPS: linux
+    GBA: doesn't have a (real) OS
+    Street fighter: doesn't have a real OS 
+-->
 
 
 ### Types of operating systems
@@ -82,7 +92,7 @@ The image above showed that the OS places itself between general software and ha
 
 In the definition the Microkernel it states that it runs the **bare minimum** of software. Generally this contains the following mechanisms: 
 
-* **Task management**: the ability to run multiple programs/tasks on the same hardware at (apparently) the same time.
+* **Task management/Scheduling**: the ability to run multiple programs/tasks on the same hardware at (apparently) the same time.
 * **Inter-Process Communication** (IPC): the ability for two different programs to communicate with each other.
 * **Address space management**: manages how the available (RAM) memory is divided between programs.
 
@@ -128,7 +138,7 @@ If you search for Bodhi in the image above, you'll learn that Bodhi is based on 
 {{% task %}}
 1. Use apt to see a list of the installed packages in the VM
 2. Update the list of packages in the VM
-3. Install **frozen-bubble** in your VM
+3. Install **frozen-bubble** in your VM and launch it with the `frozen-bubble` command
 4. Upgrade all packages to the most recently available version (this can take a while... Interrupting with `CTRL+C`/`CTRL+Z` shouldn't be dangerous, but sometimes can be!)
 
 (tip: adding -h or --help to a Linux command typically shows you the main options. Try `apt -h`.)

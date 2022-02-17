@@ -12,19 +12,19 @@
     <title>1.2: File systems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1645092577" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1645092577" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1645092577" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1645092577" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1645092577" rel="stylesheet">
-    <link href="../../css/theme.css?1645092577" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1645092577" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645094110" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645094110" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645094110" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645094110" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645094110" rel="stylesheet">
+    <link href="../../css/theme.css?1645094110" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645094110" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1645092577" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645094110" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1645092577"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645094110"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1645092577"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1645092577"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645094110"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645094110"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1645092577"></script>
+<script type="text/javascript" src="../../js/search.js?1645094110"></script>
 
     
   </div>
@@ -1629,8 +1629,8 @@ window.MathJax = {
 <h2 id="introduction-in-unix-filesystems">Introduction in Unix filesystems</h2>
 <h3 id="everything-is-a-file">Everything is a file</h3>
 <p>On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users' privileges for that file (read, write, execute) are based on the <strong>access permissions</strong> (see below).</p>
-<p>Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a <em>file</em> in Unix: we have used this to our advantage to inspect the inner workings of a process in the <code>/proc</code> directory.</p>
-<p>A <strong>file</strong> is the smallest possible unit of storage in a unix system. However, a <strong>filesystem</strong> is more than mere data (the file itself): it also contains relations to other files, and attributes or <em>metadata</em> of the file itself, such as:</p>
+<p>Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. A very important aspect is that <strong>everything is a <em>file</em> in Unix</strong> (even things that aren&rsquo;t really files, like devices, network sockets and even processes!). We will for example use this to our advantage to inspect the inner workings of a process in the <code>/proc</code> directory later.</p>
+<p>A real <strong>file</strong> is the smallest possible unit of storage in a unix system. However, a <strong>filesystem</strong> is more than mere data (the file itself): it also contains relations to other files, and attributes or <em>metadata</em> of the file itself, such as:</p>
 <ul>
 <li>name</li>
 <li>size</li>
@@ -2789,17 +2789,17 @@ map auto_home on /home (autofs, automounted, nobrowse)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1645092577"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1645092577"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1645092577"></script>
-    <script src="../../js/jquery.sticky.js?1645092577"></script>
-    <script src="../../js/featherlight.min.js?1645092577"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1645092577"></script>
-    <script src="../../js/learn.js?1645092577"></script>
-    <script src="../../js/hugo-learn.js?1645092577"></script>
+    <script src="../../js/clipboard.min.js?1645094110"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645094110"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645094110"></script>
+    <script src="../../js/jquery.sticky.js?1645094110"></script>
+    <script src="../../js/featherlight.min.js?1645094110"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645094110"></script>
+    <script src="../../js/learn.js?1645094110"></script>
+    <script src="../../js/hugo-learn.js?1645094110"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1645092577"></script>
+            <script src="../../mermaid/mermaid.js?1645094110"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

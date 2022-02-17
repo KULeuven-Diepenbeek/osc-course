@@ -12,19 +12,19 @@
     <title>Cheat sheet :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1644316022" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1644316022" rel="stylesheet">
-    <link href="../../css/theme.css?1644316022" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1644316022" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645092576" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645092576" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645092576" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645092576" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645092576" rel="stylesheet">
+    <link href="../../css/theme.css?1645092576" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645092576" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1644316022" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645092576" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1644316022"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645092576"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1644316022"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1644316022"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645092576"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645092576"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1644316022"></script>
+<script type="text/javascript" src="../../js/search.js?1645092576"></script>
 
     
   </div>
@@ -1273,13 +1273,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item
+    <li data-nav-id="/exercises/" title="A. Assignments" class="dd-item
         
         
         
         ">
       <a href="../../exercises/">
-          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          <i class='fas fa-pencil-alt'></i> A. Assignments
           
       </a>
       
@@ -1633,15 +1633,15 @@ window.MathJax = {
 </tr>
 <tr>
 <td>ls</td>
-<td>list (show content of current directory) - params: <code>-la</code></td>
-</tr>
-<tr>
-<td>mkdir</td>
-<td>create a directory</td>
+<td>list (show content of current directory) - typical parameters: <code>-lha</code> (longform, human readable, all files)</td>
 </tr>
 <tr>
 <td>history</td>
 <td>show a history of used commands. Re-execute with <code>![number]</code>.</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>make a shorthand command for another, longer command</td>
 </tr>
 <tr>
 <td>clear</td>
@@ -1659,32 +1659,60 @@ window.MathJax = {
 </thead>
 <tbody>
 <tr>
-<td>rm</td>
-<td>remove a file/directory - params: <code>-rf</code></td>
+<td>man</td>
+<td>show text manual for another command (exit by pressing <code>q</code>)</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>make (create) a directory</td>
 </tr>
 <tr>
 <td>touch</td>
 <td>create a file</td>
 </tr>
 <tr>
+<td>rm</td>
+<td>remove a file/directory - typical params: <code>-rf</code> (recursive, force)</td>
+</tr>
+<tr>
 <td>cat</td>
 <td>print raw file contents to terminal output</td>
+</tr>
+<tr>
+<td>head</td>
+<td>print the first few lines of raw file contents to the terminal output - typical parameters: <code>-n 15</code> (number of lines is 15)</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>print the last few lines of raw file contents to the terminal output - typical parameters: <code>-n 15</code> (number of lines is 15)</td>
 </tr>
 <tr>
 <td>grep</td>
 <td>search for content in a file</td>
 </tr>
 <tr>
+<td>find</td>
+<td>search for content in a file</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>scripting language to filter strings/file contents</td>
+</tr>
+<tr>
 <td>vi</td>
-<td>powerful editor with a steep learning curve (FYI: exiting is through: &ldquo;:q!&quot;)</td>
+<td>powerful editor with a steep learning curve (FYI: exiting is through: ESCAPE then &ldquo;:q!&quot;)</td>
+</tr>
+<tr>
+<td>nano</td>
+<td>slightly simpler editor which is easier to control</td>
 </tr>
 <tr>
 <td>chmod</td>
-<td>change modifiers of a file (r/w/x/d) - params: <code>+/-[modifier]</code></td>
+<td>change modifiers of a file (r/w/x/d)</td>
 </tr>
 <tr>
 <td>time</td>
-<td>time a simple command or give resource usage</td>
+<td>record time it takes to run another command or give resource usage</td>
 </tr>
 </tbody>
 </table>
@@ -1705,6 +1733,10 @@ window.MathJax = {
 <td>make</td>
 <td>Execute a <code>Makefile</code> - params: <code>[target]</code></td>
 </tr>
+<tr>
+<td>./[filepath]</td>
+<td>execute a compiled file/program</td>
+</tr>
 </tbody>
 </table>
 <h3 id="system-administration">System administration</h3>
@@ -1722,7 +1754,7 @@ window.MathJax = {
 </tr>
 <tr>
 <td>ps</td>
-<td>report a snaptshot of the current processes</td>
+<td>report a snaptshot of the current processes - typical parameters: <code>-aux</code></td>
 </tr>
 <tr>
 <td>pstree</td>
@@ -1730,7 +1762,7 @@ window.MathJax = {
 </tr>
 <tr>
 <td>kill</td>
-<td>send a signal to a process</td>
+<td>send a signal to a process - typical parameters: <code>-9 PID</code> (kill signal, process id (get from <code>ps</code>))</td>
 </tr>
 <tr>
 <td>bg</td>
@@ -1743,6 +1775,10 @@ window.MathJax = {
 <tr>
 <td>jobs</td>
 <td>list processes in the background</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>secure shell - remote access to another computer via command line</td>
 </tr>
 </tbody>
 </table>
@@ -2752,17 +2788,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1644316022"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1644316022"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1644316022"></script>
-    <script src="../../js/jquery.sticky.js?1644316022"></script>
-    <script src="../../js/featherlight.min.js?1644316022"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1644316022"></script>
-    <script src="../../js/learn.js?1644316022"></script>
-    <script src="../../js/hugo-learn.js?1644316022"></script>
+    <script src="../../js/clipboard.min.js?1645092576"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645092576"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645092576"></script>
+    <script src="../../js/jquery.sticky.js?1645092576"></script>
+    <script src="../../js/featherlight.min.js?1645092576"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645092576"></script>
+    <script src="../../js/learn.js?1645092576"></script>
+    <script src="../../js/hugo-learn.js?1645092576"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1644316022"></script>
+            <script src="../../mermaid/mermaid.js?1645092576"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

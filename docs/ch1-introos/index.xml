@@ -14,7 +14,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/intro-os/</guid>
-      <description>Operating systems are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the &amp;ldquo;bare metal&amp;rdquo;&amp;mdash;the hardware. Even as a programmer, you&amp;rsquo;ll always have to go through the operating system and ask for permissions and so forth. In this chapter, we&amp;rsquo;ll have our first look at how this works.</description>
+      <description>Operating systems (OSes) are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the &amp;ldquo;bare metal&amp;rdquo;&amp;mdash;the hardware. Even as a programmer, you&amp;rsquo;ll always have to go through the operating system and ask for permissions and so forth. In this chapter, we&amp;rsquo;ll have our first look at how this works.</description>
     </item>
     
     <item>

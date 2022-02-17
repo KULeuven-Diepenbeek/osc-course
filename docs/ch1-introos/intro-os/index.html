@@ -12,19 +12,19 @@
     <title>1.1: Intro to OS using Linux :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1644316022" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1644316022" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1644316022" rel="stylesheet">
-    <link href="../../css/theme.css?1644316022" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1644316022" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645092577" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645092577" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645092577" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645092577" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645092577" rel="stylesheet">
+    <link href="../../css/theme.css?1645092577" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645092577" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1644316022" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645092577" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1644316022"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645092577"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1644316022"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1644316022"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645092577"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645092577"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1644316022"></script>
+<script type="text/javascript" src="../../js/search.js?1645092577"></script>
 
     
   </div>
@@ -1273,13 +1273,13 @@ window.MathJax = {
  
   
     
-    <li data-nav-id="/exercises/" title="A. Exercises Assignments" class="dd-item
+    <li data-nav-id="/exercises/" title="A. Assignments" class="dd-item
         
         
         
         ">
       <a href="../../exercises/">
-          <i class='fas fa-pencil-alt'></i> A. Exercises Assignments
+          <i class='fas fa-pencil-alt'></i> A. Assignments
           
       </a>
       
@@ -1616,7 +1616,7 @@ window.MathJax = {
         
 
 
-<p>Operating systems are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the &ldquo;bare metal&rdquo;&mdash;the hardware. Even as a programmer, you&rsquo;ll always have to go through the operating system and ask for permissions and so forth. In this chapter, we&rsquo;ll have our first look at how this works.</p>
+<p>Operating systems (OSes) are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the &ldquo;bare metal&rdquo;&mdash;the hardware. Even as a programmer, you&rsquo;ll always have to go through the operating system and ask for permissions and so forth. In this chapter, we&rsquo;ll have our first look at how this works.</p>
 <p>The image below shows the classic picture when introducing OSes. The user <strong>never</strong> talks directly to hardware (or the OS), but always to the software.</p>
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
@@ -1646,11 +1646,11 @@ graph TD
 <ul>
 <li>Allowing separate independent programs to use the hardware (ideally at the same time);</li>
 <li>Directly accessing the hardware;</li>
-<li>Hiding most of the complexity of the computer for the user;</li>
-<li>Guaranteeing that different tasks are isolated and protected (from each other);</li>
+<li>Hiding most of the complexity of the computer for the user and user-space software;</li>
+<li>Guaranteeing that different tasks are isolated and protected (from each other); security in general;</li>
 <li>&hellip;</li>
 </ul>
-<p>One could say an OS is <strong>an abstraction layer</strong> that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. By providing common services for computer programs, the OS negotiates between different layers: the hardware and the application.</p>
+<p>One could say an OS is <strong>an abstraction layer</strong> that makes it easier to write software that interfaces with different types of hardware and that ensures a measure of robustness and security. By providing common services for computer programs, the OS negotiates between different layers: the hardware and the user application.</p>
 <p>Different OSes exist for different computing platforms.</p>
 <table style="border: 0px;">
     <tr>
@@ -1695,6 +1695,15 @@ graph TD
 
 	</div>
 </div>
+<!--- 
+    evercade: linux
+    xbox and xbox 360: modified windows 2000
+    xbox one: modified windows 8 and windows 10 later
+    Nokia 500: Symbian
+    VPS: linux
+    GBA: doesn't have a (real) OS
+    Street fighter: doesn't have a real OS 
+-->
 <h3 id="types-of-operating-systems">Types of operating systems</h3>
 <p>The image above showed that the OS places itself between general software and hardware. In the most inner core of an OS resides the kernel, the heart of the OS. Depending on the type of the kernel, a typical classification of OSes can be made:</p>
 <figure>
@@ -1719,7 +1728,7 @@ Windows 10 is an example of an OS that uses a Hybrid kernel</p>
 </ul>
 <p>In the definition the Microkernel it states that it runs the <strong>bare minimum</strong> of software. Generally this contains the following mechanisms:</p>
 <ul>
-<li><strong>Task management</strong>: the ability to run multiple programs/tasks on the same hardware at (apparently) the same time.</li>
+<li><strong>Task management/Scheduling</strong>: the ability to run multiple programs/tasks on the same hardware at (apparently) the same time.</li>
 <li><strong>Inter-Process Communication</strong> (IPC): the ability for two different programs to communicate with each other.</li>
 <li><strong>Address space management</strong>: manages how the available (RAM) memory is divided between programs.</li>
 </ul>
@@ -1777,7 +1786,7 @@ Windows 10 is an example of an OS that uses a Hybrid kernel</p>
     	<ol>
 <li>Use apt to see a list of the installed packages in the VM</li>
 <li>Update the list of packages in the VM</li>
-<li>Install <strong>frozen-bubble</strong> in your VM</li>
+<li>Install <strong>frozen-bubble</strong> in your VM and launch it with the <code>frozen-bubble</code> command</li>
 <li>Upgrade all packages to the most recently available version (this can take a while&hellip; Interrupting with <code>CTRL+C</code>/<code>CTRL+Z</code> shouldn&rsquo;t be dangerous, but sometimes can be!)</li>
 </ol>
 <p>(tip: adding -h or &ndash;help to a Linux command typically shows you the main options. Try <code>apt -h</code>.)</p>
@@ -2834,17 +2843,17 @@ Windows 10 is an example of an OS that uses a Hybrid kernel</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1644316022"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1644316022"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1644316022"></script>
-    <script src="../../js/jquery.sticky.js?1644316022"></script>
-    <script src="../../js/featherlight.min.js?1644316022"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1644316022"></script>
-    <script src="../../js/learn.js?1644316022"></script>
-    <script src="../../js/hugo-learn.js?1644316022"></script>
+    <script src="../../js/clipboard.min.js?1645092577"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645092577"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645092577"></script>
+    <script src="../../js/jquery.sticky.js?1645092577"></script>
+    <script src="../../js/featherlight.min.js?1645092577"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645092577"></script>
+    <script src="../../js/learn.js?1645092577"></script>
+    <script src="../../js/hugo-learn.js?1645092577"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1644316022"></script>
+            <script src="../../mermaid/mermaid.js?1645092577"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

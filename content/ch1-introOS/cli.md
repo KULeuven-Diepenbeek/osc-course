@@ -32,7 +32,7 @@ This 'lab' consists of a list of small tasks that introduce you to the command-l
 6. remove this folder
 
 ### Various
-1. navigate to osc-exercises/ch5_os (from your cloned git repository)
+1. navigate to course-files/ch1_os (from your cloned git repository)
   * all these files contain random text
   * one file contains the word "bamboozle"
   * find out which file contains this word

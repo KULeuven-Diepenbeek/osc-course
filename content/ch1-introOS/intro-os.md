@@ -198,5 +198,3 @@ Once the shell is running and the user asks to create new processes, all of thes
 {{% notice note %}}
 As a side note: Linux is not the only OS that uses a CLI. Windows for example has multiple, including the older "Command Prompt" and the more recent "Powershell". 
 {{% /notice %}}
-
-No idea what shell you're running? No problem, `echo $SHELL` will tell you exactly that. On my MacOS, it outputs `/bin/zsh`: I have Z shell installed. 

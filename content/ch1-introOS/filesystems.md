@@ -10,9 +10,9 @@ weight: 2
 
 On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users' privileges for that file (read, write, execute) are based on the **access permissions** (see below).
 
-Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. As you know from previous chapters, everything is a _file_ in Unix: we have used this to our advantage to inspect the inner workings of a process in the `/proc` directory. 
+Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem. A very important aspect is that **everything is a _file_ in Unix** (even things that aren't really files, like devices, network sockets and even processes!). We will for example use this to our advantage to inspect the inner workings of a process in the `/proc` directory later. 
 
-A **file** is the smallest possible unit of storage in a unix system. However, a **filesystem** is more than mere data (the file itself): it also contains relations to other files, and attributes or _metadata_ of the file itself, such as:
+A real **file** is the smallest possible unit of storage in a unix system. However, a **filesystem** is more than mere data (the file itself): it also contains relations to other files, and attributes or _metadata_ of the file itself, such as:
 
 - name
 - size

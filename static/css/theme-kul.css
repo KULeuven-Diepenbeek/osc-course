@@ -86,6 +86,73 @@ div.solution p {
 
 /* end VlJo */
 
+/* begin RoMa */
+.ex .solution {
+    display: none;
+}
+
+.ex input[type="button"] {
+    margin: 0 auto;
+}
+
+.multicol {
+    display: grid;
+    grid-auto-columns: max-content /* auto*/;
+}
+
+.multicol div {
+    grid-row: 1;
+    margin: 0px 10px;
+}
+
+.multicol div table tr td:last-child {
+    font-style: italic;
+    background-color: #f7f7f7;
+}
+
+.multicol div pre {
+    border: 1px solid #AAAAAA;
+}
+
+/* when using solution outside of ex should also have the same background color */
+.solution {
+    display: none;
+    padding: 15px;
+    background: #FFF2DB;
+}
+
+/* prevent yellow solution bg from leaking through */
+.solution table {
+    background-color: #FFF;
+}
+
+/* normal notice doesn't allow multiple p's or other elements, so make our own */
+div.notices.bignote {
+    border-top: 30px solid #6AB0DE;
+    background-color: #E7F2FA;
+}
+
+div.notices.bignote p {
+    padding: 5px 15px; 
+}
+
+div.notices.bignote pre {
+    margin: 0;
+    padding: 5px 0.938rem;
+}
+
+div.notices.bignote p:first-child:after {
+    content: 'Note';
+    top: -28px; /* because border is now on the div instead of first p */
+
+}
+
+div.notices.bignote p:first-child:before {
+    top: -28px; /* because border is now on the div instead of first p */
+}
+
+/* end RoMa */
+
 
 /* ---------------- custom style from theme below */
  

@@ -28,13 +28,13 @@ A quick intro to C C is an imperative programming language. You will notice this
     </item>
     
     <item>
-      <title>3.1 Arduino UNO</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</link>
+      <title>3.1 Von Neumann Architecture</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory1_arduino/</guid>
-      <description>&amp;raquo;&amp;nbsp;[Naar de labo opgave](#oef) -- The Arduino UNO is an open-source microcontroller board. It is powered by an off-the-shelf ATMega microcontroller from Microchip  . The datasheet for this family of microcontrollers can be found here  .
-  An Arduino UNO. Source. arduino.cc   This datasheet contains a block diagram of the AVR architecture. Nonetheless, most of these components could be found in many other microcontrollers as well.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</guid>
+      <description>In order to properly understand some concepts later in this course (such as the C pointers, stack and heap and context switching overhead), it is useful to understand some of the basics of how a CPU works internally and how the OS (and other software) interfaces with it.
+The ALU At its core, a CPU is hardware that enables the execution of a (limited) number of relatively simple/basic mathematical and logical operations.</description>
     </item>
     
     <item>
@@ -139,13 +139,13 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
     </item>
     
     <item>
-      <title>3.2: Arduino multi frequencies</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</link>
+      <title>3.2: Assembly basics</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab1_arduino-multfreq/</guid>
-      <description>Time to make some harmonics.
-  image source: wikipedia.org   Three&amp;rsquo;s a charm The example below has to be completed. Three LEDs are placed and defined. If you run the code, the left-most LED starts blinking at 1 Hz. You can choose how you want approach this. Either you search for you very own Arduino and rebuild the design. Or, otherwise, you can use a (webbased) simulator like for example Tinkercad.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</guid>
+      <description>Assembly basics Exercise 1 TODO: Show what the RAM looks like for
+With initial values: A = 5, B = 10, D = 20 Opcodes: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11 BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19 JMP = 20, JMPi = 21</description>
     </item>
     
     <item>
@@ -219,16 +219,6 @@ Navigation  figure out in which folder you are at the moment navigate to the roo
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
       <description>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&amp;rsquo;s still not always trivial to know how to apply them to a specific problem. Even for the well-known producer-consumer problem, several different setups are possible.
 This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion.</description>
-    </item>
-    
-    <item>
-      <title>3.3 The timer</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory2_timer/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/theory2_timer/</guid>
-      <description>With our sleeves rolled up and dirt all the way up to our elbows, it&amp;rsquo;s time to grab a coffee and do so reading/studying again. In this section interrupts will be introduced through the use of a timer.
-A lot of applications that are built using an Arduino need some sense of time. As mentioned earlier the ATMega has 3 dedicated timers on chip: two 8-bit timers and one 16-bit timer.</description>
     </item>
     
     <item>
@@ -312,16 +302,6 @@ As such, the actual method used most commonly in practice is segmentation with a
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
   Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
-    </item>
-    
-    <item>
-      <title>3.4: Launch that rocket !!</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-interrupts/lab2_rocketlaunch/</guid>
-      <description>image source: businessinsider.com   First task The first task that the Arduino should do for us is oscillate a LED at 1 Hz. Tip:
-  Make one LED oscillate using the &#34;Timer/Counter1 Overflow Interrupt&#34;  one LED oscillates at 1 Hz    Multiple tasks Let&amp;rsquo;s assume that one task is the original blinking LED which oscillates at 1 Hz. Now we want a second application which oscillates 3 times every second.</description>
     </item>
     
     <item>
@@ -453,6 +433,18 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
       <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
+      <description>Function calls with JAL JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!
+Now, we can also use it to implement functions
+However, need to keep track of a return address (no need before, but much needed now)
+Passing parameters to functions ? how does the function know where it can find the parameters? at which addresses they are? Can&amp;rsquo;t just have addresses agreed to up-front, would not be secure / can&amp;rsquo;t dynamically load software</description>
     </item>
     
     <item>

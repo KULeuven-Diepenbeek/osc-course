@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3: Introduction in CPU on Operating Systems and C</title>
+    <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/</link>
+    <description>Recent content in 3: Introduction in CPU on Operating Systems and C</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3.1 Von Neumann Architecture</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</guid>
+      <description>In order to properly understand some concepts later in this course (such as the C pointers, stack and heap and context switching overhead), it is useful to understand some of the basics of how a CPU works internally and how the OS (and other software) interfaces with it.
+The ALU At its core, a CPU is hardware that enables the execution of a (limited) number of relatively simple/basic mathematical and logical operations.</description>
+    </item>
+    
+    <item>
+      <title>3.2: Assembly basics</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</guid>
+      <description>Assembly basics Exercise 1 TODO: Show what the RAM looks like for
+With initial values: A = 5, B = 10, D = 20 Opcodes: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11 BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19 JMP = 20, JMPi = 21</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
+      <description>Function calls with JAL JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!
+Now, we can also use it to implement functions
+However, need to keep track of a return address (no need before, but much needed now)
+Passing parameters to functions ? how does the function know where it can find the parameters? at which addresses they are? Can&amp;rsquo;t just have addresses agreed to up-front, would not be secure / can&amp;rsquo;t dynamically load software</description>
+    </item>
+    
+  </channel>
+</rss>

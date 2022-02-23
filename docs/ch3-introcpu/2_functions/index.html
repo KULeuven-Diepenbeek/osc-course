@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>9.2: Deliberate Segfaulting :: Operating Systems and C</title>
+    <title> :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1645548878" rel="stylesheet">
@@ -59,7 +59,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../ch9-memory/lab1_segfault/">
+  <body class="" data-url="../../ch3-introcpu/2_functions/">
     <nav id="sidebar" class="">
 
 
@@ -372,7 +372,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch3-introcpu/" title="3: Introduction in CPU" class="dd-item
-        
+        parent
         
         
         ">
@@ -440,7 +440,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-introcpu/2_functions/" title="" class="dd-item ">
+      <li data-nav-id="/ch3-introcpu/2_functions/" title="" class="dd-item active">
         <a href="../../ch3-introcpu/2_functions/">
         
         
@@ -1059,7 +1059,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item
-        parent
+        
         
         
         ">
@@ -1106,7 +1106,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item active">
+      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item ">
         <a href="../../ch9-memory/lab1_segfault/">
         <i class='fas fa-vial'></i> 9.2: Deliberate Segfaulting
         
@@ -1543,7 +1543,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch9-memory/'>9: Memory Management</a> > 9.2: Deliberate Segfaulting
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-introcpu/'>3: Introduction in CPU</a> > 
           
         
           
@@ -1558,8 +1558,12 @@ window.MathJax = {
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#segfault-this">Segfault this</a></li>
-    <li><a href="#a-to-the-z">A to the Z</a></li>
+    <li><a href="#function-calls-with-jal">Function calls with JAL</a></li>
+    <li><a href="#passing-parameters-to-functions">Passing parameters to functions</a></li>
+    <li><a href="#the-stack">The Stack</a></li>
+    <li><a href="#recursive-functions">Recursive functions</a></li>
+    <li><a href="#assembly-works-on-registers-not-addresses-directly">Assembly works on registers, not addresses directly</a></li>
+    <li><a href="#ram-is-slow-have-some-registers-close-by">RAM is slow&hellip; have some registers close by</a></li>
   </ul>
 </nav>
     </div>
@@ -1577,118 +1581,27 @@ window.MathJax = {
           
             <h1>
               
-              9.2: Deliberate Segfaulting
+              
             </h1>
           
 
         
 
 
-<figure>
-    <img src="https://imgs.xkcd.com/comics/compiler_complaint.png"/> <figcaption>
-            <h4>source: xkcd.com</h4>
-        </figcaption>
-</figure>
-
-<h2 id="segfault-this">Segfault this</h2>
-<p>For each of the programs below:</p>
-<ul>
-<li>Guess first if they will give a segmentation fault and where exactly and <strong>why</strong></li>
-<li>Compile and execute them</li>
-<li>Were your guesses in the first step correct or not? Why (not)?</li>
-</ul>
-<!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>Try and change the number &ldquo;10000&rdquo; to higher and lower numbers in the previous two code samples to help make sense of what&rsquo;s happening.</li>
-</ul>
-<!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">26</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">27</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
-	
-	<span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>Try and change the number &ldquo;100&rdquo; to &ldquo;26&rdquo; and the number &ldquo;101&rdquo; to &ldquo;27&rdquo; and run the program again. Do you get the same results?</li>
-</ul>
-<h2 id="a-to-the-z">A to the Z</h2>
-<p>As we&rsquo;ve seen in the previous exercises, segmentation faults don&rsquo;t always happen when we expect them to.
-Let&rsquo;s explore this a bit deeper here.</p>
-<ul>
-<li>Again, first guess if the program below will give a segmentation fault or not (and why!)</li>
-<li>Compile and run the program and verify your guess</li>
-</ul>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#define WRITE_SIZE 26
-</span><span style="color:#75715e">#define READ_SIZE 27
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-	<span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#ae81ff">26</span><span style="color:#111">];</span>
-
-	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">WRITE_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-		<span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-	<span style="color:#111">}</span>
-
-	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">READ_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-		<span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%2d -&gt; %c (%02x)</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]);</span>
-	<span style="color:#111">}</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>
-<p>Now, recompile the code above, but verify that you have the <code>-0s</code> option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference?</p>
-</li>
-<li>
-<p>Now increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again, with and without the <code>-0s</code> option. Any errors? If so, what type of error could this be?</p>
-</li>
-<li>
-<p>Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here?</p>
-</li>
-<li>
-<p>Do some research online until you can explain what a &ldquo;stack canary&rdquo; is and why it&rsquo;s useful.</p>
-</li>
-</ul>
+<h2 id="function-calls-with-jal">Function calls with JAL</h2>
+<p>JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!</p>
+<p>Now, we can also use it to implement functions</p>
+<p>However, need to keep track of a return address (no need before, but much needed now)</p>
+<h2 id="passing-parameters-to-functions">Passing parameters to functions</h2>
+<p>? how does the function know where it can find the parameters? at which addresses they are? 
+Can&rsquo;t just have addresses agreed to up-front, would not be secure / can&rsquo;t dynamically load software</p>
+<h2 id="the-stack">The Stack</h2>
+<h2 id="recursive-functions">Recursive functions</h2>
+<h2 id="assembly-works-on-registers-not-addresses-directly">Assembly works on registers, not addresses directly</h2>
+<p>It gets worse: we don&rsquo;t have infinite memory, just say 32&hellip; rest needs to be spilled to memory
+sw and lw</p>
+<h2 id="ram-is-slow-have-some-registers-close-by">RAM is slow&hellip; have some registers close by</h2>
+<p>mention cache</p>
 
 
 <footer class="footline">
@@ -1905,6 +1818,78 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -2089,70 +2074,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -2369,7 +2290,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
-                    
                 
                 
 
@@ -2382,26 +2302,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -2419,8 +2319,21 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -2669,10 +2582,10 @@ Let&rsquo;s explore this a bit deeper here.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch9-memory/memory/" title="9.1: Memory management"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch3-introcpu/1_lab_assembly/" title="3.2: Assembly basics"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch9-memory/paging/" title="9.3: Paging" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch4-pointers/" title="4: Pointers &amp; Arrays" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

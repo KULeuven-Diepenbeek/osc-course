@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>9.2: Deliberate Segfaulting :: Operating Systems and C</title>
+    <title>3.2: Assembly basics :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1645548878" rel="stylesheet">
@@ -59,7 +59,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../ch9-memory/lab1_segfault/">
+  <body class="" data-url="../../ch3-introcpu/1_lab_assembly/">
     <nav id="sidebar" class="">
 
 
@@ -372,7 +372,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch3-introcpu/" title="3: Introduction in CPU" class="dd-item
-        
+        parent
         
         
         ">
@@ -419,7 +419,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-introcpu/1_lab_assembly/" title="3.2: Assembly basics" class="dd-item ">
+      <li data-nav-id="/ch3-introcpu/1_lab_assembly/" title="3.2: Assembly basics" class="dd-item active">
         <a href="../../ch3-introcpu/1_lab_assembly/">
         <i class='fas fa-vial'></i> 3.2: Assembly basics
         
@@ -1059,7 +1059,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch9-memory/" title="9: Memory Management" class="dd-item
-        parent
+        
         
         
         ">
@@ -1106,7 +1106,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item active">
+      <li data-nav-id="/ch9-memory/lab1_segfault/" title="9.2: Deliberate Segfaulting" class="dd-item ">
         <a href="../../ch9-memory/lab1_segfault/">
         <i class='fas fa-vial'></i> 9.2: Deliberate Segfaulting
         
@@ -1543,7 +1543,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch9-memory/'>9: Memory Management</a> > 9.2: Deliberate Segfaulting
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-introcpu/'>3: Introduction in CPU</a> > 3.2: Assembly basics
           
         
           
@@ -1558,8 +1558,16 @@ window.MathJax = {
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#segfault-this">Segfault this</a></li>
-    <li><a href="#a-to-the-z">A to the Z</a></li>
+    <li><a href="#assembly-basics">Assembly basics</a>
+      <ul>
+        <li><a href="#exercise-1">Exercise 1</a></li>
+        <li><a href="#exercise-2">Exercise 2</a></li>
+        <li><a href="#exercise-3">Exercise 3</a></li>
+        <li><a href="#exercise-4">Exercise 4</a></li>
+        <li><a href="#exercise-5">Exercise 5</a></li>
+        <li><a href="#exercise-6">Exercise 6</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -1577,119 +1585,67 @@ window.MathJax = {
           
             <h1>
               
-              9.2: Deliberate Segfaulting
+              3.2: Assembly basics
             </h1>
           
 
         
 
 
-<figure>
-    <img src="https://imgs.xkcd.com/comics/compiler_complaint.png"/> <figcaption>
-            <h4>source: xkcd.com</h4>
-        </figcaption>
-</figure>
-
-<h2 id="segfault-this">Segfault this</h2>
-<p>For each of the programs below:</p>
-<ul>
-<li>Guess first if they will give a segmentation fault and where exactly and <strong>why</strong></li>
-<li>Compile and execute them</li>
-<li>Were your guesses in the first step correct or not? Why (not)?</li>
-</ul>
-<!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">666</span><span style="color:#111">;</span>
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10000</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">777</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>Try and change the number &ldquo;10000&rdquo; to higher and lower numbers in the previous two code samples to help make sense of what&rsquo;s happening.</li>
-</ul>
-<!-- try to force end of the list -->
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-
-	<span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#ae81ff">26</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">27</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
-	
-	<span style="color:#111">free</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">);</span>
-	
-	<span style="color:#f92672">*</span><span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span><span style="color:#111">;</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>Try and change the number &ldquo;100&rdquo; to &ldquo;26&rdquo; and the number &ldquo;101&rdquo; to &ldquo;27&rdquo; and run the program again. Do you get the same results?</li>
-</ul>
-<h2 id="a-to-the-z">A to the Z</h2>
-<p>As we&rsquo;ve seen in the previous exercises, segmentation faults don&rsquo;t always happen when we expect them to.
-Let&rsquo;s explore this a bit deeper here.</p>
-<ul>
-<li>Again, first guess if the program below will give a segmentation fault or not (and why!)</li>
-<li>Compile and run the program and verify your guess</li>
-</ul>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#define WRITE_SIZE 26
-</span><span style="color:#75715e">#define READ_SIZE 27
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-	<span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-	<span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#ae81ff">26</span><span style="color:#111">];</span>
-
-	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">WRITE_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-		<span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-	<span style="color:#111">}</span>
-
-	<span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">READ_SIZE</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-		<span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%2d -&gt; %c (%02x)</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">alphabet</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]);</span>
-	<span style="color:#111">}</span>
-
-	<span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-</code></pre></div><ul>
-<li>
-<p>Now, recompile the code above, but verify that you have the <code>-0s</code> option added for gcc. This compiler flag sets the optimisation towards size, but also adds a few more interesting things. Does that make a difference?</p>
-</li>
-<li>
-<p>Now increase the <strong>WRITE_SIZE</strong> to 27. Compile and run again, with and without the <code>-0s</code> option. Any errors? If so, what type of error could this be?</p>
-</li>
-<li>
-<p>Compare this to the last code sample of the first exercise above. What is different about which memory we are trying to access here?</p>
-</li>
-<li>
-<p>Do some research online until you can explain what a &ldquo;stack canary&rdquo; is and why it&rsquo;s useful.</p>
-</li>
-</ul>
-
+<h2 id="assembly-basics">Assembly basics</h2>
+<h3 id="exercise-1">Exercise 1</h3>
+<p>TODO: Show what the RAM looks like for</p>
+<p>With initial values: A = 5, B = 10, D = 20
+Opcodes: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11
+BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19
+JMP = 20, JMPi = 21</p>
+<pre><code>C = A + B
+A = A + D
+E = A - B
+F = E * E
+</code></pre><h3 id="exercise-2">Exercise 2</h3>
+<p>TODO: Optimize this by eliminating as many variables as possible (using the -d and -c variants)</p>
+<h3 id="exercise-3">Exercise 3</h3>
+<p>TODO: This is the C code, this is the assembly, but we&rsquo;ve made a few mistakes&hellip; find them and fix them!</p>
+<h3 id="exercise-4">Exercise 4</h3>
+<p>Did you know that <code>X++</code> and <code>++X</code> have subtly different meanings in most programming languages?</p>
+<p>Specifically:</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#f92672">++</span><span style="color:#111">A</span><span style="color:#111">;</span>
+<span style="color:#75715e">// A is now 2
+</span><span style="color:#75715e">// B is now 2
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">```</span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">C</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</code></pre></div></div>
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
+<span style="color:#75715e">// A is now 2
+</span><span style="color:#75715e">// B is now 1 !!!!!!! (not 2 !!!)
+</span></code></pre></div></div>
+</div>
+<p>As you can see, if <code>X++</code> is used in combination with an assignment (<code>Y = X</code>), the assignment will happen first, and only then does the increment (<code>++</code>) happen.</p>
+<p>The opposite is true for <code>++X</code>: there the increment happens first, and then the assignment is done.</p>
+<p>Write both options in Assembly (using ADDi and ADDd instructions) showing clearly how they&rsquo;re different.</p>
+<p><em>Note: this shows that a single statement in C can often compile to 2 or even more assembly instructions, and the implications are often subtle!</em></p>
+<h3 id="exercise-5">Exercise 5</h3>
+<p>How would you implement a while loop in ASSEMBLY using BEQi and JMPi?</p>
+<pre><code>int accumulator = 0;
+int n = 10;
+while( n != 0 ) {
+    accumulator += 10;
+    --n;
+}
+int a = accumulator + 5;
+</code></pre><h3 id="exercise-6">Exercise 6</h3>
+<p>How would you implement a For loop?</p>
+<pre><code>int accumulator = 0;
+for( int i = 10; i &gt; 0; ++i ) {
+    accumulator += 10;
+}
+int a = accumulator + 5;
+</code></pre>
 
 <footer class="footline">
 	
@@ -1905,6 +1861,7 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
+                    
                 
                 
 
@@ -1917,6 +1874,9 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1934,53 +1894,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1998,21 +1911,8 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
+                        
                     
                 
                 
@@ -2153,6 +2053,150 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
                         
             
             
@@ -2281,22 +2325,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -2349,78 +2377,6 @@ Let&rsquo;s explore this a bit deeper here.</p>
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -2669,10 +2625,10 @@ Let&rsquo;s explore this a bit deeper here.</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../ch9-memory/memory/" title="9.1: Memory management"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch3-introcpu/1_vonneumann/" title="3.1 Von Neumann Architecture"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch9-memory/paging/" title="9.3: Paging" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch3-introcpu/2_functions/" title="" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

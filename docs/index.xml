@@ -222,6 +222,16 @@ This task requires you to think about the bigger picture and forces you to expla
     </item>
     
     <item>
+      <title>3.3 Functions and The Stack</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
+      <description>In the previous part, we&amp;rsquo;ve discussed how we can use special branching and jumping instructions (like BEQ and JMP) to skip over certain parts of code to implement if-else logic. In the lab, we&amp;rsquo;ve seen how we can use the same building blocks to build while and for loops.
+In this part we will discuss how we can use jumping to implement functions, and some extra challenges that come with that.</description>
+    </item>
+    
+    <item>
       <title>4.1: Pointers and arrays</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -302,6 +312,17 @@ As such, the actual method used most commonly in practice is segmentation with a
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
   Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
+    </item>
+    
+    <item>
+      <title>3.4: The Stack</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</guid>
+      <description>Exercise 1 TODO: Write the Assembly needed to store a single parameter on the stack (at shared location 0x60) for a function (in addition to the return address).
+Exercise 2 TODO: Extend exercise 1 to also include an example of storing a return value (at shared location 0x80) on the stack.
+Exercise 3 TODO: Extend exercise 2 to show how a recursive function would work</description>
     </item>
     
     <item>
@@ -433,18 +454,6 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
       <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
-      <description>Function calls with JAL JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!
-Now, we can also use it to implement functions
-However, need to keep track of a return address (no need before, but much needed now)
-Passing parameters to functions ? how does the function know where it can find the parameters? at which addresses they are? Can&amp;rsquo;t just have addresses agreed to up-front, would not be secure / can&amp;rsquo;t dynamically load software</description>
     </item>
     
     <item>

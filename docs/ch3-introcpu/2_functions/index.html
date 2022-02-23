@@ -9,22 +9,22 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title> :: Operating Systems and C</title>
+    <title>3.3 Functions and The Stack :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1645548878" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1645548878" rel="stylesheet">
-    <link href="../../css/theme.css?1645548878" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1645548878" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645575344" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645575344" rel="stylesheet">
+    <link href="../../css/theme.css?1645575344" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645575344" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1645548878" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645575344" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1645548878"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645575344"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1645548878"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1645548878"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645575344"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645575344"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1645548878"></script>
+<script type="text/javascript" src="../../js/search.js?1645575344"></script>
 
     
   </div>
@@ -440,9 +440,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-introcpu/2_functions/" title="" class="dd-item active">
+      <li data-nav-id="/ch3-introcpu/2_functions/" title="3.3 Functions and The Stack" class="dd-item active">
         <a href="../../ch3-introcpu/2_functions/">
+        <i class='fab fa-linux'></i> 3.3 Functions and The Stack
         
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-introcpu/2_lab_stack/" title="3.4: The Stack" class="dd-item ">
+        <a href="../../ch3-introcpu/2_lab_stack/">
+        <i class='fas fa-vial'></i> 3.4: The Stack
         
         </a>
     </li>
@@ -1543,7 +1564,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-introcpu/'>3: Introduction in CPU</a> > 
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-introcpu/'>3: Introduction in CPU</a> > 3.3 Functions and The Stack
           
         
           
@@ -1558,12 +1579,17 @@ window.MathJax = {
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#function-calls-with-jal">Function calls with JAL</a></li>
-    <li><a href="#passing-parameters-to-functions">Passing parameters to functions</a></li>
-    <li><a href="#the-stack">The Stack</a></li>
+    <li><a href="#function-calls">Function calls</a></li>
+    <li><a href="#passing-parameters-and-returning-values">Passing parameters and returning values</a></li>
+    <li><a href="#the-stack">The Stack</a>
+      <ul>
+        <li><a href="#the-stack-pointer">The Stack Pointer</a></li>
+        <li><a href="#the-stack-in-assembly">The Stack in Assembly</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-stack-for-parameters-return-values-and-local-values">The stack for parameters, return values, and local values</a></li>
     <li><a href="#recursive-functions">Recursive functions</a></li>
     <li><a href="#assembly-works-on-registers-not-addresses-directly">Assembly works on registers, not addresses directly</a></li>
-    <li><a href="#ram-is-slow-have-some-registers-close-by">RAM is slow&hellip; have some registers close by</a></li>
   </ul>
 </nav>
     </div>
@@ -1581,27 +1607,567 @@ window.MathJax = {
           
             <h1>
               
-              
+              3.3 Functions and The Stack
             </h1>
           
 
         
 
 
-<h2 id="function-calls-with-jal">Function calls with JAL</h2>
-<p>JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!</p>
-<p>Now, we can also use it to implement functions</p>
-<p>However, need to keep track of a return address (no need before, but much needed now)</p>
-<h2 id="passing-parameters-to-functions">Passing parameters to functions</h2>
-<p>? how does the function know where it can find the parameters? at which addresses they are? 
-Can&rsquo;t just have addresses agreed to up-front, would not be secure / can&rsquo;t dynamically load software</p>
+<p>In the previous part, we&rsquo;ve discussed how we can use special branching and jumping instructions (like BEQ and JMP) to skip over certain parts of code to implement if-else logic. In the lab, we&rsquo;ve seen how we can use the same building blocks to build while and for loops.</p>
+<p>In this part we will discuss how we can use jumping to implement functions, and some extra challenges that come with that.</p>
+<h2 id="function-calls">Function calls</h2>
+<p>Let&rsquo;s consider a very simple example of one C function calling another on the left, and the known assembly on the right (using line numbers instead of hexadecimal addresses for simplicity):</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ae81ff">1.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f1</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">2.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span> 
+<span style="color:#ae81ff">3.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">4.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">5.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f2</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">6.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">7.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">8.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<pre><code>1. 
+2. JMPi line6 
+3. ADDd 0 10 C
+4. 
+
+5. 
+6. ADDd 0 20 D   
+7. JMPi line3   
+8. 
+</code></pre></div>
+</div>
+<p>Logically, we know what we want the <code>f2()</code> function call to do: if it&rsquo;s encountered, we want to stop executing the current function <code>f1</code>, and start executing the other function <code>f2</code> from its start (line 6). Only when the other function is done (indicated by the <code>return</code> statement), do we want to return to f1. However, we don&rsquo;t want to start <code>f1</code> all over again (on line 2), <strong>we want to continue right after the function call</strong> (line 3).</p>
+<p>As we can see above on the right, we can quite easily do this with <code>JMPi</code>, having the <code>f2</code> jump &ldquo;back&rdquo; to <code>f1</code> once it&rsquo;s done. However, you there&rsquo;s a problem with this particular approach? Can you see what it is?</p>
+<p>Imagine a third function <code>f3()</code> that also calls <code>f2()</code>.</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ae81ff">9.</span>  <span style="color:#00a8c8">void</span> <span style="color:#111">f3</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">10.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span>
+<span style="color:#ae81ff">11.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">E</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">12.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+</div>
+<p>As a programmer, you expect the same logic as above: <code>f2</code> gets called, and after that the execution of <code>f3</code> continues on line 11. However, <strong>this is not what happens</strong>! This is because above, we&rsquo;ve hardcoded <code>f2</code> to &ldquo;return&rdquo; to the hardcoded address &ldquo;line3&rdquo; (which is in <code>f1</code>). As such, we would never go back into <code>f3</code> but instead execute part of the unrelated <code>f1</code>. That&rsquo;s of course not good!</p>
+<p>We can see that, in order to allow <code>f2</code> to be called from anywhere, <strong>the address it JMPs to when it&rsquo;s done needs to be dynamic</strong>. As hinted in the previous part, we will use JMP instead of JMPi for that. Instead of a direct address value to jump to like JMPi, JMP will instead take an address which it needs to read to get the real address to jump to. As we&rsquo;re working with functions and we want to know where to jump to after &ldquo;returning&rdquo; from a function, this address is typically called the <strong>return adress</strong>.</p>
+<p>Let&rsquo;s change the example above to incorporate this idea. We choose a single location in memory (at address 0x07) to store the return address for both <code>f1</code> and <code>f3</code>.</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ae81ff">1.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f1</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">2.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span> 
+<span style="color:#ae81ff">3.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">4.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">5.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f2</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">6.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">7.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">8.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">9.</span>  <span style="color:#00a8c8">void</span> <span style="color:#111">f3</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">10.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span>
+<span style="color:#ae81ff">11.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">E</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">12.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<pre><code>1. ADDd 0 line3 0x07 // store return address line3
+2. JMPi line6 
+3. ADDd 0 10 C
+4. 
+
+5. 
+6. ADDd 0 20 D   
+7. JMP 0x07 // jump to whatever address is stored in 0x07   
+8. 
+
+9.  ADDd 0 line6 0x07
+10. JMPi line6
+11. ADDd 0 50 E
+12.
+</code></pre></div>
+</div>
+<p>As you can see, we can now indeed correctly return to either <code>f1</code> or <code>f3</code> from <code>f2</code>, depending on which return address values they store in 0x07 before calling <code>f2</code>!</p>
+<p>However, this is still not ideal&hellip; can you see the problem <strong>when <code>f2</code> itself would want to call another function</strong> (for example <code>f4</code>)?</p>
+<p>In that case, <code>f2</code> of course also needs to store a return address for <code>f4</code> to return to. However, it can&rsquo;t re-use 0x07, because that memory location already stores the return address for either <code>f1</code> or <code>f3</code>, which would be <strong>overwritten and lost forever</strong>&hellip; A naive solution would be to just choose a different storage location for <code>f2</code>&rsquo;s return address, say 0x06. <code>f4</code> can then just do <code>JMP 0x06</code> and stuff works, right?</p>
+<p>Sadly no&hellip; imagine what happens if <code>f3</code> wants to call <code>f4</code> as well. It would have to somehow know that it needs to use 0x07 for <code>f2</code>, but 0x06 for <code>f4</code>, or things won&rsquo;t work. This is doable for a handful of functions, but you can imagine that this is not feasible for larger programs with hundreds of functions that could each call one another. It would also consume a lot of memory, as we basically would need a separate return address storage location for each function. It also wouldn&rsquo;t support so-called &ldquo;recursive functions&rdquo; (see below).</p>
+<p>In short, <strong>we cannot simply choose a single return address location (we want to call functions from inside functions), nor can be choose a separate one for each function (impractical)</strong>. We clearly need something else&hellip; but before we figure out what the real solution might be, let&rsquo;s first think about what functions need besides return addresses. Maybe we can end up designing a system that works for other things as well?</p>
+<h2 id="passing-parameters-and-returning-values">Passing parameters and returning values</h2>
+<p>As you probably know, the functions we had above were really the simplest possible ones. Real functions are typically more complex, as they also allow the use of <strong>function parameters</strong> and <strong>return values</strong>.</p>
+<p>For example, below <code>fY</code> accepts two input parameters (A and B) and has a single output/return value <code>result</code>:</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#ae81ff">1.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fX</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">2.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">3.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">4.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#111">fY</span><span style="color:#111">(</span><span style="color:#111">A</span><span style="color:#111">,</span> <span style="color:#111">B</span><span style="color:#111">);</span> 
+<span style="color:#ae81ff">5.</span>
+<span style="color:#ae81ff">6.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">C</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">7.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">8.</span> <span style="color:#00a8c8">int</span> <span style="color:#111">fY</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">A</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">B</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">9.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span> <span style="color:#f92672">+</span> <span style="color:#111">B</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">10.</span>   <span style="color:#00a8c8">return</span> <span style="color:#111">result</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">11.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<pre><code>1. 
+2. ADDd 0 1 A
+3. ADDd 0 2 B
+4. JMPi line7       // call fY
+5. ADDi result 0 C  // C = result
+6. ADDi C 5 D
+7.
+
+8. 
+9.  ADD A B result   
+10. JMPi line5     // return to fX   
+11. 
+</code></pre></div>
+</div>
+<p><em>Note that line 4 was split into two instructions: one <code>JMP</code> to call the function and one <code>ADDi</code> to assign the return value to C</em></p>
+<p>As we can see above, we can both pass input parameters and receive outputs (return values) by using the same variable names across functions (A, B and result). However, this again is suboptimal. In essence we&rsquo;re now using global variables! Imagine again <code>fY</code> would call another function <code>fZ</code> that also uses variables named A, B or result&hellip; then <code>fZ</code> would end up <strong>overwriting</strong> their values with new contents! With this approach, <strong>each variable and parameter in the entire codebase would need a unique name</strong>, which is of course almost impossible (and very impractical!).</p>
+<p>To make this a bit better, we could again think of something similar to the return address, where <code>fX</code> places its parameters values in certain known memory locations (say 0x60 and 0x61) and <code>fY</code> places its return value in 0x80. However, this is really just the exact same problem again&hellip; whether we call the location A or 0x60, the concept remains exactly the same! We are still assuming that the same memory location is re-used across functions, which has the danger of it being overwritten.</p>
+
+<div class="notices bignote" ><p>So, let&rsquo;s try to rephrase our problem in more general terms, now that we see that <strong>our issues with the return address, input parameters and output values are in essence the same single problem</strong>.</p>
+<p>The core problem is thus that we want to <strong>pass one or more pieces of data from one function to another without functions overwriting each other&rsquo;s data</strong>. The only way we can do this, is to place the data in certain memory locations.</p>
+<p>That leaves us with two options:</p>
+<ol>
+<li>
+<p>Re-use the same memory locations.</p>
+<p>For example:</p>
+<ul>
+<li>0x07 is the return <em>address</em> for each function</li>
+<li>0x60 - 0x79 are the addresses of the input parameters for each function (allowing up to 20 parameters)</li>
+<li>0x80 holds the return <em>value</em> for each function</li>
+</ul>
+<p><strong>Positive</strong>: each function knows where to look for its data, how to return after execution, and where to put data it wants to pass to another</p>
+<p><strong>Negative</strong>: only allow us to call a single function at a time, otherwise we would overwrite the data</p>
+</li>
+<li>
+<p>Have separate memory locations for each individual function.</p>
+<p>For example:</p>
+<ul>
+<li>f1() would use 0x100 as return address, 0x101 - 0x120 for parameters, 0x121 for return value</li>
+<li>f2() would use 0x200 as return address, 0x201 - 0x220 for parameters, 0x221 for return value</li>
+<li>etc.</li>
+</ul>
+<p><strong>Positive</strong>: no risk over overwriting <em>(except when using recursive functions, see below)</em></p>
+<p><strong>Negative</strong>: huge memory requirement. Each function needs to know which memory locations other functions will use before being able to call them.</p>
+</li>
+</ol>
+<p>As we&rsquo;ve said above, option 2 is impractical. But option 1 would only allow us to call a single function at a time&hellip; <em>or would it</em>?</p>
+<p>As we define the problem above, <strong>the real problem is NOT re-using memory location; it is potentially overwriting data in them</strong>.</p>
+<p>As such, if we can find a way to re-use the same memory locations without overwriting them, we&rsquo;ve found our solution!</p>
+</div>
+
+
+<div class="ex">
+	<div class="inner">
+    	<p>How can we possibly re-use memory locations without overwriting the data contained within?</p>
+<div class="solution" id="q331">
+  <p>
+    <strong>By first copying out the data before the memory locations are re-used, then afterwards copying the original data back in!</strong>
+  </p>
+</div>
+<input value="Toggle solution" type="button" onclick="toggleDisplay('q331')"/>
+
+	</div>
+</div>
 <h2 id="the-stack">The Stack</h2>
+<p>The epiphany we had at the end of the last section should be quite easy to grasp: to prevent overwriting some data, we first copy that data to another location. Then, after the function call is done, we copy the data back to the original location.</p>
+<p>Let&rsquo;s illustrate this with the simple example where we only need to worry about the return address (stored at 0x07) being overwritten by <code>f1</code> calling <code>f2</code>, which then calls <code>f4</code>:</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">
+<span style="color:#ae81ff">1.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f1</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">2.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span> 
+<span style="color:#ae81ff">3.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">4.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">5.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f2</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">6.</span>    <span style="color:#111">f4</span><span style="color:#111">();</span>
+<span style="color:#ae81ff">7.</span>    
+<span style="color:#ae81ff">8.</span> 
+<span style="color:#ae81ff">9.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">10.</span><span style="color:#111">}</span>
+
+<span style="color:#ae81ff">11.</span>  <span style="color:#00a8c8">void</span> <span style="color:#111">f4</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">12.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">E</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">13.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">14.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<pre><code>                     // we start in f1() so 0x07 is empty at this time
+1. ADDd 0 line3 0x07 // store return address line3
+2. JMPi line6        // call f2
+3. ADDd 0 10 C
+4. 
+
+5. ADDi 0x07 0 0x500  // copy whatever is in 0x07 (return addres from caller f1) to 0x500
+6. ADDd 0 line8 0x07  // put our own f2 return address (line8) in 0x07
+7. JMPi line12        // call f4   
+8. ADDi 0x500 0 0x07  // copy 0x500 back to 0x07 (restore previous value)
+9. JMP 0x07           // return from this function to caller f1
+10.
+
+11.                   // f4 doesn't call another function, so we don't need to put anything in 0x07
+12. ADDd 50 0 E
+13. JMP 0x07
+14.
+</code></pre></div>
+</div>
+<p>As we can see, all the magic happens in <code>f2</code>. Here, we first protect <code>f1</code>&rsquo;s return address (which is in 0x07) by copying it to 0x500, before putting <code>f2</code>&rsquo;s own return address into 0x07. As we can see, we are now indeed re-using the single memory location in each function, but <strong>without overwriting/losing data</strong>!</p>
+<p>You might think that&rsquo;s it, we&rsquo;ve done it! However, let&rsquo;s contemplate what happens if I have more than 3 functions. Let&rsquo;s say <code>f1</code> calls <code>f2</code>, which calls <code>f3</code>, which calls <code>f4</code>, which calls <code>f5</code>. 
+<code>f2</code> can use 0x500 as temporary storage, but of course <code>f3</code> cannot, or it would overwrite things again! So <code>f3</code> would maybe use 0x600, <code>f4</code> might use 0x700, etc.</p>
+<p>We can see this is again not ideal&hellip; it&rsquo;s better than our previous discussion, because here the <em>calling</em> function can choose which memory to use as temporary storage (as opposed to being hardcoded in the <em>called</em> function). However, this still has issues: how does <code>f4</code> know that <code>f2</code> is using 0x500 and that it itself should be using 0x700 instead? In other words:</p>
+
+<div class="ex">
+	<div class="inner">
+    	<p>How do we <strong>ensure functions don&rsquo;t re-use each other&rsquo;s temporary storage</strong>?</p>
+<div class="solution" id="q332">
+  <p>
+    By having each function <strong>store its data directly after that of the previous function!</strong>
+  </p>
+</div>
+<input value="Toggle solution" type="button" onclick="toggleDisplay('q332')"/>
+
+	</div>
+</div>
+<p>Instead of having each function decide its own temporary storage locations, we will just ensure they put their copied data <strong>after that of the previous function</strong>. As such, if <code>f2</code> would use 0x500, then <code>f3</code> would use the next free location after that, being 0x501. <code>f4</code> then uses 0x502, etc. Conceptually, you can say that each function adds more temporary data on top of a large pile of memory. You can compare it to a stack of papers or books: you start with one on the bottom, then keep putting others on top whenever you need place to store a page/a book.</p>
+<p>As such, this approach is typically called just that: <strong>the stack</strong>!</p>
+<h3 id="the-stack-pointer">The Stack Pointer</h3>
+<p>Now again, we of course again don&rsquo;t want to hardcode the addresses in the functions! We want to dynamically know which location the previous function used last, and then dynamically store our data after that.</p>
+<p>We can do this by using just a single global variable (shared across all functions), which is called the <strong>stack pointer</strong>.</p>
+<p>Let&rsquo;s say this stack pointer lives at address 0x82. Its initial value is 0x500. <code>f1</code> starts and places it return address (line3) into 0x07. This is the (partial) state of the RAM at this point:</p>
+<div class="multicol">
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x07</td>
+<td>line3</td>
+<td>shared return address location</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>0x500</td>
+<td>stack pointer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x500</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x501</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x502</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x503</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>When <code>f2</code> is called, it loads the value that&rsquo;s in 0x82 and finds it&rsquo;s 0x500, which is the address where it can start storing its temporary data. It puts the return address of <code>f1</code> (value in 0x07) in 0x500 and then, very importantly, <strong>increases the value of the stack pointer by one</strong> (one, because it has stored a single byte). The value of the stack pointer at 0x82 is now 0x501. <code>f2</code> can now set its own return address (line8) in 0x07 and then call <code>f3</code> as shown above.  The RAM now looks like this:</p>
+<div class="multicol">
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x07</td>
+<td>line8</td>
+<td>shared return address location</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>0x501</td>
+<td>stack pointer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x500</td>
+<td>line3</td>
+<td>return address of f1, stored here by f2</td>
+</tr>
+<tr>
+<td>0x501</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x502</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x503</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><code>f3</code> then wants to call <code>f4</code>, so it needs to store <code>f2</code>&rsquo;s return address (currently in 0x07) on the stack. It loads the stack pointer at 0x82, finding that it has safe room to temporarily copy data at 0x501 and does so. <code>f3</code> then, again very importantly, <strong>increases the value of the stack pointer by one</strong>, and stores its own return address (say line14) before actually calling <code>f4</code>. The RAM is now:</p>
+<div class="multicol">
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x07</td>
+<td>line14</td>
+<td>shared return address location</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>0x502</td>
+<td>stack pointer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x500</td>
+<td>line3</td>
+<td>return address of f1, stored here by f2</td>
+</tr>
+<tr>
+<td>0x501</td>
+<td>line8</td>
+<td>return address of f2, stored here by f3</td>
+</tr>
+<tr>
+<td>0x502</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x503</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now, let&rsquo;s say it ends there: <code>f4</code> does not call any other functions, just does its work and then returns back into <code>f3</code>. Now we&rsquo;re really going to start to see the power of using the stack!</p>
+<p><code>f4</code> did not do anything to 0x07, so it knows it can just use its current value (line14) as return address to get back into <code>f3</code>. After that, the RAM still looks the same as the last diagram from above.</p>
+<p>Now, <code>f3</code> needs to do some more work of course. It needs to figure out how to return to its caller (<code>f2</code>). It knows it has previously stored <code>f2</code>&rsquo;s return address on the stack (via the stack pointer), and after that it had increased the stack pointer by one. As such, to figure out where it had stored <code>f2</code>&rsquo;s return address, it needs to undo what it did. First, it reads the value of the stack pointer in 0x82, getting back 0x502. It then decrements that value by one, making it 0x501. It now knows that the return address of its caller (<code>f2</code>) is at 0x501 and can read that value, finding line8. It places that value back into 0x07. It now first cleans up after itself by clearing the value of 0x501, and then returns to <code>f2</code> by JMPing to 0x07. The RAM now looks like this:</p>
+<div class="multicol">
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x07</td>
+<td>line8</td>
+<td>shared return address location</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>0x501</td>
+<td>stack pointer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Value</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x500</td>
+<td>line3</td>
+<td>return address of f1, stored here by f2</td>
+</tr>
+<tr>
+<td>0x501</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x502</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0x503</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="notices note" ><p>You will see this state of the RAM is exactly the same as that from before we called <code>f3</code> in the first place. This is of course exactly as intended! The stack is only used as temporary storage, and as such should no longer be needed once we&rsquo;ve done executing all functions!</p>
+</div>
+
+<p>The same thing happens in <code>f2</code>: it reads the stack pointer, decrements it by 1, and finds 0x500. It places the value at 0x500 at 0x07, clears 0x500, and then returns to <code>f1</code> with JMP 0x07. The RAM state is again the same as the one we started with above.</p>
+<h3 id="the-stack-in-assembly">The Stack in Assembly</h3>
+<p>To be able to write the above sequence in Assembly, we actually find we need a new syntax. If we write <code>*</code> before an address, it means we want to use the <strong>value at that address as a new address</strong> instead of as a value.</p>
+<p>For example:</p>
+<pre><code>ADDd 3 5 0x10 : this means we store the value 8 at address 0x10.
+ADDd 3 5 *0x10 : this means we read the value currently at address 0x10, interpret it as another address (say the value was 0x29), and write 8 to that address. 
+</code></pre><p>This is needed to be able to write to the free temporary memory address pointed to by the stack pointer:</p>
+<pre><code>ADDi 0x07 0 *0x82 : this adds 0 to the value of 0x07 (so it stays the same), and then stores the result not in 0x82, but in the address value stored in 0x82 (which is 0x500 at the start of our example).
+</code></pre><p>If we thus write the above sequence in Assembly, we get:</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">
+<span style="color:#ae81ff">0.</span>
+<span style="color:#ae81ff">1.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f1</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">2.</span>    <span style="color:#111">f2</span><span style="color:#111">();</span> 
+<span style="color:#ae81ff">3.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">4.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">5.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f2</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">6.</span>    
+<span style="color:#ae81ff">7.</span>    
+<span style="color:#ae81ff">8.</span>    <span style="color:#111">f3</span><span style="color:#111">();</span>
+<span style="color:#ae81ff">9.</span> 
+<span style="color:#ae81ff">10.</span> 
+<span style="color:#ae81ff">11.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">12.</span><span style="color:#111">}</span>
+
+<span style="color:#ae81ff">13.</span> <span style="color:#00a8c8">void</span> <span style="color:#111">f3</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">14.</span> 
+<span style="color:#ae81ff">15.</span> 
+<span style="color:#ae81ff">16.</span>    <span style="color:#111">f4</span><span style="color:#111">();</span>
+<span style="color:#ae81ff">17.</span>    
+<span style="color:#ae81ff">18.</span> 
+<span style="color:#ae81ff">19.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">20.</span> <span style="color:#111">}</span>
+
+<span style="color:#ae81ff">21.</span>  <span style="color:#00a8c8">void</span> <span style="color:#111">f4</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#ae81ff">22.</span>    <span style="color:#00a8c8">int</span> <span style="color:#111">E</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">23.</span>    <span style="color:#00a8c8">return</span><span style="color:#111">;</span>
+<span style="color:#ae81ff">24.</span> <span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<pre><code>                     // we start in f1() so 0x07 is empty at this time
+0. ADDd 0 0x500 0x82 // initialize the stack pointer (done by the OS)
+1. ADDd 0 line3 0x07 // store return address line3
+2. JMPi line5        // call f2
+3. ADDd 0 10 C
+4. 
+
+5.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x500)
+6.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x501)
+7.  ADDd 0 line9 0x07  // put our own f2 return address (line8) in 0x07
+8.  JMPi line13        // call f3   
+9.  SUBi 0x82 1 0x82   // decrement the stack pointer value by one (is now 0x500)
+10. ADDi *0x82 0 0x07  // store the value at the stack pointer address (at address 0x500) in 0x07
+11. JMP 0x07           // return from this function to caller f1
+12.
+
+13.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x501)
+14.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x502)
+15.  ADDd 0 line17 0x07 // put our own f3 return address (line17) in 0x07
+16.  JMPi line22        // call f4   
+17.  SUBi 0x82 1 0x82   // decrement the stack pointer value by one (is now 0x501)
+18.  ADDi *0x82 0 0x07  // store the value at the stack pointer address (at address 0x501) in 0x07
+19.  JMP 0x07           // return from this function to caller f2
+20.
+
+21.                   // f4 doesn't call another function, so we don't need to put anything new in 0x07
+22. ADDd 50 0 E     
+23. JMP 0x07          // return from this function to caller f3
+24.
+</code></pre></div>
+</div>
+<p>One crucial thing you will notice is that the stack-specific code is exactly the same for both <code>f2</code> and <code>f3</code>. This is the beauty of using a dynamic setup like the stack: it doesn&rsquo;t rely on hardcoded addresses or logic, and so the exact same code can be re-used!</p>
+<p>Note also that the stack instructions are indeed each other&rsquo;s opposites: <code>ADDi 0x07 0 *0x82</code> is undone by <code>ADDi *0x82 0 0x07</code> and <code>ADDi 0x82 1 0x82</code> is inverted by <code>SUBi 0x82 1 0x82</code>, creating a nice symmetry!</p>
+<h2 id="the-stack-for-parameters-return-values-and-local-values">The stack for parameters, return values, and local values</h2>
+<p>TODO: store more stuff on there. How exactly: see exercises!</p>
+<p>TODO: stack grows downward in C</p>
+<p>TODO: stack cleans up after itself (only between SP and initial value of 0x500 is occupied, everything above SP can be cleaned if needed). WE usually don&rsquo;t really clean, just overwrite when new functions are called.</p>
 <h2 id="recursive-functions">Recursive functions</h2>
+<p>TODO: discuss function calling itself</p>
 <h2 id="assembly-works-on-registers-not-addresses-directly">Assembly works on registers, not addresses directly</h2>
-<p>It gets worse: we don&rsquo;t have infinite memory, just say 32&hellip; rest needs to be spilled to memory
+<p>TODO: It gets worse: we don&rsquo;t have infinite memory, just say 32&hellip; rest needs to be spilled to memory
 sw and lw</p>
-<h2 id="ram-is-slow-have-some-registers-close-by">RAM is slow&hellip; have some registers close by</h2>
-<p>mention cache</p>
 
 
 <footer class="footline">
@@ -1879,9 +2445,6 @@ sw and lw</p>
             
         
                     
-            
-        
-                    
                         
             
             
@@ -1889,6 +2452,25 @@ sw and lw</p>
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -2585,7 +3167,7 @@ sw and lw</p>
 			<a class="nav nav-prev" href="../../ch3-introcpu/1_lab_assembly/" title="3.2: Assembly basics"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch4-pointers/" title="4: Pointers &amp; Arrays" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch3-introcpu/2_lab_stack/" title="3.4: The Stack" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2595,17 +3177,17 @@ sw and lw</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1645548878"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1645548878"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1645548878"></script>
-    <script src="../../js/jquery.sticky.js?1645548878"></script>
-    <script src="../../js/featherlight.min.js?1645548878"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1645548878"></script>
-    <script src="../../js/learn.js?1645548878"></script>
-    <script src="../../js/hugo-learn.js?1645548878"></script>
+    <script src="../../js/clipboard.min.js?1645575344"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645575344"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645575344"></script>
+    <script src="../../js/jquery.sticky.js?1645575344"></script>
+    <script src="../../js/featherlight.min.js?1645575344"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645575344"></script>
+    <script src="../../js/learn.js?1645575344"></script>
+    <script src="../../js/hugo-learn.js?1645575344"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1645548878"></script>
+            <script src="../../mermaid/mermaid.js?1645575344"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

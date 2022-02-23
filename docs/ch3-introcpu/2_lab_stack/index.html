@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>3. Inter-thread communication :: Operating Systems and C</title>
+    <title>3.4: The Stack :: Operating Systems and C</title>
 
     
     <link href="../../css/nucleus.css?1645575344" rel="stylesheet">
@@ -59,7 +59,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../exercises/tasks_inter_thread_communication/">
+  <body class="" data-url="../../ch3-introcpu/2_lab_stack/">
     <nav id="sidebar" class="">
 
 
@@ -372,7 +372,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/ch3-introcpu/" title="3: Introduction in CPU" class="dd-item
-        
+        parent
         
         
         ">
@@ -461,7 +461,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-introcpu/2_lab_stack/" title="3.4: The Stack" class="dd-item ">
+      <li data-nav-id="/ch3-introcpu/2_lab_stack/" title="3.4: The Stack" class="dd-item active">
         <a href="../../ch3-introcpu/2_lab_stack/">
         <i class='fas fa-vial'></i> 3.4: The Stack
         
@@ -1274,7 +1274,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/exercises/" title="A. Assignments" class="dd-item
-        parent
+        
         
         
         ">
@@ -1342,7 +1342,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item active">
+      <li data-nav-id="/exercises/tasks_inter_thread_communication/" title="3. Inter-thread communication" class="dd-item ">
         <a href="../../exercises/tasks_inter_thread_communication/">
         <i class='fas fa-pen-square'></i> 3. Inter-thread communication
         
@@ -1564,7 +1564,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Operating Systems and C</a> > <a href='../../exercises/'>A. Assignments</a> > 3. Inter-thread communication
+            <a href='../../'>Operating Systems and C</a> > <a href='../../ch3-introcpu/'>3: Introduction in CPU</a> > 3.4: The Stack
           
         
           
@@ -1577,7 +1577,13 @@ window.MathJax = {
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#exercise-1">Exercise 1</a></li>
+    <li><a href="#exercise-2">Exercise 2</a></li>
+    <li><a href="#exercise-3">Exercise 3</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1593,182 +1599,20 @@ window.MathJax = {
           
             <h1>
               
-              3. Inter-thread communication
+              3.4: The Stack
             </h1>
           
 
         
 
 
-<p>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&rsquo;s still not always trivial to know <em>how to apply them to a specific problem</em>. Even for the well-known producer-consumer problem, several different setups are possible.</p>
-<p>This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a &ldquo;single right answer&rdquo; and/or are a bit vague: that is intentional.</p>
-<p>Analyse the code below and write a report (3-4 pages):</p>
-<ol>
-<li>Describe the most important aspects of this program in terms of threading (in general, not line-by-line)</li>
-<li>Note that this program does something similar to the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
-<ul>
-<li>However, it is fundamentally different in how it divides the responsibilities between producers and consumers.</li>
-<li>Explain this difference in detail.</li>
-<li>Discuss which of both approaches you think is probably more realistic / more likely to occur in practice and why.</li>
-</ul>
-</li>
-<li>Make a line chart that plots &lsquo;the elapsed time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
-<ul>
-<li>For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
-<li>Note:
-<ul>
-<li>the scale on the X-axis goes from 2 to 300</li>
-<li>don&rsquo;t just sample the number of threads between 2 and 300 uniformly though: be smart in how you choose your threadcounts!</li>
-<li>at least 8 data points should be present in the chart</li>
-<li>you can use any charting program for this (for example excel or google sheets)</li>
-<li><strong>TIP</strong> use the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
-<li><strong>NOTE</strong> printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.</li>
-<li><strong>NOTE</strong> it&rsquo;s best to execute each measurement a few times and on an unloaded system to get consistent results</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Interpret the chart and draw conclusions
-<ul>
-<li>It is not sufficient to simply describe what&rsquo;s visible on the chart: you need to explain <strong>WHY</strong> this behaviour occurs.</li>
-</ul>
-</li>
-<li>Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
-<ul>
-<li>Would the program run faster or slower? Why?</li>
-<li>Does it make sense to use multiple <em>producer</em> threads with this setup? Why (not)?</li>
-<li>Does it make sense to use multiple <em>consumer</em> threads with this setup? Why (not)?</li>
-<li>Answer both questions for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a> as well</li>
-<li>For a different problem, how would you decide how to split the available number of threads between producers and consumers?</li>
-</ul>
-</li>
-<li>The producer-consumer problem comes up in many other settings as well
-<ul>
-<li>Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs</li>
-<li>Note: there aren&rsquo;t always literal &ldquo;producers&rdquo; or &ldquo;consumers&rdquo; of course; these are general concepts
-<ul>
-<li>For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Include your solution (source code) for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
-<ul>
-<li>This is not part of the page-limit for the report of course ;)</li>
-</ul>
-</li>
-</ol>
-<p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
-<p>Note: It&rsquo;s possible that you&rsquo;ve solved exercise 6.7.3 (question 7 above) in group during class.
-In this case, you MUST add sufficient personal comments to the code that explain how it works and why the used approach was chosen.
-You must also clearly list the students that collaborated on the code.
-This is to make it easier for the teaching team to assess if you actually understand the code or only copy-pasted it without contributing.
-Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned.
-Note that this is only for question 7: questions 1-6 MUST be answered fully individually!</p>
-<center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;semaphore.h&gt; </span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;signal.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#define NUMBER_OF_THREADS 5
-</span><span style="color:#75715e">#define MAX_COUNT 500000
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">static</span> <span style="color:#111">sem_t</span> <span style="color:#111">obj_produced</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">static</span> <span style="color:#111">sem_t</span> <span style="color:#111">obj_consumed</span><span style="color:#111">;</span>
+<h2 id="exercise-1">Exercise 1</h2>
+<p>TODO: Write the Assembly needed to store a single parameter on the stack (at shared location 0x60) for a function (in addition to the return address).</p>
+<h2 id="exercise-2">Exercise 2</h2>
+<p>TODO: Extend exercise 1 to also include an example of storing a return value (at shared location 0x80) on the stack.</p>
+<h2 id="exercise-3">Exercise 3</h2>
+<p>TODO: Extend exercise 2 to show how a recursive function would work</p>
 
-<span style="color:#00a8c8">static</span> <span style="color:#00a8c8">int</span> <span style="color:#111">shelf</span><span style="color:#111">;</span>
-
-
-<span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#75af00">producer</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-  
-  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">&lt;</span> <span style="color:#111">MAX_COUNT</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">shelf</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-    <span style="color:#111">sem_post</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
-    <span style="color:#111">sem_wait</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
-  <span style="color:#111">}</span>
-
-  <span style="color:#00a8c8">return</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-
-
-<span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#75af00">consumer</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">isPrime</span><span style="color:#111">;</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">VUT</span><span style="color:#111">;</span>
-
-  <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">sem_wait</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
-    <span style="color:#111">VUT</span> <span style="color:#f92672">=</span> <span style="color:#111">shelf</span><span style="color:#111">;</span>
-    <span style="color:#111">sem_post</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
-    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;[CONSUMER] %d</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">VUT</span><span style="color:#111">);</span>
-
-    <span style="color:#111">isPrime</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">VUT</span><span style="color:#111">;</span> <span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-      <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">VUT</span> <span style="color:#f92672">%</span> <span style="color:#111">i</span> <span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-        <span style="color:#111">isPrime</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-      <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-    <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">isPrime</span><span style="color:#f92672">==</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-      <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;    thread #x announces that %d is prime.</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
-    <span style="color:#111">}</span>
-  <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-
-
-<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#111">err</span><span style="color:#111">;</span>
-  <span style="color:#111">pthread_t</span> <span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">];</span>
-
-  <span style="color:#75715e">// create semaphores
-</span><span style="color:#75715e"></span>  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">sem_init</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span>
-  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create semaphore: obj_produced [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">sem_init</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">);</span>
-  <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create semaphore: obj_produced [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span>
-
-  <span style="color:#75715e">// create producer thread
-</span><span style="color:#75715e"></span>  <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">pthread_create</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]),</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">producer</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
-  <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create producer thread: [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
-  <span style="color:#111">}</span> 
-  <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Producer thread created</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
-
-  <span style="color:#75715e">// create consumer threads
-</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">err</span> <span style="color:#f92672">=</span> <span style="color:#111">pthread_create</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]),</span> <span style="color:#111">NULL</span><span style="color:#111">,</span> <span style="color:#f92672">&amp;</span><span style="color:#111">consumer</span><span style="color:#111">,</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
-    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">err</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-      <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">can&#39;t create consumer thread %d: [%s]&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">strerror</span><span style="color:#111">(</span><span style="color:#111">err</span><span style="color:#111">));</span>
-    <span style="color:#111">}</span>
-    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Consumer thread %d created</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">);</span>
-  <span style="color:#111">}</span>
-
-  <span style="color:#75715e">// wait for producer thread
-</span><span style="color:#75715e"></span>  <span style="color:#111">pthread_join</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#111">NULL</span><span style="color:#111">);</span>
-
-  <span style="color:#75715e">// kill consumer threads 
-</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">&lt;</span><span style="color:#111">NUMBER_OF_THREADS</span><span style="color:#111">;</span><span style="color:#111">i</span><span style="color:#f92672">++</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">pthread_kill</span><span style="color:#111">(</span><span style="color:#111">tid</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#ae81ff">9</span><span style="color:#111">);</span>
-  <span style="color:#111">}</span>
-
-  <span style="color:#75715e">// delete the semaphores
-</span><span style="color:#75715e"></span>  <span style="color:#111">sem_destroy</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_produced</span><span style="color:#111">);</span>
-  <span style="color:#111">sem_destroy</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">obj_consumed</span><span style="color:#111">);</span>
-
-  <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-
-</code></pre></div>
 
 <footer class="footline">
 	
@@ -1984,6 +1828,7 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
                 
                     
+                    
                 
                 
 
@@ -1996,6 +1841,9 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2045,69 +1893,6 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -2128,34 +1913,8 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -2164,185 +1923,6 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
                     
                     
 
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -2536,6 +2116,278 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -2592,7 +2444,6 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
                 
                     
-                    
                 
                 
 
@@ -2606,8 +2457,21 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -2640,26 +2504,6 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
             
             
                 
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -2764,10 +2608,10 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../exercises/c-debugging-testing/" title="2. Testing in C(&#43;&#43;)"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../ch3-introcpu/2_functions/" title="3.3 Functions and The Stack"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../exercises/scheduler/" title="4. Pseudo scheduler" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch4-pointers/" title="4: Pointers &amp; Arrays" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

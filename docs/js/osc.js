@@ -89,3 +89,19 @@ function toggleAnswer(target, combo) {
 
 
 }  
+
+function toggleDisplay(targetID) {
+  x = document.getElementById(targetID);
+
+  // TODO: refactor to add/remove classname hidden, will be much much smoother!
+  if (x.style.display !== "block" && x.style.display !== "grid") {
+    if( x.className.includes("multicol") ) {
+      x.style.display = "grid";
+    }
+    else {
+      x.style.display = "block";
+    }
+  } else {
+    x.style.display = "none";
+  }
+}

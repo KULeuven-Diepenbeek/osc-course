@@ -12,19 +12,19 @@
     <title>3.2: Assembly basics :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1645548878" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1645548878" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1645548878" rel="stylesheet">
-    <link href="../../css/theme.css?1645548878" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1645548878" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645575344" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645575344" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645575344" rel="stylesheet">
+    <link href="../../css/theme.css?1645575344" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645575344" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1645548878" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645575344" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1645548878"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645575344"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1645548878"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1645548878"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645575344"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645575344"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1645548878"></script>
+<script type="text/javascript" src="../../js/search.js?1645575344"></script>
 
     
   </div>
@@ -440,9 +440,30 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/ch3-introcpu/2_functions/" title="" class="dd-item ">
+      <li data-nav-id="/ch3-introcpu/2_functions/" title="3.3 Functions and The Stack" class="dd-item ">
         <a href="../../ch3-introcpu/2_functions/">
+        <i class='fab fa-linux'></i> 3.3 Functions and The Stack
         
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/ch3-introcpu/2_lab_stack/" title="3.4: The Stack" class="dd-item ">
+        <a href="../../ch3-introcpu/2_lab_stack/">
+        <i class='fas fa-vial'></i> 3.4: The Stack
         
         </a>
     </li>
@@ -1616,7 +1637,7 @@ F = E * E
 <span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#f92672">++</span><span style="color:#111">A</span><span style="color:#111">;</span>
 <span style="color:#75715e">// A is now 2
 </span><span style="color:#75715e">// B is now 2
-</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">```</span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">C</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</span><span style="color:#75715e"></span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">C</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
 </code></pre></div></div>
 <div>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
@@ -1631,21 +1652,21 @@ F = E * E
 <p><em>Note: this shows that a single statement in C can often compile to 2 or even more assembly instructions, and the implications are often subtle!</em></p>
 <h3 id="exercise-5">Exercise 5</h3>
 <p>How would you implement a while loop in ASSEMBLY using BEQi and JMPi?</p>
-<pre><code>int accumulator = 0;
-int n = 10;
-while( n != 0 ) {
-    accumulator += 10;
-    --n;
-}
-int a = accumulator + 5;
-</code></pre><h3 id="exercise-6">Exercise 6</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">while</span><span style="color:#111">(</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#f92672">--</span><span style="color:#111">n</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+</code></pre></div><h3 id="exercise-6">Exercise 6</h3>
 <p>How would you implement a For loop?</p>
-<pre><code>int accumulator = 0;
-for( int i = 10; i &gt; 0; ++i ) {
-    accumulator += 10;
-}
-int a = accumulator + 5;
-</code></pre>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">for</span><span style="color:#111">(</span> <span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">++</span><span style="color:#111">i</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+</code></pre></div>
 
 <footer class="footline">
 	
@@ -1913,6 +1934,22 @@ int a = accumulator + 5;
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -2628,7 +2665,7 @@ int a = accumulator + 5;
 			<a class="nav nav-prev" href="../../ch3-introcpu/1_vonneumann/" title="3.1 Von Neumann Architecture"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../ch3-introcpu/2_functions/" title="" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../ch3-introcpu/2_functions/" title="3.3 Functions and The Stack" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -2638,17 +2675,17 @@ int a = accumulator + 5;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1645548878"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1645548878"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1645548878"></script>
-    <script src="../../js/jquery.sticky.js?1645548878"></script>
-    <script src="../../js/featherlight.min.js?1645548878"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1645548878"></script>
-    <script src="../../js/learn.js?1645548878"></script>
-    <script src="../../js/hugo-learn.js?1645548878"></script>
+    <script src="../../js/clipboard.min.js?1645575344"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645575344"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645575344"></script>
+    <script src="../../js/jquery.sticky.js?1645575344"></script>
+    <script src="../../js/featherlight.min.js?1645575344"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645575344"></script>
+    <script src="../../js/learn.js?1645575344"></script>
+    <script src="../../js/hugo-learn.js?1645575344"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1645548878"></script>
+            <script src="../../mermaid/mermaid.js?1645575344"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

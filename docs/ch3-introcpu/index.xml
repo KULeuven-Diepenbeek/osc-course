@@ -29,15 +29,24 @@ With initial values: A = 5, B = 10, D = 20 Opcodes: MUL = 6, MULd = 7, MULi = 8,
     </item>
     
     <item>
-      <title></title>
+      <title>3.3 Functions and The Stack</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
-      <description>Function calls with JAL JMPi to SKIP things, but can also be used to re-do things, like we saw with while/for in exercises!
-Now, we can also use it to implement functions
-However, need to keep track of a return address (no need before, but much needed now)
-Passing parameters to functions ? how does the function know where it can find the parameters? at which addresses they are? Can&amp;rsquo;t just have addresses agreed to up-front, would not be secure / can&amp;rsquo;t dynamically load software</description>
+      <description>In the previous part, we&amp;rsquo;ve discussed how we can use special branching and jumping instructions (like BEQ and JMP) to skip over certain parts of code to implement if-else logic. In the lab, we&amp;rsquo;ve seen how we can use the same building blocks to build while and for loops.
+In this part we will discuss how we can use jumping to implement functions, and some extra challenges that come with that.</description>
+    </item>
+    
+    <item>
+      <title>3.4: The Stack</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</guid>
+      <description>Exercise 1 TODO: Write the Assembly needed to store a single parameter on the stack (at shared location 0x60) for a function (in addition to the return address).
+Exercise 2 TODO: Extend exercise 1 to also include an example of storing a return value (at shared location 0x80) on the stack.
+Exercise 3 TODO: Extend exercise 2 to show how a recursive function would work</description>
     </item>
     
   </channel>

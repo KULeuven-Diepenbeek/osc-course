@@ -20,16 +20,17 @@ A few of these possible operations, applied to one or two parameters (called _op
 | Subtraction: A - B | A OR B |
 | Multiplication: A * B | NOT A |
 | Division: A / B | A XOR B |
-| Shift left: A << B | |
-| Shift right: A >> B| |
+| Shift left: A `<<` B | |
+| Shift right: A `>>` B| |
 | Negation: -A | | 
 
 </div>
 
 Most of these operations are typically implemented directly in hardware by a combination of logical ports (AND, OR, NOT, etc.). What that looks like exactly is discussed in your other course `Digital and Electronic Circuits (DISCH)`. For now, the main thing we need to know is that all the operations are typically combined in a single hardware element: the **Arithmetic Logical Unit (ALU)**. 
 
-
-<!-- {{<figure src="https://peacehumanity.org/wp-content/uploads/2021/10/placeholder-286.png" title="The ALU">}} -->
+<div style="max-width: 500px; margin: 0 auto;">
+{{<figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/ALU_block.gif/1200px-ALU_block.gif" title="The ALU">}}
+</div>
 
 As the single ALU supports multiple operations, we need a way to select which operation is chosen at a given time. This is done using the **operation code (opcode)**, which is really just a number. For example, we can define that number 0 means ADD, 1 means SUB(TRACT), 2 means MUL(TIPLY), etc.
 
@@ -159,7 +160,7 @@ The above example `C = A + B` could then look something like this:
 
 | Address 	| Value 	| Comment        	|
 |---------	|-------	|----------------	|
-| 0x08    	| 0       	| ADD instr. type   |
+| 0x08    	| 0       | ADD instr. type   |
 | 0x09    	| 0x03  	| A address      	|
 | 0x0A    	| 0x00  	| B address      	|
 | 0x0B    	| 0x01  	| output address 	|
@@ -616,7 +617,7 @@ _Note: the JMPi is conceptually part of the if-block, not the else block. The el
 
 Note that there of course also exists a **JMP** instruction. However, that one doesn't just encode the new value for the PC directly. Instead, it encodes an address in memory. To get the new value for the PC, we need to load the value of that memory address, which itself is also an address, and then set the PC to that value, not the immediate encoded in the instruction itself. 
 
-This idea that an address can point to a value that is itself another address that can point to another thing is a very powerful concept in C/C++ that allows many fancy features. For now however, we'll just use the JMPi variant.
+This idea that an address can point to a value that is itself another address that can point to another thing is a very powerful concept in C/C++ that allows many fancy features. In the next part, we'll see how we can use it to implement function calls. For now however, we'll just use the JMPi variant.
 
 Note finally, for completeness, that "real" Assembly typically does not work with full addresses but "offsets". For example if the PC is currently at 0x10 and we want to JMPi to 0x18, we wouldn't say 0x18, but rather 8, because the current value (0x10) plus that offset (8) equals the target address 0x18. Can you guess why this is the common approach? 
 

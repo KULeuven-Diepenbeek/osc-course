@@ -44,7 +44,7 @@ int A = 1;
 int B = ++A;
 // A is now 2
 // B is now 2
-```D = C - 10;
+D = C - 10;
 ```
 
 </div>
@@ -72,7 +72,7 @@ _Note: this shows that a single statement in C can often compile to 2 or even mo
 
 How would you implement a while loop in ASSEMBLY using BEQi and JMPi?
 
-```
+``` C
 int accumulator = 0;
 int n = 10;
 while( n != 0 ) {
@@ -86,7 +86,7 @@ int a = accumulator + 5;
 
 How would you implement a For loop? 
 
-```
+``` C
 int accumulator = 0;
 for( int i = 10; i > 0; ++i ) {
     accumulator += 10;

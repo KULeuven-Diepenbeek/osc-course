@@ -12,19 +12,19 @@
     <title>3.2: Assembly basics :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1645575344" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1645575344" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1645575344" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1645575344" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1645575344" rel="stylesheet">
-    <link href="../../css/theme.css?1645575344" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1645575344" rel="stylesheet">
+    <link href="../../css/nucleus.css?1646066332" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1646066332" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1646066332" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1646066332" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1646066332" rel="stylesheet">
+    <link href="../../css/theme.css?1646066332" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1646066332" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1645575344" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1646066332" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1645575344"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1646066332"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1645575344"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1645575344"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1646066332"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1646066332"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1645575344"></script>
+<script type="text/javascript" src="../../js/search.js?1646066332"></script>
 
     
   </div>
@@ -1586,7 +1586,6 @@ window.MathJax = {
         <li><a href="#exercise-3">Exercise 3</a></li>
         <li><a href="#exercise-4">Exercise 4</a></li>
         <li><a href="#exercise-5">Exercise 5</a></li>
-        <li><a href="#exercise-6">Exercise 6</a></li>
       </ul>
     </li>
   </ul>
@@ -1615,20 +1614,72 @@ window.MathJax = {
 
 <h2 id="assembly-basics">Assembly basics</h2>
 <h3 id="exercise-1">Exercise 1</h3>
-<p>TODO: Show what the RAM looks like for</p>
-<p>With initial values: A = 5, B = 10, D = 20
-Opcodes: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11
-BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19
+<p>How would you implement a while loop in Assembly using BEQi and JMPi?</p>
+<p>You don&rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">while</span><span style="color:#111">(</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#f92672">--</span><span style="color:#111">n</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+</code></pre></div><h3 id="exercise-2">Exercise 2</h3>
+<p>How would you implement a for loop in Assembly using BEQi and JMPi? How is this different from the while in Exercise 1 above?</p>
+<p>You don&rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">for</span><span style="color:#111">(</span> <span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">--</span><span style="color:#111">n</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+</code></pre></div><h3 id="exercise-3">Exercise 3</h3>
+<p>Show what the full RAM contents might look like after executing the following pseudo-C program. Show both variables (A, B, C, &hellip;) and encoded instructions.
+You can choose yourself at which addresses you place the variables and where you start placing the instructions.</p>
+<p>Use the following opcodes if necessary: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11,
+BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19,
 JMP = 20, JMPi = 21</p>
-<pre><code>C = A + B
-A = A + D
-E = A - B
-F = E * E
-</code></pre><h3 id="exercise-2">Exercise 2</h3>
-<p>TODO: Optimize this by eliminating as many variables as possible (using the -d and -c variants)</p>
-<h3 id="exercise-3">Exercise 3</h3>
-<p>TODO: This is the C code, this is the assembly, but we&rsquo;ve made a few mistakes&hellip; find them and fix them!</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+<span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+<span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#111">A</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">15</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#111">D</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>
+<span style="color:#111">}</span>
+<span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+    <span style="color:#111">A</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">15</span>
+    <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#111">D</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>
+<span style="color:#111">}</span>
+<span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#111">(</span><span style="color:#111">B</span> <span style="color:#f92672">/</span> <span style="color:#111">A</span><span style="color:#111">);</span>
+</code></pre></div><p><em>Tip: a single line of C code might need multiple lines of Assembly code!</em></p>
 <h3 id="exercise-4">Exercise 4</h3>
+<p>Below, you can see a (psuedo) C program on the left.
+It has been translated to the Assembly on the right, but the programmer has made some major errors!</p>
+<p>Can you find an fix the errors in the Assembly?</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#111">A</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">15</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#111">C</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">X</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">Y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+        <span style="color:#111">Z</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#111">C</span> <span style="color:#f92672">=</span> <span style="color:#111">X</span><span style="color:#111">;</span>
+</code></pre></div></div>
+<div>
+<pre><code>0x08: BEQi A 15 0x20
+0x0C: ADDd B B 10
+0x10: BLE X C 0x18
+0x14: ADDi Y 20 Y
+0x18: JMP 0x20
+
+0x1C: ADDi Z 30 Z
+
+
+0x20: ADDi X C
+</code></pre></div>
+</div>
+<h3 id="exercise-5">Exercise 5</h3>
 <p>Did you know that <code>X++</code> and <code>++X</code> have subtly different meanings in most programming languages?</p>
 <p>Specifically:</p>
 <div class="multicol">
@@ -1637,36 +1688,23 @@ F = E * E
 <span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#f92672">++</span><span style="color:#111">A</span><span style="color:#111">;</span>
 <span style="color:#75715e">// A is now 2
 </span><span style="color:#75715e">// B is now 2
-</span><span style="color:#75715e"></span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">C</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-</code></pre></div></div>
+</span><span style="color:#75715e"></span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">B</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#75715e">// D is now 3
+</span></code></pre></div></div>
 <div>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">A</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
 <span style="color:#00a8c8">int</span> <span style="color:#111">B</span> <span style="color:#f92672">=</span> <span style="color:#111">A</span><span style="color:#f92672">++</span><span style="color:#111">;</span>
 <span style="color:#75715e">// A is now 2
 </span><span style="color:#75715e">// B is now 1 !!!!!!! (not 2 !!!)
+</span><span style="color:#75715e"></span><span style="color:#111">D</span> <span style="color:#f92672">=</span> <span style="color:#111">B</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+<span style="color:#75715e">// D is now 2 !!!!!!! (not 3 !!!)
 </span></code></pre></div></div>
 </div>
 <p>As you can see, if <code>X++</code> is used in combination with an assignment (<code>Y = X</code>), the assignment will happen first, and only then does the increment (<code>++</code>) happen.</p>
 <p>The opposite is true for <code>++X</code>: there the increment happens first, and then the assignment is done.</p>
 <p>Write both options in Assembly (using ADDi and ADDd instructions) showing clearly how they&rsquo;re different.</p>
 <p><em>Note: this shows that a single statement in C can often compile to 2 or even more assembly instructions, and the implications are often subtle!</em></p>
-<h3 id="exercise-5">Exercise 5</h3>
-<p>How would you implement a while loop in ASSEMBLY using BEQi and JMPi?</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">while</span><span style="color:#111">(</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-    <span style="color:#f92672">--</span><span style="color:#111">n</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
-</code></pre></div><h3 id="exercise-6">Exercise 6</h3>
-<p>How would you implement a For loop?</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">for</span><span style="color:#111">(</span> <span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">++</span><span style="color:#111">i</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-<span style="color:#111">}</span>
-<span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
-</code></pre></div>
+
 
 <footer class="footline">
 	
@@ -2675,17 +2713,17 @@ F = E * E
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1645575344"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1645575344"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1645575344"></script>
-    <script src="../../js/jquery.sticky.js?1645575344"></script>
-    <script src="../../js/featherlight.min.js?1645575344"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1645575344"></script>
-    <script src="../../js/learn.js?1645575344"></script>
-    <script src="../../js/hugo-learn.js?1645575344"></script>
+    <script src="../../js/clipboard.min.js?1646066332"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1646066332"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1646066332"></script>
+    <script src="../../js/jquery.sticky.js?1646066332"></script>
+    <script src="../../js/featherlight.min.js?1646066332"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1646066332"></script>
+    <script src="../../js/learn.js?1646066332"></script>
+    <script src="../../js/hugo-learn.js?1646066332"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1645575344"></script>
+            <script src="../../mermaid/mermaid.js?1646066332"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -45,9 +45,9 @@ In this part we will discuss how we can use jumping to implement functions, and 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</guid>
-      <description>Exercise 1 TODO: Write the Assembly needed to store a single parameter on the stack (at shared location 0x60) for a function (in addition to the return address).
-Exercise 2 TODO: Extend exercise 1 to also include an example of storing a return value (at shared location 0x80) on the stack.
-Exercise 3 TODO: Extend exercise 2 to show how a recursive function would work</description>
+      <description>Exercise 1 Write the Assembly code (using PUSH/POP) for the following C code (note: you can re-use a lot of the example code in the chapter to start, but you&amp;rsquo;ll need to add/change a lot too!).
+Since we&amp;rsquo;re now calling additional functions, also make sure you store the return addresses on the stack correctly (using 0x07 as temporary return address storage).
+void fX() { int A = 1; int B = 2; int C = fY(A, B); int D = C + A; } int fY(int M, int N) { int Q = M + N; int R = fZ(Q, M, N); return R; } int fZ(int R, int S, int T) { int U = R * S * T; return U; } Exercise 2 A recursive function is a function that calls itself.</description>
     </item>
     
   </channel>

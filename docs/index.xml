@@ -144,8 +144,9 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</guid>
-      <description>Assembly basics Exercise 1 TODO: Show what the RAM looks like for
-With initial values: A = 5, B = 10, D = 20 Opcodes: MUL = 6, MULd = 7, MULi = 8, DIV = 9, DIVd = 10, DIVi = 11 BEQ = 12, BEQi = 13, BNE = 14, BNEi = 15, BLT = 16, BLTi = 17, BLE = 18, BLEi = 19 JMP = 20, JMPi = 21</description>
+      <description>Assembly basics Exercise 1 How would you implement a while loop in Assembly using BEQi and JMPi?
+You don&amp;rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).
+int accumulator = 0; int n = 10; while( n != 0 ) { accumulator += 10; --n; } int a = accumulator + 5; Exercise 2 How would you implement a for loop in Assembly using BEQi and JMPi?</description>
     </item>
     
     <item>

@@ -307,11 +307,11 @@ E = C - 10
 Note that we no longer need a separate memory address for A, B or D, as their values are now encoded into the instructions themselves (see address 0x09, 0x0A and 0x0E)! 
 
 {{% task %}}
-How would you load a hardcoded value into a memory address, using only the instructions seen so far? For example: int X = 50;
+How would you load a hardcoded value into a memory address, using only the instructions seen so far? For example: int X = 50; where X is at address 0x07?
 
 <div class="solution" id="q313">
   <p>
-    ADDd 0 50 0x00
+    ADDd 0 50 0x07
   </p>
 </div>
 

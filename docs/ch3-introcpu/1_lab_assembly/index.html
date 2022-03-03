@@ -12,19 +12,19 @@
     <title>3.2: Assembly basics :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1646090545" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1646090545" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1646090545" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1646090545" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1646090545" rel="stylesheet">
-    <link href="../../css/theme.css?1646090545" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1646090545" rel="stylesheet">
+    <link href="../../css/nucleus.css?1646324817" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1646324817" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1646324817" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1646324817" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1646324817" rel="stylesheet">
+    <link href="../../css/theme.css?1646324817" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1646324817" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1646090545" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1646324817" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1646090545"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1646324817"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1646090545"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1646090545"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1646324817"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1646324817"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1646090545"></script>
+<script type="text/javascript" src="../../js/search.js?1646324817"></script>
 
     
   </div>
@@ -1620,14 +1620,14 @@ window.MathJax = {
 <span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
 <span style="color:#00a8c8">while</span><span style="color:#111">(</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
-    <span style="color:#f92672">--</span><span style="color:#111">n</span><span style="color:#111">;</span>
+    <span style="color:#111">n</span><span style="color:#f92672">--</span><span style="color:#111">;</span>
 <span style="color:#111">}</span>
 <span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
 </code></pre></div><h3 id="exercise-2">Exercise 2</h3>
 <p>How would you implement a for loop in Assembly using BEQi and JMPi? How is this different from the while in Exercise 1 above?</p>
 <p>You don&rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
-<span style="color:#00a8c8">for</span><span style="color:#111">(</span> <span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">--</span><span style="color:#111">n</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">for</span><span style="color:#111">(</span> <span style="color:#00a8c8">int</span> <span style="color:#111">n</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#111">n</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">n</span><span style="color:#f92672">--</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#111">accumulator</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
 <span style="color:#111">}</span>
 <span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#111">accumulator</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
@@ -1704,6 +1704,7 @@ It has been translated to the Assembly on the right, but the programmer has made
 <p>The opposite is true for <code>++X</code>: there the increment happens first, and then the assignment is done.</p>
 <p>Write both options in Assembly (using ADDi and ADDd instructions) showing clearly how they&rsquo;re different.</p>
 <p><em>Note: this shows that a single statement in C can often compile to 2 or even more assembly instructions, and the implications are often subtle!</em></p>
+<p><em>Note: when used in while/for loops (see Exercise 1 and 2), it typically doesn&rsquo;t matter if you do &ndash;X or X&ndash;, they both end up the same in those cases</em></p>
 
 
 <footer class="footline">
@@ -2713,17 +2714,17 @@ It has been translated to the Assembly on the right, but the programmer has made
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1646090545"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1646090545"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1646090545"></script>
-    <script src="../../js/jquery.sticky.js?1646090545"></script>
-    <script src="../../js/featherlight.min.js?1646090545"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1646090545"></script>
-    <script src="../../js/learn.js?1646090545"></script>
-    <script src="../../js/hugo-learn.js?1646090545"></script>
+    <script src="../../js/clipboard.min.js?1646324817"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1646324817"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1646324817"></script>
+    <script src="../../js/jquery.sticky.js?1646324817"></script>
+    <script src="../../js/featherlight.min.js?1646324817"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1646324817"></script>
+    <script src="../../js/learn.js?1646324817"></script>
+    <script src="../../js/hugo-learn.js?1646324817"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1646090545"></script>
+            <script src="../../mermaid/mermaid.js?1646324817"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

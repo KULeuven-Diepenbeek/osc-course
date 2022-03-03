@@ -146,7 +146,7 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</guid>
       <description>Assembly basics Exercise 1 How would you implement a while loop in Assembly using BEQi and JMPi?
 You don&amp;rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).
-int accumulator = 0; int n = 10; while( n != 0 ) { accumulator += 10; --n; } int a = accumulator + 5; Exercise 2 How would you implement a for loop in Assembly using BEQi and JMPi?</description>
+int accumulator = 0; int n = 10; while( n != 0 ) { accumulator += 10; n--; } int a = accumulator + 5; Exercise 2 How would you implement a for loop in Assembly using BEQi and JMPi?</description>
     </item>
     
     <item>
@@ -321,9 +321,9 @@ As such, the actual method used most commonly in practice is segmentation with a
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</guid>
-      <description>Exercise 1 Write the Assembly code (using PUSH/POP) for the following C code (note: you can re-use a lot of the example code in the chapter to start, but you&amp;rsquo;ll need to add/change a lot too!).
+      <description>Exercise 1 Write the (psuedo)Assembly code (using PUSH/POP) for the following C code (note: you can re-use a lot of the example code in the chapter to start, but you&amp;rsquo;ll need to add/change a lot too!).
 Since we&amp;rsquo;re now calling additional functions, also make sure you store the return addresses on the stack correctly (using 0x07 as temporary return address storage).
-void fX() { int A = 1; int B = 2; int C = fY(A, B); int D = C + A; } int fY(int M, int N) { int Q = M + N; int R = fZ(Q, M, N); return R; } int fZ(int R, int S, int T) { int U = R * S * T; return U; } Exercise 2 A recursive function is a function that calls itself.</description>
+You can use 0x60, 0x61 and 0x62 as addresses for the input parameters (M, N, R, S, and T), and 0x80 to store any return values.</description>
     </item>
     
     <item>

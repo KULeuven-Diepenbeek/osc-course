@@ -17,7 +17,7 @@ int accumulator = 0;
 int n = 10;
 while( n != 0 ) {
     accumulator += 10;
-    --n;
+    n--;
 }
 int a = accumulator + 5;
 ```
@@ -30,7 +30,7 @@ You don't need to write out the full RAM contents nor variable addresses, just t
 
 ``` C
 int accumulator = 0;
-for( int n = 10; n != 0; --n ) {
+for( int n = 10; n != 0; n-- ) {
     accumulator += 10;
 }
 int a = accumulator + 5;
@@ -143,4 +143,6 @@ The opposite is true for `++X`: there the increment happens first, and then the 
 Write both options in Assembly (using ADDi and ADDd instructions) showing clearly how they're different. 
 
 _Note: this shows that a single statement in C can often compile to 2 or even more assembly instructions, and the implications are often subtle!_
+
+_Note: when used in while/for loops (see Exercise 1 and 2), it typically doesn't matter if you do --X or X--, they both end up the same in those cases_
 

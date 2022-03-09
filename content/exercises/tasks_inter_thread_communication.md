@@ -49,7 +49,7 @@ This is to make it easier for the teaching team to assess if you actually unders
 Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned. 
 Note that this is only for question 7: questions 1-6 MUST be answered fully individually!
 
-<center>**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo **</center>
+**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo**.
 
 ```C
 #include <stdio.h>

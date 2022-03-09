@@ -157,9 +157,7 @@ You will discover in exercise '[the ancient library](/ch3-pointers/lab/)', you c
 
 This is how the memory structure of your C code looks like without initializing any single variable:
 
-<center>
-    ![](/img/lists1.png)
-</center>
+![](/img/lists1.png)
 
 Given the following structure:
 
@@ -173,9 +171,7 @@ struct node {
 
 When instantiating a `node` element using `malloc()`, we create a new variable on the heap instead of the stack:
 
-<center>
-    ![](/img/lists2.png)
-</center>
+![](/img/lists2.png)
 
 However, this representation is **incomplete**! We create a new local variable, a pointer, and this pointer is actually also a variable on the stack. So, this code:
 
@@ -190,21 +186,15 @@ void create_node() {
 
 Reserves some space on the heap, but also creates a local variable named `newelement` on the stack:
 
-<center>
-    ![](/img/lists3.png)
-</center>
+![](/img/lists3.png)
 
 The `next` value is pointing to `NULL` ("nothing"), hence the white arrow in the right side of the Figure. Now, what if I want to create a second element, and connect both together? A second local variable reserves a second block on both the stack and the heap:
 
-<center>
-    ![](/img/lists4.png)
-</center>
+![](/img/lists4.png)
 
 Now, we want to assign the second element to the `next` property of the first element. That's very simple with the statement `newelement->next = newelement2;`. Now, our memory looks like this:
 
-<center>
-    ![](/img/lists5.png)
-</center>
+![](/img/lists5.png)
 
 Notice the changed arrow in the right side of the Figure. Ok, what if we want to loop over all elements by following the arrows from each element, starting with the first, what happens with our variables in the memory space? A new method creates a new chunk in the stack space, where a new variable will be created:
 
@@ -223,9 +213,7 @@ void main() {
 }
 ```
 
-<center>
-    ![](/img/lists6.png)
-</center>
+![](/img/lists6.png)
 
 In the above Figure, `printer` points to the first value in the heap, which is the same as the variable `head`. When the `while()` loop starts doing it's work, the variable will point to the next value, and the next, and the next, until it points to `NULL`. 
 

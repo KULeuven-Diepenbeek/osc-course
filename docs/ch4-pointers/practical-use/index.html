@@ -12,19 +12,19 @@
     <title>4.2: Practical Use of Pointers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1646324817" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1646324817" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1646324817" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1646324817" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1646324817" rel="stylesheet">
-    <link href="../../css/theme.css?1646324817" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1646324817" rel="stylesheet">
+    <link href="../../css/nucleus.css?1646814460" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1646814460" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1646814460" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1646814460" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1646814460" rel="stylesheet">
+    <link href="../../css/theme.css?1646814460" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1646814460" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1646324817" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1646814460" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1646324817"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1646814460"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1646324817"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1646324817"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1646814460"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1646814460"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1646324817"></script>
+<script type="text/javascript" src="../../js/search.js?1646814460"></script>
 
     
   </div>
@@ -1754,9 +1754,7 @@ graph TD
 <h3 id="4-linked-lists">4. Linked Lists</h3>
 <p>You will discover in exercise &lsquo;<a href="../../ch3-pointers/lab/">the ancient library</a>&rsquo;, you can link different <code>struct</code> instances together to create a list of items, instead of simply using Arrays or other existing data structures. Internally in the C libraries, pointers are applied to connect elements of a collection. Let us try to do the same.</p>
 <p>This is how the memory structure of your C code looks like without initializing any single variable:</p>
-<center>
-    ![](/img/lists1.png)
-</center>
+<p><img src="../../img/lists1.png" alt=""></p>
 <p>Given the following structure:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">struct</span> <span style="color:#111">node</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">char</span><span style="color:#f92672">*</span> <span style="color:#111">name</span><span style="color:#111">;</span>
@@ -1764,9 +1762,7 @@ graph TD
     <span style="color:#00a8c8">struct</span> <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
 <span style="color:#111">};</span>
 </code></pre></div><p>When instantiating a <code>node</code> element using <code>malloc()</code>, we create a new variable on the heap instead of the stack:</p>
-<center>
-    ![](/img/lists2.png)
-</center>
+<p><img src="../../img/lists2.png" alt=""></p>
 <p>However, this representation is <strong>incomplete</strong>! We create a new local variable, a pointer, and this pointer is actually also a variable on the stack. So, this code:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">create_node</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">newelement</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#111">));</span>
@@ -1775,17 +1771,11 @@ graph TD
     <span style="color:#111">newelement</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
 <span style="color:#111">}</span>
 </code></pre></div><p>Reserves some space on the heap, but also creates a local variable named <code>newelement</code> on the stack:</p>
-<center>
-    ![](/img/lists3.png)
-</center>
+<p><img src="../../img/lists3.png" alt=""></p>
 <p>The <code>next</code> value is pointing to <code>NULL</code> (&ldquo;nothing&rdquo;), hence the white arrow in the right side of the Figure. Now, what if I want to create a second element, and connect both together? A second local variable reserves a second block on both the stack and the heap:</p>
-<center>
-    ![](/img/lists4.png)
-</center>
+<p><img src="../../img/lists4.png" alt=""></p>
 <p>Now, we want to assign the second element to the <code>next</code> property of the first element. That&rsquo;s very simple with the statement <code>newelement-&gt;next = newelement2;</code>. Now, our memory looks like this:</p>
-<center>
-    ![](/img/lists5.png)
-</center>
+<p><img src="../../img/lists5.png" alt=""></p>
 <p>Notice the changed arrow in the right side of the Figure. Ok, what if we want to loop over all elements by following the arrows from each element, starting with the first, what happens with our variables in the memory space? A new method creates a new chunk in the stack space, where a new variable will be created:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">void</span> <span style="color:#75af00">print</span><span style="color:#111">(</span><span style="color:#111">node</span><span style="color:#f92672">*</span> <span style="color:#111">printer</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">while</span><span style="color:#111">(</span><span style="color:#111">printer</span> <span style="color:#f92672">!=</span> <span style="color:#111">NULL</span><span style="color:#111">)</span> <span style="color:#111">{</span>
@@ -1799,9 +1789,7 @@ graph TD
     <span style="color:#111">head</span><span style="color:#f92672">-&gt;</span><span style="color:#111">next</span> <span style="color:#f92672">=</span> <span style="color:#111">tail</span><span style="color:#111">;</span>
     <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">head</span><span style="color:#111">);</span>
 <span style="color:#111">}</span>
-</code></pre></div><center>
-    ![](/img/lists6.png)
-</center>
+</code></pre></div><p><img src="../../img/lists6.png" alt=""></p>
 <p>In the above Figure, <code>printer</code> points to the first value in the heap, which is the same as the variable <code>head</code>. When the <code>while()</code> loop starts doing it&rsquo;s work, the variable will point to the next value, and the next, and the next, until it points to <code>NULL</code>.</p>
 <p>This will become clear in the exercise when you will implement these concepts yourself.</p>
 
@@ -2821,17 +2809,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1646324817"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1646324817"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1646324817"></script>
-    <script src="../../js/jquery.sticky.js?1646324817"></script>
-    <script src="../../js/featherlight.min.js?1646324817"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1646324817"></script>
-    <script src="../../js/learn.js?1646324817"></script>
-    <script src="../../js/hugo-learn.js?1646324817"></script>
+    <script src="../../js/clipboard.min.js?1646814460"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1646814460"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1646814460"></script>
+    <script src="../../js/jquery.sticky.js?1646814460"></script>
+    <script src="../../js/featherlight.min.js?1646814460"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1646814460"></script>
+    <script src="../../js/learn.js?1646814460"></script>
+    <script src="../../js/hugo-learn.js?1646814460"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1646324817"></script>
+            <script src="../../mermaid/mermaid.js?1646814460"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

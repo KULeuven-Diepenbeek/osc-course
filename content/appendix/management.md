@@ -33,11 +33,11 @@ draft: true
 * Week 9: Easter Holidays: 02/04 to 18/04 
 
 * Week 10: 20/04, 21/04 : 2.5h + 2h
-  * **ch7** CPU scheduling - Robin
-  * announcement of the fourth exercise - Scheduling (deadline: 18/05 9AM)
+  * **ch8** Stack and Heap - Wouter (AANGEPAST voor Robin)
 
 * Week 11: 27/04, 28/04 : 2.5h + 2h
-  * **ch8** Stack and Heap - Wouter
+  * **ch7** CPU scheduling - Robin
+  * announcement of the fourth exercise - Scheduling (deadline: 18/05 9AM)
 
 * Week 12: 04/05, 05/05: 2.5h + 2h
   * **ch9** Memory Management - Robin

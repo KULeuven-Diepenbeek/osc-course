@@ -51,7 +51,7 @@ void f1() {
 }
 
 void countToTenRecursive(int currentNumber) {
-    if ( currentNumber == 10 ) {
+    if ( currentNumber >= 10 ) {
         return currentNumber;
     }
 
@@ -62,11 +62,11 @@ void countToTenRecursive(int currentNumber) {
 ```
 
 Your goal is to write Assembly (using the stack of course!) that properly implements this function.
-You can assume that a function retrieves its first parameter (in this case `currentNumber`) from the address 0x60. 
+You can assume that a function retrieves its first parameter (in this case `currentNumber`) from the address 0x60 and stores its return parameter in 0x80. 
 
 _Before you start, consider what exactly it means to return a function call as we do here at the end of `countToTenRecursive`_
 
-Take care to correctly store the return addresses, return values, and function parameters on the stack so that, even 10 calls deep, things still work as expected!
+Take care to correctly store the return addresses (and potentially also the return values and function parameters) on the stack so that, even 10 calls deep, things still work as expected!
 
 ## Exercise 3
 
@@ -88,7 +88,6 @@ Using this approach, write (conceptual) WebAssembly code for the following funct
 - Given a value on the stack (put there by some previous operation), subtract 20 from it
 - Given a value on the stack (put there by some previous operation), square it (e.g., if the value is 5, we want to do 5*5)
 - `void f1(int A) { B = 25 + A; C = B + 10; return C; }`
-- 
 
 Answer the following questions:
 - Do we still need 3 variants of our mathematical operations (for example ADD, ADDd and ADDi) or can we do with less? Why?

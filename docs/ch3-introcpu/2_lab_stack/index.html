@@ -12,19 +12,19 @@
     <title>3.4: The Stack :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1646837120" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1646837120" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1646837120" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1646837120" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1646837120" rel="stylesheet">
-    <link href="../../css/theme.css?1646837120" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1646837120" rel="stylesheet">
+    <link href="../../css/nucleus.css?1647010182" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1647010182" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1647010182" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1647010182" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1647010182" rel="stylesheet">
+    <link href="../../css/theme.css?1647010182" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1647010182" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1646837120" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1647010182" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1646837120"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1647010182"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -80,14 +80,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1646837120"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1646837120"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1647010182"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1647010182"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1646837120"></script>
+<script type="text/javascript" src="../../js/search.js?1647010182"></script>
 
     
   </div>
@@ -1640,7 +1640,7 @@ window.MathJax = {
 </span><span style="color:#75715e"></span><span style="color:#111">}</span>
 
 <span style="color:#00a8c8">void</span> <span style="color:#75af00">countToTenRecursive</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">currentNumber</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#111">currentNumber</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#111">currentNumber</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
         <span style="color:#00a8c8">return</span> <span style="color:#111">currentNumber</span><span style="color:#111">;</span>
     <span style="color:#111">}</span>
 
@@ -1649,9 +1649,9 @@ window.MathJax = {
 <span style="color:#111">}</span>
 
 </code></pre></div><p>Your goal is to write Assembly (using the stack of course!) that properly implements this function.
-You can assume that a function retrieves its first parameter (in this case <code>currentNumber</code>) from the address 0x60.</p>
+You can assume that a function retrieves its first parameter (in this case <code>currentNumber</code>) from the address 0x60 and stores its return parameter in 0x80.</p>
 <p><em>Before you start, consider what exactly it means to return a function call as we do here at the end of <code>countToTenRecursive</code></em></p>
-<p>Take care to correctly store the return addresses, return values, and function parameters on the stack so that, even 10 calls deep, things still work as expected!</p>
+<p>Take care to correctly store the return addresses (and potentially also the return values and function parameters) on the stack so that, even 10 calls deep, things still work as expected!</p>
 <h2 id="exercise-3">Exercise 3</h2>
 <p>There are many types of Assembly. One of the most recent ones is called &ldquo;WebAssembly&rdquo;, a somewhat high-level Assembly language (if that&rsquo;s not a &ldquo;contradictio in terminis&rdquo;, I don&rsquo;t know what is) that can be used as an alternative for JavaScript.</p>
 <p>WebAssembly is special in that it works purely by means of a &ldquo;stack machine&rdquo;. Put differently: all of its instructions/operations work by pop&rsquo;ing and push&rsquo;ing things from/to the stack. If it&rsquo;s not on the stack, you can&rsquo;t perform calculations with it.</p>
@@ -1665,7 +1665,6 @@ POP C     // store the top value of the stack in address C
 <li>Given a value on the stack (put there by some previous operation), subtract 20 from it</li>
 <li>Given a value on the stack (put there by some previous operation), square it (e.g., if the value is 5, we want to do 5*5)</li>
 <li><code>void f1(int A) { B = 25 + A; C = B + 10; return C; }</code></li>
-<li></li>
 </ul>
 <p>Answer the following questions:</p>
 <ul>
@@ -2694,17 +2693,17 @@ POP C     // store the top value of the stack in address C
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1646837120"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1646837120"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1646837120"></script>
-    <script src="../../js/jquery.sticky.js?1646837120"></script>
-    <script src="../../js/featherlight.min.js?1646837120"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1646837120"></script>
-    <script src="../../js/learn.js?1646837120"></script>
-    <script src="../../js/hugo-learn.js?1646837120"></script>
+    <script src="../../js/clipboard.min.js?1647010182"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1647010182"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1647010182"></script>
+    <script src="../../js/jquery.sticky.js?1647010182"></script>
+    <script src="../../js/featherlight.min.js?1647010182"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1647010182"></script>
+    <script src="../../js/learn.js?1647010182"></script>
+    <script src="../../js/hugo-learn.js?1647010182"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1646837120"></script>
+            <script src="../../mermaid/mermaid.js?1647010182"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

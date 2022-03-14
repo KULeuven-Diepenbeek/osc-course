@@ -16,14 +16,15 @@ draft: true
 * Week 4: 09/03, 10/03 : 2.5h + 2h
   * **ch4** Pointers and Arrays - Wouter
 
-* Week 5: 16/03, 17/03 : 2.5h + 2h
-  * **ch4** Pointers and Arrays - Wouter
-  * **ch5** Debugging - Wouter
-  * announcement of first exercise - C programming (deadline: 31/03 9AM)
+* Week 5:
+  * 16/03, 2.5h: **ch4** Pointers and Arrays - Wouter
+    * announcement of first exercise - C programming (deadline: 31/03 9AM)
+  * 17/03, 2h: **ch6** Task Management: Processes - Robin
 
-* Week 6: 23/03, 24/03 : 2.5h + 2h
-  * **ch6** Task Management: Processes - Robin
-  * announcement of second exercise - Unit testing (deadline: 20/04 9AM)
+* Week 6: , 24/03 : 2.5h + 2h
+  * 23/03, 2.5h: **ch6** Task Management: Processes - Robin
+  * 24/03, 2h: **ch5** Debugging - Wouter
+    * announcement of second exercise - Unit testing (deadline: 20/04 9AM)
 
 * Week 7: 30/03, 31/03 : 2.5h + 2h
   * **ch6** Task Management: Threads - Robin

@@ -12,19 +12,24 @@
     <title>8.2: Inspecting memory regions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647516832" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647516832" rel="stylesheet">
-    <link href="../../css/theme.css?1647516832" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647516832" rel="stylesheet">
-    
-    <link href="../../css/theme-kul.css?1647516832" rel="stylesheet">
-    
+    <link href="../../css/nucleus.css?1647621864" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1647621864" rel="stylesheet">
+    <link href="../../css/hybrid.css?1647621864" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1647621864" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1647621864" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1647621864" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1647621864" rel="stylesheet">
+    <link href="../../css/theme.css?1647621864" rel="stylesheet">
+    <link href="../../css/devselector.css?1647621864" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1647621864" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1647621864" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647516832"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1647621864"></script>
+    <script src="../../js/devselector.js?1647621864"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -36,28 +41,7 @@
         }
       
     </style>
-      <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-<script>
-window.MathJax = {
-  chtml: {
-    scale: 2,                      
-    minScale: .5,                  
-    matchFontHeight: true,         
-    mtextInheritFont: false,       
-    merrorInheritFont: true,       
-    mathmlSpacing: false,          
-    skipAttributes: {},            
-    exFactor: .5,                  
-    displayAlign: 'center',        
-    displayIndent: '0'             
-  }
-};
-</script>
-
-<script src=../../js/osc.js></script>
+    
   </head>
   <body class="" data-url="../../ch8-stack/inspection-labs/">
     <nav id="sidebar" class="">
@@ -67,10 +51,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+  <img src="../../images/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+  <img src="../../images/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -80,28 +64,21 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647516832"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647516832"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1647621864"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1647621864"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647516832"></script>
+<script type="text/javascript" src="../../js/search.js?1647621864"></script>
 
     
   </div>
-  
-    <section id="homelinks">
-      <ul>
-        <li>
-            <a class="padding" href='../../'><i class='fas fa-home'></i> Home</a>
-        </li>
-      </ul>
-    </section>
-  
 
     <div class="highlightable">
+
+      <h3><a href="../../">Course Contents</a></h3>
     <ul class="topics">
 
         
@@ -1702,7 +1679,13 @@ read(0,
 <h2 id="4-free">4. Free</h2>
 <p>Until now the above examples have never taken into consideration the fact that one has to get rid unused space using <code>free()</code>. We will leave it up to you to inspect what happens in <code>/proc</code>.</p>
 <h2 id="extra-using-valgrind-to-inspect-the-memory-heap">Extra: Using Valgrind to inspect the memory heap</h2>
-<p><img src="../../img/valgrind.png" alt=""></p>
+<p><figure>
+	<a href="../../img/valgrind.png" data-featherlight="image">
+		<img src="../../img/valgrind.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Valgrind is a useful commandline tool that makes it easy for C programmers to inspect how much dynamic (heap) memory a program actually consumed, and how much of it was freed. It is a lot easier to use than dabbling in different disassemble commands, but it does NOT come with the GNU toolchain. Use <code>apt-get install valgrind</code> to install it onto your virtual machine.</p>
 <p>Let&rsquo;s assume a simple program that reserves some memory, fills in the blanks, and then frees up some space: (also available in the <code>osc-exercises</code> repository)</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
@@ -2762,21 +2745,38 @@ warning: no debug symbols in executable (-arch x86_64)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647516832"></script>
-    <script src="../../js/jquery.sticky.js?1647516832"></script>
-    <script src="../../js/featherlight.min.js?1647516832"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647516832"></script>
-    <script src="../../js/learn.js?1647516832"></script>
-    <script src="../../js/hugo-learn.js?1647516832"></script>
+    <script src="../../js/clipboard.min.js?1647621864"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1647621864"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1647621864"></script>
+    <script src="../../js/jquery.sticky.js?1647621864"></script>
+    <script src="../../js/featherlight.min.js?1647621864"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1647621864"></script>
+    <script src="../../js/learn.js?1647621864"></script>
+    <script src="../../js/hugo-learn.js?1647621864"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647516832"></script>
+            <script src="../../mermaid/mermaid.js?1647621864"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
         </script>
+    
+    <script>
+    window.MathJax = {
+      chtml: {
+        scale: 2,                      
+        minScale: .5,                  
+        matchFontHeight: true,         
+        mtextInheritFont: false,       
+        merrorInheritFont: true,       
+        mathmlSpacing: false,          
+        skipAttributes: {},            
+        exFactor: .5,                  
+        displayAlign: 'center',        
+        displayIndent: '0'             
+      }
+    };
+    </script>
     
     
 

@@ -12,19 +12,24 @@
     <title>2.1: The C programming language :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647516832" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647516832" rel="stylesheet">
-    <link href="../../css/theme.css?1647516832" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647516832" rel="stylesheet">
-    
-    <link href="../../css/theme-kul.css?1647516832" rel="stylesheet">
-    
+    <link href="../../css/nucleus.css?1647621863" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/hybrid.css?1647621863" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1647621863" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1647621863" rel="stylesheet">
+    <link href="../../css/theme.css?1647621863" rel="stylesheet">
+    <link href="../../css/devselector.css?1647621863" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1647621863" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1647621863" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647516832"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1647621863"></script>
+    <script src="../../js/devselector.js?1647621863"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -36,28 +41,7 @@
         }
       
     </style>
-      <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-<script>
-window.MathJax = {
-  chtml: {
-    scale: 2,                      
-    minScale: .5,                  
-    matchFontHeight: true,         
-    mtextInheritFont: false,       
-    merrorInheritFont: true,       
-    mathmlSpacing: false,          
-    skipAttributes: {},            
-    exFactor: .5,                  
-    displayAlign: 'center',        
-    displayIndent: '0'             
-  }
-};
-</script>
-
-<script src=../../js/osc.js></script>
+    
   </head>
   <body class="" data-url="../../ch2-c/intro/">
     <nav id="sidebar" class="">
@@ -67,10 +51,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+  <img src="../../images/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+  <img src="../../images/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -80,28 +64,21 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647516832"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647516832"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1647621863"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1647621863"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647516832"></script>
+<script type="text/javascript" src="../../js/search.js?1647621863"></script>
 
     
   </div>
-  
-    <section id="homelinks">
-      <ul>
-        <li>
-            <a class="padding" href='../../'><i class='fas fa-home'></i> Home</a>
-        </li>
-      </ul>
-    </section>
-  
 
     <div class="highlightable">
+
+      <h3><a href="../../">Course Contents</a></h3>
     <ul class="topics">
 
         
@@ -1680,7 +1657,13 @@ Congratulations on your first compiled C program!</p>
 <li>C works with headers (.h) and source (.c) files. An executable file requires two steps: compiling and linking. Linking allows for <a href="https://www.devdungeon.com/content/how-mix-c-and-assembly">mixing with assembly</a>.</li>
 </ol>
 <p>The following figure represents the Java Virtual Machine you have been using in the INF1 course (<a href="https://www.quora.com/What-is-the-Java-virtual-machine-JVM">source</a>):</p>
-<p><img src="../../img/jvm.jpg" alt="The JVM"></p>
+<p><figure>
+	<a href="../../img/jvm.jpg" data-featherlight="image">
+		<img src="../../img/jvm.jpg"  alt="The JVM" >
+	</a>
+	
+</figure>
+</p>
 <p>Note that there is <strong>only one</strong> source code and byte code block. Any <code>.class</code> file can be executed on any Linux/Windows/MacOS machine, provided you installed the correct JVM on top of the OS, as also pictured. When you compile <code>.c</code> C files, they do not translate into byte code but into <strong>OS-specific binaries</strong>! That means you cannot simply share your Windows binaries with a friend that runs Linux on his or her machine.</p>
 <h3 id="why-should-you-learn-c">Why should you learn C?</h3>
 <p>Good question. A few answers:</p>
@@ -1689,7 +1672,15 @@ Congratulations on your first compiled C program!</p>
 <li>Since this course is part of an <em>engineering</em> curriculum, it needs to stay close to its engineering roots: <strong>the hardware</strong> (<em>embedded systems</em>). Controlling hardware components on a PCB chip can only be done with low level machine instructions, that are coming from a low-level programming language such as C. Of course, writing in Assembly is even more precise, but hurts just a tad bit more.</li>
 <li>This is more of an operating systems course than it is a programming course. However, to learn concepts of an OS, you&rsquo;ll need a firm grasp of the basics in C.</li>
 </ol>
-<p><img src="../../img/tiobe.jpg" alt="" title="The TIOBE Index"></p>
+<p><figure>
+	<a href="../../img/tiobe.jpg" data-featherlight="image">
+		<img src="../../img/tiobe.jpg"   title="The TIOBE Index">
+	</a>
+	
+		<figcaption>The TIOBE Index</figcaption>
+	
+</figure>
+</p>
 <h2 id="basic-c">Basic C</h2>
 <h3 id="hello-world">Hello World</h3>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
@@ -2850,21 +2841,38 @@ And of <code>strncmp(&quot;hello, world&quot;, &quot;hello, amazing world!!&quot
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647516832"></script>
-    <script src="../../js/jquery.sticky.js?1647516832"></script>
-    <script src="../../js/featherlight.min.js?1647516832"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647516832"></script>
-    <script src="../../js/learn.js?1647516832"></script>
-    <script src="../../js/hugo-learn.js?1647516832"></script>
+    <script src="../../js/clipboard.min.js?1647621863"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1647621863"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1647621863"></script>
+    <script src="../../js/jquery.sticky.js?1647621863"></script>
+    <script src="../../js/featherlight.min.js?1647621863"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1647621863"></script>
+    <script src="../../js/learn.js?1647621863"></script>
+    <script src="../../js/hugo-learn.js?1647621863"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647516832"></script>
+            <script src="../../mermaid/mermaid.js?1647621863"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
         </script>
+    
+    <script>
+    window.MathJax = {
+      chtml: {
+        scale: 2,                      
+        minScale: .5,                  
+        matchFontHeight: true,         
+        mtextInheritFont: false,       
+        merrorInheritFont: true,       
+        mathmlSpacing: false,          
+        skipAttributes: {},            
+        exFactor: .5,                  
+        displayAlign: 'center',        
+        displayIndent: '0'             
+      }
+    };
+    </script>
     
     
 

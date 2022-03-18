@@ -12,19 +12,24 @@
     <title>3.3: The Ancient Library (RTOS) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647516832" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647516832" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647516832" rel="stylesheet">
-    <link href="../../css/theme.css?1647516832" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647516832" rel="stylesheet">
-    
-    <link href="../../css/theme-kul.css?1647516832" rel="stylesheet">
-    
+    <link href="../../css/nucleus.css?1647621863" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/hybrid.css?1647621863" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1647621863" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1647621863" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1647621863" rel="stylesheet">
+    <link href="../../css/theme.css?1647621863" rel="stylesheet">
+    <link href="../../css/devselector.css?1647621863" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1647621863" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1647621863" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647516832"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1647621863"></script>
+    <script src="../../js/devselector.js?1647621863"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -36,28 +41,7 @@
         }
       
     </style>
-      <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-<script>
-window.MathJax = {
-  chtml: {
-    scale: 2,                      
-    minScale: .5,                  
-    matchFontHeight: true,         
-    mtextInheritFont: false,       
-    merrorInheritFont: true,       
-    mathmlSpacing: false,          
-    skipAttributes: {},            
-    exFactor: .5,                  
-    displayAlign: 'center',        
-    displayIndent: '0'             
-  }
-};
-</script>
-
-<script src=../../js/osc.js></script>
+    
   </head>
   <body class="" data-url="../../appendix/lab_ll_rtos/">
     <nav id="sidebar" class="">
@@ -67,10 +51,10 @@ window.MathJax = {
   <div id="header-wrapper">
     <div id="header">
       <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
-	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+  <img src="../../images/kul.png" alt="KU Leuven" /><br/>
 </a>
 <a href="https://www.uhasselt.be/" target="_blank">
-	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+  <img src="../../images/uhasselt.svg" alt="UHasselt" id="uhlogo" />
 </a>
     </div>
     
@@ -80,28 +64,21 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647516832"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647516832"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1647621863"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1647621863"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647516832"></script>
+<script type="text/javascript" src="../../js/search.js?1647621863"></script>
 
     
   </div>
-  
-    <section id="homelinks">
-      <ul>
-        <li>
-            <a class="padding" href='../../'><i class='fas fa-home'></i> Home</a>
-        </li>
-      </ul>
-    </section>
-  
 
     <div class="highlightable">
+
+      <h3><a href="../../">Course Contents</a></h3>
     <ul class="topics">
 
         
@@ -1614,7 +1591,13 @@ window.MathJax = {
 <blockquote>
 <p>Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (<a href="https://dublin2019.com/3906-2/fantasy-library-art-736x459/">img src</a>)</p>
 </blockquote>
-<p><img src="../../img/labs/library.png" alt="Library"></p>
+<p><figure>
+	<a href="../../img/labs/library.png" data-featherlight="image">
+		<img src="../../img/labs/library.png"  alt="Library" >
+	</a>
+	
+</figure>
+</p>
 <h3 id="1-modeling-the-books">1. Modeling the books</h3>
 <p>The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</p>
 <ul>
@@ -2734,21 +2717,38 @@ While the spell completes, you hear the figure cursing &ldquo;<em>annoying wild 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647516832"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647516832"></script>
-    <script src="../../js/jquery.sticky.js?1647516832"></script>
-    <script src="../../js/featherlight.min.js?1647516832"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647516832"></script>
-    <script src="../../js/learn.js?1647516832"></script>
-    <script src="../../js/hugo-learn.js?1647516832"></script>
+    <script src="../../js/clipboard.min.js?1647621863"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1647621863"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1647621863"></script>
+    <script src="../../js/jquery.sticky.js?1647621863"></script>
+    <script src="../../js/featherlight.min.js?1647621863"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1647621863"></script>
+    <script src="../../js/learn.js?1647621863"></script>
+    <script src="../../js/hugo-learn.js?1647621863"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647516832"></script>
+            <script src="../../mermaid/mermaid.js?1647621863"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
         </script>
+    
+    <script>
+    window.MathJax = {
+      chtml: {
+        scale: 2,                      
+        minScale: .5,                  
+        matchFontHeight: true,         
+        mtextInheritFont: false,       
+        merrorInheritFont: true,       
+        mathmlSpacing: false,          
+        skipAttributes: {},            
+        exFactor: .5,                  
+        displayAlign: 'center',        
+        displayIndent: '0'             
+      }
+    };
+    </script>
     
     
 

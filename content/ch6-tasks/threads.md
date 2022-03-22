@@ -68,7 +68,7 @@ However, the name "single-threaded" of course also implies the existence of **mu
 There are 4 major benefits to working with multiple threads: 
 
 0. **Responsiveness**: When a single program is broken down into multiple threads, the user experience feels more responsive. Dedicated threads can be created to handle user requests and give (visual) feedback, while other threads can for example process data in the background. 
-0. **Resource sharing**: Programs that have multiple threads typically want some sort of communication between these threads. This is done more easily between threads than between processes, as threads _implicitly_ share memory via their heap.
+0. **Resource sharing**: Programs that have multiple threads typically want some sort of communication between these threads. This is done more easily between threads than between processes, as threads _implicitly_ share memory via their heap. This is discussed in detail in the next Section.
 0. **Economy**: Context switching becomes cheaper when switching between threads in comparison to switching between processes. This is because less per-thread state needs to be tracked, in comparison to more per-process state. 
 0. **Scalability**: Multiple threads can run in parallel on multi-core systems in contrast to a single threaded process.
 
@@ -96,7 +96,7 @@ The graph above visualises Amdahl's law. For example, as marked by the red dot, 
 
 However, as stated above, it requires a skilled programmer to achieve maximal speed-up even if a large part of the program can be parallelized. If the program needs a lot of data that needs to be communicated between the serial and parallel portions this becomes even harder to achieve, as this can also cause additional slowdowns. 
 
-### User threads vs system threads  
+### User threads vs System threads  
 
 By now, you might still think that using threads is only useful if you have multiple processors, or, if you do have multiple CPU cores, that you should only use as many threads as you have cores. However, this is somewhat incorrect. 
 
@@ -111,13 +111,13 @@ As such, there is often not a direct one-to-one mapping between threads and actu
 
 Before discussing how to communicate between threads however, we first look at how we can create threads in C. 
 
-In the previous sections on processes, multiple processes could be created through the *fork* and *exec* functions. These function wrap the OS system-calls that are required to achieve this. Therefore, this comes intrinsically with the OS. 
+In the previous sections on processes, multiple processes could be created through the `fork` and `exec` functions. These function wrap the OS system-calls that are required to achieve this. Therefore, this comes intrinsically with the OS. 
 
-Threads are of course also fully supported by the OS, but they typically require a more high-level API to easily work with. Most programming languages provide their own versions of these APIs, but they all internally call the OS-provided functionality. As we are working with Linux, we will be using the standard POSIX API library called Pthreads. 
+Threads are of course also fully supported by the OS, but they typically require a more high-level API to easily work with. Most programming languages provide their own versions of these APIs, but they all internally call the OS-provided functionality. As we are working with Linux, we will be using the standard POSIX API library called pthreads. 
 
 ### Pthreads
 
-An example for creating a new pthread is given below. 
+A simple example for creating a new pthread is given below: 
 
 ```C
 #include <stdio.h>
@@ -128,13 +128,14 @@ An example for creating a new pthread is given below.
 
 int counter;
 
-void* doSomeThing() {
+void* startThreadJob() {
     unsigned long i = 0;
     counter += 1;
 
     printf("  Job %d started\n", counter);
     for(i=0; i<(0xFFFFFFFF); i++) {
         // do nothing
+        // this is just here to keep the thread running for a while!
     }
     printf("  Job %d finished\n", counter);
 
@@ -148,9 +149,13 @@ int main(void) {
 
   while(i < 2) {
 
-    // 1. pointer to pthread_t to keep thread state, 2. configuration arguments for the thread (we use the defaults here)
-    // 3. pointer to function that runs in separate thread, 4. parameters to pass to the thread (empty for doSomeThing)
-    err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
+    // pthread_create has 4 parameters:
+    // 1. pointer to pthread_t, needed to keep thread state
+    // 2. configuration arguments for the thread (passing NULL means we use the defaults here)
+    // 3. pointer to the function that will run in a separate thread
+    // 4. parameters to pass to the thread (no arguments for startThreadJob, so we pass NULL)
+
+    err = pthread_create( &(tid[i]), NULL, &startThreadJob, NULL );
 
     if (err != 0) {
       printf("\ncan't create thread :[%s]", strerror(err));
@@ -159,9 +164,12 @@ int main(void) {
     i++;
   }
 
-  // Pauze the main thread until the thread in the first argument is terminated
-  // If the thread was already terminated, pthread_join continues immediately
+  // pthread_join pauses the current thread until the thread in the first argument is terminated
+  // Note that the "main" function automatically also executes in a thread, which we often call the "main thread".
+  // If the joined thread was already terminated, pthread_join returns immediately
   // The second argument can be used to store the return value of the thread
+  // Our thread currently doesn't return anything, so we pass NULL
+
   pthread_join(tid[0], NULL);
   pthread_join(tid[1], NULL);
 
@@ -174,3 +182,64 @@ When the code above gets compiled, the **pthread** library has to be used. This 
 {{% /notice %}}
 
 {{% figure src="/img/os/sc_compile.png" %}}
+
+
+The example above is quite simple and doesn't show a few of the more complex aspects of dealing with threads, particularly passing data into and out of the thread function (parameters and return value). The following example shows how you can pass a single parameters to the thread and how you can handle a return value. Note that we use (void*) as a type here, since the parameters can be anything and `pthread_create` can't know which type they will be. As such, you as the programmer need to first cast to (void*) when creating the thread, then cast the (void*) back into what you really want it to be in the thread. 
+
+{{% notice note %}}
+Something similar happens for the return value in `pthread_join`. Can you figure out why this needs a (void**), even though the thread function returns a (void*)? (or look it up online if you can't?)
+{{% /notice %}}
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+void* threadWithParameter(void* textInput) {
+
+    char* text = (char*) textInput;
+    unsigned long i = 0;
+
+    printf("In thread %s: Thread started\n", text);
+    for(i=0; i<(0xFFFFFFFF); i++) {
+        // do nothing
+        // this is just here to keep the thread running for a while!
+    }
+    printf("In thread %s: Thread finished\n", text);
+
+    return text;
+}
+
+int main(void) {
+  int i = 0, err;
+  pthread_t tid[2];
+
+  while(i < 2) {
+
+    if ( i == 0 ) {
+      err = pthread_create( &(tid[i]), NULL, &threadWithParameter, "nr 1" );
+    }
+    else if( i == 1 ) {
+      err = pthread_create( &(tid[i]), NULL, &threadWithParameter, "nr 2" );
+    }
+
+    if (err != 0) {
+      printf("\ncan't create thread :[%s]", strerror(err));
+    }
+
+    i++;
+  }
+
+  char* returnValue = NULL;
+
+  pthread_join(tid[0], (void **) &returnValue);
+  printf(" In main thread: Thread %s returned!\n", returnValue);
+
+  pthread_join(tid[1], (void **) &returnValue);
+  printf(" In main thread: Thread %s returned!\n", returnValue);
+
+  return 0;
+}
+```

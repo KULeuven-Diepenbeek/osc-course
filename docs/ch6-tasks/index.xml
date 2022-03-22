@@ -58,7 +58,8 @@ We have however also seen that this is not trivial: new processes need their own
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
-Creating and inspecting threads  Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID. Note that, unlike when spawning multiple processes, the PID is of course the same for all threads.</description>
+Creating and inspecting threads   Take a closer look at the first pthreads example code from the previous section (with the startThreadJob function).
+ Without executing the code, what do you think will be printed to the screen (with regards to the &amp;ldquo;Job %d started and Job %d finished&amp;rdquo; messages)?</description>
     </item>
     
     <item>

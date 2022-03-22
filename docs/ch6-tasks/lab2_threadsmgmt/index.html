@@ -12,21 +12,21 @@
     <title>6.5: Threads (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647621864" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647621864" rel="stylesheet">
-    <link href="../../css/hybrid.css?1647621864" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647621864" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647621864" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647621864" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1647621864" rel="stylesheet">
-    <link href="../../css/theme.css?1647621864" rel="stylesheet">
-    <link href="../../css/devselector.css?1647621864" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647621864" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1647621864" rel="stylesheet">
+    <link href="../../css/nucleus.css?1647980870" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1647980870" rel="stylesheet">
+    <link href="../../css/hybrid.css?1647980870" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1647980870" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1647980870" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1647980870" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1647980870" rel="stylesheet">
+    <link href="../../css/theme.css?1647980870" rel="stylesheet">
+    <link href="../../css/devselector.css?1647980870" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1647980870" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1647980870" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647621864"></script>
-    <script src="../../js/devselector.js?1647621864"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1647980870"></script>
+    <script src="../../js/devselector.js?1647980870"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -64,14 +64,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647621864"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647621864"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1647980870"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1647980870"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647621864"></script>
+<script type="text/javascript" src="../../js/search.js?1647980870"></script>
 
     
   </div>
@@ -1599,45 +1599,60 @@
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <h2 id="creating-and-inspecting-threads">Creating and inspecting threads</h2>
 <ul>
-<li>Write a C-program that has 3 threads. Each thread announces its existence through a printf() together with its PID. Note that, unlike when spawning multiple processes, the PID is of course the same for all threads.</li>
+<li>
+<p>Take a closer look at the first pthreads example code from the previous section (with the startThreadJob function).</p>
+<ul>
+<li>Without executing the code, what do you think will be printed to the screen (with regards to the &ldquo;Job %d started and Job %d finished&rdquo; messages)? Why?</li>
+<li>Compile and run the code on your machine</li>
+<li>What is the actual output? Is it the same as what you guessed? Why (not)?</li>
+<li>Now run the second pthreads example code (with the threadWithParameter function). Does it have the same problem? Why (not)?</li>
+<li>Note: you do not have to think of a &ldquo;fix&rdquo; for this problem just yet: we&rsquo;ll discuss some possible solutions in the next Section on inter-thread communication.</li>
+</ul>
+</li>
+<li>
+<p>Write a C-program that has 3 threads. Each thread is passed its integer ID (1,2,3) through a parameter and announces its existence through a printf() together with its PID. Note that, unlike when spawning multiple processes, the PID is of course the same for all threads.</p>
+<ul>
+<li>Note: the second pthreads example code for passing parameters is a bit dirty, requiring an if-test for each thread to pass the correct string parameter. For this exercise, make sure you approach this in a (much) cleaner way!</li>
+<li>Now change the code so the PID isn&rsquo;t printed in the thread itself, but rather passed as a return value to the main thread (via <code>pthread_join</code>) and printed there.</li>
+</ul>
+</li>
 </ul>
 <figure>
     <img src="../../img/os/sc_641.png"/> <figcaption>
-            <h4>An example output</h4>
+            <h4>An example output of the first part of the exercise</h4>
         </figcaption>
 </figure>
 <ul>
 <li>
-<p>Take a closer look at the Pthreads example code from the previous section (with the doSomeThing function).</p>
+<p>In the previous processes lab, you had to implement a program that spawned different parallel processes, each calculating all the primes between 0 and a given number. Let&rsquo;s adapt this to threads, but with a twist!</p>
 <ul>
-<li>Without executing the code, what do you think will be printed to the screen (with regards to the &ldquo;Job started and finished&rdquo; messages)? Why?</li>
-<li>Compile and run the code on your machine</li>
-<li>What is the actual output? Is it the same as what you guessed? Why (not)?</li>
-<li>Note: you do not have to think of a &ldquo;fix&rdquo; for this problem just yet: we&rsquo;ll discuss some possible solutions in the next Section.</li>
-</ul>
-</li>
 <li>
-<p>In the processes lab, you had to implement a program that spawned different parallel processes, each calculating all the primes between 0 and a given number. Let&rsquo;s adapt this to threads, but with a twist.</p>
-<ul>
-<li>Write a C-program that has 4 threads (in addition to the main thread). Each thread calculates all prime numbers between a lower and larger limit. Given a maximum number N which is divisible by 4 (e.g., 100000):
+<p>Write a C-program that has 4 threads (in addition to the main thread). Each thread calculates all prime numbers between a lower and larger limit. Given a maximum number N which is divisible by 4 (e.g., 100000):</p>
 <ul>
 <li>Thread 1 computes all primes between 2 and N/4</li>
 <li>Thread 2 computes all primes between N/4 + 1 and N/2</li>
 <li>Thread 3 computes all primes between N/2 + 1 and 3N/4</li>
 <li>Thread 4 computes all primes between 3N/4 + 1 and N</li>
+<li>Make sure you pass these limits properly to the threads as function parameters. Think about how you can pass more than 1 parameter!</li>
 </ul>
 </li>
-<li>After all threads are done, the main thread prints all the resulting primes <strong>in the proper order (low to high)</strong> to the screen.
+<li>
+<p><strong>After all threads are done</strong>, the main thread prints all the resulting primes <strong>in the proper order (low to high)</strong> to the screen.</p>
 <ul>
-<li>Note: this means that the threads dont print the primes themselves like in the processes exercise: you have to instead use heap-allocated memory to communicate back the results to the main thread!
+<li>Note: this means that the threads don&rsquo;t do the printing themselves like in the previous exercises: you have to instead use heap-allocated memory to communicate back the results to the main thread!
 <ul>
 <li>For this exercise, it&rsquo;s sufficient for each thread to store their results separately and communicate them back at the end. We will see other options later.</li>
 </ul>
 </li>
-<li>There are several ways of doing this and none of them are perfect (we&rsquo;ll see how to make things better in the next Section). For now, just pick a method you think will work, don&rsquo;t worry too much about cleanliness.</li>
+<li>There are several ways of doing this and none of them are perfect (we&rsquo;ll see how to make things better in the next Section). For now, just pick a method you think will work, don&rsquo;t worry <em>too</em> much about cleanliness.</li>
 </ul>
 </li>
-<li>Imagine you wouldn&rsquo;t have to print the results fully ordered from low to high (but still in the main thread) (You don&rsquo;t actually have to implement this). Would you be able to make the program more efficient then? Why (not)?</li>
+<li>
+<p>Imagine you wouldn&rsquo;t have to print the results fully ordered from low to high (but still in the main thread) (You don&rsquo;t actually have to implement this). Would you be able to make the program more efficient then? Why (not)?</p>
+<ul>
+<li>Put differently: does every thread take an equal amount of time to perform its work. Why (not)?</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2650,17 +2665,17 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647621864"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647621864"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647621864"></script>
-    <script src="../../js/jquery.sticky.js?1647621864"></script>
-    <script src="../../js/featherlight.min.js?1647621864"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647621864"></script>
-    <script src="../../js/learn.js?1647621864"></script>
-    <script src="../../js/hugo-learn.js?1647621864"></script>
+    <script src="../../js/clipboard.min.js?1647980870"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1647980870"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1647980870"></script>
+    <script src="../../js/jquery.sticky.js?1647980870"></script>
+    <script src="../../js/featherlight.min.js?1647980870"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1647980870"></script>
+    <script src="../../js/learn.js?1647980870"></script>
+    <script src="../../js/hugo-learn.js?1647980870"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647621864"></script>
+            <script src="../../mermaid/mermaid.js?1647980870"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

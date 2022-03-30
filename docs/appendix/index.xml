@@ -6,13 +6,13 @@
     <description>Recent content in B. Appendix on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/appendix/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/appendix/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3.3: The Ancient Library (RTOS)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
     1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
@@ -22,7 +22,7 @@
       <title>1. Recommended reading</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</guid>
       <description>Operating Systems Operating System Concepts  Another defining moment in the evolution of operating systems Small footprint operating systems, such as those driving the handheld devices that the baby dinosaurs are using on the cover, are just one of the cutting-edge applications you&amp;rsquo;ll find in Silberschatz, Galvin, and Gagne&amp;rsquo;s Operating System Concepts, Seventh Edition.
  Website: os-book.com
@@ -33,7 +33,7 @@ Programming in C The (Ansi) C Programming Language  This book is meant to help t
       <title>2. Linux Installation Instructions</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</guid>
       <description>The exercises for this course are to be done on the Linux Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.
 We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle.</description>
@@ -43,7 +43,7 @@ We would of course not ask you to remove Windows to install Linux on your person
       <title>Cheat sheet</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</guid>
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
 Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;rdquo;, or even google the manpage on Google.

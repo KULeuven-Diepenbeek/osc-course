@@ -12,21 +12,21 @@
     <title>6.7: Inter-Thread communication (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647980870" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/hybrid.css?1647980870" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647980870" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/devselector.css?1647980870" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1647980870" rel="stylesheet">
+    <link href="../../css/nucleus.css?1648684372" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/hybrid.css?1648684372" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1648684372" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/devselector.css?1648684372" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1648684372" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647980870"></script>
-    <script src="../../js/devselector.js?1647980870"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1648684372"></script>
+    <script src="../../js/devselector.js?1648684372"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -64,14 +64,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647980870"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647980870"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1648684372"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1648684372"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647980870"></script>
+<script type="text/javascript" src="../../js/search.js?1648684372"></script>
 
     
   </div>
@@ -1554,7 +1554,21 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#good-morning-sire">Good Morning, Sire</a>
+      <ul>
+        <li><a href="#polite-servants-impolite-king">Polite servants, impolite king</a></li>
+        <li><a href="#polite-king">Polite king</a></li>
+      </ul>
+    </li>
+    <li><a href="#deadlock-empire-the-endgame">Deadlock Empire: The Endgame</a></li>
+    <li><a href="#producer-consumer-v1--single-mutex">Producer-Consumer V1 : Single mutex</a></li>
+    <li><a href="#producer-consumer-v2--proper-close">Producer-Consumer V2 : Proper close</a></li>
+    <li><a href="#producer-consumer-v3--multiple-consumers">Producer-Consumer V3 : Multiple consumers</a></li>
+    <li><a href="#producer-consumer-v4--semaphores">Producer-Consumer V4 : Semaphores</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1583,69 +1597,84 @@
         </figcaption>
 </figure>
 
+<h2 id="good-morning-sire">Good Morning, Sire</h2>
+<h3 id="polite-servants-impolite-king">Polite servants, impolite king</h3>
+<p>Extend <a href="../../exercises/ch6-hello-sire-template.cpp">this incomplete C-program</a>. As you can see, the program has <strong>one</strong> <em>king</em> thread and <strong>N</strong> <em>servant</em> threads, but they don&rsquo;t really do anything yet. Implement the following using <strong>one or more semaphores</strong>:</p>
 <ul>
-<li>
-<p>Write a C-program that has 1 <em>king</em> thread and <em>n</em> <em>servant</em> threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say <strong>Good morning, sire</strong> together with a servant ID. The king thread goes to sleep again.</p>
+<li>The king thread sleeps (using the <code>sleep()</code> function) for a random amount of time (a few seconds).</li>
+<li>When the king thread awakes, it signals the servant threads.</li>
+<li>All servant threads politely say <strong>Good Morning, sire</strong> (using <code>printf()</code>) together with their servant ID.</li>
+<li>The king thread goes to sleep again.</li>
+</ul>
+<p>Take note of these things as well:</p>
 <ul>
+<li>You can find some concrete code examples of pthread semaphores in the code on the bottom of Assignment 3!</li>
 <li>Every servant needs to greet the king <strong>once</strong> (no more, no less)</li>
-<li>The king <strong>doesn&rsquo;t</strong> wait for the greetings before he goes back to sleep</li>
+<li>The king <strong>doesn&rsquo;t</strong> wait for the servant greetings before he goes back to sleep</li>
 <li>You do not need to make sure that the servants always reply in the same order</li>
-<li>Repeat the wake-greet cycle at least 5 times</li>
+<li>Repeat the wake-greet cycle at least 10 times</li>
 <li>Tip: use the <code>rand()</code> function to get random numbers</li>
 </ul>
-</li>
-<li>
+<h3 id="polite-king">Polite king</h3>
 <p><strong>REVISIT, WITH A TWEAK</strong> Change the previous king-servant setup with a single change: now, the king <strong>does</strong> explicitly wait for the greetings of <em>all</em> his servants before he goes back to sleep.</p>
-</li>
-</ul>
+<p>Think about if you need additional semaphores/mutexes for this and why.</p>
 <figure>
     <img src="../../img/os/sc_642.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
+<h2 id="deadlock-empire-the-endgame">Deadlock Empire: The Endgame</h2>
 <ul>
-<li>
-<p>Let&rsquo;s revisit the prime numbers for one last time. Like the prime-exercise in the previous lab, we will have several separate producer threads, each calculating a subsection of primes between 2 and N. Now however, we will not have each thread store their full results in thread-specific memory and later print it in one go. Instead, each prime-calculting thread (the producers) will share the same memory. Additionally, they will communicate each discovered prime <strong>as soon as possible</strong> back to separate &ldquo;processing&rdquo; entities that print the primes to the screen (several consumers). Put differently: we will have multiple producers and consumers working <strong>at the same time</strong> and <strong>sharing the same memory</strong>. Again, this can be accomplished in several different ways:</p>
-<ol>
-<li>You can use a single shared array and a shared counter (indicating how many items are in the array) to store the results
-<ul>
-<li>Access to the array is protected by a Mutex that both the producers and consumers lock</li>
-<li>Extra points if you can think of a way to not make this array take up excessive memory by the time the calculations are done</li>
-</ul>
-</li>
-<li>You can pass each prime as an individual value between producer/consumer threads instead of using a shared array
-<ul>
-<li>Here, you can use Semaphores and/or Mutexes to coordinate this communication
-<ul>
-<li>Tip: <code>sem_trywait()</code> might be useful here, depending your approach</li>
-</ul>
-</li>
-<li>Extra points if you can think of a way of keeping the producers producing (at least for a small amount of time) while all consumers are busy</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>
-<p>Tip: the complexity of the solution is of course higher if there are multiple consumer threads. You can start by using a single consumer thread (but still with multiple producers), then extending it to use multiple consumers later.</p>
-</li>
-<li>
-<p>The goal is to implement <strong>one</strong> of these options (mutex or semaphore, shared array or individual value(s), you choose), think deeply about the rest, and then answer the following questions:</p>
-<ul>
-<li>Which approach should be faster: this one with shared memory/direct value passing or the one from the previous lab using per-thread memory?</li>
-<li>Which tradeoffs were made here in comparison with the previous version? (e.g., faster but less flexible, slower but less memory, &hellip;)</li>
-<li>Are you able to keep the primes sorted in this new version? Why (not)? If not, can you think of a way to still sort the results afterwards? Explain this in terms of parallel vs sequential phases of a program.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Go to the Deadlock Empire website and complete these two exercises:</p>
+<li>Go to the Deadlock Empire website and complete these two exercises:
 <ul>
 <li>The Final Stretch: Dragonfire</li>
 <li>The Final Stretch: Triple Danger</li>
 </ul>
 </li>
 </ul>
+<h2 id="producer-consumer-v1--single-mutex">Producer-Consumer V1 : Single mutex</h2>
+<p>In the prime-number exercises in the previous labs, we were actually implementing the basics of a producer-consumer problem, without really knowing it! In our example solution, we bypassed the shared memory issue by assigning each producer (the <code>calculatePrimes</code> function) a separate block of memory only they could use/access to place their results. As you know now, this is highly inefficient and a waste of memory. As such, it&rsquo;s time to make our prime-number into a proper producer-consumer setup with a single shared memory array of a limited size!</p>
+<p><strong>We will do this in several steps, starting with a somewhat sub-optimal mutex-based solution and ending up with a more complex semaphore-based one!</strong></p>
+<p>Start from the provided solution to the last prime-number exercise (<code>6_5_3_primethreads.c</code>). Change it so:</p>
+<ul>
+<li>All 4 producer threads write their results to a <strong>single</strong> shared array instead of the 4 separate <code>results</code> arrays (note: this single array will still be quite large, say 20000 integers).</li>
+<li>Make a new <code>printPrimes()</code> function that acts as the consumer. Use <code>pthread_create</code> in <code>main</code> to start a single instance of the consumer. Make sure this function prints newly produced primes <strong>as soon as possible</strong>/as soon as they&rsquo;re put in the shared array (meaning: we&rsquo;re no longer waiting for all the producers to be done before starting to print the results in <code>main()</code>).</li>
+</ul>
+<p>For this, you should use a <strong>single mutex</strong> to prevent the producers/consumers from having race conditions on the single shared array.</p>
+<ul>
+<li>Tip: use a global <code>write_index</code> variable to manipulate the shared array</li>
+</ul>
+<p><em>Note: in this setup, the primes will no longer be printed in-order from smallest to largest. That&rsquo;s fine ;)</em> <strong>Can you explain why though??? And can you imagine a possible solution where they -are- still printed in-order?</strong></p>
+<h2 id="producer-consumer-v2--proper-close">Producer-Consumer V2 : Proper close</h2>
+<p>One thing you might/should have noticed in the previous exercise, is that it&rsquo;s no longer easy to determine when the consumer should stop printing/when it has printed all produced primes.</p>
+<p>In the original solution <code>6_5_3_primethreads.c</code>, we had the producers write the number <code>0</code> at the end of their result array to signal they were done (because <code>0</code> is not a prime). In the new setup however, we can&rsquo;t use this anymore, because not all producers end at the same time, and so new &ldquo;real&rdquo; primes might be written after a <code>0</code> from the first finished producer!</p>
+<p>As such, we need a new way to determine when we&rsquo;re done: <strong>keep a count of producers that are done</strong>. Then, the consumer can check if this &ldquo;done count&rdquo; is equal to the number of producers. If so, it can safely exit without having to rely on the <code>0</code> <em>sentinel value</em>.</p>
+<ul>
+<li>Extend your previous code to keep a <strong>thread-safe</strong> &ldquo;done count&rdquo; of the number of finished producers.</li>
+<li>Make sure your consumer properly checks this &ldquo;done count&rdquo; (again in a <strong>thread-safe</strong> way!) and that it also properly exits/returns when all primes are printed.</li>
+</ul>
+<p>Keeping the &ldquo;done count&rdquo; thread safe can be done in two main ways. Choose one:</p>
+<ul>
+<li>Use a count variable and a mutex</li>
+<li>Use a semaphore as a counter. (tip: here it might help to use the <code>sem_getvalue()</code> function. Look up online what that does and how to use it).</li>
+</ul>
+<h2 id="producer-consumer-v3--multiple-consumers">Producer-Consumer V3 : Multiple consumers</h2>
+<p>In the previous two versions, we had only a single consumer. To get maximum performance, we of course would like to not just have multiple producers, but also <strong>multiple consumers</strong>!</p>
+<p>Extend your previous solution to:</p>
+<ul>
+<li>Create at least 2 <code>printPrimes</code> consumer threads (ideally more!), that all read from the shared array and print the produced primes. Of course you need to make sure no primes are printed twice (= <strong>thread-safe</strong> access to the shared array from all consumers)!!!</li>
+</ul>
+<p>Note: this can again be done in several ways. The simplest/best way however, doesn&rsquo;t even require you to define a new mutex here; you can just re-use the one from the V1 above. Tip for this: previously we just had a global write_index, now we also need another type of global index ;)</p>
+<h2 id="producer-consumer-v4--semaphores">Producer-Consumer V4 : Semaphores</h2>
+<p>Up until now, you&rsquo;ve used (should have been using?) mainly mutexes to access a single (huge) shared array. Because the array is so large, we didn&rsquo;t have the typical mutex problems like busy waiting, because there was always room for newly produced primes to be placed in the shared memory (unless we had very high limits for the prime generation).</p>
+<p>To forcibly show the usefulness of semaphores when we don&rsquo;t have &ldquo;unlimited&rdquo; shared memory, you will now adapt your previous code to:</p>
+<ul>
+<li>Use semaphores instead of mutexes (<em>at least for the main shared memory, you can still use a mutex for the &ldquo;done count&rdquo; if you did that</em>)</li>
+<li>Use only the <strong>minimal amount of shared memory</strong>. Put differently: the shared array is now only <strong>a single integer in size</strong> instead of say 20000. All producers and all consumers can only use this single shared &ldquo;memory location&rdquo; to pass individual primes from one to the other. Consequently, this single &ldquo;shelf&rdquo; needs to be <strong>ultra-thread-safe</strong>!</li>
+</ul>
+<p>Tip: These changes shouldn&rsquo;t be too large (though also not tiny ;)). Nor should they be very different from the producer-consumer semaphore examples shown in the course text.</p>
+<p><em>Note: think about if you still need a mutex inside of your semaphore(s) as well. Why (not)? Look up the discussion on &ldquo;binary semaphores&rdquo; in the course text. Is this the same/a similar situation or not?</em></p>
+<p><strong>Note: this exercise is a mandatory part of Assignment 3. While the assignments are individual, you CAN (and should) collaborate on this exercise! The solution will be posted only after the deadline for assignment 3 however.</strong></p>
 
 
 <footer class="footline">
@@ -2655,17 +2684,17 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647980870"></script>
-    <script src="../../js/jquery.sticky.js?1647980870"></script>
-    <script src="../../js/featherlight.min.js?1647980870"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647980870"></script>
-    <script src="../../js/learn.js?1647980870"></script>
-    <script src="../../js/hugo-learn.js?1647980870"></script>
+    <script src="../../js/clipboard.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1648684372"></script>
+    <script src="../../js/jquery.sticky.js?1648684372"></script>
+    <script src="../../js/featherlight.min.js?1648684372"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1648684372"></script>
+    <script src="../../js/learn.js?1648684372"></script>
+    <script src="../../js/hugo-learn.js?1648684372"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647980870"></script>
+            <script src="../../mermaid/mermaid.js?1648684372"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

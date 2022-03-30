@@ -12,21 +12,21 @@
     <title>6.6: Inter Thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647980870" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/hybrid.css?1647980870" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647980870" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/devselector.css?1647980870" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1647980870" rel="stylesheet">
+    <link href="../../css/nucleus.css?1648684372" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/hybrid.css?1648684372" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1648684372" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/devselector.css?1648684372" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1648684372" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647980870"></script>
-    <script src="../../js/devselector.js?1647980870"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1648684372"></script>
+    <script src="../../js/devselector.js?1648684372"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -64,14 +64,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647980870"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647980870"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1648684372"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1648684372"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647980870"></script>
+<script type="text/javascript" src="../../js/search.js?1648684372"></script>
 
     
   </div>
@@ -1563,7 +1563,13 @@
         <li><a href="#deadlocks">Deadlocks</a></li>
       </ul>
     </li>
-    <li><a href="#semaphore">Semaphore</a></li>
+    <li><a href="#semaphores">Semaphores</a>
+      <ul>
+        <li><a href="#producer-consumer-problems">Producer-Consumer Problems</a></li>
+        <li><a href="#semaphore-concepts">Semaphore concepts</a></li>
+        <li><a href="#semaphores-in-c-and-pthreads">Semaphores in C and pthreads</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -1761,26 +1767,192 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// Both threads are waiting endlessly AND also locking the network and the harddisk for any other threads that might arrive
 </span></code></pre></div><p>Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see <a href="http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf">this presentation</a> (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing multiple pieces of shared memory, so watch out!</p>
-<h2 id="semaphore">Semaphore</h2>
-<p>While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a <strong>semaphore</strong>. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys:</p>
+<h2 id="semaphores">Semaphores</h2>
+<p>While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a <strong>semaphore</strong>. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource.</p>
+<h3 id="producer-consumer-problems">Producer-Consumer Problems</h3>
+<p>This technique is used in for example producer-consumer problems. There, one or more producer threads prepare data (in our exercises: prime numbers) and put it in a limited amount of shared memory spots (say an array of size 10), ready to be used by one or more consumers (in our exercises: a function that prints the prime numbers). This type of setup prevents us from having to allocate a large amount of memory up-front to communicate thread results (as we did in the solution to the last exercise in the previous lab).</p>
+<figure>
+    <img src="https://www.baeldung.com/wp-content/uploads/2022/02/Multi-Producers-Multi-Consumers.png"/> <figcaption>
+            <h4>A high-level visualization of a multi-producer &#43; multi-consumer problem with a limited amount of shared memory in between.</h4>
+        </figcaption>
+</figure>
+<p>In this setup, we don&rsquo;t just want to lock access to the shared memory so only 1 producer or consumer can use it at a given time, we want to do more: we want the producers to only write data to the shared memory if there is an open spot. If not, they have to wait. Similarly, the consumers can only read data from shared memory if there is actually something there. If not, they have to wait.</p>
+<p>Conceptually, we could do this by keeping track of a count of the amount of items currently in the shared array (<code>items_in_array</code> below), and increment/decrement that count inside a mutex lock when producing/consuming (similar to the global counter solution above):</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// PSEUDOCODE!
+</span><span style="color:#75715e"></span><span style="color:#111">mutex</span> <span style="color:#111">myLock</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> 
+<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">array</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">producer</span><span style="color:#111">()</span> 
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span>
+        <span style="color:#00a8c8">bool</span> <span style="color:#111">itemStored</span> <span style="color:#f92672">=</span> <span style="color:#111">false</span><span style="color:#111">;</span>
+        <span style="color:#111">Item</span> <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">produceItem</span><span style="color:#111">();</span>
+
+        <span style="color:#00a8c8">while</span><span style="color:#111">(</span> <span style="color:#f92672">!</span><span style="color:#111">itemStored</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+
+            <span style="color:#111">lock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+            
+            <span style="color:#00a8c8">if</span><span style="color:#111">(</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+                <span style="color:#111">array</span><span style="color:#111">[</span> <span style="color:#111">items_in_array</span> <span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">item</span><span style="color:#111">;</span>
+                <span style="color:#111">items_in_array</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+
+                <span style="color:#111">itemStored</span> <span style="color:#f92672">=</span> <span style="color:#111">true</span><span style="color:#111">;</span>
+            <span style="color:#111">}</span>
+
+            <span style="color:#111">unlock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// PSEUDOCODE!
+</span><span style="color:#75715e"></span>
+
+
+
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">consumer</span><span style="color:#111">()</span> 
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span>
+        <span style="color:#111">Item</span> <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
+
+        <span style="color:#111">lock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+        
+        <span style="color:#00a8c8">if</span><span style="color:#111">(</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+            <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">array</span><span style="color:#111">[</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#111">];</span>
+            <span style="color:#111">items_in_array</span> <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+        <span style="color:#111">}</span>
+
+        <span style="color:#111">unlock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+
+        <span style="color:#00a8c8">if</span><span style="color:#111">(</span> <span style="color:#111">item</span> <span style="color:#f92672">!=</span> <span style="color:#111">NULL</span> <span style="color:#111">)</span> <span style="color:#111">{</span>
+            <span style="color:#111">consumeItem</span><span style="color:#111">(</span><span style="color:#111">item</span><span style="color:#111">);</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div></div>
+</div>
+<p>This setup will work, however it is <strong>very inefficient</strong>: both the producers and the consumers are constantly trying to get a new lock on the array to check if they can produce/consume something, even if it&rsquo;s only been a few milliseconds since they last checked (and found the array was full/empty and there was nothing to do). Imagine for example if the producers in the example are slow to produce new items, but the consumers are very fast: the consumers would constantly be re-locking the mutex to check if something new is available, even though there rarely is, causing the mutex to be almost immediately unlocked again. This type of behaviour is often called <strong>busy waiting</strong> or <strong>polling</strong> and is bad for performance as you&rsquo;re doing a lot of unnecessary work.</p>
+<p>Instead, a better solution would be that a thread that wants to read/write an item from/to the array can only do so if it is actually possible. If not, the thread should be <strong>paused</strong> until it&rsquo;s sure that it can make progress, instead of constantly checking. To do this, we need a new type of lock that keeps track of who&rsquo;s waiting for what to happen, which is called <strong>the semaphore</strong>.</p>
+<h3 id="semaphore-concepts">Semaphore concepts</h3>
+<p>In essence, the semaphore is nothing more than a counter (the <code>items_in_array</code> from above), but one that can <strong>automatically pause/resume threads that use</strong> it if the counter is zero/becomes positive (while above, we had to do this manually).</p>
+<p>This is typically done using three conceptual functions on the semaphore:</p>
+<ul>
+<li><code>init( mySemaphore, count )</code> : Start the semaphore value at <code>count</code> (can be either 0 or a positive number).</li>
+<li><code>wait( mySemaphore )</code> : Continues if mySemaphore is &gt; 0 and decrements it by 1. If not, it pauses the current thread until mySemaphore becomes positive.</li>
+<li><code>post( mySemaphore )</code> : Increments mySemaphore by 1. This then automatically causes <strong>1 of the waiting threads</strong> (if any) to be unpaused.</li>
+</ul>
+
+<div class="notices note" ><p>As you can see, multiple threads can be waiting on the same semaphore (determined by the <code>count</code> passed in <code>init()</code>). For each time a <code>post()</code> is done however, only 1 of the waiting threads can of course be unpaused. The OS determines which thread is chosen from among the waiters and can do so in many different ways (for example thread that has been paused the longest, thread that has been paused the shortest, thread that was most recently started, the thread with the highest priority, etc.). More information on this is given in Chapter 7 (Scheduling).</p>
+</div>
+
+<p>To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys:</p>
 <figure>
     <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" width="50%"/> <figcaption>
             <h4>This photo of Cafe Boulevard is courtesy of Tripadvisor</h4>
         </figcaption>
 </figure>
-<p>Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, they need to take a bracelet and put it on. When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait until another child leaves the room and places their bracelet back in the bowl.</p>
-<p>This technique is used in e.g., producer-consumer problems, amongst many other types. In those settings, several producer threads prepare data and put it in shared memory, ready to be used by one or more consumers. Instead of having a separate counter that tracks how many produced items are waiting for processing, a semaphore can be used directly, making state keeping a bit easier.</p>
-<p>This is because in contrast with the mutex, a semaphore is a <em>count</em> of tokens. Put differently, a mutex limits access to a single resource (e.g., a single memory location) to one thread at a time. A semaphore instead allows threads to share a limited pool of resources (e.g., 4 different hard disks), with multiple threads potentially active at the same time. Note though that if there is only a single token in the semaphore, this behaves exactly the same as a mutex (this specific type is referred to as a <strong>binary semaphore</strong>).</p>
-<p>The <strong>pthreads</strong> library also provides an API to program with semaphores (include semaphore.h to use). It contains, amongst others, functions like:</p>
-<ul>
-<li>sem_init(): initialises a semaphore.</li>
-<li>sem_wait(): decrements the number inside of the semaphore.</li>
-<li>sem_post(): increments the number inside of the semaphore.</li>
-<li>sem_destroy(): destroys the semaphore when it&rsquo;s no longer needed.</li>
-</ul>
-<p>Note that the <code>sem_wait()</code> function is <em>blocking</em> (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes <code>sem_post()</code> (put differently: until the semaphore is &ldquo;unlocked&rdquo;). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: <code>sem_trywait()</code>. See the manual pages and search Google for more info and the correct usage.</p>
-<p>Note that multiple threads can be waiting on  the same semaphore at any given time. When a sem_post occurs, they of course cannot all start immediately, since only one token was added. Here there are again several ways for the OS to decide which thread gets preference (e.g., the one that has been waiting the longest, the one that was most recently started) and gets to consume the token.</p>
+<p>Only 5 children are allowed in that room. Outside, there is a bowl with bracelets (<code>init( braceletBowl, 5 )</code>). When a child wants to enter the room to play, they need to take a bracelet and put it on (<code>wait( braceletBowl )</code>). When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait (also <code>wait( braceletBowl )</code>) until another child leaves the room and places their bracelet back in the bowl (<code>post( braceletBowl )</code>).</p>
+<p>Using semaphores then, we can more optimally re-write the producer-consumer setup from above. Note however that we <strong>can&rsquo;t just use a single semaphore</strong>, since the wait/post functions really only allow us to wait if the value is 0, not if the value is for example 10 (the maximum size of the array). As such, we need two: one to indicate how much slots are filled, and one to indicate how many are empty:</p>
+<div class="multicol">
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// PSEUDOCODE!
+</span><span style="color:#75715e"></span><span style="color:#111">mutex</span> <span style="color:#111">myLock</span><span style="color:#111">;</span>
+
+<span style="color:#111">semaphore</span> <span style="color:#111">fill_count</span><span style="color:#111">;</span>  
+<span style="color:#111">init</span><span style="color:#111">(</span><span style="color:#111">fill_count</span><span style="color:#111">,</span>  <span style="color:#ae81ff">0</span><span style="color:#111">);</span>
+
+<span style="color:#111">semaphore</span> <span style="color:#111">empty_count</span><span style="color:#111">;</span> 
+<span style="color:#111">init</span><span style="color:#111">(</span><span style="color:#111">empty_count</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> 
+<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">array</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span><span style="color:#111">);</span>
+
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">producer</span><span style="color:#111">()</span> 
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span>
+        <span style="color:#111">Item</span> <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">produceItem</span><span style="color:#111">();</span>
+
+        <span style="color:#111">wait</span><span style="color:#111">(</span> <span style="color:#111">empty_count</span> <span style="color:#111">);</span> <span style="color:#75715e">// THIS IS NEW!
+</span><span style="color:#75715e"></span>
+        <span style="color:#111">lock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+        
+        <span style="color:#111">array</span><span style="color:#111">[</span> <span style="color:#111">items_in_array</span> <span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">item</span><span style="color:#111">;</span>
+        <span style="color:#111">items_in_array</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+
+        <span style="color:#111">unlock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+        
+        <span style="color:#111">post</span><span style="color:#111">(</span> <span style="color:#111">fill_count</span> <span style="color:#111">);</span> <span style="color:#75715e">// THIS IS NEW!
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div></div>
+<div>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// PSEUDOCODE!
+</span><span style="color:#75715e"></span>
+
+  
+
+
+ 
+
+
+
+
+
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">consumer</span><span style="color:#111">()</span> 
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">while</span> <span style="color:#111">(</span><span style="color:#111">true</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span>
+        <span style="color:#111">Item</span> <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">NULL</span><span style="color:#111">;</span>
+
+        <span style="color:#111">wait</span><span style="color:#111">(</span> <span style="color:#111">fill_count</span> <span style="color:#111">);</span> <span style="color:#75715e">// THIS IS NEW! 
+</span><span style="color:#75715e"></span>
+        <span style="color:#111">lock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+        
+        <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">array</span><span style="color:#111">[</span> <span style="color:#111">items_in_array</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#111">];</span>
+        <span style="color:#111">items_in_array</span> <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>
+
+        <span style="color:#111">unlock</span><span style="color:#111">(</span> <span style="color:#111">myLock</span> <span style="color:#111">);</span>
+
+        <span style="color:#111">post</span><span style="color:#111">(</span> <span style="color:#111">empty_count</span> <span style="color:#111">);</span> <span style="color:#75715e">// THIS IS NEW! 
+</span><span style="color:#75715e"></span>
+        <span style="color:#111">consumeItem</span><span style="color:#111">(</span><span style="color:#111">item</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div></div>
+</div>
+
+<div class="ex">
+	<div class="inner">
+    	<p>It might seem strange to you that when using semaphores, we still ALSO need a mutex when actually writing to/reading from the shared array. Can you explain why this is needed? Can you explain why we&rsquo;re using semaphores in the first place then, if they don&rsquo;t even allow us to remove the mutex?</p>
+<div class="solution" style="display: block;"  id="q661">
+  <b>Answer:</b><br/>
+  <p>
+    When using a Semaphore with an initial value higher than 1, multiple threads can still "enter" the semaphore at the same time (this is exactly one of the reasons to use a semaphore after all!). The amount of simultaneous threads is just limited by the Semaphore value. 
+  </p>
+  <p>
+    As such, we still need to protect the critical section inside the semaphore block if it accesses shared memory, or we would again have race conditions!
+  </p>
+  <p>
+    We see that using semaphores is indeed not done to remove the mutex, but rather to remove the busy waiting while() loop and the custom checks if the array is full/empty. Compare the semaphore version with the pure-mutex version and you'll see we were able to actually get rid of quite some code + we're no longer constantly locking/unlocking the mutex!
+  </p>
+</div>
+<input value="Toggle solution" type="button" onclick="toggleDisplay('q661')"/>
+
+	</div>
+</div>
+
+<div class="notices bignote" ><p>Note that, if we initialize the Semaphore with a value of 1 (<code>init( mySemaphore, 1 )</code>), we basically get a mutex! After all, only a single thread can be active inside the semaphore at any given time then, leading to the same behaviour as a mutex. This is then typically referred to as a <strong>binary semaphore</strong>.</p>
+<p>In this setup, we of course <em>don&rsquo;t</em> need another mutex inside the semaphore block, since we&rsquo;re already getting that guarantee from the binary semaphore.</p>
+<p>This is sometimes used if the size of the shared memory is just a single item, often referred to as a &ldquo;shelf&rdquo; (see also later exercises and the threading assignment), to prevent having to keep a manual counter variable alongside a mutex (the binary semaphore is mutex and counter all-in-one!).</p>
 <p>More info on the differences between a semaphore and a mutex are given <a href="https://techdifferences.com/difference-between-semaphore-and-mutex.html">here</a>.</p>
+</div>
+
 
 <div class="ex">
 	<div class="inner">
@@ -1793,7 +1965,19 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
 
 	</div>
 </div>
-<p>Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example conditional variables and barriers). Especially more modern programming languages like Java and C# typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped.</p>
+<h3 id="semaphores-in-c-and-pthreads">Semaphores in C and pthreads</h3>
+<p>The <strong>pthreads</strong> library provides an API to program with semaphores in C (include semaphore.h to use). It contains the <code>semaphore_t</code> type and, amongst others, these functions (which are the same as discussed previously):</p>
+<ul>
+<li><code>sem_init()</code>: initialises a semaphore.</li>
+<li><code>sem_wait()</code>: waits until the semaphore is positive, then decrements the number inside of the semaphore.</li>
+<li><code>sem_post()</code>: increments the number inside of the semaphore and unpauses one of the waiting threads (if any). (note: in other programming languages, this operation is often called <code>signal</code> instead of <code>post</code>)</li>
+<li><code>sem_destroy()</code>: destroys the semaphore when it&rsquo;s no longer needed.</li>
+</ul>
+
+<div class="notices note" ><p>There is also a &ldquo;non-pausing&rdquo; alternative to sem_wait: <code>sem_trywait()</code>. This variant will only decrement the semaphore if it&rsquo;s positive. If it&rsquo;s zero, it won&rsquo;t pause the current thread. Additionally, this function returns the current value of the semaphore, which allows us to really use it as a replacement for a counter! See the manual pages and search Google for more info and the correct usage of this version!</p>
+</div>
+
+<p>Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example &ldquo;conditional variables&rdquo;, &ldquo;monitors&rdquo; and &ldquo;barriers&rdquo;). Especially more modern programming languages like Java, C#, Rust, and Go typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped.</p>
 
 
 <footer class="footline">
@@ -2803,17 +2987,17 @@ It should be clear that what we wanted to see was <em>Job 1 started</em> followe
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647980870"></script>
-    <script src="../../js/jquery.sticky.js?1647980870"></script>
-    <script src="../../js/featherlight.min.js?1647980870"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647980870"></script>
-    <script src="../../js/learn.js?1647980870"></script>
-    <script src="../../js/hugo-learn.js?1647980870"></script>
+    <script src="../../js/clipboard.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1648684372"></script>
+    <script src="../../js/jquery.sticky.js?1648684372"></script>
+    <script src="../../js/featherlight.min.js?1648684372"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1648684372"></script>
+    <script src="../../js/learn.js?1648684372"></script>
+    <script src="../../js/hugo-learn.js?1648684372"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647980870"></script>
+            <script src="../../mermaid/mermaid.js?1648684372"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

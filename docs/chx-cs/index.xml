@@ -6,13 +6,13 @@
     <description>Recent content in X: Capita Selecta on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>X.2: Real-time Operating Systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
   source: wikipedia.com   The image above shows:
@@ -23,7 +23,7 @@
       <title>X.3: Device Drivers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
       <description>General The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware devices that are typically connected to a processor in a laptop, desktop, or server. The OS has to know how to talk to a certain device. Typically an Application Programming Interface (an API) is provided to the user space, so users can interact with the hardware.</description>
     </item>

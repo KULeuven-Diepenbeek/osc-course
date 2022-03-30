@@ -6,13 +6,13 @@
     <description>Recent content on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1.1: Intro to OS using Linux</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/intro-os/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/intro-os/</guid>
       <description>Operating systems (OSes) are prevalent everywhere as soon as you touch anything that resembles a computer: from your smartphone, video game system interface, to the digital dashboard of your car. You, as a user, will probably never directly interact with the &amp;ldquo;bare metal&amp;rdquo;&amp;mdash;the hardware. Even as a programmer, you&amp;rsquo;ll always have to go through the operating system and ask for permissions and so forth. In this chapter, we&amp;rsquo;ll have our first look at how this works.</description>
     </item>
@@ -21,7 +21,7 @@
       <title>2.1: The C programming language</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro/</guid>
       <description>The C language is a programming language developed in the &amp;rsquo;70s to make it easier to interface with hardware. C was/is in essence nothing more than a few abstraction layers on top of assembly itself.
 A quick intro to C C is an imperative programming language. You will notice this when writing some code yourself: we write instructions as statements. These rules or statements are structured in function and struct types.</description>
@@ -31,7 +31,7 @@ A quick intro to C C is an imperative programming language. You will notice this
       <title>3.1 Von Neumann Architecture</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_vonneumann/</guid>
       <description>In order to properly understand some concepts later in this course (such as the C pointers, stack and heap and context switching overhead), it is useful to understand some of the basics of how a CPU works internally and how the OS (and other software) interfaces with it.
 The ALU At its core, a CPU is hardware that enables the execution of a (limited) number of relatively simple/basic mathematical and logical operations.</description>
@@ -41,7 +41,7 @@ The ALU At its core, a CPU is hardware that enables the execution of a (limited)
       <title>5.1: The Easy Way: IDEs</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-ide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-ide/</guid>
       <description>1. The easy way: Debugging using an IDE Arguably one of the better integrated C/C++ IDEs out there is CLion, a toolkit from Jetbrains based on the IDEA platform you all know from IntelliJ. It has exactly the same tools and capabilities but is fully geared towards C and C++. Cross-compiling and toolchain setup is also very easy using CLion. The Figure below is a screen capture of CLion showcasing it&amp;rsquo;s integrated unit testing capabilities which we will expand upon in the coming sections.</description>
     </item>
@@ -50,7 +50,7 @@ The ALU At its core, a CPU is hardware that enables the execution of a (limited)
       <title>6.1: Processes</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</guid>
       <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
 What&amp;rsquo;s in a process ? By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course, a basic program can be divided in multiple segments. When source code is compiled into a binary, these segments are fixed.</description>
@@ -60,7 +60,7 @@ What&amp;rsquo;s in a process ? By definition, a process is an instance of a pro
       <title>7.1: Scheduling algorithms</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</guid>
       <description>In the previous chapter on Tasks, we&amp;rsquo;ve discussed one of the main responsibilities of an operating system: task management. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on one or multiple processors, the scheduler, is discussed in this chapter. Note that &amp;ldquo;tasks&amp;rdquo; or &amp;ldquo;jobs&amp;rdquo; can refer to either processes and/or threads.
 The scheduler has two main responsibilities:</description>
@@ -70,7 +70,7 @@ The scheduler has two main responsibilities:</description>
       <title>8.1: The Stack &amp; the Heap</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/stackvsheap/</guid>
       <description>The Stack and the Heap Program Memory  Compiled computer programs are divided into different sections, each with their own specific needs and properties. Together, they form the program memory. The following image represents these sections, from bottom to top:   text Read-only, fixed size. Contains executable instructions.   data Can be modified. Contains global or static variables that are initialized, such as static int i = 5;. Global variables are variables that live outside of any function scope, and are accessible everywhere, such as int i = 5; int main() { printf(&#34;</description>
     </item>
@@ -79,7 +79,7 @@ The scheduler has two main responsibilities:</description>
       <title>9.1: Memory management</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/memory/</guid>
       <description>In the previous chapters we have many times talked about (RAM) memory and (RAM) memory addresses, as well as specialized memory regions such as the stack and the heap. Up until now, we have pretended as if these concepts mapped directly onto the underlying hardware, but reality is of course a bit more complex. In this chapter, we will consider how physical memory is actually managed by the OS and the CPU.</description>
     </item>
@@ -88,7 +88,7 @@ The scheduler has two main responsibilities:</description>
       <title>1. Integrated C exercise</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</guid>
       <description>Download the start project here: c-integrated-start.c.
 The program represents a book, consisting out of multiple pages, of which each page contains (random) text, represented as a char[].
@@ -100,7 +100,7 @@ The following functions are given:
       <title>1.2: File systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</guid>
       <description>Introduction in Unix filesystems Everything is a file On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users&#39; privileges for that file (read, write, execute) are based on the access permissions (see below).
 Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem.</description>
@@ -110,7 +110,7 @@ Working daily with files in Unix operating systems will no doubt increase your a
       <title>2. Testing in C(&#43;&#43;)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</guid>
       <description>Download the start project files here: cpp-testing.cpp, cpp-testing-main.cpp. Remember that in order to run this as a Google Test Suite, you need to compile it using g++ and bootstrap GTest in a separate .cpp file where the main() function resides. Go back to the lab notes if you&amp;rsquo;re not sure how to pull this off.
 The following code is given:
@@ -121,7 +121,7 @@ date and period structs to represent a date and a period of dates in code.</desc
       <title>2.2: String Manipulation</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</guid>
       <description>We are at War! We&amp;rsquo;re at war! The orcs are attacking and are looking very hungry! Look at them!
   Orcs attacking! source: G.I.   1. String manipulation However, instead of simply killing you, these not so friendly looking beasts target vowels instead of bowels. So when speaking to, they munch and munch, stripping your carefully chosen words of all vowels. How rude. Implement a function called char* munch(char* sentence) that obscures all vowels with an &amp;lsquo;X&amp;rsquo;, and then prints the results.</description>
@@ -131,7 +131,7 @@ date and period structs to represent a date and a period of dates in code.</desc
       <title>2.3: Creating order: Structures</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs/</guid>
       <description>Structs The only way to structure data in C is using the struct keyword:
 struct Person { int age; int gender; // no bool, remember?  char name[100]; // do not forget to add a size } We can use this structure to assign values like this:
@@ -142,7 +142,7 @@ struct Person jaak; // do not forget &amp;#34;struct&amp;#34; // jaak.name = &am
       <title>3.2: Assembly basics</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/1_lab_assembly/</guid>
       <description>Assembly basics Exercise 1 How would you implement a while loop in Assembly using BEQi and JMPi?
 You don&amp;rsquo;t need to write out the full RAM contents nor variable addresses, just the instruction addresses and Assembly instructions (as in exercise 4 below).
@@ -153,7 +153,7 @@ int accumulator = 0; int n = 10; while( n != 0 ) { accumulator += 10; n--; } int
       <title>6.2: Processes (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting processes TIP: the unistd.h header has some useful functions. You may also want to check out the wait() function in sys/wait.h and exit() in stdlib.h.
@@ -164,7 +164,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>7.2: Scheduling algorithms (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</guid>
       <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do it&amp;rsquo;s job. Let&amp;rsquo;s compare them. We assume the following tasks:
  T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority high T4: arrives @ 7s, takes 1s, and has priority medium  Compare Average Throughput, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
@@ -174,7 +174,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>8.2: Inspecting memory regions</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/inspection-labs/</guid>
       <description>Accompanying Screencast:
   1. No malloc, no heap Let&amp;rsquo;s look at memory regions of a process that does not call malloc(). This means we will not use the heap just yet. Compile the following code:
@@ -185,7 +185,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>9.2: Deliberate Segfaulting</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab1_segfault/</guid>
       <description>source: xkcd.com   Segfault this For each of the programs below:
  Guess first if they will give a segmentation fault and where exactly and why Compile and execute them Were your guesses in the first step correct or not? Why (not)?  #include &amp;lt;stdio.h&amp;gt; int main(void) { int* i = NULL; *(i) = 666; return 0; } #include &amp;lt;stdio.h&amp;gt; int main(void) { int i = 666; *(&amp;amp;i - 10000) = 777; return 0; } #include &amp;lt;stdio.</description>
@@ -195,7 +195,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>X.2: Real-time Operating Systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
   source: wikipedia.com   The image above shows:
@@ -206,7 +206,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>1.3: Getting your CLI-feet wet</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/cli/</guid>
       <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
 Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
@@ -216,7 +216,7 @@ Navigation  figure out in which folder you are at the moment navigate to the roo
       <title>3. Inter-thread communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
       <description>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&amp;rsquo;s still not always trivial to know how to apply them to a specific problem. Even for the well-known producer-consumer problem, several different setups are possible.
 This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion.</description>
@@ -226,7 +226,7 @@ This task requires you to think about the bigger picture and forces you to expla
       <title>3.3 Functions and The Stack</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</guid>
       <description>In the previous part, we&amp;rsquo;ve discussed how we can use special branching and jumping instructions (like BEQ and JMP) to skip over certain parts of code to implement if-else logic. In the lab, we&amp;rsquo;ve seen how we can use the same building blocks to build while and for loops.
 In this part we will discuss how we can use jumping to implement functions, and some extra challenges that come with that.</description>
@@ -236,7 +236,7 @@ In this part we will discuss how we can use jumping to implement functions, and 
       <title>4.1: Pointers and arrays</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/pointers/</guid>
       <description>In the schematic examples below, the following concepts can be explicitly distinguished:
  The name of a variable The value of a variable  And the following implicitly:
@@ -247,7 +247,7 @@ In this part we will discuss how we can use jumping to implement functions, and 
       <title>5.3: The Middle Way: TDD</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/</guid>
       <description>Test-Driven Development: Google Test A concept you learned to love in the Software Engineering Skills course.
 It&amp;rsquo;s concepts and definitions will not be repeated here, but we will introduce Google Test, a unit testing framework for C/C++ that enables us to write tests to track down bugs and reduce the amount of time needed dabbling in gdb. That is one of the major advantages of using automated test frameworks.
@@ -258,7 +258,7 @@ Google Test is a C++ (11) framework, not a C framework!</description>
       <title>6.3: Inter Process communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
@@ -270,7 +270,7 @@ There are two main techniques to facilitate communication between multiple proce
       <title>7.3: Towards real-world schedulers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
       <description>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges that make them difficult for direct use in real-world scenarios. And we haven&amp;rsquo;t even taken into account all variables that are in play in a typical OS!
 As such, in this Section, we first look at a few factors that come into play in real systems.</description>
@@ -280,7 +280,7 @@ As such, in this Section, we first look at a few factors that come into play in 
       <title>8.3: Different Scopes in C</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/scope/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch8-stack/scope/</guid>
       <description>Scoping issues Now that you have some basic knowledge on the stack and the heap, it is time to take a better look at the different scopes present in the C programming language. These concepts are very important because they in part determine whether variables live (or not) - and whether anything is pushed to the local stack (or not). Let&amp;rsquo;s start with a basic example:
 #include &amp;lt;stdio.h&amp;gt; void* whats_my_age() { int age = 30; // I&amp;#39;m being generous here!</description>
@@ -290,7 +290,7 @@ As such, in this Section, we first look at a few factors that come into play in 
       <title>9.3: Paging</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/paging/</guid>
       <description>In the previous part, we have discussed both the benefits and problems with segmentation. One of the main issues was the fact that the segments could be of different sizes, making it difficult to find memory gaps of an appropriate size and adding overhead when doing so.
 As such, the actual method used most commonly in practice is segmentation with all the segments being of the same size. This means that not only the segments, but also the gaps they leave, are always the same, predictable size.</description>
@@ -300,7 +300,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <title>X.3: Device Drivers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
       <description>General The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware devices that are typically connected to a processor in a laptop, desktop, or server. The OS has to know how to talk to a certain device. Typically an Application Programming Interface (an API) is provided to the user space, so users can interact with the hardware.</description>
     </item>
@@ -309,7 +309,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <title>2.4: Structs</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/structs-labs/</guid>
       <description>We are (still&amp;hellip;) at War! We&amp;rsquo;re still at war! The orcs are attacking and are looking very hungry! Look at them!
   Orcs attacking! source: G.I.   2. Modelling the orcs Let us try to model these filthy beasts. Ask the user for a number. That number is the amount of orcs in the army. Create as many struct instances with random property values and print these on the screen.</description>
@@ -319,7 +319,7 @@ As such, the actual method used most commonly in practice is segmentation with a
       <title>3.4: The Stack</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_lab_stack/</guid>
       <description>Exercise 1 Write the (psuedo)Assembly code (using PUSH/POP) for the following C code (note: you can re-use a lot of the example code in the chapter to start, but you&amp;rsquo;ll need to add/change a lot too!).
 Since we&amp;rsquo;re now calling additional functions, also make sure you store the return addresses on the stack correctly (using 0x07 as temporary return address storage).
@@ -330,7 +330,7 @@ You can use 0x60, 0x61 and 0x62 as addresses for the input parameters (M, N, R, 
       <title>4. Pseudo scheduler</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
       <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.
 The scheduler follows these rules:
@@ -341,7 +341,7 @@ The scheduler is preemptive and uses a round-robin approach without priorities. 
       <title>4.2: Practical Use of Pointers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</guid>
       <description>1. Changing values around Because in C everything passed by-value, we can manipulate the values of variables in a function that has been declared outside with pointers. In Java you can also change the value of member variables in objects, but not primitives! How do you switch two numbers without giving anything back?
 #include &amp;lt;stdio.h&amp;gt;void swap(int *px, int *py) { int temp; temp = *px; *px = *py; *py = temp; } int main() { int x = 10, y = 20; swap(&amp;amp;x, &amp;amp;y); printf(&amp;#34;(%d, %d)\n&amp;#34;, x, y); // print (20, 10) } mermaid.</description>
@@ -351,7 +351,7 @@ The scheduler is preemptive and uses a round-robin approach without priorities. 
       <title>6.4: Threads</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
       <description>In the previous three sections we have discussed that you can run multiple processes at the same time and how this is managed by the OS. This can be useful in two ways: either a) to use multiple programs at the same time (e.g., your Web browser and music player), or b) to make efficient use of multiple hardware CPUs or processing cores.
 We have however also seen that this is not trivial: new processes need their own memory space and associated state (the PCB) and communication between processes is either flexible but complex (shared memory) or straightforward but limited (message passing).</description>
@@ -361,7 +361,7 @@ We have however also seen that this is not trivial: new processes need their own
       <title>7.4: Mr. nice guy(lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
       <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS      An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
     </item>
@@ -370,7 +370,7 @@ We have however also seen that this is not trivial: new processes need their own
       <title>9.4: Simply browsing through pages</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch9-memory/lab2_browsing/</guid>
       <description>image source: wikipedia.com    Get page size on your Linux system through a C program    An example output    Assume a system with a 32-bit logical addresses and a 4-kB (4096 bytes) page size. Write a C program that is passed a logical address (in decimal) through a command line argument. Print the page number (p) and the offset (d) for the given address.</description>
     </item>
@@ -379,7 +379,7 @@ We have however also seen that this is not trivial: new processes need their own
       <title>2.5: C Ecosystems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems/</guid>
       <description>Separation of concerns: functions in different C files To make the division clearer, we prepare the following C code, split into two different files:
 File hello.c:
@@ -391,7 +391,7 @@ File hello.c:
       <title>3.3: The Ancient Library (RTOS)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
     1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
@@ -401,7 +401,7 @@ File hello.c:
       <title>4.3: The Ancient Library</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/lab/</guid>
       <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit.
    Source: dublin2019.com   1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
@@ -411,7 +411,7 @@ File hello.c:
       <title>5.2: The Hard Way: GDB</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-gdb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/debugging-gdb/</guid>
       <description>2. The hard way: Command-line debugging using GDB In order to fluently debug binary programs, they have to be compiled with the debug flag, gcc -g. This will add metadata to the binary file that gdb uses when disassembling and setting breakpoints. IDEs automatically add metadata like this when you press the &amp;ldquo;Debug&amp;rdquo; button on them, but since this is a command-line application, we need to do everything ourselves.
 2.1 With debug flags Let&amp;rsquo;s start with a heap-based application we would like to inspect:</description>
@@ -421,7 +421,7 @@ File hello.c:
       <title>6.5: Threads (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting threads   Take a closer look at the first pthreads example code from the previous section (with the startThreadJob function).
@@ -432,7 +432,7 @@ Creating and inspecting threads   Take a closer look at the first pthreads examp
       <title>2.6: Splitting up Code</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/ecosystems-labs/</guid>
       <description>Building with Makefiles It is time to split up our Orc exercise code into different parts:
 mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  graph TD E{Executable} A[main.c] AAmain.o] B[orcs.c] BBorcs.o] D[orcs.h] E -- AA E -- BB AA -- A AA -- D BB -- B BB -- D  Create four different files:
@@ -443,7 +443,7 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <title>6.6: Inter Thread communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
       <description>One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
   This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
@@ -453,16 +453,17 @@ mermaid.initialize({ startOnLoad: true, flowchart: { useMaxWidth: true } });  gr
       <title>6.7: Inter-Thread communication (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
-      <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
+      <description>Source: G.I.   Good Morning, Sire Polite servants, impolite king Extend this incomplete C-program. As you can see, the program has one king thread and N servant threads, but they don&amp;rsquo;t really do anything yet. Implement the following using one or more semaphores:
+ The king thread sleeps (using the sleep() function) for a random amount of time (a few seconds). When the king thread awakes, it signals the servant threads.</description>
     </item>
     
     <item>
       <title>1. Recommended reading</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/reading/</guid>
       <description>Operating Systems Operating System Concepts  Another defining moment in the evolution of operating systems Small footprint operating systems, such as those driving the handheld devices that the baby dinosaurs are using on the cover, are just one of the cutting-edge applications you&amp;rsquo;ll find in Silberschatz, Galvin, and Gagne&amp;rsquo;s Operating System Concepts, Seventh Edition.
  Website: os-book.com
@@ -473,7 +474,7 @@ Programming in C The (Ansi) C Programming Language  This book is meant to help t
       <title>2. Linux Installation Instructions</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</guid>
       <description>The exercises for this course are to be done on the Linux Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.
 We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle.</description>
@@ -483,7 +484,7 @@ We would of course not ask you to remove Windows to install Linux on your person
       <title>Cheat sheet</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/cheat_sheet/</guid>
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
 Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;rdquo;, or even google the manpage on Google.

@@ -6,13 +6,13 @@
     <description>Recent content in 7: CPU scheduling on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>7.1: Scheduling algorithms</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/algorithms/</guid>
       <description>In the previous chapter on Tasks, we&amp;rsquo;ve discussed one of the main responsibilities of an operating system: task management. Well to be fair, we have only been creating tasks and stopping or killing tasks. The necessary component that allows tasks to be run on one or multiple processors, the scheduler, is discussed in this chapter. Note that &amp;ldquo;tasks&amp;rdquo; or &amp;ldquo;jobs&amp;rdquo; can refer to either processes and/or threads.
 The scheduler has two main responsibilities:</description>
@@ -22,7 +22,7 @@ The scheduler has two main responsibilities:</description>
       <title>7.2: Scheduling algorithms (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</guid>
       <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do it&amp;rsquo;s job. Let&amp;rsquo;s compare them. We assume the following tasks:
  T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority high T4: arrives @ 7s, takes 1s, and has priority medium  Compare Average Throughput, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
@@ -32,7 +32,7 @@ The scheduler has two main responsibilities:</description>
       <title>7.3: Towards real-world schedulers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
       <description>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges that make them difficult for direct use in real-world scenarios. And we haven&amp;rsquo;t even taken into account all variables that are in play in a typical OS!
 As such, in this Section, we first look at a few factors that come into play in real systems.</description>
@@ -42,7 +42,7 @@ As such, in this Section, we first look at a few factors that come into play in 
       <title>7.4: Mr. nice guy(lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab2_niceguy/</guid>
       <description>image source: amazon.com    Write a program in C that fetches its own PID and priority. Display the PID, the nice value and the priority.  hint: use getpriority() in #include &amp;lt;sys/resource.h&amp;gt; and use PRIO_PROCESS      An example output    Adjust the program above (after copying it, off course) so it sleeps for 5 seconds after those operations. Repeat that process for 100 times.</description>
     </item>

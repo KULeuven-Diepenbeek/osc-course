@@ -12,21 +12,21 @@
     <title>3. Inter-thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1647980870" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/hybrid.css?1647980870" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1647980870" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1647980870" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/devselector.css?1647980870" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1647980870" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1647980870" rel="stylesheet">
+    <link href="../../css/nucleus.css?1648684372" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/hybrid.css?1648684372" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1648684372" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1648684372" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/devselector.css?1648684372" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1648684372" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1648684372" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1647980870"></script>
-    <script src="../../js/devselector.js?1647980870"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1648684372"></script>
+    <script src="../../js/devselector.js?1648684372"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -64,14 +64,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1647980870"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1647980870"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1648684372"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1648684372"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1647980870"></script>
+<script type="text/javascript" src="../../js/search.js?1648684372"></script>
 
     
   </div>
@@ -1629,20 +1629,17 @@
 </li>
 </ul>
 </li>
-<li>Include your solution (source code) for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
+<li>Include your solution (source code) for the &ldquo;Producer-Consumer V4: Semaphores&rdquo; exercise in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
 <ul>
 <li>This is not part of the page-limit for the report of course ;)</li>
 </ul>
 </li>
 </ol>
 <p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
-<p>Note: It&rsquo;s possible that you&rsquo;ve solved exercise 6.7.3 (question 7 above) in group during class.
-In this case, you MUST add sufficient personal comments to the code that explain how it works and why the used approach was chosen.
-You must also clearly list the students that collaborated on the code.
-This is to make it easier for the teaching team to assess if you actually understand the code or only copy-pasted it without contributing.
-Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned.
-Note that this is only for question 7: questions 1-6 MUST be answered fully individually!</p>
-<p><strong>Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo</strong>.</p>
+<p>Note: It&rsquo;s possible that you&rsquo;ve solved &ldquo;Producer-Consumer V4: Semaphores&rdquo; in group during class, which was allowed.
+To be able to make sure however that each individual student -really- understands what the code does (and didn&rsquo;t just copy-paste it from someone else), you MUST add <em>sufficient</em> personal comments in the code explaining the most important parts (how they work and why that approach was chosen).</p>
+<p><strong>Note that this all only counts for &ldquo;Producer-Consumer V4: Semaphores&rdquo; : questions 1-6 above MUST be answered fully individually!</strong></p>
+<p><strong>Hand in the report and the source code for the &ldquo;Producer-Consumer V4&rdquo; exercise (together in a .zip file) via Toledo</strong>.</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -2754,17 +2751,17 @@ Note that this is only for question 7: questions 1-6 MUST be answered fully indi
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1647980870"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1647980870"></script>
-    <script src="../../js/jquery.sticky.js?1647980870"></script>
-    <script src="../../js/featherlight.min.js?1647980870"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1647980870"></script>
-    <script src="../../js/learn.js?1647980870"></script>
-    <script src="../../js/hugo-learn.js?1647980870"></script>
+    <script src="../../js/clipboard.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1648684372"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1648684372"></script>
+    <script src="../../js/jquery.sticky.js?1648684372"></script>
+    <script src="../../js/featherlight.min.js?1648684372"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1648684372"></script>
+    <script src="../../js/learn.js?1648684372"></script>
+    <script src="../../js/hugo-learn.js?1648684372"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1647980870"></script>
+            <script src="../../mermaid/mermaid.js?1648684372"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

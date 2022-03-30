@@ -6,13 +6,13 @@
     <description>Recent content in 6: Task management on Operating Systems and C</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.1: Processes</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/processes/</guid>
       <description>One of the three core tasks of an OS is the management of tasks. These different tasks are all running on the same processor. To make this magic happen some form of management is required.
 What&amp;rsquo;s in a process ? By definition, a process is an instance of a program. As was dicussed in the &amp;ldquo;C-portion&amp;rdquo; of this course, a basic program can be divided in multiple segments. When source code is compiled into a binary, these segments are fixed.</description>
@@ -22,7 +22,7 @@ What&amp;rsquo;s in a process ? By definition, a process is an instance of a pro
       <title>6.2: Processes (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab1_processmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting processes TIP: the unistd.h header has some useful functions. You may also want to check out the wait() function in sys/wait.h and exit() in stdlib.h.
@@ -33,7 +33,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <title>6.3: Inter Process communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
       <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
@@ -45,7 +45,7 @@ There are two main techniques to facilitate communication between multiple proce
       <title>6.4: Threads</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/threads/</guid>
       <description>In the previous three sections we have discussed that you can run multiple processes at the same time and how this is managed by the OS. This can be useful in two ways: either a) to use multiple programs at the same time (e.g., your Web browser and music player), or b) to make efficient use of multiple hardware CPUs or processing cores.
 We have however also seen that this is not trivial: new processes need their own memory space and associated state (the PCB) and communication between processes is either flexible but complex (shared memory) or straightforward but limited (message passing).</description>
@@ -55,7 +55,7 @@ We have however also seen that this is not trivial: new processes need their own
       <title>6.5: Threads (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab2_threadsmgmt/</guid>
       <description>p.dinobook { color: #7E7E7E; font-size: 14px; font-weight: 300; letter-spacing: -1px; padding-top: 0px; margin-top: -20px; text-align: center; }  source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. Operating System Concepts. 9th ed. Hoboken: Wiley, 2013.
 Creating and inspecting threads   Take a closer look at the first pthreads example code from the previous section (with the startThreadJob function).
@@ -66,7 +66,7 @@ Creating and inspecting threads   Take a closer look at the first pthreads examp
       <title>6.6: Inter Thread communication</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interthread/</guid>
       <description>One raison d&amp;rsquo;être for multi-threaded applications is resource sharing. In the example that was given earlier a global variable &amp;lsquo;counter&amp;rsquo; was used. No measures were taken for securing this approach and we got some unexpected results. The output of the example looks like shown below:
   This probably came as a surprise 😃  It should be clear that what we wanted to see was Job 1 started followed by Job 1 finished and that this would be repeated again for job number 2.</description>
@@ -76,9 +76,10 @@ Creating and inspecting threads   Take a closer look at the first pthreads examp
       <title>6.7: Inter-Thread communication (lab)</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen)</author>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/lab3_interthreadcomm/</guid>
-      <description>Source: G.I.     Write a C-program that has 1 king thread and n servant threads. The number of servant threads should be configurable through a define. The king thread sleeps for a random amount of time (a few seconds) and signals the servants when it awakes. All servant threads politely say Good morning, sire together with a servant ID. The king thread goes to sleep again.</description>
+      <description>Source: G.I.   Good Morning, Sire Polite servants, impolite king Extend this incomplete C-program. As you can see, the program has one king thread and N servant threads, but they don&amp;rsquo;t really do anything yet. Implement the following using one or more semaphores:
+ The king thread sleeps (using the sleep() function) for a random amount of time (a few seconds). When the king thread awakes, it signals the servant threads.</description>
     </item>
     
   </channel>

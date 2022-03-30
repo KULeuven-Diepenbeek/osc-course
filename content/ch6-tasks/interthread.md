@@ -215,30 +215,221 @@ harddisk.lock() // this will not complete, because Thread 2 is holding this lock
 
 Note: this example is not entirely realistic, as the network and harddisk can generally be used by multiple threads and processes concurrently. This is because the OS (or even the hardware itself) has layers of abstraction, but also complex ways of detecting and preventing deadlocks from happening (for extra information, see [this presentation](http://lass.cs.umass.edu/~shenoy/courses/fall15/lectures/Lec11.pdf) (this is not course material)). Still, you can pretty easily make this mistake in your own program when accessing multiple pieces of shared memory, so watch out!
 
-## Semaphore
+## Semaphores
 
-While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a **semaphore**. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys: 
+While mutex locks are useful, the are also relatively simple and limited in what they can convey. As such, over time more advanced thread synchronization techniques have evolved that make it a bit easier to deal with often occurring scenarios. One such more advanced technique is a **semaphore**. A semaphore makes it easier to track how many threads are requesting access or have already been given access to a particular resource. 
+
+### Producer-Consumer Problems
+
+This technique is used in for example producer-consumer problems. There, one or more producer threads prepare data (in our exercises: prime numbers) and put it in a limited amount of shared memory spots (say an array of size 10), ready to be used by one or more consumers (in our exercises: a function that prints the prime numbers). This type of setup prevents us from having to allocate a large amount of memory up-front to communicate thread results (as we did in the solution to the last exercise in the previous lab).
+
+{{% figure src="https://www.baeldung.com/wp-content/uploads/2022/02/Multi-Producers-Multi-Consumers.png" title="A high-level visualization of a multi-producer + multi-consumer problem with a limited amount of shared memory in between." %}}
+
+In this setup, we don't just want to lock access to the shared memory so only 1 producer or consumer can use it at a given time, we want to do more: we want the producers to only write data to the shared memory if there is an open spot. If not, they have to wait. Similarly, the consumers can only read data from shared memory if there is actually something there. If not, they have to wait. 
+
+Conceptually, we could do this by keeping track of a count of the amount of items currently in the shared array (`items_in_array` below), and increment/decrement that count inside a mutex lock when producing/consuming (similar to the global counter solution above): 
+
+<div class="multicol">
+<div>
+
+```C
+// PSEUDOCODE!
+mutex myLock;
+int items_in_array = 0; 
+int* array = malloc(sizeof(int) * 10);
+
+void* producer() 
+{
+    while (true) 
+    {
+        bool itemStored = false;
+        Item item = produceItem();
+
+        while( !itemStored ) {
+
+            lock( myLock );
+            
+            if( items_in_array < 10 ) {
+                array[ items_in_array ] = item;
+                items_in_array += 1;
+
+                itemStored = true;
+            }
+
+            unlock( myLock );
+        }
+    }
+}
+```
+</div>
+<div>
+
+```C
+// PSEUDOCODE!
+
+
+
+
+void* consumer() 
+{
+    while (true) 
+    {
+        Item item = NULL;
+
+        lock( myLock );
+        
+        if( items_in_array > 0 ) {
+            item = array[ items_in_array - 1 ];
+            items_in_array -= 1;
+        }
+
+        unlock( myLock );
+
+        if( item != NULL ) {
+            consumeItem(item);
+        }
+    }
+}
+```
+
+</div>
+</div>
+
+This setup will work, however it is **very inefficient**: both the producers and the consumers are constantly trying to get a new lock on the array to check if they can produce/consume something, even if it's only been a few milliseconds since they last checked (and found the array was full/empty and there was nothing to do). Imagine for example if the producers in the example are slow to produce new items, but the consumers are very fast: the consumers would constantly be re-locking the mutex to check if something new is available, even though there rarely is, causing the mutex to be almost immediately unlocked again. This type of behaviour is often called **busy waiting** or **polling** and is bad for performance as you're doing a lot of unnecessary work. 
+
+Instead, a better solution would be that a thread that wants to read/write an item from/to the array can only do so if it is actually possible. If not, the thread should be **paused** until it's sure that it can make progress, instead of constantly checking. To do this, we need a new type of lock that keeps track of who's waiting for what to happen, which is called **the semaphore**.
+
+### Semaphore concepts
+
+In essence, the semaphore is nothing more than a counter (the `items_in_array` from above), but one that can **automatically pause/resume threads that use** it if the counter is zero/becomes positive (while above, we had to do this manually).
+
+This is typically done using three conceptual functions on the semaphore:
+
+* `init( mySemaphore, count )` : Start the semaphore value at `count` (can be either 0 or a positive number).
+* `wait( mySemaphore )` : Continues if mySemaphore is > 0 and decrements it by 1. If not, it pauses the current thread until mySemaphore becomes positive.
+* `post( mySemaphore )` : Increments mySemaphore by 1. This then automatically causes **1 of the waiting threads** (if any) to be unpaused.
+
+{{% notice note %}}
+
+As you can see, multiple threads can be waiting on the same semaphore (determined by the `count` passed in `init()`). For each time a `post()` is done however, only 1 of the waiting threads can of course be unpaused. The OS determines which thread is chosen from among the waiters and can do so in many different ways (for example thread that has been paused the longest, thread that has been paused the shortest, thread that was most recently started, the thread with the highest priority, etc.). More information on this is given in Chapter 7 (Scheduling).
+
+{{% /notice %}}
+
+To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys: 
 
 {{% figure src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" title="This photo of Cafe Boulevard is courtesy of Tripadvisor"  width="50%" %}}
 
-Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, they need to take a bracelet and put it on. When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait until another child leaves the room and places their bracelet back in the bowl.
+Only 5 children are allowed in that room. Outside, there is a bowl with bracelets (`init( braceletBowl, 5 )`). When a child wants to enter the room to play, they need to take a bracelet and put it on (`wait( braceletBowl )`). When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait (also `wait( braceletBowl )`) until another child leaves the room and places their bracelet back in the bowl (`post( braceletBowl )`).
 
-This technique is used in e.g., producer-consumer problems, amongst many other types. In those settings, several producer threads prepare data and put it in shared memory, ready to be used by one or more consumers. Instead of having a separate counter that tracks how many produced items are waiting for processing, a semaphore can be used directly, making state keeping a bit easier. 
+Using semaphores then, we can more optimally re-write the producer-consumer setup from above. Note however that we **can't just use a single semaphore**, since the wait/post functions really only allow us to wait if the value is 0, not if the value is for example 10 (the maximum size of the array). As such, we need two: one to indicate how much slots are filled, and one to indicate how many are empty:
 
- This is because in contrast with the mutex, a semaphore is a *count* of tokens. Put differently, a mutex limits access to a single resource (e.g., a single memory location) to one thread at a time. A semaphore instead allows threads to share a limited pool of resources (e.g., 4 different hard disks), with multiple threads potentially active at the same time. Note though that if there is only a single token in the semaphore, this behaves exactly the same as a mutex (this specific type is referred to as a **binary semaphore**). 
+<div class="multicol">
+<div>
 
-The **pthreads** library also provides an API to program with semaphores (include semaphore.h to use). It contains, amongst others, functions like:
+```C
+// PSEUDOCODE!
+mutex myLock;
 
-* sem_init(): initialises a semaphore.
-* sem_wait(): decrements the number inside of the semaphore. 
-* sem_post(): increments the number inside of the semaphore.
-* sem_destroy(): destroys the semaphore when it's no longer needed.
+semaphore fill_count;  
+init(fill_count,  0);
 
-Note that the ```sem_wait()``` function is _blocking_ (similar to pthread_join). If the value of the semaphore is set to zero when sem_wait is called, the thread is paused until another thread invokes ```sem_post()``` (put differently: until the semaphore is "unlocked"). In other programming languages, the post() operation is often referred to as signal(). There is also a non-blocking alternative to sem_wait: ```sem_trywait()```. See the manual pages and search Google for more info and the correct usage.
+semaphore empty_count; 
+init(empty_count, 10);
 
-Note that multiple threads can be waiting on  the same semaphore at any given time. When a sem_post occurs, they of course cannot all start immediately, since only one token was added. Here there are again several ways for the OS to decide which thread gets preference (e.g., the one that has been waiting the longest, the one that was most recently started) and gets to consume the token. 
+int items_in_array = 0; 
+int* array = malloc(sizeof(int) * 10);
+
+void* producer() 
+{
+    while (true) 
+    {
+        Item item = produceItem();
+
+        wait( empty_count ); // THIS IS NEW!
+
+        lock( myLock );
+        
+        array[ items_in_array ] = item;
+        items_in_array += 1;
+
+        unlock( myLock );
+        
+        post( fill_count ); // THIS IS NEW!
+    }
+}
+```
+</div>
+<div>
+
+```C
+// PSEUDOCODE!
+
+
+  
+
+
+ 
+
+
+
+
+
+void* consumer() 
+{
+    while (true) 
+    {
+        Item item = NULL;
+
+        wait( fill_count ); // THIS IS NEW! 
+
+        lock( myLock );
+        
+        item = array[ items_in_array - 1 ];
+        items_in_array -= 1;
+
+        unlock( myLock );
+
+        post( empty_count ); // THIS IS NEW! 
+
+        consumeItem(item);
+    }
+}
+```
+
+</div>
+</div>
+
+{{% task %}}
+
+It might seem strange to you that when using semaphores, we still ALSO need a mutex when actually writing to/reading from the shared array. Can you explain why this is needed? Can you explain why we're using semaphores in the first place then, if they don't even allow us to remove the mutex?
+
+<div class="solution" style="display: block;"  id="q661">
+  <b>Answer:</b><br/>
+  <p>
+    When using a Semaphore with an initial value higher than 1, multiple threads can still "enter" the semaphore at the same time (this is exactly one of the reasons to use a semaphore after all!). The amount of simultaneous threads is just limited by the Semaphore value. 
+  </p>
+  <p>
+    As such, we still need to protect the critical section inside the semaphore block if it accesses shared memory, or we would again have race conditions!
+  </p>
+  <p>
+    We see that using semaphores is indeed not done to remove the mutex, but rather to remove the busy waiting while() loop and the custom checks if the array is full/empty. Compare the semaphore version with the pure-mutex version and you'll see we were able to actually get rid of quite some code + we're no longer constantly locking/unlocking the mutex!
+  </p>
+</div>
+
+<input value="Toggle solution" type="button" onclick="toggleDisplay('q661')"/>
+{{% /task %}}
+
+{{% notice bignote %}}
+
+Note that, if we initialize the Semaphore with a value of 1 (`init( mySemaphore, 1 )`), we basically get a mutex! After all, only a single thread can be active inside the semaphore at any given time then, leading to the same behaviour as a mutex. This is then typically referred to as a **binary semaphore**.
+
+In this setup, we of course _don't_ need another mutex inside the semaphore block, since we're already getting that guarantee from the binary semaphore.
+
+This is sometimes used if the size of the shared memory is just a single item, often referred to as a "shelf" (see also later exercises and the threading assignment), to prevent having to keep a manual counter variable alongside a mutex (the binary semaphore is mutex and counter all-in-one!).
 
 More info on the differences between a semaphore and a mutex are given [here](https://techdifferences.com/difference-between-semaphore-and-mutex.html).
+
+{{% /notice %}}
 
 {{% task %}}
 Go to the Deadlock Empire website and do:
@@ -246,6 +437,22 @@ Go to the Deadlock Empire website and do:
 * Semaphores: Semaphores
 * Semaphores: Producer-Consumer
 * Semaphores: Producer-Consumer (Variant)
+
 {{% /task %}}
 
-Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example conditional variables and barriers). Especially more modern programming languages like Java and C# typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped. 
+### Semaphores in C and pthreads
+
+The **pthreads** library provides an API to program with semaphores in C (include semaphore.h to use). It contains the `semaphore_t` type and, amongst others, these functions (which are the same as discussed previously):
+
+* `sem_init()`: initialises a semaphore.
+* `sem_wait()`: waits until the semaphore is positive, then decrements the number inside of the semaphore. 
+* `sem_post()`: increments the number inside of the semaphore and unpauses one of the waiting threads (if any). (note: in other programming languages, this operation is often called `signal` instead of `post`)
+* `sem_destroy()`: destroys the semaphore when it's no longer needed.
+
+{{% notice note %}}
+
+There is also a "non-pausing" alternative to sem_wait: ```sem_trywait()```. This variant will only decrement the semaphore if it's positive. If it's zero, it won't pause the current thread. Additionally, this function returns the current value of the semaphore, which allows us to really use it as a replacement for a counter! See the manual pages and search Google for more info and the correct usage of this version!
+
+{{% /notice %}}
+
+Note that next to mutexes and semaphores, there are many other thread synchronization utilities and concepts (such as for example "conditional variables", "monitors" and "barriers"). Especially more modern programming languages like Java, C#, Rust, and Go typically have highly advanced threading options built-in. Some of these you can (optionally) explore and experiment with using the exercises from Deadlock Empire that we skipped. 

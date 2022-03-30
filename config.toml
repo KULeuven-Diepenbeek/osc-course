@@ -15,6 +15,10 @@ pygmentsCodefences = true
 # for .Lastmod to work with .GitInfo: --enableGitInfo https://gohugo.io/variables/git/
 enableGitInfo = true
 
+
+# custom_js = ["static/js/osc.js"] # doesn't seem to work? 
+# customJS = ["js/osc.js"] # this neither?
+
 [markup]
 	defaultMarkdownHandler = "goldmark"
 
@@ -45,7 +49,7 @@ enableGitInfo = true
 home = [ "HTML", "RSS", "JSON"]
 
 [Author]
-  name = "Wouter Groeneveld and Jo Vliegen"
+  name = "Wouter Groeneveld and Jo Vliegen and Robin Marx"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
 
 [[menu.shortcuts]] 

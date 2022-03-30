@@ -37,19 +37,17 @@ Analyse the code below and write a report (3-4 pages):
     * Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs
     * Note: there aren't always literal "producers" or "consumers" of course; these are general concepts
         * For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers
-7. Include your solution (source code) for the prime-thread exercise (nr 3) in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
+7. Include your solution (source code) for the "Producer-Consumer V4: Semaphores" exercise in [Section 6.7](/ch6-tasks/lab3_interthreadcomm)
     * This is not part of the page-limit for the report of course ;)  
 
 **Note that, like all other tasks, this is an individual assignment!**
 
-Note: It's possible that you've solved exercise 6.7.3 (question 7 above) in group during class. 
-In this case, you MUST add sufficient personal comments to the code that explain how it works and why the used approach was chosen.
-You must also clearly list the students that collaborated on the code. 
-This is to make it easier for the teaching team to assess if you actually understand the code or only copy-pasted it without contributing.
-Submitting co-created code without such individual comments will be regarded as plagiarism and sanctioned. 
-Note that this is only for question 7: questions 1-6 MUST be answered fully individually!
+Note: It's possible that you've solved "Producer-Consumer V4: Semaphores" in group during class, which was allowed.
+To be able to make sure however that each individual student -really- understands what the code does (and didn't just copy-paste it from someone else), you MUST add _sufficient_ personal comments in the code explaining the most important parts (how they work and why that approach was chosen). 
 
-**Hand in the report and the source code for the prime-thread exercise (together in a .zip file) via Toledo**.
+**Note that this all only counts for "Producer-Consumer V4: Semaphores" : questions 1-6 above MUST be answered fully individually!**
+
+**Hand in the report and the source code for the "Producer-Consumer V4" exercise (together in a .zip file) via Toledo**.
 
 ```C
 #include <stdio.h>

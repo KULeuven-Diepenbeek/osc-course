@@ -12,21 +12,21 @@
     <title>3. Inter-thread communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1648733383" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1648733383" rel="stylesheet">
-    <link href="../../css/hybrid.css?1648733383" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1648733383" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1648733383" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1648733383" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1648733383" rel="stylesheet">
-    <link href="../../css/theme.css?1648733383" rel="stylesheet">
-    <link href="../../css/devselector.css?1648733383" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1648733383" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1648733383" rel="stylesheet">
+    <link href="../../css/nucleus.css?1649239358" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1649239358" rel="stylesheet">
+    <link href="../../css/hybrid.css?1649239358" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1649239358" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1649239358" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1649239358" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1649239358" rel="stylesheet">
+    <link href="../../css/theme.css?1649239358" rel="stylesheet">
+    <link href="../../css/devselector.css?1649239358" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1649239358" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1649239358" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1648733383"></script>
-    <script src="../../js/devselector.js?1648733383"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1649239358"></script>
+    <script src="../../js/devselector.js?1649239358"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1648733383"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1648733383"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1649239358"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1649239358"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1648733383"></script>
+<script type="text/javascript" src="../../js/search.js?1649239358"></script>
 
     
   </div>
@@ -1579,36 +1579,30 @@
 
 
 <p>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&rsquo;s still not always trivial to know <em>how to apply them to a specific problem</em>. Even for the well-known producer-consumer problem, several different setups are possible.</p>
-<p>This task requires you to think about the bigger picture and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a &ldquo;single right answer&rdquo; and/or are a bit vague: that is intentional.</p>
+<p>Below, you will find an implementation variation on the prime-generator producer-consumer problem we handled during class (especially &ldquo;Producer-Consumer V4: Semaphores&rdquo; in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>). As you will see, it is fundamentally different from the lab exercises in how it handles producer/consumer responsibilities.</p>
+<p>This task requires you to compare both approaches, to think about the bigger picture, and forces you to explain your thoughts in a concise and clear fashion. Some of the questions do not have a &ldquo;single right answer&rdquo; and/or are a bit vague: that is intentional.</p>
 <p>Analyse the code below and write a report (3-4 pages):</p>
 <ol>
-<li>Describe the most important aspects of this program in terms of threading (in general, not line-by-line)</li>
-<li>Note that this program does something similar to the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
-<ul>
-<li>However, it is fundamentally different in how it divides the responsibilities between producers and consumers.</li>
-<li>Explain this difference in detail.</li>
-<li>Discuss which of both approaches you think is probably more realistic / more likely to occur in practice and why.</li>
-</ul>
-</li>
-<li>Make a line chart that plots &lsquo;the elapsed time&rsquo; the program consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
+<li><strong>Explain</strong> the most important aspects of this program in terms of how it uses threading and inter-thread communication (in general, not line-by-line).</li>
+<li>Explain the difference in how the program below and the &ldquo;Producer-Consumer V4: Semaphores&rdquo; exercise divide responsibilities between producers and consumers. Discuss which of both approaches you think is probably more realistic / more likely to occur in practice and why.</li>
+<li>Make a line chart that plots &lsquo;the elapsed time&rsquo; the program below consumes (y-axis) in function of &lsquo;the number of threads that are contributing&rsquo; (x-axis)
 <ul>
 <li>For this, you change the NUMBER_OF_THREADS in the program to different values and re-run the program to observe the time it takes to complete</li>
 <li>Note:
 <ul>
 <li>the scale on the X-axis goes from 2 to 300</li>
-<li>don&rsquo;t just sample the number of threads between 2 and 300 uniformly though: be smart in how you choose your threadcounts!</li>
+<li>don&rsquo;t just sample the number of threads between 2 and 300 uniformly though: be smart in how you choose your threadcounts!!!</li>
 <li>at least 8 data points should be present in the chart</li>
 <li>you can use any charting program for this (for example excel or google sheets)</li>
 <li><strong>TIP</strong> use the command <a href="https://linux.die.net/man/1/time"><em>time</em></a></li>
-<li><strong>NOTE</strong> printf() can seriously slow down a program. Test this for yourself by running the timing tests with and without printf() statements.</li>
-<li><strong>NOTE</strong> it&rsquo;s best to execute each measurement a few times and on an unloaded system to get consistent results</li>
+<li><strong>NOTE</strong> it&rsquo;s usually best to execute each measurement a few times and on an unloaded system to get consistent results</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Interpret the chart and draw conclusions
 <ul>
-<li>It is not sufficient to simply describe what&rsquo;s visible on the chart: you need to explain <strong>WHY</strong> this behaviour occurs.</li>
+<li>It is not sufficient to simply describe what&rsquo;s visible on the chart: you need to explain <strong>WHY</strong> you think this behaviour occurs.</li>
 </ul>
 </li>
 <li>Explain what would (probably) happen if you would use more than one producer thread (with MAX_COUNT divided between the threads)
@@ -1616,31 +1610,21 @@
 <li>Would the program run faster or slower? Why?</li>
 <li>Does it make sense to use multiple <em>producer</em> threads with this setup? Why (not)?</li>
 <li>Does it make sense to use multiple <em>consumer</em> threads with this setup? Why (not)?</li>
-<li>Answer both questions for the prime-thread exercise (nr 3) in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a> as well</li>
-<li>For a different problem, how would you decide how to split the available number of threads between producers and consumers?</li>
+<li>Answer both questions for the &ldquo;Producer-Consumer V4: Semaphores&rdquo; exercise as well</li>
+<li>In general, for a different problem, how would you decide how to split the available number of threads between producers and consumers? Why?</li>
 </ul>
 </li>
-<li>The producer-consumer problem comes up in many other settings as well
-<ul>
-<li>Provide at least 2 examples of industrial (e.g., factory, logistics) or other real-world scenarios in which the producer-consumer problem occurs</li>
-<li>Note: there aren&rsquo;t always literal &ldquo;producers&rdquo; or &ldquo;consumers&rdquo; of course; these are general concepts
-<ul>
-<li>For example, people in line at an amusement park can be seen as producers, while the park rides/rollercoasters are consumers</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Include your solution (source code) for the &ldquo;Producer-Consumer V4: Semaphores&rdquo; exercise in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
+<li>Include your solution (full source code with personal comments) for the &ldquo;Producer-Consumer V4: Semaphores&rdquo; exercise in <a href="../../ch6-tasks/lab3_interthreadcomm">Section 6.7</a>
 <ul>
 <li>This is not part of the page-limit for the report of course ;)</li>
 </ul>
 </li>
 </ol>
 <p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
-<p>Note: It&rsquo;s possible that you&rsquo;ve solved &ldquo;Producer-Consumer V4: Semaphores&rdquo; in group during class, which was allowed.
-To be able to make sure however that each individual student -really- understands what the code does (and didn&rsquo;t just copy-paste it from someone else), you MUST add <em>sufficient</em> personal comments in the code explaining the most important parts (how they work and why that approach was chosen).</p>
-<p><strong>Note that this all only counts for &ldquo;Producer-Consumer V4: Semaphores&rdquo; : questions 1-6 above MUST be answered fully individually!</strong></p>
-<p><strong>Hand in the report and the source code for the &ldquo;Producer-Consumer V4&rdquo; exercise (together in a .zip file) via Toledo</strong>.</p>
+<p>Still, it&rsquo;s possible that you&rsquo;ve solved &ldquo;Producer-Consumer V4: Semaphores&rdquo; in group during class, which was allowed/recommended.</p>
+<p>To be able to make sure however that each individual student <strong>really</strong> understands what the code does (and didn&rsquo;t just copy-paste it from someone else), you MUST add <em>sufficient</em> <strong>personal comments</strong> in the code explaining the most important parts (how they work and why that approach was chosen).</p>
+<p><strong>Note that this all only counts for &ldquo;Producer-Consumer V4: Semaphores&rdquo; : questions 1-5 above MUST be answered fully individually!</strong></p>
+<p><strong>Hand in the report (as a .pdf file!) and the source code for the &ldquo;Producer-Consumer V4&rdquo; exercise, together in a .zip file, via Toledo. Name it: BESC_task3_firstName_lastName.zip</strong>.</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;pthread.h&gt;</span><span style="color:#75715e">
@@ -2752,17 +2736,17 @@ To be able to make sure however that each individual student -really- understand
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1648733383"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1648733383"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1648733383"></script>
-    <script src="../../js/jquery.sticky.js?1648733383"></script>
-    <script src="../../js/featherlight.min.js?1648733383"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1648733383"></script>
-    <script src="../../js/learn.js?1648733383"></script>
-    <script src="../../js/hugo-learn.js?1648733383"></script>
+    <script src="../../js/clipboard.min.js?1649239358"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1649239358"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1649239358"></script>
+    <script src="../../js/jquery.sticky.js?1649239358"></script>
+    <script src="../../js/featherlight.min.js?1649239358"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1649239358"></script>
+    <script src="../../js/learn.js?1649239358"></script>
+    <script src="../../js/hugo-learn.js?1649239358"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1648733383"></script>
+            <script src="../../mermaid/mermaid.js?1649239358"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

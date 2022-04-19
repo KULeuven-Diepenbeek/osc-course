@@ -19,7 +19,7 @@ The C++-specific code is kept to a bare minimum, but remember to compile using `
 Create a simplified `Makefile` which does the following when executing the command `make`:
 
 1. Clean up any left object files
-2. Compile the exercise, using C++ and linking against GTest
+2. Compile the exercise, using C++ (Please also use the `-std=c++11` flag. Not doing so will cost you points!) and linking against GTest. **USE THE ENVIRONMENT VARIABLE `GTEST_DIR`, DO NOT HARDCODE THE PATH**---this will cost you points!
 3. Run the exercise
 
 The result of the executed start project is the following:
@@ -45,6 +45,11 @@ Add as many TEST cases as you can think of and complete isInPeriod()!
 
  1 FAILED TEST
 </pre>
+
+{{% notice warning %}}
+Please submit a **zip file** with your `.cpp` files and `Makefile`. Make sure your `make` commando runs flawlessly and the file names are in order. Submitting files separately will cost you points! Please make sure your compile flags are correct---see above.
+{{% /notice %}}
+
 
 ### 2. Create Test cases
 

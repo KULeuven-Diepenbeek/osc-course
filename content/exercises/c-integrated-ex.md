@@ -27,6 +27,10 @@ Create a simplified `Makefile` which does the following when executing the comma
 
 This file should also be submitted. 
 
+{{% notice warning %}}
+Please submit a **zip file** with your `.c` and `Makefile`. Make sure your `make` commando runs flawlessly and the file names are in order. Submitting files separately will cost you points!
+{{% /notice %}}
+
 ### 2. Create two "books"
 
 This program makes a book of 10 _pages_, instances of the `page` struct, represented as a linked list. Each object has a random bit of text as it's _text_ value, stolen from the [Lorem Ipsum generator](https://lipsum.com/) (thank you, Cicero). In this exercise, you have to extend the program such that the book will be _split up_ into two books: one with text on pages that start with a _vowel_, and another with text that starts with a consonant. The pages have to continue to exist, but have to be relinked. It is of paramount importance **not to** make copies of objects! (Remember pointers?)

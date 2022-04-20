@@ -42,8 +42,27 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 No `[heap]` region allocated yet. Let's do the same, but use `malloc()` to allocate a random block of memory. The return value of the method is a `void*` that can be printed to show the address of the heap region. Use `printf("%p", p)`.
 
 {{% notice warning %}}
-Peeking into the files in `/proc`, we can sometimes see the heap block not moving _at all_. It turns out that this is [completely OS-dependant](https://stackoverflow.com/questions/19991623/why-is-malloc-not-using-up-the-memory-on-my-computer#:~:text=3%20Answers&text=malloc()%20does%20not%20use,It%20allocates%20it.&text=Some%20platforms%20implement%20malloc(),%22%20of%20bytes)%20is%20accessed). Try to use `calloc()` instead and see what happens!
+Peeking into the files in `/proc`, we can sometimes see the heap block not moving _at all_. It turns out that this is [completely OS-dependant](https://stackoverflow.com/questions/19991623/why-is-malloc-not-using-up-the-memory-on-my-computer). Try to use `calloc()` instead and see what happens!
 {{% /notice %}}
+
+### 1.1 Inspecting the stack
+
+See if there's a way to more thoroughly inspect the stack region.
+
+1. Write a small program that fills the stack with a few variables and function calls, then a blocking call to `getchar()` which gives you time to inspect things.
+2. Check the `/proc/{process_id}` folder to scour for stack information.
+3. Use the [pstack](https://linux.die.net/man/1/pstack) program to print the stack trace of the running process (you'll have to install this using `apt-get`). An alternative is using [elfutils](https://sourceware.org/elfutils/) which includes a utility called `eu-stack`.
+4. Use the `gdb` GCC debugger: `gdb -batch -ex bt -p {process_id}`. 
+
+Does the output make sense? Are there major differences?
+
+A few tips:
+
+- _Operation not permitted_ problems are usually solved with using `sudo`!
+- If you don't know what the arguments of a cmdline program do, use `man {cmd}` to find out. 
+
+Another fun exercise: write a never-ending recursive loop and increase a global `int` variable that gets printed. How far can you get without segfaulting? Re-run the program. Is the maximum number the same? Is this the same on your neighbor's computer?
+
 
 ## 2. malloc: use heap
 

@@ -12,21 +12,21 @@
     <title>8.2: Inspecting memory regions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1650439542" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/hybrid.css?1650439542" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1650439542" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/devselector.css?1650439542" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1650439542" rel="stylesheet">
+    <link href="../../css/nucleus.css?1650527192" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/hybrid.css?1650527192" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1650527192" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/devselector.css?1650527192" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1650527192" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1650439542"></script>
-    <script src="../../js/devselector.js?1650439542"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1650527192"></script>
+    <script src="../../js/devselector.js?1650527192"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1650439542"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1650439542"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1650527192"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1650527192"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1650439542"></script>
+<script type="text/javascript" src="../../js/search.js?1650527192"></script>
 
     
   </div>
@@ -1633,14 +1633,14 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 <ol>
 <li>Write a small program that fills the stack with a few variables and function calls, then a blocking call to <code>getchar()</code> which gives you time to inspect things.</li>
 <li>Check the <code>/proc/{process_id}</code> folder to scour for stack information.</li>
-<li>Use the <a href="https://linux.die.net/man/1/pstack">pstack</a> program to print the stack trace of the running process (you&rsquo;ll have to install this using <code>apt-get</code>). An alternative is using <a href="https://sourceware.org/elfutils/">elfutils</a> which includes a utility called <code>eu-stack</code>.</li>
 <li>Use the <code>gdb</code> GCC debugger: <code>gdb -batch -ex bt -p {process_id}</code>.</li>
+<li>For older 32-bit computers only: use the <a href="https://linux.die.net/man/1/pstack">pstack</a> program to print the stack trace of the running process.</li>
 </ol>
 <p>Does the output make sense? Are there major differences?</p>
 <p>A few tips:</p>
 <ul>
 <li><em>Operation not permitted</em> problems are usually solved with using <code>sudo</code>!</li>
-<li>If you don&rsquo;t know what the arguments of a cmdline program do, use <code>man {cmd}</code> to find out.</li>
+<li>If you don&rsquo;t know what the arguments of a cmdline program do, use <code>man {cmd}</code> to find out. These are also available online in various mirrors such as <a href="https://linux.die.net/man/1/gdb">linux.die.net</a> for gdb.</li>
 </ul>
 <p>Another fun exercise: write a never-ending recursive loop and increase a global <code>int</code> variable that gets printed. How far can you get without segfaulting? Re-run the program. Is the maximum number the same? Is this the same on your neighbor&rsquo;s computer?</p>
 <h2 id="2-malloc-use-heap">2. malloc: use heap</h2>
@@ -1751,6 +1751,7 @@ warning: no debug symbols in executable (-arch x86_64)
 
 	</div>
 </div>
+<p>Remember that <code>malloc()</code> calls that aren&rsquo;t assigned <em>could</em> be optimized and removed by the compiler, resulting in no heap reservation at all. Make sure to actually &ldquo;do&rdquo; something with it (e.g. allocate a struct and pass in a few values). See also <a href="../../ch8-stack/stackvsheap/#optimizing-c-code">8.1: Optimizing code</a>.</p>
 <h2 id="further-reading">Further Reading</h2>
 <ul>
 <li><a href="https://blog.holbertonschool.com/hack-the-virtual-memory-malloc-the-heap-the-program-break/">Hack the Virtual Memory: malloc, the heap &amp; the program break</a></li>
@@ -2765,17 +2766,17 @@ warning: no debug symbols in executable (-arch x86_64)
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1650439542"></script>
-    <script src="../../js/jquery.sticky.js?1650439542"></script>
-    <script src="../../js/featherlight.min.js?1650439542"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1650439542"></script>
-    <script src="../../js/learn.js?1650439542"></script>
-    <script src="../../js/hugo-learn.js?1650439542"></script>
+    <script src="../../js/clipboard.min.js?1650527192"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1650527192"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1650527192"></script>
+    <script src="../../js/jquery.sticky.js?1650527192"></script>
+    <script src="../../js/featherlight.min.js?1650527192"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1650527192"></script>
+    <script src="../../js/learn.js?1650527192"></script>
+    <script src="../../js/hugo-learn.js?1650527192"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1650439542"></script>
+            <script src="../../mermaid/mermaid.js?1650527192"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

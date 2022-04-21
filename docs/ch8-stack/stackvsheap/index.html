@@ -12,21 +12,21 @@
     <title>8.1: The Stack &amp; the Heap :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1650439542" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/hybrid.css?1650439542" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1650439542" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/devselector.css?1650439542" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1650439542" rel="stylesheet">
+    <link href="../../css/nucleus.css?1650527192" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/hybrid.css?1650527192" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1650527192" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/devselector.css?1650527192" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1650527192" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1650439542"></script>
-    <script src="../../js/devselector.js?1650439542"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1650527192"></script>
+    <script src="../../js/devselector.js?1650527192"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1650439542"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1650439542"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1650527192"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1650527192"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1650439542"></script>
+<script type="text/javascript" src="../../js/search.js?1650527192"></script>
 
     
   </div>
@@ -1938,6 +1938,7 @@ a.out[0x100000f1d]:  callq  0x100000f40               ; symbol stub for: __stack
 <div class="notices note" ><p>Instead of bootstrapping the debugger to inspect disassembly, you can also simply dump the object contents using <code>objdump -D</code> (GNU) or <code>otool -tV</code> (OSX).</p>
 </div>
 
+<p>What&rsquo;s the difference between <code>-O3</code>, <code>-O2</code>, etc? These are actually shorthand for a <strong>collection of optimizations</strong> done by the GCC compiler, and are listed in full in the <a href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">online GCC documentation: Optimize Options</a>. The higher the number, the more options are enabled. <code>-Os</code> optimizes for <em>size</em>&mdash;this actually reduces a few optimization options that might increase the file size of the binary. For more information, please consult the GCC documentation.</p>
 <h4 id="volatile">volatile</h4>
 <p>When heavily optimizing, sometimes you do not want the compiler to leave things out. This is especially important on embedded devices with raw pointer access to certain memory mapped spaces. In that case, use the <code>volatile</code> keyword on a variable to tell the compiler to &ldquo;leave this variable alone&rdquo; - do not move it&rsquo;s declaration and do not leave it out. <a href="https://godbolt.org/z/Dm5YHx">For instance</a>:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#00a8c8">int</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#ae81ff">1024</span><span style="color:#111">];</span>
@@ -2977,17 +2978,17 @@ main:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1650439542"></script>
-    <script src="../../js/jquery.sticky.js?1650439542"></script>
-    <script src="../../js/featherlight.min.js?1650439542"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1650439542"></script>
-    <script src="../../js/learn.js?1650439542"></script>
-    <script src="../../js/hugo-learn.js?1650439542"></script>
+    <script src="../../js/clipboard.min.js?1650527192"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1650527192"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1650527192"></script>
+    <script src="../../js/jquery.sticky.js?1650527192"></script>
+    <script src="../../js/featherlight.min.js?1650527192"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1650527192"></script>
+    <script src="../../js/learn.js?1650527192"></script>
+    <script src="../../js/hugo-learn.js?1650527192"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1650439542"></script>
+            <script src="../../mermaid/mermaid.js?1650527192"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

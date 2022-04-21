@@ -12,21 +12,21 @@
     <title>8.3: Different Scopes in C :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1650439542" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/hybrid.css?1650439542" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1650439542" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1650439542" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/devselector.css?1650439542" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1650439542" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1650439542" rel="stylesheet">
+    <link href="../../css/nucleus.css?1650527192" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/hybrid.css?1650527192" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1650527192" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1650527192" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/devselector.css?1650527192" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1650527192" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1650527192" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1650439542"></script>
-    <script src="../../js/devselector.js?1650439542"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1650527192"></script>
+    <script src="../../js/devselector.js?1650527192"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1650439542"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1650439542"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1650527192"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1650527192"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1650439542"></script>
+<script type="text/javascript" src="../../js/search.js?1650527192"></script>
 
     
   </div>
@@ -1606,6 +1606,28 @@
 	</div>
 </div>
 <p>If you forget how <code>void*</code> works, please re-read <a href="../../ch4-pointers">chapter 4: pointers and arrays</a>.</p>
+<p>You can accidentally get the handle of another pointer that way. Inspect the following code carefully:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">p</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#75af00">whats_my_age</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">malloc</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">));</span>
+    <span style="color:#f92672">*</span><span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">int</span> <span style="color:#111">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span><span style="color:#111">;</span> <span style="color:#75715e">// I&#39;m being generous here!
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;hey&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">int</span><span style="color:#f92672">*</span> <span style="color:#111">my_age</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#111">whats_my_age</span><span style="color:#111">();</span>
+
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;ptr p is p(%p), x(%x) </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">p</span><span style="color:#111">,</span> <span style="color:#111">p</span><span style="color:#111">);</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;ptr my_age is p(%p), x(%x) </span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">my_age</span><span style="color:#111">,</span> <span style="color:#111">my_age</span><span style="color:#111">);</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>Formatting <code>%p</code> (pointer) or <code>%x</code> (hex values) result in the same, with or without the <code>0x</code> prepend, printing the raw pointer address. Are these the same or different? How about printing the values of both variables by dereferencing them and using <code>%d</code>? Are those the same or different? Why?</p>
+<p>Try these out locally or on <a href="https://godbolt.org/">https://godbolt.org/</a> using different C compilers (Clang, GCC, MSVC). Sometimes these behave differently!</p>
 <h4 id="local-variables">Local variables</h4>
 <p>The <em>local</em> variabel, <code>age</code>, exists as soon as <code>whats_my_age</code> is pushed to <strong>the stack</strong>. That automatically includes all locally defined variables. When the method is done, after the <code>}</code> sign, things are popped from the stack to make room for future methods and their local variables. This means <code>whats_my_age</code> and <code>age</code> disappear. Forever.</p>
 <p>If we were to try and change the <code>age</code> variable from inside the <code>main()</code> method (another method, so the variable is not local anymore) by adding <code>age = 5;</code> in the main method, we would get a compile error:</p>
@@ -2680,17 +2702,17 @@ scoping.c:9:5: error: use of undeclared identifier 'age'
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1650439542"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1650439542"></script>
-    <script src="../../js/jquery.sticky.js?1650439542"></script>
-    <script src="../../js/featherlight.min.js?1650439542"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1650439542"></script>
-    <script src="../../js/learn.js?1650439542"></script>
-    <script src="../../js/hugo-learn.js?1650439542"></script>
+    <script src="../../js/clipboard.min.js?1650527193"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1650527193"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1650527193"></script>
+    <script src="../../js/jquery.sticky.js?1650527193"></script>
+    <script src="../../js/featherlight.min.js?1650527193"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1650527193"></script>
+    <script src="../../js/learn.js?1650527193"></script>
+    <script src="../../js/hugo-learn.js?1650527193"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1650439542"></script>
+            <script src="../../mermaid/mermaid.js?1650527193"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

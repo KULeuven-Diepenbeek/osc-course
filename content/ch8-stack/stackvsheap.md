@@ -401,6 +401,8 @@ You can fiddle with options and such yourself in [godbolt.org](https://godbolt.o
 Instead of bootstrapping the debugger to inspect disassembly, you can also simply dump the object contents using `objdump -D` (GNU) or `otool -tV` (OSX).
 {{% /notice %}}
 
+What's the difference between `-O3`, `-O2`, etc? These are actually shorthand for a **collection of optimizations** done by the GCC compiler, and are listed in full in the [online GCC documentation: Optimize Options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html). The higher the number, the more options are enabled. `-Os` optimizes for _size_---this actually reduces a few optimization options that might increase the file size of the binary. For more information, please consult the GCC documentation. 
+
 #### volatile
 
 When heavily optimizing, sometimes you do not want the compiler to leave things out. This is especially important on embedded devices with raw pointer access to certain memory mapped spaces. In that case, use the `volatile` keyword on a variable to tell the compiler to "leave this variable alone" - do not move it's declaration and do not leave it out. [For instance](https://godbolt.org/z/Dm5YHx):

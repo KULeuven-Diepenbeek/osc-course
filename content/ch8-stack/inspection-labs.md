@@ -51,15 +51,15 @@ See if there's a way to more thoroughly inspect the stack region.
 
 1. Write a small program that fills the stack with a few variables and function calls, then a blocking call to `getchar()` which gives you time to inspect things.
 2. Check the `/proc/{process_id}` folder to scour for stack information.
-3. Use the [pstack](https://linux.die.net/man/1/pstack) program to print the stack trace of the running process (you'll have to install this using `apt-get`). An alternative is using [elfutils](https://sourceware.org/elfutils/) which includes a utility called `eu-stack`.
-4. Use the `gdb` GCC debugger: `gdb -batch -ex bt -p {process_id}`. 
+3. Use the `gdb` GCC debugger: `gdb -batch -ex bt -p {process_id}`. 
+4. For older 32-bit computers only: use the [pstack](https://linux.die.net/man/1/pstack) program to print the stack trace of the running process.
 
 Does the output make sense? Are there major differences?
 
 A few tips:
 
 - _Operation not permitted_ problems are usually solved with using `sudo`!
-- If you don't know what the arguments of a cmdline program do, use `man {cmd}` to find out. 
+- If you don't know what the arguments of a cmdline program do, use `man {cmd}` to find out. These are also available online in various mirrors such as [linux.die.net](https://linux.die.net/man/1/gdb) for gdb.
 
 Another fun exercise: write a never-ending recursive loop and increase a global `int` variable that gets printed. How far can you get without segfaulting? Re-run the program. Is the maximum number the same? Is this the same on your neighbor's computer?
 
@@ -173,6 +173,7 @@ warning: no debug symbols in executable (-arch x86_64)
 Try to let the above program produce a few memory leaks. Does valgrind notice you did not clean up your mess? The _definitely lost_ amount should skyrocket after a few uncleaned `malloc()` calls. Are amount of reported bytes correct? Recalculate this manually. 
 {{% /task %}}
 
+Remember that `malloc()` calls that aren't assigned _could_ be optimized and removed by the compiler, resulting in no heap reservation at all. Make sure to actually "do" something with it (e.g. allocate a struct and pass in a few values). See also [8.1: Optimizing code](/ch8-stack/stackvsheap/#optimizing-c-code).
 
 ## Further Reading
 

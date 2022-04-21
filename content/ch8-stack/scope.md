@@ -27,6 +27,34 @@ What is the output of the above program? I'm sure you know the answer, but... wh
 
 If you forget how `void*` works, please re-read [chapter 4: pointers and arrays](/ch4-pointers).
 
+You can accidentally get the handle of another pointer that way. Inspect the following code carefully:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int* p;
+
+void* whats_my_age() {
+    p = malloc(sizeof(int));
+    *p = 5;
+
+    int age = 30; // I'm being generous here!
+}
+
+int main() {
+    printf("hey");
+    int* my_age = (int*) whats_my_age();
+
+    printf("ptr p is p(%p), x(%x) \n", p, p);
+    printf("ptr my_age is p(%p), x(%x) \n", my_age, my_age);
+}
+```
+
+Formatting `%p` (pointer) or `%x` (hex values) result in the same, with or without the `0x` prepend, printing the raw pointer address. Are these the same or different? How about printing the values of both variables by dereferencing them and using `%d`? Are those the same or different? Why? 
+
+Try these out locally or on https://godbolt.org/ using different C compilers (Clang, GCC, MSVC). Sometimes these behave differently!
+
 #### Local variables
 
 The _local_ variabel, `age`, exists as soon as `whats_my_age` is pushed to **the stack**. That automatically includes all locally defined variables. When the method is done, after the `}` sign, things are popped from the stack to make room for future methods and their local variables. This means `whats_my_age` and `age` disappear. Forever. 

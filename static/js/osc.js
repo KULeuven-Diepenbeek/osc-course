@@ -7,8 +7,10 @@ function toggleAnswer(target, combo) {
     x = document.getElementById('q711')
     if (x.style.visibility === "hidden") {
       x.style.visibility = "visible";
+      x.style.display = "block";
     } else {
       x.style.visibility = "hidden";
+      x.style.display = "none";
     }
   }
 
@@ -16,8 +18,10 @@ function toggleAnswer(target, combo) {
     x = document.getElementById('q712')
     if (x.style.visibility === "hidden") {
       x.style.visibility = "visible";
+      x.style.display = "block";
     } else {
       x.style.visibility = "hidden";
+      x.style.display = "none";
     }
   }
 
@@ -35,8 +39,10 @@ function toggleAnswer(target, combo) {
     x = document.getElementById('q714')
     if (x.style.visibility === "hidden") {
       x.style.visibility = "visible";
+      x.style.display = "block";
     } else {
       x.style.visibility = "hidden";
+      x.style.display = "none";
     }
   }
 
@@ -44,8 +50,10 @@ function toggleAnswer(target, combo) {
     x = document.getElementById('div_q721')
     if (x.style.visibility === "hidden") {
       x.style.visibility = "visible";
+      x.style.display = "block";
     } else {
       x.style.visibility = "hidden";
+      x.style.display = "none";
     }
     x = document.getElementById('img_q721')
     if (x.src.includes('img/sched/ss_ts.png')) {
@@ -59,8 +67,10 @@ function toggleAnswer(target, combo) {
     x = document.getElementById('div_q722')
     if (x.style.visibility === "hidden") {
       x.style.visibility = "visible";
+      x.style.display = "block";
     } else {
       x.style.visibility = "hidden";
+      x.style.display = "none";
     }
     x = document.getElementById('img_q722')
     if (x.src.includes('img/sched/ss_ts_l.png')) {
@@ -74,8 +84,10 @@ function toggleAnswer(target, combo) {
       x = document.getElementById('div_'+target)
       if (x.style.visibility === "hidden") {
         x.style.visibility = "visible";
+        x.style.display = "block";
       } else {
         x.style.visibility = "hidden";
+        x.style.display = "none";
       }
     }
     if(image === 1) {

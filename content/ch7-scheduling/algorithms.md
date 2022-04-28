@@ -32,7 +32,7 @@ When working with a single core, only a single task can be active at the same ti
 While the cooperative scheduling approach is the simplest, it also has some severe downsides. If a given task takes a long time to complete or doesn't properly yield at appropriate intervals, it can end up hogging the CPU for a long time, causing other tasks to stall. As such, most modern OSes will employ a form of preemptive scheduling. 
 
 {{% notice note %}}
-If the scheduler needs to preempt jobs after a certain amount of time (or execution ticks), it requires hardware assistance. The **timer**, discussed in chapter 2, is a fundamental piece of hardware for preemptive scheduling.
+If the scheduler needs to preempt jobs after a certain amount of time (or execution ticks), it requires hardware assistance. CPUs contain a specialized **timer** component that can trigger an "interrupt" to the CPU after a certain amount of time has passed. This interrupt then triggers a pre-defined OS function call that handles the interrupt. In this case, the handling code will pause the current process and schedule a new one. As such, the hardware timer is a crucial piece necessary for implementing pre-emptive scheduling!
 {{% /notice %}}
 
 ## Scheduler algorithms
@@ -44,7 +44,7 @@ To be able to reason about different scheduling algorithms, there is a need of s
 * **Average Throughput:** the number of tasks that are executed in one second.
 * **Average Job Wait Time (AJWT):** the average time that a job needs to wait before it gets scheduled for the first time (first time - creation time).
 * **Average Job Completion Time (AJCT):** the average time that a job needs to wait before it has fully finished (last time - creation time).
-* **CPU efficiency (&#0951;<sub>CPU</sub>):** the percentage of time that the processor performs useful work. Remember that every time the CPU switches between tasks, there is a certain amount of overhead due to *context switching*. As such, the more transitions between tasks there are, the less efficient the CPU is being used. 
+* **CPU efficiency (&eta;<sub>CPU</sub>):** the percentage of time that the processor performs useful work. Remember that every time the CPU switches between tasks, there is a certain amount of overhead due to *context switching*. As such, the more transitions between tasks there are, the less efficient the CPU is being used. This metric is primarily used in 7.3, as we will assume the overhead is 0 in this chapter. 
 
 ### FCFS
 

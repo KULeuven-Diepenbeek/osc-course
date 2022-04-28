@@ -8,7 +8,7 @@ weight: 2
 
 ## Let's compare !
 
-We have discussed a number of algorithms the scheduler can use to do it's job. Let's compare them. We assume the following tasks:
+We have discussed a number of algorithms the scheduler can use to do its job. Let's compare them. We assume the following tasks:
 
 * T1: arrives @ 0s, takes 10s, and has priority low
 * T2: arrives @ 1s, takes 2s, and has priority high
@@ -17,8 +17,8 @@ We have discussed a number of algorithms the scheduler can use to do it's job. L
 
 Compare Average Throughput, AJWT, and AJCT of the 4 algorithms we've seen up until: 
 
-0. cooperative (non preemptive) FCFS, 
-0. cooperative (non preemptive) SJF, 
-0. preemptive priority based, and 
-0. preemptive round robin
+1. cooperative (non preemptive) FCFS, 
+2. cooperative (non preemptive) SJF, 
+3. preemptive priority based, and 
+4. preemptive round robin (with a 1s time slice)
 

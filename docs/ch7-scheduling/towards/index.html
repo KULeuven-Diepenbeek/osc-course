@@ -12,21 +12,21 @@
     <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1650527192" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1650527192" rel="stylesheet">
-    <link href="../../css/hybrid.css?1650527192" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1650527192" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1650527192" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1650527192" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1650527192" rel="stylesheet">
-    <link href="../../css/theme.css?1650527192" rel="stylesheet">
-    <link href="../../css/devselector.css?1650527192" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1650527192" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1650527192" rel="stylesheet">
+    <link href="../../css/nucleus.css?1651141516" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1651141516" rel="stylesheet">
+    <link href="../../css/hybrid.css?1651141516" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1651141516" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1651141516" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1651141516" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1651141516" rel="stylesheet">
+    <link href="../../css/theme.css?1651141516" rel="stylesheet">
+    <link href="../../css/devselector.css?1651141516" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1651141516" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1651141516" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1650527192"></script>
-    <script src="../../js/devselector.js?1650527192"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1651141516"></script>
+    <script src="../../js/devselector.js?1651141516"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1650527192"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1650527192"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1651141516"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1651141516"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1650527192"></script>
+<script type="text/javascript" src="../../js/search.js?1651141516"></script>
 
     
   </div>
@@ -1559,9 +1559,9 @@
   <ul>
     <li><a href="#reponsiveness-vs-efficiency">Reponsiveness vs Efficiency</a>
       <ul>
-        <li><a href="#context-switching">Context switching</a></li>
+        <li><a href="#context-switching-overhead">Context Switching Overhead</a></li>
         <li><a href="#io-bound-vs-cpu-bound-tasks">I/O-bound vs CPU-bound tasks</a></li>
-        <li><a href="#time-slice-size">Time slice size</a></li>
+        <li><a href="#dynamic-time-slice-length">Dynamic Time Slice Length</a></li>
         <li><a href="#priorities">Priorities</a></li>
         <li><a href="#a-dynamic-solution">A dynamic solution</a></li>
       </ul>
@@ -1598,36 +1598,73 @@
         
 
 
-<p>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges that make them difficult for direct use in real-world scenarios. And we haven&rsquo;t even taken into account all variables that are in play in a typical OS!</p>
+<p>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges/downsides that make them difficult for direct use in real-world scenarios. And we haven&rsquo;t even taken into account all variables that are in play in a typical OS!</p>
 <p>As such, in this Section, we first look at a few factors that come into play in real systems. We then look at how the naive schedulers we&rsquo;ve already seen can be adapted to deal with these new problems. Finally, we discuss how all of this has been combined in practice in the Linux OS scheduler over time.</p>
 <h2 id="reponsiveness-vs-efficiency">Reponsiveness vs Efficiency</h2>
-<h3 id="context-switching">Context switching</h3>
-<p>As said previously, when a new task is scheduled for execution by the OS, a number of operations need to happen to swap the old task with the new one. In the previous examples, we&rsquo;ve pretended these operations happen instantly, but that&rsquo;s of course not the case.</p>
-<p>Say we have 2 user tasks: X and Y. X has already been running for a while on the processor, while Y is in the ready state, waiting for CPU-time. Say that the OS is using a preemptive scheduler (for example a pure Round-Robin algorithm) and decides to give Y some running time. Switching between the tasks involves the following steps:</p>
+<p>In theory, we could say that using a Round-Robin (RR) scheduler would be a good starting point. After all, this is a very fair scheduler that ensures that all processes get at least some time on the CPU (so there is no starvation as with a pure priority-based scheduler).</p>
+<p>In this section, let&rsquo;s start from a simple RR scheduler and discuss why it&rsquo;s difficult to make it work properly in a real-world setting. This is mainly due to three factors:</p>
+<ol>
+<li><strong>Context switching overhead</strong>: this limits how often we can switch between tasks</li>
+<li><strong>I/O vs CPU-bound processes</strong>: this means we can&rsquo;t use a single time slice length for all tasks</li>
+<li><strong>Need for priorities</strong>: while pure priorities aren&rsquo;t optimal, we still want to use their concept to be able to speed up certain key tasks</li>
+</ol>
+<h3 id="context-switching-overhead">Context Switching Overhead</h3>
+<p>As said previously, when a new task is scheduled for execution by the OS, a number of operations need to happen to swap the old task with the new one. In the previous examples, we&rsquo;ve pretended these operations happen instantly (the context switching overhead was 0), but that&rsquo;s of course not the case.</p>
+<p>Say we have 2 user tasks: X and Y. X has already been running for a while on the processor, while Y is in the ready state, waiting for CPU-time. After X&rsquo;s time slice is up, the OS uses the RR scheduler to select Y as the next task to run. Switching between the tasks involves the following steps:</p>
+<ul>
+<li>
 <p><strong>Step 1</strong></p>
-<p>X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a <em>snapshot</em> has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, &hellip; ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: <strong>The PCB of X needs to be stored</strong>. The kernel puts this PCB in a list of paused tasks.</p>
-<p>Note: something similar happens for Threads (remember there&rsquo;s also a conceptual TCB), but it&rsquo;s more lightweight, since there is more shared state between threads in the same program and so fewer aspects need to be updated.</p>
+<p>X has be stopped in such a way that it can continue from where it left off the next time it is scheduled. Therefore, a <em>snapshot</em> has to be made: what is the value of the program counter, what are the values in the registers, which address is the stack pointer pointing to, what are the open files, which parts of the heap are filled, &hellip; ? All these values need to be stored. As was discussed in Chapter 6, the OS keeps a PCB (Process Control Block) for every process, which contains the fields necessary to store all these required parameters: <strong>The PCB of X needs to be updated to the current CPU</strong>. The kernel then puts this PCB in a list of paused tasks.</p>
+<p><em>Note: something similar happens for Threads (remember there&rsquo;s also a conceptual TCB), but it&rsquo;s more lightweight, since there is more shared state between threads in the same program and so fewer aspects need to be updated.</em></p>
+</li>
+<li>
 <p><strong>Step 2</strong></p>
-<p>X is removed from the processor.</p>
+<p>X is removed from the processor. For example, the register contents and program counter are cleared.</p>
+</li>
+<li>
 <p><strong>Step 3</strong></p>
 <p>The scheduler uses the RR scheduling algorithm to determine which process is next. Since Y is the only other process, it is selected. The processor searches Y&rsquo;s PCB in its list of paused tasks.</p>
+</li>
+<li>
 <p><strong>Step 4</strong></p>
 <p>Everything that happened to the PCB of X, now needs to be done in the opposite direction with the PCB of Y: <strong>the PCB of Y needs to be restored</strong>. The program counter is read and the next instruction is loaded. The values of the registers are restored. The stack pointer is updated.</p>
+</li>
+<li>
 <p><strong>Step 5</strong></p>
 <p>Y starts to run on the processor.</p>
-<p>In the previous Section, we have called this series of actions &ldquo;Dispatching&rdquo;. As such, the  time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>. The actions of updating (and restoring) individual PCB&rsquo;s is typically referred to as <strong>a context switch</strong> (though some sources also call the entire process together a context switch).</p>
+</li>
+</ul>
+<p>In the previous Section, we have called this series of actions &ldquo;Dispatching&rdquo;. As such, the time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>, or the <strong>scheduling latency</strong>. The actions of updating (and restoring) individual PCB&rsquo;s is typically referred to as <strong>a context switch</strong> (though some sources also call the entire process together a context switch).</p>
 <p>As you can see, during the dispatch period, the CPU is not actually doing any useful work: it is waiting and/or updating its state so the new task can start running. As such, the act of dispatching a new process is considered 100% overhead, and it <strong>should be avoided as much as possible</strong>. <em>Note: there are also other aspects that make context switches slower, such as the fact that it often means that data in the cache memory is no longer useful. As the cached data belongs to the previous task, the cache needs to be (partially) flushed and updated with data from the new task as well, which again takes time.</em></p>
-<p>However, before you get the wrong idea, it&rsquo;s not all that bad. In practice, the dispatch latency is typically in the order of (10) microseconds (say about 1/100th of a millisecond). Still, if we were to switch processes for example each millisecond, we would have a full 1% overhead, which over time definitely adds up (we don&rsquo;t only spend more time context switching, we also do a larger amount of context switches over time). If you recall from the previous section, we introduced the metric CPU efficiency (�<sub>CPU</sub>), which helps make concrete how much overhead actually was introduced.</p>
+<p>However, before you get the wrong idea, it&rsquo;s not all that bad. In practice, the dispatch latency is typically <strong>in the order of (10) microseconds</strong> (say about 1/100th of a millisecond). Still, if we were to switch processes for example each millisecond, we would have a full 1% overhead, which over time definitely adds up (we don&rsquo;t only spend more time context switching, we also do a larger amount of context switches over time). If you recall from the previous section, we introduced the metric CPU efficiency (η<sub>CPU</sub>), which helps make concrete how much overhead actually was introduced.</p>
 <p>We can see that we somehow need to <strong>strike a balance</strong> between being CPU efficiency (less overhead) and keeping the system responsive (switching between tasks often enough). This is easy enough in our simple examples with just 3-10 tasks, but modern systems often run hundreds of tasks at the same time.</p>
-<p>The concept of the <strong>time slice</strong>, discussed in the previous section on Round-Robin scheduling, can play a large part in this: shorter time slices make things more responsive, but cause more context switches, and vice versa. As such, we want to determine an ideal time slice length, but it&rsquo;s not easy to see how this can be accomplished. In general, we can really only say that the time slice should always be quite a bit larger than the dispatch latency, but that we don&rsquo;t really have an easy way to determine an upper bound.</p>
+<p>The length of the RR <strong>time slice</strong> thus plays a large part in this: <strong>shorter time slices make things more responsive, but cause more context switches, and vice versa</strong>. As such, we want to determine an ideal time slice length, but it&rsquo;s not easy to see how this can be accomplished. In general, we can really only say that the time slice should always be quite a bit larger than the dispatch latency, but that we don&rsquo;t really have an easy way to determine an upper bound.</p>
 <h3 id="io-bound-vs-cpu-bound-tasks">I/O-bound vs CPU-bound tasks</h3>
 <p>A second aspect that&rsquo;s highly relevant in modern systems is that there are typically two large classes of tasks: <strong>I/O-bound</strong> and <strong>CPU-bound</strong> tasks.</p>
-<p>The I/O-bound tasks typically run for only short amounts of time (a few milliseconds) before they already have to wait for an I/O operation. Put differently, these tasks pause themselves (go into the &ldquo;waiting&rdquo; state) often. A good example is a program that&rsquo;s listening for user input (keyboard/mouse). These tasks are thus sometimes also referred to as <strong>interactive</strong> tasks.</p>
-<p>The CPU-bound tasks typically do not require outside input and are often computationally heavy. They run for tens of milliseconds (or much more) without ever yielding/waiting themselves. These jobs typically process data in large chunks, and are sometimes called <strong>batch</strong> tasks.</p>
-<p>The fact that there are typically few processes that do &ldquo;something in between&rdquo; again makes it difficult to determine a good time slice length. If there are many I/O-bound tasks, shorter timeslices are probably better, as most tasks will pause themselves frequently anyway, and we don&rsquo;t loose much (extra) efficiency for higher responsiveness.</p>
-<p>If there are many CPU-bound tasks, longer timeslices are probably better, as processes will typically fill their slices with useful work and we reduce the amount of context switches (and those tasks typically don&rsquo;t need to be very responsive).</p>
-<p>Simply using an average time slice that&rsquo;s &ldquo;somewhere in between&rdquo; can produce the worst of both worlds: it lowers the responsiveness in interactive systems, while (needlessly) increasing the amount of context switches during batch processing.</p>
-<p>As in the previous subsection, it&rsquo;s unclear how long a time slice should ideally be to deal with both I/O and CPU-bound tasks.</p>
+<ol>
+<li>
+<p>The <strong>I/O-bound tasks</strong> typically run for only short amounts of time (a few milliseconds) before they already have to wait for an I/O operation. Put differently, these tasks often pause themselves (go into the &ldquo;waiting&rdquo; state) often. A good example is a program that&rsquo;s listening for user input (keyboard/mouse). These tasks are thus sometimes also referred to as <strong>interactive</strong> tasks. However, waiting for packets to come in from the network is also an I/O operation, as is for example waiting for a large file to be loaded from hard disk into RAM memory so it can be used. More generally, an I/O bound task is a process that can&rsquo;t execute (many) useful instructions on the CPU (at this time) because it doesn&rsquo;t have the necessary data/input available (yet).</p>
+</li>
+<li>
+<p>The <strong>CPU-bound tasks</strong> typically do not require much outside input and/or mainly have to run a lot of calculations on the data. As such, if the data is available, these tasks can keep issueing instructions to the CPU for a long time without pause. They run for tens of milliseconds (or much more) without ever yielding/waiting themselves. These jobs typically process data in large chunks, and are sometimes called <strong>batch</strong> tasks.</p>
+</li>
+</ol>
+<p>The fact that there are typically few processes that do &ldquo;something in between&rdquo; (few programs can do a medium amount of calculations with a medium amount of data) again makes it difficult to determine a good time slice length:</p>
+<ul>
+<li>
+<p>If there are many I/O-bound tasks, shorter timeslices are probably better, as most tasks will pause themselves frequently anyway, and we don&rsquo;t loose much (extra) efficiency for higher responsiveness.</p>
+</li>
+<li>
+<p>On the other hand, if there are many CPU-bound tasks, longer timeslices are probably better, as processes will typically fill their slices with useful work and we reduce the amount of context switches (and those tasks typically don&rsquo;t need to be very responsive).</p>
+</li>
+</ul>
+
+<div class="notices bignote" ><p>Note that <strong>many processes switch between being I/O-bound and CPU-bound</strong> over the course of their execution. Take for example Photoshop: here, you often want to first load a (very) large image file into RAM memory from disk (or network nowadays) to then use advanced image processing tools on it (e.g., apply a sepia filter).</p>
+<p>As such, while waiting for the image data to become available on the CPU, Photoshop is I/O bound and can&rsquo;t do much. However, once the data is available, it will want to execute heavy calculations on it, causing it to become CPU-bound for the duration of the calculations.</p>
+</div>
+
+<p>Simply using an average time slice that&rsquo;s &ldquo;somewhere in between&rdquo; can produce the worst of both worlds: it lowers the responsiveness in interactive systems (as batch processes delay interactive processes), while (needlessly) increasing the amount of context switches during batch processing.</p>
+<p>As in the previous subsection, it&rsquo;s unclear how long a time slice should ideally be to deal with both I/O and CPU-bound tasks, and especially with tasks (like Photoshop) that can switch from one category to the other, depending on what they&rsquo;re doing at a given time.</p>
 <!-- ### What does it all mean ?
 
 With the examples above, it should be clear that the size of the time quantum has an impact on the CPU efficiency. Be careful, however, that you formulate the correct conclusion. Stating that a larger time slice would **"always"** increases the CPU efficiency is <u>not correct</u>.
@@ -1658,17 +1695,17 @@ The algorithms provide the scheduler with an approach to **choose the next task*
 
 There are 2 user jobs: X and Y. X is running on the processor while Y is in the ready state, waiting for CPU-time. The scheduler decides that X's time is over an it's Y's turn on the processor.
  -->
-<h3 id="time-slice-size">Time slice size</h3>
+<h4 id="singular-time-slice-length-example">Singular time slice length example</h4>
 <p>Let&rsquo;s illustrate this with an example:</p>
 <ul>
-<li>There are two I/O-bound tasks. Both run for 1ms, in which they update state and then wait/yield for more input.
+<li>There are two I/O-bound tasks, T1 and T2. Both run for 1ms, in which they update state, and then wait/yield for more input.
 <ul>
-<li>Input becomes available after 4ms of <em>wait</em> time (starts when the task yields)</li>
+<li>Input becomes available after 4ms of <em>wait</em> time (starts when the task yields). The task then becomes &ldquo;ready&rdquo; to process this input.</li>
 <li>Both tasks do three rounds of this (wait for input 3 times in total)</li>
 </ul>
 </li>
-<li>There is one CPU-bound task that runs a total of 10ms without yielding</li>
-<li>All three tasks start at 0s</li>
+<li>There is one CPU-bound task, T3, that runs a total of 10ms without yielding</li>
+<li>All three tasks start/arrive at 0s and input is available for T1 and T2 at 0s</li>
 <li>The two I/O-bound tasks are higher priority than the CPU-bound task.</li>
 <li>Each task gets to complete its full time slice unless it yields by itself.</li>
 <li>In this very unrealistic system, the dispatch latency is a full 1ms</li>
@@ -1676,9 +1713,13 @@ There are 2 user jobs: X and Y. X is running on the processor while Y is in the 
 
 <div class="ex">
 	<div class="inner">
-    	<p>Draw schemas of how these tasks would be scheduled in two scenarios: (1) with a time slice of 2ms and (2) a time slice of 5ms.</p>
+    	<p>Draw schemas of how these tasks would be scheduled in two scenarios:</p>
+<ol>
+<li>with a time slice of 2ms</li>
+<li>with a time slice of 5ms.</li>
+</ol>
 <p>Indicate clearly each time a task goes into a ready state and don&rsquo;t forget to take into account the high dispatch latency!</p>
-<p>For each scenario, calculate the CPU efficiency (the percentage of time that the processor performs actual work: running task time - dispatch latency).
+<p>For each scenario, calculate the CPU efficiency η<sub>CPU</sub> (the percentage of time that the processor performs actual work: <strong>total runtime - dispatch latency overhead</strong>).
 Note that calculating AJWT is less useful here to compare both scenarios, as we have multiple waiting periods!
 As such, focus on the AJCT and calculate that for the three tasks as well.</p>
 <p>Answer these questions:</p>
@@ -1696,6 +1737,18 @@ As such, focus on the AJCT and calculate that for the three tasks as well.</p>
 
 	</div>
 </div>
+<h3 id="dynamic-time-slice-length">Dynamic Time Slice Length</h3>
+<p>As we can see from the example above and the discussion before that, it&rsquo;s indeed difficult to find an optimal, singular time slice length for all processes in a system over time.</p>
+<p>However, there is a relatively simple insight that we should get by now: if the optimal time slice depends on how often the processes pauses itself (which is often for I/O-bound, and more rare for CPU-bound), we can start assigning <strong>dynamic time slice lengths</strong> to processes, depending on their past behaviour!</p>
+<p>For example, if task X got a time slice of 20ms, but paused itself after just 5ms, we might decide to give it just a 10ms time slice the next time it&rsquo;s scheduled, as we expect it to be I/O-bound. Inversely, if task Y does run for its complete 20ms time slice, we might increase that to 30ms the next time, as it&rsquo;s probably CPU-bound.</p>
+<p>Note that, even if a task evolves from I/O bound to CPU-bound (or back), the logic still works! <strong>The time slice will keep adjusting itself dynamically</strong> over time to accomodate whatever a task needs at a given time.</p>
+<p>This is a very elegant yet powerful solution that is indeed used in practice. However, it also has some challenges. Two of the main ones are:</p>
+<ol>
+<li>We still need lower and upper bounds for the time slice lengths, which are not trivial to determine</li>
+<li>CPU-bound tasks can still end up blocking I/O-bound or interactive tasks, especially if the CPU-bound tasks get a relatively large time slice!</li>
+</ol>
+<p>This latter point isn&rsquo;t a problem if the CPU-bound task is something the user is actually waiting for (e.g., using Photoshop). However, if it&rsquo;s a background process that&rsquo;s processing data (for example updating a search index, scanning files for viruses), we would rather not have that process interupting more important tasks (e.g., while the user is using a Web browser).</p>
+<p>As such, <strong>even with dynamic time slice lengths, we still need to add the concept of priorities</strong> of processes, to make sure we can manually (using C APIs, see the lab in 7.4) or automatically (e.g., which window is the user currently interacting with) ensure important processes are given more CPU time.</p>
 <!-- 
 With the knowledge of the dispatch latency, the size of the time slice can re-visited. We assume the following setting:
 
@@ -1764,18 +1817,25 @@ With the knowledge of the dispatch latency, the size of the time slice can re-vi
 	</div>
 </div> -->
 <h3 id="priorities">Priorities</h3>
-<p>As discussed in the previous Section, a third aspect is that there is typically a need to indicate which processes are more important than others. This is usually done using <strong>priorities</strong>, whereby each task is assigned a number so they can be fully ordered to determine which is most important.</p>
-<p>In the simple Priority-based scheduler we&rsquo;ve considered, the priority was mainly used to determine <em>when</em> to start which process, as higher priority processes are selected earlier. However, we&rsquo;ve also seen that this could lead to <strong>starvation</strong> for low-priority tasks, needing some <em>ageing</em> mechanism to correct this.</p>
-<p>However, can we not think of another way of enforcing priorities that solves the ageing problem in a more elegant fashion? Up until this point, we&rsquo;ve also been assuming that we want to determine a single time slice length to use for all tasks, independent of how they behave. We&rsquo;ve seen that this is suboptimal in several ways in terms of efficiency vs responsiveness.</p>
-<p>So maybe we can solve both ageing and efficiency by moving away from a fixed-length time slice, to using <strong>multiple different time slice lengths, dynamically assigned per priority</strong>?</p>
-<p>For example, high priority jobs could get a longer time slice (say 10ms) to make sure they get to do as much work as possible, while lower priority tasks could get less time (say 2ms per burst). We can then <strong>use a simple Round-Robin scheduler</strong> between the different tasks, as the priorities are enforced by the time slice length, rather than by strict execution order. Lower priority processes would get time on the CPU more often than with a direct priority-based scheduler, but in shorter bursts, solving ageing while keeping relative priorities intact.</p>
+<p>As discussed in the previous section, we often want to explicitly indicate a given task is more important than another. This is usually done using <strong>priorities</strong>, whereby each task is assigned a number so they can be fully ordered to determine which is most important.</p>
+<p>In the simple Priority-based scheduler we&rsquo;ve considered, the priority was mainly used to determine <em>when</em> to start which process, as higher priority processes are selected earlier. However, we&rsquo;ve also seen that this could lead to <strong>starvation</strong> for low-priority tasks, needing some <em>ageing</em> mechanism (whereby the priority is slowly increased for low-priority tasks over time) to correct this.</p>
+<p>Applying this idea that priorities influence <em>when</em> a task is scheduled to our preemptive RR scheduler with dynamice time slices, we see it becomes more like an <strong>how often</strong> is a task to be scheduled! For example, higher priority tasks can be scheduled more often than/before lower priority tasks, <em>independent of their (dynamic) time slice length</em>. While that works conceptually, it does not really help prevent starvation.</p>
+<p>However, can we not think of another, quite different, way to interpret priorities rather than <em>when</em> a task is scheduled?</p>
+<p>Imagine for a second that, rather than controlling the timing of when a task is scheduled, instead <strong>we use the priority (rather than how often a task pauses itself) to determine the per-process time slice length.</strong></p>
+<p>For example, high priority jobs could get a longer time slice (say 10ms) to make sure they get to do as much work as possible, while lower priority tasks could get less time (say 2ms per burst). We can then <strong>use the simple RR scheduler</strong> between the different tasks, as the priorities are enforced by the time slice length, rather than by strict execution order/scheduling time. <em>Lower priority processes would get time on the CPU more often than with a direct priority-based scheduler, but in shorter bursts, solving ageing while keeping relative priorities intact.</em></p>
 <p>This seems like a good idea, but we can again question if this will work well in practice. For example, say the high priority tasks in a system are I/O-bound and the low priority tasks are CPU-bound, the proposed system seems to do the exact opposite of what we want (as I/O-bound tasks don&rsquo;t need long time slices, but batch jobs do).</p>
-<p>We can see that this line of thinking is an interesting one, but that once again we&rsquo;re not quite there yet with how to practically apply the concept of <strong>modelling priorities as time slice lengths</strong>.</p>
+<p>As such, we now have two competing ways to determine our dynamic time slice length:</p>
+<ol>
+<li>Based on how often a task pauses itself / how often it uses its entire current time slice</li>
+<li>Based on the task&rsquo;s priority</li>
+</ol>
+<p>It is difficult to know which of both is optimal for any given use case, and as you might predict, in practice a combination of both is used (see the Linux schedulers below). This also still doesn&rsquo;t solve our lower/upper bound for time slice lengths.</p>
 <h3 id="a-dynamic-solution">A dynamic solution</h3>
-<p>To summarize: at this point it&rsquo;s clear that we have multiple different requirements of a real world scheduler: it needs to be both responsive and CPU efficient, it needs to support both I/O-bound and CPU-bound tasks in a decent way, and it needs to have support for per-task priorities to allow further tweaking of scheduling logic. As hinted to in the last section, one possible approach for dealing with these issues, is to use a dynamic time slice length.</p>
-<p>As such, a generally proposed solution to these issues is the <strong>multi-level feedback queue scheduler</strong>. In this setup, we no longer have a single long list of processes, but instead distribute them across multiple, independent &ldquo;run queues&rdquo;. Each of these queues can then employ their own scheduling logic (for example use FCFS or RR or even priority-based) and determine other parameters such as if the queue is processed cooperatively or preemptively (in which case, the time slice length can also vary). That&rsquo;s the &ldquo;multi-level&rdquo; part.</p>
-<p>The &ldquo;feedback&rdquo; part indicates that tasks can move between these separate queues over time (for example as they become more or less important, as they run for longer or shorter bursts, etc.).</p>
-<p>We can then see that we also need a sort of top-level scheduler, that determines how the different run queues are processed (for example, queue 2 can only start if queue 1 is empty).</p>
+<p>To summarize our discussion so far: at this point it&rsquo;s clear that we have multiple different requirements of a real world scheduler: it needs to be both responsive and CPU efficient, it needs to support both I/O-bound and CPU-bound tasks in a decent way, and it needs to have support for per-task priorities to allow further tweaking of scheduling logic.</p>
+<p>As we&rsquo;ve seen, the concept of a Round-Robin scheduler using dynamic time slice lengths is a promising solution, but we&rsquo;re still not sure how to properly choose the time slice lengths&hellip; If we were to think about this further, we would end up at the conclusion that there is no single optimal answer and we will have to use combinations of different options to reach good results.</p>
+<p>The general concept of such a solution that combines multiple options is the <strong>multi-level feedback queue scheduler</strong>. In this setup, we no longer have a single long list of processes, but instead distribute them across multiple, independent &ldquo;run queues&rdquo;. Each of these queues can then employ their own scheduling logic (for example use FCFS or RR or even priority-based) and determine other parameters such as if the queue is processed cooperatively or preemptively (in which case, the time slice length can also vary). That&rsquo;s the &ldquo;multi-level&rdquo; part.</p>
+<p>The &ldquo;feedback&rdquo; part indicates that tasks can move between these separate queues over time (for example as they become more or less important (change priority), as they run for longer or shorter bursts, etc.).</p>
+<p>We can then see that we also need a sort of top-level scheduler, that determines how the different run queues are processed (for example, queue 2 can only start if queue 1 is empty if we use FCFS between the queues).</p>
 <p><a href="https://en.wikipedia.org/wiki/Multilevel_feedback_queue">One of the first examples of this approach</a> was given by Fernando J. Corbató et al. in 1962. Their setup has three specific goals:</p>
 <ol start="0">
 <li>Give preference to short jobs.</li>
@@ -1876,7 +1936,7 @@ When a more complex algorithms are used in the scheduler, a tree might suit the 
 <p>The clip below tries to illustrate the effect of the overall priority.
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/Bt-Z_Y5Zl44" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+  <iframe src="https://www.youtube.com/embed/ZaG9PD3Bxwc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
 <p>(The code for the examples in the video can be found <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/osc-course/master/archive_jo/scheduling/blink.c">here</a>).</p>
@@ -2992,17 +3052,17 @@ Symmetric multiprocessing (SMP) is where each processor is self scheduling --><b
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1650527192"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1650527192"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1650527192"></script>
-    <script src="../../js/jquery.sticky.js?1650527192"></script>
-    <script src="../../js/featherlight.min.js?1650527192"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1650527192"></script>
-    <script src="../../js/learn.js?1650527192"></script>
-    <script src="../../js/hugo-learn.js?1650527192"></script>
+    <script src="../../js/clipboard.min.js?1651141516"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1651141516"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1651141516"></script>
+    <script src="../../js/jquery.sticky.js?1651141516"></script>
+    <script src="../../js/featherlight.min.js?1651141516"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1651141516"></script>
+    <script src="../../js/learn.js?1651141516"></script>
+    <script src="../../js/hugo-learn.js?1651141516"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1650527192"></script>
+            <script src="../../mermaid/mermaid.js?1651141516"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

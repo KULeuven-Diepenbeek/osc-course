@@ -166,7 +166,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/lab1_algorithms/</guid>
-      <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do it&amp;rsquo;s job. Let&amp;rsquo;s compare them. We assume the following tasks:
+      <description>image source: unsplash.com   Let&amp;rsquo;s compare ! We have discussed a number of algorithms the scheduler can use to do its job. Let&amp;rsquo;s compare them. We assume the following tasks:
  T1: arrives @ 0s, takes 10s, and has priority low T2: arrives @ 1s, takes 2s, and has priority high T3: arrives @ 4s, takes 5s, and has priority high T4: arrives @ 7s, takes 1s, and has priority medium  Compare Average Throughput, AJWT, and AJCT of the 4 algorithms we&amp;rsquo;ve seen up until:</description>
     </item>
     
@@ -272,7 +272,7 @@ There are two main techniques to facilitate communication between multiple proce
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch7-scheduling/towards/</guid>
-      <description>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges that make them difficult for direct use in real-world scenarios. And we haven&amp;rsquo;t even taken into account all variables that are in play in a typical OS!
+      <description>The previously discussed scheduling algorithms are but a select number of a huge amount of imaginable approaches that can be thought of. We have seen that all individual algorithms come with certain challenges/downsides that make them difficult for direct use in real-world scenarios. And we haven&amp;rsquo;t even taken into account all variables that are in play in a typical OS!
 As such, in this Section, we first look at a few factors that come into play in real systems.</description>
     </item>
     

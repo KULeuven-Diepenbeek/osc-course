@@ -8,27 +8,27 @@ weight: 4
 
 ### Scheduler
 
-In this assignment you're going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file. 
+In this assignment you're going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file. 
 
 The scheduler follows these rules:
 
-0. The scheduler is preemptive and uses a round-robin approach without priorities.
-0. The (virtual) time slice is 1 second.
-0. There is no (measurable) context switching overhead.
-0. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)
+1. The scheduler is preemptive and uses a round-robin approach without priorities.
+2. The (virtual) time slice is 1 second.
+3. There is no (measurable) context switching overhead.
+4. If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)
 
 
 ### Circular Linked List
 
-As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks. To be consistent with this course and Linux, the run queue is to be implemented using a **linked list**.
+The (pseudo) scheduler will need to store the incoming and ongoing tasks in a **"run queue"**. To be consistent with this course and the Linux kernel, this run queue is to be implemented using a **linked list**.
 
 The **struct** that is to hold the tasks is predefined:
 
 {{< highlight c >}}
 typedef struct ST_PCB {
-  int arrival_time;
+  int arrival_time; // in seconds
   char name[9];
-  int duration;
+  int duration; // in seconds
   struct ST_PCB * next;
 } T_PCB;
 {{< /highlight >}}
@@ -41,7 +41,8 @@ With this run queue all the tasks are on a merry-go-round (see image above) :smi
 
 
 ### Input/output
-Both the input and the output are in the form of files.
+
+Both the input and the output are in the form of text files with a specific format:
 
 <div class="multicolumn">
   <div class="column">
@@ -78,7 +79,7 @@ T0000001
 13 - T0000003
 14 - idle
 15 - idle
-(...)
+(...) # many more lines here, omitted for brevity
 49 - idle
     {{< /highlight >}}
   </div>
@@ -86,7 +87,7 @@ T0000001
 
 <div class="multicolumn">
   <div class="column">
-    The <b>input</b> file is always named "tasks.txt", and is a normal text file. You can assume that this file is positioned next to the executable. <br/><br/>
+    The <b>input</b> file is always named "tasks.txt", and is a normal text file. You can assume that this file is always positioned next to the executable. <br/><br/>
     The <b>input</b> is formatted according to these rules:
     <ol>
       <li>The first line shows the number of tasks that are in the input file</li>
@@ -100,23 +101,39 @@ T0000001
     </ol>
   </div>
   <div class="column">
-    The <b>output</b> file is always named "output.txt", and is a normal text file. You must write this file in the current working directory (which will be next to the executable). <br/><br/>
+    The <b>output</b> file is always named "output.txt", and is a normal text file. You <b>must</b> write this file in the current working directory (which will be next to the executable). <br/><br/>
     The <b>output</b> MUST be formatted according to these rules:
     <ol>
-      <li>Each line starts with a line number of <b>exactly</b> two digits</li>
+      <li>Each line starts with a line number of <b>exactly</b> two digits, followed by a space, a dash, and another space ( - )</li>
       <li>There is a line for <b>every</b> time slice</li>
       <li>If a task is scheduled, its <b>name</b> is mentioned</li>
-      <li>If a new task is scheduled, it is indicated with <b>(new)</b></li>
+      <li>If a new task is scheduled, it is indicated with the <b>(new)</b> suffix</li>
       <li>If there is no task to scheduled, <b>idle</b> is reported</li>
-      <li>Each line ends with \n (NOT with \r\n) and there are NO spaces between the last character of the line and the \n</li>
-      <li>The output reflects the first 50 time slices of a run of the scheduler (so there are 51 lines in each output file, 1 empty at the end)</li>
+      <li>Each line (even the last one) ends with \n (NOT with \r\n) and there are NO spaces between the last character of the line and the \n</li>
+      <li>The output always reflects the first 50 time slices of a run of the scheduler (so there are 51 lines in each output file, 1 empty at the end)</li>
+      <li>If an error is detected (for example bad input), the output file consists of 2 lines: the first line is simply the string "error\n" and the second a string describing the error.</li>
     </ol>
   </div>
 </div>
 
-You MUST strictly follow these formats and filenames, as your code wil be (partially) validated with automated scripts.
+You **MUST strictly follow these formats and filenames**, as your code wil be (mostly) validated with automated scripts.
 If you do not follow these formats and we have to make manual adjustments to your output, points will be deducted.
-Test this by directly comparing your output for the test example with the example output: they have to be a perfect match.
+Test this by directly comparing your output for the test input above with the example output above: they have to be a perfect match.
+
+### Testing and validation
+
+As this is first and foremost a programming exercise, we expect you to **use proper software engineering practices**. 
+
+In particular, we expect you to provide a good measure of defensive programming (for example, checking if input is indeed formatted as expected) and a certain amount of (automated) testing (for example, does `sort_tasks_on_arrival()` (see below) always work correctly?).
+
+We have included some examples of weird/unexpected input files below that your implementation should be able to deal with by either showing an error or by properly dealing with the weird situation. Example errors are for example: incomplete/empty input and negative duration values. Weird input that should work correctly includes: tasks that run longer than 50 time slices or input that is not correctly ordered by arrival time.
+
+When validating your implementation, we will of course evaluate some additional test cases as well, not shared up-front, to see if you properly take into account other types of errors/weird input! As such, make sure you **think about possible edge cases yourself** and try to make your implementation as robust as possible!
+
+Finally, we of course also expect you to:
+
+* **Not create memory leaks**
+* **Properly close opened files**
 
 ### Some boiler plating
 
@@ -131,7 +148,7 @@ void show_tasks_circ(T_PCB * head);
 
 * two functions that should be completed
 {{< highlight c >}}
-T_PCB * read_tasks(void);
+T_PCB * read_tasks(void); // read tasks from the tasks.txt file
 T_PCB * sort_tasks_on_arrival(T_PCB * head); // you cannot assume the tasks in the file are in the order they arrive!
 {{< /highlight >}}
 
@@ -147,33 +164,25 @@ T_PCB * sort_tasks_on_arrival(T_PCB * head); // you cannot assume the tasks in t
     * if you see weird characters in your output, this is probably the cause
 
 * Tip: for sorting the tasks, use a simple insertion-sort or selection-sort algorithm. 
-    * Make sure you don't do unnecessary string copies when sorting the data!
+    * Make sure you don't do unnecessary (string) copies when sorting the data!
 
 * Note: input can have tasks with overlapping arrival times. For example, tasks 3 and 4 can both arrive at time 10, while 5 arrives at time 11. 
     * In this case, you should aim for a STRICT last-come, first-served approach
     * task 4 should be scheduled at time quantum 10
     * task 5 should be scheduled at time quantum 11
-    * task 3 should be scheduled at time quantum 12 (even though it "arrived first")
+    * task 3 should be scheduled at time quantum 12 (even though it "arrived first", before task 5)
 
 {{% notice note %}}
-The complete boilerplate code and an example tasks.txt and output.txt is added to the **osc-exercises** repository (see <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises/tree/master/assignments">here</a>).
+The complete boilerplate code and various example tasks.txt files and one output.txt file are available in the **osc-exercises** repository (see <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises/tree/master/assignments">here</a>, files starting with `4-`). Note that while these are named differently here to make clear which file is which, your program should always expect the input to be named `tasks.txt` and the output `output.txt`!
 {{% /notice %}}
 
 ### Assignment
 
 This assignment requires you to:
 
-* complete the bodies of the two missing functions
-* modify the main function **BETWEEN THE INDICATED LINES** so the correct output is produced given a certain input
+* Complete the bodies of the two missing functions
+* Modify the main function **BETWEEN THE INDICATED LINES** so the correct output is produced given a certain input
 
 The resulting C-file is to be uploaded to Toledo.
 
 **Note that, like all other tasks, this is an individual assignment!**
-
-{{% notice warning %}}
-Just, for the record: </br>
-  <span style="margin-left: 5%">**Don't create memory leaks !!**</span></br>
-  <span style="margin-left: 5%">**Close files that are opened !!**</span></br>
-  <span style="margin-left: 5%">**Validate for unexpected input !!** (at least a bit)</span></br></br>
-**Your solution will be verified with multiple, different input files !!**
-{{% /notice %}}

@@ -12,21 +12,21 @@
     <title>4. Pseudo scheduler :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1651141516" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1651141516" rel="stylesheet">
-    <link href="../../css/hybrid.css?1651141516" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1651141516" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1651141516" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1651141516" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1651141516" rel="stylesheet">
-    <link href="../../css/theme.css?1651141516" rel="stylesheet">
-    <link href="../../css/devselector.css?1651141516" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1651141516" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1651141516" rel="stylesheet">
+    <link href="../../css/nucleus.css?1651425266" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1651425266" rel="stylesheet">
+    <link href="../../css/hybrid.css?1651425266" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1651425266" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1651425266" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1651425266" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1651425266" rel="stylesheet">
+    <link href="../../css/theme.css?1651425266" rel="stylesheet">
+    <link href="../../css/devselector.css?1651425266" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1651425266" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1651425266" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1651141516"></script>
-    <script src="../../js/devselector.js?1651141516"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1651425266"></script>
+    <script src="../../js/devselector.js?1651425266"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1651141516"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1651141516"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1651425266"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1651425266"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1651141516"></script>
+<script type="text/javascript" src="../../js/search.js?1651425266"></script>
 
     
   </div>
@@ -1562,6 +1562,7 @@
         <li><a href="#scheduler">Scheduler</a></li>
         <li><a href="#circular-linked-list">Circular Linked List</a></li>
         <li><a href="#inputoutput">Input/output</a></li>
+        <li><a href="#testing-and-validation">Testing and validation</a></li>
         <li><a href="#some-boiler-plating">Some boiler plating</a></li>
         <li><a href="#assignment">Assignment</a></li>
       </ul>
@@ -1597,22 +1598,22 @@
 </figure>
 
 <h3 id="scheduler">Scheduler</h3>
-<p>In this assignment you&rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.</p>
+<p>In this assignment you&rsquo;re going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file.</p>
 <p>The scheduler follows these rules:</p>
-<ol start="0">
+<ol>
 <li>The scheduler is preemptive and uses a round-robin approach without priorities.</li>
 <li>The (virtual) time slice is 1 second.</li>
 <li>There is no (measurable) context switching overhead.</li>
-<li>If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)</li>
+<li>If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)</li>
 </ol>
 <h3 id="circular-linked-list">Circular Linked List</h3>
-<p>As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks. To be consistent with this course and Linux, the run queue is to be implemented using a <strong>linked list</strong>.</p>
+<p>The (pseudo) scheduler will need to store the incoming and ongoing tasks in a <strong>&ldquo;run queue&rdquo;</strong>. To be consistent with this course and the Linux kernel, this run queue is to be implemented using a <strong>linked list</strong>.</p>
 <p>The <strong>struct</strong> that is to hold the tasks is predefined:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">arrival_time</span><span style="color:#111">;</span>
-  <span style="color:#00a8c8">char</span> <span style="color:#111">name</span><span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">];</span>
-  <span style="color:#00a8c8">int</span> <span style="color:#111">duration</span><span style="color:#111">;</span>
-  <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">arrival_time</span><span style="color:#111">;</span> <span style="color:#75715e">// in seconds
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">char</span> <span style="color:#111">name</span><span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">];</span>
+  <span style="color:#00a8c8">int</span> <span style="color:#111">duration</span><span style="color:#111">;</span> <span style="color:#75715e">// in seconds
+</span><span style="color:#75715e"></span>  <span style="color:#00a8c8">struct</span> <span style="color:#111">ST_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">next</span><span style="color:#111">;</span>
 <span style="color:#111">}</span> <span style="color:#111">T_PCB</span><span style="color:#111">;</span></code></pre></div>
 <p>However, instead of using just a linear linked list (as we did earlier), this time you should aim for using a <strong>circular linked list</strong> as well. This is nothing more than a <em>normal</em> linked list where the final element&rsquo;s <strong>next</strong> field points back to the <strong>head</strong> of the list.</p>
 <figure>
@@ -1621,7 +1622,7 @@
 
 <p>With this run queue all the tasks are on a merry-go-round (see image above) 😃, which makes it easier to keep scheduling them until they are all done.</p>
 <h3 id="inputoutput">Input/output</h3>
-<p>Both the input and the output are in the form of files.</p>
+<p>Both the input and the output are in the form of text files with a specific format:</p>
 <div class="multicolumn">
   <div class="column">
     <h4>INPUT</h4>
@@ -1655,14 +1656,14 @@ T0000001
 <span style="color:#ae81ff">13</span> - T0000003
 <span style="color:#ae81ff">14</span> - idle
 <span style="color:#ae81ff">15</span> - idle
-<span style="color:#f92672">(</span>...<span style="color:#f92672">)</span>
+<span style="color:#f92672">(</span>...<span style="color:#f92672">)</span> <span style="color:#75715e"># many more lines here, omitted for brevity</span>
 <span style="color:#ae81ff">49</span> - idle
     </code></pre></div>
   </div>
 </div>
 <div class="multicolumn">
   <div class="column">
-    The <b>input</b> file is always named "tasks.txt", and is a normal text file. You can assume that this file is positioned next to the executable. <br/><br/>
+    The <b>input</b> file is always named "tasks.txt", and is a normal text file. You can assume that this file is always positioned next to the executable. <br/><br/>
     The <b>input</b> is formatted according to these rules:
     <ol>
       <li>The first line shows the number of tasks that are in the input file</li>
@@ -1676,22 +1677,33 @@ T0000001
     </ol>
   </div>
   <div class="column">
-    The <b>output</b> file is always named "output.txt", and is a normal text file. You must write this file in the current working directory (which will be next to the executable). <br/><br/>
+    The <b>output</b> file is always named "output.txt", and is a normal text file. You <b>must</b> write this file in the current working directory (which will be next to the executable). <br/><br/>
     The <b>output</b> MUST be formatted according to these rules:
     <ol>
-      <li>Each line starts with a line number of <b>exactly</b> two digits</li>
+      <li>Each line starts with a line number of <b>exactly</b> two digits, followed by a space, a dash, and another space ( - )</li>
       <li>There is a line for <b>every</b> time slice</li>
       <li>If a task is scheduled, its <b>name</b> is mentioned</li>
-      <li>If a new task is scheduled, it is indicated with <b>(new)</b></li>
+      <li>If a new task is scheduled, it is indicated with the <b>(new)</b> suffix</li>
       <li>If there is no task to scheduled, <b>idle</b> is reported</li>
-      <li>Each line ends with \n (NOT with \r\n) and there are NO spaces between the last character of the line and the \n</li>
-      <li>The output reflects the first 50 time slices of a run of the scheduler (so there are 51 lines in each output file, 1 empty at the end)</li>
+      <li>Each line (even the last one) ends with \n (NOT with \r\n) and there are NO spaces between the last character of the line and the \n</li>
+      <li>The output always reflects the first 50 time slices of a run of the scheduler (so there are 51 lines in each output file, 1 empty at the end)</li>
+      <li>If an error is detected (for example bad input), the output file consists of 2 lines: the first line is simply the string "error\n" and the second a string describing the error.</li>
     </ol>
   </div>
 </div>
-<p>You MUST strictly follow these formats and filenames, as your code wil be (partially) validated with automated scripts.
+<p>You <strong>MUST strictly follow these formats and filenames</strong>, as your code wil be (mostly) validated with automated scripts.
 If you do not follow these formats and we have to make manual adjustments to your output, points will be deducted.
-Test this by directly comparing your output for the test example with the example output: they have to be a perfect match.</p>
+Test this by directly comparing your output for the test input above with the example output above: they have to be a perfect match.</p>
+<h3 id="testing-and-validation">Testing and validation</h3>
+<p>As this is first and foremost a programming exercise, we expect you to <strong>use proper software engineering practices</strong>.</p>
+<p>In particular, we expect you to provide a good measure of defensive programming (for example, checking if input is indeed formatted as expected) and a certain amount of (automated) testing (for example, does <code>sort_tasks_on_arrival()</code> (see below) always work correctly?).</p>
+<p>We have included some examples of weird/unexpected input files below that your implementation should be able to deal with by either showing an error or by properly dealing with the weird situation. Example errors are for example: incomplete/empty input and negative duration values. Weird input that should work correctly includes: tasks that run longer than 50 time slices or input that is not correctly ordered by arrival time.</p>
+<p>When validating your implementation, we will of course evaluate some additional test cases as well, not shared up-front, to see if you properly take into account other types of errors/weird input! As such, make sure you <strong>think about possible edge cases yourself</strong> and try to make your implementation as robust as possible!</p>
+<p>Finally, we of course also expect you to:</p>
+<ul>
+<li><strong>Not create memory leaks</strong></li>
+<li><strong>Properly close opened files</strong></li>
+</ul>
 <h3 id="some-boiler-plating">Some boiler plating</h3>
 <p>A starting file is provided below. This file provides:</p>
 <ul>
@@ -1705,8 +1717,8 @@ Test this by directly comparing your output for the test example with the exampl
 </li>
 <li>
 <p>two functions that should be completed
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">read_tasks</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">);</span>
-<span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">sort_tasks_on_arrival</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span> <span style="color:#f92672">//</span> <span style="color:#111">you</span> <span style="color:#111">cannot</span> <span style="color:#111">assume</span> <span style="color:#111">the</span> <span style="color:#111">tasks</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">file</span> <span style="color:#111">are</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">order</span> <span style="color:#111">they</span> <span style="color:#111">arrive</span><span style="color:#f92672">!</span></code></pre></div></p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">read_tasks</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span><span style="color:#111">);</span> <span style="color:#75715e">// read tasks from the tasks.txt file
+</span><span style="color:#75715e"></span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#75af00">sort_tasks_on_arrival</span><span style="color:#111">(</span><span style="color:#111">T_PCB</span> <span style="color:#f92672">*</span> <span style="color:#111">head</span><span style="color:#111">);</span> <span style="color:#f92672">//</span> <span style="color:#111">you</span> <span style="color:#111">cannot</span> <span style="color:#111">assume</span> <span style="color:#111">the</span> <span style="color:#111">tasks</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">file</span> <span style="color:#111">are</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">order</span> <span style="color:#111">they</span> <span style="color:#111">arrive</span><span style="color:#f92672">!</span></code></pre></div></p>
 </li>
 <li>
 <p>a main function that should only be modified between these two lines. You MUST make use of all already defined variables!
@@ -1726,7 +1738,7 @@ Test this by directly comparing your output for the test example with the exampl
 <li>
 <p>Tip: for sorting the tasks, use a simple insertion-sort or selection-sort algorithm.</p>
 <ul>
-<li>Make sure you don&rsquo;t do unnecessary string copies when sorting the data!</li>
+<li>Make sure you don&rsquo;t do unnecessary (string) copies when sorting the data!</li>
 </ul>
 </li>
 <li>
@@ -1735,30 +1747,22 @@ Test this by directly comparing your output for the test example with the exampl
 <li>In this case, you should aim for a STRICT last-come, first-served approach</li>
 <li>task 4 should be scheduled at time quantum 10</li>
 <li>task 5 should be scheduled at time quantum 11</li>
-<li>task 3 should be scheduled at time quantum 12 (even though it &ldquo;arrived first&rdquo;)</li>
+<li>task 3 should be scheduled at time quantum 12 (even though it &ldquo;arrived first&rdquo;, before task 5)</li>
 </ul>
 </li>
 </ul>
 
-<div class="notices note" ><p>The complete boilerplate code and an example tasks.txt and output.txt is added to the <strong>osc-exercises</strong> repository (see <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises/tree/master/assignments">here</a>).</p>
+<div class="notices note" ><p>The complete boilerplate code and various example tasks.txt files and one output.txt file are available in the <strong>osc-exercises</strong> repository (see <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises/tree/master/assignments">here</a>, files starting with <code>4-</code>). Note that while these are named differently here to make clear which file is which, your program should always expect the input to be named <code>tasks.txt</code> and the output <code>output.txt</code>!</p>
 </div>
 
 <h3 id="assignment">Assignment</h3>
 <p>This assignment requires you to:</p>
 <ul>
-<li>complete the bodies of the two missing functions</li>
-<li>modify the main function <strong>BETWEEN THE INDICATED LINES</strong> so the correct output is produced given a certain input</li>
+<li>Complete the bodies of the two missing functions</li>
+<li>Modify the main function <strong>BETWEEN THE INDICATED LINES</strong> so the correct output is produced given a certain input</li>
 </ul>
 <p>The resulting C-file is to be uploaded to Toledo.</p>
 <p><strong>Note that, like all other tasks, this is an individual assignment!</strong></p>
-
-<div class="notices warning" ><p>Just, for the record: </br>
-<span style="margin-left: 5%"><strong>Don&rsquo;t create memory leaks !!</strong></span></br>
-<span style="margin-left: 5%"><strong>Close files that are opened !!</strong></span></br>
-<span style="margin-left: 5%"><strong>Validate for unexpected input !!</strong> (at least a bit)</span></br></br>
-<strong>Your solution will be verified with multiple, different input files !!</strong></p>
-</div>
-
 
 
 <footer class="footline">
@@ -2768,17 +2772,17 @@ Test this by directly comparing your output for the test example with the exampl
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1651141516"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1651141516"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1651141516"></script>
-    <script src="../../js/jquery.sticky.js?1651141516"></script>
-    <script src="../../js/featherlight.min.js?1651141516"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1651141516"></script>
-    <script src="../../js/learn.js?1651141516"></script>
-    <script src="../../js/hugo-learn.js?1651141516"></script>
+    <script src="../../js/clipboard.min.js?1651425266"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1651425266"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1651425266"></script>
+    <script src="../../js/jquery.sticky.js?1651425266"></script>
+    <script src="../../js/featherlight.min.js?1651425266"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1651425266"></script>
+    <script src="../../js/learn.js?1651425266"></script>
+    <script src="../../js/hugo-learn.js?1651425266"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1651141516"></script>
+            <script src="../../mermaid/mermaid.js?1651425266"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -332,9 +332,9 @@ You can use 0x60, 0x61 and 0x62 as addresses for the input parameters (M, N, R, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
-      <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to build a (pseudo) scheduler. A number of to-be-scheduled tasks will be provided via an input file.
+      <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file.
 The scheduler follows these rules:
-The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets a time slice right away (last-come, first-served)  Circular Linked List As should be clear from the theory, the (pseudo) scheduler will need to store the incoming tasks.</description>
+ The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)  Circular Linked List The (pseudo) scheduler will need to store the incoming and ongoing tasks in a &amp;ldquo;run queue&amp;rdquo;.</description>
     </item>
     
     <item>

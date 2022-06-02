@@ -192,7 +192,7 @@ In that case, `f2` of course also needs to store a return address for `f4` to re
 
 Sadly no... imagine what happens if `f3` wants to call `f4` as well. It would have to somehow know that it needs to use 0x07 when calling `f2`, but 0x06 when calling `f4`, or things won't work. This is doable for a handful of functions, but you can imagine that this is not feasible for larger programs with hundreds of functions that could each call one another. It would also consume quite some of memory, as we basically would need a separate return address storage location for each function. It also wouldn't support so-called "recursive functions" (see below).
 
-In short, **we cannot simply choose a single return address location (we want to call functions from inside functions), nor can be choose a separate one for each function (impractical)**. We clearly need something else... but before we figure out what the real solution might be, let's first think about what functions need besides return addresses. Maybe we can end up designing a system that works for other things as well? 
+In short, **we cannot simply choose a single return address location (we want to call functions from inside functions), nor can we choose a separate one for each function (impractical)**. We clearly need something else... but before we figure out what the real solution might be, let's first think about what functions need besides return addresses. Maybe we can end up designing a system that works for other things as well? 
 
 ## Passing parameters and returning values
 
@@ -665,7 +665,7 @@ Now that we've solved the problem for return addresses, you'll be happy to hear 
 1. 
 2.  ADDd 0 1 A
 3.  ADDd 0 2 B
-4.  ADDi 0 line8 0x07 // return address in 0x07
+4.  ADDd 0 line8 0x07 // return address in 0x07
 5.  PUSH A       // parameter 1
 6.  PUSH B       // parameter 2
 7.  JMPi line12  // call fY

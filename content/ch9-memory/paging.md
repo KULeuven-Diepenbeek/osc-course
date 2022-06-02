@@ -120,12 +120,18 @@ In practice, all of these techniques are combined in clever ways on modern OSes 
 
 <div class="multicolumn">
   <div class="column">
-    {{% figure src="/img/mem/ss_mem_paging_2levelpaging.png" title="A two-level page-table scheme"%}}
-    {{% dinobook %}}
+    <figure>
+    <a href="http://localhost:1313/osc-course/img/mem/ss_mem_paging_2levelpaging.png" data-featherlight="image"><img src="../../img/mem/ss_mem_paging_2levelpaging.png" style="width: auto; height: auto;"></a> <figcaption>
+            <h4>A two-level page-table scheme</h4>
+        </figcaption>
+</figure>
+    <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
   </div>
   <div class="column">
     <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses <b>paging for page tables</b>. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
-    {{% figure src="/img/mem/ss_mem_paging_2levelpaging_address.png" %}}
+    <figure>
+    <a href="img/mem/ss_mem_paging_2levelpaging_address.png" data-featherlight="image"><img src="/img/mem/ss_mem_paging_2levelpaging_address.png" style="width: auto; height: auto;"></a> 
+  </figure>
     <p>With this setting, p<sub>1</sub> is the index into the outer page. Similarly, p<sub>2</sub> is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p<sub>1</sub>. With the inner table index found, the base address can be searched for in the inner table using p<sub>2</sub>. Finally the page offset is added to the base address to end up with the mapped physical address.</p>
     <p>The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as <b>a forward-mapped page table</b>. The are also "inverted" and "hashed" approaches that do things differently.</p>
   </div>

@@ -278,9 +278,9 @@ We can then see that we also need a sort of top-level scheduler, that determines
 
 <a href="https://en.wikipedia.org/wiki/Multilevel_feedback_queue">One of the first examples of this approach</a> was given by Fernando J. Corbató et al. in 1962. Their setup has three specific goals:
 
-0. Give preference to short jobs.
-0. Give preference to I/O-bound tasks.
-0. Separate processes into categories based on their need for the processor.
+1. Give preference to short jobs.
+2. Give preference to I/O-bound tasks.
+3. Separate processes into categories based on their need for the processor.
 
 To achieve these goals, they employ three differen run queues:
 

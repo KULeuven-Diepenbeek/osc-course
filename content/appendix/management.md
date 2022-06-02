@@ -38,7 +38,7 @@ draft: true
 
 * Week 11: 27/04, 28/04 : 2.5h + 2h
   * **ch7** CPU scheduling - Robin
-  * announcement of the fourth exercise - Scheduling (deadline: 18/05 9AM)
+  * announcement of the fourth exercise - Scheduling (deadline: 20/05 5PM)
 
 * Week 12: 04/05, 05/05: 2.5h + 2h
   * **ch9** Memory Management - Robin

@@ -575,7 +575,7 @@ We can see that, ideally, we would have another way of specifying the else witho
 For these situations (change the PC every time, not just if a condition is true), we can use the **JMPi (Jump immediate) instruction**. If a JMPi is executed, it just sets the PC to the specified value, no questions asked! As such, the JMPi is about the simplest instruction we've seen yet:
 
 ```
-JMPi: instruction type, address to set the PC to if condition is true
+JMPi: instruction type, address to set the PC to
 ```
 
 With the JMPi, our code remains simple to write but now also executes correctly:

@@ -12,21 +12,21 @@
     <title>7.3: Towards real-world schedulers :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1651425266" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/hybrid.css?1651425266" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1651425266" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1651425266" rel="stylesheet">
-    <link href="../../css/theme.css?1651425266" rel="stylesheet">
-    <link href="../../css/devselector.css?1651425266" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1651425266" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1651425266" rel="stylesheet">
+    <link href="../../css/nucleus.css?1654195629" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/hybrid.css?1654195629" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1654195629" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1654195629" rel="stylesheet">
+    <link href="../../css/theme.css?1654195629" rel="stylesheet">
+    <link href="../../css/devselector.css?1654195629" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1654195629" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1654195629" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1651425266"></script>
-    <script src="../../js/devselector.js?1651425266"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1654195629"></script>
+    <script src="../../js/devselector.js?1654195629"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1651425266"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1651425266"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1654195629"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1654195629"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1651425266"></script>
+<script type="text/javascript" src="../../js/search.js?1654195629"></script>
 
     
   </div>
@@ -1837,7 +1837,7 @@ With the knowledge of the dispatch latency, the size of the time slice can re-vi
 <p>The &ldquo;feedback&rdquo; part indicates that tasks can move between these separate queues over time (for example as they become more or less important (change priority), as they run for longer or shorter bursts, etc.).</p>
 <p>We can then see that we also need a sort of top-level scheduler, that determines how the different run queues are processed (for example, queue 2 can only start if queue 1 is empty if we use FCFS between the queues).</p>
 <p><a href="https://en.wikipedia.org/wiki/Multilevel_feedback_queue">One of the first examples of this approach</a> was given by Fernando J. Corbató et al. in 1962. Their setup has three specific goals:</p>
-<ol start="0">
+<ol>
 <li>Give preference to short jobs.</li>
 <li>Give preference to I/O-bound tasks.</li>
 <li>Separate processes into categories based on their need for the processor.</li>
@@ -3052,17 +3052,17 @@ Symmetric multiprocessing (SMP) is where each processor is self scheduling --><b
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1651425266"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1651425266"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1651425266"></script>
-    <script src="../../js/jquery.sticky.js?1651425266"></script>
-    <script src="../../js/featherlight.min.js?1651425266"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1651425266"></script>
-    <script src="../../js/learn.js?1651425266"></script>
-    <script src="../../js/hugo-learn.js?1651425266"></script>
+    <script src="../../js/clipboard.min.js?1654195629"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1654195629"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1654195629"></script>
+    <script src="../../js/jquery.sticky.js?1654195629"></script>
+    <script src="../../js/featherlight.min.js?1654195629"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1654195629"></script>
+    <script src="../../js/learn.js?1654195629"></script>
+    <script src="../../js/hugo-learn.js?1654195629"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1651425266"></script>
+            <script src="../../mermaid/mermaid.js?1654195629"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

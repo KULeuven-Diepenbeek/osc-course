@@ -12,21 +12,21 @@
     <title>3.3 Functions and The Stack :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1651425265" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1651425265" rel="stylesheet">
-    <link href="../../css/hybrid.css?1651425265" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1651425265" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1651425265" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1651425265" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1651425265" rel="stylesheet">
-    <link href="../../css/theme.css?1651425265" rel="stylesheet">
-    <link href="../../css/devselector.css?1651425265" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1651425265" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1651425265" rel="stylesheet">
+    <link href="../../css/nucleus.css?1654195629" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/hybrid.css?1654195629" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1654195629" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1654195629" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1654195629" rel="stylesheet">
+    <link href="../../css/theme.css?1654195629" rel="stylesheet">
+    <link href="../../css/devselector.css?1654195629" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1654195629" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1654195629" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1651425265"></script>
-    <script src="../../js/devselector.js?1651425265"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1654195629"></script>
+    <script src="../../js/devselector.js?1654195629"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1651425265"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1651425265"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1654195629"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1654195629"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1651425265"></script>
+<script type="text/javascript" src="../../js/search.js?1654195629"></script>
 
     
   </div>
@@ -1734,7 +1734,7 @@
 <p>In that case, <code>f2</code> of course also needs to store a return address for <code>f4</code> to return to. However, it can&rsquo;t re-use 0x07, because that memory location already stores the return address for either <code>f1</code> or <code>f3</code>, which would be <strong>overwritten and lost forever</strong>&hellip; This is what happens in the example above: <code>f1</code> is called, stores <code>line3</code> in 0x07, then calls <code>f2</code>. <code>f2</code> then stores its own return address <code>line7</code> in 0x07, overwriting the <code>line3</code> value forever. It then calls <code>f4</code>, which is indeed able to correctly return to <code>f2</code>. However, then we have another problem: <code>f2</code> tries to &ldquo;return&rdquo; to <code>f1</code> via 0x07, but erroneously returns to itself, causing an <em>infinite loop</em>!</p>
 <p>A naive solution to this problem of overwriting 0x07 would be to just <strong>choose a different storage location for <code>f2</code>&rsquo;s return address</strong>, say 0x06. <code>f4</code> can then just do <code>JMP 0x06</code> and stuff works, right?</p>
 <p>Sadly no&hellip; imagine what happens if <code>f3</code> wants to call <code>f4</code> as well. It would have to somehow know that it needs to use 0x07 when calling <code>f2</code>, but 0x06 when calling <code>f4</code>, or things won&rsquo;t work. This is doable for a handful of functions, but you can imagine that this is not feasible for larger programs with hundreds of functions that could each call one another. It would also consume quite some of memory, as we basically would need a separate return address storage location for each function. It also wouldn&rsquo;t support so-called &ldquo;recursive functions&rdquo; (see below).</p>
-<p>In short, <strong>we cannot simply choose a single return address location (we want to call functions from inside functions), nor can be choose a separate one for each function (impractical)</strong>. We clearly need something else&hellip; but before we figure out what the real solution might be, let&rsquo;s first think about what functions need besides return addresses. Maybe we can end up designing a system that works for other things as well?</p>
+<p>In short, <strong>we cannot simply choose a single return address location (we want to call functions from inside functions), nor can we choose a separate one for each function (impractical)</strong>. We clearly need something else&hellip; but before we figure out what the real solution might be, let&rsquo;s first think about what functions need besides return addresses. Maybe we can end up designing a system that works for other things as well?</p>
 <h2 id="passing-parameters-and-returning-values">Passing parameters and returning values</h2>
 <p>As you probably know, the functions we had above were really the simplest possible ones. Real functions are typically more complex, as they also allow the use of <strong>function parameters</strong> and <strong>return values</strong>.</p>
 <p>For example, below <code>fY</code> accepts two input parameters (A and B) and has a single output/return value <code>result</code>:</p>
@@ -2254,7 +2254,7 @@ POP 0x07 // pop value from top of the stack and put it in 0x07
 <pre><code>1. 
 2.  ADDd 0 1 A
 3.  ADDd 0 2 B
-4.  ADDi 0 line8 0x07 // return address in 0x07
+4.  ADDd 0 line8 0x07 // return address in 0x07
 5.  PUSH A       // parameter 1
 6.  PUSH B       // parameter 2
 7.  JMPi line12  // call fY
@@ -3316,17 +3316,17 @@ TODO: stack grows downward in C -->
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1651425265"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1651425265"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1651425265"></script>
-    <script src="../../js/jquery.sticky.js?1651425265"></script>
-    <script src="../../js/featherlight.min.js?1651425265"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1651425265"></script>
-    <script src="../../js/learn.js?1651425265"></script>
-    <script src="../../js/hugo-learn.js?1651425265"></script>
+    <script src="../../js/clipboard.min.js?1654195629"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1654195629"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1654195629"></script>
+    <script src="../../js/jquery.sticky.js?1654195629"></script>
+    <script src="../../js/featherlight.min.js?1654195629"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1654195629"></script>
+    <script src="../../js/learn.js?1654195629"></script>
+    <script src="../../js/hugo-learn.js?1654195629"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1651425265"></script>
+            <script src="../../mermaid/mermaid.js?1654195629"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,21 @@
     <title>9.3: Paging :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1651425266" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/hybrid.css?1651425266" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1651425266" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1651425266" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1651425266" rel="stylesheet">
-    <link href="../../css/theme.css?1651425266" rel="stylesheet">
-    <link href="../../css/devselector.css?1651425266" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1651425266" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1651425266" rel="stylesheet">
+    <link href="../../css/nucleus.css?1654195630" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1654195630" rel="stylesheet">
+    <link href="../../css/hybrid.css?1654195630" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1654195630" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1654195630" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1654195630" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1654195630" rel="stylesheet">
+    <link href="../../css/theme.css?1654195630" rel="stylesheet">
+    <link href="../../css/devselector.css?1654195630" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1654195630" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1654195630" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1651425266"></script>
-    <script src="../../js/devselector.js?1651425266"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1654195630"></script>
+    <script src="../../js/devselector.js?1654195630"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1651425266"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1651425266"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1654195630"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1654195630"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1651425266"></script>
+<script type="text/javascript" src="../../js/search.js?1654195630"></script>
 
     
   </div>
@@ -1728,32 +1728,19 @@ text-align: center;
 <div class="multicolumn">
   <div class="column">
     <figure>
-    <img src="../../img/mem/ss_mem_paging_2levelpaging.png"/> <figcaption>
+    <a href="http://localhost:1313/osc-course/img/mem/ss_mem_paging_2levelpaging.png" data-featherlight="image"><img src="../../img/mem/ss_mem_paging_2levelpaging.png" style="width: auto; height: auto;"></a> <figcaption>
             <h4>A two-level page-table scheme</h4>
         </figcaption>
 </figure>
-<pre><code>&lt;style&gt;
-</code></pre>
-<p>p.dinobook {
-color: #7E7E7E;
-font-size: 14px;
-font-weight: 300;
-letter-spacing: -1px;
-padding-top: 0px;
-margin-top: -20px;
-text-align: center;
-}
-</style></p>
-<p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
+    <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
   </div>
   <div class="column">
     <p>One way to overcome large page tables is to use a <b>two-level paging</b> algorithm. This technique uses <b>paging for page tables</b>. The page number in the example above is 20 bits. Using the same technique again, the page number gets split into two 10-bit addresses.</p>
     <figure>
-    <img src="../../img/mem/ss_mem_paging_2levelpaging_address.png"/> 
-</figure>
-<pre><code>&lt;p&gt;With this setting, p&lt;sub&gt;1&lt;/sub&gt; is the index into the outer page. Similarly, p&lt;sub&gt;2&lt;/sub&gt; is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p&lt;sub&gt;1&lt;/sub&gt;. With the inner table index found, the base address can be searched for in the inner table using p&lt;sub&gt;2&lt;/sub&gt;. Finally the page offset is added to the base address to end up with the mapped physical address.&lt;/p&gt;
-&lt;p&gt;The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as &lt;b&gt;a forward-mapped page table&lt;/b&gt;. The are also &quot;inverted&quot; and &quot;hashed&quot; approaches that do things differently.&lt;/p&gt;
-</code></pre>
+    <a href="img/mem/ss_mem_paging_2levelpaging_address.png" data-featherlight="image"><img src="../../img/mem/ss_mem_paging_2levelpaging_address.png" style="width: auto; height: auto;"></a> 
+  </figure>
+    <p>With this setting, p<sub>1</sub> is the index into the outer page. Similarly, p<sub>2</sub> is the index into the inner page. When the physical address is to be searched from a logical address, first the outer table needs to be examined using p<sub>1</sub>. With the inner table index found, the base address can be searched for in the inner table using p<sub>2</sub>. Finally the page offset is added to the base address to end up with the mapped physical address.</p>
+    <p>The translation from logical to physical address happens from the outer table, inward. Therefore this scheme is known as <b>a forward-mapped page table</b>. The are also "inverted" and "hashed" approaches that do things differently.</p>
   </div>
 </div>
 <p>In practice, this approach can be repeated at will, adding more and more lookup tables in between. For example, for a typical 64-bit system, a hierarchy of 4 page tables is used with page sizes of 4KB, where each page number pN is stored in <a href="https://cs61.seas.harvard.edu/site/2018/Kernel3/">9 bits</a>. This approach is chosen so that <a href="https://www.cs.cornell.edu/courses/cs4410/2015su/lectures/lec14-pagetables.html">each page table nicely subdivides into 4KB pages itself</a>, which allows them to be &ldquo;swapped&rdquo; as well (see below).</p>
@@ -2826,17 +2813,17 @@ text-align: center;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1651425266"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1651425266"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1651425266"></script>
-    <script src="../../js/jquery.sticky.js?1651425266"></script>
-    <script src="../../js/featherlight.min.js?1651425266"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1651425266"></script>
-    <script src="../../js/learn.js?1651425266"></script>
-    <script src="../../js/hugo-learn.js?1651425266"></script>
+    <script src="../../js/clipboard.min.js?1654195630"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1654195630"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1654195630"></script>
+    <script src="../../js/jquery.sticky.js?1654195630"></script>
+    <script src="../../js/featherlight.min.js?1654195630"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1654195630"></script>
+    <script src="../../js/learn.js?1654195630"></script>
+    <script src="../../js/hugo-learn.js?1654195630"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1651425266"></script>
+            <script src="../../mermaid/mermaid.js?1654195630"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

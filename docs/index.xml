@@ -85,18 +85,6 @@ The scheduler has two main responsibilities:</description>
     </item>
     
     <item>
-      <title>1. Integrated C exercise</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</guid>
-      <description>Download the start project here: c-integrated-start.c.
-The program represents a book, consisting out of multiple pages, of which each page contains (random) text, represented as a char[].
-The following functions are given:
- printBook() prints all pages of the book (no need to modify this) clearBook() clears pages and frees memory (no need to modify this) createRandomBook() creates a new book consisting out of amount of pages createRandompage() creates a new page with random text main() bootstraps everything.</description>
-    </item>
-    
-    <item>
       <title>1.2: File systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -104,17 +92,6 @@ The following functions are given:
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</guid>
       <description>Introduction in Unix filesystems Everything is a file On Linux, almost everything is a file. A file is a file. A directory is a file. An entire harddrive is a file. A UART port is a file. Even a network connection is a file! Every file is owned by one user. All other users&#39; privileges for that file (read, write, execute) are based on the access permissions (see below).
 Working daily with files in Unix operating systems will no doubt increase your awareness of the specific ins and outs of the Unix filesystem.</description>
-    </item>
-    
-    <item>
-      <title>2. Testing in C(&#43;&#43;)</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</guid>
-      <description>Download the start project files here: cpp-testing.cpp, cpp-testing-main.cpp. Remember that in order to run this as a Google Test Suite, you need to compile it using g++ and bootstrap GTest in a separate .cpp file where the main() function resides. Go back to the lab notes if you&amp;rsquo;re not sure how to pull this off.
-The following code is given:
-date and period structs to represent a date and a period of dates in code.</description>
     </item>
     
     <item>
@@ -199,7 +176,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
   source: wikipedia.com   The image above shows:
- Task management Memory management the IO subsystem    The desired situation.   &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;column&amp;quot;&amp;gt; &amp;lt;figure&amp;gt; &amp;lt;img src=&amp;quot;/img/chx/reality.svg&amp;quot;/&amp;gt; &amp;lt;figcaption&amp;gt; &amp;lt;h4&amp;gt;The real situation.&amp;lt;/h4&amp;gt; &amp;lt;/figcaption&amp;gt;   &amp;lt;/div&amp;gt;   The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+ Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
     </item>
     
     <item>
@@ -210,16 +187,6 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/cli/</guid>
       <description>Source: Neo Getting your feet wet This &amp;lsquo;lab&amp;rsquo; consists of a list of small tasks that introduce you to the command-line interface. None of these tasks should require exhaustive manual labour. Most can be accomplished by using the commands you already know (and that are listed at the cheat sheet), and for others a short Google session should give you the answer.
 Navigation  figure out in which folder you are at the moment navigate to the root folder of the OS navigate to your home folder (/home/username), without actually typing that path make an alias (man alias) that navigates to your home folder from everywhere within the system  File manipulation  make a folder &amp;ldquo;myVeryOwnFolder&amp;rdquo; navigate into that folder create a file: hello.</description>
-    </item>
-    
-    <item>
-      <title>3. Inter-thread communication</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
-      <description>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&amp;rsquo;s still not always trivial to know how to apply them to a specific problem. Even for the well-known producer-consumer problem, several different setups are possible.
-Below, you will find an implementation variation on the prime-generator producer-consumer problem we handled during class (especially &amp;ldquo;Producer-Consumer V4: Semaphores&amp;rdquo; in Section 6.</description>
     </item>
     
     <item>
@@ -327,17 +294,6 @@ You can use 0x60, 0x61 and 0x62 as addresses for the input parameters (M, N, R, 
     </item>
     
     <item>
-      <title>4. Pseudo scheduler</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
-      <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file.
-The scheduler follows these rules:
- The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)  Circular Linked List The (pseudo) scheduler will need to store the incoming and ongoing tasks in a &amp;ldquo;run queue&amp;rdquo;.</description>
-    </item>
-    
-    <item>
       <title>4.2: Practical Use of Pointers</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch4-pointers/practical-use/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -385,16 +341,6 @@ We have however also seen that this is not trivial: new processes need their own
 File hello.c:
 // hello.c char* hello() { return &amp;#34;heykes&amp;#34;; } File main.c:
 // main.c #include &amp;lt;printf.h&amp;gt;int main() { printf(&amp;#34;%s&amp;#34;, hello()); return 0; } The main function has no knowledge of hello() because it lives in a different source file. This will be fine if we link the machine code together after compiling.</description>
-    </item>
-    
-    <item>
-      <title>3.3: The Ancient Library (RTOS)</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/lab_ll_rtos/</guid>
-      <description>The Ancient Library  Stuff just got interesting: you find yourself inside an extremely old library, where things clearly have not been touched for ages. A green glowing ball rests in the center of the room, giving the books an odd, but compelling color. Do you dare to touch the books? Let us go ahead and clean this place up a bit. (img src)
-    1. Modeling the books The back of the first row of books is barely readable, but you can distinguish the following titles and authors:</description>
     </item>
     
     <item>
@@ -477,7 +423,7 @@ Programming in C The (Ansi) C Programming Language  This book is meant to help t
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/appendix/installing/</guid>
       <description>The exercises for this course are to be done on the Linux Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.
-We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle.</description>
+We would of course not ask you to remove Windows to install Linux on your personal machine. Installing both OSes side-by-side (called a &amp;ldquo;dual boot&amp;rdquo;) is also a very valid option.</description>
     </item>
     
     <item>
@@ -489,6 +435,15 @@ We would of course not ask you to remove Windows to install Linux on your person
       <description>This cheat sheet summarises a set of commands, so you don&amp;rsquo;t have to Google everything.
 Linux commands Below is a brief list of Linux commands. Remember that you can get more info on a command by typing &amp;ldquo;[command] -h&amp;quot;, &amp;ldquo;man [command]&amp;rdquo;, or even google the manpage on Google.
 Navigation    command goal     cd change directory   pwd &amp;lsquo;present working directory&amp;rsquo;   ls list (show content of current directory) - typical parameters: -lha (longform, human readable, all files)   history show a history of used commands.</description>
+    </item>
+    
+    <item>
+      <title>None yet!</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/none-yet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/none-yet/</guid>
+      <description>Check back soon.</description>
     </item>
     
   </channel>

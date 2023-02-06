@@ -16,7 +16,7 @@
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
       <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
   source: wikipedia.com   The image above shows:
- Task management Memory management the IO subsystem    The desired situation.   &amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;column&amp;quot;&amp;gt; &amp;lt;figure&amp;gt; &amp;lt;img src=&amp;quot;/img/chx/reality.svg&amp;quot;/&amp;gt; &amp;lt;figcaption&amp;gt; &amp;lt;h4&amp;gt;The real situation.&amp;lt;/h4&amp;gt; &amp;lt;/figcaption&amp;gt;   &amp;lt;/div&amp;gt;   The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+ Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
     </item>
     
     <item>

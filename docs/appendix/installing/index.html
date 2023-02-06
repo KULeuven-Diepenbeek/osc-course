@@ -12,21 +12,21 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1675689142" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1675689142" rel="stylesheet">
-    <link href="../../css/hybrid.css?1675689142" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1675689142" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1675689142" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1675689142" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1675689142" rel="stylesheet">
-    <link href="../../css/theme.css?1675689142" rel="stylesheet">
-    <link href="../../css/devselector.css?1675689142" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1675689142" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1675689142" rel="stylesheet">
+    <link href="../../css/nucleus.css?1675691512" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1675691512" rel="stylesheet">
+    <link href="../../css/hybrid.css?1675691512" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1675691512" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1675691512" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1675691512" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1675691512" rel="stylesheet">
+    <link href="../../css/theme.css?1675691512" rel="stylesheet">
+    <link href="../../css/devselector.css?1675691512" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1675691512" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1675691512" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1675689142"></script>
-    <script src="../../js/devselector.js?1675689142"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1675691512"></script>
+    <script src="../../js/devselector.js?1675691512"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1675689142"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1675689142"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1675691512"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1675691512"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1675689142"></script>
+<script type="text/javascript" src="../../js/search.js?1675691512"></script>
 
     
   </div>
@@ -1473,8 +1473,18 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#osc-virtualbox-install-guide">OSC VirtualBox Install Guide</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#step-a-install-linux">Step A: Install Linux</a>
+      <ul>
+        <li><a href="#option-0-single-boot">Option 0: Single Boot</a></li>
+        <li><a href="#option-1-dual-boot">Option 1: Dual Boot</a></li>
+        <li><a href="#option-2-virtualize">Option 2: Virtualize</a></li>
+      </ul>
+    </li>
+    <li><a href="#step-b-install-compiler--files">Step B: Install compiler &amp; files</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -1499,35 +1509,35 @@
         
 
 
-<p>The exercises for this course are to be done on the <strong>Linux</strong> Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.</p>
-<p>We would of course not ask you to remove Windows to install Linux on your personal machine. Installing both OSes side-by-side (called a <em>&ldquo;dual boot&rdquo;</em>) is also a very valid option. Please see the <a href="https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview">Ubuntu Install Guide</a> if you&rsquo;d like to install Linux permanently. Make sure not to erase your existing Windows partition! We are <em>not</em> responsible and will <em>not</em> be able to help if something went wrong.</p>
-<p>For this course, we provide a third option, called a <em>&ldquo;virtual machine&rdquo;</em>. We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it&rsquo;s running on normal hardware.</p>
-<p>Notes:</p>
+<p>The exercises for this course are to be done on the <strong>Linux</strong> Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions&mdash;see <a href="../../ch1-introos/intro-os/">chapter 1</a>. Linux is used extensively worldwide and you will need to use it many times in your future career.</p>
+<p>Therefore, for this course, you&rsquo;ll need to install a Linux flavor on your machine. Below are a number of options in how to do so. We would of course not ask you to remove Windows to install Linux on your personal machine: both OSes can perfectly live side-by-side. If you are using MacOS, you should still install a Linux flavor. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. For instance, you will not be able to compile and run the device driver exercises.</p>
+<p>There are many types of Linux distros available. We will use either Ubuntu or Bodhi&mdash;which is a more lightweight, smaller version of Ubuntu that&rsquo;s easier to virtualize (see option 2 below). Ubuntu is the most newbie-friendly Linux OS.</p>
 <ul>
-<li>If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!</li>
-<li>If you are using MacOS, you should still install a Linux flavor. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. For instance, you will not be able to compile and run the device driver exercises.
-<ul>
-<li>If you are using a 2020+ M1 Apple Mac architecture (ARM64 - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you should try out the QEMU-based Mac-specific virtualization alternative called <a href="https://mac.getutm.app/">UTM</a>. Follow <a href="https://docs.getutm.app/guides/ubuntu/">the UTM docs</a> on how to install Ubuntu. Don&rsquo;t forget to choose &ldquo;virtualize&rdquo; and mount <a href="https://ubuntu.com/download/server/arm">the ARM64 <code>.iso</code></a>&mdash;not the AMD one. Bodhi Linux only works in &ldquo;emulate&rdquo; mode and is <em>very</em> slow.</li>
-<li>If that still doesn&rsquo;t work, try <a href="https://www.vmware.com/products/fusion.html">VMWare Fusion</a>, a personal edition is free.</li>
+<li>Download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, will require 10GB+ disk space)</li>
+<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)</li>
 </ul>
-</li>
-</ul>
-<h2 id="osc-virtualbox-install-guide">OSC VirtualBox Install Guide</h2>
+<p>For newcomers, we strongly recommend you to use Ubuntu if possible.</p>
+<h2 id="step-a-install-linux">Step A: Install Linux</h2>
+<h3 id="option-0-single-boot">Option 0: Single Boot</h3>
+<p>If you&rsquo;re a hardcore software/hardware engineer, you&rsquo;ll likely already have installed Linux as your only OS, and nothing else. We&rsquo;re glad you&rsquo;re that enthusiastic! In that case, you don&rsquo;t need to do anything, except prepare the compiler: see step B.</p>
+<p>If you only have Windows on your machine, choose option 1 or 2 instead.</p>
+<h3 id="option-1-dual-boot">Option 1: Dual Boot</h3>
+<p>The simplest option that will allow you to permanently enjoy Linux on your machine for many years to come, next to your existing OS. A &ldquo;dual boot&rdquo; denotes the presence of two bootable OSes; e.g. Windows 11 and Ubunutu, or macOS and FreeBSD.</p>
+<p>Please see the official <a href="https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview">Ubuntu Install Guide</a> if you&rsquo;d like to install Linux permanently.</p>
+
+<div class="notices warning" ><p>A dual boot installation is not without its <strong>dangers</strong>! Make sure not to erase your existing (Windows) partition! We are <em>not</em> responsible and will <em>not</em> be able to help if something went wrong. Read the install guide carefully. <br/>If you&rsquo;d rather be on the safe site, choose option 2.</p>
+</div>
+
+<h3 id="option-2-virtualize">Option 2: Virtualize</h3>
+<p>For this course, we provide a second option, called a <em>&ldquo;virtual machine&rdquo;</em>. This will install Linux inside of your Windows OS through an additional program called Oracle <a href="https://www.virtualbox.org/">VirtualBox</a>, which will make Linux think it&rsquo;s running on normal hardware.</p>
+<p>If you are using a <strong>2020+ M1 Apple Mac architecture</strong> (<code>ARM64</code> - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you should try out the QEMU-based Mac-specific virtualization alternative called <a href="https://mac.getutm.app/">UTM</a>. Follow <a href="https://docs.getutm.app/guides/ubuntu/">the UTM docs</a> on how to install Ubuntu. Don&rsquo;t forget to choose &ldquo;virtualize&rdquo; and mount <a href="https://ubuntu.com/download/server/arm">the ARM64 <code>.iso</code></a>&mdash;not the AMD one. Bodhi Linux only works in &ldquo;emulate&rdquo; mode and is <em>very</em> slow. If that still doesn&rsquo;t work, try <a href="https://www.vmware.com/products/fusion.html">VMWare Fusion</a>, a personal edition is free.</p>
+<h4 id="virtualbox-install-steps">VirtualBox Install Steps</h4>
 <ol>
 <li>
 <p>Download and install <a href="https://www.virtualbox.org/">VirtualBox</a></p>
 </li>
 <li>
-<p>Download Linux</p>
-<ul>
-<li>There are many types of Linux available. We will use either Ubuntu or Bodhi (which is a more lightweight, smaller version of Ubuntu)
-<ul>
-<li>download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, will require 10GB+ disk space)</li>
-<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)</li>
-</ul>
-</li>
-<li>We strongly recommend you use Ubuntu if possible</li>
-</ul>
+<p>Download a Linux <code>.iso</code> file (see above)</p>
 </li>
 <li>
 <p>Prepare VirtualBox</p>
@@ -1577,40 +1587,8 @@
 <li>After installation, reboot and login with your created account</li>
 </ul>
 </li>
-<li>
-<p>Prepare GCC</p>
-<ul>
-<li>For many exercises in this course, we will use the &ldquo;GNU Compiler Collection&rdquo; (GCC) to run our C program code.</li>
-<li>We will do this from the &ldquo;terminal&rdquo; or &ldquo;command line&rdquo;, a textual interface. This comes pre-installed in Linux. Look for an <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/1200px-GNOME_Terminal_icon_2019.svg.png">icon like this one</a>, which should open a screen that looks a bit like <a href="https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png">this one</a>.</li>
-<li>To check if GCC is installed (it should be), type the following command in the terminal and hit enter: <code>gcc -v</code>
-<ul>
-<li>the output should be a list of details of the GCC program, and should end with a line starting with &ldquo;gcc version&rdquo;</li>
-<li>if this is not the case and you get an error message saying GCC is not installed, please execute the following command <code>sudo apt update &amp;&amp; sudo apt install -y gcc</code> (it will ask you for your password) and try again</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Get the course files</p>
-<ul>
-<li>For some exercises, we provide some basic code to help you get started</li>
-<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Gobbledygook to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
-<li>For now, you just need to execute following commands in the terminal:
-<ul>
-<li>Install git: <code>sudo apt update &amp;&amp; sudo apt install -y git</code></li>
-<li>Go to your home directory: <code>cd ~/</code></li>
-<li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files</code>
-<ul>
-<li>This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items. You can verify this by typing <code>ls -la</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
 </ol>
-<p>You should now be ready to follow along with the classes!</p>
-<h2 id="faq">FAQ</h2>
+<h4 id="virtualbox-install-faq">VirtualBox Install FAQ</h4>
 <ul>
 <li>[WINDOWS] The screen looks very interlaced
 <ul>
@@ -1651,6 +1629,32 @@
 </li>
 </ul>
 <p>If you encounter any other issues, Google is your friend. There&rsquo;s a high chance others have encountered the same problem as you have, and have posted a solution.</p>
+<h2 id="step-b-install-compiler--files">Step B: Install compiler &amp; files</h2>
+<p>Once you&rsquo;re able to boot up Linux&mdash;either by using virtualization or by (dual) booting directly into it&mdash;you&rsquo;ll need to make sure you&rsquo;ve got the <code>gcc</code> compiler and course files at the ready.</p>
+<h4 id="preparing-gcc">Preparing gcc</h4>
+<ul>
+<li>For many exercises in this course, we will use the &ldquo;GNU Compiler Collection&rdquo; (GCC) to run our C program code.</li>
+<li>We will do this from the &ldquo;terminal&rdquo; or &ldquo;command line&rdquo;, a textual interface. This comes pre-installed in Linux. Look for an <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/1200px-GNOME_Terminal_icon_2019.svg.png">icon like this one</a>, which should open a screen that looks a bit like <a href="https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/optimized/2X/b/ba76cbf3dc8dc2cc94d26dd61c7aad3cedcd5102_2_690x300.png">this one</a>.</li>
+<li>To check if GCC is installed (it should be), type the following command in the terminal and hit enter: <code>gcc -v</code>
+<ul>
+<li>the output should be a list of details of the GCC program, and should end with a line starting with &ldquo;gcc version&rdquo;</li>
+<li>if this is not the case and you get an error message saying GCC is not installed, please execute the following command <code>sudo apt update &amp;&amp; sudo apt install -y gcc</code> (it will ask you for your password) and try again</li>
+</ul>
+</li>
+</ul>
+<h4 id="preparing-the-course-files">Preparing the course files</h4>
+<ul>
+<li>For some exercises, we provide some basic code to help you get started</li>
+<li>This code is hosted in a <a href="https://github.com/KULeuven-Diepenbeek/osc-exercises">GitHub repository</a>. If that sounds like Gobbledygook to you, no worries: the Software Engineering course will explain all about Git and version control soon</li>
+<li>For now, you just need to execute following commands in the terminal:
+<ul>
+<li>Install git: <code>sudo apt update &amp;&amp; sudo apt install -y git</code></li>
+<li>Go to your home directory: <code>cd ~/</code></li>
+<li>Download the course files: <code>git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files</code>. This will create a new directory named &ldquo;course-files&rdquo; containing the necessary items. You can verify this by typing <code>ls -la</code></li>
+</ul>
+</li>
+</ul>
+<p>You should now be ready to follow along with the classes!</p>
 
 
 <footer class="footline">
@@ -2596,17 +2600,17 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1675689142"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1675689142"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1675689142"></script>
-    <script src="../../js/jquery.sticky.js?1675689142"></script>
-    <script src="../../js/featherlight.min.js?1675689142"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1675689142"></script>
-    <script src="../../js/learn.js?1675689142"></script>
-    <script src="../../js/hugo-learn.js?1675689142"></script>
+    <script src="../../js/clipboard.min.js?1675691513"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1675691513"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1675691513"></script>
+    <script src="../../js/jquery.sticky.js?1675691513"></script>
+    <script src="../../js/featherlight.min.js?1675691513"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1675691513"></script>
+    <script src="../../js/learn.js?1675691513"></script>
+    <script src="../../js/hugo-learn.js?1675691513"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1675689142"></script>
+            <script src="../../mermaid/mermaid.js?1675691513"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

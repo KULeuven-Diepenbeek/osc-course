@@ -1,34 +1,32 @@
-
-
-
 ---
 title: '2. Linux Installation Instructions'
 ---
 
 The exercises for this course are to be done on the **Linux** Operating System (OS). For those unfamiliar, Linux is an open source OS that comes in many different forms called distributions. Linux is used extensively worldwide and you will need to use it many times in your future career.
 
-We would of course not ask you to remove Windows to install Linux on your personal machine and installing them side-by-side (called dual boot) is also a hassle. So for this course we use a third option, called a "virtual machine". We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it's running on normal hardware.
+We would of course not ask you to remove Windows to install Linux on your personal machine. Installing both OSes side-by-side (called a _"dual boot"_) is also a very valid option. Please see the [Ubuntu Install Guide](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview) if you'd like to install Linux permanently. Make sure not to erase your existing Windows partition! We are _not_ responsible and will _not_ be able to help if something went wrong.  
+
+For this course, we provide a third option, called a _"virtual machine"_. We will install Linux inside of your Windows OS through an additional program called VirtualBox, which will make Linux think it's running on normal hardware.
 
 Notes:
 
 * If you are already using Linux on your laptop, you can skip steps 1-4 below, but make sure you do steps 5-6!
-* If you are using MacOS, you should still install VirtualBox. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. 
-* If you are using MacOS 11 (Big Sur) on a M1 Apple architecture (ARM64 - click on "apple" - "about": does "Chip" say "Apple M1"?), then you're out of luck. VirtualBox does not run under the M1 chip, but QEmu does. See https://www.sevarg.net/2021/01/09/arm-mac-mini-and-boinc/ - although beware and follow it at your own risk!
-* If you are using Windows **and have a bit more experience**, you can also install the WSL (Windows Subsystem for Linux) instead of VirtualBox. See https://docs.microsoft.com/en-us/windows/wsl/install for a tutorial. This is only recommended for students who know what they are doing though!
+* If you are using MacOS, you should still install a Linux flavor. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. For instance, you will not be able to compile and run the device driver exercises.
+    - If you are using a 2020+ M1 Apple Mac architecture (ARM64 - click on "apple" - "about": does "Chip" say "Apple M1"?), then you should try out the QEMU-based Mac-specific virtualization alternative called [UTM](https://mac.getutm.app/). Follow [the UTM docs](https://docs.getutm.app/guides/ubuntu/) on how to install Ubuntu. Don't forget to choose "virtualize" and mount [the ARM64 `.iso`](https://ubuntu.com/download/server/arm)---not the AMD one. Bodhi Linux only works in "emulate" mode and is _very_ slow.
+    - If that still doesn't work, try [VMWare Fusion](https://www.vmware.com/products/fusion.html), a personal edition is free.
 
 
-## Recipe for installing the OSC virtual machine
+## OSC VirtualBox Install Guide
 
 1. Download and install [VirtualBox](https://www.virtualbox.org/)
-
 2. Download Linux
     * There are many types of Linux available. We will use either Ubuntu or Bodhi (which is a more lightweight, smaller version of Ubuntu)
-        * download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 20.04.3 LTS, filename ubuntu-20.04.3-desktop-amd64.iso) (2.7GB image, will require 10GB disk space)
+        * download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, will require 10GB+ disk space)
         * OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)
     * We strongly recommend you use Ubuntu if possible
 
 3. Prepare VirtualBox
-    * For this first part, we will follow [an existing guide](https://brb.nci.nih.gov/seqtools/installUbuntu.html)
+    * For this first part, we will follow [an existing guide](https://brb.nci.nih.gov/seqtools/installUbuntu.html). You can also simply read along the official [Ubuntu VirtualBox install guide](https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview).
         * Note that this is for an older version of Ubuntu, but everything is the same up until where you need to actually install Linux (the "Install Ubuntu" heading), which is where you go to step 4 below
     * Follow the guide until the "Install Ubuntu" Heading, taking into account these changes/options:
         * Memory size:
@@ -65,37 +63,28 @@ Notes:
         * Install git: `sudo apt update && sudo apt install -y git`
         * Go to your home directory: `cd ~/`
         * Download the course files: `git clone https://github.com/KULeuven-Diepenbeek/osc-exercises.git course-files`
-            * This will create a new directory named "course-files" containing the necessary items. You can verify this by typing `ls -al`
+            * This will create a new directory named "course-files" containing the necessary items. You can verify this by typing `ls -la`
 
 
 You should now be ready to follow along with the classes! 
 
 ## FAQ
 
-1. [WINDOWS] The screen looks very interlaced
-  * Settings > Display
-    * Graphics Controller VBoxVGA -> VMSVGA
-2. I want to change the keyboard layout!
-  * (https://www.bodhilinux.com/w/configuring-your-new-bodhi-system/ Go to Menu > Applications > System Tools > System Settings > Keyboard Layout to open the Keyboard Layout dialog box.  Click your language from the list and hit Apply Selected.)
-3. I want to be able to copy-and-paste text between my Host (my own computer) and the Guest (Linux ISO)!
-  * This is not possible without the installation of an additional package: https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745
-4. I want to install something else such as my own favorite editor!
-  * `sudo apt install [package]`
-5. I want to change the resolution of the VirtualBox display
-  * This is sadly non-trivial with VirtualBox, where by default you can either choose the small/windowed view (default), or a fullscreen view from the menu.
-  * To choose a dynamic resolution, you need to install the "VirtualBox Guest Additions"
-    * Boot the Virtual Machine and login
-    * In the VirtualBox menu on top, choose "Mount Guest Additions CD Image" (bottom option)
-    * This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
-        * Sometimes this step requires additional software to be installed first. This typically does the trick: `sudo apt install -y make perl`. After this, reboot the VM and re-Mount the CD image. 
-6. If you have other issues, Google is your friend. There's a high chance others have encountered the same problem as you have, and have posted a solution.
+- [WINDOWS] The screen looks very interlaced
+    - Settings > Display
+    - Graphics Controller VBoxVGA -> VMSVGA
+- I want to change the keyboard layout!
+    - See https://www.bodhilinux.com/w/configuring-your-new-bodhi-system/: Go to Menu > Applications > System Tools > System Settings > Keyboard Layout to open the Keyboard Layout dialog box.  Click your language from the list and hit Apply Selected.
+- I want to be able to copy-and-paste text between my Host (my own computer) and the Guest (Linux ISO)!
+    - This is not possible without the installation of an additional package: https://askubuntu.com/questions/22743/how-do-i-install-guest-additions-in-a-virtualbox-vm/22745#22745
+- I want to install something else such as my own favorite editor!
+    - `sudo apt install [package]`. Read It's FOSS's [Ubuntu Getting Started Guide](https://itsfoss.com/getting-started-with-ubuntu/).
+- I want to change the resolution of the VirtualBox display
+    - This is sadly non-trivial with VirtualBox, where by default you can either choose the small/windowed view (default), or a fullscreen view from the menu.
+    - To choose a dynamic resolution, you need to install the "VirtualBox Guest Additions"
+        - Boot the Virtual Machine and login
+        - In the VirtualBox menu on top, choose "Mount Guest Additions CD Image" (bottom option)
+    - This should allow you to auto-install the necessary software. After this, reboot the VM and you should be able to choose new screen sizing options in the VirtualBox View menu
+        - Sometimes this step requires additional software to be installed first. This typically does the trick: `sudo apt install -y make perl`. After this, reboot the VM and re-Mount the CD image. 
 
-<!-- 6. I get the following error **can't open device "/dev/ttyACM0": No such file or directory**. This means that the Arduino is not present in the Virtual Machine. Make sure you've added the device in the **OSC - Settings** !! 
-{{% figure src="/img/installVM/arduino_01.png" %}}
-  * This can be verified with the command **lsusb**. If the Arduino is not found, it should not be present in the result of this command:
-{{% figure src="/img/installVM/arduino_02.png" %}}
-  * In the bottom right of your VirtualBox machine, you can give permission to your Arduino on the VM:
-{{% figure src="/img/installVM/arduino_03.png" %}}
-  * The VM should now be able to see the Arduino. Again ... verify with **lsusb**
-{{% figure src="/img/installVM/arduino_04.png" %}} -->
-
+If you encounter any other issues, Google is your friend. There's a high chance others have encountered the same problem as you have, and have posted a solution.

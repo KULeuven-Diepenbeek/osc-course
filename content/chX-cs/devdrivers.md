@@ -53,10 +53,10 @@ Character devices are the simplest types of devices to communicate with, on a Li
 
 <div class="multicolumn">
   <div class="column">
-    {{% figure src="https://www.partsdata.de/media/image/65/5b/58/null-modem-kabel--2x-dsub-9-weiblich-cross-over-belegung-3m_CNULL-101_1_1280x1280.png" width="55%" title="The original serial port cable" %}}
+    {{% figure src="/img/nullmodem.jpg" width="55%" title="The original serial port cable" %}}
   </div>
   <div class="column">
-    {{% figure src="https://en.accessoires-asus.com/images/contenu/type-de-cable-usb.jpg" title="Different types of USB connectors" %}}
+    {{% figure src="/img/usbconnectors.jpg" title="Different types of USB connectors" %}}
   </div>
 </div>
 

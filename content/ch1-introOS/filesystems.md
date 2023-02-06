@@ -96,7 +96,7 @@ Changing the owners of the file can be done using `chown user:group [filepath]`.
 
 A complete overview of the permission system, neatly summarized by Julia Evans:
 
-{{% figure src="https://1.bp.blogspot.com/-4YYentw6dEM/W2WjhM1l1DI/AAAAAAAAL6M/2pJn_KbDXmUPEImvikiCFcnWJ0pLvzVVACLcBGAs/s640/UNIX%2Bfile%2Bpermissions%2Bby%2BJulia%2BEvans.jpg" title="source: drawings.jvns.ca"%}}
+{{% figure src="/img/unixperms.jpg" title="source: drawings.jvns.ca"%}}
 
 
 ## File system (FS) flavors

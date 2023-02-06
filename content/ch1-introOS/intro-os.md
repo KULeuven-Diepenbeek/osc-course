@@ -38,9 +38,9 @@ Different OSes exist for different computing platforms.
 <table style="border: 0px;">
     <tr>
         <td width="50%"><h4>Laptops, desktops, and servers</h4>On laptops, desktops, and servers, the most well known operating systems are used. These include: Microsoft's Windows, Linux, and MacOS. It goes without saying that there are many more operating systems for these platforms, but some/many of them are fairly unknown to the wider public. These might include: DOS, BeOS, BSD, Unix, Solaris, SunOS, ...</td>
-        <td>{{< figure src="https://3.imimg.com/data3/OP/NK/MY-2971758/laptop-desktop-and-server-trading-service-250x250.jpg" width="500px" title="Source: imimg.com" >}}</td>
+        <td>{{< figure src="/img/laptop-desktop-and-server-trading-service.jpg" width="500px" title="Source: imimg.com" >}}</td>
     </tr>
-    <tr><td>{{< figure src="https://images.fridaymagazine.ae/1_2244719/imagesList_0/159508486_main.jpg" width="500px" title="Source: fridaymagazine.ae" >}}</td>
+    <tr><td>{{< figure src="/img/embeddedsystem.jpg" width="500px" title="Source: skyfilabs.com" >}}</td>
         <td><h4>Embedded systems</h4>Embedded systems come in many flavours, colours and sizes. Typically, these devices are smaller and have fewer features than the laptops and co do. It goes without saying that the OSes that run on embedded systems are different to, or at least ported from, the other OSes. A number of OSes for embedded systems are: Android, FreeRTOS, Symbian, mbedOS, and brickOS.</td></tr>
 </table>
 
@@ -79,7 +79,7 @@ Do you know which flavor of OS runs on:
 
 The image above showed that the OS places itself between general software and hardware. In the most inner core of an OS resides the kernel, the heart of the OS. Depending on the type of the kernel, a typical classification of OSes can be made:
 
-{{< figure src="https://upload.wikimedia.org/wikipedia/commons/d/d0/OS-structure2.svg" title="source: Wikipedia. (IPC: Inter-Process communication. VFS: Virtual Filesystem Switch)" >}}
+{{< figure src="/img/OS-structure2.svg" title="source: Wikipedia. (IPC: Inter-Process communication. VFS: Virtual Filesystem Switch)" >}}
 
 * A **Monotlithic kernel** is a kernel that runs the __complete__ OS in kernel space.
     Linux is a example of an OS that uses a Monolithic kernel.
@@ -117,7 +117,7 @@ The Linux kernel, available at [kernel.org](https://kernel.org/), almost never c
 
 As such, there is a large number of Linux distributions available, which mainly differ in the additional software they provide on top of the Linux kernel (which is pretty much the same across distros). Which one to pick was (and probably is) the start of multiple programmer wars, as everyone has their own preference. Our recommendation is to take into consideration what you want to use it for. For example when using Linux on a Web server, you probably don't need a full GUI or a Web browser, which is different from when you want to use it as your main OS on your laptop. 
 
-{{< figure src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" title="source: Wikimedia" >}}
+{{< figure src="/img/GNU_Linux Distributions Timeline.svg" title="source: Wikimedia" >}}
 
 
 If the figure above doesn't contain a distribution to your liking you can always Do It Yourself: [Linux from scratch](http://www.linuxfromscratch.org/). Happy compiling !!
@@ -167,7 +167,7 @@ Most operating systems allow for multiple users to share one system and provide 
 
 A better way of approaching your day-to-day work on a Linux system is to use a standard user. Whenever you need a higher privilege-level, you can use **sudo** (Super User DO). This is a simple tool that allows a regular user to execute only certain commands as the root-user (only when needed). In your VM, your main user that you use to login with is normally also the root user, but you still need to use "sudo" to execute sensitive commands. 
 
-{{% figure src="https://imgs.xkcd.com/comics/sandwich.png" title="source: xkcd.com"%}}
+{{% figure src="/img/sudosandwich.png" title="source: xkcd.com"%}}
 
 Every user that has a login on a Linux system also automatically belongs to a **group**. Depending on the distribution, this group can have multiple names. On **Bodhi** for example, a new group is created for every user that bares the same name. Linux allows you to assign certain privileges and access rights to entire groups at a time, instead of only to individual users. 
 
@@ -185,7 +185,7 @@ When a user logs in on a Linux computer, typically one of the following approach
 
 For a desktop/laptop that is running Linux, the GUI approach is typically used. An example is the Ubuntu/Bodhi Virtual Machine you use for the labs. On those systems there are **terminal emulators** which emulate the CLI. Many flavours of these terminals are available: gnome-terminal, xterm, konsole, ...
 
-{{<figure src="http://linuxcommand.org/images/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator. Source: linuxcommand.org">}}
+{{<figure src="/img/adventure_powerterm_gnome_terminal_with_tabs.png" title="Example of a Terminal emulator. Source: linuxcommand.org">}}
 
 For embedded systems or Linux running on servers, the CLI is more appropriate. Running the Graphical User Interface requires CPU time and storage. Both are scarce on an embedded system. Since everything can be done through the command line, removing the GUI is a win-win. Additionally, it is useful to learn the CLI commands even if you normally use the GUI, because they play a large part in writing automation scripts for the OS: automation scripts typically do not indicate commands like "click button at location x,y" but rather execute the necessary CLI commands directly.
 

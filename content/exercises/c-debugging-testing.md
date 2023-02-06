@@ -2,7 +2,7 @@
 title: '2. Testing in C(++)'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 2
-draft: false
+draft: true
 ---
 
 **Download the start project files here**: [cpp-testing.cpp](/exercises/cpp-testing.cpp), [cpp-testing-main.cpp](/exercises/cpp-testing-main.cpp). Remember that in order to run this as a Google Test Suite, you need to compile it using `g++` and bootstrap GTest in a separate `.cpp` file where the `main()` function resides. Go back to the lab notes if you're not sure how to pull this off.

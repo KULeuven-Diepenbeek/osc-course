@@ -223,7 +223,7 @@ While mutex locks are useful, the are also relatively simple and limited in what
 
 This technique is used in for example producer-consumer problems. There, one or more producer threads prepare data (in our exercises: prime numbers) and put it in a limited amount of shared memory spots (say an array of size 10), ready to be used by one or more consumers (in our exercises: a function that prints the prime numbers). This type of setup prevents us from having to allocate a large amount of memory up-front to communicate thread results (as we did in the solution to the last exercise in the previous lab).
 
-{{% figure src="https://www.baeldung.com/wp-content/uploads/2022/02/Multi-Producers-Multi-Consumers.png" title="A high-level visualization of a multi-producer + multi-consumer problem with a limited amount of shared memory in between." %}}
+{{% figure src="/img/Multi-Producers-Multi-Consumers.jpg" title="A high-level visualization of a multi-producer + multi-consumer problem with a limited amount of shared memory in between." %}}
 
 In this setup, we don't just want to lock access to the shared memory so only 1 producer or consumer can use it at a given time, we want to do more: we want the producers to only write data to the shared memory if there is an open spot. If not, they have to wait. Similarly, the consumers can only read data from shared memory if there is actually something there. If not, they have to wait. 
 
@@ -317,7 +317,7 @@ As you can see, multiple threads can be waiting on the same semaphore (determine
 
 To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in a child daycare there can be a room with toys: 
 
-{{% figure src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" title="This photo of Cafe Boulevard is courtesy of Tripadvisor"  width="50%" %}}
+{{% figure src="/img/cafe-boulevard.jpg" title="A photo of Cafe Boulevard (courtesy of Tripadvisor)"  width="50%" %}}
 
 Only 5 children are allowed in that room. Outside, there is a bowl with bracelets (`init( braceletBowl, 5 )`). When a child wants to enter the room to play, they need to take a bracelet and put it on (`wait( braceletBowl )`). When there are no more bracelets in the bowl, a child that also wants to play in the room has to wait (also `wait( braceletBowl )`) until another child leaves the room and places their bracelet back in the bowl (`post( braceletBowl )`).
 

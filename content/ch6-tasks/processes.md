@@ -9,6 +9,8 @@ One of the three core tasks of an OS is the **management of tasks**. These diffe
 
 ## What's in a process ?
 
+<img src="/img/Program_memory_layout.pdf.jpg" title="source: Wikipedia" style="float: right;">
+
 By definition, a process is an instance of a program. As was dicussed in the "C-portion" of this course, a basic program can be divided in multiple **segments**. When source code is compiled into a binary, these segments are *fixed*. 
 
 * **text/code**: is the machine code in assembly. This section is compiled for one (type of) processor(s).
@@ -16,8 +18,6 @@ By definition, a process is an instance of a program. As was dicussed in the "C-
 * **bss**: (Block Starting Symbol) this segment contains the global and static variables that are not initialised.
 * **stack**: dynamic part of memory used to store typically short-lived data. *See Chapter 8*
 * **heap**: dynamic part of memory used to store typically longer-lived data. *See Chapter 8*
-
-{{% figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-225px-Program_memory_layout.pdf.jpg" title="source: Wikipedia"%}}
 
 
 Let's put these definitions to the test. A very simple program could be written as follows:

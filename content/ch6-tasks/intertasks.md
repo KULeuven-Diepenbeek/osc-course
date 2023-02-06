@@ -368,7 +368,7 @@ With this measure in place, the result is as was intended.
 
 A more advance technique for synchronisation, in comparison with a mutex, is a semaphore. To illustrate this, a semaphore can be thought of as a bowl with tokens. For example, in daycare there can be a room with toys. 
 
-{{% figure src="https://media-cdn.tripadvisor.com/media/photo-s/03/c6/74/b4/cafe-boulevard.jpg" title="This photo of Cafe Boulevard is courtesy of Tripadvisor"  width="50%" %}}
+{{% figure src="/img/cafe-boulevard.jpg" title="A photo of Cafe Boulevard (courtesy of Tripadvisor)"  width="50%" %}}
 
 Only 5 children are allowed in that room. Outside, there is a bowl with bracelets. When a child wants to enter the room to play, he/she needs to take a bracelet and put it on. When there are not more bracelets, a child that also wants to play in the room has to wait until another child leaves the room and places his/her bracelet back in the bowl.
 

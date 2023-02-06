@@ -29,7 +29,7 @@ A few of these possible operations, applied to one or two parameters (called _op
 Most of these operations are typically implemented directly in hardware by a combination of logical ports (AND, OR, NOT, etc.). What that looks like exactly is discussed in your other course `Digital and Electronic Circuits (DISCH)`. For now, the main thing we need to know is that all the operations are typically combined in a single hardware element: the **Arithmetic Logical Unit (ALU)**. 
 
 <div style="max-width: 500px; margin: 0 auto;">
-{{<figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/ALU_block.gif/1200px-ALU_block.gif" title="The ALU">}}
+{{<figure src="/img/ALU_block.gif" title="The ALU (wikipedia)">}}
 </div>
 
 As the single ALU supports multiple operations, we need a way to select which operation is chosen at a given time. This is done using the **operation code (opcode)**, which is really just a number. For example, we can define that number 0 means ADD, 1 means SUB(TRACT), 2 means MUL(TIPLY), etc.
@@ -176,8 +176,6 @@ _Note: here we represent addresses as hexadecimal values and non-addresses as de
 
 We see that we've split a single instruction over 4 different bytes in memory. Conceptually, we could have tried to encode it all in a single byte as well, for example by taking the first 2 bits as an opcode, the next 2 bits as address 1, another 2 for address 2, etc. However, as you can see, that would severly limit the amount of values we could represent (2 bits can only mean 4 options (0, 1, 2, or 3) and so only 4 opcodes or 4 memory addressess...). By using more memory for each, we allow a wider range of values. 
 
-<!-- {{<figure src="https://peacehumanity.org/wp-content/uploads/2021/10/placeholder-286.png" title="Show how instructions map to ALU/mem hardware">}} -->
-
 {{% notice note %}}
 
 Note that 8 bits (1 byte) for an address is still very little (only allows us to address 256 bytes). Real instruction encodings typically either use more than 1 byte to represent an address or use multiple steps to load a full address (for example for a 32-bit address, first load one 16-bit part with 1 instruction, then the second 16-bit part with another instruction). Other clever tricks are used, such as using an `offset` from a starting address (for example when storing an array), so you don't always need to create larger addresses. This is however not important for this course yet. Here we can just assume a simple 256-byte RAM where all addresses fit nicely into a single byte!
@@ -317,8 +315,6 @@ How would you load a hardcoded value into a memory address, using only the instr
 
 <input value="Toggle solution" type="button" onclick="toggleDisplay('q313')"/>
 {{% /task %}}
-
-<!-- {{<figure src="https://peacehumanity.org/wp-content/uploads/2021/10/placeholder-286.png" title="Show how instructions map to ALU OR mem hardware depending on their type">}} -->
 
 
 ## Branching and the Program Counter
@@ -646,7 +642,7 @@ Adapted from [wikipedia](https://en.wikipedia.org/wiki/Von_Neumann_architecture)
 
 
 <div style="max-width: 50%; margin: 0 auto;">
-{{<figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Von_Neumann_Architecture.svg/2560px-Von_Neumann_Architecture.svg.png" title="The high-level Von Neumann architecture (source: wikipedia)">}}
+{{<figure src="/img/Von_Neumann_Architecture.svg.png" title="The high-level Von Neumann architecture (source: wikipedia)">}}
 </div>
 
 

@@ -5,7 +5,7 @@ weight: 4
 ---
 
 
-{{<figure src="https://upload.wikimedia.org/wikipedia/commons/2/24/Blank_page_intentionally_end_of_book.jpg" title="image source: wikipedia.com">}}
+{{<figure src="/img/Blank_page_intentionally_end_of_book.jpg" title="image source: wikipedia.com">}}
 
 * **Get page size** on your Linux system through a C program
 

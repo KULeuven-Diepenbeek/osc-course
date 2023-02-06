@@ -4,7 +4,7 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 2
 ---
 
-{{<figure src="https://imgs.xkcd.com/comics/compiler_complaint.png" title="source: xkcd.com">}}
+{{<figure src="/img/compiler_complaint.png" title="source: xkcd.com">}}
 
 ## Segfault this
 

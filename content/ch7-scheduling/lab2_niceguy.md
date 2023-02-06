@@ -4,7 +4,7 @@ pre: "<i class='fas fa-vial'></i> "
 weight: 4
 ---
 
-{{<figure src="https://images-na.ssl-images-amazon.com/images/I/41mzOaXP%2BcL._SX337_BO1,204,203,200_.jpg" title="image source: amazon.com">}}
+{{<figure src="/img/mrniceguy.jpg" title="image source: amazon.com">}}
 
 * Write a program in C that fetches its own **PID** and **priority**. Display the PID, the nice value and the priority.
     * hint: use `getpriority()` in ```#include <sys/resource.h>``` and use PRIO_PROCESS

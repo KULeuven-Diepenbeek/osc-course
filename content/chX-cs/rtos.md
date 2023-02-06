@@ -7,7 +7,7 @@ weight: 2
 ## Operating Systems
 In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
 
-{{% figure src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Simplified_Structure_of_the_Linux_Kernel.svg/1920px-Simplified_Structure_of_the_Linux_Kernel.svg.png" title="source: wikipedia.com" width="60%" %}}
+{{% figure src="/img/Simplified_Structure_of_the_Linux_Kernel.svg.png" title="source: wikipedia.com" width="60%" %}}
 
 The image above shows: 
 
@@ -15,14 +15,13 @@ The image above shows:
 * Memory management
 * the IO subsystem
 
-
 <div class="multicolumn">
-	<div class="column">
-		{{% figure src="/img/chx/desired.svg" title="The desired situation." %}}
-	</div>
-	<div class="column">
-		{{% figure src="/img/chx/reality.svg" title="The real situation." %}}
-	</div>
+<div class="column">
+{{% figure src="/img/chx/desired.svg" title="The desired situation." %}}
+</div>
+<div class="column">
+{{% figure src="/img/chx/reality.svg" title="The real situation." %}}
+</div>
 </div>
 
 The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware. On the left-hand side of the image above a visual representation is given of what we want to experience. Everything is running truly in parallel.	We have touched on a number of reasons why reality is more like is shown on the right-hand side of the image. The OS will do its best to achieve the desired situation as good as possible. However, sometimes doing your best is **not good enough**.
@@ -36,11 +35,10 @@ Try to imagine these situations (and the possible explanations from the develope
 * The motor of a high-end sports car **burned** out due to a faulty-timed gear shift
 	* *Sorry, at the moment the timer ended, the microcontroller was handling a switch in radio stations.*
 
-{{% notice warning %}}
-**Sometimes doing your best is not good enough**
-{{% /notice %}}
+**Sometimes, doing your best is not good enough.**
 
 ## Real-time Operating Systems
+
 While a general OS tries its best to meet all constraints, a sporadic failure is not a vital problem. If there is a dip in network handling resulting in a short lag of a youtube-clip the computer will not crash-and-burn. Operating systems like this are called **soft real-time operating systems** and examples are: Linux, Windows, iOS, ...
 
 
@@ -57,11 +55,12 @@ For the sake of completeness it is pointed out that tweaks are available to turn
 ### FreeRTOS
 
 
-{{% figure src="https://www.freertos.org/wp-content/uploads/2018/07/logo-1.jpg" title="The FreeRTOS logo" %}}
+![](/img/freertos.jpg)
 
-[FreeRTOS](https://www.freertos.org/) is an open source real-time OS that is tailored for embedded systems. You can run this on the Arduino we touched upon in [chapter 3](/ch3-interrupts/). Again ... you can run **this OS** on the little microcontroller :smile:
 
-This OS essentially consists out 5 files:
+[FreeRTOS](https://www.freertos.org/) is an open source real-time OS that is tailored for embedded systems. You can even run this on an Arduino.
+
+This OS essentially consists out of merely 5 files:
 
 * **tasks.c**: handles task management
 * **queue.c**: handles queues & synchronisation 
@@ -131,10 +130,10 @@ int main(void) {
 }
 ```
 
-## Outdated ?
+## Is a RTOS outdated?
 
-One could state that RTOS-es are outdated. Processors and OS-es, anno 2020, are **so powerful** that no additional measures should be taken to guarantee specific constraints. While that might be true, there is also **scalability**. 
+One could state that RTOS-es are outdated. Processors and OS-es, anno 2023, are **so powerful** that no additional measures should be taken to guarantee specific constraints. While that might be true, there is also **scalability**. 
 
 It might be feasible to write all the desired software (networking stacks, logging, sensor reading, ...) in such a way all constraints are met, **BUT** it requires a state-of-the-art system. For example: a processor with 2 GB of RAM memory and 160 GB of solid state storage. Installing this in every gearbox of a car, for example, simply is **too expensive**. If the same constraints and performance requirements can be met for a fraction of the price, industry dictates the latter option should be chosen. 
 
-That's good news for whoever is studying this course, as skill-full programmers and engineers are a necessity to make this work :smile:
+That's good news for whoever is studying this course, as skill-full programmers and engineers are a necessity to make this work!

@@ -25,9 +25,9 @@ void* doSomeThing(void *arg) {
     counter += 1;
     local_id = counter; // make a local copy of counter for this thread                                
 
-    printf("  Job %d started\n", id);
+    printf("  Job %d started\n", local_id);
     for(i=0; i<(0xFFFFFFFF);i++);
-    printf("  Job %d finished\n", id);
+    printf("  Job %d finished\n", local_id);
 
     return NULL;
 }

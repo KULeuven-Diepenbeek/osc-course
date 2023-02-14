@@ -12,21 +12,21 @@
     <title>2. Linux Installation Instructions :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1675796862" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1675796862" rel="stylesheet">
-    <link href="../../css/hybrid.css?1675796862" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1675796862" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1675796862" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1675796862" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1675796862" rel="stylesheet">
-    <link href="../../css/theme.css?1675796862" rel="stylesheet">
-    <link href="../../css/devselector.css?1675796862" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1675796862" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1675796862" rel="stylesheet">
+    <link href="../../css/nucleus.css?1676361289" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1676361289" rel="stylesheet">
+    <link href="../../css/hybrid.css?1676361289" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1676361289" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1676361289" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1676361289" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1676361289" rel="stylesheet">
+    <link href="../../css/theme.css?1676361289" rel="stylesheet">
+    <link href="../../css/devselector.css?1676361289" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1676361289" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1676361289" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1675796862"></script>
-    <script src="../../js/devselector.js?1675796862"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1676361289"></script>
+    <script src="../../js/devselector.js?1676361289"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1675796862"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1675796862"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1676361289"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1676361289"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1675796862"></script>
+<script type="text/javascript" src="../../js/search.js?1676361289"></script>
 
     
   </div>
@@ -1513,8 +1513,8 @@
 <p>Therefore, for this course, you&rsquo;ll need to install a Linux flavor on your machine. Below are a number of options in how to do so. We would of course not ask you to remove Windows to install Linux on your personal machine: both OSes can perfectly live side-by-side. If you are using MacOS, you should still install a Linux flavor. Even though MacOS also runs on a flavor of UNIX, they are not fully compatible. For instance, you will not be able to compile and run the device driver exercises.</p>
 <p>There are many types of Linux distros available. We will use either Ubuntu or Bodhi&mdash;which is a more lightweight, smaller version of Ubuntu that&rsquo;s easier to virtualize (see option 2 below). Ubuntu is the most newbie-friendly Linux OS.</p>
 <ul>
-<li>Download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, will require 10GB+ disk space)</li>
-<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)</li>
+<li>Download <a href="https://ubuntu.com/download/desktop">Ubuntu</a> (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, requires <code>12 GB</code>+ disk space)</li>
+<li>OR download <a href="https://www.bodhilinux.com/download">Bodhi</a> (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, requires <code>6 GB</code>+ disk space)</li>
 </ul>
 <p>For newcomers, we strongly recommend you to use Ubuntu if possible.</p>
 <h2 id="step-a-install-linux">Step A: Install Linux</h2>
@@ -1530,7 +1530,7 @@
 
 <h3 id="option-2-virtualize">Option 2: Virtualize</h3>
 <p>For this course, we provide a second option, called a <em>&ldquo;virtual machine&rdquo;</em>. This will install Linux inside of your Windows OS through an additional program called Oracle <a href="https://www.virtualbox.org/">VirtualBox</a>, which will make Linux think it&rsquo;s running on normal hardware.</p>
-<p>If you are using a <strong>2020+ M1 Apple Mac architecture</strong> (<code>ARM64</code> - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you should try out the QEMU-based Mac-specific virtualization alternative called <a href="https://mac.getutm.app/">UTM</a>. Follow <a href="https://docs.getutm.app/guides/ubuntu/">the UTM docs</a> on how to install Ubuntu. Don&rsquo;t forget to choose &ldquo;virtualize&rdquo; and mount <a href="https://ubuntu.com/download/server/arm">the ARM64 <code>.iso</code></a>&mdash;not the AMD one. Bodhi Linux only works in &ldquo;emulate&rdquo; mode and is <em>very</em> slow. If that still doesn&rsquo;t work, try <a href="https://www.vmware.com/products/fusion.html">VMWare Fusion</a>, a personal edition is free.</p>
+<p>If you are using a <strong>2020+ M1 Apple Mac architecture</strong> (<code>ARM64</code> - click on &ldquo;apple&rdquo; - &ldquo;about&rdquo;: does &ldquo;Chip&rdquo; say &ldquo;Apple M1&rdquo;?), then you should try out the QEMU-based Mac-specific virtualization alternative called <a href="https://mac.getutm.app/">UTM</a>. Follow <a href="https://docs.getutm.app/guides/ubuntu/">the UTM docs</a> on how to install Ubuntu (min <code>12 GB</code>). Don&rsquo;t forget to choose &ldquo;virtualize&rdquo; and mount <a href="https://cdimage.ubuntu.com/focal/daily-live/current/">the ARM64 <code>.iso</code></a>&mdash;the second link, not the AMD/64-bit PC one. Bodhi Linux only works in &ldquo;emulate&rdquo; mode and is <em>very</em> slow. If that still doesn&rsquo;t work, try <a href="https://www.vmware.com/products/fusion.html">VMWare Fusion</a>, a personal edition is free.</p>
 <h4 id="virtualbox-install-steps">VirtualBox Install Steps</h4>
 <ol>
 <li>
@@ -2600,17 +2600,17 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1675796862"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1675796862"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1675796862"></script>
-    <script src="../../js/jquery.sticky.js?1675796862"></script>
-    <script src="../../js/featherlight.min.js?1675796862"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1675796862"></script>
-    <script src="../../js/learn.js?1675796862"></script>
-    <script src="../../js/hugo-learn.js?1675796862"></script>
+    <script src="../../js/clipboard.min.js?1676361289"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1676361289"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1676361289"></script>
+    <script src="../../js/jquery.sticky.js?1676361289"></script>
+    <script src="../../js/featherlight.min.js?1676361289"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1676361289"></script>
+    <script src="../../js/learn.js?1676361289"></script>
+    <script src="../../js/hugo-learn.js?1676361289"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1675796862"></script>
+            <script src="../../mermaid/mermaid.js?1676361289"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

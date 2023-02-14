@@ -8,8 +8,8 @@ Therefore, for this course, you'll need to install a Linux flavor on your machin
 
 There are many types of Linux distros available. We will use either Ubuntu or Bodhi---which is a more lightweight, smaller version of Ubuntu that's easier to virtualize (see option 2 below). Ubuntu is the most newbie-friendly Linux OS. 
 
-- Download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, will require 10GB+ disk space)
-- OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, will require 6GB disk space)
+- Download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, requires `12 GB`+ disk space)
+- OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, requires `6 GB`+ disk space)
 
 For newcomers, we strongly recommend you to use Ubuntu if possible.
 
@@ -35,7 +35,7 @@ A dual boot installation is not without its **dangers**! Make sure not to erase 
 
 For this course, we provide a second option, called a _"virtual machine"_. This will install Linux inside of your Windows OS through an additional program called Oracle [VirtualBox](https://www.virtualbox.org/), which will make Linux think it's running on normal hardware.
 
-If you are using a **2020+ M1 Apple Mac architecture** (`ARM64` - click on "apple" - "about": does "Chip" say "Apple M1"?), then you should try out the QEMU-based Mac-specific virtualization alternative called [UTM](https://mac.getutm.app/). Follow [the UTM docs](https://docs.getutm.app/guides/ubuntu/) on how to install Ubuntu. Don't forget to choose "virtualize" and mount [the ARM64 `.iso`](https://ubuntu.com/download/server/arm)---not the AMD one. Bodhi Linux only works in "emulate" mode and is _very_ slow. If that still doesn't work, try [VMWare Fusion](https://www.vmware.com/products/fusion.html), a personal edition is free.
+If you are using a **2020+ M1 Apple Mac architecture** (`ARM64` - click on "apple" - "about": does "Chip" say "Apple M1"?), then you should try out the QEMU-based Mac-specific virtualization alternative called [UTM](https://mac.getutm.app/). Follow [the UTM docs](https://docs.getutm.app/guides/ubuntu/) on how to install Ubuntu (min `12 GB`). Don't forget to choose "virtualize" and mount [the ARM64 `.iso`](https://cdimage.ubuntu.com/focal/daily-live/current/)---the second link, not the AMD/64-bit PC one. Bodhi Linux only works in "emulate" mode and is _very_ slow. If that still doesn't work, try [VMWare Fusion](https://www.vmware.com/products/fusion.html), a personal edition is free.
 
 
 #### VirtualBox Install Steps

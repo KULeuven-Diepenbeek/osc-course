@@ -40,11 +40,13 @@ int main(void) {
 
 {{% figure src="/img/os/sc_stacksmashing.png" title="An example of memory protection that given by the OS" %}}
 
+Note that, depending on the OS, the error message might vary: on MacOS, it's simply `[1]    28507 abort      ./example.bin`.
+
 {{% task %}}
 The code above exceeds the allowed stack space. Try to find out why this happens.
 {{% /task %}}
 
-The technique of using **shared memory** allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is **not** protected by the OS. A programming API for using shared memory is provided by POSIX (Portable Operating System Interface). The example below shows a **producer** on the left (a process which puts data inside of the shared memory) and a **consumer** on the right (which uses the data it gets from the producer).
+The technique of using **shared memory** allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is **not** protected by the OS. A programming API for using shared memory is provided by POSIX ([Portable Operating System Interface](https://en.wikipedia.org/wiki/POSIX), a set of standards implemented by most UNIX OSes). The example below shows a **producer** on the left (a process which puts data inside of the shared memory) and a **consumer** on the right (which uses the data it gets from the producer).
 
 <div class="multicolumn">
   <div class="column">
@@ -127,7 +129,7 @@ int main() {
 </div>
 {{% dinobook %}}
 
-**Note:** to compile these, you need to pass the `-lrt` flag to gcc ("link with library rt") like so: `gcc -o producer producer.c -lrt`.
+**Note:** to compile these on Linux, you need to pass the `-lrt` flag to gcc ("link with library rt") like so: `gcc -o producer producer.c -lrt`. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.
 
 {{% task %}}
 This very simple example uses shared memory. Try to find answers to the questions below:
@@ -311,4 +313,5 @@ The anonymous pipes above only live for as long as the processes live. Named pip
 
 Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the **mkfifo** command.
 
-As they are not frequently used, we leave the interested reader to man page :smiley:.
+As they are not frequently used, we direct the interested reader to `man` pages.
+

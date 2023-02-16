@@ -75,11 +75,11 @@ The Process Control Block (PCB) is a representation of the process in the OS. It
 
 **HOLD ON** Linux is an open source OS, so does that mean we should be able to find this struct in the source code ?
 
-**WELL YES** Inspecting the [sched.h](https://github.com/torvalds/linux/blob/master/include/linux/sched.h#L728) file verifies: 
+**WELL YES** Inspecting the [sched.h](https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L737) file verifies: 
 
 1. that we **can** read the source code
 2. that the **task_struct** is indeed there, 
-3. that the PCB has **a lot** of parameters. The definition of the struct starts at line 728 and ends at line 1510 (at the moment of writing, March 17th 2022). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
+3. that the PCB has **a lot** of parameters. The definition of the struct starts at [line 737](https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L737) and ends at [line 1546](https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L1546) for Linux kernel release 6.1. As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:
   * the process state (see below)
   * the process identifier (PID), a unique number
   * the process priority (see Chapter 7, scheduling)
@@ -89,7 +89,7 @@ The Process Control Block (PCB) is a representation of the process in the OS. It
   * the CPU register contents (containing things like the stack pointer, local variables, return addres, etc. see end of Chapter 3)
   * the program counter (PC)
 
-Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pauze a process for a while: simply stop updating the PC. 
+Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pause a process for a while: simply stop updating the PC. 
 
 The PCBs of all the processes are contained in a doubly-linked list data structure in the kernel, which is headed by the **mother of all processes**. This process is called **init** and has **PID 0**. The doubly-linked list is commonly known as the **process table**.
 

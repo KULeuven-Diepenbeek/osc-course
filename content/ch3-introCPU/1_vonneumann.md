@@ -37,7 +37,7 @@ As the single ALU supports multiple operations, we need a way to select which op
 Additionally, the ALU has not one but two outputs: 1) the actual result of the operation, and 2) a number of **status signals**. One simple example of such a signal is the _carry bit_, which is used when adding or multiplying binary numbers. This is also why the ALU can receive status signals as _input_: if the ALU for example works on 32 bits at a time, and we want to add two 64-bit numbers, the carry bit of adding the first two 32-bit parts needs to be passed onto the addition of the second two 32-bit parts. Other signals could for example be if the result was negative, positive, or zero, which helps with comparing two numbers.
 
 {{% task %}}
-Not all possible operation are typically implemented directly in hardware, as they can be reconstructed/created by using _other_ operations in a clever way. 
+Not all possible operations are typically implemented directly in hardware, as they can be reconstructed/created by using _other_ operations in a clever way. 
 For example, negation (-A) can be done by using subtraction (0 - A).
 
 Can you find a clever way of doing the following operations?
@@ -654,4 +654,4 @@ Consequently, you could think of a hacker that writes **code that has the goal t
 
 For this reason, there are often strict separations in place between memory that stores instructions and memory that stores data (we will call them "segments" later in this course). Furthermore, instruction memory is often read-only, except in a few very special circumstances, in which there are other safety measures put in place. 
 
-Finally, program A typically cannot access the memory of program B at all! This is one of the core responsibilities of the operating system: to make sure programs cannot access each other's memory. Not just so they can't read each others data, but as we've now seen, also so they can't change each other's instructions!
+Finally, program A typically cannot access the memory of program B at all! This is one of the core responsibilities of the operating system: to make sure programs cannot access each other's memory. Not just so they can't read each others data, but as we've now seen, also so they can't change each other's instructions! There are exceptions to the rule, such as shared memory models, which will be explained in [chapter 6: inter process communication](/ch6-tasks/interprocess/).

@@ -12,21 +12,21 @@
     <title>6.1: Processes :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1676361289" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/hybrid.css?1676361289" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1676361289" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1676361289" rel="stylesheet">
-    <link href="../../css/theme.css?1676361289" rel="stylesheet">
-    <link href="../../css/devselector.css?1676361289" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1676361289" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1676361289" rel="stylesheet">
+    <link href="../../css/nucleus.css?1676541369" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/hybrid.css?1676541369" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1676541369" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1676541369" rel="stylesheet">
+    <link href="../../css/theme.css?1676541369" rel="stylesheet">
+    <link href="../../css/devselector.css?1676541369" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1676541369" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1676541369" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1676361289"></script>
-    <script src="../../js/devselector.js?1676361289"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1676541369"></script>
+    <script src="../../js/devselector.js?1676541369"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1676361289"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1676361289"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1676541369"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1676541369"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1676361289"></script>
+<script type="text/javascript" src="../../js/search.js?1676541369"></script>
 
     
   </div>
@@ -1549,11 +1549,11 @@ jvliegen@localhost:~/$
 <h3 id="process-control-block">Process Control Block</h3>
 <p>The Process Control Block (PCB) is a representation of the process in the OS. It is created as a <em>task_struct</em> object. Such a PCB is made for every process and the definition of its struct is in the kernel source.</p>
 <p><strong>HOLD ON</strong> Linux is an open source OS, so does that mean we should be able to find this struct in the source code ?</p>
-<p><strong>WELL YES</strong> Inspecting the <a href="https://github.com/torvalds/linux/blob/master/include/linux/sched.h#L728">sched.h</a> file verifies:</p>
+<p><strong>WELL YES</strong> Inspecting the <a href="https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L737">sched.h</a> file verifies:</p>
 <ol>
 <li>that we <strong>can</strong> read the source code</li>
 <li>that the <strong>task_struct</strong> is indeed there,</li>
-<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at line 728 and ends at line 1510 (at the moment of writing, March 17th 2022). As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:</li>
+<li>that the PCB has <strong>a lot</strong> of parameters. The definition of the struct starts at <a href="https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L737">line 737</a> and ends at <a href="https://github.com/torvalds/linux/blob/v6.1/include/linux/sched.h#L1546">line 1546</a> for Linux kernel release 6.1. As might be clear from this code (or even from thinking about the number of lines of codes), this struct is rather large. A (very) small subset of the fields in the struct represent:</li>
 </ol>
 <ul>
 <li>the process state (see below)</li>
@@ -1565,7 +1565,7 @@ jvliegen@localhost:~/$
 <li>the CPU register contents (containing things like the stack pointer, local variables, return addres, etc. see end of Chapter 3)</li>
 <li>the program counter (PC)</li>
 </ul>
-<p>Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pauze a process for a while: simply stop updating the PC.</p>
+<p>Especially these last two parts are crucial: they store the actual execution state of the program at a given time. The PC points to the current instruction the CPU will execute. As such, you can already see how it becomes easy to for example pause a process for a while: simply stop updating the PC.</p>
 <p>The PCBs of all the processes are contained in a doubly-linked list data structure in the kernel, which is headed by the <strong>mother of all processes</strong>. This process is called <strong>init</strong> and has <strong>PID 0</strong>. The doubly-linked list is commonly known as the <strong>process table</strong>.</p>
 <p>Let&rsquo;s verify all of the above. To do that, we need to keep a process running for long enough to determine its PID and read other information. For this, we&rsquo;ll adapt our &ldquo;hello world&rdquo; C program so it takes much more time to run:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
@@ -2621,17 +2621,17 @@ environ          mountinfo  personality    statm
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1676361289"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1676361289"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1676361289"></script>
-    <script src="../../js/jquery.sticky.js?1676361289"></script>
-    <script src="../../js/featherlight.min.js?1676361289"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1676361289"></script>
-    <script src="../../js/learn.js?1676361289"></script>
-    <script src="../../js/hugo-learn.js?1676361289"></script>
+    <script src="../../js/clipboard.min.js?1676541369"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1676541369"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1676541369"></script>
+    <script src="../../js/jquery.sticky.js?1676541369"></script>
+    <script src="../../js/featherlight.min.js?1676541369"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1676541369"></script>
+    <script src="../../js/learn.js?1676541369"></script>
+    <script src="../../js/hugo-learn.js?1676541369"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1676361289"></script>
+            <script src="../../mermaid/mermaid.js?1676541369"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

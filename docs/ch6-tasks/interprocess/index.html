@@ -12,21 +12,21 @@
     <title>6.3: Inter Process communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1676361289" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/hybrid.css?1676361289" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1676361289" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1676361289" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1676361289" rel="stylesheet">
-    <link href="../../css/theme.css?1676361289" rel="stylesheet">
-    <link href="../../css/devselector.css?1676361289" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1676361289" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1676361289" rel="stylesheet">
+    <link href="../../css/nucleus.css?1676541369" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/hybrid.css?1676541369" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1676541369" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1676541369" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1676541369" rel="stylesheet">
+    <link href="../../css/theme.css?1676541369" rel="stylesheet">
+    <link href="../../css/devselector.css?1676541369" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1676541369" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1676541369" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1676361289"></script>
-    <script src="../../js/devselector.js?1676361289"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1676541369"></script>
+    <script src="../../js/devselector.js?1676541369"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1676361289"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1676361289"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1676541369"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1676541369"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1676361289"></script>
+<script type="text/javascript" src="../../js/search.js?1676541369"></script>
 
     
   </div>
@@ -1550,6 +1550,7 @@
             <h4>An example of memory protection that given by the OS</h4>
         </figcaption>
 </figure>
+<p>Note that, depending on the OS, the error message might vary: on MacOS, it&rsquo;s simply <code>[1]    28507 abort      ./example.bin</code>.</p>
 
 <div class="ex">
 	<div class="inner">
@@ -1557,7 +1558,7 @@
 
 	</div>
 </div>
-<p>The technique of using <strong>shared memory</strong> allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is <strong>not</strong> protected by the OS. A programming API for using shared memory is provided by POSIX (Portable Operating System Interface). The example below shows a <strong>producer</strong> on the left (a process which puts data inside of the shared memory) and a <strong>consumer</strong> on the right (which uses the data it gets from the producer).</p>
+<p>The technique of using <strong>shared memory</strong> allows other processes to gain access certain regions of the address space. Both processes have to be aware that the memory is <strong>not</strong> protected by the OS. A programming API for using shared memory is provided by POSIX (<a href="https://en.wikipedia.org/wiki/POSIX">Portable Operating System Interface</a>, a set of standards implemented by most UNIX OSes). The example below shows a <strong>producer</strong> on the left (a process which puts data inside of the shared memory) and a <strong>consumer</strong> on the right (which uses the data it gets from the producer).</p>
 <div class="multicolumn">
   <div class="column">
   <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// PRODUCER
@@ -1647,7 +1648,7 @@
   }
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
-<p><strong>Note:</strong> to compile these, you need to pass the <code>-lrt</code> flag to gcc (&ldquo;link with library rt&rdquo;) like so: <code>gcc -o producer producer.c -lrt</code>.</p>
+<p><strong>Note:</strong> to compile these on Linux, you need to pass the <code>-lrt</code> flag to gcc (&ldquo;link with library rt&rdquo;) like so: <code>gcc -o producer producer.c -lrt</code>. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.</p>
 
 <div class="ex">
 	<div class="inner">
@@ -1810,7 +1811,7 @@ jvliegen@localhost:~/$
 <p><strong>Named pipes</strong> are the other type of pipes that can be created. The main differences with anonymous pipes are the lifetime of this mechanism and their presence in the file system.</p>
 <p>The anonymous pipes above only live for as long as the processes live. Named pipes instead persist and have to be closed explicitly (or are closes automatically at system-shutdown).</p>
 <p>Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the <strong>mkfifo</strong> command.</p>
-<p>As they are not frequently used, we leave the interested reader to man page 😃.</p>
+<p>As they are not frequently used, we direct the interested reader to <code>man</code> pages.</p>
 
 
 <footer class="footline">
@@ -2756,17 +2757,17 @@ jvliegen@localhost:~/$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1676361289"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1676361289"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1676361289"></script>
-    <script src="../../js/jquery.sticky.js?1676361289"></script>
-    <script src="../../js/featherlight.min.js?1676361289"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1676361289"></script>
-    <script src="../../js/learn.js?1676361289"></script>
-    <script src="../../js/hugo-learn.js?1676361289"></script>
+    <script src="../../js/clipboard.min.js?1676541369"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1676541369"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1676541369"></script>
+    <script src="../../js/jquery.sticky.js?1676541369"></script>
+    <script src="../../js/featherlight.min.js?1676541369"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1676541369"></script>
+    <script src="../../js/learn.js?1676541369"></script>
+    <script src="../../js/hugo-learn.js?1676541369"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1676361289"></script>
+            <script src="../../mermaid/mermaid.js?1676541369"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

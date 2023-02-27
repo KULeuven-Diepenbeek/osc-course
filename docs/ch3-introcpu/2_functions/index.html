@@ -12,21 +12,21 @@
     <title>3.3 Functions and The Stack :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1676541369" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1676541369" rel="stylesheet">
-    <link href="../../css/hybrid.css?1676541369" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1676541369" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1676541369" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1676541369" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1676541369" rel="stylesheet">
-    <link href="../../css/theme.css?1676541369" rel="stylesheet">
-    <link href="../../css/devselector.css?1676541369" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1676541369" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1676541369" rel="stylesheet">
+    <link href="../../css/nucleus.css?1677496520" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1677496520" rel="stylesheet">
+    <link href="../../css/hybrid.css?1677496520" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1677496520" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1677496520" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1677496520" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1677496520" rel="stylesheet">
+    <link href="../../css/theme.css?1677496520" rel="stylesheet">
+    <link href="../../css/devselector.css?1677496520" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1677496520" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1677496520" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1676541369"></script>
-    <script src="../../js/devselector.js?1676541369"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1677496520"></script>
+    <script src="../../js/devselector.js?1677496520"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1676541369"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1676541369"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1677496520"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1677496520"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1676541369"></script>
+<script type="text/javascript" src="../../js/search.js?1677496520"></script>
 
     
   </div>
@@ -1759,13 +1759,13 @@
 <div>
 <pre><code>                     // we start in f1() so 0x07 is empty at this time
 1. ADDd 0 line3 0x07 // store return address line3
-2. JMPi line6        // call f2
+2. JMPi line5        // call f2
 3. ADDd 0 10 C
 4. 
 
 5. ADDi 0x07 0 0x500  // copy whatever is in 0x07 (return addres from caller f1) to 0x500
 6. ADDd 0 line8 0x07  // put our own f2 return address (line8) in 0x07
-7. JMPi line12        // call f4   
+7. JMPi line11        // call f4   
 8. ADDi 0x500 0 0x07  // copy 0x500 back to 0x07 (restore previous value)
 9. JMP 0x07           // return from this function to caller f1
 10.
@@ -1797,7 +1797,7 @@
 <p>The opposite is also true: you can&rsquo;t just grab the book at the bottom of the stack; you first need to remove other books from the top. Here, this means <code>f4</code> can&rsquo;t just immediately return to <code>f2</code> (0x500), we of course first need to return to <code>f3</code> (0x501) before we can do that.</p>
 <p>As such, this approach of <strong>putting per-function data directly after each other in memory</strong> is typically called just that: <strong>the stack</strong>!</p>
 <h3 id="the-stack-pointer">The Stack Pointer</h3>
-<p>Now again, we of course again don&rsquo;t want to hardcode the addresses in the functions! We want to dynamically know which location the previous function used last, and then dynamically store our data after that.</p>
+<p>Again, we of course don&rsquo;t want to hardcode the addresses in the functions! We want to dynamically know which location the previous function used last, and then dynamically store our data after that.</p>
 <p>We can do this by using just a single global variable (shared across all functions), which is called the <strong>stack pointer</strong>.</p>
 <p>Let&rsquo;s say this stack pointer lives at address 0x82. Its initial value is 0x500. <code>f1</code> starts and places it return address (line3) into 0x07. This is the (partial) state of the RAM at this point:</p>
 <div class="multicol">
@@ -2044,7 +2044,7 @@
 
 <p>The same thing happens in <code>f2</code>: it reads the stack pointer, decrements it by 1, and finds 0x500. It places the value at 0x500 at 0x07, clears 0x500, and then returns to <code>f1</code> with JMP 0x07. The RAM state is again the same as the one we started with above.</p>
 <h2 id="the-stack-in-assembly">The Stack in Assembly</h2>
-<p>To be able to write the above sequence in Assembly, we actually find we need a new syntax. This is because we need to read the stack pointer&rsquo;s value (at 0x82) and then use the value itself (example 0x501) as an address! We weren&rsquo;t able to do this before, except when it was implied in the instruction&rsquo;s way of working (for example, JMP does work like this implicitly!). If we want to do this for other instructions as well however (for example ADDi), we need some way to indicate that the read value should be treated as an address instead of an immediate. For this, we&rsquo;ll take inspiration from C&rsquo;s pointers:</p>
+<p>To be able to write the above sequence in Assembly, we actually need a new syntax. This is because we need to read the stack pointer&rsquo;s value (at 0x82) and then use the value itself (example 0x501) as an address! We weren&rsquo;t able to do this before, except when it was implied in the instruction&rsquo;s way of working (for example, JMP does work like this implicitly!). If we want to do this for other instructions as well however (for example ADDi), we need some way to indicate that the read value should be treated as an address instead of an immediate. For this, we&rsquo;ll take inspiration from C&rsquo;s pointers:</p>
 
 <div class="notices bignote" ><p>If we write <code>*</code> before an address, it means we want to use the <strong>value at that address as a new address</strong> instead of as a value.</p>
 <p>For example:</p>
@@ -2095,16 +2095,16 @@ ADDd 3 5 *0x10 : this means we read the value currently at address 0x10, interpr
 3. ADDd 0 10 C
 4. 
 
-5.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x500)
+5.  ADDi 0x07 0 *0x82  // store the contents of 0x07 (line3) on the stack (at 0x500)
 6.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x501)
-7.  ADDd 0 line9 0x07  // put our own f2 return address (line8) in 0x07
+7.  ADDd 0 line9 0x07  // put our own f2 return address in 0x07
 8.  JMPi line13        // call f3   
 9.  SUBi 0x82 1 0x82   // decrement the stack pointer value by one (is now 0x500)
 10. ADDi *0x82 0 0x07  // store the value at the stack pointer address (at address 0x500) in 0x07
 11. JMP 0x07           // return from this function to caller f1
 12.
 
-13.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x501)
+13.  ADDi 0x07 0 *0x82  // store the contents of 0x07 on the stack (at 0x501)
 14.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x502)
 15.  ADDd 0 line17 0x07 // put our own f3 return address (line17) in 0x07
 16.  JMPi line22        // call f4   
@@ -2143,7 +2143,7 @@ POP 0x07 // pop value from top of the stack and put it in 0x07
 </div>
 <p><em>Note: for simplicity, we will assume PUSH and POP know where the stack pointer is stored (at 0x82 previously). In &ldquo;real&rdquo; Assembly, this is often a special address/memory location reserved for this purpose by convention and is always the same for all programs (we&rsquo;ll see later how that&rsquo;s possible with virtual memory without causing collisions).</em></p>
 <h2 id="the-stack-for-parameters-return-values-and-local-values">The stack for parameters, return values, and local values</h2>
-<p>If you look back at how we introduced the need for the stack above, you&rsquo;ll remember we talked not just about return addresses, but also function parameters and return values (remember function <code>fY</code>?). We then said that these function features had exactly the same problems as the return addresses (risk of overwriting data across functions).</p>
+<p>If you look back at how we introduced the need for the stack above, you&rsquo;ll remember we talked not just about return addresses, but also function parameters and return values (remember function <code>fY(int M, int N)</code>?). We then said that these function features had exactly the same problems as the return addresses (risk of overwriting data across functions).</p>
 <p>Now that we&rsquo;ve solved the problem for return addresses, you&rsquo;ll be happy to hear the same solution also works for parameters and return values! To reprise the example from before (but changing the variable names slightly to enforce our point), we would now write it as follows using the stack:</p>
 <div class="multicol">
 <div>
@@ -3168,17 +3168,17 @@ TODO: stack grows downward in C -->
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1676541369"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1676541369"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1676541369"></script>
-    <script src="../../js/jquery.sticky.js?1676541369"></script>
-    <script src="../../js/featherlight.min.js?1676541369"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1676541369"></script>
-    <script src="../../js/learn.js?1676541369"></script>
-    <script src="../../js/hugo-learn.js?1676541369"></script>
+    <script src="../../js/clipboard.min.js?1677496520"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1677496520"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1677496520"></script>
+    <script src="../../js/jquery.sticky.js?1677496520"></script>
+    <script src="../../js/featherlight.min.js?1677496520"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1677496520"></script>
+    <script src="../../js/learn.js?1677496520"></script>
+    <script src="../../js/hugo-learn.js?1677496520"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1676541369"></script>
+            <script src="../../mermaid/mermaid.js?1677496520"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

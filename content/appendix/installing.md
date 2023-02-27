@@ -11,7 +11,7 @@ There are many types of Linux distros available. We will use either Ubuntu or Bo
 - Download [Ubuntu](https://ubuntu.com/download/desktop) (choose the Ubuntu 22.04.1 LTS, filename ubuntu-22.04.1-desktop-amd64.iso) (3.6 GB image, requires `12 GB`+ disk space)
 - OR download [Bodhi](https://www.bodhilinux.com/download) (choose the Standard release, filename bodhi-6.0.0-64.iso) (800MB image, requires `6 GB`+ disk space)
 
-For newcomers, we strongly recommend you to use Ubuntu if possible. Ubuntu's default user password is... `ubuntu`.
+For newcomers, we strongly recommend you to use Ubuntu if possible. Ubuntu's default user password is... `ubuntu`. 
 
 ## Step A: Install Linux
 

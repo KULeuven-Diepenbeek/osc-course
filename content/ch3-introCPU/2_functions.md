@@ -331,13 +331,13 @@ Let's illustrate this with the simple example where we only need to worry about 
 ```
                      // we start in f1() so 0x07 is empty at this time
 1. ADDd 0 line3 0x07 // store return address line3
-2. JMPi line6        // call f2
+2. JMPi line5        // call f2
 3. ADDd 0 10 C
 4. 
 
 5. ADDi 0x07 0 0x500  // copy whatever is in 0x07 (return addres from caller f1) to 0x500
 6. ADDd 0 line8 0x07  // put our own f2 return address (line8) in 0x07
-7. JMPi line12        // call f4   
+7. JMPi line11        // call f4   
 8. ADDi 0x500 0 0x07  // copy 0x500 back to 0x07 (restore previous value)
 9. JMP 0x07           // return from this function to caller f1
 10.
@@ -380,7 +380,7 @@ As such, this approach of **putting per-function data directly after each other 
 
 ### The Stack Pointer
 
-Now again, we of course again don't want to hardcode the addresses in the functions! We want to dynamically know which location the previous function used last, and then dynamically store our data after that. 
+Again, we of course don't want to hardcode the addresses in the functions! We want to dynamically know which location the previous function used last, and then dynamically store our data after that. 
 
 We can do this by using just a single global variable (shared across all functions), which is called the **stack pointer**. 
 
@@ -493,7 +493,7 @@ The same thing happens in `f2`: it reads the stack pointer, decrements it by 1, 
 
 ## The Stack in Assembly
 
-To be able to write the above sequence in Assembly, we actually find we need a new syntax. This is because we need to read the stack pointer's value (at 0x82) and then use the value itself (example 0x501) as an address! We weren't able to do this before, except when it was implied in the instruction's way of working (for example, JMP does work like this implicitly!). If we want to do this for other instructions as well however (for example ADDi), we need some way to indicate that the read value should be treated as an address instead of an immediate. For this, we'll take inspiration from C's pointers:
+To be able to write the above sequence in Assembly, we actually need a new syntax. This is because we need to read the stack pointer's value (at 0x82) and then use the value itself (example 0x501) as an address! We weren't able to do this before, except when it was implied in the instruction's way of working (for example, JMP does work like this implicitly!). If we want to do this for other instructions as well however (for example ADDi), we need some way to indicate that the read value should be treated as an address instead of an immediate. For this, we'll take inspiration from C's pointers:
 
 {{% notice bignote %}}
 
@@ -562,16 +562,16 @@ If we thus write the above sequence in Assembly, we get:
 3. ADDd 0 10 C
 4. 
 
-5.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x500)
+5.  ADDi 0x07 0 *0x82  // store the contents of 0x07 (line3) on the stack (at 0x500)
 6.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x501)
-7.  ADDd 0 line9 0x07  // put our own f2 return address (line8) in 0x07
+7.  ADDd 0 line9 0x07  // put our own f2 return address in 0x07
 8.  JMPi line13        // call f3   
 9.  SUBi 0x82 1 0x82   // decrement the stack pointer value by one (is now 0x500)
 10. ADDi *0x82 0 0x07  // store the value at the stack pointer address (at address 0x500) in 0x07
 11. JMP 0x07           // return from this function to caller f1
 12.
 
-13.  ADDi 0x07 0 *0x82  // store 0x07 on the stack (at 0x501)
+13.  ADDi 0x07 0 *0x82  // store the contents of 0x07 on the stack (at 0x501)
 14.  ADDi 0x82 1 0x82   // increment the stack pointer value by one (is now 0x502)
 15.  ADDd 0 line17 0x07 // put our own f3 return address (line17) in 0x07
 16.  JMPi line22        // call f4   
@@ -630,7 +630,7 @@ _Note: for simplicity, we will assume PUSH and POP know where the stack pointer 
 
 ## The stack for parameters, return values, and local values
 
-If you look back at how we introduced the need for the stack above, you'll remember we talked not just about return addresses, but also function parameters and return values (remember function `fY`?). We then said that these function features had exactly the same problems as the return addresses (risk of overwriting data across functions).
+If you look back at how we introduced the need for the stack above, you'll remember we talked not just about return addresses, but also function parameters and return values (remember function `fY(int M, int N)`?). We then said that these function features had exactly the same problems as the return addresses (risk of overwriting data across functions).
 
 Now that we've solved the problem for return addresses, you'll be happy to hear the same solution also works for parameters and return values! To reprise the example from before (but changing the variable names slightly to enforce our point), we would now write it as follows using the stack:
 

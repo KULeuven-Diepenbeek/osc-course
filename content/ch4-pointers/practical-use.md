@@ -71,6 +71,12 @@ test.c:5:8: error: read-only variable is not assignable
 
 In practice, try to use as many constant variables as possible, if you want to make sure the passed values stay the same. 
 
+{{% notice note %}}
+Pointers in combination with `const` can be very tricky! For instance, a `const int* ptr` cannot change the value of the thing it's pointing to (`*ptr = 6`), but still can change the value of the address it's pointing to (`ptr = &otherval`). For a `int* const ptr`---where the keyword is placed in-between---this is the other way around: the pointer is constant, but the value isn't.
+{{% /notice %}}
+
+
+
 ### 3. Arithmetics with pointers
 
 Pointers and arrays go hand-in-hand in C. Pointers can be moved around by adding and subtracting. On pointers you can also perform operations such as `++` and `--` that move the pointer in the memory one place to the left or right. With `char * text = "sup"` the pointer refers to the first character:

@@ -2,7 +2,6 @@
 title: '1. Integrated C exercise'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 2
-draft: true
 ---
 
 **Download the start project here**: [c-integrated-start.c](/exercises/c-integrated-start.c).

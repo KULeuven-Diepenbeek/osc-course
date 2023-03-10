@@ -85,6 +85,18 @@ The scheduler has two main responsibilities:</description>
     </item>
     
     <item>
+      <title>1. Integrated C exercise</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</guid>
+      <description>Download the start project here: c-integrated-start.c.
+The program represents a book, consisting out of multiple pages, of which each page contains (random) text, represented as a char[].
+The following functions are given:
+ printBook() prints all pages of the book (no need to modify this) clearBook() clears pages and frees memory (no need to modify this) createRandomBook() creates a new book consisting out of amount of pages createRandompage() creates a new page with random text main() bootstraps everything.</description>
+    </item>
+    
+    <item>
       <title>1.2: File systems</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch1-introos/filesystems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

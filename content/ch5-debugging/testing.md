@@ -21,7 +21,6 @@ Since `g++` and the tool we need to build it, `cmake`, are not installed on the 
 Most open source libraries require you to download the source code and compile it yourself. For Google Test, we will do exactly that, since we are learning how to work with compiling and making things anyway. We want to only compile _googletest_, and not _googlemock_ - both are part of the same repository. 
 
 - Clone the github repository: [https://github.com/google/googletest/](https://github.com/google/googletest/). We want to build branch `v1.12.x` - the `master` branch is too unstable. Remember how to switch to that branch? Use `git branch -a` to see all branches, and `git checkout -b [name] remotes/origin/[name]` to check it out locally. Verify with `git branch`.
--  `cd googletest`
 -  Create a builddir and navigate into it: `mkdir build`, `cd build`
 -  Build Makefiles using Cmake: `cmake ./../`
 -  Build binaries using make: `make`. 

@@ -220,7 +220,36 @@ For more information on the correct Makefile syntax, see the [GNU make](ftp://ft
 Create a Makefile that contains two targets: `compile` and `run`. The default target should execute both in sequence. As for what to compile, write a simple program that outputs "hello, (name)". The name is something you ask from the user using the stdio function `gets()`.
 {{% /task %}}
 
-#### (3) IDEs
+#### (3) CMake
+
+As you can judge for yourself from the above Makefile syntax, a typical project build file can get pretty verbose and complicated. Recent attempts to mitigate this have resulted in more modern build systems for C/C++, such as the general-purpose [SCons](https://scons.org/), and [CMake](https://cmake.org/). CMake builds... Makefiles. That means you'll have to execute `cmake`, which generates a `Makefile`, and then `make`. It's a two-step process.
+
+{{<mermaid>}}
+graph TD
+    cmake[CMake]
+    make[Makefiles]
+    cmd[gcc & cmdline]
+    cmake --> make
+    make --> cmd
+{{< /mermaid >}}
+
+
+`CMakeLists.txt` contains instructions to generate a` Makefile`:
+
+<pre>
+cmake_minimum_required(VERSION 3.10)
+project(my_little_pony)
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
+</pre>
+
+A simple CMake file is much easier to read and write than a Makefile. See [CMake tutorial](https://cmake.org/cmake-tutorial/) for more information. CLion manages the `add_executable` arguments for you: adding new files to your project will also automatically add them to the list.
+
+Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling `gcc file.c` yourself every single time. 
+
+
+#### (4) IDEs
 
 ##### Lightweights
 
@@ -237,26 +266,4 @@ We will not stop old-school fans from using Emacs or Vi(m).
 
 {{% figure src="/img/clion.png" %}}
 
-CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: `CMakeLists.txt` contains instructions to generate a` Makefile`:
-
-<pre>
-cmake_minimum_required(VERSION 3.10)
-project(my_little_pony)
-set(CMAKE_CXX_STANDARD 11)
-
-add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
-</pre>
-
-A simple CMake file is much easier to read and write than a Makefile. See [CMake tutorial](https://cmake.org/cmake-tutorial/) for more information. CLion manages the `add_executable` arguments for you: adding new files to your project will also automatically add them to the list.
-
-Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling `gcc file.c` yourself every single time. 
-
-{{<mermaid>}}
-graph TD
-    cmake[CMake]
-    make[Makefiles]
-    cmd[gcc & cmdline]
-    cmake --> make
-    make --> cmd
-{{< /mermaid >}}
-
+CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion also by default works with CMake. 

@@ -13,25 +13,29 @@ It's concepts and definitions will **not** be repeated here, but we will introdu
 {{% notice warning %}}
 Google Test is a `C++` (11) framework, not a `C` framework! We will be using `g++` instead of `gcc` to compile everything. C++ files are suffixed with `.cpp` instead of `.c`.<br/>
 Major differences between both languages exist but will not be needed to know all about in order to write a few simple tests.<br/><br/>
-Since `g++` is not installed on the image by default, use `apt install g++` to download and install the toolchain.
+Since `g++` and the tool we need to build it, `cmake`, are not installed on the image by default, use `apt install g++ cmake` to download and install the toolchains.
 {{% /notice %}}
 
 ### A. Installation
 
 Most open source libraries require you to download the source code and compile it yourself. For Google Test, we will do exactly that, since we are learning how to work with compiling and making things anyway. We want to only compile _googletest_, and not _googlemock_ - both are part of the same repository. 
 
-- Clone the github repository: [https://github.com/google/googletest/](https://github.com/google/googletest/). We want to build branch `v1.10.x` - the `master` branch is too unstable. Remember how to switch to that branch? Use `git branch -a` to see all branches, and `git checkout -b [name] remotes/origin/[name]` to check it out locally. Verify with `git branch`.
+- Clone the github repository: [https://github.com/google/googletest/](https://github.com/google/googletest/). We want to build branch `v1.12.x` - the `master` branch is too unstable. Remember how to switch to that branch? Use `git branch -a` to see all branches, and `git checkout -b [name] remotes/origin/[name]` to check it out locally. Verify with `git branch`.
 -  `cd googletest`
 -  Create a builddir and navigate into it: `mkdir build`, `cd build`
--  Build Makefiles using cmake: `cmake ./../`
+-  Build Makefiles using Cmake: `cmake ./../`
 -  Build binaries using make: `make`. 
 
-If all goes according to plan, two libraries will have been created:
+More information about CMake can be found in [chapter 2.5: C Ecosystems](/ch2-c/ecosystems/#3-cmake).
+
+If all goes according to plan, four libraries will have been created:
 
 1. `libgtest.a`
 2. `ligbtest_main.a`
+3. `libgmock.a` (we won't use this)
+4. `libgmock_main.a` (we won't use this)
 
-In the subfolder `googletest/googletest/build/lib`. 
+In the subfolder `googletest/build/lib`. 
 
 ### B. Usage
 
@@ -117,8 +121,8 @@ Add libraries as arguments to the compiler while linking. Remember to first use 
 Bringing everything together:
 
 <pre>
-Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-main.cpp
-Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/include -c gtest-tests.cpp
+Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/googletest/include -c gtest-main.cpp
+Wouters-MacBook-Air:debugging wgroeneveld$ g++ -I$GTEST_DIR/googletest/include -c gtest-tests.cpp
 Wouters-MacBook-Air:debugging wgroeneveld$ g++ gtest-main.o gtest-tests.o $GTEST_DIR/build/lib/libgtest.a $GTEST_DIR/build/lib/libgtest_main.a  -lpthread
 Wouters-MacBook-Air:debugging wgroeneveld$ ./a.out
 [==========] Running 2 tests from 1 test case.
@@ -132,6 +136,8 @@ As you can see, it can be handy to create a shell variable `$GTEST_DIR` that poi
 `export GTEST_DIR=/home/[user]/googletest/googletest`
 
 And reopen all terminals. Verify the above using `echo $GTEST_DIR`, it should print out the path. 
+
+If you are using a different shell, edit your shell's config file. If you have no idea which shell you're using, you're probably using Bash. Verify with `echo $SHELL` which will likely output `/bin/bash`.
 
 {{% notice note %}}
 The `-lpthread` linking flag tells the compiler to link the standard threading libraries along with anything else, that are needed by GTest internally. We will get back on these in [chapter 6](/ch6-tasks). <br/>

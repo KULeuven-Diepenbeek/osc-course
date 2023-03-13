@@ -66,13 +66,13 @@ Things you need to know from the GDB debugger:
 1. `r`: running the program (main() method execution)
 2. `c`: continue after a breakpoint
 3. `i`: inspect (`i r [regname]`: inspect register name)
-4. `start` and `next`: start stepping through the application.
-5. `b *[addr]`: set breakpoint at certain function/line/`*`address (see [manual](https://visualgdb.com/gdbreference/commands/break)). Conditionals are possible, for instance: `break func if arg == 3`.
+4. `start` and `next` (shorthand `n`) or `step`: start stepping through the application.
+5. `b *[addr]`: set breakpoint at certain function/line/`*`address ([see manual](https://visualgdb.com/gdbreference/commands/break)). Conditionals are possible, for instance: `break func if arg == 3`.
 6. `delete`: deletes all breakpoints
 7. `disassemble [fn]`: disassembles functionname (after running)
-8. `x/[length][format] [address expr]`: inspect dynamic memory block (see [manual](http://visualgdb.com/gdbreference/commands/x))
-9. `print x`: print `var`, or `&var` address (Enalbe printing of addresses: `show print address`)
-10. `info` address/line (fn) or `source`
+8. `x/[length][format] [address expr]`: inspect dynamic memory block ([see manual](http://visualgdb.com/gdbreference/commands/x))
+9. `print x` (shorthand: `p`): print `var`, or `&var` address (Enalbe printing of addresses: `show print address`)
+10. `info` (shorthand: `i`) address/line (fn) or `source`
 
 {{% task %}}
 Bootstrap gdb and step through the whole application. As soon as the stackvar has been evaluated, try to inspect the memory value using `x/d`. The address expression could be hexadecimal, or `&stackvar`. <br/>
@@ -81,8 +81,14 @@ How could you evaluate a heap variable using the x command? If you have the addr
 
 More useful commands:
 
-- Don't remember which breakpoints you've set? `info b`. (info breakpoints)
+- Don't remember which breakpoints you've set? `i b`. (info breakpoints)
 - Don't remember where you're at now? Inspect the stack: `bt` (backtrace), optionally appended with `full` that includes local variables. 
+- Don't know which registers to inspect? `i r` ([see manual](https://sourceware.org/gdb/onlinedocs/gdb/Registers.html)). 
+
+{{% task %}}
+Can you spot the stack pointer and program counter? Can you see what happens to them when a function is called or an instruction is executed? Why do you think the PC doens't simply increment with the expected four bytes when instructing gdb to execute a line of code?
+{{% /task %}}
+
 
 Do not forget that the expression that is printed out is the one to be evaluated after you enter the 'next' command. You can already inspect the stack variable address but it will contain junk:
 
@@ -112,7 +118,6 @@ How come something interesting is hidden in `eax` after calling `malloc()`?
 1. Because `eax` is the _return value_ register, or the **accumulator**. You should be familiar with it due to other Hardware-oriented courses.
 2. Because [malloc returns a void pointer](https://www.man7.org/linux/man-pages/man3/malloc.3.html) - read the `man` pages carefully!
  
-Interested in more useful registers to fiddle with? Check out `info registers` in the gdb console (`i r` is [an abbreviation](https://sourceware.org/gdb/current/onlinedocs/gdb/Registers.html#Registers)).
 
 ### 2.2 Without debug flags
 
@@ -148,6 +153,23 @@ eax            0x55756260   1433756256
 
 As you can see, `0x55756260` is an invalid memory address, but based on the disassembly info, we can deduce it is actually `0x0000555555756260` we need to look at. 
 
+There's another way to pry out the return value of the last statement. The `finish` command executes until the current stack is popped off and prints the return value. Set a breakpoint to just below `malloc()`, call `finish`, and the result is:
+
+```
+(gdb) finish
+Run till exit from #0  __GI___libc_malloc (bytes=100) at ./malloc/malloc.c:3294
+0x0000aaaaaaaa08f4 in main ()
+Value returned is $1 = (void *) 0xaaaaaaab22a0
+```
+
+There's your address you can now inspect using `r 0xaaaaaaab22a0`. It'll likely still be `0x00000000`, so try to `step` and inspect until it contains the value you're interested in. 
+
+{{% notice note %}}
+Registers are platform- and architecture-specific! In other words, the return value register `eax` is only available on x86_64 CPUs. If you're on a modern Mac with an ARM64, you'll have to check `info all-registers` and consult the [ARM Developer Documentation](https://developer.arm.com/documentation/102374/0101/Registers-in-AArch64---general-purpose-registers) to find the correct register.<br/>
+The `pc` and `sp` registers are universal concepts.
+{{% /notice %}}
+
+
 ## The (still) hard way: DDD, a UI on top of GDB
 
 Instead of invoking `gdb`, one can also employ `ddd`. This is a crude UI on top of the gdb debugger, with multiple windows where the same commands can be entered as you have learned so far. However, ddd also allows you to visualize heap/stack variables while stepping through the application. The Figure below shows a screen-shot of a debug session of our hackme app using ddd. 
@@ -163,6 +185,6 @@ Things to try out:
 - Right-click in the main window -> "New Display" to add variables by name to watch (for instance `buf` and `password`, as shown). You can also watch references to functions - any valid `gdb`-style expression will do.
 
 {{% task %}}
-Take a moment to fiddle with `ddd`. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.
+Take a moment to fiddle with `ddd` after correctly installing it. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.
 {{% /task %}}
 

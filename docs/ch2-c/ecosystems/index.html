@@ -12,21 +12,21 @@
     <title>2.5: C Ecosystems :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1678451460" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1678451460" rel="stylesheet">
-    <link href="../../css/hybrid.css?1678451460" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1678451460" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1678451460" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1678451460" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1678451460" rel="stylesheet">
-    <link href="../../css/theme.css?1678451460" rel="stylesheet">
-    <link href="../../css/devselector.css?1678451460" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1678451460" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1678451460" rel="stylesheet">
+    <link href="../../css/nucleus.css?1678703272" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1678703272" rel="stylesheet">
+    <link href="../../css/hybrid.css?1678703272" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1678703272" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1678703272" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1678703272" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1678703272" rel="stylesheet">
+    <link href="../../css/theme.css?1678703272" rel="stylesheet">
+    <link href="../../css/devselector.css?1678703272" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1678703272" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1678703272" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1678451460"></script>
-    <script src="../../js/devselector.js?1678451460"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1678703272"></script>
+    <script src="../../js/devselector.js?1678703272"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1678451460"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1678451460"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1678703272"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1678703272"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1678451460"></script>
+<script type="text/javascript" src="../../js/search.js?1678703272"></script>
 
     
   </div>
@@ -1715,29 +1715,8 @@ all: clean compile link
 
 	</div>
 </div>
-<h4 id="3-ides">(3) IDEs</h4>
-<h5 id="lightweights">Lightweights</h5>
-<p>A source file consists of simply plain text. Any text editor is sufficient to write your C program. However, it may be useful to use Sublime Text or Visual Studio Code. These modern powerful editors have built-in auto-completion and build tools.</p>
-<ul>
-<li><a href="https://www.thecrazyprogrammer.com/2017/04/how-to-run-c-and-c-program-in-sublime-text.html">Sublime Text 3 Build Systems en C/C++</a> and <a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html">docs</a></li>
-<li><a href="https://code.visualstudio.com/docs/languages/cpp">Visual Studio Code C/C++ integration</a></li>
-</ul>
-<p>We will not stop old-school fans from using Emacs or Vi(m).</p>
-<h5 id="heavyweights">Heavyweights</h5>
-<p><a href="https://www.jetbrains.com/clion/">CLion</a> is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it&rsquo;s built on the same platform (IDEA) - even most shortcuts are the same.</p>
-<figure>
-    <img src="../../img/clion.png"/> 
-</figure>
-<p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion works with CMake: <code>CMakeLists.txt</code> contains instructions to generate a<code> Makefile</code>:</p>
-<pre>
-cmake_minimum_required(VERSION 3.10)
-project(my_little_pony)
-set(CMAKE_CXX_STANDARD 11)
-
-add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
-</pre>
-<p>A simple CMake file is much easier to read and write than a Makefile. See <a href="https://cmake.org/cmake-tutorial/">CMake tutorial</a> for more information. CLion manages the <code>add_executable</code> arguments for you: adding new files to your project will also automatically add them to the list.</p>
-<p>Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling <code>gcc file.c</code> yourself every single time.</p>
+<h4 id="3-cmake">(3) CMake</h4>
+<p>As you can judge for yourself from the above Makefile syntax, a typical project build file can get pretty verbose and complicated. Recent attempts to mitigate this have resulted in more modern build systems for C/C++, such as the general-purpose <a href="https://scons.org/">SCons</a>, and <a href="https://cmake.org/">CMake</a>. CMake builds&hellip; Makefiles. That means you&rsquo;ll have to execute <code>cmake</code>, which generates a <code>Makefile</code>, and then <code>make</code>. It&rsquo;s a two-step process.</p>
 <script defer src="../../mermaid/mermaid.min.js">
 	mermaid.initialize({
 		startOnLoad: true,
@@ -1756,6 +1735,30 @@ graph TD
     make --> cmd
 
 </div>
+<p><code>CMakeLists.txt</code> contains instructions to generate a<code> Makefile</code>:</p>
+<pre>
+cmake_minimum_required(VERSION 3.10)
+project(my_little_pony)
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(my_little_pony main.cpp biblio.cpp biblio.h animals.cpp animals.h)    
+</pre>
+<p>A simple CMake file is much easier to read and write than a Makefile. See <a href="https://cmake.org/cmake-tutorial/">CMake tutorial</a> for more information. CLion manages the <code>add_executable</code> arguments for you: adding new files to your project will also automatically add them to the list.</p>
+<p>Since CMake builds Makefiles and Makefiles use cmdline to evoke the compiler, you are essentially using high-level tools that use low-level tools. This makes it easier to repeatedly compile bigger projects, instead of calling <code>gcc file.c</code> yourself every single time.</p>
+<h4 id="4-ides">(4) IDEs</h4>
+<h5 id="lightweights">Lightweights</h5>
+<p>A source file consists of simply plain text. Any text editor is sufficient to write your C program. However, it may be useful to use Sublime Text or Visual Studio Code. These modern powerful editors have built-in auto-completion and build tools.</p>
+<ul>
+<li><a href="https://www.thecrazyprogrammer.com/2017/04/how-to-run-c-and-c-program-in-sublime-text.html">Sublime Text 3 Build Systems en C/C++</a> and <a href="http://docs.sublimetext.info/en/latest/file_processing/build_systems.html">docs</a></li>
+<li><a href="https://code.visualstudio.com/docs/languages/cpp">Visual Studio Code C/C++ integration</a></li>
+</ul>
+<p>We will not stop old-school fans from using Emacs or Vi(m).</p>
+<h5 id="heavyweights">Heavyweights</h5>
+<p><a href="https://www.jetbrains.com/clion/">CLion</a> is the perfect cross-platform and cross-compiler candidate to do the heavy C/C++ lifting for you, and it comes with integrated debugging, stack inspection, and everything else you might expect from an IDE. If you are familiar with IntelliJ, you will love CLion: it&rsquo;s built on the same platform (IDEA) - even most shortcuts are the same.</p>
+<figure>
+    <img src="../../img/clion.png"/> 
+</figure>
+<p>CLion is not free, but it is highly recommended for students (and they get a free license if you register with your university e-mail address). CLion also by default works with CMake.</p>
 
 
 <footer class="footline">
@@ -2717,17 +2720,17 @@ graph TD
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1678451460"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1678451460"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1678451460"></script>
-    <script src="../../js/jquery.sticky.js?1678451460"></script>
-    <script src="../../js/featherlight.min.js?1678451460"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1678451460"></script>
-    <script src="../../js/learn.js?1678451460"></script>
-    <script src="../../js/hugo-learn.js?1678451460"></script>
+    <script src="../../js/clipboard.min.js?1678703272"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1678703272"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1678703272"></script>
+    <script src="../../js/jquery.sticky.js?1678703272"></script>
+    <script src="../../js/featherlight.min.js?1678703272"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1678703272"></script>
+    <script src="../../js/learn.js?1678703272"></script>
+    <script src="../../js/hugo-learn.js?1678703272"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1678451460"></script>
+            <script src="../../mermaid/mermaid.js?1678703272"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

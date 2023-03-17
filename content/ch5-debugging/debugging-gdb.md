@@ -153,7 +153,7 @@ eax            0x55756260   1433756256
 
 As you can see, `0x55756260` is an invalid memory address, but based on the disassembly info, we can deduce it is actually `0x0000555555756260` we need to look at. 
 
-There's another way to pry out the return value of the last statement. The `finish` command executes until the current stack is popped off and prints the return value. Set a breakpoint to just below `malloc()`, call `finish`, and the result is:
+There's another way to pry out the return value of the last statement. The `finish` command executes until the current stack is popped off (that is, the function ends) and prints the return value. Set a breakpoint to just below `malloc()`, call `finish`, and the result is:
 
 ```
 (gdb) finish
@@ -163,6 +163,8 @@ Value returned is $1 = (void *) 0xaaaaaaab22a0
 ```
 
 There's your address you can now inspect using `r 0xaaaaaaab22a0`. It'll likely still be `0x00000000`, so try to `step` and inspect until it contains the value you're interested in. 
+
+Remember that `finish` here works because we breaked _inside_ `malloc()`, which then becomes the current stack. If you're still debugging in `main`, an error will appear, as there is nothing to `finish`: popping the stack would end the program. 
 
 {{% notice note %}}
 Registers are platform- and architecture-specific! In other words, the return value register `eax` is only available on x86_64 CPUs. If you're on a modern Mac with an ARM64, you'll have to check `info all-registers` and consult the [ARM Developer Documentation](https://developer.arm.com/documentation/102374/0101/Registers-in-AArch64---general-purpose-registers) to find the correct register.<br/>

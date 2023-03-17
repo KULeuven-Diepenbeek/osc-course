@@ -107,6 +107,17 @@ Working daily with files in Unix operating systems will no doubt increase your a
     </item>
     
     <item>
+      <title>2. Testing in C(&#43;&#43;)</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-debugging-testing/</guid>
+      <description>Download the start project files here: cpp-testing.cpp, cpp-testing-main.cpp. Remember that in order to run this as a Google Test Suite, you need to compile it using g++ and bootstrap GTest in a separate .cpp file where the main() function resides. Go back to the lab notes if you&amp;rsquo;re not sure how to pull this off.
+The following code is given:
+date and period structs to represent a date and a period of dates in code.</description>
+    </item>
+    
+    <item>
       <title>2.2: String Manipulation</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch2-c/intro-labs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -12,21 +12,21 @@
     <title>5.2: The Hard Way: GDB :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1679048803" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679048803" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679048803" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679048803" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679048803" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679048803" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679048803" rel="stylesheet">
-    <link href="../../css/theme.css?1679048803" rel="stylesheet">
-    <link href="../../css/devselector.css?1679048803" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679048803" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679048803" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679059470" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679059470" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679059470" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679059470" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679059470" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679059470" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679059470" rel="stylesheet">
+    <link href="../../css/theme.css?1679059470" rel="stylesheet">
+    <link href="../../css/devselector.css?1679059470" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679059470" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679059470" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679048803"></script>
-    <script src="../../js/devselector.js?1679048803"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679059470"></script>
+    <script src="../../js/devselector.js?1679059470"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679048803"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679048803"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679059470"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679059470"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679048803"></script>
+<script type="text/javascript" src="../../js/search.js?1679059470"></script>
 
     
   </div>
@@ -1683,12 +1683,13 @@ eax            0x55756260   1433756256
 0x555555756260: 0x00000000
 </pre>
 <p>As you can see, <code>0x55756260</code> is an invalid memory address, but based on the disassembly info, we can deduce it is actually <code>0x0000555555756260</code> we need to look at.</p>
-<p>There&rsquo;s another way to pry out the return value of the last statement. The <code>finish</code> command executes until the current stack is popped off and prints the return value. Set a breakpoint to just below <code>malloc()</code>, call <code>finish</code>, and the result is:</p>
+<p>There&rsquo;s another way to pry out the return value of the last statement. The <code>finish</code> command executes until the current stack is popped off (that is, the function ends) and prints the return value. Set a breakpoint to just below <code>malloc()</code>, call <code>finish</code>, and the result is:</p>
 <pre><code>(gdb) finish
 Run till exit from #0  __GI___libc_malloc (bytes=100) at ./malloc/malloc.c:3294
 0x0000aaaaaaaa08f4 in main ()
 Value returned is $1 = (void *) 0xaaaaaaab22a0
 </code></pre><p>There&rsquo;s your address you can now inspect using <code>r 0xaaaaaaab22a0</code>. It&rsquo;ll likely still be <code>0x00000000</code>, so try to <code>step</code> and inspect until it contains the value you&rsquo;re interested in.</p>
+<p>Remember that <code>finish</code> here works because we breaked <em>inside</em> <code>malloc()</code>, which then becomes the current stack. If you&rsquo;re still debugging in <code>main</code>, an error will appear, as there is nothing to <code>finish</code>: popping the stack would end the program.</p>
 
 <div class="notices note" ><p>Registers are platform- and architecture-specific! In other words, the return value register <code>eax</code> is only available on x86_64 CPUs. If you&rsquo;re on a modern Mac with an ARM64, you&rsquo;ll have to check <code>info all-registers</code> and consult the <a href="https://developer.arm.com/documentation/102374/0101/Registers-in-AArch64---general-purpose-registers">ARM Developer Documentation</a> to find the correct register.<br/>
 The <code>pc</code> and <code>sp</code> registers are universal concepts.</p>
@@ -2689,17 +2690,17 @@ The <code>pc</code> and <code>sp</code> registers are universal concepts.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679048803"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679048803"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679048803"></script>
-    <script src="../../js/jquery.sticky.js?1679048803"></script>
-    <script src="../../js/featherlight.min.js?1679048803"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679048803"></script>
-    <script src="../../js/learn.js?1679048803"></script>
-    <script src="../../js/hugo-learn.js?1679048803"></script>
+    <script src="../../js/clipboard.min.js?1679059470"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679059470"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679059470"></script>
+    <script src="../../js/jquery.sticky.js?1679059470"></script>
+    <script src="../../js/featherlight.min.js?1679059470"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679059470"></script>
+    <script src="../../js/learn.js?1679059470"></script>
+    <script src="../../js/hugo-learn.js?1679059470"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679048803"></script>
+            <script src="../../mermaid/mermaid.js?1679059470"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

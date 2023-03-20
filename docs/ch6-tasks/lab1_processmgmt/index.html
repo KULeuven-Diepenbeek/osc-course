@@ -12,21 +12,21 @@
     <title>6.2: Processes (lab) :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1679059470" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679059470" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679059470" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679059470" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679059470" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679059470" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679059470" rel="stylesheet">
-    <link href="../../css/theme.css?1679059470" rel="stylesheet">
-    <link href="../../css/devselector.css?1679059470" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679059470" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679059470" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679305075" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679305075" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679305075" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679305075" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679305075" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679305075" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679305075" rel="stylesheet">
+    <link href="../../css/theme.css?1679305075" rel="stylesheet">
+    <link href="../../css/devselector.css?1679305075" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679305075" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679305075" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679059470"></script>
-    <script src="../../js/devselector.js?1679059470"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679305075"></script>
+    <script src="../../js/devselector.js?1679305075"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679059470"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679059470"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679305075"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679305075"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679059470"></script>
+<script type="text/javascript" src="../../js/search.js?1679305075"></script>
 
     
   </div>
@@ -1515,7 +1515,15 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#creating-and-inspecting-processes">Creating and inspecting processes</a></li>
+    <li><a href="#creating-and-inspecting-processes">Creating and inspecting processes</a>
+      <ul>
+        <li><a href="#61-pid-info">6.1 PID info</a></li>
+        <li><a href="#62-testing-the-waters-with-fork">6.2 Testing the waters with <code>fork()</code></a></li>
+        <li><a href="#63-multiple-fork-children">6.3 Multiple <code>fork()</code> children</a></li>
+        <li><a href="#64-i-forked-the-fork">6.4 I <code>fork()</code>ed the <code>fork()</code>!</a></li>
+        <li><a href="#65-fork-and-order">6.5 <code>fork()</code> and order</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -1558,24 +1566,22 @@
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
 <h2 id="creating-and-inspecting-processes">Creating and inspecting processes</h2>
 <p><strong>TIP:</strong> the unistd.h header has some useful functions. You may also want to check out the <code>wait()</code> function in sys/wait.h and <code>exit()</code> in stdlib.h.</p>
-<ul>
-<li>Write a C-program that prints its own PID on the screen.</li>
-</ul>
+<h3 id="61-pid-info">6.1 PID info</h3>
+<p>Write a C-program that prints its own PID on the screen.</p>
 <figure>
     <img src="../../img/os/sc_621.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-<ul>
-<li>Write a C-program that spawns another process using <code>fork()</code>. Both parent and child processes announce their existence (through a printf) and their PIDs.</li>
-</ul>
+<h3 id="62-testing-the-waters-with-fork">6.2 Testing the waters with <code>fork()</code></h3>
+<p>Write a C-program that spawns another process using <code>fork()</code>. Both parent and child processes announce their existence (through a printf) and their PIDs.</p>
 <figure>
     <img src="../../img/os/sc_622.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
-<ul>
-<li>Write a C-program that creates 4 child processes using <code>fork()</code>
+<h3 id="63-multiple-fork-children">6.3 Multiple <code>fork()</code> children</h3>
+<p>Write a C-program that creates 4 child processes using <code>fork()</code>, where:</p>
 <ul>
 <li>each of the childeren checks which numbers below 10000 are <a href="https://en.wikipedia.org/wiki/Prime_number">prime</a></li>
 <li>every child reports only numbers that are prime (using printf), together with its own PID</li>
@@ -1583,13 +1589,29 @@
 <li><strong>TIP:</strong> don&rsquo;t worry too much about the efficienty of calculating whether a number is prime or not. The calculation is meant to be time-consuming.</li>
 <li>Answer this question: how are the processes scheduled? Do they all execute one after the other or at the same time? <strong>How can you tell?</strong></li>
 </ul>
-</li>
-</ul>
 <figure>
     <img src="../../img/os/sc_623.png"/> <figcaption>
             <h4>An example output</h4>
         </figcaption>
 </figure>
+<h3 id="64-i-forked-the-fork">6.4 I <code>fork()</code>ed the <code>fork()</code>!</h3>
+<p>Given the following C code:</p>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">()</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">fork</span><span style="color:#111">();</span>
+    <span style="color:#111">fork</span><span style="color:#111">();</span>
+    <span style="color:#111">fork</span><span style="color:#111">();</span>
+    <span style="color:#111">fork</span><span style="color:#111">();</span>
+    <span style="color:#111">printf</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Hi class</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></div><p>How many times will <code>Hi class</code> be printed? Why? Draw a <code>pstree</code> tree that visualizes the parent and children to help explain your answer.</p>
+<h3 id="65-fork-and-order">6.5 <code>fork()</code> and order</h3>
+<p>Write two functions: a <code>main()</code> that calls another <code>void</code> function in which you <code>fork()</code> the process. If the resulting process is the child one, print some text. If it&rsquo;s the parent process, print another text.</p>
+<p>Execute the program from your commandline terminal a few hundred (!) times and carefully inspect the order of the printed messages. Are these always the same? If so, do you think this will always be the case for everyone running your specific hardware? Why (not)? <strong>TIP</strong>: Who decides the execution order and timing?</p>
 
 
 <footer class="footline">
@@ -2567,17 +2589,17 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679059470"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679059470"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679059470"></script>
-    <script src="../../js/jquery.sticky.js?1679059470"></script>
-    <script src="../../js/featherlight.min.js?1679059470"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679059470"></script>
-    <script src="../../js/learn.js?1679059470"></script>
-    <script src="../../js/hugo-learn.js?1679059470"></script>
+    <script src="../../js/clipboard.min.js?1679305075"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679305075"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679305075"></script>
+    <script src="../../js/jquery.sticky.js?1679305075"></script>
+    <script src="../../js/featherlight.min.js?1679305075"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679305075"></script>
+    <script src="../../js/learn.js?1679305075"></script>
+    <script src="../../js/hugo-learn.js?1679305075"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679059470"></script>
+            <script src="../../mermaid/mermaid.js?1679305075"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

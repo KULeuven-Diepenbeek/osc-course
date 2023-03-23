@@ -4,7 +4,7 @@ pre: "<i class='fas fa-book'></i> "
 weight: 3
 ---
 
-Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, **good job !!**
+Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember? Right, **good job!**
 
 It would make sense, though, if different processes were able to communicate with each other. That's what this Section is about. 
 
@@ -129,16 +129,16 @@ int main() {
 </div>
 {{% dinobook %}}
 
-**Note:** to compile these on Linux, you need to pass the `-lrt` flag to gcc ("link with library rt") like so: `gcc -o producer producer.c -lrt`. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.
+**Note:** to compile these on Linux, you need to pass the `-lrt` flag to gcc ("link with library rt", see the [librt interface documentation](https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/librt.html)) like so: `gcc -o producer producer.c -lrt`. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.
 
 {{% task %}}
 This very simple example uses shared memory. Try to find answers to the questions below:
 
 * Try to find out what these programs do
-* What is the size of the memory that is shared ?
-* Can a *producer* read from the shared memory ?
-* Can a *consumer* write to the shared memory ?
-* How do both processes know which data is shared ? In other words, how does the consumer decide which memory it connects to?
+* What is the size of the memory that is shared?
+* Can a *producer* read from the shared memory?
+* Can a *consumer* write to the shared memory?
+* How do both processes know which data is shared? In other words, how does the consumer decide which memory it connects to?
 * Do both processes have to be active at the same time for the memory sharing to work? Why (not)?
 {{% /task %}}
 
@@ -150,9 +150,9 @@ The second technique for for InterProcess Communication (IPC) comes in the form 
 
 ### Signals
 
-Signals are the cheapest form of IPC. They literally allow one process to send a signal to another process, through the use of the function **kill()**. Although due to historical reasons the name might be a bit misleading (originally, the only defined signal was used to stop a process, other uses only came later), it can be used to send different signals. Signals here are very simply numbers with a predefined meaning (an "enum" if you will) that you can send to another process. Depending on the number received, a different action is expected to be taken. For example, if you use the `Ctrl+c` keyboard shortcut to stop a running program, the shell sends a `SIGINT` (signal interrupt) to the current program. Similarly, `Ctrl+z` will send a `SIGTSTP` signal.
+Signals are the cheapest form of IPC. They literally allow one process to send a signal to another process, through the use of the function `kill()`. Although due to historical reasons the name might be a bit misleading (originally, the only defined signal was used to stop a process, other uses only came later), it can be used to send different signals. Signals here are very simply numbers with a predefined meaning (an "enum" if you will) that you can send to another process. Depending on the number received, a different action is expected to be taken. For example, if you use the `Ctrl+c` keyboard shortcut to stop a running program, the shell sends a `SIGINT` (signal interrupt) to the current program. Similarly, `Ctrl+z` will send a `SIGTSTP` signal.
 
-The snippet below shows the different types of signals that can be sent. Many of them have to do with stopping other processes, but with subtly different effects (for example, stop a process -immediately- versus allowing it to safely exit itself).
+The snippet below shows the different types of signals that can be sent. Many of them have to do with stopping other processes, but with subtly different effects (for example, stop a process---immediately---versus allowing it to safely exit itself).
 
 ```bash
 jvliegen@localhost:~/$ kill -L
@@ -171,7 +171,7 @@ jvliegen@localhost:~/$ kill -L
 63) SIGRTMAX-1  64) SIGRTMAX   
 ```
 
-There is also has CLI-compatible command **kill** that can send these signals to any running process (addressed by their PID). For more information on the kill command, add the ```--help``` argument, read the man-page (```man kill```), or ask the Internet.
+There is also has CLI-compatible command `kill` that can send these signals to any running process (addressed by their PID). For more information on the kill command, add the `--help` argument, read the man-page (`man kill`).
 
 Let's illustrate this with an example:
 
@@ -237,12 +237,12 @@ jvliegen@localhost:~/$
 
 For the sake of completeness we enumerate a few more usefull aspects about this:
 
-* a process can be started in the background as well. This can be achieved by adding an **ampersand** after the command (e.g., xeyes &)
-* the command **jobs** gives you an overview of which jobs are running in the background
-* through the command **fg <#>** the job with index number <#> will pulled to foreground.
+* a process can be started in the background as well. This can be achieved by adding an `&` (ampersand) after the command (e.g., `xeyes &`)
+* the command `jobs` gives you an overview of which jobs are running in the background
+* through the command `fg <#>` the job with index number <#> will pulled to foreground.
 
 {{% task %}}
-Try this for yourself. If the **xeyes** program is not installed, install it first or use the `longhello` program from before.
+Try this for yourself. If the `xeyes` program is not installed, install it first or use the `longhello` program from before.
 {{% /task %}}
 
 ### Pipes
@@ -279,7 +279,7 @@ Let's try something similar for yourselves:
 {{% /task %}}
 
 
-Do you remember the Process Control Block ? This has one field called **list of open files**. We've already touched upon stdin, stdout and stderr. Using anonymous pipes will add an entry to this list.
+Do you remember the Process Control Block? This has one field called **list of open files**. We've already touched upon stdin, stdout and stderr. Using anonymous pipes will add an entry to this list.
 
 We can also **relink** the 3 default open files to other targets. For example, instead of writing output and errors to the command line, we can redirect them to a file. Similarly, we can read input from a file instead of from the keyboard:
 
@@ -311,7 +311,7 @@ Also try to do `input_file.txt > ./my_program 1> output_file.txt` and explain wh
 
 The anonymous pipes above only live for as long as the processes live. Named pipes instead persist and have to be closed explicitly (or are closes automatically at system-shutdown).
 
-Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the **mkfifo** command.
+Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the `mkfifo` command.
 
 As they are not frequently used, we direct the interested reader to `man` pages.
 

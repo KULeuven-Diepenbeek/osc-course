@@ -12,21 +12,21 @@
     <title>6.3: Inter Process communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1679305075" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679305075" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679305075" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679305075" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679305075" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679305075" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679305075" rel="stylesheet">
-    <link href="../../css/theme.css?1679305075" rel="stylesheet">
-    <link href="../../css/devselector.css?1679305075" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679305075" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679305075" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679566225" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679566225" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679566225" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679566225" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679566225" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679566225" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679566225" rel="stylesheet">
+    <link href="../../css/theme.css?1679566225" rel="stylesheet">
+    <link href="../../css/devselector.css?1679566225" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679566225" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679566225" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679305075"></script>
-    <script src="../../js/devselector.js?1679305075"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679566225"></script>
+    <script src="../../js/devselector.js?1679566225"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679305075"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679305075"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679566225"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679566225"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679305075"></script>
+<script type="text/javascript" src="../../js/search.js?1679566225"></script>
 
     
   </div>
@@ -1546,7 +1546,7 @@
         
 
 
-<p>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, <strong>good job !!</strong></p>
+<p>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember? Right, <strong>good job!</strong></p>
 <p>It would make sense, though, if different processes were able to communicate with each other. That&rsquo;s what this Section is about.</p>
 <p>There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.</p>
 <ol>
@@ -1690,17 +1690,17 @@
   }
 </style>
 <p class="dinobook">source: SILBERSCHATZ, A., GALVIN, P.B., and GAGNE, G. <i>Operating System Concepts</i>. 9<sup>th</sup> ed. Hoboken: Wiley, 2013.</p>
-<p><strong>Note:</strong> to compile these on Linux, you need to pass the <code>-lrt</code> flag to gcc (&ldquo;link with library rt&rdquo;) like so: <code>gcc -o producer producer.c -lrt</code>. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.</p>
+<p><strong>Note:</strong> to compile these on Linux, you need to pass the <code>-lrt</code> flag to gcc (&ldquo;link with library rt&rdquo;, see the <a href="https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/librt.html">librt interface documentation</a>) like so: <code>gcc -o producer producer.c -lrt</code>. MacOS relies less on auxiliary external libraries; the flag can safely be omitted there.</p>
 
 <div class="ex">
 	<div class="inner">
     	<p>This very simple example uses shared memory. Try to find answers to the questions below:</p>
 <ul>
 <li>Try to find out what these programs do</li>
-<li>What is the size of the memory that is shared ?</li>
-<li>Can a <em>producer</em> read from the shared memory ?</li>
-<li>Can a <em>consumer</em> write to the shared memory ?</li>
-<li>How do both processes know which data is shared ? In other words, how does the consumer decide which memory it connects to?</li>
+<li>What is the size of the memory that is shared?</li>
+<li>Can a <em>producer</em> read from the shared memory?</li>
+<li>Can a <em>consumer</em> write to the shared memory?</li>
+<li>How do both processes know which data is shared? In other words, how does the consumer decide which memory it connects to?</li>
 <li>Do both processes have to be active at the same time for the memory sharing to work? Why (not)?</li>
 </ul>
 
@@ -1710,8 +1710,8 @@
 <h2 id="message-passing">Message passing</h2>
 <p>The second technique for for InterProcess Communication (IPC) comes in the form of message passing. This method is a bit more restricted than using raw shared memory, but also easier to use and safer because of that. Here we touch on 2 different mechanisms for achieving this: <strong>signals</strong> and <strong>pipes</strong>.</p>
 <h3 id="signals">Signals</h3>
-<p>Signals are the cheapest form of IPC. They literally allow one process to send a signal to another process, through the use of the function <strong>kill()</strong>. Although due to historical reasons the name might be a bit misleading (originally, the only defined signal was used to stop a process, other uses only came later), it can be used to send different signals. Signals here are very simply numbers with a predefined meaning (an &ldquo;enum&rdquo; if you will) that you can send to another process. Depending on the number received, a different action is expected to be taken. For example, if you use the <code>Ctrl+c</code> keyboard shortcut to stop a running program, the shell sends a <code>SIGINT</code> (signal interrupt) to the current program. Similarly, <code>Ctrl+z</code> will send a <code>SIGTSTP</code> signal.</p>
-<p>The snippet below shows the different types of signals that can be sent. Many of them have to do with stopping other processes, but with subtly different effects (for example, stop a process -immediately- versus allowing it to safely exit itself).</p>
+<p>Signals are the cheapest form of IPC. They literally allow one process to send a signal to another process, through the use of the function <code>kill()</code>. Although due to historical reasons the name might be a bit misleading (originally, the only defined signal was used to stop a process, other uses only came later), it can be used to send different signals. Signals here are very simply numbers with a predefined meaning (an &ldquo;enum&rdquo; if you will) that you can send to another process. Depending on the number received, a different action is expected to be taken. For example, if you use the <code>Ctrl+c</code> keyboard shortcut to stop a running program, the shell sends a <code>SIGINT</code> (signal interrupt) to the current program. Similarly, <code>Ctrl+z</code> will send a <code>SIGTSTP</code> signal.</p>
+<p>The snippet below shows the different types of signals that can be sent. Many of them have to do with stopping other processes, but with subtly different effects (for example, stop a process&mdash;immediately&mdash;versus allowing it to safely exit itself).</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ <span style="color:#111">kill</span> -L
  1<span style="color:#f92672">)</span> SIGHUP   2<span style="color:#f92672">)</span> SIGINT   3<span style="color:#f92672">)</span> SIGQUIT  4<span style="color:#f92672">)</span> SIGILL   5<span style="color:#f92672">)</span> SIGTRAP
  6<span style="color:#f92672">)</span> SIGABRT  7<span style="color:#f92672">)</span> SIGBUS   8<span style="color:#f92672">)</span> SIGFPE   9<span style="color:#f92672">)</span> SIGKILL 10<span style="color:#f92672">)</span> SIGUSR1
@@ -1726,7 +1726,7 @@
 53<span style="color:#f92672">)</span> SIGRTMAX-11 54<span style="color:#f92672">)</span> SIGRTMAX-10 55<span style="color:#f92672">)</span> SIGRTMAX-9  56<span style="color:#f92672">)</span> SIGRTMAX-8  57<span style="color:#f92672">)</span> SIGRTMAX-7
 58<span style="color:#f92672">)</span> SIGRTMAX-6  59<span style="color:#f92672">)</span> SIGRTMAX-5  60<span style="color:#f92672">)</span> SIGRTMAX-4  61<span style="color:#f92672">)</span> SIGRTMAX-3  62<span style="color:#f92672">)</span> SIGRTMAX-2
 63<span style="color:#f92672">)</span> SIGRTMAX-1  64<span style="color:#f92672">)</span> SIGRTMAX   
-</code></pre></div><p>There is also has CLI-compatible command <strong>kill</strong> that can send these signals to any running process (addressed by their PID). For more information on the kill command, add the <code>--help</code> argument, read the man-page (<code>man kill</code>), or ask the Internet.</p>
+</code></pre></div><p>There is also has CLI-compatible command <code>kill</code> that can send these signals to any running process (addressed by their PID). For more information on the kill command, add the <code>--help</code> argument, read the man-page (<code>man kill</code>).</p>
 <p>Let&rsquo;s illustrate this with an example:</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
@@ -1779,14 +1779,14 @@ jvliegen@localhost:~/$ <span style="color:#111">bg</span>
 jvliegen@localhost:~/$ 
 </code></pre></div><p>For the sake of completeness we enumerate a few more usefull aspects about this:</p>
 <ul>
-<li>a process can be started in the background as well. This can be achieved by adding an <strong>ampersand</strong> after the command (e.g., xeyes &amp;)</li>
-<li>the command <strong>jobs</strong> gives you an overview of which jobs are running in the background</li>
-<li>through the command <strong>fg &lt;#&gt;</strong> the job with index number &lt;#&gt; will pulled to foreground.</li>
+<li>a process can be started in the background as well. This can be achieved by adding an <code>&amp;</code> (ampersand) after the command (e.g., <code>xeyes &amp;</code>)</li>
+<li>the command <code>jobs</code> gives you an overview of which jobs are running in the background</li>
+<li>through the command <code>fg &lt;#&gt;</code> the job with index number &lt;#&gt; will pulled to foreground.</li>
 </ul>
 
 <div class="ex">
 	<div class="inner">
-    	<p>Try this for yourself. If the <strong>xeyes</strong> program is not installed, install it first or use the <code>longhello</code> program from before.</p>
+    	<p>Try this for yourself. If the <code>xeyes</code> program is not installed, install it first or use the <code>longhello</code> program from before.</p>
 
 	</div>
 </div>
@@ -1825,7 +1825,7 @@ jvliegen@localhost:~/$
 
 	</div>
 </div>
-<p>Do you remember the Process Control Block ? This has one field called <strong>list of open files</strong>. We&rsquo;ve already touched upon stdin, stdout and stderr. Using anonymous pipes will add an entry to this list.</p>
+<p>Do you remember the Process Control Block? This has one field called <strong>list of open files</strong>. We&rsquo;ve already touched upon stdin, stdout and stderr. Using anonymous pipes will add an entry to this list.</p>
 <p>We can also <strong>relink</strong> the 3 default open files to other targets. For example, instead of writing output and errors to the command line, we can redirect them to a file. Similarly, we can read input from a file instead of from the keyboard:</p>
 <figure>
     <img src="../../img/os/sc_redirect_stdout.png"/> <figcaption>
@@ -1852,7 +1852,7 @@ jvliegen@localhost:~/$
 </div>
 <p><strong>Named pipes</strong> are the other type of pipes that can be created. The main differences with anonymous pipes are the lifetime of this mechanism and their presence in the file system.</p>
 <p>The anonymous pipes above only live for as long as the processes live. Named pipes instead persist and have to be closed explicitly (or are closes automatically at system-shutdown).</p>
-<p>Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the <strong>mkfifo</strong> command.</p>
+<p>Named pipes also have an actual presence in the file system. That is, they show up as files. But unlike most files, they never appear to have contents. Even if you write a lot of data to a named pipe, the file appears to be empty. Making named pipes can be done through the <code>mkfifo</code> command.</p>
 <p>As they are not frequently used, we direct the interested reader to <code>man</code> pages.</p>
 
 
@@ -2831,17 +2831,17 @@ jvliegen@localhost:~/$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679305075"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679305075"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679305075"></script>
-    <script src="../../js/jquery.sticky.js?1679305075"></script>
-    <script src="../../js/featherlight.min.js?1679305075"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679305075"></script>
-    <script src="../../js/learn.js?1679305075"></script>
-    <script src="../../js/hugo-learn.js?1679305075"></script>
+    <script src="../../js/clipboard.min.js?1679566225"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679566225"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679566225"></script>
+    <script src="../../js/jquery.sticky.js?1679566225"></script>
+    <script src="../../js/featherlight.min.js?1679566225"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679566225"></script>
+    <script src="../../js/learn.js?1679566225"></script>
+    <script src="../../js/hugo-learn.js?1679566225"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679305075"></script>
+            <script src="../../mermaid/mermaid.js?1679566225"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

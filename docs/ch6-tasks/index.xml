@@ -35,7 +35,7 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
       <guid>https://kuleuven-diepenbeek.github.io/osc-course/ch6-tasks/interprocess/</guid>
-      <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember ? Right, good job !!
+      <description>Having multiple processes running is all good-and-well. Hey, it is one of the main reasons why the concept of an OS was introduced, remember? Right, good job!
 It would make sense, though, if different processes were able to communicate with each other. That&amp;rsquo;s what this Section is about.
 There are two main techniques to facilitate communication between multiple processes. These two techniques are shown in image below.
  Shared memory Message passing    The two main techniques for inter process communication    p.</description>

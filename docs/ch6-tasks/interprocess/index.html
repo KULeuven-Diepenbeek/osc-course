@@ -12,21 +12,21 @@
     <title>6.3: Inter Process communication :: Operating Systems and C</title>
 
     
-    <link href="../../css/nucleus.css?1679566225" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679566225" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679566225" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679566225" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679566225" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679566225" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679566225" rel="stylesheet">
-    <link href="../../css/theme.css?1679566225" rel="stylesheet">
-    <link href="../../css/devselector.css?1679566225" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679566225" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679566225" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679663772" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679663772" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679663772" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679663772" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679663772" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679663772" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679663772" rel="stylesheet">
+    <link href="../../css/theme.css?1679663772" rel="stylesheet">
+    <link href="../../css/devselector.css?1679663772" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679663772" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679663772" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679566225"></script>
-    <script src="../../js/devselector.js?1679566225"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679663772"></script>
+    <script src="../../js/devselector.js?1679663772"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679566225"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679566225"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679663772"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679663772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/osc-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679566225"></script>
+<script type="text/javascript" src="../../js/search.js?1679663772"></script>
 
     
   </div>
@@ -1799,7 +1799,7 @@ jvliegen@localhost:~/$
 <p><strong>Anonymous pipes</strong> are like waterslides. You can put some data on it on one end (the top of the slide) and it comes out the other (the bottom), but it&rsquo;s not possible to go up the waterslide from the bottom. Put differently: communication is half-duplex (single direction). One process can <strong>write</strong> into the pipe, while the other can <strong>read</strong> from of the pipe. This type of pipe can only be create between two processes that have parent-child relationship. What happens internally is that the <strong>stdout</strong> of the first process is mapped to the <strong>stdin</strong> of the second process. For this, we use the <code>|</code> (pipe) character.</p>
 <p>When using the CLI, anonymous pipes are a very powerful tool for chaining different commands. The output of the first command will be the input for the next command. This can be chained multiple times.</p>
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">jvliegen@localhost:~/$ xeyes <span style="color:#111">&amp;</span>
-jvliegen@localhost:~/$ ps -ux <span style="color:#111">|</span> grep xeyes <span style="color:#111">|</span> head -1 <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#34; &#34;</span> -f <span style="color:#ae81ff">3</span>
+jvliegen@localhost:~/$ ps -ux <span style="color:#111">|</span> grep xeyes <span style="color:#111">|</span> head -1 <span style="color:#111">|</span> tr -s <span style="color:#d88200">&#34; &#34;</span> <span style="color:#111">|</span> cut -d <span style="color:#d88200">&#34; &#34;</span> -f <span style="color:#ae81ff">3</span>
 <span style="color:#ae81ff">5526</span>
 jvliegen@localhost:~/$ 
 </code></pre></div><p>The example above chains the following:</p>
@@ -1807,7 +1807,8 @@ jvliegen@localhost:~/$
 <li>give a list of all <em>my</em> processes (<code>ps</code> = process status)</li>
 <li>only filter the lines that contain the word <em>xeyes</em> (<code>grep</code> stands for Global Regular Expression Print)</li>
 <li>filter only the first line (<code>head</code>)</li>
-<li>split the input on a space (&quot; &ldquo;) and report only the third field (which is the process ID)</li>
+<li>squash all spaces <code>ps</code> produces together to better prepare for step 5:</li>
+<li>split the input on a space (<code>&quot; &quot;</code>) and report only the third field (which is the process ID)</li>
 </ol>
 
 <div class="ex">
@@ -2831,17 +2832,17 @@ jvliegen@localhost:~/$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679566225"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679566225"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679566225"></script>
-    <script src="../../js/jquery.sticky.js?1679566225"></script>
-    <script src="../../js/featherlight.min.js?1679566225"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679566225"></script>
-    <script src="../../js/learn.js?1679566225"></script>
-    <script src="../../js/hugo-learn.js?1679566225"></script>
+    <script src="../../js/clipboard.min.js?1679663772"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679663772"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679663772"></script>
+    <script src="../../js/jquery.sticky.js?1679663772"></script>
+    <script src="../../js/featherlight.min.js?1679663772"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679663772"></script>
+    <script src="../../js/learn.js?1679663772"></script>
+    <script src="../../js/hugo-learn.js?1679663772"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679566225"></script>
+            <script src="../../mermaid/mermaid.js?1679663772"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -258,7 +258,7 @@ When using the CLI, anonymous pipes are a very powerful tool for chaining differ
 
 ```bash
 jvliegen@localhost:~/$ xeyes &
-jvliegen@localhost:~/$ ps -ux | grep xeyes | head -1 | cut -d " " -f 3
+jvliegen@localhost:~/$ ps -ux | grep xeyes | head -1 | tr -s " " | cut -d " " -f 3
 5526
 jvliegen@localhost:~/$ 
 ```
@@ -268,7 +268,8 @@ The example above chains the following:
 1. give a list of all *my* processes (`ps` = process status)
 2. only filter the lines that contain the word *xeyes* (`grep` stands for Global Regular Expression Print)
 3. filter only the first line (`head`)
-4. split the input on a space (" ") and report only the third field (which is the process ID)
+4. squash all spaces `ps` produces together to better prepare for step 5:
+5. split the input on a space (`" "`) and report only the third field (which is the process ID)
 
 {{% task %}}
 Let's try something similar for yourselves:

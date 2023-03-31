@@ -213,6 +213,16 @@ Navigation  figure out in which folder you are at the moment navigate to the roo
     </item>
     
     <item>
+      <title>3. Inter-thread communication</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/tasks_inter_thread_communication/</guid>
+      <description>Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it&amp;rsquo;s still not always trivial to know how to apply them to a specific problem. Even for the well-known producer-consumer problem, several different setups are possible.
+Below, you will find an implementation variation on the prime-generator producer-consumer problem we handled during class (especially &amp;ldquo;Producer-Consumer V4: Semaphores&amp;rdquo; in Section 6.</description>
+    </item>
+    
+    <item>
       <title>3.3 Functions and The Stack</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/ch3-introcpu/2_functions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

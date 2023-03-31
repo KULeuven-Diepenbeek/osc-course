@@ -2,7 +2,6 @@
 title: '3. Inter-thread communication'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 3
-draft: true
 ---
 
 Threading and inter-thread communication are complex topics that can be challenging to implement (correctly). However, even if you can use concepts like mutexes and semaphores without errors, it's still not always trivial to know *how to apply them to a specific problem*. Even for the well-known producer-consumer problem, several different setups are possible. 

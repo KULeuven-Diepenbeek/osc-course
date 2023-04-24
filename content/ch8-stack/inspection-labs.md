@@ -114,7 +114,7 @@ Extend the program by allocating `1024` bytes in a for loop (Use `getchar()` bef
 
 Converted to decimal: 93914201911296 - 93914200965120 = 946176 bytes used.
 
-Indeed, the Figure from [chapter 7.1](/ch7-stack/stackvsheap) and our findings confirm that the heap grows upwards. 
+Indeed, the Figure from [chapter 8.1](/ch8-stack/stackvsheap) and our findings confirm that the heap grows upwards. 
 
 ## 4. Free
 

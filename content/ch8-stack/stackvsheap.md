@@ -337,7 +337,7 @@ int main() {
 }
 ```
 
-`stuff` is not doging anything with the char array. Compile with `gcc -g -O3 test.c` to enable debug output and optimize. When disassembling using `lldb` (LLVM) or `gdb` (GNU), we see something like this:
+`stuff` is not doing anything with the char array. Compile with `gcc -g -O3 test.c -o test` to enable debug output and optimize. When disassembling using `lldb` (LLVM) or `gdb` (GNU), we see something like this:
 
 <pre>
 (lldb) disassemble --name stuff

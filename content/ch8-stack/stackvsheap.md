@@ -118,7 +118,7 @@ What piece of code could be _dynamic_ in size? Data structures, such as linked l
 
 ### Freeing up space
 
-In order to create an instance of a structure and return it, you have to allocate memory using `malloc()` from `<stdlib.h>` - we now that already. In contrast with higher level languages such as Java, C requires programmes to clean up the allocaed memory themselves! This means calling `free()` to free up the space for future use. For instance:
+In order to create an instance of a structure and return it, you have to allocate memory using `malloc()` from `<stdlib.h>` - we know that already. In contrast with higher level languages such as Java, C requires programmes to clean up the allocaed memory themselves! This means calling `free()` to free up the space for future use. For instance:
 
 ```C
 struct Stuff {

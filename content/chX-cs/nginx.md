@@ -218,3 +218,5 @@ What command would you now have to execute to give the current user read and wri
 
 4. Create a new folder in `hellonginx/html`, name this folder `extra_news`, create another simple index.html file in this folder. Now we want to expose this folder in our website through the path `https://localhost/news`. 
 Configure the nginx configuration file to make sure this is possible. (Tip: use a second location directive).
+  
+5. Change the second website to now be accessible through https. (Tip: use a self-signed certificate created by `openssl`)

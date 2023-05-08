@@ -2,7 +2,6 @@
 title: '4. Pseudo scheduler'
 pre: "<i class='fas fa-pen-square'></i> "
 weight: 4
-draft: true
 ---
 
 {{<figure src="/img/ass4_sched/poepjee.jpg" title="image source: youtube.com">}}

@@ -1,7 +1,7 @@
 ---
-title: 'X.2: Real-time Operating Systems'
+title: 'X.1: Real-time Operating Systems'
 pre: "<i class='fab fa-linux'></i> "
-weight: 2
+weight: 1
 ---
 
 ## Operating Systems

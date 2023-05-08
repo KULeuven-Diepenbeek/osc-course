@@ -24,3 +24,9 @@ X.2: Device drivers
   * Character device drivers
   * Block device drivers
 
+X.3: Nginx Web server
+
+  * Installation
+  * Configuration
+    * Permissions
+  * Logging

@@ -1,7 +1,7 @@
 ---
-title: 'X.3: Device Drivers'
+title: 'X.2: Device Drivers'
 pre: "<i class='fab fa-linux'></i> "
-weight: 3
+weight: 2
 ---
 
 ## General

@@ -42,6 +42,17 @@ Below, you will find an implementation variation on the prime-generator producer
     </item>
     
     <item>
+      <title>4. Pseudo scheduler</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
+      <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file.
+The scheduler follows these rules:
+ The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)  Circular Linked List The (pseudo) scheduler will need to store the incoming and ongoing tasks in a &amp;ldquo;run queue&amp;rdquo;.</description>
+    </item>
+    
+    <item>
       <title>None yet!</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/none-yet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

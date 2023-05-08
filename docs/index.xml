@@ -85,6 +85,17 @@ The scheduler has two main responsibilities:</description>
     </item>
     
     <item>
+      <title>X.1: Real-time Operating Systems</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
+      <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
+  source: wikipedia.com   The image above shows:
+ Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+    </item>
+    
+    <item>
       <title>1. Integrated C exercise</title>
       <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/c-integrated-ex/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -192,14 +203,12 @@ Creating and inspecting processes TIP: the unistd.h header has some useful funct
     </item>
     
     <item>
-      <title>X.2: Real-time Operating Systems</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</link>
+      <title>X.2: Device Drivers</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/rtos/</guid>
-      <description>Operating Systems In the previous chapters, many aspects are handled that form the Operating System. The image below, linked from Wikipedia, shows the most important components in the Linux kernel.
-  source: wikipedia.com   The image above shows:
- Task management Memory management the IO subsystem    The desired situation.      The real situation.     The main goal of the OS is still the same: allow multiple programs and/or users use the same hardware.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
+      <description>General The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware devices that are typically connected to a processor in a laptop, desktop, or server. The OS has to know how to talk to a certain device. Typically an Application Programming Interface (an API) is provided to the user space, so users can interact with the hardware.</description>
     </item>
     
     <item>
@@ -297,12 +306,14 @@ As such, the actual method used most commonly in practice is segmentation with a
     </item>
     
     <item>
-      <title>X.3: Device Drivers</title>
-      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</link>
+      <title>X.3: Nginx Web server</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/nginx/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/devdrivers/</guid>
-      <description>General The kernel of an operating system has a lot of different tasks. Some of them we visited in earlier chapters. One task of the OS is the management of the different hardware devices that are typically connected to a processor in a laptop, desktop, or server. The OS has to know how to talk to a certain device. Typically an Application Programming Interface (an API) is provided to the user space, so users can interact with the hardware.</description>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/chx-cs/nginx/</guid>
+      <description>1. Installing Nginx on Ubuntu For this lesson, you can use a virtual private server running Ubuntu or provision a virtual machine on your local system using Vagrant. To install Nginx on Ubuntu, first update your software repository and then install Nginx using the following commands:
+sudo apt update sudo apt install nginx After installation, start the Nginx web server and check its status:
+sudo systemctl start nginx sudo systemctl status nginx 2.</description>
     </item>
     
     <item>
@@ -324,6 +335,17 @@ As such, the actual method used most commonly in practice is segmentation with a
       <description>Exercise 1 Write the (psuedo)Assembly code (using PUSH/POP) for the following C code (note: you can re-use a lot of the example code in the chapter to start, but you&amp;rsquo;ll need to add/change a lot too!).
 Since we&amp;rsquo;re now calling additional functions, also make sure you store the return addresses on the stack correctly (using 0x07 as temporary return address storage).
 You can use 0x60, 0x61 and 0x62 as addresses for the input parameters (M, N, R, S, and T), and 0x80 to store any return values.</description>
+    </item>
+    
+    <item>
+      <title>4. Pseudo scheduler</title>
+      <link>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld and Jo Vliegen and Robin Marx)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/osc-course/exercises/scheduler/</guid>
+      <description>image source: youtube.com   Scheduler In this assignment you&amp;rsquo;re going to implement a simple scheduler in C. A number of to-be-scheduled tasks will be provided via an input file.
+The scheduler follows these rules:
+ The scheduler is preemptive and uses a round-robin approach without priorities. The (virtual) time slice is 1 second. There is no (measurable) context switching overhead. If a new job arrives in the queue, it gets scheduled/receives a time slice right away (LCFS: last-come, first-served)  Circular Linked List The (pseudo) scheduler will need to store the incoming and ongoing tasks in a &amp;ldquo;run queue&amp;rdquo;.</description>
     </item>
     
     <item>
